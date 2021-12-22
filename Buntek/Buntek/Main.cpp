@@ -125,7 +125,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Game loop update end
 		///////////////////////
 
-
+		// Test Comment
 		//////////////////
 		// Game loop draw
 		// Drawing object 1
