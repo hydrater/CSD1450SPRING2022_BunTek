@@ -1,9 +1,6 @@
 # Prerequisites
 #testing
 *.d
-*.tlog
-*.recipe
-*.lastbuildstate
 
 # Object files
 *.o
@@ -59,3 +56,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+*.tlog
+*.lastbuildstate
+*.log
+*.recipe
