@@ -3,8 +3,6 @@
 
 #include "AEEngine.h"
 
-
-
 // ---------------------------------------------------------------------------
 // main
 
@@ -24,6 +22,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AEGfxVertexList* pMesh1 = 0;
 	AEGfxVertexList* pMesh2 = 0;
 	AEGfxTexture* pTex1; // Pointer to Texture (Image)
+	AEGfxTexture* pTex2;
+
 
 	// Variable declaration end
 	///////////////////////////
@@ -97,8 +97,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Loading textures (images)
 
 	// Texture 1: From file
-	pTex1 = AEGfxTextureLoad("PlanetTexture.png");
+	pTex1 = AEGfxTextureLoad("./Resources/Art/PlanetTexture.png");
 	AE_ASSERT_MESG(pTex1, "Failed to create texture1!!");
+	// Texture 2: From file
+	pTex2 = AEGfxTextureLoad("./Resources/Art/YellowTexture.png");
+	AE_ASSERT_MESG(pTex2, "Failed to create texture2!!");
+
 
 	// Loading textures (images) end
 	//////////////////////////////////
@@ -125,7 +129,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Game loop update end
 		///////////////////////
 
-		// Test Comment2
 		//////////////////
 		// Game loop draw
 		// Drawing object 1
@@ -162,6 +165,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// Freeing the objects and textures
 		AEGfxTextureUnload(pTex1);
+		AEGfxTextureUnload(pTex2);
 
 		// Informing the system about the loop's end
 		AESysFrameEnd();
