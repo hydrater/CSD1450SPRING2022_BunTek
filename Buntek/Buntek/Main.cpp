@@ -2,6 +2,7 @@
 // includes
 #include "AEEngine.h"
 #include <iostream>
+#include "GameObject.cpp"
 
 // ---------------------------------------------------------------------------
 // main
@@ -29,15 +30,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
+	GameObject test;
+	test.position.x = 5;
 
-	// Game Loop
+	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
+		// ------------------------------------------- Start of Loop ------------------------------------------- //
 		// Informing the system about the loop's start
 		AESysFrameStart();
 
 		// Handling Input
 		AEInputUpdate();
+
+		// Remove white backgrounds
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 		// --------------------------------------------- Update --------------------------------------------- //
 
@@ -54,7 +61,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			gGameRunning = 0;
 	}
 
-	// ---------------------------------- Freeing the objects and textures----------------------------------- //
+	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //
 
 
 	// free the system
