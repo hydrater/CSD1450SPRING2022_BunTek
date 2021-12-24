@@ -24,6 +24,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AEGfxTexture* pTex1; // Pointer to Texture (Image)
 	AEGfxTexture* pTex2;
 
+	float obj1X = 0.0f, obj1Y = 0.0f;
+	float objtexX = 0, objtexY = 0; // Texture variables for object 2 and 3 texture
+
+	int counter = 0;
+
+	AEGfxVertexList* pMeshLine; // Pointer to Mesh (Model)
+	float camX, camY; // Used to temporary store camera position
+
+	s8 fontId = 0;
 
 	// Variable declaration end
 	///////////////////////////
@@ -74,13 +83,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// This shape has 2 triangles
 	AEGfxTriAdd(
-		-30.0f, -30.0f, 0x00FF00FF, 0.0f, 0.0f,
-		30.0f, -30.0f, 0x00FFFF00, 0.0f, 0.0f,
+		-30.0f, -30.0f, 0x00FF00FF, 0.0f, 1.0f,
+		30.0f, -30.0f, 0x00FFFF00, 1.0f, 1.0f,
 		-30.0f, 30.0f, 0x0000FFFF, 0.0f, 0.0f);
 
 	AEGfxTriAdd(
-		30.0f, -30.0f, 0x00FFFFFF, 0.0f, 0.0f,
-		30.0f, 30.0f, 0x00FFFFFF, 0.0f, 0.0f,
+		30.0f, -30.0f, 0x00FFFFFF, 1.0f, 1.0f,
+		30.0f, 30.0f, 0x00FFFFFF, 1.0f, 0.0f,
 		-30.0f, 30.0f, 0x00FFFFFF, 0.0f, 0.0f);
 
 	// Saving the mesh (list of triangles) in pMesh2
@@ -88,10 +97,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	pMesh2 = AEGfxMeshEnd();
 	AE_ASSERT_MESG(pMesh2, "Failed to create mesh 2!!");
 
+	// Informing the library that we're about to start adding vertices
+	AEGfxMeshStart();
+
+	// This shape has 5 vertices
+	AEGfxVertexAdd(0.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+	AEGfxVertexAdd(100.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+	AEGfxVertexAdd(200.0f, 150.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+	AEGfxVertexAdd(300.0f, -100.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+	AEGfxVertexAdd(100.0f, -250.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+	AEGfxVertexAdd(100.0f, -250.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+	AEGfxVertexAdd(0.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+
+	pMeshLine = AEGfxMeshEnd();
+	AE_ASSERT_MESG(pMeshLine, "Failed to create line mesh!!");
+
 	// Creating the objects (Shapes) end
 	////////////////////////////////////
-
-
 
 	////////////////////////////
 	// Loading textures (images)
@@ -109,6 +131,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	//////////////////////////////////
 	// Creating Fonts	
+	fontId = AEGfxCreateFont("./Resources/Art/Roboto-Regular.ttf", 12);
+
 
 	// Creating Fonts end
 	//////////////////////////////////
@@ -125,47 +149,123 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		///////////////////
 		// Game loop update
+		
+		// Fixes white background
+		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+		// Blending mode
+		if (AEInputCheckCurr(AEVK_1))
+			AEGfxSetBlendMode(AE_GFX_BM_NONE);
+		else if (AEInputCheckCurr(AEVK_2))
+			AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+		else if (AEInputCheckCurr(AEVK_3))
+			AEGfxSetBlendMode(AE_GFX_BM_ADD);
+
+		// Object 1 Control
+		if (AEInputCheckCurr(AEVK_UP))
+			obj1Y += 3.0f;
+		else if (AEInputCheckCurr(AEVK_DOWN))
+			obj1Y -= 3.0f;
+
+		if (AEInputCheckCurr(AEVK_LEFT))
+			obj1X -= 3.0f;
+		else if (AEInputCheckCurr(AEVK_RIGHT))
+			obj1X += 3.0f;
+
+		// Texture offset
+		if (AEInputCheckCurr(AEVK_L))
+			objtexX -= 0.01f;
+		else if (AEInputCheckCurr(AEVK_J))
+			objtexX += 0.01f;
+
+		if (AEInputCheckCurr(AEVK_I))
+			objtexY += 0.01f;
+		else if (AEInputCheckCurr(AEVK_K))
+			objtexY -= 0.01f;
 
 		// Game loop update end
 		///////////////////////
 
 		//////////////////
 		// Game loop draw
+
 		// Drawing object 1
 		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
-
 		AEGfxSetTintColor(0.5f, 0.5f, 0.5f, 1.0f);
 		// Set position for object 1
-		AEGfxSetPosition(5.0f, 5.0f);
+		AEGfxSetPosition(obj1X, obj1Y);
 		// No texture for object 1
-		AEGfxTextureSet(NULL, 0, 0);
+		//AEGfxTextureSet(NULL, 0, 0);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh1, AE_GFX_MDM_TRIANGLES);
+		
+		// Drawing object 2 - (first) - No tint
+		AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 
-		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-		// Drawing object 2 - (first)
+		// Stupid texture swap code
+		++counter;
+		if (counter < 120)
+			AEGfxTextureSet(pTex1, objtexX, objtexY);		// Same object, different texture
+		else if (counter < 240)
+			AEGfxTextureSet(pTex2, objtexX, objtexY);		// Same object, different texture
+		else
+		{
+			AEGfxTextureSet(pTex1, objtexX, objtexY);		// Same object, different texture
+			counter = 0;
+		}
+
+		// Set Transparency, Transparency will work only if the Blend mode is not NONE.
+		AEGfxSetTransparency(1.0f);
 		// Set position for object 2
 		AEGfxSetPosition(100.0f, -60.0f);
-		// No texture for object 2
-		AEGfxTextureSet(NULL, 0, 0);
+		// No tint
+		AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
+		// Set texture
+		//AEGfxTextureSet(pTex1, objtexX, objtexY);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh2, AE_GFX_MDM_TRIANGLES);
 
-		//AEGfxSetTintColor(0.0f, 0.0f, 1.0f, 1.0f);
-		// Drawing object 3 - (Second)
+		// Drawing object 3 - (Second) - Blue tint
+		// Set Transparency, Transparency will work only if the Blend mode is not NONE.
+		AEGfxSetTransparency(1.0f);
 		// Set position for object 3
 		AEGfxSetPosition(100.0f, 60.0f);
-		// No texture for object 3
-		AEGfxTextureSet(NULL, 0, 0);
+		// Add Blue tint
+		AEGfxSetTintColor(1.0f, 0.0f, 0.0f, 1.0f);
+		// Set texture
+		//AEGfxTextureSet(pTex1, objtexX, objtexY);
 		// Drawing the mesh (list of triangles)
 		AEGfxMeshDraw(pMesh2, AE_GFX_MDM_TRIANGLES);
+
+		AEGfxSetRenderMode(AE_GFX_RM_COLOR);
+		AEGfxSetPosition(0.0f, 0.0f);
+		AEGfxMeshDraw(pMeshLine, AE_GFX_MDM_LINES_STRIP);
+
+		// Move the camera
+		AEGfxGetCamPosition(&camX, &camY);
+		if (AEInputCheckCurr(AEVK_W))
+			AEGfxSetCamPosition(camX, camY + 2);
+		else if (AEInputCheckCurr(AEVK_S))
+			AEGfxSetCamPosition(camX, camY - 2);
+
+		AEGfxGetCamPosition(&camX, &camY);
+		if (AEInputCheckCurr(AEVK_A))
+			AEGfxSetCamPosition(camX - 2, camY);
+		else if (AEInputCheckCurr(AEVK_D))
+			AEGfxSetCamPosition(camX + 2, camY);
+
+		char strBuffer[100];
+		memset(strBuffer, 0, 100 * sizeof(char));
+		sprintf_s(strBuffer, "Frame Time:  %.6f", AEFrameRateControllerGetFrameTime());
+
+		// text at top right
+		f32 TextWidth, TextHeight;
+		AEGfxGetPrintSize(fontId, strBuffer, 1.0f, TextWidth, TextHeight);
+		AEGfxPrint(fontId, strBuffer, 0.99 - TextWidth, 0.99 - TextHeight, 1.0f, 1.f, 1.f, 1.f);
 
 		// Game loop draw end
 		/////////////////////
 
-		// Freeing the objects and textures
-		AEGfxTextureUnload(pTex1);
-		AEGfxTextureUnload(pTex2);
 
 		// Informing the system about the loop's end
 		AESysFrameEnd();
@@ -174,8 +274,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		if (AEInputCheckTriggered(AEVK_ESCAPE) || 0 == AESysDoesWindowExist())
 			gGameRunning = 0;
 	}
+
+	// Freeing the objects and textures
 	AEGfxMeshFree(pMesh1);
 	AEGfxMeshFree(pMesh2);
+	AEGfxTextureUnload(pTex1);
+	AEGfxTextureUnload(pTex2);
+	AEGfxMeshFree(pMeshLine);
+	AEGfxDestroyFont(fontId);
 
 	// free the system
 	AESysExit();
