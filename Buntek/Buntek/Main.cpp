@@ -1,8 +1,6 @@
 // ---------------------------------------------------------------------------
 // includes
-#include "AEEngine.h"
-#include <iostream>
-#include "GameObject.cpp"
+#include "Scene.h"
 
 // ---------------------------------------------------------------------------
 // main
@@ -18,20 +16,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// --------------------------------------------- Awake --------------------------------------------- //
 
 	int gGameRunning = 1;
+	Scene* scene = new Battle;
+	scene->Awake();
 
 	// ------------------------------------------ System Init ------------------------------------------- //
 	// Using custom window procedure
 	AESysInit(hInstance, nCmdShow, 800, 600, 1, 60, true, NULL);
 
 	// Changing the window title
-	AESysSetWindowTitle("My New Demo!");
+	AESysSetWindowTitle("idk we need a pong game name atm");
 
 	// reset the system modules
 	AESysReset();
 
+	scene->Start();
+
 	// --------------------------------------------- Init --------------------------------------------- //
-	GameObject test;
-	test.position.x = 5;
 
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
@@ -47,10 +47,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 		// --------------------------------------------- Update --------------------------------------------- //
-
+		scene->Update();
 
 		// --------------------------------------------- Render --------------------------------------------- //
-
+		scene->Render();
 
 		// ------------------------------------------- End of Loop ------------------------------------------- //
 		// Informing the system about the loop's end
@@ -62,7 +62,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
 	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //
-
+	scene->Free();
 
 	// free the system
 	AESysExit();
