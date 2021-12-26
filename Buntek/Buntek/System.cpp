@@ -1,6 +1,5 @@
 #include "System.h"
 
-
 void Scene::Awake(void)
 {
 
@@ -26,15 +25,12 @@ void Scene::Free(void)
 
 }
 
-class GameObject
+void GameObject::Instantiate(void)
 {
-public:
-    struct Position
-    {
-        float x;
-        float y;
-    };
 
-    Position position;
+}
 
-};
+void GameObject::Update(void)
+{
+    cout << "test" << endl;
+}

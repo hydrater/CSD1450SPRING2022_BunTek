@@ -1,6 +1,8 @@
 #pragma once
 #include "AEEngine.h"
 #include <iostream>
+#include <stdio.h>
+
 using namespace std;
 
 class Scene
@@ -11,4 +13,11 @@ public:
     virtual void Update(void);
     virtual void Render(void);
     virtual void Free(void);
+};
+
+class GameObject
+{
+public:
+    void Instantiate(void);
+    virtual void Update(void);
 };

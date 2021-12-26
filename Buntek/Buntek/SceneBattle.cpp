@@ -1,9 +1,10 @@
-#include "Scene.h"
+#include "SceneBattle.h"
 
 // ------------------------------------ Battle ------------------------------------
 
 AEGfxVertexList* pMesh1;
 AEGfxTexture* pTex1;
+
 void Battle::Awake(void)
 {
 	
@@ -12,7 +13,6 @@ void Battle::Awake(void)
 
 void Battle::Start(void)
 {
-	
 	AEGfxMeshStart();
 	AEGfxTriAdd(
 		-30.0f, -30.0f, 0x00FF00FF, 0.0f, 1.0f,
@@ -33,10 +33,15 @@ void Battle::Update(void)
 {
     //set background color
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+
 }
 
 void Battle::Render(void)
 {
+	// Call base function test
+	//Battle test;
+	//test.Scene::Render();
+
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	//Set Transparency, Transparency will work only if the Blend mode is not NONE.
 	AEGfxSetTransparency(1.0f);

@@ -1,9 +1,44 @@
 // ---------------------------------------------------------------------------
 // includes
-#include "Scene.h"
+#include "SceneBattle.h"
 
 // ---------------------------------------------------------------------------
 // main
+
+class EventManager
+{
+protected:
+	EventManager()
+	{
+
+	}
+
+	static EventManager* eventManager;
+
+public:
+	// Singletons should not be cloneable.
+	EventManager(EventManager& other) = delete;
+	// Singletons should not be assignable.
+	void operator=(const EventManager&) = delete;
+
+	static EventManager* GetInstance();
+	
+	void Test()
+	{
+		cout << "lmao" << endl;
+	}
+
+};
+
+EventManager* EventManager::eventManager = nullptr;
+
+EventManager* EventManager::GetInstance()
+{
+    if (eventManager == nullptr) {
+        eventManager = new EventManager();
+    }
+    return eventManager;
+}
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
@@ -14,10 +49,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// --------------------------------------------- Awake --------------------------------------------- //
-
+	// Move to main
 	int gGameRunning = 1;
 	Scene* scene = new Battle;
 	scene->Awake();
+	EventManager* eventManager = EventManager::GetInstance();
 
 	// ------------------------------------------ System Init ------------------------------------------- //
 	// Using custom window procedure
@@ -32,7 +68,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	scene->Start();
 
 	// --------------------------------------------- Init --------------------------------------------- //
-
+	eventManager->Test();
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
@@ -51,7 +87,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// --------------------------------------------- Render --------------------------------------------- //
 		scene->Render();
-
+		
 		// ------------------------------------------- End of Loop ------------------------------------------- //
 		// Informing the system about the loop's end
 		AESysFrameEnd();
