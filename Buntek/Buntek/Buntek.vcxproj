@@ -88,14 +88,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GAMTut.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SceneBattle.cpp" />
+    <ClCompile Include="Scene_Splash.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="hisMath.h" />
     <ClInclude Include="SceneBattle.h" />
+    <ClInclude Include="Scene_Splash.h" />
     <ClInclude Include="System.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

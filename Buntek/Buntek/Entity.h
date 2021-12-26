@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <typeinfo>
 
 using std::string;
 using std::vector;
@@ -46,7 +47,7 @@ public:
 	template <typename T>
 	T* GetComponent()
 	{
-		for (auto &c : components)
+		for (auto& c : components)
 		{
 			if (typeid(*c) == typeid(T))
 			{

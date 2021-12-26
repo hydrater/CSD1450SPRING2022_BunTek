@@ -5,16 +5,22 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Buntek", "Buntek\Buntek.vcxproj", "{C9BD83C4-83F5-4C58-A8CD-FE72DCA168AE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA2A4528-8D22-4CE9-AFF7-03F5FCA0A4B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C9BD83C4-83F5-4C58-A8CD-FE72DCA168AE}.Debug|x64.ActiveCfg = Debug|x64
 		{C9BD83C4-83F5-4C58-A8CD-FE72DCA168AE}.Debug|x64.Build.0 = Debug|x64
+		{C9BD83C4-83F5-4C58-A8CD-FE72DCA168AE}.Debug|x86.ActiveCfg = Debug|x64
 		{C9BD83C4-83F5-4C58-A8CD-FE72DCA168AE}.Release|x64.ActiveCfg = Release|x64
 		{C9BD83C4-83F5-4C58-A8CD-FE72DCA168AE}.Release|x64.Build.0 = Release|x64
+		{C9BD83C4-83F5-4C58-A8CD-FE72DCA168AE}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

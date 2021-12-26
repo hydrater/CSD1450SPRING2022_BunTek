@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Transform.h"
 #include "Component.h"
 
 int Entity::entity_count = 0;

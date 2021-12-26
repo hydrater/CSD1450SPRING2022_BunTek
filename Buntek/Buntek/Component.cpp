@@ -2,8 +2,8 @@
 
 
 Component::Component() :
-active(true),
-remove(false)
+	active(true),
+	remove(false)
 {
 }
 

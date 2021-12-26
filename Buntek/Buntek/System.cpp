@@ -27,6 +27,8 @@ void EventManager::Test(void)
     cout << "lmao" << endl;;
 }
 
+
+
 void Scene::Awake(void)
 {
 
