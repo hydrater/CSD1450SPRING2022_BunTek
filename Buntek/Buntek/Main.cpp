@@ -1,6 +1,7 @@
 // ---------------------------------------------------------------------------
 // includes
 #include "Scene_Battle.h"
+#include "AudioEngine.cpp"
 
 // ---------------------------------------------------------------------------
 // main
@@ -31,7 +32,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	scene->Start();
 
 	// --------------------------------------------- Init --------------------------------------------- //
-	EventManager::Instance().Test();
+	//EventManager::Instance().Test();
+
 
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)

@@ -8,6 +8,7 @@
 /* For more detail visit:                                                                   */
 /* https://fmod.com/resources/documentation-api?version=2.0&page=core-api.html              */
 /* ======================================================================================== */
+#pragma warning(disable:26812)
 #ifndef _FMOD_HPP
 #define _FMOD_HPP
 
