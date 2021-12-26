@@ -16,8 +16,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// --------------------------------------------- Awake --------------------------------------------- //
 	// Move to main
 	int gGameRunning = 1;
-	sceneManager.UpdateScene(new Battle);
-	sceneManager.CurrentScene()->Awake();
+	SceneManager.LoadScene(new Battle);
+	SceneManager.GetScene()->Awake();
 
 	// ------------------------------------------ System Init ------------------------------------------- //
 	// Using custom window procedure
@@ -30,7 +30,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
-	sceneManager.CurrentScene()->Start();
+	SceneManager.GetScene()->Start();
 	//EventManager::Instance().Test();
 	//SoundTest();
 
@@ -48,10 +48,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 		// --------------------------------------------- Update --------------------------------------------- //
-		sceneManager.CurrentScene()->Update();
+		SceneManager.GetScene()->Update();
 
 		// --------------------------------------------- Render --------------------------------------------- //
-		sceneManager.CurrentScene()->Render();
+		SceneManager.GetScene()->Render();
 		
 		// ------------------------------------------- End of Loop ------------------------------------------- //
 		// Informing the system about the loop's end
@@ -63,7 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
 	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //
-	sceneManager.CurrentScene()->Free();
+	SceneManager.GetScene()->Free();
 
 	// free the system
 	AESysExit();

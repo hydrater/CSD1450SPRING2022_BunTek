@@ -5,19 +5,19 @@
 
 using namespace std;
 
-#define eventManager EventManager::Instance()
-#define sceneManager SceneManager::Instance()
+#define EventManager _eventManager::Instance()
+#define SceneManager _sceneManager::Instance()
 
-class EventManager
+class _eventManager
 {
 private:
-    static EventManager* instance;
-    EventManager();
-    ~EventManager();
+    static _eventManager* instance;
+    _eventManager();
+    ~_eventManager();
 
 public:
     void Test();
-    static EventManager& Instance(void);
+    static _eventManager& Instance(void);
 };
 
 class Scene
@@ -30,19 +30,18 @@ public:
     virtual void Free(void);
 };
 
-class SceneManager
+class _sceneManager
 {
 private:
-    static SceneManager* instance;
-    SceneManager();
-    ~SceneManager();
+    static _sceneManager* instance;
+    _sceneManager();
+    ~_sceneManager();
     Scene* scene;
 
 public:
-    static SceneManager& Instance(void);
-
-    void UpdateScene(Scene* newScene);
-    Scene* CurrentScene(void);
+    static _sceneManager& Instance(void);
+    void LoadScene(Scene* newScene);
+    Scene* GetScene(void);
 };
 
 class GameObject

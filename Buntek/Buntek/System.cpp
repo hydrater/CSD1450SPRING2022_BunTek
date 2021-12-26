@@ -1,29 +1,29 @@
 #include "System.h"
 
-EventManager* EventManager::instance = 0;
-SceneManager* SceneManager::instance = 0;
+_eventManager* _eventManager::instance = 0;
+_sceneManager* _sceneManager::instance = 0;
 
-EventManager& EventManager::Instance(void)
+_eventManager& _eventManager::Instance(void)
 {
     if (instance != 0)
     {
         return *instance;
     }
-    instance = new EventManager();
+    instance = new _eventManager();
     return *instance;
 }
 
-EventManager::EventManager()
+_eventManager::_eventManager()
 {
 
 }
 
-EventManager::~EventManager()
+_eventManager::~_eventManager()
 {
 
 }
 
-void EventManager::Test(void)
+void _eventManager::Test(void)
 {
     cout << "lmao" << endl;;
 }
@@ -53,32 +53,32 @@ void Scene::Free(void)
 
 }
 
-SceneManager& SceneManager::Instance(void)
+_sceneManager& _sceneManager::Instance(void)
 {
     if (instance != 0)
     {
         return *instance;
     }
-    instance = new SceneManager();
+    instance = new _sceneManager();
     return *instance;
 }
 
-SceneManager::SceneManager()
+_sceneManager::_sceneManager()
 {
     scene = 0;
 }
 
-SceneManager::~SceneManager()
+_sceneManager::~_sceneManager()
 {
 
 }
 
-void SceneManager::UpdateScene(Scene* newScene)
+void _sceneManager::LoadScene(Scene* newScene)
 {
     scene = newScene;
 }
 
-Scene* SceneManager::CurrentScene(void)
+Scene* _sceneManager::GetScene(void)
 {
     return scene;
 }
