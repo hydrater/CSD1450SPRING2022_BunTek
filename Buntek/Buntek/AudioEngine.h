@@ -27,7 +27,7 @@ void SoundTest(void)
 {
     FMOD_RESULT result;
 
-    FMOD::System* system = nullptr;
+    FMOD::System* system = NULL;
     // Create the main system object.
     result = FMOD::System_Create(&system);
     /*if (!succeededOrWarn("FMOD: Failed to create system object", result))
