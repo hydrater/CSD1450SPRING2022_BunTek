@@ -1,4 +1,4 @@
-#include "SceneBattle.h"
+#include "Scene_Battle.h"
 
 // ------------------------------------ Battle ------------------------------------
 

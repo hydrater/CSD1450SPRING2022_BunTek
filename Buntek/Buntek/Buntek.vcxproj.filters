@@ -24,7 +24,7 @@
     <ClCompile Include="System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SceneBattle.cpp">
+    <ClCompile Include="Scene_Battle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene_Splash.cpp">
@@ -47,7 +47,7 @@
     <ClInclude Include="System.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SceneBattle.h">
+    <ClInclude Include="Scene_Battle.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Scene_Splash.h">
