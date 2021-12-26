@@ -33,7 +33,6 @@ void Battle::Update(void)
 {
     //set background color
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-
 }
 
 void Battle::Render(void)

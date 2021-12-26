@@ -5,6 +5,18 @@
 
 using namespace std;
 
+class EventManager
+{
+private:
+    static EventManager* instance;
+    EventManager();
+    ~EventManager();
+
+public:
+    void Test();
+    static EventManager& Instance();
+};
+
 class Scene
 {
 public:

@@ -1,5 +1,32 @@
 #include "System.h"
 
+EventManager* EventManager::instance = 0;
+
+EventManager& EventManager::Instance()
+{
+    if (instance != 0)
+    {
+        return *instance;
+    }
+    instance = new EventManager();
+    return *instance;
+}
+
+EventManager::EventManager()
+{
+
+}
+
+EventManager::~EventManager()
+{
+
+}
+
+void EventManager::Test(void)
+{
+    cout << "lmao" << endl;;
+}
+
 void Scene::Awake(void)
 {
 
