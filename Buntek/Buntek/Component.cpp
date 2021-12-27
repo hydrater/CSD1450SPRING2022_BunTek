@@ -1,12 +1,10 @@
 #include "Component.h"
 
-
 Component::Component() :
 	active(true),
 	remove(false)
 {
 }
-
 
 Component::~Component()
 {

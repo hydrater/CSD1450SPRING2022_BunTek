@@ -1,3 +1,8 @@
+#include <iostream>
+#include <AEEngine.h>
+
+using namespace std;
+
 #ifndef COMPONENT_H
 #define COMPONENT_H
 

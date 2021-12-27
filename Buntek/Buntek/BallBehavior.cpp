@@ -11,5 +11,5 @@ BallBehavior::~BallBehavior()
 
 void BallBehavior::TestPrint(void)
 {
-	cout << "ball ball hahaha" << endl;
+	
 }

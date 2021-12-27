@@ -113,7 +113,7 @@ float Vector2::Dot(const Vector2& vec) const
 Vector2 Vector2::Normalized(void) const throw(DivideByZero)
 {
 	float d = Length();
-	if (d <= Math::EPSILON && -d <= Math::EPSILON)
+	if (d <= Math::epsilon && -d <= Math::epsilon)
 		throw DivideByZero();
 	return Vector2(x / d, y / d);
 }
@@ -121,7 +121,7 @@ Vector2 Vector2::Normalized(void) const throw(DivideByZero)
 Vector2& Vector2::Normalize(void) throw(DivideByZero)
 {
 	float d = Length();
-	if (d <= Math::EPSILON && -d <= Math::EPSILON)
+	if (d <= Math::epsilon && -d <= Math::epsilon)
 		throw DivideByZero();
 	x /= d;
 	y /= d;

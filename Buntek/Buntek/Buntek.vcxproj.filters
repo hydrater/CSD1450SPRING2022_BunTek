@@ -60,6 +60,9 @@
     <ClCompile Include="BallBehavior.cpp">
       <Filter>Source Files\ECS\Components</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="System.h">
@@ -90,6 +93,9 @@
       <Filter>Source Files\Common</Filter>
     </ClInclude>
     <ClInclude Include="BallBehavior.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
   </ItemGroup>

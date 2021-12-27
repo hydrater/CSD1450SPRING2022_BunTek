@@ -8,13 +8,11 @@
 
 namespace Math
 {
-
-	const float	EPSILON = 0.00001f;  ///Used for error checking
-	const float	PI = 3.1415926535897932384626433832795f;
-	const float TWO_PI = PI * 2.0f;
-	const float HALF_PI = PI / 2.0f;
-	const float QUARTER_PI = PI / 4.0f;
-
+	const float epsilon = 0.00001f;  ///Used for error checking
+	const float	pi = 3.1415926535897932384626433832795f;
+	const float two_pi = pi * 2.0f;
+	const float half_pi = pi / 2.0f;
+	const float quarter_pi = pi / 4.0f;
 
 	inline float FAbs(float value)
 	{
@@ -23,12 +21,12 @@ namespace Math
 
 	inline float DegreeToRadian(float value)
 	{
-		return value * PI / 180.0f;
+		return value * pi / 180.0f;
 	}
 
 	inline float RadianToDegree(float value)
 	{
-		return value * 180.0f / PI;
+		return value * 180.0f / pi;
 	}
 
 	template<typename T>
