@@ -30,7 +30,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
-	SceneManager.GetScene()->Start();
 	//EventManager::Instance().Test();
 	//SoundTest();
 
@@ -48,7 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 		// --------------------------------------------- Update --------------------------------------------- //
-		SceneManager.GetScene()->Update();
+		SceneManager.Update();
 
 		// --------------------------------------------- Render --------------------------------------------- //
 		SceneManager.GetScene()->Render();

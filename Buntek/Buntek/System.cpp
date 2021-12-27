@@ -66,6 +66,7 @@ _sceneManager& _sceneManager::Instance(void)
 _sceneManager::_sceneManager()
 {
     scene = 0;
+    notStarted = true;
 }
 
 _sceneManager::~_sceneManager()
@@ -81,6 +82,16 @@ void _sceneManager::LoadScene(Scene* newScene)
 Scene* _sceneManager::GetScene(void)
 {
     return scene;
+}
+
+void _sceneManager::Update(void)
+{
+    if (notStarted)
+    {
+        scene->Start();
+        notStarted = false;
+    }
+    scene->Update();
 }
 
 void GameObject::Instantiate(void)

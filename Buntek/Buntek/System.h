@@ -37,11 +37,13 @@ private:
     _sceneManager();
     ~_sceneManager();
     Scene* scene;
+    bool notStarted;
 
 public:
     static _sceneManager& Instance(void);
     void LoadScene(Scene* newScene);
     Scene* GetScene(void);
+    void Update(void);
 };
 
 class GameObject
