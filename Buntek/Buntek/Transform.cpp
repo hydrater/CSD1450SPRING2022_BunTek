@@ -17,8 +17,6 @@ Transform::~Transform()
 {
 }
 
-
-
 void Transform::Set(Vector2 position, Vector2 scale, float rotation)
 {
 	this->localposition = position;

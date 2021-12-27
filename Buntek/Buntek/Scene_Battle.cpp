@@ -1,4 +1,7 @@
 #include "Scene_Battle.h"
+#include "Component.h"
+#include "Entity.h"
+#include "BallBehavior.h"
 
 // ------------------------------------ Battle ------------------------------------
 
@@ -26,6 +29,13 @@ void Battle::Start(void)
 	pMesh1 = AEGfxMeshEnd();
 	pTex1 = AEGfxTextureLoad("./Resources/Art/PlanetTexture.png");
 	AE_ASSERT_MESG(pTex1, "Failed to create texture1!!");
+
+	cout << "asd" << endl;
+
+	Entity* test = new Entity();
+	test->AddComponent<BallBehavior>();
+	test->GetComponent<BallBehavior>()->TestPrint();
+
 }
 
 void Battle::Update(void)
