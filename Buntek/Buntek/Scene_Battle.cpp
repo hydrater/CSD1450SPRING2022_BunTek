@@ -7,8 +7,7 @@ AEGfxTexture* pTex1;
 
 void Battle::Awake(void)
 {
-	
-
+	cout << "Awake" << endl;
 }
 
 void Battle::Start(void)
@@ -27,12 +26,15 @@ void Battle::Start(void)
 	pMesh1 = AEGfxMeshEnd();
 	pTex1 = AEGfxTextureLoad("./Resources/Art/PlanetTexture.png");
 	AE_ASSERT_MESG(pTex1, "Failed to create texture1!!");
+
+	cout << "Start" << endl;
 }
 
 void Battle::Update(void)
 {
     //set background color
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+	cout << "Update" << endl;
 }
 
 void Battle::Render(void)

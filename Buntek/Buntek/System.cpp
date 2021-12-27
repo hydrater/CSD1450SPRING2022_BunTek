@@ -67,6 +67,7 @@ _sceneManager::_sceneManager()
 {
     scene = 0;
     notStarted = true;
+    notAwake = true;
 }
 
 _sceneManager::~_sceneManager()
@@ -84,10 +85,21 @@ Scene* _sceneManager::GetScene(void)
     return scene;
 }
 
+void _sceneManager::Awake(void)
+{
+    if (notAwake)
+    {
+        scene->Awake();
+        notAwake = false;
+    }
+}
+
 void _sceneManager::Update(void)
 {
     if (notStarted)
     {
+        Awake();
+
         scene->Start();
         notStarted = false;
     }

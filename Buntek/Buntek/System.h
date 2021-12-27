@@ -37,12 +37,13 @@ private:
     _sceneManager();
     ~_sceneManager();
     Scene* scene;
-    bool notStarted;
+    bool notStarted, notAwake;
 
 public:
     static _sceneManager& Instance(void);
     void LoadScene(Scene* newScene);
     Scene* GetScene(void);
+    void Awake(void);
     void Update(void);
 };
 
