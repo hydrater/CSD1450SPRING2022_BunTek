@@ -25,18 +25,12 @@
     <Filter Include="Source Files\ECS\Components">
       <UniqueIdentifier>{62378dff-4a0f-4386-9a47-ccc97006a793}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{6e15f47c-36b7-400d-81a6-ca5038cac463}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="GAMTut.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="System.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene_Battle.cpp">
@@ -63,17 +57,20 @@
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Source Files\ECS\Components</Filter>
     </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioEngine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
     <ClCompile Include="GameScript.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="System.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioEngine.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Scene_Battle.h">
       <Filter>Source Files\Scenes</Filter>
     </ClInclude>
@@ -101,8 +98,14 @@
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
+    <ClInclude Include="AudioEngine.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
     <ClInclude Include="GameScript.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
