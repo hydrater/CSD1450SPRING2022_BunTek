@@ -15,8 +15,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// --------------------------------------------- Awake --------------------------------------------- //
 	// Move to main
 	int gGameRunning = 1;
-	SceneManager.LoadScene(new Battle);
-	SceneManager.GetScene()->Awake();
 
 	// ------------------------------------------ System Init ------------------------------------------- //
 	// Using custom window procedure
@@ -30,7 +28,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// --------------------------------------------- Init --------------------------------------------- //
 	//EventManager::Instance().Test();
-	//SoundTest();
+	SceneManager.LoadScene(new Battle);
+	SceneManager.Awake();
 
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
