@@ -2,14 +2,16 @@
 
 BallBehavior::BallBehavior()
 {
+	position.Set(0, 0);
 }
 
 
 BallBehavior::~BallBehavior()
 {
+
 }
 
-void BallBehavior::TestPrint(void)
+void BallBehavior::Test()
 {
-	
+	cout << "asd" << endl;
 }

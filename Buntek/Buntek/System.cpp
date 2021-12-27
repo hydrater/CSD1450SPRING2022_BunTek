@@ -105,13 +105,3 @@ void _sceneManager::Update(void)
     }
     scene->Update();
 }
-
-void GameObject::Instantiate(void)
-{
-
-}
-
-void GameObject::Update(void)
-{
-    cout << "test" << endl;
-}

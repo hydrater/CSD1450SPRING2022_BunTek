@@ -46,10 +46,3 @@ public:
     void Awake(void);
     void Update(void);
 };
-
-class GameObject
-{
-public:
-    void Instantiate(void);
-    virtual void Update(void);
-};

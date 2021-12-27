@@ -15,10 +15,9 @@ void Battle::Awake(void)
 
 void Battle::Start(void)
 {
-
 	test = new Entity();
 	test->AddComponent<SpriteRenderer>()->Size(100, 100);
-
+	test->AddComponent<BallBehavior>()->Test();
 }
 
 void Battle::Update(void)
@@ -29,10 +28,7 @@ void Battle::Update(void)
 
 void Battle::Render(void)
 {
-
-
 	test->GetComponent<SpriteRenderer>()->Render();
-
 }
 
 void Battle::Free(void)

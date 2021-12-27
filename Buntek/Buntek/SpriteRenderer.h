@@ -1,5 +1,6 @@
 #pragma once
 #include "Component.h"
+#include "Transform.h"
 
 class SpriteRenderer : public Component
 {
@@ -13,4 +14,6 @@ public:
 
 	AEGfxVertexList* mesh;
 	AEGfxTexture* texture;
+private:
+	Transform transform;
 };

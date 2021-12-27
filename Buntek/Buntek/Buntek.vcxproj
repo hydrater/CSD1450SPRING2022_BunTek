@@ -96,6 +96,7 @@
     <ClCompile Include="BallBehavior.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GameScript.cpp" />
     <ClCompile Include="GAMTut.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="BallBehavior.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="GameScript.h" />
     <ClInclude Include="hisMath.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Scene_Battle.h" />

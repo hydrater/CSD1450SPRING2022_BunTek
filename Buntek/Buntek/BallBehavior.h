@@ -1,11 +1,14 @@
 #pragma once
-#include "Component.h"
+#include "GameScript.h"
+#include "Vector2.h"
 
-class BallBehavior : public Component
+class BallBehavior : public GameScript
 {
 public:
 	BallBehavior();
 	~BallBehavior();
+	void Test(void);
 
-	void TestPrint(void);
+private:
+	Vector2 position;
 };

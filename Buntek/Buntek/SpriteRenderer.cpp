@@ -1,9 +1,8 @@
 #include "SpriteRenderer.h"
 
-AEGfxVertexList* pMesh;
-
 SpriteRenderer::SpriteRenderer()
 {
+	
 }
 
 SpriteRenderer::~SpriteRenderer()
