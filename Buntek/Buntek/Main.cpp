@@ -1,6 +1,7 @@
 // ---------------------------------------------------------------------------
 // includes
 #include "Scene_Battle.h"
+#include "AudioEngine.h"
 
 // ---------------------------------------------------------------------------
 // main
@@ -23,14 +24,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Changing the window title
 	AESysSetWindowTitle("idk we need a pong game name atm");
 
-	// reset the system modules
+	// reset the system modules-
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
 	//EventManager::Instance().Test();
 	SceneManager.LoadScene(new Battle);
 	SceneManager.Awake();
-
+	SoundTest();
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
