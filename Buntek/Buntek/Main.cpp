@@ -49,7 +49,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// --------------------------------------------- Render --------------------------------------------- //
 		SceneManager.GetScene()->Render();
-		
 		// ------------------------------------------- End of Loop ------------------------------------------- //
 		// Informing the system about the loop's end
 		AESysFrameEnd();
