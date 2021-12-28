@@ -11,13 +11,15 @@ Entity* test;
 void Battle::Start(void)
 {
 	test = new Entity();
-	test->AddComponent<SpriteRenderer>()->Size(100, 100);
+	test->AddComponent<SpriteRenderer>()->Size(500, 500);
+	test->transform->SetPosition(Vector2(-500, 10));
 	test->AddComponent<BallBehavior>()->Test();
 }
 
 void Battle::Update(void)
 {
     //set background color
+	test->transform->SetPosition(Vector2(test->transform->localposition.x+1, test->transform->localposition.y));
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
 

@@ -14,6 +14,4 @@ public:
 
 	AEGfxVertexList* mesh;
 	AEGfxTexture* texture;
-private:
-	Transform transform;
 };

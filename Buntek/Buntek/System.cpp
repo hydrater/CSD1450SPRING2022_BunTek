@@ -126,25 +126,3 @@ void _sceneManager::Update(void)
     }
     scene->Update();
 }
-
-_assetManager::_assetManager()
-{
-
-}
-
-_assetManager::~_assetManager()
-{
-
-}
-
-_assetManager& _assetManager::Instance(void)
-{
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _assetManager();
-    // Init here
-
-    return *instance;
-}

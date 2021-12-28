@@ -49,14 +49,3 @@ public:
     Scene* GetScene(void);
     void Update(void);
 };
-
-class _assetManager
-{
-private:
-    static _assetManager* instance;
-    _assetManager();
-    ~_assetManager();
-
-public:
-    static _assetManager& Instance(void);
-};

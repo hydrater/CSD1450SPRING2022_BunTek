@@ -1,8 +1,14 @@
 #include "SpriteRenderer.h"
 
+//TODO:
+// vector2 size, stores half of the width and length
+
 SpriteRenderer::SpriteRenderer()
 {
-	
+	texture = 0;
+	mesh = 0;
+	// Replace with add to list
+	cout << "asd" << endl;
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -26,7 +32,7 @@ void SpriteRenderer::Size(float width, float height)
 		-halfwidth, halfheight, 0x00FFFFFF, 0.0f, 0.0f);
 
 	mesh = AEGfxMeshEnd();
-	texture = AEGfxTextureLoad("./Resources/Art/PlanetTexture.png");
+	texture = AEGfxTextureLoad("./Resources/Art/Steven.jpg");
 	AE_ASSERT_MESG(texture, "Failed to create texture1!!");
 }
 
@@ -36,7 +42,7 @@ void SpriteRenderer::Render(void)
 	//Set Transparency, Transparency will work only if the Blend mode is not NONE.
 	AEGfxSetTransparency(1.0f);
 	// Set position for object 3
-	AEGfxSetPosition(0.0f, -60.0f);
+	AEGfxSetPosition(this->owner->transform->localposition.x, this->owner->transform->localposition.y);
 	// Add Blue tint
 	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 	// Set texture
