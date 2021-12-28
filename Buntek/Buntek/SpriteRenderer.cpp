@@ -8,7 +8,6 @@ SpriteRenderer::SpriteRenderer()
 	texture = 0;
 	mesh = 0;
 	AssetManager.AddToList(this);
-	cout << "Sprite Renderer added" << endl;
 }
 
 SpriteRenderer::~SpriteRenderer()

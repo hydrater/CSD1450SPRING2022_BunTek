@@ -34,6 +34,14 @@ void _assetManager::RenderAll(void)
 
     for (int i = 0; i < rendererList.size(); ++i)
     {
+        if (rendererList[i]->remove)
+        {
+            delete rendererList[i];
+            rendererList.erase(rendererList.begin() + i);
+            --i;
+            continue;
+        }
+
         float halfWidth = rendererList[i]->GetHalfWidth();
         float halfHeight = rendererList[i]->GetHalfHeight();
         Transform* transform = rendererList[i]->GetTransform();
