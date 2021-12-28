@@ -105,8 +105,8 @@ void _sceneManager::LoadScene(Scene* newScene)
 {
     if (scene != NULL)
     {
-        scene->Free();
-        cout << "free success" << endl;
+        //scene->Free();
+        delete scene;
     }
     scene = newScene;
 }
