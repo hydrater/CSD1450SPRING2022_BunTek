@@ -47,7 +47,7 @@ void SpriteRenderer::Render(void)
 
 void SpriteRenderer::Free(void)
 {
-	AEGfxMeshFree(mesh);
-	AEGfxTextureUnload(texture);
+	//AEGfxMeshFree(mesh);
+	//AEGfxTextureUnload(texture);
 }
 

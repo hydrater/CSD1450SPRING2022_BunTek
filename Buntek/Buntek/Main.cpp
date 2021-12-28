@@ -46,7 +46,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.Update();
-		
+
 		// --------------------------------------------- Render --------------------------------------------- //
 		SceneManager.GetScene()->Render();
 		

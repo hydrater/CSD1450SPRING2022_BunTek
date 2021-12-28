@@ -105,7 +105,7 @@ void _sceneManager::LoadScene(Scene* newScene)
 {
     if (scene != NULL)
     {
-        //scene->Free();
+        scene->Free();
         delete scene;
     }
     scene = newScene;
