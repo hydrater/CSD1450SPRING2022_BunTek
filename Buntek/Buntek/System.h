@@ -7,6 +7,7 @@ using namespace std;
 
 #define EventManager _eventManager::Instance()
 #define SceneManager _sceneManager::Instance()
+#define AssetManager _assetManager::Instance()
 
 class _eventManager
 {
@@ -16,7 +17,6 @@ private:
     ~_eventManager();
 
 public:
-    void Test();
     static _eventManager& Instance(void);
 	void Awake(void);
 	void Start(void);
@@ -48,4 +48,15 @@ public:
     void LoadScene(Scene* newScene);
     Scene* GetScene(void);
     void Update(void);
+};
+
+class _assetManager
+{
+private:
+    static _assetManager* instance;
+    _assetManager();
+    ~_assetManager();
+
+public:
+    static _assetManager& Instance(void);
 };
