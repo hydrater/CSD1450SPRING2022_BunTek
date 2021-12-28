@@ -7,6 +7,7 @@ using namespace std;
 
 #define EventManager _eventManager::Instance()
 #define SceneManager _sceneManager::Instance()
+#define DeltaTime AEFrameRateControllerGetFrameTime()
 
 class _eventManager
 {
