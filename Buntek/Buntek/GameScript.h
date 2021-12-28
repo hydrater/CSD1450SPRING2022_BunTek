@@ -10,7 +10,7 @@ public:
 	GameScript();
 	virtual ~GameScript();
 
-	void Init(Entity* owner) override;
+	void Init(GameObject* owner) override;
 	virtual void Start(void);
 	virtual void Awake(void);
 	virtual void Update(void);

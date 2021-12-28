@@ -11,7 +11,7 @@ using std::vector;
 // Transform Component
 class Transform : public Component
 {
-	friend class Entity;
+	friend class GameObject;
 	friend class TransformSystem;
 public:
 	Transform();

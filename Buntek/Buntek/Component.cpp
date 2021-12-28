@@ -4,21 +4,21 @@ Component::Component() :
 	active(true),
 	remove(false)
 {
-	owner = NULL;
+	gameObject = NULL;
 }
 
 Component::~Component()
 {
 }
 
-void Component::Init(Entity* owner)
+void Component::Init(GameObject* owner)
 {
-	this->owner = owner;
+	this->gameObject = owner;
 }
 
-Entity* Component::Owner(void)
+GameObject* Component::Owner(void)
 {
-	return owner;
+	return gameObject;
 }
 
 bool Component::IsActive()

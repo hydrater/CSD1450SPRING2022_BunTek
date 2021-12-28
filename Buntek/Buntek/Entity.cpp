@@ -2,9 +2,9 @@
 #include "Transform.h"
 #include "Component.h"
 
-int Entity::entity_count = 0;
+int GameObject::entity_count = 0;
 
-Entity::Entity() :
+GameObject::GameObject() :
 active(true),
 remove(false)
 {
@@ -15,7 +15,7 @@ remove(false)
 }
 
 
-Entity::~Entity()
+GameObject::~GameObject()
 {
 	transform->children.clear();
 	transform->parent->Owner()->DetachChild(this);
@@ -30,27 +30,27 @@ Entity::~Entity()
 	}
 }
 
-const int Entity::GetID(void)
+const int GameObject::GetID(void)
 {
 	return id;
 }
 
-bool Entity::IsActive(void)
+bool GameObject::IsActive(void)
 {
 	return active;
 }
 
-void Entity::Activate(void)
+void GameObject::Activate(void)
 {
 	active = true;
 }
 
-void Entity::Deactivate(void)
+void GameObject::Deactivate(void)
 {
 	active = false;
 }
 
-void Entity::AddChild(Entity* child)
+void GameObject::AddChild(GameObject* child)
 {
 	//children.push_back(child);
 	//child->parent = this;
@@ -59,7 +59,7 @@ void Entity::AddChild(Entity* child)
 	child->transform->parent = transform;
 }
 
-void Entity::DetachChild(Entity* child)
+void GameObject::DetachChild(GameObject* child)
 {
 	for (unsigned i = 0; i < transform->children.size(); ++i)
 	{
@@ -72,13 +72,13 @@ void Entity::DetachChild(Entity* child)
 	}
 }
 
-void Entity::DetachChild(int number)
+void GameObject::DetachChild(int number)
 {
 	transform->children[number]->parent = NULL;
 	transform->children.erase(transform->children.begin() + number);
 }
 
-void Entity::DetachAllChild(void)
+void GameObject::DetachAllChild(void)
 {
 	for (unsigned i = 0; i < transform->children.size(); ++i)
 	{
@@ -88,12 +88,12 @@ void Entity::DetachAllChild(void)
 	transform->children.clear();
 }
 
-void Entity::DetachParent(void)
+void GameObject::DetachParent(void)
 {
 	transform->parent = NULL;
 }
 
-void Entity::Delete(void)
+void GameObject::Delete(void)
 {
 	/*remove = true;
 	for (int i = 0; i < transform->children.size(); ++i)

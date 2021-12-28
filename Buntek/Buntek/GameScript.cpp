@@ -10,9 +10,9 @@ GameScript::~GameScript()
 {
 }
 
-void GameScript::Init(Entity* owner)
+void GameScript::Init(GameObject* owner)
 {
-	this->owner = owner;
+	this->gameObject = owner;
 	// Add to event manager
 	cout << "Game script override success" << endl;
 }

@@ -11,11 +11,11 @@ using std::vector;
 class Transform;
 class Material;
 class Component;
-class Entity
+class GameObject
 {
 public:
-	Entity();
-	~Entity();
+	GameObject();
+	~GameObject();
 
 	// Compulsory component
 	Transform* transform;
@@ -24,8 +24,8 @@ public:
 	bool IsActive(void);
 	void Activate(void);
 	void Deactivate(void);
-	void AddChild(Entity* child);
-	void DetachChild(Entity* child);
+	void AddChild(GameObject* child);
+	void DetachChild(GameObject* child);
 	void DetachChild(int number);
 	void DetachAllChild(void);
 	void DetachParent(void);

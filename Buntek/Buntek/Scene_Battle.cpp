@@ -6,11 +6,11 @@
 
 // ------------------------------------ Battle ------------------------------------
 
-Entity* test;
+GameObject* test;
 
 void Battle::Start(void)
 {
-	test = new Entity();
+	test = new GameObject();
 	test->AddComponent<SpriteRenderer>()->Size(500, 500);
 	test->transform->SetPosition(Vector2(-500, 10));
 	test->AddComponent<BallBehavior>()->Test();

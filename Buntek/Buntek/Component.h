@@ -8,7 +8,7 @@ using namespace std;
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-class Entity;
+class GameObject;
 class Component
 {
 public:
@@ -16,8 +16,8 @@ public:
 	virtual ~Component() = 0;
 
 	// Function to initialize the component's owner when it is added to the entity
-	virtual void Init(Entity* owner);
-	Entity* Owner(void);
+	virtual void Init(GameObject* owner);
+	GameObject* Owner(void);
 
 	bool IsActive(void);
 	void Activate();
@@ -25,7 +25,7 @@ public:
 	void Remove();	// queue it for deletion
 
 protected:
-	Entity* owner;
+	GameObject* gameObject;
 	bool active;
 	//bool add;	// queue for addition in runtime
 	bool remove;	// queue for remove
