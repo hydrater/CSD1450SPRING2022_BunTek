@@ -13,10 +13,9 @@ void Battle::Start(void)
 {
 	test = new GameObject();
 	test->AddComponent<SpriteRenderer>()->Size(500, 500);
-	//test->RemoveComponent<SpriteRenderer>();
-	
 	test->transform->SetPosition(Vector2(-500, 10));
 	test->AddComponent<BallBehavior>()->Test();
+
 	test2 = new GameObject();
 	test2->AddComponent<SpriteRenderer>()->Size(500, 500);
 	test2->transform->SetPosition(Vector2(0, 10));

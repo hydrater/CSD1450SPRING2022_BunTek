@@ -70,11 +70,6 @@ void _assetManager::AddToList(SpriteRenderer* spriteRenderer)
     rendererList.push_back(spriteRenderer);
 }
 
-void _assetManager::Free(void)
-{
-    // Free and delete
-}
-
 void _assetManager::FreeAll(void)
 {
     AEGfxMeshFree(mesh);

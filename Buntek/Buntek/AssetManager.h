@@ -20,7 +20,5 @@ public:
     static _assetManager& Instance(void);
     void AddToList(SpriteRenderer* spriteRenderer);
     void RenderAll(void);
-    void Free(void);
     void FreeAll(void);
-    //void FreeRenderer() Use vector.erase
 };
