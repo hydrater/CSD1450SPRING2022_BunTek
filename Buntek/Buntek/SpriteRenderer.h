@@ -11,7 +11,7 @@ public:
 	void Size(float width, float height);
 	float GetHalfWidth(void);
 	float GetHalfHeight(void);
-	Transform GetTransform(void);
+	Transform* GetTransform(void);
 
 	AEGfxVertexList* mesh;
 	AEGfxTexture* texture;
@@ -19,5 +19,4 @@ public:
 private:
 	float halfWidth;
 	float halfHeight;
-	Transform transform;
 };

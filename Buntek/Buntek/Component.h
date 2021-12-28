@@ -23,12 +23,12 @@ public:
 	void Activate();
 	void Deactivate();
 	void Remove();	// queue it for deletion
+	bool remove;	// queue for remove
 
 protected:
 	GameObject* gameObject;
 	bool active;
 	//bool add;	// queue for addition in runtime
-	bool remove;	// queue for remove
 };
 
 #endif

@@ -1,9 +1,6 @@
 #include "SpriteRenderer.h"
 #include "AssetManager.h"
 
-//TODO:
-// vector2 size, stores half of the width and length
-
 SpriteRenderer::SpriteRenderer()
 {
 	halfHeight = 100;
@@ -16,12 +13,13 @@ SpriteRenderer::SpriteRenderer()
 
 SpriteRenderer::~SpriteRenderer()
 {
-
+	cout << "sprite renderer deconstructor called" << endl;
 }
 
 void SpriteRenderer::Size(float width, float height)
 {
-	float halfwidth = width / 2, halfheight = height / 2;
+	halfWidth = width / 2;
+	halfHeight = height / 2;
 }
 
 float SpriteRenderer::GetHalfWidth(void)
@@ -34,7 +32,7 @@ float SpriteRenderer::GetHalfHeight(void)
 	return halfHeight;
 }
 
-Transform SpriteRenderer::GetTransform(void)
+Transform* SpriteRenderer::GetTransform(void)
 {
-	return this->transform;
+	return this->Owner()->transform;
 }

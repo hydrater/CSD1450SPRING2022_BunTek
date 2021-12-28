@@ -29,15 +29,14 @@ _assetManager& _assetManager::Instance(void)
 void _assetManager::RenderAll(void)
 {
     AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+    
+    //cout << rendererList.size() << endl;
 
     for (int i = 0; i < rendererList.size(); ++i)
     {
-        // Render
-        //rendererList[i]->Render();
-
         float halfWidth = rendererList[i]->GetHalfWidth();
         float halfHeight = rendererList[i]->GetHalfHeight();
-        Transform transform = rendererList[i]->GetTransform();
+        Transform* transform = rendererList[i]->GetTransform();
 
         AEGfxMeshStart();
         AEGfxTriAdd(
@@ -56,7 +55,7 @@ void _assetManager::RenderAll(void)
         //Set Transparency, Transparency will work only if the Blend mode is not NONE.
         AEGfxSetTransparency(1.0f);
         // Set position for object 3
-        AEGfxSetPosition(transform.localposition.x, transform.localposition.y);
+        AEGfxSetPosition(transform->localposition.x, transform->localposition.y);
         // Add Blue tint
         AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
         // Set texture
