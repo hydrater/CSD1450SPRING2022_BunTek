@@ -9,9 +9,15 @@ public:
 	~SpriteRenderer();
 
 	void Size(float width, float height);
-	void Render(void);
-	void Free(void);
+	float GetHalfWidth(void);
+	float GetHalfHeight(void);
+	Transform GetTransform(void);
 
 	AEGfxVertexList* mesh;
 	AEGfxTexture* texture;
+
+private:
+	float halfWidth;
+	float halfHeight;
+	Transform transform;
 };

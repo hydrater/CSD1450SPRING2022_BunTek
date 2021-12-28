@@ -10,13 +10,3 @@ void Splash::Update(void)
 {
 
 }
-
-void Splash::Render(void)
-{
-
-}
-
-void Splash::Free(void)
-{
-
-}

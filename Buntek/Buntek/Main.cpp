@@ -3,6 +3,7 @@
 #include "Scene_Battle.h"
 #include "Scene_Splash.h"
 #include "AudioEngine.h"
+#include "AssetManager.h"
 
 // ---------------------------------------------------------------------------
 // main
@@ -48,7 +49,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneManager.Update();
 
 		// --------------------------------------------- Render --------------------------------------------- //
-		SceneManager.GetScene()->Render();
+		AssetManager.RenderAll();
 		// ------------------------------------------- End of Loop ------------------------------------------- //
 		// Informing the system about the loop's end
 		AESysFrameEnd();
@@ -59,7 +60,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
 	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //
-	SceneManager.GetScene()->Free();
+	AssetManager.FreeAll();
 
 	// free the system
 	AESysExit();

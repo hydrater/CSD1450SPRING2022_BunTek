@@ -22,13 +22,3 @@ void Battle::Update(void)
 	test->transform->SetPosition(Vector2(test->transform->localposition.x+1, test->transform->localposition.y));
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
-
-void Battle::Render(void)
-{
-	test->GetComponent<SpriteRenderer>()->Render();
-}
-
-void Battle::Free(void)
-{
-	test->GetComponent<SpriteRenderer>()->Free();
-}

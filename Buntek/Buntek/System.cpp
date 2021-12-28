@@ -1,4 +1,5 @@
 #include "System.h"
+#include "AssetManager.h"
 
 _eventManager* _eventManager::instance = 0;
 _sceneManager* _sceneManager::instance = 0;
@@ -23,41 +24,31 @@ _eventManager& _eventManager::Instance(void)
     return *instance;
 }
 
-void _eventManager::Awake(void)
-{
-	/*if (notAwake)
-	{
-		scene->Awake();
-		notAwake = false;
-	}*/
-}
-
-void _eventManager::Start(void)
-{
-
-}
-
-void _eventManager::Update(void)
-{
-    //if (notStarted)
-    //{
-    //    Awake();
-
-    //    scene->Start();
-    //    notStarted = false;
-    //}
-    //scene->Update();
-}
-
-void _eventManager::Render(void)
-{
-
-}
-
-void _eventManager::Free(void)
-{
-
-}
+//void _eventManager::Awake(void)
+//{
+//	/*if (notAwake)
+//	{
+//		scene->Awake();
+//		notAwake = false;
+//	}*/
+//}
+//
+//void _eventManager::Start(void)
+//{
+//
+//}
+//
+//void _eventManager::Update(void)
+//{
+//    //if (notStarted)
+//    //{
+//    //    Awake();
+//
+//    //    scene->Start();
+//    //    notStarted = false;
+//    //}
+//    //scene->Update();
+//}
 
 void Scene::Start(void)
 {
@@ -65,16 +56,6 @@ void Scene::Start(void)
 }
 
 void Scene::Update(void)
-{
-
-}
-
-void Scene::Render(void)
-{
-
-}
-
-void Scene::Free(void)
 {
 
 }
@@ -105,7 +86,7 @@ void _sceneManager::LoadScene(Scene* newScene)
 {
     if (scene != NULL)
     {
-        scene->Free();
+        AssetManager.FreeAll();
         delete scene;
     }
     notStarted = true;

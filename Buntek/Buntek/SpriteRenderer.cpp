@@ -1,14 +1,17 @@
 #include "SpriteRenderer.h"
+#include "AssetManager.h"
 
 //TODO:
 // vector2 size, stores half of the width and length
 
 SpriteRenderer::SpriteRenderer()
 {
+	halfHeight = 100;
+	halfWidth = 100;
 	texture = 0;
 	mesh = 0;
-	// Replace with add to list
-	cout << "asd" << endl;
+	AssetManager.AddToList(this);
+	cout << "Sprite Renderer added" << endl;
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -19,41 +22,19 @@ SpriteRenderer::~SpriteRenderer()
 void SpriteRenderer::Size(float width, float height)
 {
 	float halfwidth = width / 2, halfheight = height / 2;
-
-	AEGfxMeshStart();
-	AEGfxTriAdd(
-		-halfwidth, -halfheight, 0x00FF00FF, 0.0f, 1.0f,
-		halfwidth, -halfheight, 0x00FFFF00, 1.0f, 1.0f,
-		-halfwidth, halfheight, 0x0000FFFF, 0.0f, 0.0f);
-
-	AEGfxTriAdd(
-		halfwidth, -halfheight, 0x00FFFFFF, 1.0f, 1.0f,
-		halfwidth, halfheight, 0x00FFFFFF, 1.0f, 0.0f,
-		-halfwidth, halfheight, 0x00FFFFFF, 0.0f, 0.0f);
-
-	mesh = AEGfxMeshEnd();
-	texture = AEGfxTextureLoad("./Resources/Art/Steven.jpg");
-	AE_ASSERT_MESG(texture, "Failed to create texture1!!");
 }
 
-void SpriteRenderer::Render(void)
+float SpriteRenderer::GetHalfWidth(void)
 {
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	//Set Transparency, Transparency will work only if the Blend mode is not NONE.
-	AEGfxSetTransparency(1.0f);
-	// Set position for object 3
-	AEGfxSetPosition(this->gameObject->transform->localposition.x, this->gameObject->transform->localposition.y);
-	// Add Blue tint
-	AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-	// Set texture
-	AEGfxTextureSet(texture, 0, 0);
-	// Drawing the mesh (list of triangles)
-	AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
+	return halfWidth;
 }
 
-void SpriteRenderer::Free(void)
+float SpriteRenderer::GetHalfHeight(void)
 {
-	AEGfxMeshFree(mesh);
-	AEGfxTextureUnload(texture);
+	return halfHeight;
 }
 
+Transform SpriteRenderer::GetTransform(void)
+{
+	return this->transform;
+}

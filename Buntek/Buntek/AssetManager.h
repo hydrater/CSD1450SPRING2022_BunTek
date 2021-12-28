@@ -1,7 +1,10 @@
 #pragma once
+#include <AEEngine.h>
+#include "Transform.h"
 #include <vector>
 #include "SpriteRenderer.h"
-#include <AEEngine.h>
+
+#define AssetManager _assetManager::Instance()
 
 class _assetManager
 {
@@ -17,5 +20,7 @@ public:
     static _assetManager& Instance(void);
     void AddToList(SpriteRenderer* spriteRenderer);
     void RenderAll(void);
+    void Free(void);
+    void FreeAll(void);
     //void FreeRenderer() Use vector.erase
 };
