@@ -2,9 +2,7 @@
 #define TRANSFORM_H
 
 #include "Component.h"
-
 #include "Vector2.h"
-
 #include <vector>
 
 using std::vector;

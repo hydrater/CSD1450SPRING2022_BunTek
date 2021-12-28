@@ -1,5 +1,7 @@
 #include <iostream>
 #include <AEEngine.h>
+#include "Entity.h"
+#include "Transform.h"
 
 using namespace std;
 
