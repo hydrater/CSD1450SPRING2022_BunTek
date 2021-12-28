@@ -62,6 +62,7 @@ void _assetManager::RenderAll(void)
         AEGfxSetPosition(transform->localposition.x, transform->localposition.y);
         AEGfxTextureSet(texture, 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
+        AEGfxMeshFree(mesh);
     }
 }
 
@@ -72,7 +73,9 @@ void _assetManager::AddToList(SpriteRenderer* spriteRenderer)
 
 void _assetManager::FreeAll(void)
 {
-    AEGfxMeshFree(mesh);
+    if (mesh != 0)
+        AEGfxMeshFree(mesh);
+
     AEGfxTextureUnload(texture);
     rendererList.clear();
 }
