@@ -86,7 +86,7 @@ void _assetManager::FreeAll(void)
 
 void _assetManager::LoadTexture(string name)
 {
-    string pathname = "./Resources/Art/" + name;
+    string pathname = "./Assets/" + name;
     AEGfxTexture* texture = AEGfxTextureLoad(&pathname.front());
     textureDatabase[name] = texture;
     AE_ASSERT_MESG(texture, "Failed to create texture1!!");
