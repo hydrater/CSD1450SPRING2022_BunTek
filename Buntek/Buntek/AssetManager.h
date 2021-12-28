@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include <vector>
 #include "SpriteRenderer.h"
+#include <map>
 
 #define AssetManager _assetManager::Instance()
 
@@ -14,7 +15,9 @@ private:
     ~_assetManager();
     vector<SpriteRenderer*> rendererList;
     AEGfxVertexList* mesh;
-    AEGfxTexture* texture;
+    map<string, AEGfxTexture*> textureDatabase;
+    void LoadTexture(string name);
+    AEGfxTexture* GetTexture(string name);
 
 public:
     static _assetManager& Instance(void);

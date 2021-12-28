@@ -5,9 +5,8 @@ SpriteRenderer::SpriteRenderer()
 {
 	halfHeight = 100;
 	halfWidth = 100;
-	texture = 0;
-	mesh = 0;
 	AssetManager.AddToList(this);
+	textureString = "Steven.jpg";
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -34,4 +33,14 @@ float SpriteRenderer::GetHalfHeight(void)
 Transform* SpriteRenderer::GetTransform(void)
 {
 	return this->Owner()->transform;
+}
+
+string SpriteRenderer::GetTextureName(void)
+{
+	return textureString;
+}
+
+void SpriteRenderer::SetTexture(string textureName)
+{
+	textureString = textureName;
 }

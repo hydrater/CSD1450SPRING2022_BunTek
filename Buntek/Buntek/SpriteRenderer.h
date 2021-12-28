@@ -12,11 +12,11 @@ public:
 	float GetHalfWidth(void);
 	float GetHalfHeight(void);
 	Transform* GetTransform(void);
-
-	AEGfxVertexList* mesh;
-	AEGfxTexture* texture;
+	string GetTextureName(void);
+	void SetTexture(string textureName);
 
 private:
+	string textureString;
 	float halfWidth;
 	float halfHeight;
 };

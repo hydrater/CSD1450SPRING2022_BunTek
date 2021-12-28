@@ -30,6 +30,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
+	AssetManager.Instance();
 	SceneManager.LoadScene(new Battle);
 	//SoundTest();
 	// --------------------------------------------- Game Loop --------------------------------------------- //

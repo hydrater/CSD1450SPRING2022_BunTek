@@ -4,9 +4,8 @@ _assetManager* _assetManager::instance = 0;
 
 _assetManager::_assetManager()
 {
+    LoadTexture("Steven.jpg");
     mesh = 0;
-    texture = AEGfxTextureLoad("./Resources/Art/Steven.jpg");
-    AE_ASSERT_MESG(texture, "Failed to create texture1!!");
 }
 
 _assetManager::~_assetManager()
@@ -60,7 +59,7 @@ void _assetManager::RenderAll(void)
         mesh = AEGfxMeshEnd();
 
         AEGfxSetPosition(transform->localposition.x, transform->localposition.y);
-        AEGfxTextureSet(texture, 0, 0);
+        AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()) , 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
         AEGfxMeshFree(mesh);
     }
@@ -76,6 +75,30 @@ void _assetManager::FreeAll(void)
     if (mesh != 0)
         AEGfxMeshFree(mesh);
 
-    AEGfxTextureUnload(texture);
     rendererList.clear();
+
+    map<string, AEGfxTexture*>::iterator start;
+    for (start = textureDatabase.begin(); start != textureDatabase.end(); start++)
+        AEGfxTextureUnload(start->second);
+    
+    textureDatabase.clear();
 }
+
+void _assetManager::LoadTexture(string name)
+{
+    string pathname = "./Resources/Art/" + name;
+    AEGfxTexture* texture = AEGfxTextureLoad(&pathname.front());
+    textureDatabase[name] = texture;
+    AE_ASSERT_MESG(texture, "Failed to create texture1!!");
+}
+
+AEGfxTexture* _assetManager::GetTexture(string name)
+{
+    auto search = textureDatabase.find(name);
+    if (search != textureDatabase.end()) 
+    {
+        return search->second;
+    }
+    return NULL;
+}
+
