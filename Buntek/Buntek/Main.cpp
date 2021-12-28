@@ -30,7 +30,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// --------------------------------------------- Init --------------------------------------------- //
 	//EventManager::Instance().Test();
 	SceneManager.LoadScene(new Battle);
-	SceneManager.Awake();
 	SoundTest();
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)

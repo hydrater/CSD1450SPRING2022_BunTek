@@ -10,10 +10,10 @@ public:
 	GameScript();
 	virtual ~GameScript();
 
+	void Init(Entity* owner) override;
 	virtual void Start(void);
 	virtual void Awake(void);
-	virtual void Update(const double dt);
-
+	virtual void Update(void);
 };
 
 #endif

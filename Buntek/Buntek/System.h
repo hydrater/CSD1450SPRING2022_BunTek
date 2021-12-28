@@ -18,12 +18,16 @@ private:
 public:
     void Test();
     static _eventManager& Instance(void);
+	void Awake(void);
+	void Start(void);
+	void Update(void);
+	void Render(void);
+	void Free(void);
 };
 
 class Scene
 {
 public:
-    virtual void Awake(void);
     virtual void Start(void);
     virtual void Update(void);
     virtual void Render(void);
@@ -43,6 +47,5 @@ public:
     static _sceneManager& Instance(void);
     void LoadScene(Scene* newScene);
     Scene* GetScene(void);
-    void Awake(void);
     void Update(void);
 };

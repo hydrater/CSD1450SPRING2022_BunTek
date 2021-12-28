@@ -14,7 +14,7 @@ public:
 	virtual ~Component() = 0;
 
 	// Function to initialize the component's owner when it is added to the entity
-	void Init(Entity* owner);
+	virtual void Init(Entity* owner);
 	Entity* Owner(void);
 
 	bool IsActive(void);
@@ -25,7 +25,7 @@ public:
 protected:
 	Entity* owner;
 	bool active;
-	bool add;	// queue for addition in runtime
+	//bool add;	// queue for addition in runtime
 	bool remove;	// queue for remove
 };
 

@@ -4,6 +4,7 @@ Component::Component() :
 	active(true),
 	remove(false)
 {
+	owner = NULL;
 }
 
 Component::~Component()

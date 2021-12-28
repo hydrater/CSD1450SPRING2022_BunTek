@@ -8,11 +8,6 @@
 
 Entity* test;
 
-void Battle::Awake(void)
-{
-	
-}
-
 void Battle::Start(void)
 {
 	test = new Entity();

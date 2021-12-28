@@ -3,16 +3,6 @@
 _eventManager* _eventManager::instance = 0;
 _sceneManager* _sceneManager::instance = 0;
 
-_eventManager& _eventManager::Instance(void)
-{
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _eventManager();
-    return *instance;
-}
-
 _eventManager::_eventManager()
 {
 
@@ -23,12 +13,48 @@ _eventManager::~_eventManager()
 
 }
 
-void _eventManager::Test(void)
+_eventManager& _eventManager::Instance(void)
 {
-    cout << "lmao" << endl;;
+    if (instance != 0)
+    {
+        return *instance;
+    }
+    instance = new _eventManager();
+    return *instance;
 }
 
-void Scene::Awake(void)
+void _eventManager::Awake(void)
+{
+	/*if (notAwake)
+	{
+		scene->Awake();
+		notAwake = false;
+	}*/
+}
+
+void _eventManager::Start(void)
+{
+
+}
+
+void _eventManager::Update(void)
+{
+    //if (notStarted)
+    //{
+    //    Awake();
+
+    //    scene->Start();
+    //    notStarted = false;
+    //}
+    //scene->Update();
+}
+
+void _eventManager::Render(void)
+{
+
+}
+
+void _eventManager::Free(void)
 {
 
 }
@@ -85,21 +111,10 @@ Scene* _sceneManager::GetScene(void)
     return scene;
 }
 
-void _sceneManager::Awake(void)
-{
-    if (notAwake)
-    {
-        scene->Awake();
-        notAwake = false;
-    }
-}
-
 void _sceneManager::Update(void)
 {
     if (notStarted)
     {
-        Awake();
-
         scene->Start();
         notStarted = false;
     }

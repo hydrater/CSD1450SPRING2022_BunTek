@@ -13,5 +13,7 @@ BallBehavior::~BallBehavior()
 
 void BallBehavior::Test()
 {
-	cout << "asd" << endl;
+	cout << "Ball behavior success" << endl;
 }
+
+
