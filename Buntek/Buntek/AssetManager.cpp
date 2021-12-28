@@ -29,8 +29,8 @@ _assetManager& _assetManager::Instance(void)
 void _assetManager::RenderAll(void)
 {
     AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-    
-    //cout << rendererList.size() << endl;
+    AEGfxSetTransparency(1.0f);
+    AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     for (int i = 0; i < rendererList.size(); ++i)
     {
@@ -51,16 +51,8 @@ void _assetManager::RenderAll(void)
 
         mesh = AEGfxMeshEnd();
 
-        AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-        //Set Transparency, Transparency will work only if the Blend mode is not NONE.
-        AEGfxSetTransparency(1.0f);
-        // Set position for object 3
         AEGfxSetPosition(transform->localposition.x, transform->localposition.y);
-        // Add Blue tint
-        AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
-        // Set texture
         AEGfxTextureSet(texture, 0, 0);
-        // Drawing the mesh (list of triangles)
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
     }
 }
