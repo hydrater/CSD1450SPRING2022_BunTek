@@ -1,6 +1,7 @@
 // ---------------------------------------------------------------------------
 // includes
 #include "Scene_Battle.h"
+#include "Scene_Splash.h"
 #include "AudioEngine.h"
 
 // ---------------------------------------------------------------------------
@@ -28,9 +29,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
-	//EventManager::Instance().Test();
 	SceneManager.LoadScene(new Battle);
-	SoundTest();
+	//SoundTest();
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
