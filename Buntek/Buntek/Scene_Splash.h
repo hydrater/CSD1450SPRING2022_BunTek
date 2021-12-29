@@ -1,7 +1,7 @@
 #pragma once
 #include "System.h"
 
-class Splash : public Scene
+class Scene_Splash : public Scene
 {
 public:
     void Start(void) override;

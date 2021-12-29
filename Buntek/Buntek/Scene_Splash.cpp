@@ -1,12 +1,12 @@
 #include "Scene_Splash.h"
 
 
-void Splash::Start(void) 
+void Scene_Splash::Start(void) 
 {
 
 }
 
-void Splash::Update(void)
+void Scene_Splash::Update(void)
 {
 
 }

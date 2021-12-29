@@ -9,7 +9,7 @@
 GameObject* test;
 GameObject* test2;
 
-void Battle::Start(void)
+void Scene_Battle::Start(void)
 {
 	test = new GameObject();
 	test->AddComponent<SpriteRenderer>()->Size(500, 500);
@@ -21,7 +21,7 @@ void Battle::Start(void)
 	test2->transform->SetPosition(Vector2(0, 10));
 }
 
-void Battle::Update(void)
+void Scene_Battle::Update(void)
 {
     //set background color
 	test->transform->SetPosition(Vector2(test->transform->localposition.x+1, test->transform->localposition.y));

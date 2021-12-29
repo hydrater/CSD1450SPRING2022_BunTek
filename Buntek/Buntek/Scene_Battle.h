@@ -1,7 +1,7 @@
 #pragma once
 #include "System.h"
 
-class Battle : public Scene
+class Scene_Battle : public Scene
 {
 public:
     void Start(void) override;
