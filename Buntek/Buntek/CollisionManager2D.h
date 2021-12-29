@@ -16,11 +16,13 @@ private:
     static _CollisionManager2D* instance;
     _CollisionManager2D();
     ~_CollisionManager2D();
-    vector<Collider2D*> colliderList;
+    vector<CircleCollider*> circleColliderList;
+    vector<BoxCollider*> boxColliderList;
     
 
 public:
     static _CollisionManager2D& Instance(void);
-    void AddToList(Collider2D* collider);
+    void AddToList(CircleCollider* collider);
+    void AddToList(BoxCollider* collider);
     void CollideAll(void);
 };

@@ -22,26 +22,29 @@ _CollisionManager2D& _CollisionManager2D::Instance(void)
     return *instance;
 }
 
-void _CollisionManager2D::AddToList(Collider2D* collider)
+void _CollisionManager2D::AddToList(CircleCollider* collider)
 {
-    colliderList.push_back(collider);
+    circleColliderList.push_back(collider);
+}
+void _CollisionManager2D::AddToList(BoxCollider* collider)
+{
+    boxColliderList.push_back(collider);
 }
 
 void _CollisionManager2D::CollideAll(void)
 {
-    for (int i = 0; i < colliderList.size(); ++i)
+    cout << "TestingCollision!\n";
+
+    //Circles with everything else
+    for (int i = 0; i < circleColliderList.size(); ++i)
     {
-
-        for (int j = 1; j < colliderList.size(); ++j)
+        for (int j = i+1; j < circleColliderList.size(); ++j)
         {
-            if (typeid(colliderList[i]) == typeid(CircleCollider)) {
-                ((CircleCollider*)colliderList[i])->Collide(colliderList[j]);
-            }
-            else if (typeid(colliderList[i]) == typeid(BoxCollider)) {
-                ((BoxCollider*)colliderList[i])->Collide(colliderList[j]);
-            }
-
-            
+            (circleColliderList[i])->Collide(circleColliderList[j]);
+        }
+        for (int j = 0; j < boxColliderList.size(); ++j)
+        {
+            (circleColliderList[i])->Collide(boxColliderList[j]);
         }
     }
 
