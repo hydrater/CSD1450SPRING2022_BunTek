@@ -4,6 +4,7 @@
 #include "Scene_Splash.h"
 #include "AssetManager.h"
 #include "CollisionManager2D.h"
+#include "AudioEngine.h"
 
 // ---------------------------------------------------------------------------
 // main
@@ -31,9 +32,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
-	AssetManager.Instance();
+	AssetManager;
+	AudioManager;
 	SceneManager.LoadScene(new Scene_Splash);
-	//SoundTest();
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
@@ -51,7 +52,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneManager.Update();
 		GameScriptManager.Update();
 
-		//LoopPlaying();
 		// --------------------------------------------- Render --------------------------------------------- //
 		AssetManager.RenderAll();
 

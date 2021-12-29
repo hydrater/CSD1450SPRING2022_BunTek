@@ -27,8 +27,6 @@ void Scene_Splash::Update(void)
 	timer += DeltaTime;
 	Transform* splashTransform = splash->transform;
 
-	cout << cycle << endl;
-
 	switch (cycle)
 	{
 	default:
@@ -39,7 +37,7 @@ void Scene_Splash::Update(void)
 		break;
 	case 1:
 		if (playSound)
-			SoundTest(true);
+			AudioManager.SoundTest(true);
 		playSound = false;
 		break;
 	case 2:
@@ -51,7 +49,7 @@ void Scene_Splash::Update(void)
 		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
 		break;
 	case 4:
-		SoundTest(true);
+		AudioManager.SoundTest(false);
 		SceneManager.LoadScene(new Scene_Battle);
 		break;
 	}
