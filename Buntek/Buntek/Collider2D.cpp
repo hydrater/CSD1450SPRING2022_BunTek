@@ -39,6 +39,7 @@ BoxCollider::BoxCollider()
 		height = 100;
 	}
 	*/
+	angle = 0;
 	width = -1;
 	height = -1;
 	CollisionManager2D.AddToList(this);
