@@ -91,10 +91,11 @@ void _assetManager::FreeAll(void)
 {
     rendererList.clear();
 
-    if (mesh != 0)
-        AEGfxMeshFree(mesh);
+    
 
     try {
+        if (mesh != 0)
+            AEGfxMeshFree(mesh);
         map<string, AEGfxTexture*>::iterator start;
         for (start = textureDatabase.begin(); start != textureDatabase.end(); start++)
             AEGfxTextureUnload(start->second);
