@@ -133,3 +133,17 @@ void _gameScriptManager::AddToList(GameScript* gameScript)
 {
     gameScriptList.push_back(gameScript);
 }
+
+void _gameScriptManager::Update(void)
+{
+    for (int i = 0; i < gameScriptList.size(); ++i)
+    {
+        if (!gameScriptList[i]->getStarted())
+        {
+            gameScriptList[i]->Start();
+            gameScriptList[i]->setStarted(true);
+        }
+
+        gameScriptList[i]->Update();
+    }
+}

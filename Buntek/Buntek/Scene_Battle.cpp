@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "BallBehavior.h"
 #include "SpriteRenderer.h"
+#include "Collider2D.h"
 
 // ------------------------------------ Battle ------------------------------------
 
@@ -15,16 +16,20 @@ void Scene_Battle::Start(void)
 	test->AddComponent<SpriteRenderer>()->Size(500, 500);
 	test->transform->SetPosition(Vector2(-500, 10));
 	test->AddComponent<BallBehavior>()->Test();
+	test->AddComponent<CircleCollider>()->radius = 250;
 
 	test2 = new GameObject();
 	test2->AddComponent<SpriteRenderer>()->Size(500, 500);
 	test2->transform->SetPosition(Vector2(0, 10));
-}
+	test2->AddComponent<CircleCollider>()->radius = 250;
+}	
 
 void Scene_Battle::Update(void)
 {
     //set background color
-	test->transform->SetPosition(Vector2(test->transform->localposition.x+1, test->transform->localposition.y));
-	test2->transform->SetPosition(Vector2(test2->transform->localposition.x + 1, test2->transform->localposition.y));
+	test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
+	test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+	test->GetComponent<CircleCollider>()->Collide((Collider2D*)test2->GetComponent<CircleCollider>());
 }
+

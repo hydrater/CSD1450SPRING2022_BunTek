@@ -14,6 +14,8 @@ public:
 	virtual void Start(void);
 	virtual void Awake(void);
 	virtual void Update(void);
+	void setStarted(bool setValue);
+	bool getStarted(void);
 private:
 	bool hasStarted;
 };

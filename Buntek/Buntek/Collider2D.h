@@ -1,6 +1,7 @@
 #pragma once
-#include "GameScript.h"
 #include "Vector2.h"
+#include "SpriteRenderer.h"
+
 
 class Collider2D : public Component
 {
@@ -10,6 +11,35 @@ public:
 	void Collide(void);
 
 private:
-	Transform *transform;
+
+};
+
+class BoxCollider : public Collider2D
+{
+public:
+	BoxCollider();
+	~BoxCollider();
+	bool Collide(Collider2D* other);
+	float width;
+	float height;
+	float angle; //clockwise rotation
+	
+
+private:
+	
+
+};
+
+class CircleCollider : public Collider2D
+{
+public:
+	CircleCollider();
+	~CircleCollider();
+	bool Collide(Collider2D* other);
+	float radius;
+	
+
+private:
+	
 
 };
