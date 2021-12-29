@@ -92,7 +92,7 @@ bool CircleCollider::Collide(Collider2D* col)
 		float Dist2 = (radius + other->radius)* (radius + other->radius);
 
 		if ((this->Owner()->transform->worldposition- other->Owner()->transform->worldposition).LengthSquared() <= Dist2 ) {
-			cout << "COLLIDED!!!!!\n";
+			
 			return true;
 		}
 		

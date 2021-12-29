@@ -33,8 +33,6 @@ void _CollisionManager2D::AddToList(BoxCollider* collider)
 
 void _CollisionManager2D::CollideAll(void)
 {
-    cout << "TestingCollision!\n";
-
     //Circles with everything else
     for (int i = 0; i < circleColliderList.size(); ++i)
     {

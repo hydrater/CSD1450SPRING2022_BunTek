@@ -30,6 +30,5 @@ void Scene_Battle::Update(void)
 	test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
 	test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-	//test->GetComponent<CircleCollider>()->Collide((CircleCollider*)test2->GetComponent<CircleCollider>());
 }
 
