@@ -133,3 +133,14 @@ void _gameScriptManager::AddToList(GameScript* gameScript)
 {
     gameScriptList.push_back(gameScript);
 }
+
+void _gameScriptManager::Update(void)
+{
+    cout << "There are currently " << gameScriptList.size() << " game object";
+    for (int i = 0; i < gameScriptList.size(); ++i)
+    {
+        //if (gameScriptList[i].)
+
+        gameScriptList[i]->Update();
+    }
+}
