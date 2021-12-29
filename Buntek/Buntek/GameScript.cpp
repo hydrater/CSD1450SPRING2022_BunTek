@@ -22,11 +22,6 @@ void GameScript::Start(void)
 
 }
 
-void GameScript::Awake(void)
-{
-
-}
-
 void GameScript::Update(void)
 {
 

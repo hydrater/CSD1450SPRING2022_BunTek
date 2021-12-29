@@ -12,7 +12,6 @@ public:
 
 	void Init(GameObject* owner) override;
 	virtual void Start(void);
-	virtual void Awake(void);
 	virtual void Update(void);
 	void setStarted(bool setValue);
 	bool getStarted(void);
