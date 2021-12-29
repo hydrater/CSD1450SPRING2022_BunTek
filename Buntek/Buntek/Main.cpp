@@ -2,7 +2,6 @@
 // includes
 #include "Scene_Battle.h"
 #include "Scene_Splash.h"
-#include "AudioEngine.h"
 #include "AssetManager.h"
 #include "CollisionManager2D.h"
 
@@ -22,7 +21,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// ------------------------------------------ System Init ------------------------------------------- //
 	// Using custom window procedure
-	AESysInit(hInstance, nCmdShow, 800, 600, 1, 60, true, NULL);
+	AESysInit(hInstance, nCmdShow, 1920, 1080, 1, 60, true, NULL);
+	AEToogleFullScreen(true);
 
 	// Changing the window title
 	AESysSetWindowTitle("idk we need a pong game name atm");
@@ -30,15 +30,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// reset the system modules-
 	AESysReset();
 
-	FMOD::System* system = NULL;
-	FMOD::Channel* channel = nullptr;
-	FMOD::ChannelGroup* channelGroup = nullptr;
-	FMOD::Sound* sound = nullptr;
-	SoundTest(system, channel, channelGroup, sound);
-
 	// --------------------------------------------- Init --------------------------------------------- //
 	AssetManager.Instance();
-	SceneManager.LoadScene(new Scene_Battle);
+	SceneManager.LoadScene(new Scene_Splash);
 	//SoundTest();
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
@@ -57,7 +51,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneManager.Update();
 		GameScriptManager.Update();
 
-		LoopPlaying(system, channel);
+		//LoopPlaying();
 		// --------------------------------------------- Render --------------------------------------------- //
 		AssetManager.RenderAll();
 
@@ -76,9 +70,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	}
 
 	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //
-	
+	//AssetManager.FreeAll();
 
 	// free the system
 	AESysExit();
-	CleanPlaying(system, channelGroup, sound);
+	//CleanPlaying();
 }

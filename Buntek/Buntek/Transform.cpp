@@ -11,6 +11,7 @@ Transform::Transform() :
 	down(0, -1),
 	parent(NULL)
 {
+	worldscale = Vector2(1, 1);
 }
 
 Transform::~Transform()
@@ -51,7 +52,7 @@ void Transform::Translate(Vector2 translate)
 
 void Transform::Rotate(float rotate)
 {
-	worldrotation = worldrotation + rotate;
+	this->worldrotation = worldrotation + rotate;
 }
 
 void Transform::Scale(float scale)

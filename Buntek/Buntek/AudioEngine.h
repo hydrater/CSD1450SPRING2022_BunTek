@@ -6,6 +6,11 @@
 #include <fmod_errors.h>
 using namespace std;
 
+FMOD::System* fsystem = NULL;
+FMOD::Channel* channel = nullptr;
+FMOD::ChannelGroup* channelGroup = nullptr;
+FMOD::Sound* sound = nullptr;
+
 bool succeededOrWarn(const std::string& message, FMOD_RESULT result)
 {
     if (result != FMOD_OK) {
@@ -23,35 +28,38 @@ FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
     return FMOD_OK;
 }
 
-void SoundTest(FMOD::System* system, FMOD::Channel* channel, FMOD::ChannelGroup* channelGroup, FMOD::Sound* sound)
+void SoundTest(bool lmao)
 {
     FMOD_RESULT result;
 
     // Create the main system object.
-    result = FMOD::System_Create(&system);
+    result = FMOD::System_Create(&fsystem);
     if (!succeededOrWarn("FMOD: Failed to create system object", result))
         return;
     if (result != FMOD_OK)
         cout << "FMOD broke at one" << endl;
 
         // Initialize FMOD.
-    result = system->init(512, FMOD_INIT_NORMAL, nullptr);
+    result = fsystem->init(512, FMOD_INIT_NORMAL, nullptr);
     if (!succeededOrWarn("FMOD: Failed to initialise system object", result))
         return;
     if (result == FMOD_OK)
         cout << "yes" << endl;
 
         // Create the channel group.
-    result = system->createChannelGroup("inGameSoundEffects", &channelGroup);
+    result = fsystem->createChannelGroup("inGameSoundEffects", &channelGroup);
     if (!succeededOrWarn("FMOD: Failed to create in-game sound effects channel group", result))
         return;
 
         // Create the sound.
     //system->createSound("./Resources/Art/Test.wav", FMOD_DEFAULT, nullptr, &sound);
-    system->createSound("./Assets/Test.wav", FMOD_DEFAULT, nullptr, &sound);
+    if (lmao)
+        fsystem->createSound("./Assets/splash.mp3", FMOD_DEFAULT, nullptr, &sound);
+    else
+        fsystem->createSound("./Assets/Test.wav", FMOD_DEFAULT, nullptr, &sound);
 
     // Play the sound.
-    result = system->playSound(sound, nullptr, false, &channel);
+    result = fsystem->playSound(sound, nullptr, false, &channel);
     if (result == FMOD_OK)
         cout << "yes" << endl;
 
@@ -69,17 +77,17 @@ void SoundTest(FMOD::System* system, FMOD::Channel* channel, FMOD::ChannelGroup*
             return;
 }
 
-void LoopPlaying(FMOD::System* system, FMOD::Channel* channel)
+void LoopPlaying()
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     
-    FMOD_RESULT result = system->update();
+    FMOD_RESULT result = fsystem->update();
 }
 
-void CleanPlaying(FMOD::System* system, FMOD::ChannelGroup* channelGroup, FMOD::Sound* sound)
+void CleanPlaying()
 {
     // Clean up.
     sound->release();
     channelGroup->release();
-    system->release();
+    fsystem->release();
 }
