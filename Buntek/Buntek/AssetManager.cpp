@@ -29,7 +29,6 @@ void _assetManager::RenderAll(void)
 {
     AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
     AEGfxSetTransparency(1.0f);
-    AEGfxSetTintColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     for (int i = 0; i < rendererList.size(); ++i)
     {
@@ -58,7 +57,6 @@ void _assetManager::RenderAll(void)
 
         AEGfxSetPosition(transform->worldposition.x, transform->worldposition.y);
 
-
         AEGfxMeshStart();
 
         AEGfxTriAdd(
@@ -73,7 +71,7 @@ void _assetManager::RenderAll(void)
 
         mesh = AEGfxMeshEnd();
 
-        //AEGfxSetPosition(transform->localposition.x, transform->localposition.y);
+        AEGfxSetTintColor(1.0f, 1.0f, 1.0f, rendererList[i]->GetTransparency());
         AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()), 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
         AEGfxMeshFree(mesh);

@@ -14,9 +14,12 @@ public:
 	Transform* GetTransform(void);
 	string GetTextureName(void);
 	void SetTexture(string textureName);
+	float GetTransparency();
+	void SetTransparency(float value);
 
 private:
 	string textureString;
 	float halfWidth;
 	float halfHeight;
+	float transparency;
 };

@@ -44,3 +44,13 @@ void SpriteRenderer::SetTexture(string textureName)
 {
 	textureString = textureName;
 }
+
+float SpriteRenderer::GetTransparency()
+{
+	return transparency;
+}
+
+void SpriteRenderer::SetTransparency(float value)
+{
+	transparency = value;
+}
