@@ -29,6 +29,7 @@ void Scene_Battle::Update(void)
     //set background color
 	test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
 	test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
+	//test->transform->Rotate(20*DeltaTime);
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
 
