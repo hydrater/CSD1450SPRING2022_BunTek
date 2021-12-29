@@ -1,7 +1,5 @@
 #pragma once
-#include "Vector2.h"
 #include "SpriteRenderer.h"
-
 
 class Collider2D : public Component
 {

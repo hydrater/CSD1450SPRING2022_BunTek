@@ -1,10 +1,8 @@
 #pragma once
 #include <AEEngine.h>
-#include "Transform.h"
 #include <vector>
-#include "SpriteRenderer.h"
 #include <map>
-#include "System.h"
+#include "SpriteRenderer.h"
 
 #define AssetManager _assetManager::Instance()
 

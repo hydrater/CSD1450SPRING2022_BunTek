@@ -1,15 +1,14 @@
 #pragma once
-#include "AEEngine.h"
+#include <AEEngine.h>
 #include <iostream>
 #include <stdio.h>
 #include "GameScript.h"
-
 using namespace std;
 
 #define EventManager _eventManager::Instance()
 #define SceneManager _sceneManager::Instance()
 #define GameScriptManager _gameScriptManager::Instance()
-#define DeltaTime AEFrameRateControllerGetFrameTime()
+#define DeltaTime (float)AEFrameRateControllerGetFrameTime()
 
 class _eventManager
 {

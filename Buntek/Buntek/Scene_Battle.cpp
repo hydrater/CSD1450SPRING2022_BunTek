@@ -4,6 +4,7 @@
 #include "BallBehavior.h"
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
+#include "System.h"
 
 // ------------------------------------ Battle ------------------------------------
 

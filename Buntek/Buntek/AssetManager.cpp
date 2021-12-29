@@ -1,10 +1,12 @@
 #include "AssetManager.h"
+#include "System.h"
 
 _assetManager* _assetManager::instance = 0;
 
 _assetManager::_assetManager()
 {
     LoadTexture("Steven.jpg");
+    LoadTexture("splash.png");
     mesh = 0;
 }
 
@@ -43,13 +45,16 @@ void _assetManager::RenderAll(void)
 
         float halfWidth = rendererList[i]->GetHalfWidth();
         float halfHeight = rendererList[i]->GetHalfHeight();
+        halfWidth *= rendererList[i]->GetTransform()->worldscale.x;
+        halfHeight *= rendererList[i]->GetTransform()->worldscale.y;
+
         Transform* transform = rendererList[i]->GetTransform();
 
         float rotationAngle = transform->worldrotation;
-        Vector2 BottomLeft = Vector2(-halfWidth, -halfHeight);
-        Vector2 BottomRight = Vector2(halfWidth, -halfHeight);
-        Vector2 TopLeft = Vector2(-halfWidth, halfHeight);
-        Vector2 TopRight = Vector2(halfWidth, halfHeight);
+		Vector2 BottomLeft = Vector2(halfWidth, -halfHeight);
+		Vector2 BottomRight = Vector2(-halfWidth, -halfHeight);
+		Vector2 TopLeft = Vector2(halfWidth, halfHeight);
+		Vector2 TopRight = Vector2(-halfWidth, halfHeight);
 
         BottomLeft.Rotate(rotationAngle);
         BottomRight.Rotate(rotationAngle);

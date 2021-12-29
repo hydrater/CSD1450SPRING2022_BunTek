@@ -1,14 +1,10 @@
 #pragma once
 
 #include <AEEngine.h>
-#include "Transform.h"
 #include <vector>
-#include "System.h"
 #include "Collider2D.h"
 
-
 #define CollisionManager2D _CollisionManager2D::Instance()
-#define DeltaTime AEFrameRateControllerGetFrameTime()
 
 class _CollisionManager2D
 {
