@@ -69,7 +69,7 @@ void SoundTest(FMOD::System* system, FMOD::Channel* channel, FMOD::ChannelGroup*
             return;
 }
 
-void LoopPlaying(bool* isPlaying, FMOD::System* system, FMOD::Channel* channel)
+void LoopPlaying(FMOD::System* system, FMOD::Channel* channel)
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
     

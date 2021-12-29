@@ -56,8 +56,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneManager.Update();
 		GameScriptManager.Update();
 
-		bool isPlaying = false;
-		LoopPlaying(&isPlaying, system, channel);
+		LoopPlaying(system, channel);
 		// --------------------------------------------- Render --------------------------------------------- //
 		AssetManager.RenderAll();
 		// ------------------------------------------- End of Loop ------------------------------------------- //
