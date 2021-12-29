@@ -8,7 +8,7 @@ class Collider2D : public Component
 public:
 	Collider2D();
 	~Collider2D();
-	void Collide(void);
+	bool Collide(Collider2D col);
 
 private:
 

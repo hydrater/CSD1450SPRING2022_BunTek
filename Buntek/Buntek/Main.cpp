@@ -4,6 +4,7 @@
 #include "Scene_Splash.h"
 #include "AudioEngine.h"
 #include "AssetManager.h"
+#include "CollisionManager2D.h"
 
 // ---------------------------------------------------------------------------
 // main
@@ -59,6 +60,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		LoopPlaying(system, channel);
 		// --------------------------------------------- Render --------------------------------------------- //
 		AssetManager.RenderAll();
+
+		// --------------------------------------------- Collision --------------------------------------------- //
+		CollisionManager2D.CollideAll();
 		// ------------------------------------------- End of Loop ------------------------------------------- //
 		// Informing the system about the loop's end
 		AESysFrameEnd();

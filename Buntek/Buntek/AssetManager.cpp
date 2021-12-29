@@ -25,6 +25,7 @@ _assetManager& _assetManager::Instance(void)
     return *instance;
 }
 
+
 void _assetManager::RenderAll(void)
 {
     AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);

@@ -1,4 +1,4 @@
-
+#include "CollisionManager2D.h"
 #include "Collider2D.h"
 
 Collider2D::Collider2D()
@@ -13,9 +13,9 @@ Collider2D::~Collider2D()
 
 
 
-void Collider2D::Collide(void)
+bool Collider2D::Collide(Collider2D col)
 {
-
+	return false;
 }
 
 // ============ BOX COLLIDER ============ 
@@ -41,6 +41,8 @@ BoxCollider::BoxCollider()
 	*/
 	width = -1;
 	height = -1;
+	CollisionManager2D.AddToList(this);
+
 }
 
 
@@ -78,7 +80,7 @@ CircleCollider::CircleCollider()
 	}
 	*/
 	radius = -1;
-	
+	CollisionManager2D.AddToList(this);
 }
 
 bool CircleCollider::Collide(Collider2D* col)

@@ -96,6 +96,7 @@
     <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="BallBehavior.cpp" />
     <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="CollisionManager2D.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameScript.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="BallBehavior.h" />
     <ClInclude Include="Collider2D.h" />
+    <ClInclude Include="CollisionManager2D.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameScript.h" />
