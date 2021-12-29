@@ -84,13 +84,14 @@ void Vector2::SetZero()
 	x = y = 0;
 }
 
+//Does Clockwise Rotatoin
 void Vector2::Rotate(float degrees)
 {
-	float sin = sinf(degrees * 180.0f / 3.1415926535897932384626433832795f);
-	float cos = cosf(degrees * 180.0f / 3.1415926535897932384626433832795f);
+	float sin = sinf(degrees / 180.0f * 3.1415926535897932384626433832795f);
+	float cos = cosf(degrees / 180.0f * 3.1415926535897932384626433832795f);
 	float tx = x;
 	float ty = y;
-	x = (cos * tx) - (sin * ty);
+	x = (sin * ty) - (cos * tx);
 	y = (sin * tx) + (cos * ty);
 }
 

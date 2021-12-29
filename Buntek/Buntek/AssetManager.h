@@ -4,6 +4,7 @@
 #include <vector>
 #include "SpriteRenderer.h"
 #include <map>
+#include "System.h"
 
 #define AssetManager _assetManager::Instance()
 

@@ -57,11 +57,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// check if forcing the application to quit
 		if (AEInputCheckTriggered(AEVK_ESCAPE) || 0 == AESysDoesWindowExist())
+		{
 			gGameRunning = 0;
+			AssetManager.FreeAll();
+		}
 	}
 
 	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //
-	AssetManager.FreeAll();
+	
 
 	// free the system
 	AESysExit();
