@@ -6,22 +6,22 @@
 #include <fmod_errors.h>
 using namespace std;
 
-//bool succeededOrWarn(const std::string& message, FMOD_RESULT result)
-//{
-//    if (result != FMOD_OK) {
-//        std::cerr << message << ": " << result << " " << FMOD_ErrorString(result) << std::endl;
-//        return false;
-//    }
-//    return true;
-//}
-//
-//FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
-//    FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
-//    void* commandData1, void* commandData2)
-//{
-//    std::cout << "Callback called for " << controlType << std::endl;
-//    return FMOD_OK;
-//}
+bool succeededOrWarn(const std::string& message, FMOD_RESULT result)
+{
+    if (result != FMOD_OK) {
+        std::cerr << message << ": " << result << " " << FMOD_ErrorString(result) << std::endl;
+        return false;
+    }
+    return true;
+}
+
+FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
+    FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
+    void* commandData1, void* commandData2)
+{
+    std::cout << "Callback called for " << controlType << std::endl;
+    return FMOD_OK;
+}
 
 void SoundTest(void)
 {
@@ -30,27 +30,28 @@ void SoundTest(void)
     FMOD::System* system = NULL;
     // Create the main system object.
     result = FMOD::System_Create(&system);
-    /*if (!succeededOrWarn("FMOD: Failed to create system object", result))
-        return;*/
+    if (!succeededOrWarn("FMOD: Failed to create system object", result))
+        return;
     if (result != FMOD_OK)
         cout << "FMOD broke at one" << endl;
 
         // Initialize FMOD.
     result = system->init(512, FMOD_INIT_NORMAL, nullptr);
-    /*if (!succeededOrWarn("FMOD: Failed to initialise system object", result))
-        return;*/
+    if (!succeededOrWarn("FMOD: Failed to initialise system object", result))
+        return;
     if (result == FMOD_OK)
         cout << "yes" << endl;
 
         // Create the channel group.
     FMOD::ChannelGroup* channelGroup = nullptr;
     result = system->createChannelGroup("inGameSoundEffects", &channelGroup);
-    /*if (!succeededOrWarn("FMOD: Failed to create in-game sound effects channel group", result))
-        return;*/
+    if (!succeededOrWarn("FMOD: Failed to create in-game sound effects channel group", result))
+        return;
 
         // Create the sound.
     FMOD::Sound* sound = nullptr;
-    system->createSound("./Resources/Art/Test.wav", FMOD_DEFAULT, nullptr, &sound);
+    //system->createSound("./Resources/Art/Test.wav", FMOD_DEFAULT, nullptr, &sound);
+    system->createSound("./Assets/Test.wav", FMOD_DEFAULT, nullptr, &sound);
 
     // Play the sound.
     FMOD::Channel* channel = nullptr;
@@ -58,27 +59,27 @@ void SoundTest(void)
     if (result == FMOD_OK)
         cout << "yes" << endl;
 
-    /*if (!succeededOrWarn("FMOD: Failed to play sound", result))
-        return;*/
+    if (!succeededOrWarn("FMOD: Failed to play sound", result))
+        return;
 
         // Assign the channel to the group.
     result = channel->setChannelGroup(channelGroup);
-    /*if (!succeededOrWarn("FMOD: Failed to set channel group on", result))
-        return;*/
+    if (!succeededOrWarn("FMOD: Failed to set channel group on", result))
+        return;
 
         // Set a callback on the channel.
-        /*channel->setCallback(&channelGroupCallback);
+        channel->setCallback(&channelGroupCallback);
         if (!succeededOrWarn("FMOD: Failed to set callback for sound", result))
-            return;*/
+            return;
 
-    bool isPlaying = false;
+    /*bool isPlaying = false;
     do {
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
         channel->isPlaying(&isPlaying);
 
         system->update();
-    } while (isPlaying);
+    } while (isPlaying);*/
 
 
     // Clean up.

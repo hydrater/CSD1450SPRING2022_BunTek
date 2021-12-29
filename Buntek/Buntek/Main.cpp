@@ -29,6 +29,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// reset the system modules-
 	AESysReset();
 
+	SoundTest();
+
 	// --------------------------------------------- Init --------------------------------------------- //
 	AssetManager.Instance();
 	SceneManager.LoadScene(new Scene_Battle);
