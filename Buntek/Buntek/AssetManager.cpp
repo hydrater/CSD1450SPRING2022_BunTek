@@ -89,16 +89,21 @@ void _assetManager::AddToList(SpriteRenderer* spriteRenderer)
 
 void _assetManager::FreeAll(void)
 {
+    rendererList.clear();
+
     if (mesh != 0)
         AEGfxMeshFree(mesh);
 
-    //rendererList.clear();
+    try {
+        map<string, AEGfxTexture*>::iterator start;
+        for (start = textureDatabase.begin(); start != textureDatabase.end(); start++)
+            AEGfxTextureUnload(start->second);
 
-    map<string, AEGfxTexture*>::iterator start;
-    for (start = textureDatabase.begin(); start != textureDatabase.end(); start++)
-        AEGfxTextureUnload(start->second);
+        textureDatabase.clear();
+    }
+    catch (const std::exception) {
 
-    textureDatabase.clear();
+    }
 }
 
 void _assetManager::LoadTexture(string name)
