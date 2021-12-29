@@ -15,7 +15,6 @@ void GameScript::Init(GameObject* owner)
 	this->gameObject = owner;
 	// Add to event manager
 	GameScriptManager.AddToList(this);
-	cout << "Game script override success" << endl;
 }
 
 void GameScript::Start(void)
@@ -31,4 +30,14 @@ void GameScript::Awake(void)
 void GameScript::Update(void)
 {
 
+}
+
+void GameScript::setStarted(bool setValue)
+{
+	hasStarted = setValue;
+}
+
+bool GameScript::getStarted(void)
+{
+	return hasStarted;
 }

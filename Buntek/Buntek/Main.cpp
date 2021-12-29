@@ -50,6 +50,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.Update();
+		GameScriptManager.Update();
 
 		// --------------------------------------------- Render --------------------------------------------- //
 		AssetManager.RenderAll();

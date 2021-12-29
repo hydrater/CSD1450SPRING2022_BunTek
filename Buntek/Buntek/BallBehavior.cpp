@@ -11,9 +11,20 @@ BallBehavior::~BallBehavior()
 
 }
 
+
 void BallBehavior::Test()
 {
 	
+}
+
+void BallBehavior::Start(void)
+{
+	cout << "monkaS" << endl;
+}
+
+void BallBehavior::Update(void)
+{
+	//cout << "poo poo pee pee" << endl;
 }
 
 
