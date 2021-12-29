@@ -29,7 +29,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// reset the system modules-
 	AESysReset();
 
-	SoundTest();
+	FMOD::System* system = NULL;
+	FMOD::Channel* channel = nullptr;
+	FMOD::ChannelGroup* channelGroup = nullptr;
+	FMOD::Sound* sound = nullptr;
+	SoundTest(system, channel, channelGroup, sound);
 
 	// --------------------------------------------- Init --------------------------------------------- //
 	AssetManager.Instance();
@@ -50,6 +54,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.Update();
+		bool isPlaying = false;
+		LoopPlaying(&isPlaying, system, channel);
 
 		// --------------------------------------------- Render --------------------------------------------- //
 		AssetManager.RenderAll();
@@ -70,4 +76,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// free the system
 	AESysExit();
+	CleanPlaying(system, channelGroup, sound);
 }

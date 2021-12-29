@@ -56,5 +56,4 @@ private:
 public:
     static _gameScriptManager& Instance(void);
     void AddToList(GameScript* gameScript);
-    void 
 };

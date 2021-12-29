@@ -23,11 +23,10 @@ FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
     return FMOD_OK;
 }
 
-void SoundTest(void)
+void SoundTest(FMOD::System* system, FMOD::Channel* channel, FMOD::ChannelGroup* channelGroup, FMOD::Sound* sound)
 {
     FMOD_RESULT result;
 
-    FMOD::System* system = NULL;
     // Create the main system object.
     result = FMOD::System_Create(&system);
     if (!succeededOrWarn("FMOD: Failed to create system object", result))
@@ -43,18 +42,15 @@ void SoundTest(void)
         cout << "yes" << endl;
 
         // Create the channel group.
-    FMOD::ChannelGroup* channelGroup = nullptr;
     result = system->createChannelGroup("inGameSoundEffects", &channelGroup);
     if (!succeededOrWarn("FMOD: Failed to create in-game sound effects channel group", result))
         return;
 
         // Create the sound.
-    FMOD::Sound* sound = nullptr;
     //system->createSound("./Resources/Art/Test.wav", FMOD_DEFAULT, nullptr, &sound);
     system->createSound("./Assets/Test.wav", FMOD_DEFAULT, nullptr, &sound);
 
     // Play the sound.
-    FMOD::Channel* channel = nullptr;
     result = system->playSound(sound, nullptr, false, &channel);
     if (result == FMOD_OK)
         cout << "yes" << endl;
@@ -71,17 +67,17 @@ void SoundTest(void)
         channel->setCallback(&channelGroupCallback);
         if (!succeededOrWarn("FMOD: Failed to set callback for sound", result))
             return;
+}
 
-    /*bool isPlaying = false;
-    do {
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+void LoopPlaying(bool* isPlaying, FMOD::System* system, FMOD::Channel* channel)
+{
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    
+    FMOD_RESULT result = system->update();
+}
 
-        channel->isPlaying(&isPlaying);
-
-        system->update();
-    } while (isPlaying);*/
-
-
+void CleanPlaying(FMOD::System* system, FMOD::ChannelGroup* channelGroup, FMOD::Sound* sound)
+{
     // Clean up.
     sound->release();
     channelGroup->release();
