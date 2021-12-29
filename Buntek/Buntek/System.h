@@ -2,11 +2,13 @@
 #include "AEEngine.h"
 #include <iostream>
 #include <stdio.h>
+#include "GameScript.h"
 
 using namespace std;
 
 #define EventManager _eventManager::Instance()
 #define SceneManager _sceneManager::Instance()
+#define GameScriptManager _gameScriptManager::Instance()
 #define DeltaTime AEFrameRateControllerGetFrameTime()
 
 class _eventManager
@@ -41,4 +43,18 @@ public:
     void LoadScene(Scene* newScene);
     Scene* GetScene(void);
     void Update(void);
+};
+
+class _gameScriptManager
+{
+private:
+    static _gameScriptManager* instance;
+    _gameScriptManager();
+    ~_gameScriptManager();
+    vector<GameScript*> gameScriptList;
+
+public:
+    static _gameScriptManager& Instance(void);
+    void AddToList(GameScript* gameScript);
+    void 
 };

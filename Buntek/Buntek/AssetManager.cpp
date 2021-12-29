@@ -46,7 +46,7 @@ void _assetManager::RenderAll(void)
         Transform* transform = rendererList[i]->GetTransform();
 
         float rotationAngle = transform->worldrotation;
-        transform->worldrotation += 20 * DeltaTime;
+        transform->worldrotation += 20 * (float)DeltaTime;
 
         Vector2 BottomLeft = Vector2(-halfWidth, -halfHeight);
         Vector2 BottomRight = Vector2(halfWidth, -halfHeight);
@@ -91,10 +91,10 @@ void _assetManager::FreeAll(void)
 {
     rendererList.clear();
 
-    if (mesh != 0)
-        AEGfxMeshFree(mesh);
-
-    try {
+    // memory leak? lol
+   /* try {
+        if (mesh != 0)
+            AEGfxMeshFree(mesh);
         map<string, AEGfxTexture*>::iterator start;
         for (start = textureDatabase.begin(); start != textureDatabase.end(); start++)
             AEGfxTextureUnload(start->second);
@@ -103,7 +103,7 @@ void _assetManager::FreeAll(void)
     }
     catch (const std::exception) {
 
-    }
+    }*/
 }
 
 void _assetManager::LoadTexture(string name)

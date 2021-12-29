@@ -3,6 +3,7 @@
 
 _eventManager* _eventManager::instance = 0;
 _sceneManager* _sceneManager::instance = 0;
+_gameScriptManager* _gameScriptManager::instance = 0;
 
 _eventManager::_eventManager()
 {
@@ -106,4 +107,29 @@ void _sceneManager::Update(void)
         notStarted = false;
     }
     scene->Update();
+}
+
+_gameScriptManager::_gameScriptManager()
+{
+
+}
+
+_gameScriptManager::~_gameScriptManager()
+{
+
+}
+
+_gameScriptManager& _gameScriptManager::Instance(void)
+{
+    if (instance != 0)
+    {
+        return *instance;
+    }
+    instance = new _gameScriptManager();
+    return *instance;
+}
+
+void _gameScriptManager::AddToList(GameScript* gameScript)
+{
+    gameScriptList.push_back(gameScript);
 }

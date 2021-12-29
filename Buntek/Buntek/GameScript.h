@@ -14,6 +14,8 @@ public:
 	virtual void Start(void);
 	virtual void Awake(void);
 	virtual void Update(void);
+private:
+	bool hasStarted;
 };
 
 #endif
