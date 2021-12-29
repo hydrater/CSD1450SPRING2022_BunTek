@@ -46,7 +46,10 @@ void _assetManager::RenderAll(void)
         Transform* transform = rendererList[i]->GetTransform();
 
         float rotationAngle = transform->worldrotation;
+<<<<<<< Updated upstream
         transform->worldrotation += 20 * (float)DeltaTime;
+=======
+>>>>>>> Stashed changes
 
         Vector2 BottomLeft = Vector2(-halfWidth, -halfHeight);
         Vector2 BottomRight = Vector2(halfWidth, -halfHeight);
@@ -58,7 +61,7 @@ void _assetManager::RenderAll(void)
         TopLeft.Rotate(rotationAngle);
         TopRight.Rotate(rotationAngle);
 
-        AEGfxSetPosition(transform->localposition.x, transform->localposition.y);
+        AEGfxSetPosition(transform->worldposition.x, transform->worldposition.y);
 
 
         AEGfxMeshStart();

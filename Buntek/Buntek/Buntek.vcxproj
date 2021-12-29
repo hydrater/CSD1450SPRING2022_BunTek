@@ -95,8 +95,6 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="BallBehavior.cpp" />
-    <ClCompile Include="BoxCollider.cpp" />
-    <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -114,8 +112,6 @@
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="BallBehavior.h" />
-    <ClInclude Include="BoxCollider.h" />
-    <ClInclude Include="CircleCollider.h" />
     <ClInclude Include="Collider2D.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Entity.h" />

@@ -19,24 +19,24 @@ Transform::~Transform()
 
 void Transform::Set(Vector2 position, Vector2 scale, float rotation)
 {
-	this->localposition = position;
-	this->localscale = scale;
-	this->localrotation = rotation;
+	this->worldposition = position;
+	this->worldscale = scale;
+	this->worldrotation = rotation;
 }
 
 void Transform::SetPosition(Vector2 position)
 {
-	this->localposition = position;
+	this->worldposition = position;
 }
 
 void Transform::SetScale(Vector2 scale)
 {
-	this->localscale = scale;
+	this->worldscale = scale;
 }
 
 void Transform::SetRotation(float rotation)
 {
-	this->localrotation = rotation;
+	this->worldrotation = rotation;
 }
 
 void Transform::SetRight(Vector2 right)
@@ -46,17 +46,17 @@ void Transform::SetRight(Vector2 right)
 
 void Transform::Translate(Vector2 translate)
 {
-	this->localposition += translate;
+	this->worldposition += translate;
 }
 
 void Transform::Rotate(float rotate)
 {
-	localrotation = localrotation + rotate;
+	worldrotation = worldrotation + rotate;
 }
 
 void Transform::Scale(float scale)
 {
-	this->localscale *= scale;
+	this->worldscale *= scale;
 }
 
 const Vector2& Transform::Right()
