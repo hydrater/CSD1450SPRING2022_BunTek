@@ -1,4 +1,5 @@
 #include "AssetManager.h"
+#include "System.h"
 
 _assetManager* _assetManager::instance = 0;
 

@@ -1,6 +1,5 @@
 #pragma once
 #include "GameScript.h"
-#include "Vector2.h"
 
 class BallBehavior : public GameScript
 {

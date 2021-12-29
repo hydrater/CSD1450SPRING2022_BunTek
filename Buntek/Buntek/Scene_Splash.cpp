@@ -51,7 +51,7 @@ void Scene_Splash::Update(void)
 		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
 		break;
 	case 4:
-		SoundTest(false);
+		SoundTest(true);
 		SceneManager.LoadScene(new Scene_Battle);
 		break;
 	}

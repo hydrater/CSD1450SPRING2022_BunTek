@@ -1,4 +1,5 @@
 #include "CollisionManager2D.h"
+#include "System.h"
 
 _CollisionManager2D* _CollisionManager2D::instance = 0;
 
