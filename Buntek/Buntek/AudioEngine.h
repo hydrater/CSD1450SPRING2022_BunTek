@@ -4,6 +4,7 @@
 #include <thread>
 #include <fmod.hpp>
 #include <fmod_errors.h>
+#include <map>
 using namespace std;
 using namespace FMOD;
 
@@ -15,10 +16,11 @@ private:
     static _audioManager* instance;
     _audioManager();
     ~_audioManager();
+    void SoundTest(string audiClip);
     System* fmodSystem = NULL;
     Channel* channel = nullptr;
     ChannelGroup* channelGroup = nullptr;
-    Sound* sound = nullptr;
+    map<string, Sound*> soundDatabase;
     
 public:
     static _audioManager& Instance(void);
@@ -26,7 +28,9 @@ public:
     /*FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
         FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
         void* commandData1, void* commandData2);*/
-    void SoundTest(bool lmao);
     void LoopPlaying();
     void CleanPlaying();
+    void PlayAudio(string audiClip);
+    void LoadSound(string name);
+    Sound* GetSound(string name);
 };

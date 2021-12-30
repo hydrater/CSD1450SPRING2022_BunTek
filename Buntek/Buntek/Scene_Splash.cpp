@@ -37,7 +37,7 @@ void Scene_Splash::Update(void)
 		break;
 	case 1:
 		if (playSound)
-			AudioManager.SoundTest(true);
+			AudioManager.PlayAudio("splash.mp3");
 		playSound = false;
 		break;
 	case 2:
@@ -49,7 +49,7 @@ void Scene_Splash::Update(void)
 		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
 		break;
 	case 4:
-		AudioManager.SoundTest(false);
+		AudioManager.PlayAudio("Test.wav");
 		SceneManager.LoadScene(new Scene_Battle);
 		break;
 	}
