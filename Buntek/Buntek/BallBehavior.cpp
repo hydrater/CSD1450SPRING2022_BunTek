@@ -1,4 +1,5 @@
 #include "BallBehavior.h"
+#include "GameManager.h"
 
 BallBehavior::BallBehavior()
 {
@@ -13,13 +14,7 @@ BallBehavior::BallBehavior()
 
 BallBehavior::~BallBehavior()
 {
-
-}
-
-
-void BallBehavior::Test()
-{
-	
+	GameManager.CameraShake(2, 5);
 }
 
 void BallBehavior::Start(void)

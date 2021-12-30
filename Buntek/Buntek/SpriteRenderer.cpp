@@ -13,7 +13,7 @@ SpriteRenderer::SpriteRenderer()
 
 SpriteRenderer::~SpriteRenderer()
 {
-	cout << "sprite renderer deconstructor called" << endl;
+	
 }
 
 void SpriteRenderer::Size(float width, float height)

@@ -5,6 +5,7 @@
 #include "AssetManager.h"
 #include "CollisionManager2D.h"
 #include "AudioEngine.h"
+#include "GameManager.h"
 
 // ---------------------------------------------------------------------------
 // main
@@ -54,6 +55,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AudioManager.Update();
 
 		// --------------------------------------------- Render --------------------------------------------- //
+		GameManager.CameraUpdate();
 		AssetManager.RenderAll();
 
 		// --------------------------------------------- Collision --------------------------------------------- //

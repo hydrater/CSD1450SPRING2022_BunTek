@@ -9,6 +9,7 @@ _assetManager::_assetManager()
     LoadTexture("Steven.jpg");
     LoadTexture("splash.png");
     LoadTexture("Background.jpg");
+    LoadTexture("YellowTexture.png");
     LoadTexture("BlackTexture.png");
     LoadTexture("ball.png");
 

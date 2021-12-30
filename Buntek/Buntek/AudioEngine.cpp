@@ -138,7 +138,9 @@ FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
     FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
     void* commandData1, void* commandData2)
 {
-    if (controlType == FMOD_CHANNELCONTROL_CHANNEL && AudioManager.GetMusicChannel() == (Channel*)channelControl && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END)
+    if (controlType == FMOD_CHANNELCONTROL_CHANNEL 
+        && AudioManager.GetMusicChannel() == (Channel*)channelControl 
+        && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END)
     {
         // music ended
     }

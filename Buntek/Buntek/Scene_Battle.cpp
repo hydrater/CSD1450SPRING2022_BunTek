@@ -12,7 +12,7 @@
 
 GameObject* test;
 GameObject* test2;
-GameObject* background, *ball, *friendlyArea, *hostileArea;
+GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea;
 
 void Scene_Battle::Start(void)
 {
@@ -26,13 +26,20 @@ void Scene_Battle::Start(void)
 
 	friendlyArea = new GameObject();
 	friendlyArea->AddComponent<SpriteRenderer>()->Size(620, 800);
-	friendlyArea->GetComponent<SpriteRenderer>()->SetTexture("BlackTexture");
+	friendlyArea->GetComponent<SpriteRenderer>()->SetTexture("BlackTexture.png");
 	friendlyArea->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
 	friendlyArea->transform->SetPosition(Vector2(-590, 70));
 
+	neutralArea = new GameObject();
+	neutralArea->AddComponent<SpriteRenderer>()->Size(560, 800);
+	neutralArea->GetComponent<SpriteRenderer>()->SetTexture("YellowTexture.png");
+	neutralArea->GetComponent<SpriteRenderer>()->SetColor(0, 0.5f, 0.5f);
+	neutralArea->GetComponent<SpriteRenderer>()->SetTransparency(0.2f);
+	neutralArea->transform->SetPosition(Vector2(0, 70));
+
 	hostileArea = new GameObject();
 	hostileArea->AddComponent<SpriteRenderer>()->Size(620, 800);
-	hostileArea->GetComponent<SpriteRenderer>()->SetTexture("BlackTexture");
+	hostileArea->GetComponent<SpriteRenderer>()->SetTexture("BlackTexture.png");
 	hostileArea->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
 	hostileArea->transform->SetPosition(Vector2(590, 70));
 
@@ -41,7 +48,6 @@ void Scene_Battle::Start(void)
 	ball->GetComponent<SpriteRenderer>()->SetTexture("ball.png");
 	ball->GetComponent<SpriteRenderer>()->SetColor(0, 1, 0);
 	ball->AddComponent<BallBehavior>()->radius = 10;
-
 
 	//test = new GameObject();
 	//test->AddComponent<SpriteRenderer>()->Size(500, 500);
