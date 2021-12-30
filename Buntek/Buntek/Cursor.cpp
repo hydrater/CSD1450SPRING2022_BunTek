@@ -43,19 +43,21 @@ void Cursor::Update(void)
 		CursorPosition.y += (float)AEGetWindowHeight() / 2;
 
 		CursorPosition.Set((float)*x, (float)*y);
-		Vector2 comparisonVector = (CursorPosition - ballbehavior->position);
+		BallBehavior* temp = this->Owner()->GetComponent<BallBehavior>();
+
+		Vector2 comparisonVector = (CursorPosition - temp->position);
 		float comparingAngle = comparisonVector.AngleBetween(Vector2(0, 1));	
-		if (comparisonVector.Length() <= ballbehavior->radius)
+		if (comparisonVector.Length() <= temp->radius)
 		{
-			if (comparingAngle <= (ballbehavior->clickableAngleRight / 2 + 45 ) && comparingAngle>= (ballbehavior->clickableAngleRight / 2 - 45))
+			if (comparingAngle <= (temp->clickableAngleRight / 2 + 45 ) && comparingAngle>= (temp->clickableAngleRight / 2 - 45))
 			{
 				ValidClick = true;
-				ballbehavior->velocity.x = -ballbehavior->velocity.x;
+				temp->velocity.x = -temp->velocity.x;
 			}
-			else if (comparingAngle <= (ballbehavior->clickableAngleLeft / 2 + 45) && comparingAngle >= (ballbehavior->clickableAngleLeft / 2 - 45))
+			else if (comparingAngle <= (temp->clickableAngleLeft / 2 + 45) && comparingAngle >= (temp->clickableAngleLeft / 2 - 45))
 			{
 				ValidClick = true;
-				ballbehavior->velocity.x = -ballbehavior->velocity.x;
+				temp->velocity.x = -temp->velocity.x;
 			}
 		}
 	}
