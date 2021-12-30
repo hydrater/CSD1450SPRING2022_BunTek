@@ -21,3 +21,8 @@ _gameManager& _gameManager::Instance(void)
     instance = new _gameManager();
     return *instance;
 }
+
+void Skill::SpawnSkillObject(void)
+{
+
+}

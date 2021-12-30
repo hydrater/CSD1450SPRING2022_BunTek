@@ -11,10 +11,18 @@ class Skill
 {
 private:
 
-
 public:
+    void SpawnSkillObject(void);
     int id;
     string description;
+    enum RarityTypes
+    {
+        common,
+        Rare,
+        Epic,
+        Legendary
+    };
+    RarityTypes rarity;
 };
 
 class _gameManager
