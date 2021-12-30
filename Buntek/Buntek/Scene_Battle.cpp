@@ -17,6 +17,7 @@ void Scene_Battle::Start(void)
 	test->AddComponent<SpriteRenderer>()->Size(500, 500);
 	test->transform->SetPosition(Vector2(-500, 10));
 	test->AddComponent<BallBehavior>()->radius = 250;
+	test->transform->Rotate(90);
 	test->AddComponent<CircleCollider>()->radius = 250;
 
 	test2 = new GameObject();

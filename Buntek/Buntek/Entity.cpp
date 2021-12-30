@@ -95,7 +95,7 @@ void GameObject::DetachParent(void)
 
 void GameObject::Delete(void)
 {
-	/*remove = true;
+	remove = true;
 	for (int i = 0; i < transform->children.size(); ++i)
 	{
 		transform->children[i]->Owner()->Delete();
@@ -103,5 +103,5 @@ void GameObject::Delete(void)
 	for (auto &c : components)
 	{
 		c->Remove();
-	}*/
+	}
 }
