@@ -8,6 +8,7 @@ BallBehavior::BallBehavior()
 	clickableAngleLeft = 90;
 	clickableAngleRight = 90;
 	speed = 6;
+	transform = 0;
 }
 
 BallBehavior::~BallBehavior()
