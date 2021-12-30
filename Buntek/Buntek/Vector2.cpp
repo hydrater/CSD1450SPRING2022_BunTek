@@ -110,8 +110,8 @@ float Vector2::Dot(const Vector2& vec) const
 	return x * vec.x + y * vec.y ;
 }
 
-float Vector2::AngleBetween(Vector2 p1, Vector2 p2) {
-	return atan2f(p1.y - p2.y, p1.x - p2.x);
+float Vector2::AngleBetween(const Vector2 vec) {
+	return atan2f(y - vec.y, x - vec.x);
 }
 
 Vector2 Vector2::Normalized(void) const throw(DivideByZero)
