@@ -58,6 +58,10 @@ void _gameManager::CameraUpdate(void)
                 break;
             }
 
+            float test = 4;
+            pos.x += RandFloatMinMax(-test, test);
+			pos.y += RandFloatMinMax(-test, test);
+
             AEGfxSetCamPosition(pos.x, pos.y);
             cameraShakeState += cameraShakeState < 3 ? 1 : -3;
             shakeIntervalTimer = shakeInterval;

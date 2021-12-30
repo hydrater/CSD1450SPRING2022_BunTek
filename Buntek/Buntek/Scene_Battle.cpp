@@ -35,7 +35,7 @@ void Scene_Battle::Start(void)
 	neutralArea->AddComponent<SpriteRenderer>()->Size(560, 800);
 	neutralArea->GetComponent<SpriteRenderer>()->SetTexture("YellowTexture.png");
 	neutralArea->GetComponent<SpriteRenderer>()->SetColor(0, 0.5f, 0.5f);
-	neutralArea->GetComponent<SpriteRenderer>()->SetTransparency(0.2f);
+	neutralArea->GetComponent<SpriteRenderer>()->SetTransparency(1.0f);
 	neutralArea->transform->SetPosition(Vector2(0, 70));
 
 	hostileArea = new GameObject();
@@ -50,7 +50,7 @@ void Scene_Battle::Start(void)
 	ball->GetComponent<SpriteRenderer>()->SetColor(0, 1, 0);
 	ball->AddComponent<BallBehavior>()->radius = 10;
 
-	GameManager.CameraShake(2, 100);
+	GameManager.CameraShake(2, 40);
 
 	//test = new GameObject();
 	//test->AddComponent<SpriteRenderer>()->Size(500, 500);
