@@ -1,8 +1,21 @@
 #pragma once
+#include <iostream>
 #include <string>
+#include <vector>
+#include "Vector2.h"
 using namespace std;
 
 #define GameManager _gameManager::Instance()
+
+class Skill
+{
+private:
+
+
+public:
+    int id;
+    string description;
+};
 
 class _gameManager
 {
@@ -13,15 +26,17 @@ private:
 
 public:
     static _gameManager& Instance(void);
-
+    Skill skill1, skill2, skill3;
 };
 
-class Skill
+class MapData
 {
-private:
-    
+    class Node
+    {
+    public:
+        int row, height;
+        Vector2 pos;
+    };
 
-public:
-    int id;
-    string description;
+    vector<Node> nodeList;
 };
