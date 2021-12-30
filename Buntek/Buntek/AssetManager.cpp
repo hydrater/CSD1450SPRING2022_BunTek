@@ -78,6 +78,7 @@ void _assetManager::RenderAll(void)
 
         AEGfxSetPosition(transform->worldposition.x, transform->worldposition.y);
 
+        // In case matrix is unable to rotate properly
         /*AEGfxMeshStart();
 
         AEGfxTriAdd(
@@ -90,20 +91,24 @@ void _assetManager::RenderAll(void)
             TopRight.x, TopRight.y, 0x00FFFFFF, 1.0f, 0.0f,
             TopLeft.x, TopLeft.y, 0x00FFFFFF, 0.0f, 0.0f);
 
-        mesh = AEGfxMeshEnd();*/
-
-        //[TEST/TOREMOVE]
-        //rotationAngle = 90;
-        //// Add Matrix that scale according to the GameObject Size
-        //float TransformMatrix[3][3]{
-        //    {halfWidth * 2 * cosf(rotationAngle * 3.1415926535897932384626433832795f),- sinf(rotationAngle * 3.1415926535897932384626433832795f),transform->worldposition.x},
-        //    {sinf(rotationAngle * 3.1415926535897932384626433832795f),halfHeight * 2 * cosf(rotationAngle * 3.1415926535897932384626433832795f),transform->worldposition.y},
-        //    {0,0,1}
-        //};
+        mesh = AEGfxMeshEnd();
 
         float TransformMatrix[3][3]{
             {halfWidth * 2,0,transform->worldposition.x},
             {0,halfHeight * 2,transform->worldposition.y},
+            {0,0,1}
+        };*/
+
+        // Scale and Rotate Matrix
+        //rotationAngle = 0;
+        float cosAngle = cosf(rotationAngle / 180.0f * 3.1415926535897932384626433832795f);
+        float sinAngle = sinf(rotationAngle / 180.0f * 3.1415926535897932384626433832795f);
+        float width = halfWidth * 2;
+        float height = halfHeight * 2;
+        // Multiply Matrix by scale according to the GameObject Size then by rotation
+        float TransformMatrix[3][3]{
+            {cosAngle*width,sinAngle*height,transform->worldposition.x},
+            {-sinAngle*width,cosAngle*height,transform->worldposition.y},
             {0,0,1}
         };
 
