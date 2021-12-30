@@ -63,6 +63,7 @@ void _audioManager::LoadSound(string name)
     char* pathName = new char[pathString.length() + 1];
     copy(pathString.begin(), pathString.end(), pathName);
     Sound* sound = 0;
+    //fmodSystem->createSound(pathName, FMOD_LOOP_NORMAL, nullptr, &sound); // Loops the sound infinitely
     fmodSystem->createSound(pathName, FMOD_DEFAULT, nullptr, &sound);
     soundDatabase[name] = sound;
 }
