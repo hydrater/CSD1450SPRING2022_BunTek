@@ -1,6 +1,8 @@
 #include "Cursor.h"
 #include "BallBehavior.h"
 #include "Vector2.h"
+
+#define ballbehavior this->Owner()->GetComponent<BallBehavior>()
 Cursor::Cursor()
 {
 
@@ -25,25 +27,25 @@ void Cursor::Start(void)
 void Cursor::Update(void)
 {
 	ValidClick = false;
-	signed int* x;
-	signed int* y;
-	*x = 0;
-	*y = 0;
+	signed int X = 0;
+	signed int Y = 0;
+	signed int *x = &X;
+	signed int *y = &Y;
 	if (Clicked == true)
 	{
 		AEInputGetCursorPosition(x,y);
-		CursorPosition.Set(*x, *y);
-		Vector2 comparisonVector = (CursorPosition - BallBehavior().position);
+		CursorPosition.Set((float)*x, (float)*y);
+		Vector2 comparisonVector = (CursorPosition - ballbehavior->position);
 		float comparingAngle = comparisonVector.AngleBetween(Vector2(0, 1));	
-		if (comparisonVector.Length() <= BallBehavior().radius)
+		if (comparisonVector.Length() <= ballbehavior->radius)
 		{
-			if (comparingAngle <= BallBehavior().clickableAngleRight + 45  && comparingAngle>= BallBehavior().clickableAngleRight - 45)
+			if (comparingAngle <= (ballbehavior->clickableAngleRight / 2 + 90 ) && comparingAngle>= (ballbehavior->clickableAngleRight / 2 - 90))
 			{
-				=
+				ballbehavior->velocity.x = -ballbehavior->velocity.x;
 			}
-			else if (comparingAngle <= BallBehavior().clickableAngleLeft + 35 && comparingAngle >= BallBehavior().clickableAngleLeft - 45)
+			else if (comparingAngle <= (ballbehavior->clickableAngleLeft / 2 + 270) && comparingAngle >= (ballbehavior->clickableAngleLeft / 2 - 270))
 			{
-
+				ballbehavior->velocity.x = -ballbehavior->velocity.x;
 			}
 		}
 	}
