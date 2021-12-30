@@ -38,6 +38,10 @@ void Cursor::Update(void)
 	if (Clicked == true)
 	{
 		AEInputGetCursorPosition(x,y);
+		//offfset to center
+		CursorPosition.x += (float)AEGetWindowWidth() / 2;
+		CursorPosition.y += (float)AEGetWindowHeight() / 2;
+
 		CursorPosition.Set((float)*x, (float)*y);
 		Vector2 comparisonVector = (CursorPosition - ballbehavior->position);
 		float comparingAngle = comparisonVector.AngleBetween(Vector2(0, 1));	
