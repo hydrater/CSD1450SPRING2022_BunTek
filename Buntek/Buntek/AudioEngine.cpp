@@ -10,7 +10,12 @@ _audioManager::_audioManager()
     fmodSystem->init(512, FMOD_INIT_NORMAL, nullptr);
 
     // Create the channel group.
-    //fmodSystem->createChannelGroup("inGameSoundEffects", &channelGroup);
+    fmodSystem->createChannelGroup("inGameSoundEffects", &channelGroup);
+
+    musicChannel->setChannelGroup(channelGroup);
+
+    // Set a callback on the channel.
+    //musicChannel->setCallback(&channelGroupCallback);
 
     // Load sounds here
     LoadSound("splash.mp3");
@@ -33,12 +38,6 @@ void _audioManager::PlayAudio(string clipName)
 
     // Play the sound.
     fmodSystem->playSound(audioClip, nullptr, false, &channel);
-
-    // Assign the channel to the group.
-    //channel->setChannelGroup(channelGroup);
-
-	// Set a callback on the channel.
-	//channel->setCallback(&channelGroupCallback);
 }
 
 void _audioManager::PlayMusic(string musicTrack)
@@ -54,13 +53,10 @@ void _audioManager::PlayMusic(string musicTrack)
     fmodSystem->playSound(audioClip, nullptr, false, &musicChannel);
 }
 
-//https://documentation.help/FMOD-Studio-API/FMOD_System_Update.html
-//void _audioManager::LoopPlaying()
-//{
-//    //std::this_thread::sleep_for(std::chrono::milliseconds(10));
-//
-//    fmodSystem->update();
-//}
+void _audioManager::Update()
+{
+    fmodSystem->update();
+}
 
 void _audioManager::CleanPlaying()
 {
@@ -103,6 +99,18 @@ Sound* _audioManager::GetSound(string name)
         return search->second;
     }
     return NULL;
+}
+
+FMOD_RESULT F_CALLBACK _audioManager::channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
+    FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
+    void* commandData1, void* commandData2)
+{
+    if (controlType == FMOD_CHANNELCONTROL_CHANNEL && musicChannel == (Channel*)channelControl && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END)
+    {
+        // music ended
+    }
+
+    return FMOD_OK;
 }
 
 //bool _audioManager::succeededOrWarn(const std::string& message, FMOD_RESULT result)
