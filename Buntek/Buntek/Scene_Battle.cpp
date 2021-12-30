@@ -5,6 +5,7 @@
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
 #include "System.h"
+#include "Cursor.h"
 
 // ------------------------------------ Battle ------------------------------------
 
@@ -19,12 +20,14 @@ void Scene_Battle::Start(void)
 	test->AddComponent<BallBehavior>()->radius = 250;
 	test->transform->Rotate(90);
 	test->AddComponent<CircleCollider>()->radius = 250;
+	test->AddComponent<Cursor>();
 
 	test2 = new GameObject();
 	test2->AddComponent<SpriteRenderer>()->Size(500, 500);
 	test2->transform->SetPosition(Vector2(0, 10));
 	test2->AddComponent<BallBehavior>()->radius = 250;
 	test2->AddComponent<CircleCollider>()->radius = 250;
+	test2->AddComponent<Cursor>();
 }	
 
 void Scene_Battle::Update(void)

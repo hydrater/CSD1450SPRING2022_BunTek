@@ -110,6 +110,9 @@ float Vector2::Dot(const Vector2& vec) const
 	return x * vec.x + y * vec.y ;
 }
 
+float Vector2::AngleBetween(const Vector2 vec) {
+	return atan2f(y - vec.y, x - vec.x);
+}
 
 Vector2 Vector2::Normalized(void) const throw(DivideByZero)
 {

@@ -34,6 +34,7 @@ public:
 	float Length(void) const;
 	float LengthSquared(void) const;
 	float Dot(const Vector2& vec) const;
+	float AngleBetween(Vector2 vec);
 	Vector2 Normalized(void) const;
 	Vector2& Normalize(void);
 
