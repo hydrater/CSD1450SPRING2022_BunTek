@@ -2,7 +2,6 @@
 #include "BallBehavior.h"
 #include "Vector2.h"
 
-#define ballbehavior this->Owner()->GetComponent<BallBehavior>()
 Cursor::Cursor()
 {
 
