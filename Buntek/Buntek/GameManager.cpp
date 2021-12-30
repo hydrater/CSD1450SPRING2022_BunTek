@@ -32,6 +32,8 @@ void _gameManager::CameraUpdate(void)
         float test = RandFloatMinMax(0, 3);
 
         shakeOffset -= cameraDecline;
+        // For random, comment out the switch
+        //pos = Vector2(RandFloatMinMax(-shakeOffset, shakeOffset), RandFloatMinMax(-shakeOffset, shakeOffset));
         shakeIntervalTimer -= dt;
 
         if (shakeIntervalTimer < 0)

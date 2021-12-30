@@ -14,7 +14,7 @@ BallBehavior::BallBehavior()
 
 BallBehavior::~BallBehavior()
 {
-	GameManager.CameraShake(2, 5);
+	//GameManager.CameraShake(2, 5);
 }
 
 void BallBehavior::Start(void)

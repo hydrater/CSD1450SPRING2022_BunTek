@@ -7,6 +7,7 @@
 #include "System.h"
 #include "Cursor.h"
 #include "AudioEngine.h"
+#include "GameManager.h"
 
 // ------------------------------------ Battle ------------------------------------
 
@@ -48,6 +49,8 @@ void Scene_Battle::Start(void)
 	ball->GetComponent<SpriteRenderer>()->SetTexture("ball.png");
 	ball->GetComponent<SpriteRenderer>()->SetColor(0, 1, 0);
 	ball->AddComponent<BallBehavior>()->radius = 10;
+
+	GameManager.CameraShake(2, 100);
 
 	//test = new GameObject();
 	//test->AddComponent<SpriteRenderer>()->Size(500, 500);
