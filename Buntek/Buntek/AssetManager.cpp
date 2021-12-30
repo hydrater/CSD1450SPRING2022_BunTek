@@ -78,6 +78,7 @@ void _assetManager::RenderAll(void)
         mesh = AEGfxMeshEnd();
 
         AEGfxSetTintColor(1.0f, 1.0f, 1.0f, rendererList[i]->GetTransparency());
+        //AEGfxSetTextureMode(AE_GFX_TM_PRECISE); Different quality if using average
         AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()), 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
         AEGfxMeshFree(mesh);
