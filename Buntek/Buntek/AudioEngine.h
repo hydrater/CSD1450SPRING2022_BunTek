@@ -26,16 +26,18 @@ private:
 public:
     static _audioManager& Instance(void);
     //bool succeededOrWarn(const std::string& message, FMOD_RESULT result);
-    void CleanPlaying();
+    Channel* GetMusicChannel(void);
+    void CleanPlaying(void);
     void PlayAudio(string audiClip);
     void PlayMusic(string musicTrack);
-    void Update();
+    void Update(void);
     void LoadSound(string name);
     void LoadMusic(string name);
     Sound* GetSound(string name);
-    FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
-        FMOD_CHANNELCONTROL_TYPE controlType, 
-        FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType, 
-        void* commandData1, 
-        void* commandData2);
 };
+
+FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
+    FMOD_CHANNELCONTROL_TYPE controlType,
+    FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
+    void* commandData1,
+    void* commandData2);

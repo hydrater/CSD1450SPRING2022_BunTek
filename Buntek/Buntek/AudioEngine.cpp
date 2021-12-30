@@ -15,7 +15,7 @@ _audioManager::_audioManager()
     musicChannel->setChannelGroup(channelGroup);
 
     // Set a callback on the channel.
-    //musicChannel->setCallback(&channelGroupCallback);
+    musicChannel->setCallback(&channelGroupCallback);
 
     // Load sounds here
     LoadSound("splash.mp3");
@@ -101,18 +101,6 @@ Sound* _audioManager::GetSound(string name)
     return NULL;
 }
 
-FMOD_RESULT F_CALLBACK _audioManager::channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
-    FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
-    void* commandData1, void* commandData2)
-{
-    if (controlType == FMOD_CHANNELCONTROL_CHANNEL && musicChannel == (Channel*)channelControl && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END)
-    {
-        // music ended
-    }
-
-    return FMOD_OK;
-}
-
 //bool _audioManager::succeededOrWarn(const std::string& message, FMOD_RESULT result)
 //{
 //    if (result != FMOD_OK) {
@@ -128,4 +116,21 @@ _audioManager& _audioManager::Instance(void)
         return *instance;
     instance = new _audioManager();
     return *instance;
+}
+
+Channel* _audioManager::GetMusicChannel(void)
+{
+    return musicChannel;
+}
+
+FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
+    FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
+    void* commandData1, void* commandData2)
+{
+    if (controlType == FMOD_CHANNELCONTROL_CHANNEL && AudioManager.GetMusicChannel() == (Channel*)channelControl && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END)
+    {
+        // music ended
+    }
+
+    return FMOD_OK;
 }
