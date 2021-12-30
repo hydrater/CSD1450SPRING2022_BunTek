@@ -10,6 +10,9 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
-private:
 	Vector2 position;
+	Vector2 velocity;
+	float radius;
+private:
+
 };
