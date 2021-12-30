@@ -21,7 +21,8 @@ _audioManager::_audioManager()
     LoadSound("splash.mp3");
 
     // Load Music here
-    LoadMusic("Test.wav");
+    LoadMusic("Summer.mp3");
+    LoadMusic("GhostFinal.mp3");
 }
 
 _audioManager::~_audioManager()
@@ -51,6 +52,16 @@ void _audioManager::PlayMusic(string musicTrack)
     // Play the sound.
     musicChannel->stop();
     fmodSystem->playSound(audioClip, nullptr, false, &musicChannel);
+}
+
+void _audioManager::SetAudioVolume(float volume)
+{
+    channel->setVolume(volume);
+}
+
+void _audioManager::SetMusicVolume(float volume)
+{
+    musicChannel->setVolume(volume);
 }
 
 void _audioManager::Update()

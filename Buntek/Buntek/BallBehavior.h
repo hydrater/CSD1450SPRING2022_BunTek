@@ -15,6 +15,9 @@ public:
 	float radius;
 	float clickableAngleLeft;
 	float clickableAngleRight;
-private:
+	float GetSpeed();
 
+private:
+	float speed;
+	Transform* transform;
 };

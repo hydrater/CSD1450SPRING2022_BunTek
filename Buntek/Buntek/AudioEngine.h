@@ -30,6 +30,8 @@ public:
     void CleanPlaying(void);
     void PlayAudio(string audiClip);
     void PlayMusic(string musicTrack);
+    void SetAudioVolume(float volume);
+    void SetMusicVolume(float volume);
     void Update(void);
     void LoadSound(string name);
     void LoadMusic(string name);

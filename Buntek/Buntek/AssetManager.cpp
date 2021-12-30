@@ -8,6 +8,10 @@ _assetManager::_assetManager()
 {
     LoadTexture("Steven.jpg");
     LoadTexture("splash.png");
+    LoadTexture("Background.jpg");
+    LoadTexture("BlackTexture.png");
+    LoadTexture("ball.png");
+
     mesh = 0;
 
     AEGfxMeshStart();
@@ -114,7 +118,7 @@ void _assetManager::RenderAll(void)
 
         AEGfxSetTransform(TransformMatrix);
 
-        AEGfxSetTintColor(1.0f, 1.0f, 1.0f, rendererList[i]->GetTransparency());
+        AEGfxSetTintColor(rendererList[i]->R, rendererList[i]->G, rendererList[i]->B, rendererList[i]->GetTransparency());
         //AEGfxSetTextureMode(AE_GFX_TM_PRECISE); Different quality if using average
         AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()), 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);

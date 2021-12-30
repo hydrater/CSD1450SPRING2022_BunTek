@@ -8,6 +8,7 @@ SpriteRenderer::SpriteRenderer()
 	halfWidth = 100;
 	AssetManager.AddToList(this);
 	textureString = "Steven.jpg";
+	SetColor(1, 1, 1);
 }
 
 SpriteRenderer::~SpriteRenderer()
@@ -54,4 +55,9 @@ float SpriteRenderer::GetTransparency()
 void SpriteRenderer::SetTransparency(float value)
 {
 	transparency = value;
+}
+
+void SpriteRenderer::SetColor(float _R, float _G, float _B)
+{
+	R = _R, G = _G, B = _B;
 }

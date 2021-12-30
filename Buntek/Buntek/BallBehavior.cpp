@@ -7,8 +7,8 @@ BallBehavior::BallBehavior()
 	radius = 250;
 	clickableAngleLeft = 90;
 	clickableAngleRight = 90;
+	speed = 6;
 }
-
 
 BallBehavior::~BallBehavior()
 {
@@ -23,23 +23,27 @@ void BallBehavior::Test()
 
 void BallBehavior::Start(void)
 {
-	cout << "monkaS" << endl;
+	cout << "Ball created" << endl;
+	transform = this->Owner()->transform;
 }
 
 void BallBehavior::Update(void)
 {
-	position.Set(this->Owner()->transform->worldposition.x, this->Owner()->transform->worldposition.y);
+	position.Set(transform->worldposition.x, transform->worldposition.y);
 
-	this->Owner()->transform->SetPosition(Vector2(this->Owner()->transform->worldposition.x + velocity.x, this->Owner()->transform->worldposition.y + velocity.y));
+	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
 
-	if (((float)AEGetWindowWidth()/2 - fabs(this->Owner()->transform->worldposition.x)) < radius) {
+	if (((float)AEGetWindowWidth()/2 - fabs(transform->worldposition.x)) < radius) {
 		this->Owner()->Delete();
 	}
-	else if (((float)AEGetWindowHeight()/2 - fabs(this->Owner()->transform->worldposition.y)) < radius) {
+	else if (((float)AEGetWindowHeight()/2 - fabs(transform->worldposition.y)) < radius) {
 		velocity.y = -velocity.y;
 	}
 
-	//cout << "poo poo pee pee" << endl;
 }
 
+float BallBehavior::GetSpeed()
+{
+	return speed;
+}
 
