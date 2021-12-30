@@ -33,7 +33,7 @@ void BallBehavior::Update(void)
 	this->Owner()->transform->SetPosition(Vector2(this->Owner()->transform->worldposition.x + velocity.x, this->Owner()->transform->worldposition.y + velocity.y));
 
 	if (((float)AEGetWindowWidth()/2 - fabs(this->Owner()->transform->worldposition.x)) < radius) {
-		this->Owner()->Delete();
+		//this->Owner()->Delete();
 	}
 	else if (((float)AEGetWindowHeight()/2 - fabs(this->Owner()->transform->worldposition.y)) < radius) {
 		velocity.y = -velocity.y;
