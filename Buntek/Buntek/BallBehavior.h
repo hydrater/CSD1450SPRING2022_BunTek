@@ -13,6 +13,8 @@ public:
 	Vector2 position;
 	Vector2 velocity;
 	float radius;
+	float clickableAngleLeft;
+	float clickableAngleRight;
 private:
 
 };
