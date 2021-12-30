@@ -16,11 +16,12 @@ private:
     static _audioManager* instance;
     _audioManager();
     ~_audioManager();
-    void SoundTest(string audiClip);
     System* fmodSystem = NULL;
     Channel* channel = nullptr;
-    ChannelGroup* channelGroup = nullptr;
+    Channel* musicChannel = nullptr;
+    //ChannelGroup* channelGroup = nullptr;
     map<string, Sound*> soundDatabase;
+    map<string, Sound*> musicDatabase;
     
 public:
     static _audioManager& Instance(void);
@@ -31,6 +32,8 @@ public:
     //void LoopPlaying();
     void CleanPlaying();
     void PlayAudio(string audiClip);
+    void PlayMusic(string musicTrack);
     void LoadSound(string name);
+    void LoadMusic(string name);
     Sound* GetSound(string name);
 };

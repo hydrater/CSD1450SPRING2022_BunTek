@@ -10,11 +10,13 @@ _audioManager::_audioManager()
     fmodSystem->init(512, FMOD_INIT_NORMAL, nullptr);
 
     // Create the channel group.
-    fmodSystem->createChannelGroup("inGameSoundEffects", &channelGroup);
+    //fmodSystem->createChannelGroup("inGameSoundEffects", &channelGroup);
 
-    //Load sounds here
-    LoadSound("Test.wav");
+    // Load sounds here
     LoadSound("splash.mp3");
+
+    // Load Music here
+    LoadMusic("Test.wav");
 }
 
 _audioManager::~_audioManager()
@@ -33,10 +35,23 @@ void _audioManager::PlayAudio(string clipName)
     fmodSystem->playSound(audioClip, nullptr, false, &channel);
 
     // Assign the channel to the group.
-    channel->setChannelGroup(channelGroup);
+    //channel->setChannelGroup(channelGroup);
 
 	// Set a callback on the channel.
 	//channel->setCallback(&channelGroupCallback);
+}
+
+void _audioManager::PlayMusic(string musicTrack)
+{
+    // Create the sound.
+    Sound* audioClip = 0;
+    auto search = musicDatabase.find(musicTrack);
+    if (search != musicDatabase.end())
+        audioClip = search->second;
+
+    // Play the sound.
+    musicChannel->stop();
+    fmodSystem->playSound(audioClip, nullptr, false, &musicChannel);
 }
 
 //https://documentation.help/FMOD-Studio-API/FMOD_System_Update.html
@@ -53,7 +68,7 @@ void _audioManager::CleanPlaying()
     map<string, Sound*>::iterator start;
     for (start = soundDatabase.begin(); start != soundDatabase.end(); start++)
         start->second->release();
-    channelGroup->release();
+    //channelGroup->release();
     fmodSystem->release();
 }
 
@@ -63,9 +78,18 @@ void _audioManager::LoadSound(string name)
     char* pathName = new char[pathString.length() + 1];
     copy(pathString.begin(), pathString.end(), pathName);
     Sound* sound = 0;
-    //fmodSystem->createSound(pathName, FMOD_LOOP_NORMAL, nullptr, &sound); // Loops the sound infinitely
     fmodSystem->createSound(pathName, FMOD_DEFAULT, nullptr, &sound);
     soundDatabase[name] = sound;
+}
+
+void _audioManager::LoadMusic(string name)
+{
+    string pathString = "./Assets/" + name + '\0';
+    char* pathName = new char[pathString.length() + 1];
+    copy(pathString.begin(), pathString.end(), pathName);
+    Sound* music = 0;
+    fmodSystem->createSound(pathName, FMOD_LOOP_NORMAL, nullptr, &music);
+    musicDatabase[name] = music;
 }
 
 Sound* _audioManager::GetSound(string name)
