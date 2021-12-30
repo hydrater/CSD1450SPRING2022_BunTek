@@ -1,5 +1,6 @@
 #include "AssetManager.h"
 #include "System.h"
+#include <math.h>
 
 _assetManager* _assetManager::instance = 0;
 
@@ -8,6 +9,20 @@ _assetManager::_assetManager()
     LoadTexture("Steven.jpg");
     LoadTexture("splash.png");
     mesh = 0;
+
+    AEGfxMeshStart();
+
+    AEGfxTriAdd(
+        -0.5f, -0.5f, 0x00FF00FF, 0.0f, 1.0f,
+        0.5f, -0.5f, 0x00FFFF00, 1.0f, 1.0f,
+        -0.5f, 0.5f, 0x0000FFFF, 0.0f, 0.0f);
+
+    AEGfxTriAdd(
+        0.5f, -0.5f, 0x00FFFFFF, 1.0f, 1.0f,
+        0.5f, 0.5f, 0x00FFFFFF, 1.0f, 0.0f,
+        -0.5f, 0.5f, 0x00FFFFFF, 0.0f, 0.0f);
+
+    mesh = AEGfxMeshEnd();
 }
 
 _assetManager::~_assetManager()
@@ -63,7 +78,7 @@ void _assetManager::RenderAll(void)
 
         AEGfxSetPosition(transform->worldposition.x, transform->worldposition.y);
 
-        AEGfxMeshStart();
+        /*AEGfxMeshStart();
 
         AEGfxTriAdd(
             BottomLeft.x, BottomLeft.y, 0x00FF00FF, 0.0f, 1.0f,
@@ -75,13 +90,30 @@ void _assetManager::RenderAll(void)
             TopRight.x, TopRight.y, 0x00FFFFFF, 1.0f, 0.0f,
             TopLeft.x, TopLeft.y, 0x00FFFFFF, 0.0f, 0.0f);
 
-        mesh = AEGfxMeshEnd();
+        mesh = AEGfxMeshEnd();*/
+
+        //[TEST/TOREMOVE]
+        //rotationAngle = 90;
+        //// Add Matrix that scale according to the GameObject Size
+        //float TransformMatrix[3][3]{
+        //    {halfWidth * 2 * cosf(rotationAngle * 3.1415926535897932384626433832795f),- sinf(rotationAngle * 3.1415926535897932384626433832795f),transform->worldposition.x},
+        //    {sinf(rotationAngle * 3.1415926535897932384626433832795f),halfHeight * 2 * cosf(rotationAngle * 3.1415926535897932384626433832795f),transform->worldposition.y},
+        //    {0,0,1}
+        //};
+
+        float TransformMatrix[3][3]{
+            {halfWidth * 2,0,transform->worldposition.x},
+            {0,halfHeight * 2,transform->worldposition.y},
+            {0,0,1}
+        };
+
+        AEGfxSetTransform(TransformMatrix);
 
         AEGfxSetTintColor(1.0f, 1.0f, 1.0f, rendererList[i]->GetTransparency());
         //AEGfxSetTextureMode(AE_GFX_TM_PRECISE); Different quality if using average
         AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()), 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
-        AEGfxMeshFree(mesh);
+        //AEGfxMeshFree(mesh);
     }
 }
 
