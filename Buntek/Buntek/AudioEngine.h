@@ -19,21 +19,23 @@ private:
     System* fmodSystem = NULL;
     Channel* channel = nullptr;
     Channel* musicChannel = nullptr;
-    //ChannelGroup* channelGroup = nullptr;
+    ChannelGroup* channelGroup = nullptr;
     map<string, Sound*> soundDatabase;
     map<string, Sound*> musicDatabase;
     
 public:
     static _audioManager& Instance(void);
     //bool succeededOrWarn(const std::string& message, FMOD_RESULT result);
-    /*FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
-        FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
-        void* commandData1, void* commandData2);*/
-    //void LoopPlaying();
     void CleanPlaying();
     void PlayAudio(string audiClip);
     void PlayMusic(string musicTrack);
+    void Update();
     void LoadSound(string name);
     void LoadMusic(string name);
     Sound* GetSound(string name);
+    FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
+        FMOD_CHANNELCONTROL_TYPE controlType, 
+        FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType, 
+        void* commandData1, 
+        void* commandData2);
 };
