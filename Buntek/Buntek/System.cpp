@@ -138,6 +138,11 @@ void _gameScriptManager::Update(void)
 {
     for (int i = 0; i < gameScriptList.size(); ++i)
     {
+        if (gameScriptList[i] == NULL)
+        {
+            cout << "found deleted obj" << endl;
+        }
+
         if (!gameScriptList[i]->getStarted())
         {
             gameScriptList[i]->Start();
