@@ -120,9 +120,7 @@ AEGfxTexture* _assetManager::GetTexture(string name)
 {
     auto search = textureDatabase.find(name);
     if (search != textureDatabase.end())
-    {
         return search->second;
-    }
     return NULL;
 }
 

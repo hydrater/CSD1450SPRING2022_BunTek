@@ -23,40 +23,29 @@ _audioManager::~_audioManager()
 
 void _audioManager::PlayAudio(string clipName)
 {
-    FMOD_RESULT result;
-
     // Create the sound.
-    Sound* audioClip;
+    Sound* audioClip = 0;
     auto search = soundDatabase.find(clipName);
     if (search != soundDatabase.end())
-    {
         audioClip = search->second;
-    }
-
-	fmodSystem->createSound("./Assets/Test.wav", FMOD_DEFAULT, nullptr, &audioClip);
 
     // Play the sound.
-    result = fmodSystem->playSound(audioClip, nullptr, false, &channel);
-    if (result == FMOD_OK)
-    //    cout << "yes" << endl;
+    fmodSystem->playSound(audioClip, nullptr, false, &channel);
 
     // Assign the channel to the group.
-    result = channel->setChannelGroup(channelGroup);
-    /*if (!succeededOrWarn("FMOD: Failed to set channel group on", result))
-        return;*/
+    channel->setChannelGroup(channelGroup);
 
-        // Set a callback on the channel.
-        /*channel->setCallback(&channelGroupCallback);
-        if (!succeededOrWarn("FMOD: Failed to set callback for sound", result))
-            return;*/
+	// Set a callback on the channel.
+	//channel->setCallback(&channelGroupCallback);
 }
 
-void _audioManager::LoopPlaying()
-{
-    //std::this_thread::sleep_for(std::chrono::milliseconds(10));
-
-    fmodSystem->update();
-}
+//https://documentation.help/FMOD-Studio-API/FMOD_System_Update.html
+//void _audioManager::LoopPlaying()
+//{
+//    //std::this_thread::sleep_for(std::chrono::milliseconds(10));
+//
+//    fmodSystem->update();
+//}
 
 void _audioManager::CleanPlaying()
 {
@@ -70,12 +59,11 @@ void _audioManager::CleanPlaying()
 
 void _audioManager::LoadSound(string name)
 {
-    string pathString = "./Assets/" + name;
+    string pathString = "./Assets/" + name + '\0';
     char* pathName = new char[pathString.length() + 1];
     copy(pathString.begin(), pathString.end(), pathName);
-    Sound* sound;
+    Sound* sound = 0;
     fmodSystem->createSound(pathName, FMOD_DEFAULT, nullptr, &sound);
-    cout << sound << endl;
     soundDatabase[name] = sound;
 }
 
@@ -89,7 +77,6 @@ Sound* _audioManager::GetSound(string name)
     return NULL;
 }
 
-
 //bool _audioManager::succeededOrWarn(const std::string& message, FMOD_RESULT result)
 //{
 //    if (result != FMOD_OK) {
@@ -102,9 +89,7 @@ Sound* _audioManager::GetSound(string name)
 _audioManager& _audioManager::Instance(void)
 {
     if (instance != 0)
-    {
         return *instance;
-    }
     instance = new _audioManager();
     return *instance;
 }

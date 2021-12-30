@@ -28,7 +28,7 @@ public:
     /*FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
         FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
         void* commandData1, void* commandData2);*/
-    void LoopPlaying();
+    //void LoopPlaying();
     void CleanPlaying();
     void PlayAudio(string audiClip);
     void LoadSound(string name);
