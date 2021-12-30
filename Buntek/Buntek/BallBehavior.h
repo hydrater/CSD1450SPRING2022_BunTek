@@ -19,5 +19,4 @@ public:
 
 private:
 	float speed;
-	Transform* transform;
 };
