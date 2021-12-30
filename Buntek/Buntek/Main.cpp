@@ -23,7 +23,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// ------------------------------------------ System Init ------------------------------------------- //
 	// Using custom window procedure
 	AESysInit(hInstance, nCmdShow, 1920, 1080, 1, 60, true, NULL);
-	//AEToogleFullScreen(true);
+	AEToogleFullScreen(true);
 
 	// Changing the window title
 	AESysSetWindowTitle("idk we need a pong game name atm");
