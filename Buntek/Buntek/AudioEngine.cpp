@@ -68,6 +68,9 @@ void _audioManager::CleanPlaying()
     map<string, Sound*>::iterator start;
     for (start = soundDatabase.begin(); start != soundDatabase.end(); start++)
         start->second->release();
+
+    for (start = musicDatabase.begin(); start != musicDatabase.end(); start++)
+        start->second->release();
     //channelGroup->release();
     fmodSystem->release();
 }
