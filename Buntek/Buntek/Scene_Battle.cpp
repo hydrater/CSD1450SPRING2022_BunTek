@@ -35,7 +35,7 @@ void Scene_Battle::Start(void)
 	neutralArea->AddComponent<SpriteRenderer>()->Size(560, 800);
 	neutralArea->GetComponent<SpriteRenderer>()->SetTexture("YellowTexture.png");
 	neutralArea->GetComponent<SpriteRenderer>()->SetColor(0, 0.5f, 0.5f);
-	neutralArea->GetComponent<SpriteRenderer>()->SetTransparency(1.0f);
+	neutralArea->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
 	neutralArea->transform->SetPosition(Vector2(0, 70));
 
 	hostileArea = new GameObject();
