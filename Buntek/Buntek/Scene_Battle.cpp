@@ -50,8 +50,6 @@ void Scene_Battle::Start(void)
 	ball->GetComponent<SpriteRenderer>()->SetColor(0, 1, 0);
 	ball->AddComponent<BallBehavior>()->radius = 10;
 
-	GameManager.CameraShake(0.5f, 10, Vector2(1.0f, 0.5f));
-
 	//test = new GameObject();
 	//test->AddComponent<SpriteRenderer>()->Size(500, 500);
 	//test->transform->SetPosition(Vector2(-500, 10));
