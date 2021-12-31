@@ -35,7 +35,6 @@ void BallBehavior::Update(void)
 	else if (((float)AEGetWindowHeight()/2 - fabs(transform->worldposition.y)) < radius) {
 		velocity.y = -velocity.y;
 	}
-
 }
 
 float BallBehavior::GetSpeed()
