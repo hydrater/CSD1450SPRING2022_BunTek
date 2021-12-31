@@ -8,6 +8,12 @@ public:
 	~BallBehavior();
 	void Start(void) override;
 	void Update(void) override;
+	//temp
+
+	float AreaTopBoundary;
+	float AreaBottomBoundary;
+	float AreaLeftBoundary;
+	float AreaRightBoundary;
 
 	Vector2 position;
 	Vector2 velocity;

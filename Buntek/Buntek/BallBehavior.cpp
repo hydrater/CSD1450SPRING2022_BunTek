@@ -1,6 +1,7 @@
 #include "BallBehavior.h"
 #include "GameManager.h"
 
+
 BallBehavior::BallBehavior()
 {
 	position.Set(0, 0);
@@ -10,6 +11,10 @@ BallBehavior::BallBehavior()
 	clickableAngleRight = 90;
 	speed = 6;
 	transform = 0;
+	AreaTopBoundary = 0;
+	AreaBottomBoundary = 0;
+	AreaLeftBoundary = 0;
+	AreaRightBoundary = 0;
 }
 
 BallBehavior::~BallBehavior()
@@ -29,10 +34,11 @@ void BallBehavior::Update(void)
 
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
 
-	if (((float)AEGetWindowWidth()/2 - fabs(transform->worldposition.x)) < radius) {
+
+	if (fabs(transform->worldposition.x - AreaLeftBoundary) <= radius || fabs(transform->worldposition.x - AreaRightBoundary) <= radius) {
 		this->Owner()->Delete();
 	}
-	else if (((float)AEGetWindowHeight()/2 - fabs(transform->worldposition.y)) < radius) {
+	else if (fabs(transform->worldposition.y - AreaBottomBoundary) <= radius || fabs(transform->worldposition.y - AreaTopBoundary) <= radius) {
 		velocity.y = -velocity.y;
 	}
 }

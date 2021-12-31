@@ -44,11 +44,17 @@ void Scene_Battle::Start(void)
 	hostileArea->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
 	hostileArea->transform->SetPosition(Vector2(590, 70));
 
+	
 	ball = new GameObject();
 	ball->AddComponent<SpriteRenderer>()->Size(20, 20);
 	ball->GetComponent<SpriteRenderer>()->SetTexture("ball.png");
 	ball->GetComponent<SpriteRenderer>()->SetColor(0, 1, 0);
 	ball->AddComponent<BallBehavior>()->radius = 10;
+	//temp
+	ball->GetComponent<BallBehavior>()->AreaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	ball->GetComponent<BallBehavior>()->AreaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	ball->GetComponent<BallBehavior>()->AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	ball->GetComponent<BallBehavior>()->AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 
 	//test = new GameObject();
 	//test->AddComponent<SpriteRenderer>()->Size(500, 500);
