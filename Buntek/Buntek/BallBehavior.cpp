@@ -4,8 +4,8 @@
 
 BallBehavior::BallBehavior()
 {
-	position.Set(0, 0);
-	velocity.Set(0, 0);
+	position = Vector2(0, 0);
+	velocity= Vector2(0, 0);
 	radius = 250;
 	clickableAngleLeft = 90;
 	clickableAngleRight = 90;
@@ -30,7 +30,7 @@ void BallBehavior::Start(void)
 
 void BallBehavior::Update(void)
 {
-	position.Set(transform->worldposition.x, transform->worldposition.y);
+	position = Vector2(transform->worldposition.x, transform->worldposition.y);
 
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
 
