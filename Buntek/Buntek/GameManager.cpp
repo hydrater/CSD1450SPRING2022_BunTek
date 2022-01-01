@@ -36,7 +36,6 @@ void _gameManager::CameraUpdate(void)
         //pos = Vector2(RandFloatMinMax(-shakeOffset, shakeOffset), RandFloatMinMax(-shakeOffset, shakeOffset));
         shakeIntervalTimer -= dt;
 
-
         if (shakeIntervalTimer < 0)
         {
             switch (cameraShakeState)

@@ -11,50 +11,54 @@
 
 // ------------------------------------ Battle ------------------------------------
 
-GameObject* test;
-GameObject* test2;
 GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea;
 
 void Scene_Battle::Start(void)
 {
 	// Setting up the scene
-	AudioManager.PlayMusic("Summer.mp3");
+	//AudioManager.PlayMusic("Summer.mp3");
 	AudioManager.SetMusicVolume(0.1f);
+
+	SpriteRenderer* tempRenderer;
+	BallBehavior* tempBall;
 
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
 	background->GetComponent<SpriteRenderer>()->SetTexture("Background.jpg");
 
 	friendlyArea = new GameObject();
-	friendlyArea->AddComponent<SpriteRenderer>()->Size(620, 800);
-	friendlyArea->GetComponent<SpriteRenderer>()->SetTexture("BlackTexture.png");
-	friendlyArea->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
+	tempRenderer = friendlyArea->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(620, 800);
+	tempRenderer->SetTexture("BlackTexture.png");
+	tempRenderer->SetTransparency(0.5f);
 	friendlyArea->transform->SetPosition(Vector2(-590, 70));
 
 	neutralArea = new GameObject();
-	neutralArea->AddComponent<SpriteRenderer>()->Size(560, 800);
-	neutralArea->GetComponent<SpriteRenderer>()->SetTexture("YellowTexture.png");
-	neutralArea->GetComponent<SpriteRenderer>()->SetColor(0, 0.5f, 0.5f);
-	neutralArea->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
+	tempRenderer = neutralArea->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(560, 800);
+	tempRenderer->SetTexture("YellowTexture.png");
+	tempRenderer->SetColor(0, 0.5f, 0.5f);
+	tempRenderer->SetTransparency(0.5f);
 	neutralArea->transform->SetPosition(Vector2(0, 70));
 
 	hostileArea = new GameObject();
-	hostileArea->AddComponent<SpriteRenderer>()->Size(620, 800);
-	hostileArea->GetComponent<SpriteRenderer>()->SetTexture("BlackTexture.png");
-	hostileArea->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
+	tempRenderer = hostileArea->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(620, 800);
+	tempRenderer->SetTexture("BlackTexture.png");
+	tempRenderer->SetTransparency(0.5f);
 	hostileArea->transform->SetPosition(Vector2(590, 70));
 
-	
 	ball = new GameObject();
-	ball->AddComponent<SpriteRenderer>()->Size(20, 20);
-	ball->GetComponent<SpriteRenderer>()->SetTexture("ball.png");
-	ball->GetComponent<SpriteRenderer>()->SetColor(0, 1, 0);
-	ball->AddComponent<BallBehavior>()->radius = 10;
-	//temp
-	ball->GetComponent<BallBehavior>()->AreaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
-	ball->GetComponent<BallBehavior>()->AreaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
-	ball->GetComponent<BallBehavior>()->AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	ball->GetComponent<BallBehavior>()->AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	tempRenderer = ball->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(20, 20);
+	tempRenderer->SetTexture("ball.png");
+	tempRenderer->SetColor(0, 1, 0);
+	tempBall = ball->AddComponent<BallBehavior>();
+	tempBall->radius = 10;
+	tempBall->AreaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	tempBall->AreaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	tempBall->AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	tempBall->AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 
 	//test = new GameObject();
 	//test->AddComponent<SpriteRenderer>()->Size(500, 500);
