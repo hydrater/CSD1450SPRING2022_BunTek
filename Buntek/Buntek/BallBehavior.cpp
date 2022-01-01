@@ -5,7 +5,7 @@
 BallBehavior::BallBehavior()
 {
 	position.Set(0, 0);
-	velocity.Set(1, 1);
+	velocity.Set(0, 0);
 	radius = 250;
 	clickableAngleLeft = 90;
 	clickableAngleRight = 90;

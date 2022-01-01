@@ -70,7 +70,7 @@ Vector2& Vector2::operator*=(float scalar)
 void Vector2::Set(const Vector2& vec)
 {
 	x = vec.x;
-	x = vec.y;
+	y = vec.y;
 }
 
 void Vector2::Set(float x, float y)

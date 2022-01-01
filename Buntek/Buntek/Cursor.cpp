@@ -72,8 +72,6 @@ void Cursor::Update(void)
 			Transform* tempTransform = ballList[i]->Owner()->transform;
 			float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
 
-			
-
 			if (abs(xDelta) <= 50 && abs(yDelta) <= 50)
 			{
 				float mag = Vector2(xDelta, yDelta).Length();
@@ -84,8 +82,6 @@ void Cursor::Update(void)
 
 					ballList[i]->velocity.Set(Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
 				}
-
-
 			}
 		}
 	}
