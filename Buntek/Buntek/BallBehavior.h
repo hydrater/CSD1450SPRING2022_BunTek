@@ -8,7 +8,6 @@ public:
 	~BallBehavior();
 	void Start(void) override;
 	void Update(void) override;
-	//temp
 
 	float AreaTopBoundary;
 	float AreaBottomBoundary;
@@ -20,7 +19,8 @@ public:
 	float radius;
 	float clickableAngleLeft;
 	float clickableAngleRight;
-	float GetSpeed();
+	float GetSpeed(void);
+	void SetSpeed(float _speed);
 
 	bool listCheck = false;
 

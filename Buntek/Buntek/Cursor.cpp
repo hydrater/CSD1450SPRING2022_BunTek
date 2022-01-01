@@ -1,7 +1,8 @@
 #include "Cursor.h"
 #include "BallBehavior.h"
 #include "Vector2.h"
-#include <stdlib.h>    
+#include <stdlib.h>
+#include <algorithm>
 
 Cursor::Cursor()
 {
@@ -63,21 +64,22 @@ void Cursor::Update(void)
 		{
 			if (ballList[i]->listCheck != 0)
 			{
-				cout << "erased" << endl;
 				ballList.erase(ballList.begin() + i);
 				--i;
 				continue;
 			}
 
 			Transform* tempTransform = ballList[i]->Owner()->transform;
+			float xDelta = abs(mousePos.x - tempTransform->worldposition.x), yDelta = abs(mousePos.y - tempTransform->worldposition.y);
 
-			if (abs(mousePos.x - tempTransform->worldposition.x) <= 50)
+
+			if (xDelta <= 50 && yDelta <= 50)
 			{
-				cout << "within 50m" << endl;
-			}
-			else
-			{
-				cout << "out of 50m" << endl;
+				int mag = max(xDelta, yDelta);
+
+				cout <<"X: " << (mousePos.x - tempTransform->worldposition.x) / mag << " Y: " << (mousePos.y - tempTransform->worldposition.y) / mag << endl;
+
+				ballList[i]->velocity.Set(Vector2((mousePos.x - tempTransform->worldposition.x)/mag, (mousePos.y - tempTransform->worldposition.y)/mag));
 			}
 		}
 	}
@@ -86,5 +88,5 @@ void Cursor::Update(void)
 Vector2 Cursor::GetWorldPosition(void)
 {
 	AEInputGetCursorPosition(&worldPosition.x, &worldPosition.y);
-	return Vector2(worldPosition.x - (float)AEGetWindowWidth() / 2, worldPosition.y - (float)AEGetWindowHeight() / 2);
+	return Vector2(worldPosition.x - (float)AEGetWindowWidth() / 2, -(worldPosition.y - (float)AEGetWindowHeight() / 2));
 }

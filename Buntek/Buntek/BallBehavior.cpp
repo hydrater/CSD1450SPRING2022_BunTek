@@ -42,8 +42,13 @@ void BallBehavior::Update(void)
 	}
 }
 
-float BallBehavior::GetSpeed()
+float BallBehavior::GetSpeed(void)
 {
 	return speed;
+}
+
+void BallBehavior::SetSpeed(float _speed)
+{
+	speed = _speed;
 }
 
