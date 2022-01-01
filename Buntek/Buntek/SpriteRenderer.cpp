@@ -3,12 +3,7 @@
 
 SpriteRenderer::SpriteRenderer()
 {
-	transparency = 1;
-	halfHeight = 100;
-	halfWidth = 100;
 	AssetManager.AddToList(this);
-	textureString = "Steven.jpg";
-	SetColor(1, 1, 1);
 }
 
 SpriteRenderer::~SpriteRenderer()

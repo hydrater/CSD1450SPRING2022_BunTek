@@ -21,8 +21,8 @@ _audioManager::_audioManager()
     LoadSound("splash.mp3");
 
     // Load Music here
-    LoadMusic("Summer.mp3");
-    LoadMusic("GhostFinal.mp3");
+    //LoadMusic("Summer.mp3");
+    //LoadMusic("GhostFinal.mp3");
 }
 
 _audioManager::~_audioManager()

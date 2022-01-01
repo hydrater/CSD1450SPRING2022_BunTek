@@ -17,11 +17,11 @@ public:
 	float GetTransparency();
 	void SetTransparency(float value);
 	void SetColor(float _R, float _G, float _B);
-	float R, G, B;
+	float R = 1, G = 1, B = 1;
 
 private:
-	string textureString;
-	float halfWidth;
-	float halfHeight;
-	float transparency;
+	string textureString = "Steven.jpg";
+	float halfWidth = 100;
+	float halfHeight = 100;
+	float transparency = 1;
 };

@@ -10,7 +10,7 @@
 #include "GameManager.h"
 
 // ------------------------------------ Battle ------------------------------------
-
+GameObject* cursorManager, *origin, *origin2;
 GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea;
 
 void Scene_Battle::Start(void)
@@ -60,13 +60,23 @@ void Scene_Battle::Start(void)
 	tempBall->AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	tempBall->AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 
-	//test = new GameObject();
-	//test->AddComponent<SpriteRenderer>()->Size(500, 500);
-	//test->transform->SetPosition(Vector2(-500, 10));
-	//test->AddComponent<BallBehavior>()->radius = 250;
-	//test->transform->Rotate(90);
-	//test->AddComponent<CircleCollider>()->radius = 250;
-	//test->AddComponent<Cursor>();
+	cursorManager = new GameObject();
+	cursorManager->AddComponent<Cursor>();
+
+	origin = new GameObject();
+	tempRenderer = origin->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(50, 50);
+	tempRenderer->SetTexture("ball.png");
+	tempRenderer->SetTransparency(1.0f);
+	origin->transform->SetPosition(Vector2(0, 0));
+
+	origin2 = new GameObject();
+	tempRenderer = origin2->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(50, 50);
+	tempRenderer->SetTexture("ball.png");
+	tempRenderer->SetTransparency(1.0f);
+	tempRenderer->SetColor(1, 0 , 0);
+	origin2->transform->SetPosition(Vector2(0, 25));
 
 	//test2 = new GameObject();
 	//test2->AddComponent<SpriteRenderer>()->Size(500, 500);
@@ -82,6 +92,8 @@ void Scene_Battle::Update(void)
 	//test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
 	//test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
 	//test->transform->Rotate(20*DeltaTime);
+	origin->transform->Rotate(DeltaTime * 10);
+
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
 
