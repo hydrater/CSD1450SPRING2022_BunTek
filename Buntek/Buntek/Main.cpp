@@ -71,7 +71,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			AssetManager.FreeAll();
 		}
 	}
-
+	//
 	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //
 	//AssetManager.FreeAll();
 
