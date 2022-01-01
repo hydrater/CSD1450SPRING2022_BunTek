@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "GameScript.h"
-
+#include "BallBehavior.h"
 
 class Cursor : public GameScript
 {
@@ -14,14 +14,14 @@ public:
 	bool ValidClick;
 	Vector2 CursorPosition;
 	float CursorAngle;
+	
+	Vector2 GetWorldPosition(void);
+	vector<BallBehavior*> ballList;
 
+private:
 	struct mouseWorldPosition
 	{
 		s32 x, y;
 	};
-	Vector2 GetWorldPosition(void);
-
-
-private:
 	mouseWorldPosition worldPosition = {0, 0};
 };

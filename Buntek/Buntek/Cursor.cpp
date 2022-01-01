@@ -1,6 +1,7 @@
 #include "Cursor.h"
 #include "BallBehavior.h"
 #include "Vector2.h"
+#include <stdlib.h>    
 
 Cursor::Cursor()
 {
@@ -53,6 +54,33 @@ void Cursor::Update(void)
 	//		}
 	//	}
 	//}
+
+	if (AEInputCheckTriggered(AEVK_LBUTTON) == true)
+	{
+		Vector2 mousePos = GetWorldPosition();
+
+		for (int i = 0; i < ballList.size(); ++i)
+		{
+			if (ballList[i]->listCheck != 0)
+			{
+				cout << "erased" << endl;
+				ballList.erase(ballList.begin() + i);
+				--i;
+				continue;
+			}
+
+			Transform* tempTransform = ballList[i]->Owner()->transform;
+
+			if (abs(mousePos.x - tempTransform->worldposition.x) <= 50)
+			{
+				cout << "within 50m" << endl;
+			}
+			else
+			{
+				cout << "out of 50m" << endl;
+			}
+		}
+	}
 }
 
 Vector2 Cursor::GetWorldPosition(void)

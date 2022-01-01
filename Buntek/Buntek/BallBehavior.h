@@ -22,6 +22,8 @@ public:
 	float clickableAngleRight;
 	float GetSpeed();
 
+	bool listCheck = false;
+
 private:
 	float speed;
 	Transform* transform;

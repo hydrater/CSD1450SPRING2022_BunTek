@@ -34,7 +34,6 @@ void BallBehavior::Update(void)
 
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
 
-
 	if (fabs(transform->worldposition.x - AreaLeftBoundary) <= radius || fabs(transform->worldposition.x - AreaRightBoundary) <= radius) {
 		this->Owner()->Delete();
 	}

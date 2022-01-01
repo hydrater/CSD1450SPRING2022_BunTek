@@ -10,14 +10,19 @@
 #include "GameManager.h"
 
 // ------------------------------------ Battle ------------------------------------
-GameObject* cursorManager, *origin, *origin2;
+GameObject* cursorManager;
 GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea;
+vector<BallBehavior*> *ballList;
 
 void Scene_Battle::Start(void)
 {
 	// Setting up the scene
 	//AudioManager.PlayMusic("Summer.mp3");
 	AudioManager.SetMusicVolume(0.1f);
+
+	cursorManager = new GameObject();
+	cursorManager->AddComponent<Cursor>();
+	ballList = &cursorManager->GetComponent<Cursor>()->ballList;
 
 	SpriteRenderer* tempRenderer;
 	BallBehavior* tempBall;
@@ -59,24 +64,7 @@ void Scene_Battle::Start(void)
 	tempBall->AreaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	tempBall->AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	tempBall->AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-
-	cursorManager = new GameObject();
-	cursorManager->AddComponent<Cursor>();
-
-	origin = new GameObject();
-	tempRenderer = origin->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(50, 50);
-	tempRenderer->SetTexture("ball.png");
-	tempRenderer->SetTransparency(1.0f);
-	origin->transform->SetPosition(Vector2(0, 0));
-
-	origin2 = new GameObject();
-	tempRenderer = origin2->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(50, 50);
-	tempRenderer->SetTexture("ball.png");
-	tempRenderer->SetTransparency(1.0f);
-	tempRenderer->SetColor(1, 0 , 0);
-	origin2->transform->SetPosition(Vector2(0, 25));
+	ballList->push_back(tempBall);
 
 	//test2 = new GameObject();
 	//test2->AddComponent<SpriteRenderer>()->Size(500, 500);
@@ -92,7 +80,6 @@ void Scene_Battle::Update(void)
 	//test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
 	//test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
 	//test->transform->Rotate(20*DeltaTime);
-	origin->transform->Rotate(DeltaTime * 10);
 
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
