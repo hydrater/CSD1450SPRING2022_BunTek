@@ -70,16 +70,22 @@ void Cursor::Update(void)
 			}
 
 			Transform* tempTransform = ballList[i]->Owner()->transform;
-			float xDelta = abs(mousePos.x - tempTransform->worldposition.x), yDelta = abs(mousePos.y - tempTransform->worldposition.y);
+			float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
 
+			
 
-			if (xDelta <= 50 && yDelta <= 50)
+			if (abs(xDelta) <= 50 && abs(yDelta) <= 50)
 			{
-				int mag = max(xDelta, yDelta);
+				float mag = Vector2(xDelta, yDelta).Length();
 
-				cout <<"X: " << (mousePos.x - tempTransform->worldposition.x) / mag << " Y: " << (mousePos.y - tempTransform->worldposition.y) / mag << endl;
+				if (mag <= 50) {
 
-				ballList[i]->velocity.Set(Vector2((mousePos.x - tempTransform->worldposition.x)/mag, (mousePos.y - tempTransform->worldposition.y)/mag));
+					cout << "X: " << (mousePos.x - tempTransform->worldposition.x) / mag << " Y: " << (mousePos.y - tempTransform->worldposition.y) / mag << endl;
+
+					ballList[i]->velocity.Set(Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
+				}
+
+
 			}
 		}
 	}
