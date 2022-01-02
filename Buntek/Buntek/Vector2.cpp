@@ -67,6 +67,8 @@ Vector2& Vector2::operator*=(float scalar)
 	return *this;
 }
 
+
+
 void Vector2::Set(const Vector2& vec)
 {
 	x = vec.x;
@@ -129,6 +131,15 @@ Vector2& Vector2::Normalize(void) throw(DivideByZero)
 		throw DivideByZero();
 	x /= d;
 	y /= d;
+	return *this;
+}
+
+Vector2& Vector2::Divide(float scalar) throw(DivideByZero)
+{
+	if (scalar <= Math::epsilon && -scalar <= Math::epsilon)
+		throw DivideByZero();
+	x /= scalar;
+	y /= scalar;
 	return *this;
 }
 

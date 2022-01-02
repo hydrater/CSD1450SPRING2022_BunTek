@@ -38,6 +38,7 @@ public:
 	float AngleBetween(Vector2 vec);
 	Vector2 Normalized(void) const;
 	Vector2& Normalize(void);
+	Vector2& Divide(float scalar);
 
 	std::string ToString(void);
 

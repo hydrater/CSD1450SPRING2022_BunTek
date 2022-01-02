@@ -12,7 +12,7 @@ public:
 	void Update(void) override;
 
 	Vector2 anchorPoint;
-	float Distance;
+	float distance;
 
 
 private:
