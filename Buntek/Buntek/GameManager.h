@@ -56,8 +56,9 @@ public:
         class Node
         {
         public:
-            int row, height;
+            int column;
             Vector2 pos;
+            vector<Node*> connectedNodes;
         };
         void GenerateList(void);
 
