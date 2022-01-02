@@ -66,9 +66,9 @@ void _gameManager::CameraUpdate(void)
                 break;
             }
 
-            /*float test = 4;
-            pos.x += RandFloatMinMax(-test, test);
-			pos.y += RandFloatMinMax(-test, test);*/
+            float offset = 4;
+            pos.x += RandFloatMinMax(-offset, offset);
+			pos.y += RandFloatMinMax(-offset, offset);
 
             AEGfxSetCamPosition(pos.x, pos.y);
             cameraShakeState += cameraShakeState < 3 ? 1 : -3;
