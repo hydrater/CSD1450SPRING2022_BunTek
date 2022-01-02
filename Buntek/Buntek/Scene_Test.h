@@ -9,7 +9,6 @@ private:
 	SpriteRenderer* testRenderer1;
 	GameObject* splashimage2;
 	SpriteRenderer* testRenderer2;
-	bool playSound = true;
 
 public:
     void Start(void) override;

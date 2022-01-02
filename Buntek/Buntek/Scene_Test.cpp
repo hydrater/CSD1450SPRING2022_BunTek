@@ -19,11 +19,12 @@ void Scene_Test::Start(void)
 	testRenderer2->Size(400, 400);
 	splashimage2->transform->SetPosition(Vector2(0, 0));
 	splashimage2->AddComponent<Parallaxer>()->distance = 10;
+	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
 
 void Scene_Test::Update(void)
 {
-	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+	
 
 	
 }
