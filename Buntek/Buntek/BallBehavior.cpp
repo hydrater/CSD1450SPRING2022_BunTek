@@ -66,8 +66,11 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 		float mag = Vector2(xDelta, yDelta).Length();
 
 		if (mag <= GameManager.clickAoERadius) {
+			velocity = (Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
+			if (playerPossess && mousePos.x > tempTransform->worldposition.x || !playerPossess && mousePos.x < tempTransform->worldposition.x)
+				velocity.x *= -1;
+
 			playerPossess = !playerPossess;
-			velocity.Set(Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
 		}
 	}
 }

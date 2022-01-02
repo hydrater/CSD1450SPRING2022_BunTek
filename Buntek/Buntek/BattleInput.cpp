@@ -64,11 +64,11 @@ void BattleInput::Update(void)
 			{
 				targetedBall->HitBall(
 					Vector2(temp->worldposition.x + RandFloatMinMax(1, GameManager.clickAoERadius),
-						temp->worldposition.y + RandFloatMinMax(1, GameManager.clickAoERadius)),
+						temp->worldposition.y + RandFloatMinMax(1, GameManager.clickAoERadius/1.3f)),
 					false);
 			}
 
-			AITimer = RandFloatMinMax(0.5f, 1.5f);
+			AITimer = RandFloatMinMax(0.3f, 1.0f);
 		}
 	}
 }

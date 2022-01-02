@@ -8,11 +8,16 @@
 #include "BattleInput.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
+#include "hisMath.h"
+
+using namespace Math;
 
 // ------------------------------------ Battle ------------------------------------
 GameObject* cursorManager;
 GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea;
 vector<BallBehavior*> *ballList;
+
+float ballSpawnTimer = 0;
 
 void Scene_Battle::Start(void)
 {
@@ -53,7 +58,7 @@ void Scene_Battle::Start(void)
 	tempRenderer->SetTransparency(0.5f);
 	hostileArea->transform->SetPosition(Vector2(590, 70));
 
-	ball = new GameObject();
+	/*ball = new GameObject();
 	tempRenderer = ball->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(20, 20);
 	tempRenderer->SetTexture("ball.png");
@@ -61,9 +66,8 @@ void Scene_Battle::Start(void)
 	tempBall = ball->AddComponent<BallBehavior>();
 	tempBall->velocity = Vector2(-1, 0);
 	tempBall->radius = 10;
-	tempBall->playerPossess = true;
 	
-	ballList->push_back(tempBall);
+	ballList->push_back(tempBall);*/
 
 	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
@@ -82,6 +86,29 @@ void Scene_Battle::Start(void)
 
 void Scene_Battle::Update(void)
 {
+	ballSpawnTimer -= DeltaTime;
+
+	if (ballSpawnTimer < 0)
+	{
+		SpriteRenderer* tempRenderer;
+		BallBehavior* tempBall;
+
+		ball = new GameObject();
+		tempRenderer = ball->AddComponent<SpriteRenderer>();
+		tempRenderer->Size(20, 20);
+		tempRenderer->SetTexture("ball.png");
+		tempRenderer->SetColor(0, 1, 0);
+		tempBall = ball->AddComponent<BallBehavior>();
+		bool dir = RandIntMinMax(0, 1);
+		tempBall->playerPossess = (dir? true : false);
+		tempBall->velocity = Vector2((float) (dir?-1:1), RandFloatMinMax(0, 1));
+		tempBall->radius = 10;
+
+		ballList->push_back(tempBall);
+
+		ballSpawnTimer = 2;
+	}
+	
     //set background color
 	//test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
 	//test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
