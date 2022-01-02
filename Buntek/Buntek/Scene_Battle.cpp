@@ -60,6 +60,7 @@ void Scene_Battle::Start(void)
 	tempRenderer->SetColor(0, 1, 0);
 	tempBall = ball->AddComponent<BallBehavior>();
 	tempBall->radius = 10;
+	tempBall->playerPossess = true;
 	
 	ballList->push_back(tempBall);
 

@@ -32,7 +32,7 @@ void PlayerInput::Update(void)
 				continue;
 			}
 
-			ballList[i]->HitBall(GetWorldPosition());
+			ballList[i]->HitBall(GetWorldPosition(), true);
 		}
 	}
 }
