@@ -9,20 +9,13 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
-	float AreaTopBoundary;
-	float AreaBottomBoundary;
-	float AreaLeftBoundary;
-	float AreaRightBoundary;
-
 	Vector2 position;
 	Vector2 velocity;
 	float radius;
-	float clickableAngleLeft;
-	float clickableAngleRight;
 	float GetSpeed(void);
 	void SetSpeed(float _speed);
 	void HitBall(Vector2 mousePos, bool isPlayer);
-	bool listCheck = false;
+	short listCheck = 139;
 	bool playerPossess = false;
 
 private:

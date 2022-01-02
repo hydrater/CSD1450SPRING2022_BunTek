@@ -29,7 +29,7 @@ void BattleInput::Update(void)
 {
 	for (int i = 0; i < ballList.size(); ++i)
 	{
-		if (ballList[i]->listCheck != 0)
+		if (ballList[i]->listCheck != 139)
 		{
 			ballList.erase(ballList.begin() + i);
 			--i;
@@ -72,7 +72,7 @@ void BattleInput::Update(void)
 						temp->worldposition.y + RandFloatMinMax(1, GameManager.clickAoERadius/1.3f)),
 					false);
 			}
-			targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 0.01f);
+			targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 0.03f);
 			AITimer = RandFloatMinMax(0.7f - AIscalingTimer*0.01f, 1.5f - AIscalingTimer *0.01f);
 		}
 	}

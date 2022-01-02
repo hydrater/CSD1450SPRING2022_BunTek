@@ -6,8 +6,6 @@ BallBehavior::BallBehavior()
 	position = Vector2(0, 0);
 	velocity= Vector2(0, 0);
 	radius = 250;
-	clickableAngleLeft = 90;
-	clickableAngleRight = 90;
 	speed = 6;
 	transform = 0;
 }
@@ -31,8 +29,10 @@ void BallBehavior::Update(void)
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		this->Owner()->Delete();
 	}
-	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius) {
+	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius) 
+	{
 		velocity.y = -velocity.y;
+		transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + 1, GameManager.areaTopBoundary - 1);
 	}
 }
 

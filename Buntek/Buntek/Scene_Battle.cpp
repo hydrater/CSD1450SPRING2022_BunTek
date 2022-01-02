@@ -104,11 +104,11 @@ void Scene_Battle::Update(void)
 		tempBall->playerPossess = (dir? true : false);
 		tempBall->velocity = Vector2((float) (dir?-1:1), RandFloatMinMax(0, 1));
 		tempBall->radius = 10;
-		tempBall->SetSpeed(6+(scalingTimer*0.01f));
+		tempBall->SetSpeed(6+(scalingTimer*0.03f));
 
 		ballList->push_back(tempBall);
 
-		ballSpawnTimer = 2;
+		ballSpawnTimer = 2- scalingTimer * 0.05f;
 	}
 	
     //set background color
