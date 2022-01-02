@@ -37,11 +37,12 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 	float mag = Vector2(xDelta, yDelta).Length();
 	if (mag >= MinMoveDist) {
 
-		speed = GameManager.lerpF(Minspeed, Maxspeed, mag / Maxspeed * (float)AEFrameRateControllerGetFrameTime());
+		speed = GameManager.lerpF(0, Maxspeed, mag / Maxspeed) * (float)AEFrameRateControllerGetFrameTime();
 
-		velocity = Vector2((mousePos.x - tempTransform->worldposition.x), (mousePos.y - tempTransform->worldposition.y)).Normalize();
+		velocity = Vector2(xDelta / mag, yDelta / mag);
 
-		transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * (float)AEFrameRateControllerGetFrameTime(), transform->worldposition.y + velocity.y * speed * (float)AEFrameRateControllerGetFrameTime()));
+		transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
+
 
 		if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= sr->GetHalfWidth() || fabs(transform->worldposition.x - GameManager.friendlyAreaX) <= sr->GetHalfWidth() 
 			|| transform->worldposition.x > GameManager.friendlyAreaX || transform->worldposition.x < GameManager.areaLeftBoundary)
@@ -72,10 +73,6 @@ void PaddleBehavior::setMaxspeed(float _Maxspeed)
 	Maxspeed = _Maxspeed;
 }
 
-void PaddleBehavior::setMinspeed(float _Minspeed)
-{
-	Minspeed = _Minspeed;
-}
 
 void PaddleBehavior::setMinMoveDist(float _MinMoveDist)
 {

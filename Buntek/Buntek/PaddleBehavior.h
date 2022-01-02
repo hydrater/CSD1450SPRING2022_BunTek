@@ -23,13 +23,11 @@ public:
 	void setplayerpaddle(bool _playerpaddle);
 	void setspeed(float _speed);
 	void setMaxspeed(float _Maxspeed);
-	void setMinspeed(float _Minspeed);
 	void setMinMoveDist(float _MinMoveDist);
 
 private:
 	bool playerPaddle = false;
 	float speed = 0;
-	float Minspeed = 0;
 	float Maxspeed = 0;
 	float MinMoveDist = 1;
 	Transform* transform = 0;
