@@ -13,6 +13,7 @@ _assetManager::_assetManager()
     LoadTexture("BlackTexture.png");
     LoadTexture("ball.png");
     LoadTexture("paddle.png");
+    LoadTexture("MainMenu.png");
 
     mesh = 0;
 

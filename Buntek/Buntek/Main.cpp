@@ -2,6 +2,7 @@
 // includes
 #include "Scene_Battle.h"
 #include "Scene_Splash.h"
+#include "Scene_MainMenu.h"
 #include "AssetManager.h"
 #include "CollisionManager2D.h"
 #include "AudioEngine.h"
@@ -37,7 +38,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AssetManager;
 	AudioManager;
 	MapData;
-	SceneManager.LoadScene(new Scene_Battle);
+	SceneManager.LoadScene(new Scene_MainMenu);
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{

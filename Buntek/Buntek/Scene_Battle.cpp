@@ -8,7 +8,6 @@
 #include "BattleInput.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
-#include "hisMath.h"
 
 using namespace Math;
 

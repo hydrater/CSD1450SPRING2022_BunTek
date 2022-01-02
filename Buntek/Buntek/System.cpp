@@ -89,6 +89,7 @@ void _sceneManager::LoadScene(Scene* newScene)
     {
         AssetManager.FreeAll();
         delete scene;
+        GameScriptManager.ClearList();
     }
     notStarted = true;
     scene = newScene;
@@ -154,4 +155,14 @@ void _gameScriptManager::Update(void)
 
         gameScriptList[i]->Update();
     }
+}
+
+void _gameScriptManager::ClearList(void)
+{
+    for (int i = gameScriptList.size(); i > 0 ; --i)
+    {
+        delete gameScriptList[i];
+    }
+
+    gameScriptList.clear();
 }
