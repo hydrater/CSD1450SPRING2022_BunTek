@@ -73,7 +73,7 @@ void BattleInput::Update(void)
 						temp->worldposition.y + RandFloatMinMax(1, GameManager.clickAoERadius/1.3f)),
 					false);
 			}
-			targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 0.03f);
+			targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 3);
 			AITimer = RandFloatMinMax(0.7f - AIscalingTimer*0.005f, 1.5f - AIscalingTimer *0.005f);
 		}
 	}

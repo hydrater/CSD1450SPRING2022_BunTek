@@ -21,6 +21,6 @@ public:
 	SpriteRenderer* sr = 0;
 
 private:
-	float speed = 6;
+	float speed = 300;
 	Transform* transform = 0;
 };

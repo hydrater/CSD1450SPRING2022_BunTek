@@ -11,7 +11,7 @@ public:
 	Vector2 position = Vector2(0, 0);
 	Vector2 velocity = Vector2(0, 0);
 
-	SpriteRenderer* sr;
+	SpriteRenderer* sr = 0;
 
 	void Start(void) override;
 	void Update(void) override;

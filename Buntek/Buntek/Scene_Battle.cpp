@@ -102,7 +102,7 @@ void Scene_Battle::Update(void)
 		tempBall->playerPossess = (dir? true : false);
 		tempBall->velocity = Vector2((float) (dir?-1:1), RandFloatMinMax(0, 1));
 		tempBall->radius = 10;
-		tempBall->SetSpeed(6+(scalingTimer*0.02f));
+		tempBall->SetSpeed(tempBall->GetSpeed() +(scalingTimer * 3));
 		tempBall->sr = tempRenderer;
 		dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
 
