@@ -38,9 +38,9 @@ void BattleInput::Update(void)
 
 	if (AEInputCheckTriggered(AEVK_LBUTTON))
 	{
-		for (int i = 0; i < ballList.size(); ++i)
+		for (BallBehavior* x : ballList)
 		{
-			ballList[i]->HitBall(GetWorldPosition(), true);
+			x->HitBall(GetWorldPosition(), true);
 		}
 	}
 
@@ -54,7 +54,7 @@ void BattleInput::Update(void)
 
 			for (BallBehavior* x : ballList)
 			{
-				if (x->playerPossess )
+				if (x->playerPossess)
 					continue;
 
 				if (x->Owner()->transform->worldposition.x > targetedBall->Owner()->transform->worldposition.x)
