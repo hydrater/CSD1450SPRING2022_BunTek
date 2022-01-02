@@ -19,7 +19,6 @@ BallBehavior::~BallBehavior()
 
 void BallBehavior::Start(void)
 {
-	cout << "Ball created" << endl;
 	transform = this->Owner()->transform;
 }
 

@@ -26,17 +26,20 @@ void BattleInput::Start(void)
 
 void BattleInput::Update(void)
 {
+	for (int i = 0; i < ballList.size(); ++i)
+	{
+		if (ballList[i]->listCheck != 0)
+		{
+			ballList.erase(ballList.begin() + i);
+			--i;
+			continue;
+		}
+	}
+
 	if (AEInputCheckTriggered(AEVK_LBUTTON))
 	{
 		for (int i = 0; i < ballList.size(); ++i)
 		{
-			if (ballList[i]->listCheck != 0)
-			{
-				ballList.erase(ballList.begin() + i);
-				--i;
-				continue;
-			}
-
 			ballList[i]->HitBall(GetWorldPosition(), true);
 		}
 	}
