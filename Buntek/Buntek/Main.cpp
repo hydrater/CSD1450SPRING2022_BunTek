@@ -33,6 +33,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
+	GameManager;
 	AssetManager;
 	AudioManager;
 	SceneManager.LoadScene(new Scene_Battle);

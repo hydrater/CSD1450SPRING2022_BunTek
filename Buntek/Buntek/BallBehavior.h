@@ -21,8 +21,9 @@ public:
 	float clickableAngleRight;
 	float GetSpeed(void);
 	void SetSpeed(float _speed);
-	void HitBall(Vector2 mousePos);
+	void HitBall(Vector2 mousePos, bool isPlayer);
 	bool listCheck = false;
+	bool playerPossess = false;
 
 private:
 	float speed;
