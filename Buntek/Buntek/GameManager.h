@@ -68,10 +68,10 @@ public:
         short column;
         Vector2 pos;
         vector<Node*> connectedNodes;
-        int id;
     };
+    Node currentNode;
     static _mapData& Instance(void);
-    void GenerateList(void);
+    void GenerateList(Vector2 originPos);
     void ClearList(void);
 
 private:
