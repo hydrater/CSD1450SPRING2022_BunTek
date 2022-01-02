@@ -3,18 +3,13 @@
 #include "GameScript.h"
 #include "BallBehavior.h"
 
-class Cursor : public GameScript
+class PlayerInput : public GameScript
 {
 public:
-	Cursor();
-	~Cursor();
+	PlayerInput();
+	~PlayerInput();
 	void Start(void) override;
 	void Update(void) override;
-	bool Clicked;
-	bool ValidClick;
-	Vector2 CursorPosition;
-	float CursorAngle;
-	
 	Vector2 GetWorldPosition(void);
 	vector<BallBehavior*> ballList;
 

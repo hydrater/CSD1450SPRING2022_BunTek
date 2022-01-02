@@ -1,25 +1,25 @@
-#include "Cursor.h"
+#include "PlayerInput.h"
 #include "BallBehavior.h"
 #include "Vector2.h"
 #include <stdlib.h>
 #include <algorithm>
 
-Cursor::Cursor()
+PlayerInput::PlayerInput()
 {
 
 }
 
-Cursor::~Cursor()
+PlayerInput::~PlayerInput()
 {
 
 }
 
-void Cursor::Start(void)
+void PlayerInput::Start(void)
 {
 	
 }
 
-void Cursor::Update(void)
+void PlayerInput::Update(void)
 {
 	if (AEInputCheckTriggered(AEVK_LBUTTON))
 	{
@@ -37,7 +37,7 @@ void Cursor::Update(void)
 	}
 }
 
-Vector2 Cursor::GetWorldPosition(void)
+Vector2 PlayerInput::GetWorldPosition(void)
 {
 	AEInputGetCursorPosition(&worldPosition.x, &worldPosition.y);
 	return Vector2(worldPosition.x - (float)AEGetWindowWidth() / 2, -(worldPosition.y - (float)AEGetWindowHeight() / 2));
