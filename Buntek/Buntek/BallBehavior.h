@@ -1,5 +1,6 @@
 #pragma once
 #include "GameScript.h"
+#include "SpriteRenderer.h"
 
 class BallBehavior : public GameScript
 {
@@ -17,6 +18,7 @@ public:
 	void HitBall(Vector2 mousePos, bool isPlayer);
 	short listCheck = 139;
 	bool playerPossess = false;
+	SpriteRenderer* sr;
 
 private:
 	float speed = 6;

@@ -73,7 +73,7 @@ void BattleInput::Update(void)
 					false);
 			}
 			targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 0.03f);
-			AITimer = RandFloatMinMax(0.7f - AIscalingTimer*0.01f, 1.5f - AIscalingTimer *0.01f);
+			AITimer = RandFloatMinMax(0.7f - AIscalingTimer*0.005f, 1.5f - AIscalingTimer *0.005f);
 		}
 	}
 
