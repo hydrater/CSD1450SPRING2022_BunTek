@@ -6,6 +6,7 @@
 using namespace std;
 
 #define GameManager _gameManager::Instance()
+#define MapData _mapData::Instance()
 
 class Skill
 {
@@ -13,16 +14,16 @@ private:
 
 public:
     void SpawnSkillObject(void);
-    int id;
+    int id = 0;
     string description;
     enum RarityTypes
     {
-        common,
-        Rare,
-        Epic,
-        Legendary
+        common = 0,
+        Rare = 1,
+        Epic = 2,
+        Legendary = 3
     };
-    RarityTypes rarity;
+    RarityTypes rarity = common;
 };
 
 class _gameManager
@@ -50,22 +51,26 @@ public:
     float friendlyAreaX = 0;
     float hostileAreaX = 0;
 
-    class MapData
+    
+};
+
+class _mapData
+{
+public:
+    class Node
     {
     public:
-        class Node
-        {
-        public:
-            short column;
-            Vector2 pos;
-            vector<Node*> connectedNodes;
-            int id;
-            GameObject* clickable;
-        };
-        void GenerateList(void);
-        void ClearList(void);
-
-    private:
-        vector<vector<Node>> nodeList;
+        short column;
+        Vector2 pos;
+        vector<Node*> connectedNodes;
+        int id;
+        //GameObject* test;
     };
+    static _mapData& Instance(void);
+    void GenerateList(void);
+    void ClearList(void);
+
+private:
+    static _mapData* instance;
+    vector<vector<Node>> nodeList;
 };

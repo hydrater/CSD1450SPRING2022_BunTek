@@ -3,6 +3,7 @@
 using namespace Math;
 
 _gameManager* _gameManager::instance = 0;
+_mapData* _mapData::instance = 0;
 
 _gameManager::_gameManager()
 {
@@ -126,14 +127,24 @@ void Skill::SpawnSkillObject(void)
 
 }
 
-void _gameManager::MapData::GenerateList(void)
+_mapData& _mapData::Instance(void)
+{
+    if (instance != 0)
+    {
+        return *instance;
+    }
+    instance = new _mapData();
+    return *instance;
+}
+
+void _mapData::GenerateList(void)
 {
     for (int i = 0; i < 10; i++)
     {
-        short width = RandFloatMinMax(0, 5);
+        short width = (short)RandFloatMinMax(0, 5);
         for (short j = 0; j < width; j++)
         {
-            MapData::Node node = MapData::Node();
+            Node node = Node();
             node.column = j;
             node.pos = Vector2(j * 100, i * 100);
             //node.id
@@ -143,6 +154,16 @@ void _gameManager::MapData::GenerateList(void)
     }
 }
 
-void _gameManager::MapData::ClearList(void)
+void _mapData::ClearList(void)
 {
+    for (int i = 0; i < 10; i++)
+    {
+        for (short j = 0; j < nodeList[i].size(); j++)
+        {
+            //nodeList[i][j].clickable->Delete();
+        }
+        nodeList[i].clear();
+    }
+
+    nodeList.clear();
 }

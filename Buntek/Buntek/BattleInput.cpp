@@ -5,7 +5,6 @@
 #include <algorithm>
 #include "System.h"
 #include "GameManager.h"
-#include "hisMath.h"
 
 using namespace Math;
 float AIscalingTimer = 0;

@@ -84,6 +84,15 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Scene_Navigation.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CursorCamera.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -136,6 +145,15 @@
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Navigation.h">
+      <Filter>Source Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CursorCamera.h">
+      <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

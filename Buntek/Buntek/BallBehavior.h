@@ -18,7 +18,7 @@ public:
 	void HitBall(Vector2 mousePos, bool isPlayer);
 	short listCheck = 139;
 	bool playerPossess = false;
-	SpriteRenderer* sr;
+	SpriteRenderer* sr = 0;
 
 private:
 	float speed = 6;

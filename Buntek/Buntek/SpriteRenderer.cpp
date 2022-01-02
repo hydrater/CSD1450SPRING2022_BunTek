@@ -1,12 +1,12 @@
 #include "SpriteRenderer.h"
 #include "AssetManager.h"
 
-SpriteRenderer::SpriteRenderer()
+SpriteRenderer::SpriteRenderer(void)
 {
 	AssetManager.AddToList(this);
 }
 
-SpriteRenderer::~SpriteRenderer()
+SpriteRenderer::~SpriteRenderer(void)
 {
 	
 }

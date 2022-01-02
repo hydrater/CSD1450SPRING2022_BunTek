@@ -36,6 +36,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	GameManager;
 	AssetManager;
 	AudioManager;
+	MapData;
 	SceneManager.LoadScene(new Scene_Battle);
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
