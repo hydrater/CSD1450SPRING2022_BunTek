@@ -33,7 +33,7 @@ private:
     static _gameManager* instance;
     _gameManager();
     ~_gameManager();
-    float cameraShakeTime = 0, maxCameraShakeTime = 0, maxShakeStrength = 0, shakeStrength = 0;
+    float cameraShakeTime = 0, maxCameraShakeTime = 0, maxShakeStrength = 0, shakeStrength = 0, lerpSpeed = 1.0f;
     Vector2 pos = Vector2(0, 0);
     Vector2 dir = Vector2(0, 0);
 

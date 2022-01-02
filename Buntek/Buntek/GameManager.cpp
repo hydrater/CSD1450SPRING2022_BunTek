@@ -39,14 +39,16 @@ void _gameManager::CameraUpdate(void)
         shakeStrength = (Square(maxCameraShakeTime)-(Square(maxCameraShakeTime) - Square(cameraShakeTime)))* maxShakeStrength;
 
         // Update camera position
-        pos = Vector2(RandFloatMinMax(-shakeStrength, shakeStrength), RandFloatMinMax(-shakeStrength, shakeStrength));
-
+        pos += Vector2(RandFloatMinMax(-shakeStrength, shakeStrength), RandFloatMinMax(-shakeStrength, shakeStrength));
+        pos = pos.Lerp(Vector2(0, 0), 0.1f);
         AEGfxSetCamPosition(pos.x, pos.y);
         cameraShakeTime -= DeltaTime;
+        
     }
     else
     {
-        pos = Vector2(0, 0);
+        
+        pos = pos.Lerp(Vector2(0, 0), 0.1f);
         AEGfxSetCamPosition(pos.x, pos.y);
     }
 }
