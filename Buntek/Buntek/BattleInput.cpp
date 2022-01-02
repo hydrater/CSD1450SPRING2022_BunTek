@@ -76,6 +76,8 @@ void BattleInput::Update(void)
 			AITimer = RandFloatMinMax(0.7f - AIscalingTimer*0.01f, 1.5f - AIscalingTimer *0.01f);
 		}
 	}
+
+	GameManager.clickAoERadius = GameManager.clickAoERadius + AITimer * 0.02f;
 }
 
 Vector2 BattleInput::GetWorldPosition(void)

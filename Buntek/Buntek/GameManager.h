@@ -42,7 +42,7 @@ public:
     Skill skill1, skill2, skill3;
     void CameraUpdate(void);
     void CameraShake(float period, float cameraStrength, Vector2 direction);
-    const float clickAoERadius = 50;
+    float clickAoERadius = 50;
     float areaTopBoundary = 0;
     float areaBottomBoundary = 0;
     float areaLeftBoundary = 0;

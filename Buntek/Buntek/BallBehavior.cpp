@@ -1,13 +1,9 @@
 #include "BallBehavior.h"
 #include "GameManager.h"
+#include "SpriteRenderer.h"
 
 BallBehavior::BallBehavior()
 {
-	position = Vector2(0, 0);
-	velocity= Vector2(0, 0);
-	radius = 250;
-	speed = 6;
-	transform = 0;
 }
 
 BallBehavior::~BallBehavior()
@@ -32,7 +28,7 @@ void BallBehavior::Update(void)
 	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius) 
 	{
 		velocity.y = -velocity.y;
-		transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + 1, GameManager.areaTopBoundary - 1);
+		transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + 3, GameManager.areaTopBoundary - 3);
 	}
 }
 
@@ -76,6 +72,14 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 				velocity.x *= -1;
 
 			playerPossess = !playerPossess;
+			SpriteRenderer* sr = 0;
+			if (this->Owner() != NULL)
+				sr = this->Owner()->GetComponent<SpriteRenderer>();
+			else
+				return;
+			if (sr->remove)
+				return;
+			playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
 		}
 	}
 }
