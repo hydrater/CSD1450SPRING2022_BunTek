@@ -56,7 +56,7 @@ public:
         class Node
         {
         public:
-            int column;
+            short column;
             Vector2 pos;
             vector<Node*> connectedNodes;
             int id;
@@ -65,6 +65,6 @@ public:
         void GenerateList(void);
 
     private:
-        vector<Node> nodeList;
+        vector<vector<Node>> nodeList;
     };
 };

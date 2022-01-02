@@ -2,8 +2,6 @@
 #include "GameManager.h"
 #include <vector>
 
-vector<vector<_gameManager::MapData::Node>> nodeList;
-
 void Scene_Navigation::Start(void)
 {
 

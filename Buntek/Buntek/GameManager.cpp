@@ -130,9 +130,15 @@ void _gameManager::MapData::GenerateList(void)
 {
     for (int i = 0; i < 10; i++)
     {
-        for (int i = 0; i < RandFloatMinMax(0, 5); i++)
+        short width = RandFloatMinMax(0, 5);
+        for (short j = 0; j < width; j++)
         {
             MapData::Node node = MapData::Node();
+            node.column = j;
+            node.pos = Vector2(j * 100, i * 100);
+            //node.id
+            //node.clickable
+            //node.connectedNodes
         }
     }
 }
