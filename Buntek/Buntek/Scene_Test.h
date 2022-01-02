@@ -5,8 +5,10 @@
 class Scene_Test : public Scene
 {
 private:
-	GameObject* splash;
-	SpriteRenderer* testRenderer;
+	GameObject* splashimage1;
+	SpriteRenderer* testRenderer1;
+	GameObject* splashimage2;
+	SpriteRenderer* testRenderer2;
 	bool playSound = true;
 
 public:
