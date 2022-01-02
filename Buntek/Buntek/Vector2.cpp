@@ -142,6 +142,13 @@ Vector2 Vector2::Splat(float splat)
 	return Vector2(splat, splat);
 }
 
+//speed is min 0 max 1
+Vector2 Vector2::Lerp(Vector2 destination, float speed)
+{
+	speed = Clamp(speed, 0.0f, 1.0f);
+	return Vector2(x * (1 - speed) + destination.x * speed, y * (1 - speed) + destination.y * speed);
+}
+
 #include <sstream>
 
 std::string Vector2::ToString(void)

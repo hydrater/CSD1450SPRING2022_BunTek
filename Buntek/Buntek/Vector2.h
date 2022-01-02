@@ -4,6 +4,7 @@
 #include <string>
 #include "hisMath.h"
 #include <math.h>
+using namespace Math;
 
 class Vector2
 {
@@ -42,7 +43,8 @@ public:
 
 	static Vector2 Zero();
 	static Vector2 Splat(float splat);
-	
+
+	Vector2 Lerp(Vector2 destination, float speed);
 };
 
 #endif
