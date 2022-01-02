@@ -65,9 +65,8 @@ void Scene_Battle::Start(void)
 	PaddleBehavior* temppaddle;
 	temppaddle = playerpaddle->AddComponent<PaddleBehavior>();
 	temppaddle->setplayerpaddle(true);
-	temppaddle->setMaxspeed(1000);
-	temppaddle->setMinspeed(200);
-	temppaddle->setMinMoveDist(5);
+	temppaddle->setMaxspeed(1200);
+	temppaddle->setMinMoveDist(10);
 	temppaddle->sr = tempRenderer;
 
 	cursorManager->GetComponent<BattleInput>()->playerpaddle = temppaddle;
