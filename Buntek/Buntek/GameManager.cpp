@@ -1,5 +1,7 @@
 #include "GameManager.h"
 #include "System.h"
+#include "SpriteRenderer.h"
+
 using namespace Math;
 
 _gameManager* _gameManager::instance = 0;
@@ -43,11 +45,9 @@ void _gameManager::CameraUpdate(void)
         pos = pos.Lerp(Vector2(0, 0), 0.1f);
         AEGfxSetCamPosition(pos.x, pos.y);
         cameraShakeTime -= DeltaTime;
-        
     }
     else
     {
-        
         pos = pos.Lerp(Vector2(0, 0), 0.1f);
         AEGfxSetCamPosition(pos.x, pos.y);
     }
@@ -115,18 +115,24 @@ _mapData& _mapData::Instance(void)
     return *instance;
 }
 
-void _mapData::GenerateList(void)
+void _mapData::GenerateList(Vector2 originPos)
 {
     for (int i = 0; i < 10; i++)
     {
-        short width = (short)RandFloatMinMax(0, 5);
+        short width = (short)RandIntMinMax(2, 5);
         for (short j = 0; j < width; j++)
         {
             Node node = Node();
             node.column = j;
-            node.pos = Vector2(j * 100, i * 100);
-            //node.id
-            //node.clickable
+            node.pos = Vector2(j * 200 + originPos.x, i * 300 + originPos.y);
+
+            GameObject* temp = new GameObject;
+            SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
+            tempRenderer->Size(50, 50);
+            tempRenderer->SetTexture("Steven.jpg");
+            temp->transform->worldposition = node.pos;
+
+            node.clickable;
             //node.connectedNodes
         }
     }
