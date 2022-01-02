@@ -72,7 +72,6 @@ void Scene_Battle::Start(void)
 
 	cursorManager->GetComponent<BattleInput>()->playerpaddle = temppaddle;
 
-
 	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
@@ -83,6 +82,8 @@ void Scene_Battle::Start(void)
 
 void Scene_Battle::Update(void)
 {
+	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+
 	ballSpawnTimer -= DeltaTime;
 	scalingTimer += DeltaTime;
 
@@ -114,7 +115,5 @@ void Scene_Battle::Update(void)
 	//test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
 	//test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
 	//test->transform->Rotate(20*DeltaTime);
-
-	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
 

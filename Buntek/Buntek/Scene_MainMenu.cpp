@@ -12,4 +12,5 @@ void Scene_MainMenu::Start(void)
 
 void Scene_MainMenu::Update(void)
 {
+	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
