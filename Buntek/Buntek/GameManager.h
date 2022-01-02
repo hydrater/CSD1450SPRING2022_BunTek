@@ -49,19 +49,19 @@ public:
     float areaRightBoundary = 0;
     float friendlyAreaX = 0;
     float hostileAreaX = 0;
-};
 
-class MapData
-{
-public:
-    class Node
+    class MapData
     {
     public:
-        int row, height;
-        Vector2 pos;
-    };
-    void GenerateList(void);
+        class Node
+        {
+        public:
+            int row, height;
+            Vector2 pos;
+        };
+        void GenerateList(void);
 
-private:
-    vector<Node> nodeList;
+    private:
+        vector<Node> nodeList;
+    };
 };

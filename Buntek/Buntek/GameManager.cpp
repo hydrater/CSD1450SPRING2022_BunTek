@@ -125,3 +125,7 @@ void Skill::SpawnSkillObject(void)
 {
 
 }
+
+void _gameManager::MapData::GenerateList(void)
+{
+}
