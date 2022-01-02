@@ -42,6 +42,11 @@ public:
     Skill skill1, skill2, skill3;
     void CameraUpdate(void);
     void CameraShake(float period, float cameraStrength, Vector2 direction);
+    const float clickAoERadius = 50;
+    float AreaTopBoundary = 0;
+    float AreaBottomBoundary = 0;
+    float AreaLeftBoundary = 0;
+    float AreaRightBoundary = 0;
 };
 
 class MapData

@@ -11,10 +11,6 @@ BallBehavior::BallBehavior()
 	clickableAngleRight = 90;
 	speed = 6;
 	transform = 0;
-	AreaTopBoundary = 0;
-	AreaBottomBoundary = 0;
-	AreaLeftBoundary = 0;
-	AreaRightBoundary = 0;
 }
 
 BallBehavior::~BallBehavior()
@@ -34,10 +30,10 @@ void BallBehavior::Update(void)
 
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
 
-	if (fabs(transform->worldposition.x - AreaLeftBoundary) <= radius || fabs(transform->worldposition.x - AreaRightBoundary) <= radius) {
+	if (fabs(transform->worldposition.x - GameManager.AreaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.AreaRightBoundary) <= radius) {
 		this->Owner()->Delete();
 	}
-	else if (fabs(transform->worldposition.y - AreaBottomBoundary) <= radius || fabs(transform->worldposition.y - AreaTopBoundary) <= radius) {
+	else if (fabs(transform->worldposition.y - GameManager.AreaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.AreaTopBoundary) <= radius) {
 		velocity.y = -velocity.y;
 	}
 }
@@ -57,11 +53,11 @@ void BallBehavior::HitBall(Vector2 mousePos)
 	Transform* tempTransform = Owner()->transform;
 	float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
 
-	if (abs(xDelta) <= 50 && abs(yDelta) <= 50)
+	if (abs(xDelta) <= GameManager.clickAoERadius && abs(yDelta) <= GameManager.clickAoERadius)
 	{
 		float mag = Vector2(xDelta, yDelta).Length();
 
-		if (mag <= 50) {
+		if (mag <= GameManager.clickAoERadius) {
 
 			velocity.Set(Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
 		}

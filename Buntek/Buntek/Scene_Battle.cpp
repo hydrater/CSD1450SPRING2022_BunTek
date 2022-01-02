@@ -60,12 +60,13 @@ void Scene_Battle::Start(void)
 	tempRenderer->SetColor(0, 1, 0);
 	tempBall = ball->AddComponent<BallBehavior>();
 	tempBall->radius = 10;
-	tempBall->AreaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
-	tempBall->AreaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
-	tempBall->AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	tempBall->AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	
 	ballList->push_back(tempBall);
+
+	GameManager.AreaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.AreaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 
 	//test2 = new GameObject();
 	//test2->AddComponent<SpriteRenderer>()->Size(500, 500);
