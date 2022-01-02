@@ -39,13 +39,15 @@ void _gameManager::CameraUpdate(void)
         float dt = DeltaTime;
         float test = RandFloatMinMax(0, 3);
 
-        shakeOffset -= cameraDecline;
+        cameraDecline = (Square(maxCameraShakeTime)-(Square(maxCameraShakeTime) - Square(cameraShakeTime)))* shakeOffset;
+
         // For random, comment out the switch
-        //pos = Vector2(RandFloatMinMax(-shakeOffset, shakeOffset), RandFloatMinMax(-shakeOffset, shakeOffset));
+        pos = Vector2(RandFloatMinMax(-cameraDecline, cameraDecline), RandFloatMinMax(-cameraDecline, cameraDecline));
         shakeIntervalTimer -= dt;
 
         if (shakeIntervalTimer < 0)
         {
+            /*
             switch (cameraShakeState)
             {
             case 0: // top left
@@ -65,7 +67,7 @@ void _gameManager::CameraUpdate(void)
                 pos.y = shakeOffset;
                 break;
             }
-
+            */
             float offset = 4;
             pos.x += RandFloatMinMax(-offset, offset);
 			pos.y += RandFloatMinMax(-offset, offset);
@@ -125,8 +127,9 @@ void _gameManager::CameraShake(float period, float cameraStrength, Vector2 direc
 {
     dir = direction;
     shakeOffset = cameraStrength;
-    cameraDecline = cameraStrength / period * DeltaTime;
+    cameraDecline = cameraStrength;
     cameraShakeTime = period;
+    maxCameraShakeTime = period;
 }
 
 void Skill::SpawnSkillObject(void)

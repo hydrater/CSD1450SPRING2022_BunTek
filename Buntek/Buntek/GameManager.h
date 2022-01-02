@@ -37,7 +37,8 @@ private:
     char cameraShakeState = 0;
     Vector2 pos = Vector2(0, 0);
     Vector2 dir = Vector2(0, 0);
-    const float shakeInterval = 0.05f;
+    const float shakeInterval = 0.00f;
+    float maxCameraShakeTime = 0;
 
 public:
     static _gameManager& Instance(void);
