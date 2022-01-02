@@ -25,6 +25,13 @@ _gameManager& _gameManager::Instance(void)
     return *instance;
 }
 
+Vector2 _gameManager::GetCursorPosition(void)
+{
+    s32 x, y;
+    AEInputGetCursorPosition(&x, &y);
+    return Vector2((float)x - (float)AEGetWindowWidth() / 2, -((float)y - (float)AEGetWindowHeight() / 2));
+}
+
 void _gameManager::CameraUpdate(void)
 {
     if (cameraShakeTime > 0)

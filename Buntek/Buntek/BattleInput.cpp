@@ -26,7 +26,7 @@ void BattleInput::Start(void)
 
 void BattleInput::Update(void)
 {
-	playerpaddle->movePaddle(GetWorldPosition(), true);
+	playerpaddle->movePaddle(GameManager.GetCursorPosition(), true);
 
 	for (int i = 0; i < ballList.size(); ++i)
 	{
@@ -42,7 +42,7 @@ void BattleInput::Update(void)
 	{
 		for (BallBehavior* x : ballList)
 		{
-			x->HitBall(GetWorldPosition(), true);
+			x->HitBall(GameManager.GetCursorPosition(), true);
 		}
 	}
 
@@ -79,10 +79,4 @@ void BattleInput::Update(void)
 	}
 
 	GameManager.clickAoERadius = GameManager.clickAoERadius + AITimer * 0.02f;
-}
-
-Vector2 BattleInput::GetWorldPosition(void)
-{
-	AEInputGetCursorPosition(&worldPosition.x, &worldPosition.y);
-	return Vector2(worldPosition.x - (float)AEGetWindowWidth() / 2, -(worldPosition.y - (float)AEGetWindowHeight() / 2));
 }

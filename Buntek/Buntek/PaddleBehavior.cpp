@@ -39,7 +39,6 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 
 		speed = GameManager.lerpF(0, Maxspeed, GameManager.easeInOut(mag / Maxspeed * DeltaTime));
 
-		cout << speed << endl;
 		velocity = Vector2((mousePos.x - tempTransform->worldposition.x), (mousePos.y - tempTransform->worldposition.y)).Normalize();
 
 		transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));

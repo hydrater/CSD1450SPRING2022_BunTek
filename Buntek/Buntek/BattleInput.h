@@ -11,17 +11,11 @@ public:
 	~BattleInput(void);
 	void Start(void) override;
 	void Update(void) override;
-	Vector2 GetWorldPosition(void);
 	vector<BallBehavior*> ballList;
 	PaddleBehavior* playerpaddle;
 
 
 private:
-	struct mouseWorldPosition
-	{
-		s32 x, y;
-	};
-	mouseWorldPosition worldPosition = {0, 0};
 
 	bool AIEnabled = false;
 	float AITimer = 0;
