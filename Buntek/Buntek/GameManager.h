@@ -33,12 +33,9 @@ private:
     static _gameManager* instance;
     _gameManager();
     ~_gameManager();
-    float cameraShakeTime = 0, shakeIntervalTimer= 0, shakeOffset = 0, cameraDecline = 0;
-    char cameraShakeState = 0;
+    float cameraShakeTime = 0, maxCameraShakeTime = 0, maxShakeStrength = 0, shakeStrength = 0;
     Vector2 pos = Vector2(0, 0);
     Vector2 dir = Vector2(0, 0);
-    const float shakeInterval = 0.00f;
-    float maxCameraShakeTime = 0;
 
 public:
     static _gameManager& Instance(void);

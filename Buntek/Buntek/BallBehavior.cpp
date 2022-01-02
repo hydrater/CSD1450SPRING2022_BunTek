@@ -8,7 +8,7 @@ BallBehavior::BallBehavior(void)
 
 BallBehavior::~BallBehavior(void)
 {
-	GameManager.CameraShake(2, 20, Vector2(0, 0));
+	GameManager.CameraShake(2, 10, Vector2(0, 0));
 }
 
 void BallBehavior::Start(void)

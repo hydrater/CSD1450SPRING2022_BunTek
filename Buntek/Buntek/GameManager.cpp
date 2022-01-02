@@ -36,47 +36,13 @@ void _gameManager::CameraUpdate(void)
 {
     if (cameraShakeTime > 0)
     {
-        float dt = DeltaTime;
-        float test = RandFloatMinMax(0, 3);
+        shakeStrength = (Square(maxCameraShakeTime)-(Square(maxCameraShakeTime) - Square(cameraShakeTime)))* maxShakeStrength;
 
-        cameraDecline = (Square(maxCameraShakeTime)-(Square(maxCameraShakeTime) - Square(cameraShakeTime)))* shakeOffset;
+        // Update camera position
+        pos = Vector2(RandFloatMinMax(-shakeStrength, shakeStrength), RandFloatMinMax(-shakeStrength, shakeStrength));
 
-        // For random, comment out the switch
-        pos = Vector2(RandFloatMinMax(-cameraDecline, cameraDecline), RandFloatMinMax(-cameraDecline, cameraDecline));
-        shakeIntervalTimer -= dt;
-
-        if (shakeIntervalTimer < 0)
-        {
-            /*
-            switch (cameraShakeState)
-            {
-            case 0: // top left
-                pos.x = -shakeOffset;
-                pos.y = -shakeOffset;
-                break;
-            case 1: // bottom right
-                pos.x = shakeOffset;
-                pos.y = shakeOffset;
-                break;
-            case 2: // top right
-                pos.x = shakeOffset;
-                pos.y = -shakeOffset;
-                break;
-            case 3: // bottom left
-                pos.x = -shakeOffset;
-                pos.y = shakeOffset;
-                break;
-            }
-            */
-            float offset = 4;
-            pos.x += RandFloatMinMax(-offset, offset);
-			pos.y += RandFloatMinMax(-offset, offset);
-
-            AEGfxSetCamPosition(pos.x, pos.y);
-            cameraShakeState += cameraShakeState < 3 ? 1 : -3;
-            shakeIntervalTimer = shakeInterval;
-        }
-        cameraShakeTime -= dt;
+        AEGfxSetCamPosition(pos.x, pos.y);
+        cameraShakeTime -= DeltaTime;
     }
     else
     {
@@ -123,11 +89,11 @@ void _gameManager::CameraUpdate(void)
 //	}
 //}
 
-void _gameManager::CameraShake(float period, float cameraStrength, Vector2 direction)
+void _gameManager::CameraShake(float period, float _shakeStrength, Vector2 direction)
 {
     dir = direction;
-    shakeOffset = cameraStrength;
-    cameraDecline = cameraStrength;
+    maxShakeStrength = _shakeStrength;
+    shakeStrength = _shakeStrength;
     cameraShakeTime = period;
     maxCameraShakeTime = period;
 }
