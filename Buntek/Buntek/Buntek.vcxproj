@@ -106,6 +106,7 @@
     <ClCompile Include="GameScript.cpp" />
     <ClCompile Include="GAMTut.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PaddleBehavior.cpp" />
     <ClCompile Include="Scene_Navigation.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Scene_Battle.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScript.h" />
     <ClInclude Include="hisMath.h" />
+    <ClInclude Include="PaddleBehavior.h" />
     <ClInclude Include="Scene_Navigation.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Scene_Battle.h" />

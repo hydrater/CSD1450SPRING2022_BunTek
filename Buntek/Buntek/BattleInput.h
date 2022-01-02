@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "GameScript.h"
 #include "BallBehavior.h"
+#include "PaddleBehavior.h"
 
 class BattleInput : public GameScript
 {
@@ -12,6 +13,8 @@ public:
 	void Update(void) override;
 	Vector2 GetWorldPosition(void);
 	vector<BallBehavior*> ballList;
+	PaddleBehavior* playerpaddle;
+
 
 private:
 	struct mouseWorldPosition

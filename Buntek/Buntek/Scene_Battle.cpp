@@ -14,7 +14,7 @@ using namespace Math;
 
 // ------------------------------------ Battle ------------------------------------
 GameObject* cursorManager;
-GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea;
+GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea, *playerpaddle;
 vector<BallBehavior*> *ballList;
 
 float ballSpawnTimer = 0, scalingTimer = 0;
@@ -57,11 +57,28 @@ void Scene_Battle::Start(void)
 	tempRenderer->SetTransparency(0.5f);
 	hostileArea->transform->SetPosition(Vector2(590, 70));
 
+	playerpaddle = new GameObject();
+	tempRenderer = playerpaddle->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(20, 100);
+	tempRenderer->SetTexture("paddle.png");
+	tempRenderer->SetColor(0, 0, 1);
+	playerpaddle->transform->SetPosition(Vector2(-590, 70));
+	PaddleBehavior* temppaddle;
+	temppaddle = playerpaddle->AddComponent<PaddleBehavior>();
+	temppaddle->setplayerpaddle(true);
+	temppaddle->setMaxspeed(10);
+	temppaddle->setMinspeed(5);
+	temppaddle->setMinMoveDist(5);
+	temppaddle->sr = tempRenderer;
+
+	cursorManager->GetComponent<BattleInput>()->playerpaddle = temppaddle;
+
+
 	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	GameManager.areaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	GameManager.friendlyAreaX = friendlyArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.friendlyAreaX = friendlyArea->transform->worldposition.x + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	GameManager.hostileAreaX = hostileArea->transform->worldposition.x - hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 }	
 
@@ -90,7 +107,7 @@ void Scene_Battle::Update(void)
 		dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
 
 		ballList->push_back(tempBall);
-
+		
 		ballSpawnTimer = 2- scalingTimer * 0.01f;
 	}
 	

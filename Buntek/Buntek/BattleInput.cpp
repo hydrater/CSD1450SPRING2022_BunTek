@@ -26,6 +26,8 @@ void BattleInput::Start(void)
 
 void BattleInput::Update(void)
 {
+	playerpaddle->movePaddle(GetWorldPosition(), true);
+
 	for (int i = 0; i < ballList.size(); ++i)
 	{
 		if (ballList[i]->listCheck != 139)

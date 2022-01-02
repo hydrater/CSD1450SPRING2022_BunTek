@@ -167,3 +167,31 @@ void _mapData::ClearList(void)
 
     nodeList.clear();
 }
+
+float _gameManager::easeIn(float t)
+{
+    return t * t;
+}
+
+float _gameManager::flip(float x)
+{
+    return 1 - x;
+}
+
+float _gameManager::easeOut(float t)
+{
+    float tmp = flip(t);
+    return flip(tmp * tmp);
+}
+
+float _gameManager::easeInOut(float t)
+{
+    return lerpF(easeIn(t), easeOut(t), t);
+    //t*t*t * (t * (6f*t - 15f) + 10f)
+}
+
+float _gameManager::lerpF(float start_value, float end_value, float t)
+{
+    t = AEClamp(t, 0, 1);
+    return start_value + (end_value - start_value) * t;
+}
