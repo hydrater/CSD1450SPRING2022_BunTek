@@ -142,3 +142,7 @@ void _gameManager::MapData::GenerateList(void)
         }
     }
 }
+
+void _gameManager::MapData::ClearList(void)
+{
+}

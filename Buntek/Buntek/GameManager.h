@@ -63,6 +63,7 @@ public:
             GameObject* clickable;
         };
         void GenerateList(void);
+        void ClearList(void);
 
     private:
         vector<vector<Node>> nodeList;
