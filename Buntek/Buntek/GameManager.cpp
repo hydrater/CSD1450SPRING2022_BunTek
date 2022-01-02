@@ -160,7 +160,7 @@ void _mapData::ClearList(void)
     {
         for (short j = 0; j < nodeList[i].size(); j++)
         {
-            //nodeList[i][j].clickable->Delete();
+            nodeList[i][j].clickable->Delete();
         }
         nodeList[i].clear();
     }

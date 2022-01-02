@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Vector2.h"
+#include "Component.h"
 using namespace std;
 
 #define GameManager _gameManager::Instance()
@@ -60,11 +61,11 @@ public:
     class Node
     {
     public:
+        GameObject* clickable;
         short column;
         Vector2 pos;
         vector<Node*> connectedNodes;
         int id;
-        //GameObject* test;
     };
     static _mapData& Instance(void);
     void GenerateList(void);
