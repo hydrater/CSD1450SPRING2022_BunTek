@@ -1,7 +1,6 @@
 #include "BallBehavior.h"
 #include "GameManager.h"
 
-
 BallBehavior::BallBehavior()
 {
 	position = Vector2(0, 0);
@@ -54,6 +53,8 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 		return;
 
 	Transform* tempTransform = Owner()->transform;
+	if (transform == nullptr)
+		return;
 
 	if ((isPlayer && transform->worldposition.x > GameManager.friendlyAreaX) ||
 		(!isPlayer && transform->worldposition.x < GameManager.hostileAreaX))
@@ -61,12 +62,17 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 
 	float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
 
+	// Update the delta to prevent almost direct vertical velocity (commented out cuz of weird speed)
+	//yDelta = AEClamp(yDelta, GameManager.clickAoERadius * -0.9f, GameManager.clickAoERadius * 0.9f);
+
 	if (abs(xDelta) <= GameManager.clickAoERadius && abs(yDelta) <= GameManager.clickAoERadius)
 	{
 		float mag = Vector2(xDelta, yDelta).Length();
 
 		if (mag <= GameManager.clickAoERadius) {
 			velocity = (Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
+
+			// Change direction if click is in opposite direction
 			if (playerPossess && mousePos.x > tempTransform->worldposition.x || !playerPossess && mousePos.x < tempTransform->worldposition.x)
 				velocity.x *= -1;
 

@@ -51,8 +51,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 		// --------------------------------------------- Update --------------------------------------------- //
-		SceneManager.Update();
 		GameScriptManager.Update();
+		SceneManager.Update();
 		AudioManager.Update();
 
 		// --------------------------------------------- Render --------------------------------------------- //

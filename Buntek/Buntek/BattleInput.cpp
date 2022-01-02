@@ -51,7 +51,7 @@ void BattleInput::Update(void)
 
 			for (BallBehavior* x : ballList)
 			{
-				if (x->playerPossess)
+				if (x->playerPossess )
 					continue;
 
 				if (x->Owner()->transform->worldposition.x > targetedBall->Owner()->transform->worldposition.x)
@@ -68,7 +68,7 @@ void BattleInput::Update(void)
 					false);
 			}
 
-			AITimer = RandFloatMinMax(0.3f, 1.0f);
+			AITimer = RandFloatMinMax(0.4f, 1.0f);
 		}
 	}
 }
