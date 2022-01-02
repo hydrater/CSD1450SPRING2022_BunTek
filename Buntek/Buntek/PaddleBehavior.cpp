@@ -1,7 +1,7 @@
 #include "PaddleBehavior.h"
 #include "GameManager.h"
 #include "SpriteRenderer.h"
-#include "System.h"
+
 
 PaddleBehavior::PaddleBehavior()
 {
@@ -37,11 +37,11 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 	float mag = Vector2(xDelta, yDelta).Length();
 	if (mag >= MinMoveDist) {
 
-		speed = GameManager.lerpF(0, Maxspeed, GameManager.easeInOut(mag / Maxspeed * DeltaTime));
+		speed = GameManager.lerpF(0, Maxspeed, GameManager.easeInOut(mag / Maxspeed * (float)AEFrameRateControllerGetFrameTime()));
 
 		velocity = Vector2((mousePos.x - tempTransform->worldposition.x), (mousePos.y - tempTransform->worldposition.y)).Normalize();
 
-		transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
+		transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * (float)AEFrameRateControllerGetFrameTime(), transform->worldposition.y + velocity.y * speed * (float)AEFrameRateControllerGetFrameTime()));
 
 		if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= sr->GetHalfWidth() || fabs(transform->worldposition.x - GameManager.friendlyAreaX) <= sr->GetHalfWidth())
 		{
