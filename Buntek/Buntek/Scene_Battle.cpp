@@ -5,7 +5,7 @@
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
 #include "System.h"
-#include "PlayerInput.h"
+#include "BattleInput.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
 
@@ -21,8 +21,8 @@ void Scene_Battle::Start(void)
 	AudioManager.SetMusicVolume(0.1f);
 
 	cursorManager = new GameObject();
-	cursorManager->AddComponent<PlayerInput>();
-	ballList = &cursorManager->GetComponent<PlayerInput>()->ballList;
+	cursorManager->AddComponent<BattleInput>();
+	ballList = &cursorManager->GetComponent<BattleInput>()->ballList;
 
 	SpriteRenderer* tempRenderer;
 	BallBehavior* tempBall;

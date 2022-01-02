@@ -78,7 +78,7 @@
     <ClCompile Include="CollisionManager2D.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerInput.cpp">
+    <ClCompile Include="BattleInput.cpp">
       <Filter>Source Files\ECS\Components</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
@@ -131,7 +131,7 @@
     <ClInclude Include="CollisionManager2D.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerInput.h">
+    <ClInclude Include="BattleInput.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">

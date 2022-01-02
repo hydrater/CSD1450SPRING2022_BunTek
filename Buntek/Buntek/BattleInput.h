@@ -3,11 +3,11 @@
 #include "GameScript.h"
 #include "BallBehavior.h"
 
-class PlayerInput : public GameScript
+class BattleInput : public GameScript
 {
 public:
-	PlayerInput();
-	~PlayerInput();
+	BattleInput();
+	~BattleInput();
 	void Start(void) override;
 	void Update(void) override;
 	Vector2 GetWorldPosition(void);
@@ -19,4 +19,7 @@ private:
 		s32 x, y;
 	};
 	mouseWorldPosition worldPosition = {0, 0};
+
+	bool AIEnabled = false;
+	float AITimer = 0;
 };
