@@ -37,7 +37,7 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 	float mag = Vector2(xDelta, yDelta).Length();
 	if (mag >= MinMoveDist) {
 
-		speed = GameManager.lerpF(0, Maxspeed, GameManager.easeInOut(mag / Maxspeed * (float)AEFrameRateControllerGetFrameTime()));
+		speed = GameManager.lerpF(Minspeed, Maxspeed, mag / Maxspeed * (float)AEFrameRateControllerGetFrameTime());
 
 		velocity = Vector2((mousePos.x - tempTransform->worldposition.x), (mousePos.y - tempTransform->worldposition.y)).Normalize();
 
