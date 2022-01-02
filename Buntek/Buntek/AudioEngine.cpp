@@ -23,6 +23,7 @@ _audioManager::_audioManager()
     // Load Music here
     //LoadMusic("Summer.mp3");
     //LoadMusic("GhostFinal.mp3");
+    LoadMusic("Evans.mp3");
 }
 
 _audioManager::~_audioManager()

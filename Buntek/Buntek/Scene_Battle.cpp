@@ -17,12 +17,12 @@ GameObject* cursorManager;
 GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea;
 vector<BallBehavior*> *ballList;
 
-float ballSpawnTimer = 0;
+float ballSpawnTimer = 0, scalingTimer = 0;
 
 void Scene_Battle::Start(void)
 {
 	// Setting up the scene
-	//AudioManager.PlayMusic("Summer.mp3");
+	AudioManager.PlayMusic("Evans.mp3");
 	AudioManager.SetMusicVolume(0.1f);
 
 	cursorManager = new GameObject();
@@ -87,6 +87,7 @@ void Scene_Battle::Start(void)
 void Scene_Battle::Update(void)
 {
 	ballSpawnTimer -= DeltaTime;
+	scalingTimer += DeltaTime;
 
 	if (ballSpawnTimer < 0)
 	{
@@ -103,6 +104,7 @@ void Scene_Battle::Update(void)
 		tempBall->playerPossess = (dir? true : false);
 		tempBall->velocity = Vector2((float) (dir?-1:1), RandFloatMinMax(0, 1));
 		tempBall->radius = 10;
+		tempBall->SetSpeed(6+(scalingTimer*0.01f));
 
 		ballList->push_back(tempBall);
 

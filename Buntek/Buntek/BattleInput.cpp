@@ -8,6 +8,7 @@
 #include "hisMath.h"
 
 using namespace Math;
+float AIscalingTimer = 0;
 
 BattleInput::BattleInput()
 {
@@ -47,6 +48,7 @@ void BattleInput::Update(void)
 	if (AIEnabled)
 	{
 		AITimer -= DeltaTime;
+		AIscalingTimer += DeltaTime;
 
 		if (AITimer < 0)
 		{
@@ -70,8 +72,8 @@ void BattleInput::Update(void)
 						temp->worldposition.y + RandFloatMinMax(1, GameManager.clickAoERadius/1.3f)),
 					false);
 			}
-
-			AITimer = RandFloatMinMax(0.7f, 1.5f);
+			targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 0.01f);
+			AITimer = RandFloatMinMax(0.7f - AIscalingTimer*0.01f, 1.5f - AIscalingTimer *0.01f);
 		}
 	}
 }
