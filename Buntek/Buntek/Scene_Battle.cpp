@@ -64,7 +64,7 @@ void Scene_Battle::Start(void)
 	tempBall->AreaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	tempBall->AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	tempBall->AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	tempBall->SetSpeed(1);
+	
 	ballList->push_back(tempBall);
 
 	//test2 = new GameObject();

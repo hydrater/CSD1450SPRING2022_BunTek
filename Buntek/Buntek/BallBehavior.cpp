@@ -52,3 +52,19 @@ void BallBehavior::SetSpeed(float _speed)
 	speed = _speed;
 }
 
+void BallBehavior::HitBall(Vector2 mousePos)
+{
+	Transform* tempTransform = Owner()->transform;
+	float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
+
+	if (abs(xDelta) <= 50 && abs(yDelta) <= 50)
+	{
+		float mag = Vector2(xDelta, yDelta).Length();
+
+		if (mag <= 50) {
+
+			velocity.Set(Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
+		}
+	}
+}
+
