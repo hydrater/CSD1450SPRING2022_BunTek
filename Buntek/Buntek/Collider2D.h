@@ -4,8 +4,8 @@
 class Collider2D : public Component
 {
 public:
-	Collider2D();
-	~Collider2D();
+	Collider2D(void);
+	~Collider2D(void);
 	bool Collide(Collider2D col);
 
 private:
@@ -15,8 +15,8 @@ private:
 class BoxCollider : public Collider2D
 {
 public:
-	BoxCollider();
-	~BoxCollider();
+	BoxCollider(void);
+	~BoxCollider(void);
 	bool Collide(Collider2D* other);
 	float width;
 	float height;
@@ -31,8 +31,8 @@ private:
 class CircleCollider : public Collider2D
 {
 public:
-	CircleCollider();
-	~CircleCollider();
+	CircleCollider(void);
+	~CircleCollider(void);
 	bool Collide(Collider2D* other);
 	float radius;
 	

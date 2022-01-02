@@ -5,8 +5,8 @@
 class SpriteRenderer : public Component
 {
 public:
-	SpriteRenderer();
-	~SpriteRenderer();
+	SpriteRenderer(void);
+	~SpriteRenderer(void);
 
 	void Size(float width, float height);
 	float GetHalfWidth(void);

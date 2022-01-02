@@ -2,11 +2,11 @@
 #include "GameManager.h"
 #include "SpriteRenderer.h"
 
-BallBehavior::BallBehavior()
+BallBehavior::BallBehavior(void)
 {
 }
 
-BallBehavior::~BallBehavior()
+BallBehavior::~BallBehavior(void)
 {
 	GameManager.CameraShake(2, 5, Vector2(0, 0));
 }

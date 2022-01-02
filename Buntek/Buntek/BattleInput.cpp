@@ -10,12 +10,12 @@
 using namespace Math;
 float AIscalingTimer = 0;
 
-BattleInput::BattleInput()
+BattleInput::BattleInput(void)
 {
 	AIEnabled = true;
 }
 
-BattleInput::~BattleInput()
+BattleInput::~BattleInput(void)
 {
 
 }

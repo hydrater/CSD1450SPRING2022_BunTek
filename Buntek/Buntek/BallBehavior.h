@@ -5,8 +5,8 @@
 class BallBehavior : public GameScript
 {
 public:
-	BallBehavior();
-	~BallBehavior();
+	BallBehavior(void);
+	~BallBehavior(void);
 	void Start(void) override;
 	void Update(void) override;
 

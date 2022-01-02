@@ -5,8 +5,8 @@
 class Button : public SpriteRenderer
 {
 public:
-	Button();
-	~Button();
+	Button(void);
+	~Button(void);
 
 private:
 

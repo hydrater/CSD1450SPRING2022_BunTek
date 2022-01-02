@@ -1,12 +1,12 @@
 #include "CollisionManager2D.h"
 #include "Collider2D.h"
 
-Collider2D::Collider2D()
+Collider2D::Collider2D(void)
 {
 }
 
 
-Collider2D::~Collider2D()
+Collider2D::~Collider2D(void)
 {
 
 }
@@ -62,14 +62,14 @@ bool BoxCollider::Collide(Collider2D* col)
 }
 
 
-BoxCollider::~BoxCollider()
+BoxCollider::~BoxCollider(void)
 {
 
 }
 // ============ BOX COLLIDER END ============ 
 
 // ============ CIRCLE COLLIDER ============ 
-CircleCollider::CircleCollider()
+CircleCollider::CircleCollider(void)
 {
 	/*
 	SpriteRenderer* _sr = this->gameObject->GetComponent<SpriteRenderer>();
@@ -105,7 +105,7 @@ bool CircleCollider::Collide(Collider2D* col)
 
 	return false;
 }
-CircleCollider::~CircleCollider()
+CircleCollider::~CircleCollider(void)
 {
 
 }

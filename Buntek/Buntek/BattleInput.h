@@ -6,8 +6,8 @@
 class BattleInput : public GameScript
 {
 public:
-	BattleInput();
-	~BattleInput();
+	BattleInput(void);
+	~BattleInput(void);
 	void Start(void) override;
 	void Update(void) override;
 	Vector2 GetWorldPosition(void);
