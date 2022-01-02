@@ -59,15 +59,18 @@ void Scene_Battle::Start(void)
 	tempRenderer->SetTexture("ball.png");
 	tempRenderer->SetColor(0, 1, 0);
 	tempBall = ball->AddComponent<BallBehavior>();
+	tempBall->velocity = Vector2(-1, 0);
 	tempBall->radius = 10;
 	tempBall->playerPossess = true;
 	
 	ballList->push_back(tempBall);
 
-	GameManager.AreaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
-	GameManager.AreaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
-	GameManager.AreaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	GameManager.AreaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.areaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.areaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.friendlyAreaX = friendlyArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.hostileAreaX = hostileArea->transform->worldposition.x - hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 
 	//test2 = new GameObject();
 	//test2->AddComponent<SpriteRenderer>()->Size(500, 500);

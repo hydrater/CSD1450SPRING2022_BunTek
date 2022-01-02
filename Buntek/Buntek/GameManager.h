@@ -43,10 +43,12 @@ public:
     void CameraUpdate(void);
     void CameraShake(float period, float cameraStrength, Vector2 direction);
     const float clickAoERadius = 50;
-    float AreaTopBoundary = 0;
-    float AreaBottomBoundary = 0;
-    float AreaLeftBoundary = 0;
-    float AreaRightBoundary = 0;
+    float areaTopBoundary = 0;
+    float areaBottomBoundary = 0;
+    float areaLeftBoundary = 0;
+    float areaRightBoundary = 0;
+    float friendlyAreaX = 0;
+    float hostileAreaX = 0;
 };
 
 class MapData

@@ -30,10 +30,10 @@ void BallBehavior::Update(void)
 
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
 
-	if (fabs(transform->worldposition.x - GameManager.AreaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.AreaRightBoundary) <= radius) {
+	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		this->Owner()->Delete();
 	}
-	else if (fabs(transform->worldposition.y - GameManager.AreaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.AreaTopBoundary) <= radius) {
+	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius) {
 		velocity.y = -velocity.y;
 	}
 }
@@ -54,6 +54,11 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 		return;
 
 	Transform* tempTransform = Owner()->transform;
+
+	if ((isPlayer && transform->worldposition.x > GameManager.friendlyAreaX) ||
+		(!isPlayer && transform->worldposition.x < GameManager.hostileAreaX))
+		return;
+
 	float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
 
 	if (abs(xDelta) <= GameManager.clickAoERadius && abs(yDelta) <= GameManager.clickAoERadius)
