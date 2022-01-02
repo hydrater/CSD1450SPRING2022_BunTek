@@ -71,7 +71,7 @@ void BattleInput::Update(void)
 					false);
 			}
 
-			AITimer = RandFloatMinMax(0.4f, 1.0f);
+			AITimer = RandFloatMinMax(0.7f, 1.5f);
 		}
 	}
 }
