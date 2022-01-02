@@ -59,6 +59,8 @@ public:
             int column;
             Vector2 pos;
             vector<Node*> connectedNodes;
+            int id;
+            GameObject* clickable;
         };
         void GenerateList(void);
 

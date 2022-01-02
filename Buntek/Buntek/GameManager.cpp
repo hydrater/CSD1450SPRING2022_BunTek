@@ -128,4 +128,11 @@ void Skill::SpawnSkillObject(void)
 
 void _gameManager::MapData::GenerateList(void)
 {
+    for (int i = 0; i < 10; i++)
+    {
+        for (int i = 0; i < RandFloatMinMax(0, 5); i++)
+        {
+            MapData::Node node = MapData::Node();
+        }
+    }
 }
