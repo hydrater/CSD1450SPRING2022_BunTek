@@ -1,8 +1,8 @@
 #pragma once
 #include "Transform.h"
-#include "GameScript.h"
+#include "Component.h"
 
-class SpriteRenderer : public GameScript
+class SpriteRenderer : public Component
 {
 public:
 	SpriteRenderer(void);

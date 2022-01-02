@@ -1,8 +1,9 @@
 #pragma once
-#include "SpriteRenderer.h"
 #include "GameScript.h"
+#include "GameManager.h"
+#include "Vector2.h"
 
-class Parallaxer : public SpriteRenderer
+class Parallaxer : public GameScript
 {
 public:
 	Parallaxer(void);
@@ -10,7 +11,11 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
-private:
+	Vector2 anchorPoint;
+	float Distance;
 
+
+private:
+	
 
 };

@@ -1,6 +1,5 @@
 #include "Scene_Splash.h"
 #include "SpriteRenderer.h"
-#include "System.h"
 #include "Scene_Battle.h"
 #include "AudioEngine.h"
 

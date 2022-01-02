@@ -18,4 +18,5 @@ void Parallaxer::Start(void)
 void Parallaxer::Update(void)
 {
 
+	cout << GameManager.GetCursorPosition().ToString() << "\n";
 }
