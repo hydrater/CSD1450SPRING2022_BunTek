@@ -29,6 +29,6 @@ public:
 private:
 	float initspeed = 300;
 	float speed = 300;
-	float angrange = 15;
+	float angrange = 20;
 	Transform* transform = 0;
 };

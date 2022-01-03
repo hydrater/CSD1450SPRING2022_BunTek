@@ -89,7 +89,7 @@ void BattleInput2::Update(void)
 		{
 			targetedBall->HitBall(
 				Vector2(temp->worldposition.x + RandFloatMinMax(1, GameManager.clickAoERadius),
-					temp->worldposition.y + RandFloatMinMax(1, GameManager.clickAoERadius / 1.3f)),
+					temp->worldposition.y + RandIntMinMax(-1,1) * RandFloatMinMax(1, GameManager.clickAoERadius / 1.3f)),
 				false);
 			if (AITimer < 0)
 			{

@@ -87,46 +87,20 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 			playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
 
 			float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
-			cout << ang << endl;
-			if (0 - angrange < ang || ang < 0 + angrange) {
-				if (isPlayer) {
-					velocity.Rotate(0 + angrange - ang);
-				}
-				else if (!isPlayer) {
-					velocity.Rotate(0 - angrange - ang);
-				}
+			
+			if (0 - angrange < ang && ang <= 0) {
+				velocity.Rotate(0 + angrange - ang);
 			}
-			else if (-180 + angrange > ang || ang > 180 - angrange) {
-				if (isPlayer) {
-					velocity.Rotate(180 - angrange - ang);
-				}
-				else if (!isPlayer) {
-					velocity.Rotate(-180 + angrange - ang);
-				}
+			else if (ang < 0 + angrange && ang > 0) {
+				velocity.Rotate(0 - angrange - ang);
+			}
+			else if (-180 + angrange > ang && ang > -180) {
+				velocity.Rotate(180 - angrange - ang);
+			}
+			else if (ang > 180 - angrange && ang <= 180) {
+				velocity.Rotate(-180 + angrange - ang);
 			}
 		}
-	}
-
-			float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
-			cout << ang << endl;
-			if (0 - angrange < ang || ang < 0 + angrange) {
-				if (isPlayer) {
-					velocity.Rotate(0 + angrange - ang);
-				}
-				else if(!isPlayer){
-					velocity.Rotate(0 - angrange - ang);
-				}
-			}
-			else if (-180 + angrange > ang || ang > 180 - angrange) {
-				if (isPlayer) {
-					velocity.Rotate(180 - angrange - ang);
-				}
-				else if (!isPlayer) {
-					velocity.Rotate(-180 + angrange - ang);
-				}
-			}
-		}
-	}
-	
+	}	
 }
 
