@@ -85,12 +85,48 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 
 			playerPossess = !playerPossess;
 			playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
+
+			float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
+			cout << ang << endl;
+			if (0 - angrange < ang || ang < 0 + angrange) {
+				if (isPlayer) {
+					velocity.Rotate(0 + angrange - ang);
+				}
+				else if (!isPlayer) {
+					velocity.Rotate(0 - angrange - ang);
+				}
+			}
+			else if (-180 + angrange > ang || ang > 180 - angrange) {
+				if (isPlayer) {
+					velocity.Rotate(180 - angrange - ang);
+				}
+				else if (!isPlayer) {
+					velocity.Rotate(-180 + angrange - ang);
+				}
+			}
 		}
 	}
 
-	// Element Astral
-	if (elemAstral)
-		speed = initspeed * 0.5f;
-	// When deflected, the ball’s speed is increased by 50%
+			float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
+			cout << ang << endl;
+			if (0 - angrange < ang || ang < 0 + angrange) {
+				if (isPlayer) {
+					velocity.Rotate(0 + angrange - ang);
+				}
+				else if(!isPlayer){
+					velocity.Rotate(0 - angrange - ang);
+				}
+			}
+			else if (-180 + angrange > ang || ang > 180 - angrange) {
+				if (isPlayer) {
+					velocity.Rotate(180 - angrange - ang);
+				}
+				else if (!isPlayer) {
+					velocity.Rotate(-180 + angrange - ang);
+				}
+			}
+		}
+	}
+	
 }
 
