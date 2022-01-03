@@ -84,6 +84,4 @@ void BattleInput::Update(void)
 			AITimer = RandFloatMinMax(0.7f - AIscalingTimer*0.005f, 1.5f - AIscalingTimer *0.005f);
 		}
 	}
-
-	GameManager.clickAoERadius = GameManager.clickAoERadius + AITimer * 0.02f;
 }

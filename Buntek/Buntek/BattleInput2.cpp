@@ -105,6 +105,4 @@ void BattleInput2::Update(void)
 
 		AIPaddle->movePaddle(AIposition, false);
 	}
-
-	GameManager.clickAoERadius = GameManager.clickAoERadius + AITimer * 0.02f;
 }
