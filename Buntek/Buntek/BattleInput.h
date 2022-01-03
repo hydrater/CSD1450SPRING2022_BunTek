@@ -13,7 +13,6 @@ public:
 	void Update(void) override;
 	vector<BallBehavior*> ballList;
 	PaddleBehavior* playerpaddle;
-
 private:
 	bool AIEnabled = false;
 	float AIscalingTimer = 0;
