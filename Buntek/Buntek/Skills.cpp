@@ -21,7 +21,7 @@ void Skills :: Start(void)
 
 void Skills:: Update(void)
 {
-	Transform* tempTransform = Owner()->transform;
+	//this->Owner()->GetComponent<BallBehavior>()-> nt rly sure what to put here
 }
 
 void Skills:: Effects(string effect, string element)
