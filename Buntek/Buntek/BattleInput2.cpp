@@ -65,7 +65,7 @@ void BattleInput2::Update(void)
 
 		Transform* temp = targetedBall->Owner()->transform;
 
-		if (temp->worldposition.x >= GameManager.hostileAreaX && targetedBall->listCheck == 139)
+		if (temp->worldposition.x >= GameManager.hostileAreaX && targetedBall->listCheck == 139 && !targetedBall->playerPossess)
 		{
 			float estimate = AIposition.operator-(AITargetPosition).Length() - targetedBall->velocity.Length();
 
@@ -93,7 +93,7 @@ void BattleInput2::Update(void)
 				false);
 			if (AITimer < 0)
 			{
-				targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 3);
+				//targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 3);
 				AITimer = RandFloatMinMax(0.7f - AIscalingTimer * 0.005f, 1.5f - AIscalingTimer * 0.005f);
 			}
 		}

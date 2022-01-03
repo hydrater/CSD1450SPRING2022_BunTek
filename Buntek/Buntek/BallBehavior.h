@@ -20,7 +20,14 @@ public:
 	SpriteRenderer* sr = 0;
 	bool skillApplied = false;
 
+	// Basic Elements
+	bool elemAstral = false;
+	bool elemVirtual = false;
+	bool elemVirtualTriggered = false;
+	bool elemElemental = false;
+
 private:
+	float initspeed = 300;
 	float speed = 300;
 	Transform* transform = 0;
 };

@@ -18,6 +18,18 @@ void BallBehavior::Start(void)
 
 void BallBehavior::Update(void)
 {
+	// Element Virtual
+	if (elemVirtual && GameManager.friendlyAreaX < transform->worldposition.x && transform->worldposition.x < GameManager.hostileAreaX)
+	{
+		sr->SetTransparency(1);
+	}
+	else if (elemVirtual && !elemVirtualTriggered)
+	{
+		sr->SetTransparency(0.5f);
+		elemVirtualTriggered = true;
+	}
+	// The ball is translucent until it touches the middle of the field
+
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * (float)AEFrameRateControllerGetFrameTime(), transform->worldposition.y + velocity.y * speed * (float)AEFrameRateControllerGetFrameTime()));
 
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
@@ -38,10 +50,12 @@ float BallBehavior::GetSpeed(void)
 void BallBehavior::SetSpeed(float _speed)
 {
 	speed = _speed;
+	initspeed = _speed;
 }
 
 void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 {
+	//playerPossess means player can click the ball?
 	if (isPlayer != playerPossess)
 		return;
 
@@ -73,5 +87,10 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 			playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
 		}
 	}
+
+	// Element Astral
+	if (elemAstral)
+		speed = initspeed * 0.5f;
+	// When deflected, the ball’s speed is increased by 50%
 }
 
