@@ -29,7 +29,7 @@ void Skills:: Effects(string effect, string element)
 	{
 		if (element == "astral")
 		{
-
+			//this->Owner()->
 		}
 		if (element == "virtual")
 		{
