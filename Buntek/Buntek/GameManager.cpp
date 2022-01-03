@@ -48,8 +48,11 @@ void _gameManager::CameraUpdate(void)
     }
     else
     {
-        pos = pos.Lerp(Vector2(0, 0), 0.1f);
-        AEGfxSetCamPosition(pos.x, pos.y);
+        if (cameraLerpBack)
+        {
+            pos = pos.Lerp(Vector2(0, 0), 0.1f);
+            AEGfxSetCamPosition(pos.x, pos.y);
+        }
     }
 }
 
@@ -117,13 +120,16 @@ _mapData& _mapData::Instance(void)
 
 void _mapData::GenerateList(Vector2 originPos)
 {
-    float widthSize = 1200;
+    float widthSize = 1600;
 
     originPos.x /= 2;
 
     for (int i = 0; i < 10; i++)
     {
-        short width = (short)RandIntMinMax(2, 5);
+        short width = 1;
+        if (!(i == 0 || i == 9))
+            width = (short)RandIntMinMax(2, 5);
+
         float cellSize = widthSize / width;
         float widthOffset = originPos.x - widthSize / 2;
         widthOffset += cellSize / 2;

@@ -16,6 +16,8 @@ void Scene_Battle::Start(void)
 	AudioManager.PlayMusic("Evans.mp3");
 	AudioManager.SetMusicVolume(0.1f);
 
+	GameManager.cameraLerpBack = true;
+
 	inputHandler = new GameObject();
 	inputHandler->AddComponent<BattleInput2>();
 	ballList = &inputHandler->GetComponent<BattleInput2>()->ballList;

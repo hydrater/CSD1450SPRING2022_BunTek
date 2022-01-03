@@ -41,8 +41,11 @@ public:
     static _gameManager& Instance(void);
     Vector2 GetCursorPosition(void);
     Skill skill1, skill2, skill3;
+
     void CameraUpdate(void);
     void CameraShake(float period, float cameraStrength, Vector2 direction);
+    bool cameraLerpBack = false;
+
     float clickAoERadius = 50;
     float areaTopBoundary = 0;
     float areaBottomBoundary = 0;
