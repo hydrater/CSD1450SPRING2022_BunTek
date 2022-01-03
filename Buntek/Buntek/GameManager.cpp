@@ -144,7 +144,10 @@ void _mapData::GenerateList(Vector2 originPos)
             tempRenderer->Size(50, 50);
             tempRenderer->SetTexture("Steven.jpg");
 
-            temp->transform->worldposition = Vector2(j + widthOffset, i * 300 + originPos.y);
+            float offsetX = RandFloatMinMax(-cellSize / 3, cellSize / 3);
+            float offsetY = RandFloatMinMax(-100, 100);
+
+            temp->transform->worldposition = Vector2(j + widthOffset + offsetX, i * 300 + originPos.y + offsetY);
 
             node.clickable = temp;
             //node.connectedNodes
