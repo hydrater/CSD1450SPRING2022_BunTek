@@ -65,19 +65,27 @@ void BattleInput2::Update(void)
 
 		Transform* temp = targetedBall->Owner()->transform;
 
-		if (temp->worldposition.x >= GameManager.hostileAreaX)
+		if (temp->worldposition.x >= GameManager.hostileAreaX && targetedBall->listCheck == 139)
 		{
-			AITargetPosition.x = temp->worldposition.x - targetedBall->velocity.x;
-			AITargetPosition.y = temp->worldposition.y - targetedBall->velocity.y;
+			float estimate = AIposition.operator-(AITargetPosition).Length() - targetedBall->velocity.Length();
 
-			// Move position towards the targetedPosition
-			AIposition = AIposition.Lerp(AITargetPosition, AIspeed);
+			AITargetPosition.x = temp->worldposition.x + (targetedBall->velocity.x * estimate);
+			AITargetPosition.y = temp->worldposition.y + (targetedBall->velocity.y * estimate);
+			AITargetPosition.x = AEClamp(AITargetPosition.x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
+			AITargetPosition.y = AEClamp(AITargetPosition.y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
+		}
+		else
+		{
+			AITargetPosition = Vector2(800, 0);
 		}
 
+		// Move position towards the targetedPosition
+		AIposition = AIposition.Lerp(AITargetPosition, AIspeed);
+
 		// Calculate Distance to targetedBall
-		float dist = AIposition.operator-(AITargetPosition).Length();
+		float dist = AIposition.operator-(temp->worldposition).Length();
 		// Hit Ball if within AOE
-		if (dist <= GameManager.clickAoERadius && !AIHitBall)
+		if (dist <= GameManager.clickAoERadius)
 		{
 			targetedBall->HitBall(
 				Vector2(temp->worldposition.x + RandFloatMinMax(1, GameManager.clickAoERadius),
@@ -94,6 +102,8 @@ void BattleInput2::Update(void)
 		AIposition.y = AEClamp(AIposition.y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
 
 		AICursor->setcursorposition(AIposition);
+
+		AIPaddle->movePaddle(AIposition, false);
 	}
 
 	GameManager.clickAoERadius = GameManager.clickAoERadius + AITimer * 0.02f;

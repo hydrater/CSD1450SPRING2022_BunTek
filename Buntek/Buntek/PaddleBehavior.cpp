@@ -29,7 +29,7 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 	Transform* tempTransform = Owner()->transform;
 	if (transform == nullptr)
 		return;
-	if (isPlayer == playerPaddle) {
+	if (isPlayer) {
 		float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
 
 		float mag = Vector2(xDelta, yDelta).Length();
@@ -55,7 +55,7 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 		}
 		return;
 	}
-	else if (isPlayer != playerPaddle) {
+	else if (!isPlayer) {
 		float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
 
 		float mag = Vector2(xDelta, yDelta).Length();
