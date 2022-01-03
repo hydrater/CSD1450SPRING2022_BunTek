@@ -113,7 +113,7 @@ float Vector2::Dot(const Vector2& vec) const
 }
 
 float Vector2::AngleBetween(const Vector2 vec) {
-	return atan2f(y - vec.y, x - vec.x);
+	return acos((y * vec.y + x * vec.x)/(sqrt(x * x + y * y)* vec.Length()));
 }
 
 Vector2 Vector2::Normalized(void) const throw(DivideByZero)
