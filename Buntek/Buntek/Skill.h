@@ -12,7 +12,9 @@ public:
 	~Skill(void);
 	void Start(void) override;
 	void Update(void) override;
-private:
 
+private:
 	Transform* transform = 0;
+	string Elementtype = "Empty";
+	//<data type> Effect = Null // effect for skills on ball
 };
