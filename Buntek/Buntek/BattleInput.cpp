@@ -45,6 +45,14 @@ void BattleInput::Update(void)
 		}
 	}
 
+	if (AEInputCheckTriggered(AEVK_RBUTTON))
+	{
+		for (BallBehavior* x : ballList)
+		{
+			x->HitBall(GameManager.GetCursorPosition(), true);
+		}
+	}
+
 	if (AIEnabled)
 	{
 		AITimer -= DeltaTime;

@@ -18,6 +18,7 @@ public:
 	short listCheck = 139;
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
+	bool skillApplied = false;
 
 private:
 	float speed = 300;
