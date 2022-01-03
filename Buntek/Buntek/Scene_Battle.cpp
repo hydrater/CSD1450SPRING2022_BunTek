@@ -1,7 +1,6 @@
 #include "Scene_Battle.h"
 #include "Component.h"
 #include "Entity.h"
-#include "BallBehavior.h"
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
 #include "System.h"
@@ -11,22 +10,15 @@
 
 using namespace Math;
 
-// ------------------------------------ Battle ------------------------------------
-GameObject* cursorManager;
-GameObject* background, *ball, *friendlyArea, *hostileArea, *neutralArea, *playerpaddle;
-vector<BallBehavior*> *ballList;
-
-float ballSpawnTimer = 0, scalingTimer = 0;
-
 void Scene_Battle::Start(void)
 {
 	// Setting up the scene
 	AudioManager.PlayMusic("Evans.mp3");
 	AudioManager.SetMusicVolume(0.1f);
 
-	cursorManager = new GameObject();
-	cursorManager->AddComponent<BattleInput>();
-	ballList = &cursorManager->GetComponent<BattleInput>()->ballList;
+	inputHandler = new GameObject();
+	inputHandler->AddComponent<BattleInput>();
+	ballList = &inputHandler->GetComponent<BattleInput>()->ballList;
 
 	SpriteRenderer* tempRenderer;
 
@@ -69,7 +61,7 @@ void Scene_Battle::Start(void)
 	temppaddle->setMinMoveDist(10);
 	temppaddle->sr = tempRenderer;
 
-	cursorManager->GetComponent<BattleInput>()->playerpaddle = temppaddle;
+	inputHandler->GetComponent<BattleInput>()->playerpaddle = temppaddle;
 
 	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();

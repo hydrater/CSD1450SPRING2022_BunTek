@@ -1,6 +1,5 @@
 #include "Scene_Navigation.h"
 #include "GameManager.h"
-#include <vector>
 
 void Scene_Navigation::Start(void)
 {

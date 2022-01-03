@@ -1,13 +1,6 @@
 #include "Scene_Splash.h"
-#include "SpriteRenderer.h"
 #include "Scene_Battle.h"
 #include "AudioEngine.h"
-
-GameObject* splash;
-float timer = 0;
-int cycle = 0;
-SpriteRenderer* splashRenderer;
-bool playSound = true;
 
 void Scene_Splash::Start(void) 
 {
