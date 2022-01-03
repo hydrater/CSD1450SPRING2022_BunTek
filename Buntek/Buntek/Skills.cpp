@@ -29,6 +29,7 @@ void Skills:: Effects(string effect, string element)
 	if (element == "astral")
 	{
 		this->Owner()->GetComponent<BallBehavior>()->elemAstral == true;
+		this->Owner()->GetComponent<BallBehavior>()->SetSpeed(this->Owner()->GetComponent<BallBehavior>()->GetSpeed() * 1.50);
 		if (effect == "covid")
 		{
 
@@ -41,6 +42,7 @@ void Skills:: Effects(string effect, string element)
 	if (element == "virtual")
 	{
 		this->Owner()->GetComponent<BallBehavior>()->elemVirtual == true;
+		//this->Owner()->GetComponent<BallBehavior>()-> opacity
 		if (effect == "warp")
 		{
 
@@ -49,6 +51,7 @@ void Skills:: Effects(string effect, string element)
 	if (element == "elemental")
 	{
 		this->Owner()->GetComponent<BallBehavior>()->elemElemental == true;
+		this->Owner()->GetComponent<BallBehavior>()->SetSpeed(this->Owner()->GetComponent<BallBehavior>()->GetSpeed() * 0.50);
 		if (effect == "3splitter")
 		{
 
