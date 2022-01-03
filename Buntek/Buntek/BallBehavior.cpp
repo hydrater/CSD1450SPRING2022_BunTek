@@ -80,7 +80,7 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 			velocity = (Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
 
 			// Change direction if click is in opposite direction
-			if (playerPossess && mousePos.x > tempTransform->worldposition.x || !playerPossess && mousePos.x < tempTransform->worldposition.x)
+			if (isPlayer && mousePos.x > tempTransform->worldposition.x || !isPlayer && mousePos.x < tempTransform->worldposition.x)
 				velocity.x *= -1;
 
 			playerPossess = !playerPossess;
@@ -89,18 +89,27 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 			float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
 			if (0 <= ang && ang < angrange) {
 				if (velocity.x < 0) {
-					velocity.Rotate(-(angrange - ang));
+					velocity = Vector2(0, 1);
+					velocity.Rotate(-angrange);
+					//velocity.Rotate(-(angrange - ang));
 				}
 				else {
-					velocity.Rotate(angrange - ang);
+					velocity = Vector2(0, 1);
+					velocity.Rotate(angrange);
+					//velocity.Rotate(angrange - ang);
 				}
 			}
 			else if (180 - angrange < ang && ang <= 180) {
+				cout << ang << endl;
 				if (velocity.x < 0) {
-					velocity.Rotate(ang - (180 - angrange));
+					velocity = Vector2(0, -1);
+					velocity.Rotate(angrange);
+					//velocity.Rotate(ang - (180 - angrange));
 				}
 				else {
-					velocity.Rotate(-(ang - (180 - angrange)));
+					velocity = Vector2(0, -1);
+					velocity.Rotate(-angrange);
+					//velocity.Rotate(-(ang - (180 - angrange)));
 				}
 			}
 		}
