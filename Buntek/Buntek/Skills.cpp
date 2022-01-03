@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "SpriteRenderer.h"
 #include "Skills.h"
+#include "Component.h"
 
 Skills::Skills()
 {
@@ -25,17 +26,30 @@ void Skills:: Update(void)
 
 void Skills:: Effects(string effect, string element)
 {
-	if (effect == "element")
+	if (element == "astral")
 	{
-		if (element == "astral")
-		{
-			//this->Owner()->
-		}
-		if (element == "virtual")
+		this->Owner()->GetComponent<BallBehavior>()->elemAstral == true;
+		if (effect == "covid")
 		{
 
 		}
-		if (element == "elemental")
+		if (effect == "ricochet")
+		{
+
+		}
+	}
+	if (element == "virtual")
+	{
+		this->Owner()->GetComponent<BallBehavior>()->elemVirtual == true;
+		if (effect == "warp")
+		{
+
+		}
+	}
+	if (element == "elemental")
+	{
+		this->Owner()->GetComponent<BallBehavior>()->elemElemental == true;
+		if (effect == "3splitter")
 		{
 
 		}
@@ -56,26 +70,6 @@ void Skills:: Effects(string effect, string element)
 
 		}
 		if (element == "spiral")
-		{
-
-		}
-	}
-
-	if (effect == "special")
-	{
-		if (element == "warp")
-		{
-
-		}
-		if (element == "covid")
-		{
-
-		}
-		if (element == "ricochet")
-		{
-
-		}
-		if (element == "splitter")
 		{
 
 		}
