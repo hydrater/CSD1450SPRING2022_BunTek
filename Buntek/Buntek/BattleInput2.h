@@ -13,15 +13,14 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 	vector<BallBehavior*> ballList;
-	PaddleBehavior* playerpaddle;
+	PaddleBehavior* playerpaddle, * AIPaddle;
 	CursorBehaviour* playerCursor, * AICursor;
 
 
 private:
 
 	bool AIEnabled = false;
-	bool AIHitBall = false;
-	float AIspeed = 0.1f;
+	float AIspeed = 0.05f;
 	Vector2 AIposition = Vector2(0, 0);
 	Vector2 AITargetPosition = Vector2(0, 0);
 
