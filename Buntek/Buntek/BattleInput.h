@@ -14,11 +14,8 @@ public:
 	vector<BallBehavior*> ballList;
 	PaddleBehavior* playerpaddle;
 
-
 private:
-
 	bool AIEnabled = false;
-
 	float AIscalingTimer = 0;
 	float AITimer = 0;
 };

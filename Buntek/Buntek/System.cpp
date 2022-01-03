@@ -1,5 +1,6 @@
 #include "System.h"
 #include "AssetManager.h"
+#include "GameManager.h"
 
 _eventManager* _eventManager::instance = 0;
 _sceneManager* _sceneManager::instance = 0;
@@ -93,6 +94,7 @@ void _sceneManager::LoadScene(Scene* newScene)
     }
     notStarted = true;
     scene = newScene;
+    GameManager.cameraLerpBack = false;
 }
 
 Scene* _sceneManager::GetScene(void)
