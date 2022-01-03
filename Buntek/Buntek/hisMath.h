@@ -107,6 +107,13 @@ namespace Math
 		return (num + min);
 	}//end of RandFloatMinMax function
 
+	inline float LerpF(float start_value, float end_value, float t)
+	{
+		t = t > 1 ? 1 : t;
+		t = t < 0 ? 0 : t;
+		return start_value + (end_value - start_value) * t;
+	}//end of LerpF function
+
 }//end namespace Math
 
 class DivideByZero : public std::exception

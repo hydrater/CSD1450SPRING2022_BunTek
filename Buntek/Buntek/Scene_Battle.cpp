@@ -79,9 +79,9 @@ void Scene_Battle::Start(void)
 
 	playercursor = new GameObject();
 	tempRenderer = playercursor->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(10, 10);
+	tempRenderer->Size(50, 50);
 	tempRenderer->SetTexture("ball.png");
-	tempRenderer->SetColor(1, 1, 1);
+	tempRenderer->SetColor(0.5f, 0.5f, 1);
 	CursorBehaviour* tempcursor;
 	tempcursor = playercursor->AddComponent<CursorBehaviour>();
 	tempcursor->setplayerpossess(true);
@@ -91,9 +91,9 @@ void Scene_Battle::Start(void)
 
 	AIcursor = new GameObject();
 	tempRenderer = AIcursor->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(10, 10);
+	tempRenderer->Size(50, 50);
 	tempRenderer->SetTexture("ball.png");
-	tempRenderer->SetColor(1, 1, 1);
+	tempRenderer->SetColor(1, 0.5f, 0.5f);
 	tempcursor = AIcursor->AddComponent<CursorBehaviour>();
 	tempcursor->setplayerpossess(false);
 	tempcursor->sr = tempRenderer;

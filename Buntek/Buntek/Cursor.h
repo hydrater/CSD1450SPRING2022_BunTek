@@ -21,4 +21,16 @@ public:
 private:
 	bool playerPossess = false;
 	Transform* transform = 0;
+
+	float scaleSpeed = 0.025f;
+	float minScale = 0.75f;
+	float maxScale = 1;
+	float scale = 0.1f;
+	float targetScale = 1;
+
+	float transSpeed = 0.025f;
+	float minTrans = 0.5f;
+	float maxTrans = 1;
+	float trans = 0.1f;
+	float targetTrans = 1;
 };

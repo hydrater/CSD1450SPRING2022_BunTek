@@ -24,6 +24,27 @@ void CursorBehaviour::Update(void)
 		transform->SetPosition(GameManager.GetCursorPosition());
 	}
 	// Follow the enemy position will be called by the AI
+
+	// Create a Glow Effect
+	scale = LerpF(scale, targetScale, scaleSpeed);
+
+	if (scale >= targetScale - 0.01f && scale <= targetScale + 0.01f)
+	{
+		targetScale = (targetScale == maxScale) ? minScale : maxScale;
+		scaleSpeed = RandFloatMinMax(0.005f, 0.025f);
+	}
+
+	transform->SetScale(Vector2(scale, scale));
+
+	trans = LerpF(trans, targetTrans, transSpeed);
+
+	if (trans >= targetTrans - 0.01f && trans <= targetTrans + 0.01f)
+	{
+		targetTrans = (targetTrans == maxTrans) ? minTrans : maxTrans;
+		transSpeed = RandFloatMinMax(0.005f, 0.025f);
+	}
+
+	sr->SetTransparency(trans);
 }
 
 void CursorBehaviour::setplayerpossess(bool _playerpossess)
