@@ -90,15 +90,37 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 			
 			if (0 - angrange < ang && ang <= 0) {
 				velocity.Rotate(0 + angrange - ang);
+				if (isPlayer) {
+					velocity.Rotate(0 + angrange - ang);
+				}
+				else {
+					velocity.Rotate(0 - angrange - ang);
+				}
 			}
 			else if (ang < 0 + angrange && ang > 0) {
-				velocity.Rotate(0 - angrange - ang);
+				if (isPlayer) {
+					velocity.Rotate(0 + angrange - ang);
+				}
+				else {
+					velocity.Rotate(0 - angrange - ang);
+				}
 			}
 			else if (-180 + angrange > ang && ang > -180) {
-				velocity.Rotate(180 - angrange - ang);
+				if (isPlayer) {
+					velocity.Rotate(180 - angrange - ang);
+				}
+				else {
+					velocity.Rotate(-180 + angrange - ang);
+				}
+				
 			}
 			else if (ang > 180 - angrange && ang <= 180) {
-				velocity.Rotate(-180 + angrange - ang);
+				if (isPlayer) {
+					velocity.Rotate(180 - angrange - ang);
+				}
+				else {
+					velocity.Rotate(-180 + angrange - ang);
+				}
 			}
 		}
 	}	
