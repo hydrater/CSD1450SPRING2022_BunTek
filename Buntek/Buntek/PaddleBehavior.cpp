@@ -25,36 +25,63 @@ void PaddleBehavior::Update(void)
 
 void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 {
-	if (isPlayer != playerPaddle) {
-		return;
-	}
+	
 	Transform* tempTransform = Owner()->transform;
 	if (transform == nullptr)
 		return;
+	if (isPlayer == playerPaddle) {
+		float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
 
-	float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
+		float mag = Vector2(xDelta, yDelta).Length();
+		if (mag >= MinMoveDist) {
 
-	float mag = Vector2(xDelta, yDelta).Length();
-	if (mag >= MinMoveDist) {
+			speed = GameManager.lerpF(0, Maxspeed, mag / Maxspeed) * (float)AEFrameRateControllerGetFrameTime();
 
-		speed = GameManager.lerpF(0, Maxspeed, mag / Maxspeed) * (float)AEFrameRateControllerGetFrameTime();
+			velocity = Vector2(xDelta / mag, yDelta / mag);
 
-		velocity = Vector2(xDelta / mag, yDelta / mag);
-
-		transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
+			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
 
 
-		if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= sr->GetHalfWidth() || fabs(transform->worldposition.x - GameManager.friendlyAreaX) <= sr->GetHalfWidth() 
-			|| transform->worldposition.x > GameManager.friendlyAreaX || transform->worldposition.x < GameManager.areaLeftBoundary)
-		{
-			transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + sr->GetHalfWidth(), GameManager.friendlyAreaX - sr->GetHalfWidth());
+			if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= sr->GetHalfWidth() || fabs(transform->worldposition.x - GameManager.friendlyAreaX) <= sr->GetHalfWidth()
+				|| transform->worldposition.x > GameManager.friendlyAreaX || transform->worldposition.x < GameManager.areaLeftBoundary)
+			{
+				transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + sr->GetHalfWidth(), GameManager.friendlyAreaX - sr->GetHalfWidth());
+			}
+			if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= sr->GetHalfHeight() || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= sr->GetHalfHeight()
+				|| transform->worldposition.y < GameManager.areaTopBoundary || transform->worldposition.y > GameManager.areaBottomBoundary)
+			{
+				transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + sr->GetHalfHeight(), GameManager.areaTopBoundary - sr->GetHalfHeight());
+			}
 		}
-		if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= sr->GetHalfHeight() || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= sr->GetHalfHeight()
-			|| transform->worldposition.y < GameManager.areaTopBoundary || transform->worldposition.y > GameManager.areaBottomBoundary)
-		{
-			transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + sr->GetHalfHeight(), GameManager.areaTopBoundary - sr->GetHalfHeight());
-		}
+		return;
 	}
+	else if (isPlayer != playerPaddle) {
+		float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
+
+		float mag = Vector2(xDelta, yDelta).Length();
+		if (mag >= MinMoveDist) {
+
+			speed = GameManager.lerpF(0, Maxspeed, mag / Maxspeed) * (float)AEFrameRateControllerGetFrameTime();
+
+			velocity = Vector2(xDelta / mag, yDelta / mag);
+
+			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed, transform->worldposition.y + velocity.y * speed));
+
+
+			if (fabs(transform->worldposition.x - GameManager.hostileAreaX) <= sr->GetHalfWidth() || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= sr->GetHalfWidth()
+				|| transform->worldposition.x > GameManager.hostileAreaX || transform->worldposition.x < GameManager.areaRightBoundary)
+			{
+				transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.hostileAreaX + sr->GetHalfWidth(), GameManager.areaRightBoundary - sr->GetHalfWidth());
+			}
+			if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= sr->GetHalfHeight() || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= sr->GetHalfHeight()
+				|| transform->worldposition.y < GameManager.areaTopBoundary || transform->worldposition.y > GameManager.areaBottomBoundary)
+			{
+				transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + sr->GetHalfHeight(), GameManager.areaTopBoundary - sr->GetHalfHeight());
+			}
+		}
+		return;
+	}
+	
 }
 
 
