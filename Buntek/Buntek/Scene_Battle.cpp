@@ -4,7 +4,7 @@
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
 #include "System.h"
-#include "BattleInput.h"
+#include "BattleInput2.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
 
@@ -17,8 +17,8 @@ void Scene_Battle::Start(void)
 	AudioManager.SetMusicVolume(0.1f);
 
 	inputHandler = new GameObject();
-	inputHandler->AddComponent<BattleInput>();
-	ballList = &inputHandler->GetComponent<BattleInput>()->ballList;
+	inputHandler->AddComponent<BattleInput2>();
+	ballList = &inputHandler->GetComponent<BattleInput2>()->ballList;
 
 	SpriteRenderer* tempRenderer;
 
@@ -61,7 +61,30 @@ void Scene_Battle::Start(void)
 	temppaddle->setMinMoveDist(10);
 	temppaddle->sr = tempRenderer;
 
-	inputHandler->GetComponent<BattleInput>()->playerpaddle = temppaddle;
+	inputHandler->GetComponent<BattleInput2>()->playerpaddle = temppaddle;
+
+	playercursor = new GameObject();
+	tempRenderer = playercursor->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(10, 10);
+	tempRenderer->SetTexture("ball.png");
+	tempRenderer->SetColor(1, 1, 1);
+	CursorBehaviour* tempcursor;
+	tempcursor = playercursor->AddComponent<CursorBehaviour>();
+	tempcursor->setplayerpossess(true);
+	tempcursor->sr = tempRenderer;
+
+	inputHandler->GetComponent<BattleInput2>()->playerCursor = tempcursor;
+
+	AIcursor = new GameObject();
+	tempRenderer = AIcursor->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(10, 10);
+	tempRenderer->SetTexture("ball.png");
+	tempRenderer->SetColor(1, 1, 1);
+	tempcursor = AIcursor->AddComponent<CursorBehaviour>();
+	tempcursor->setplayerpossess(false);
+	tempcursor->sr = tempRenderer;
+
+	inputHandler->GetComponent<BattleInput2>()->AICursor = tempcursor;
 
 	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();

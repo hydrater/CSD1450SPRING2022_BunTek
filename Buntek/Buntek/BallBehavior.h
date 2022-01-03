@@ -10,7 +10,6 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
-	Vector2 position = Vector2(0, 0);
 	Vector2 velocity = Vector2(0, 0);
 	float radius = 250;
 	float GetSpeed(void);

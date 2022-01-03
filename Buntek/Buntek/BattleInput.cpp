@@ -7,7 +7,6 @@
 #include "GameManager.h"
 
 using namespace Math;
-float AIscalingTimer = 0;
 
 BattleInput::BattleInput(void)
 {

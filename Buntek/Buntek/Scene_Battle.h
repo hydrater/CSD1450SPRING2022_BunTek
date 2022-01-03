@@ -9,7 +9,7 @@ public:
     void Update(void) override;
 private:
     GameObject* inputHandler;
-    GameObject* background, * ball, * friendlyArea, * hostileArea, * neutralArea, * playerpaddle;
+    GameObject* background, * ball, * friendlyArea, * hostileArea, * neutralArea, * playerpaddle, *playercursor, *AIcursor;
     float ballSpawnTimer = 0, scalingTimer = 0;
     vector<BallBehavior*>* ballList;
 };
