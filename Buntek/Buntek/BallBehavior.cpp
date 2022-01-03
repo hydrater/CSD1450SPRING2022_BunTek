@@ -74,7 +74,7 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 
 			float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
 			cout << ang << endl;
-			if (0 - angrange < ang && ang < 0 + angrange) {
+			if (0 - angrange < ang || ang < 0 + angrange) {
 				if (isPlayer) {
 					velocity.Rotate(0 + angrange - ang);
 				}
@@ -82,7 +82,7 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 					velocity.Rotate(0 - angrange - ang);
 				}
 			}
-			else if (-180 + angrange > ang && ang < 180 - angrange) {
+			else if (-180 + angrange > ang || ang > 180 - angrange) {
 				if (isPlayer) {
 					velocity.Rotate(180 - angrange - ang);
 				}
