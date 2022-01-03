@@ -117,23 +117,33 @@ _mapData& _mapData::Instance(void)
 
 void _mapData::GenerateList(Vector2 originPos)
 {
+    float widthSize = 1200;
+
+    originPos.x /= 2;
+
     for (int i = 0; i < 10; i++)
     {
         short width = (short)RandIntMinMax(2, 5);
+        float cellSize = widthSize / width;
+        float widthOffset = originPos.x - widthSize / 2;
+        widthOffset += cellSize / 2;
+
         for (short j = 0; j < width; j++)
         {
             Node node = Node();
             node.column = j;
-            node.pos = Vector2(j * 200 + originPos.x, i * 300 + originPos.y);
 
             GameObject* temp = new GameObject;
             SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
             tempRenderer->Size(50, 50);
             tempRenderer->SetTexture("Steven.jpg");
-            temp->transform->worldposition = node.pos;
 
-            node.clickable;
+            temp->transform->worldposition = Vector2(j + widthOffset, i * 300 + originPos.y);
+
+            node.clickable = temp;
             //node.connectedNodes
+
+            widthOffset += cellSize;
         }
     }
 }

@@ -66,7 +66,6 @@ public:
     public:
         GameObject* clickable;
         short column;
-        Vector2 pos;
         vector<Node*> connectedNodes;
     };
     Node currentNode;
