@@ -122,7 +122,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
 {
     float widthSize = 1600;
 
-    originPos.x /= 2;
+    cout << originPos.x << endl;
 
     for (int i = 0; i < 10; i++)
     {
@@ -134,6 +134,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
         float widthOffset = originPos.x - widthSize / 2;
         widthOffset += cellSize / 2;
 
+        nodeList.push_back(vector<Node>());
         if (i > 0)
         {
             int previousRowSize = nodeList[(size_t)i-1].size();

@@ -6,7 +6,7 @@
 
 void Scene_Navigation::Start(void)
 {
-	MapData.GenerateList(Vector2(0, -1200));
+	MapData.GenerateMapData(Vector2(0, -1200));
 	inputHandler = new GameObject();
 	inputHandler->AddComponent<CursorCamera>()->camPos = Vector2(0, -900);
 	AEGfxSetCamPosition(0, -900);
