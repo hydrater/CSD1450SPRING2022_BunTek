@@ -68,12 +68,13 @@ public:
     {
     public:
         GameObject* clickable;
-        short column;
+        bool reached;
         vector<Node*> connectedNodes;
     };
     Node currentNode;
     static _mapData& Instance(void);
-    void GenerateList(Vector2 originPos);
+    void GenerateMapData(Vector2 originPos);
+    void GenerateMapObject(void);
     void ClearList(void);
 
 private:

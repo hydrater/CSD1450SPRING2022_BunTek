@@ -118,7 +118,7 @@ _mapData& _mapData::Instance(void)
     return *instance;
 }
 
-void _mapData::GenerateList(Vector2 originPos)
+void _mapData::GenerateMapData(Vector2 originPos)
 {
     float widthSize = 1600;
 
@@ -128,7 +128,7 @@ void _mapData::GenerateList(Vector2 originPos)
     {
         short width = 1;
         if (!(i == 0 || i == 9))
-            width = (short)RandIntMinMax(2, 5);
+            width = (short)RandIntMinMax(2, 6);
 
         float cellSize = widthSize / width;
         float widthOffset = originPos.x - widthSize / 2;
@@ -144,7 +144,6 @@ void _mapData::GenerateList(Vector2 originPos)
         for (short j = 0; j < width; j++)
         {
             Node node = Node();
-            node.column = j;
 
             GameObject* temp = new GameObject;
             SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
@@ -163,6 +162,17 @@ void _mapData::GenerateList(Vector2 originPos)
 
             // Should maybe store a pointer
             nodeList[i].push_back(node);
+        }
+    }
+}
+
+void _mapData::GenerateMapObject(void)
+{
+    for (int i = 0; i < nodeList.size(); ++i)
+    {
+        for (int j = 0; j < nodeList[i].size(); ++j)
+        {
+            
         }
     }
 }
