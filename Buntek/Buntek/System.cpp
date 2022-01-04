@@ -89,8 +89,8 @@ void _sceneManager::LoadScene(Scene* newScene)
     if (scene != NULL)
     {
         AssetManager.FreeAll();
-        delete scene;
         GameScriptManager.ClearList();
+        delete scene;
     }
     notStarted = true;
     scene = newScene;
