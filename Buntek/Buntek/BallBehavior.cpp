@@ -45,15 +45,22 @@ void BallBehavior::Update(void)
 		transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + 5, GameManager.areaTopBoundary - 5);
 	}
 
-	// Update Ball Trail position
+	UpdateTrail();
+}
+
+void BallBehavior::UpdateTrail(void)
+{
+	// Reset Color and Transform
 	srBallTrail->SetColor(sr->GetColor('R'), sr->GetColor('G'), sr->GetColor('B'));
-	ballTrail->transform->SetScale(Vector2(1.0, speed/300));
-	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
+	ballTrail->transform->SetScale(Vector2(1.0, speed / initspeed));
+
 	// Correct ang based on velocity
+	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
 	ang = (velocity.x < 0) ? 360 - ang : ang;
 	Vector2 trailoffset = Vector2(0, (double)ballTrail->transform->worldscale.y * 20 / 2.0);
 	trailoffset.Rotate(ang);
 
+	// Update position and offset
 	ballTrail->transform->worldposition.x = transform->worldposition.x - velocity.x * 2 - trailoffset.x;
 	ballTrail->transform->worldposition.y = transform->worldposition.y - velocity.y * 2 - trailoffset.y;
 	ballTrail->transform->SetRotation(ang);

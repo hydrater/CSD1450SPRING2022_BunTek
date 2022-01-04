@@ -10,6 +10,8 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
+	void UpdateTrail(void);
+
 	GameObject* ballTrail;
 	SpriteRenderer* srBallTrail = 0;
 
