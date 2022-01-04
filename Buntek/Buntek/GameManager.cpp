@@ -134,6 +134,12 @@ void _mapData::GenerateList(Vector2 originPos)
         float widthOffset = originPos.x - widthSize / 2;
         widthOffset += cellSize / 2;
 
+        if (i > 0)
+        {
+            int previousRowSize = nodeList[i-1].size();
+
+        }
+
         for (short j = 0; j < width; j++)
         {
             Node node = Node();
@@ -153,6 +159,9 @@ void _mapData::GenerateList(Vector2 originPos)
             //node.connectedNodes
 
             widthOffset += cellSize;
+
+            // Should maybe store a pointer
+            nodeList[i].push_back(node);
         }
     }
 }
