@@ -122,12 +122,23 @@ void Scene_Battle::Update(void)
 		SpriteRenderer* tempRenderer;
 		BallBehavior* tempBall;
 
+		//Create Trail first (Render Trail before Ball)
+		GameObject* tempballTrail = new GameObject();
+		SpriteRenderer* tempballTrailRenderer;
+		tempballTrailRenderer = tempballTrail->AddComponent<SpriteRenderer>();
+		tempballTrailRenderer->Size(20, 20);
+		tempballTrailRenderer->SetTexture("Trail.png");
+		tempballTrailRenderer->SetColor(1, 1, 1);
+		tempballTrailRenderer->SetTransparency(0.5f);
+
 		ball = new GameObject();
 		tempRenderer = ball->AddComponent<SpriteRenderer>();
 		tempRenderer->Size(20, 20);
 		tempRenderer->SetTexture("ball.png");
 		tempBall = ball->AddComponent<BallBehavior>();
 		//tempBall->battleInput = cursorManager->GetComponent<BattleInput>();
+		tempBall->ballTrail = tempballTrail;
+		tempBall->srBallTrail = tempballTrailRenderer;
 		bool dir = RandIntMinMax(0, 1);
 		tempBall->playerPossess = (dir? true : false);
 		tempBall->velocity = Vector2((float) (dir?-1:1), RandFloatMinMax(0, 1));

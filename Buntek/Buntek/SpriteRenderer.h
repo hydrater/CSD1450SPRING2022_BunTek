@@ -16,6 +16,7 @@ public:
 	void SetTexture(string textureName);
 	float GetTransparency();
 	void SetTransparency(float value);
+	float GetColor(char color);
 	void SetColor(float _R, float _G, float _B);
 	float R = 1, G = 1, B = 1;
 

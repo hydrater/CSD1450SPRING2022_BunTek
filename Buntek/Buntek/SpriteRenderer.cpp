@@ -52,6 +52,17 @@ void SpriteRenderer::SetTransparency(float value)
 	transparency = value;
 }
 
+float SpriteRenderer::GetColor(char color)
+{
+	switch (color)
+	{
+		case ('R'): return R; break;
+		case ('G'): return G; break;
+		case ('B'): return B; break;
+		default: return 0; break;
+	}
+}
+
 void SpriteRenderer::SetColor(float _R, float _G, float _B)
 {
 	R = _R, G = _G, B = _B;

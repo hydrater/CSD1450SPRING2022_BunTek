@@ -14,6 +14,9 @@ BallBehavior::~BallBehavior(void)
 void BallBehavior::Start(void)
 {
 	transform = this->Owner()->transform;
+
+	//Create a Trail
+	ballTrail->transform->SetPosition(Vector2(transform->worldposition.x, transform->worldposition.y - (ballTrail->transform->worldscale.y * 20 / 2.f)));
 }
 
 void BallBehavior::Update(void)
@@ -34,12 +37,26 @@ void BallBehavior::Update(void)
 
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		this->Owner()->Delete();
+		ballTrail->Delete();
 	}
 	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius) 
 	{
 		velocity.y = -velocity.y;
 		transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + 5, GameManager.areaTopBoundary - 5);
 	}
+
+	// Update Ball Trail position
+	srBallTrail->SetColor(sr->GetColor('R'), sr->GetColor('G'), sr->GetColor('B'));
+	ballTrail->transform->SetScale(Vector2(1.0, speed/300));
+	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
+	// Correct ang based on velocity
+	ang = (velocity.x < 0) ? 360 - ang : ang;
+	Vector2 trailoffset = Vector2(0, (double)ballTrail->transform->worldscale.y * 20 / 2.0);
+	trailoffset.Rotate(ang);
+
+	ballTrail->transform->worldposition.x = transform->worldposition.x - velocity.x * 2 - trailoffset.x;
+	ballTrail->transform->worldposition.y = transform->worldposition.y - velocity.y * 2 - trailoffset.y;
+	ballTrail->transform->SetRotation(ang);
 }
 
 float BallBehavior::GetSpeed(void)
@@ -55,7 +72,7 @@ void BallBehavior::SetSpeed(float _speed)
 
 void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 {
-	//playerPossess means player can click the ball?
+	//playerPossess: Player can click the ball
 	if (isPlayer != playerPossess)
 		return;
 

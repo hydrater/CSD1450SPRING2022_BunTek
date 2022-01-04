@@ -10,6 +10,9 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
+	GameObject* ballTrail;
+	SpriteRenderer* srBallTrail = 0;
+
 	Vector2 velocity = Vector2(0, 0);
 	float radius = 250;
 	float GetSpeed(void);
