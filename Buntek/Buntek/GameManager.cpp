@@ -136,8 +136,9 @@ void _mapData::GenerateList(Vector2 originPos)
 
         if (i > 0)
         {
-            int previousRowSize = nodeList[i-1].size();
-
+            int previousRowSize = nodeList[(size_t)i-1].size();
+            int minimumLinksPerNode = width / previousRowSize;
+            int extraNodes = width % previousRowSize;
         }
 
         for (short j = 0; j < width; j++)
