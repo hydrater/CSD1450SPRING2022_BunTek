@@ -53,5 +53,4 @@ void CursorCamera::Update(void)
 
 	float n, m;
 	AEGfxGetCamPosition(&n, &m);
-	cout << n << " " << m << endl;
 }

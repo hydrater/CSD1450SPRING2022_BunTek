@@ -89,11 +89,13 @@ void _sceneManager::LoadScene(Scene* newScene)
     if (scene != NULL)
     {
         AssetManager.FreeAll();
+        GameScriptManager.ClearList();
         delete scene;
     }
     notStarted = true;
     scene = newScene;
     GameManager.cameraLerpBack = false;
+    AEGfxSetCamPosition(0, 0);
 }
 
 Scene* _sceneManager::GetScene(void)
@@ -156,14 +158,11 @@ void _gameScriptManager::Update(void)
 
         gameScriptList[i]->Update();
     }
+    //cout << gameScriptList.size() << endl;
 }
 
 void _gameScriptManager::ClearList(void)
 {
-    for (int i = gameScriptList.size(); i > 0 ; --i)
-    {
-        delete gameScriptList[i];
-    }
-
     gameScriptList.clear();
 }
+

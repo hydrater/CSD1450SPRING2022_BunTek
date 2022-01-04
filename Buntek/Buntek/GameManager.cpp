@@ -122,8 +122,6 @@ void _mapData::GenerateMapData(Vector2 originPos)
 {
     float widthSize = 1600;
 
-    cout << originPos.x << endl;
-
     for (int i = 0; i < 10; i++)
     {
         short width = 1;
