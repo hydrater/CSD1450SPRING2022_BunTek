@@ -54,12 +54,18 @@ _eventManager& _eventManager::Instance(void)
 
 void Scene::Start(void)
 {
+}
 
+void Scene::EarlyUpdate(void)
+{
 }
 
 void Scene::Update(void)
 {
+}
 
+void Scene::LateUpdate(void)
+{
 }
 
 _sceneManager& _sceneManager::Instance(void)
@@ -111,6 +117,16 @@ void _sceneManager::Update(void)
         notStarted = false;
     }
     scene->Update();
+}
+
+void _sceneManager::LateUpdate(void)
+{
+    scene->LateUpdate();
+}
+
+void _sceneManager::EarlyUpdate(void)
+{
+    scene->EarlyUpdate();
 }
 
 _gameScriptManager::_gameScriptManager()

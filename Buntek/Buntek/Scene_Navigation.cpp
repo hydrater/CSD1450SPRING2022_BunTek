@@ -3,6 +3,7 @@
 #include "CursorCamera.h"
 #include "Component.h"
 #include "SpriteRenderer.h"
+#include "AssetManager.h"
 
 void Scene_Navigation::Start(void)
 {
@@ -13,13 +14,43 @@ void Scene_Navigation::Start(void)
 	AEGfxSetCamPosition(0, -900);
 }
 
-void Scene_Navigation::Update(void)
+void Scene_Navigation::EarlyUpdate(void)
 {
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.3f);
+
+	if (mesh == 0)
+	{
+		AEGfxMeshStart();
+
+		AEGfxTriAdd(
+			-30.0f, -60.0f, 0x00FF00FF, 0.0f, 1.0f,
+			30.0f, -60.0f, 0x00FFFF00, 1.0f, 1.0f,
+			-30.0f, 60.0f, 0x0000FFFF, 0.0f, 0.0f);
+
+		AEGfxTriAdd(
+			30.0f, -60.0f, 0x00FFFFFF, 1.0f, 1.0f,
+			30.0f, 60.0f, 0x00FFFFFF, 1.0f, 0.0f,
+			-30.0f, 60.0f, 0x00FFFFFF, 0.0f, 0.0f);
+		mesh = AEGfxMeshEnd();
+	}
+
+	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxTextureSet(AssetManager.GetTexture("BetterNebula.png"), 0, 0);
+	AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
+
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	AEGfxSetPosition(0.0f, 0.0f);
 	for (int i = 0; i < MapData.connectedLines.size(); i++)
 	{
 		AEGfxMeshDraw(MapData.connectedLines[i], AE_GFX_MDM_LINES_STRIP);
 	}
+}
+
+void Scene_Navigation::Update(void)
+{
+}
+
+Scene_Navigation::~Scene_Navigation(void)
+{
+	AEGfxMeshFree(mesh);
 }

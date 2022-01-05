@@ -136,7 +136,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
         {
             Node node = Node();
 
-            float offsetX = RandFloatMinMax(-cellSize / 3, cellSize / 3);
+            float offsetX = RandFloatMinMax(-cellSize / 4, cellSize / 4);
             float offsetY = RandFloatMinMax(-100, 100);
             node.pos = Vector2(j + widthOffset + offsetX, i * cellHeight + originPos.y + offsetY);
 

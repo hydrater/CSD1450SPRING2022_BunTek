@@ -9,13 +9,13 @@ _assetManager::_assetManager()
     LoadTexture("Steven.jpg");
     LoadTexture("splash.png");
     LoadTexture("Background.jpg");
-    //LoadTexture("YellowTexture.png");
-    //LoadTexture("BlackTexture.png");
     LoadTexture("WhiteTexture.png");
     LoadTexture("ball.png");
     LoadTexture("paddle.png");
     LoadTexture("MainMenu.png");
+    LoadTexture("BetterNebula.png");
     LoadFont("Roboto-Regular.ttf");
+
     mesh = 0;
 
     AEGfxMeshStart();

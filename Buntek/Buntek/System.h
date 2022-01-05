@@ -25,7 +25,9 @@ class Scene
 {
 public:
     virtual void Start(void);
+    virtual void EarlyUpdate(void);
     virtual void Update(void);
+    virtual void LateUpdate(void);
 };
 
 class _sceneManager
@@ -41,7 +43,9 @@ public:
     static _sceneManager& Instance(void);
     void LoadScene(Scene* newScene);
     Scene* GetScene(void);
+    void EarlyUpdate(void);
     void Update(void);
+    void LateUpdate(void);
 };
 
 class _gameScriptManager

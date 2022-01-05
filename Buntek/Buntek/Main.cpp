@@ -55,9 +55,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Handling Input
 		AEInputUpdate();
 
-		// Remove white backgrounds
+		//if (AEInputCheckTriggered(AEVK_1))
+		//{
+		//	SceneManager.LoadScene(new Scene_Navigation);
+		//}
 
 		// --------------------------------------------- Update --------------------------------------------- //
+		SceneManager.EarlyUpdate();
 		GameScriptManager.Update();
 		AudioManager.Update();
 		SceneManager.Update();
@@ -65,7 +69,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// --------------------------------------------- Render --------------------------------------------- //
 		GameManager.CameraUpdate();
 		AssetManager.RenderAll();
-
+		SceneManager.LateUpdate();
 		// --------------------------------------------- Collision --------------------------------------------- //
 		CollisionManager2D.CollideAll();
 		// ------------------------------------------- End of Loop ------------------------------------------- //
