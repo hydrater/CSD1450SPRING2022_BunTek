@@ -130,7 +130,10 @@ void _assetManager::RenderAll(void)
         //AEGfxMeshFree(mesh);
         
         //Text Rendering
-        AEGfxPrint(GetFont(rendererList[i]->GetFontName()), &rendererList[i]->GetText()[0], (transform->worldposition.x - halfWidth)/ ((float)AEGetWindowWidth() / 2), (transform->worldposition.y - halfHeight/2) / ((float)AEGetWindowHeight() / 2), 1, rendererList[i]->TextR, rendererList[i]->TextG, rendererList[i]->TextB);
+        AEGfxPrint(GetFont(rendererList[i]->GetFontName()), &rendererList[i]->GetText()[0],
+            (transform->worldposition.x - rendererList[i]->TextWidth/2)/ ((float)AEGetWindowWidth() / 2),
+            (transform->worldposition.y - rendererList[i]->TextHeight/2) / ((float)AEGetWindowHeight() / 2),
+            rendererList[i]->textScale, rendererList[i]->TextR, rendererList[i]->TextG, rendererList[i]->TextB);
 
     }
 }

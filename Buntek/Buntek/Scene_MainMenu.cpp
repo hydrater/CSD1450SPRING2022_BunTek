@@ -20,8 +20,8 @@ void Scene_MainMenu::Start(void)
 	tempRenderer->Size(200, 100);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetFont("Roboto-Regular.ttf");
-	tempRenderer->SetText("Battle");
 	tempRenderer->SetTextColor(1, 0, 0);
+	tempRenderer->SetText("Battle");
 	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
 	button = Battle->AddComponent<Button>();
