@@ -20,7 +20,7 @@ void Scene_MainMenu::Start(void)
 	tempRenderer->Size(200, 100);
 	tempRenderer->SetTexture("Buttons.png");
 	//tempRenderer->SetTexture("WhiteTexture.png");
-	tempRenderer->SetFont("Stargaze.otf");
+	tempRenderer->SetFont("Naden.otf");
 	tempRenderer->SetTextColor(1, 1, 1);
 	tempRenderer->SetText("B a t t l e");
 

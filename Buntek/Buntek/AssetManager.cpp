@@ -18,6 +18,7 @@ _assetManager::_assetManager()
     //font
     LoadFont("Roboto-Regular.ttf");
     LoadFont("Stargaze.otf");
+    LoadFont("Naden.otf");
 
     mesh = 0;
 
