@@ -120,12 +120,10 @@ _mapData& _mapData::Instance(void)
 
 void _mapData::GenerateMapData(Vector2 originPos)
 {
-    float widthSize = 1600;
-
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < cellRows; i++)
     {
         short width = 1;
-        if (!(i == 0 || i == 9))
+        if (!(i == 0 || i == cellRows-1))
             width = (short)RandIntMinMax(2, 6);
 
         float cellSize = widthSize / width;
@@ -133,12 +131,6 @@ void _mapData::GenerateMapData(Vector2 originPos)
         widthOffset += cellSize / 2;
 
         nodeList.push_back(vector<Node>());
-        //if (i > 0)
-        //{
-        //    int previousRowSize = nodeList[(size_t)i-1].size();
-        //    int minimumLinksPerNode = width / previousRowSize;
-        //    int extraNodes = width % previousRowSize;
-        //}
 
         for (short j = 0; j < width; j++)
         {
@@ -146,14 +138,37 @@ void _mapData::GenerateMapData(Vector2 originPos)
 
             float offsetX = RandFloatMinMax(-cellSize / 3, cellSize / 3);
             float offsetY = RandFloatMinMax(-100, 100);
-
-            node.pos = Vector2(j + widthOffset + offsetX, i * 300 + originPos.y + offsetY);
+            node.pos = Vector2(j + widthOffset + offsetX, i * cellHeight + originPos.y + offsetY);
 
             widthOffset += cellSize;
 
             // Should maybe store a pointer
             nodeList[i].push_back(node);
         }
+
+        if (i == cellRows-1)
+        {
+            for (int j = 0; j < nodeList[8].size(); ++j)
+            {
+                nodeList[(size_t)cellRows-2][j].connectedNodes.push_back(&nodeList[(size_t)cellRows-1][0]);
+            }
+        }
+        else if (i > 0)
+		{
+			int previousRowSize = nodeList[(size_t)i - 1].size();
+			int minimumLinksPerNode = width / previousRowSize;
+			int extraNodes = width % previousRowSize;
+            int k = 0, int l = 0;
+
+            for (int j = 0; j < nodeList[(size_t)i - 1].size(); ++j)
+            {
+                for (int k = 0; k < minimumLinksPerNode; ++k)
+                {
+                    nodeList[(size_t)i - 1][j].connectedNodes.push_back(&nodeList[i][l]);
+                    ++l;
+                }
+            }
+		}
     }
 }
 

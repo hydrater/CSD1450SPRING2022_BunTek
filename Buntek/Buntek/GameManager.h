@@ -71,7 +71,7 @@ public:
         Vector2 pos;
         bool reached;
         vector<Node*> connectedNodes;
-        vector<AEGfxVertexList*> connectingLines; // this wont render lmao
+        vector<AEGfxVertexList*> connectedLines; // this wont render lmao
         // Let's try render it in the scene and keep between scene changes.
         // Render is call via scene.Update()
         // Do we even free? :thinking:
@@ -84,6 +84,9 @@ public:
 
 private:
     static _mapData* instance;
+    const float widthSize = 1600;
+    const float cellHeight = 300;
+    const int cellRows = 10;
     vector<vector<Node>> nodeList;
 };
 
