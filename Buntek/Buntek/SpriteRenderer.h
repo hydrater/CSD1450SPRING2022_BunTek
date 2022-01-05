@@ -14,14 +14,22 @@ public:
 	Transform* GetTransform(void);
 	string GetTextureName(void);
 	void SetTexture(string textureName);
+	string GetFontName(void);
+	void SetFont(string textureName);
+	string GetText(void);
+	void SetText(string textureName);
 	float GetTransparency();
 	void SetTransparency(float value);
 	float GetColor(char color);
 	void SetColor(float _R, float _G, float _B);
+	void SetTextColor(float _R, float _G, float _B);
 	float R = 1, G = 1, B = 1;
+	float TextR = 1, TextG = 1, TextB = 1;
 
 private:
 	string textureString = "Steven.jpg";
+	string fontString = "Roboto-Regular.ttf";
+	string text = "";
 	float halfWidth = 100;
 	float halfHeight = 100;
 	float transparency = 1;

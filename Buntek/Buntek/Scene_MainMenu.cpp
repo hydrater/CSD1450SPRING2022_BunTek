@@ -3,14 +3,13 @@
 #include "Button.h"
 #include "Scene_Battle.h"
 
+
 void MoveToBattle(void);
 
 void Scene_MainMenu::Start(void)
 {
-	//char font = AEGfxCreateFont("Roboto-Regular.ttf", 100);
-	//string s = "test";
-	//s8* t = &s;
-	//AEGfxPrint(font, t, 0, 0, 1, 1, 1, 1);
+	
+
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
 	background->GetComponent<SpriteRenderer>()->SetTexture("MainMenu.png");
@@ -20,17 +19,22 @@ void Scene_MainMenu::Start(void)
 	tempRenderer = Battle->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(200, 100);
 	tempRenderer->SetTexture("WhiteTexture.png");
+	tempRenderer->SetFont("Roboto-Regular.ttf");
+	tempRenderer->SetText("Battle");
+	tempRenderer->SetTextColor(1, 0, 0);
 	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
 	button = Battle->AddComponent<Button>();
 	button->sr = tempRenderer;
-	button->ButtonType = Button::MoveScene;
 	button->ButtonEffect = &MoveToBattle;
-
+	
 }
 
 void Scene_MainMenu::Update(void)
 {
+	
+	//string s = "test";
+
 	//Battle->GetComponent<Button>()->ButtonEffect();
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }

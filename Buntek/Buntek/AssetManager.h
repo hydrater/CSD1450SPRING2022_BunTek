@@ -15,8 +15,11 @@ private:
     vector<SpriteRenderer*> rendererList;
     AEGfxVertexList* mesh;
     map<string, AEGfxTexture*> textureDatabase;
+    map<string, char> FontDatabase;
     void LoadTexture(string name);
     AEGfxTexture* GetTexture(string name);
+    void LoadFont(string name);
+    char GetFont(string name);
 
 public:
     static _assetManager& Instance(void);

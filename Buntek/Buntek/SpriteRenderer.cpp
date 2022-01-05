@@ -42,6 +42,24 @@ void SpriteRenderer::SetTexture(string textureName)
 	textureString = textureName;
 }
 
+string SpriteRenderer::GetFontName(void)
+{
+	return fontString;
+}
+
+void SpriteRenderer::SetFont(string fontName)
+{
+	fontString = fontName;
+}
+string SpriteRenderer::GetText(void)
+{
+	return text;
+}
+
+void SpriteRenderer::SetText(string _text)
+{
+	text = _text;
+}
 float SpriteRenderer::GetTransparency()
 {
 	return transparency;
@@ -66,4 +84,8 @@ float SpriteRenderer::GetColor(char color)
 void SpriteRenderer::SetColor(float _R, float _G, float _B)
 {
 	R = _R, G = _G, B = _B;
+}
+void SpriteRenderer::SetTextColor(float _R, float _G, float _B)
+{
+	TextR = _R, TextG = _G, TextB = _B;
 }

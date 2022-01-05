@@ -9,11 +9,13 @@ _assetManager::_assetManager()
     LoadTexture("Steven.jpg");
     LoadTexture("splash.png");
     LoadTexture("Background.jpg");
+    //LoadTexture("YellowTexture.png");
+    //LoadTexture("BlackTexture.png");
     LoadTexture("WhiteTexture.png");
     LoadTexture("ball.png");
     LoadTexture("paddle.png");
     LoadTexture("MainMenu.png");
-
+    LoadFont("Roboto-Regular.ttf");
     mesh = 0;
 
     AEGfxMeshStart();
@@ -51,6 +53,7 @@ _assetManager& _assetManager::Instance(void)
 
 void _assetManager::RenderAll(void)
 {
+    AEGfxSetBlendMode(AE_GFX_BM_BLEND);
     AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
     AEGfxSetTransparency(1.0f);
 
@@ -125,6 +128,10 @@ void _assetManager::RenderAll(void)
         AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()), 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
         //AEGfxMeshFree(mesh);
+        
+        //Text Rendering
+        AEGfxPrint(GetFont(rendererList[i]->GetFontName()), &rendererList[i]->GetText()[0], (transform->worldposition.x - halfWidth)/ ((float)AEGetWindowWidth() / 2), (transform->worldposition.y - halfHeight/2) / ((float)AEGetWindowHeight() / 2), 1, rendererList[i]->TextR, rendererList[i]->TextG, rendererList[i]->TextB);
+
     }
 }
 
@@ -164,6 +171,22 @@ AEGfxTexture* _assetManager::GetTexture(string name)
 {
     auto search = textureDatabase.find(name);
     if (search != textureDatabase.end())
+        return search->second;
+    return NULL;
+}
+
+void _assetManager::LoadFont(string name)
+{
+    string pathname = "./Assets/" + name;
+    char font = AEGfxCreateFont(&pathname.front(), 72);
+    FontDatabase[name] = font;
+    AE_ASSERT_MESG(font, "Failed to create Font1!!");
+}
+
+char _assetManager::GetFont(string name)
+{
+    auto search = FontDatabase.find(name);
+    if (search != FontDatabase.end())
         return search->second;
     return NULL;
 }

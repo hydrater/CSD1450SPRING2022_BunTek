@@ -41,10 +41,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AssetManager;
 	AudioManager;
 	MapData;
-	//SceneManager.LoadScene(new Scene_MainMenu);
+	SceneManager.LoadScene(new Scene_MainMenu);
 	//SceneManager.LoadScene(new Scene_Battle);
 	//SceneManager.LoadScene(new Scene_Splash);
-	SceneManager.LoadScene(new Scene_Navigation);
+	//SceneManager.LoadScene(new Scene_Navigation);
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
@@ -56,7 +56,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEInputUpdate();
 
 		// Remove white backgrounds
-		AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		GameScriptManager.Update();
