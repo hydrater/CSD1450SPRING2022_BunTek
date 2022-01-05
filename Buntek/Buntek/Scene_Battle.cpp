@@ -131,7 +131,7 @@ void Scene_Battle::Update(void)
 		tempballTrailRenderer->Size(20, 20);
 		tempballTrailRenderer->SetTexture("Trail.png");
 		tempballTrailRenderer->SetColor(1, 1, 1);
-		tempballTrailRenderer->SetTransparency(0.5f);
+		tempballTrailRenderer->SetTransparency(0.75f);
 
 		ball = new GameObject();
 		tempRenderer = ball->AddComponent<SpriteRenderer>();

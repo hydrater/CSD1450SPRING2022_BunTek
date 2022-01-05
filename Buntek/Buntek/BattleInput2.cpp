@@ -82,10 +82,12 @@ void BattleInput2::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Pad
 
 	for (BallBehavior* x : ballList)
 	{
-		if (x->playerPossess == isPlayer)
+		if (x->playerPossess != isPlayer)
 			continue;
 
-		if (x->Owner()->transform->worldposition.x > targetedBall->Owner()->transform->worldposition.x)
+		if (x->Owner()->transform->worldposition.x > targetedBall->Owner()->transform->worldposition.x && !isPlayer)
+			targetedBall = x;
+		if (x->Owner()->transform->worldposition.x < targetedBall->Owner()->transform->worldposition.x && isPlayer)
 			targetedBall = x;
 	}
 
@@ -131,5 +133,5 @@ void BattleInput2::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Pad
 
 	Cursor->setcursorposition(*vecPosition);
 
-	Paddle->movePaddle(*vecPosition, false);
+	Paddle->movePaddle(*vecPosition, isPlayer);
 }
