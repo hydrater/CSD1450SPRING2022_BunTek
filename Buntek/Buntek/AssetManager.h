@@ -18,7 +18,7 @@ private:
     map<string, char> FontDatabase;
     void LoadTexture(string name);
     void LoadFont(string name);
-
+    
 
 public:
     static _assetManager& Instance(void);

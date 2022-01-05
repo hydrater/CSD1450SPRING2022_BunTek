@@ -14,7 +14,10 @@ _assetManager::_assetManager()
     LoadTexture("paddle.png");
     LoadTexture("MainMenu.png");
     LoadTexture("BetterNebula.png");
+    LoadTexture("Buttons.png");
+    //font
     LoadFont("Roboto-Regular.ttf");
+    LoadFont("Dreamscape.ttf");
 
     mesh = 0;
 
@@ -181,7 +184,7 @@ AEGfxTexture* _assetManager::GetTexture(string name)
 void _assetManager::LoadFont(string name)
 {
     string pathname = "./Assets/" + name;
-    char font = AEGfxCreateFont(&pathname.front(), 72);
+    char font = AEGfxCreateFont(&pathname.front(), 48);
     FontDatabase[name] = font;
     AE_ASSERT_MESG(font, "Failed to create Font1!!");
 }

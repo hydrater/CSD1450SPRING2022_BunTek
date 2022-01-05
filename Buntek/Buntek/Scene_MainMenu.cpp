@@ -18,10 +18,12 @@ void Scene_MainMenu::Start(void)
 	SpriteRenderer* tempRenderer;
 	tempRenderer = Battle->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(200, 100);
-	tempRenderer->SetTexture("WhiteTexture.png");
-	tempRenderer->SetFont("Roboto-Regular.ttf");
-	tempRenderer->SetTextColor(1, 0, 0);
+	tempRenderer->SetTexture("Buttons.png");
+	//tempRenderer->SetTexture("WhiteTexture.png");
+	tempRenderer->SetFont("Dreamscape.ttf");
+	tempRenderer->SetTextColor(1, 1, 1);
 	tempRenderer->SetText("Battle");
+
 	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
 	button = Battle->AddComponent<Button>();
