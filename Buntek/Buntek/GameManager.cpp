@@ -186,7 +186,17 @@ void _mapData::GenerateMapObject(void)
             temp->transform->worldposition = Vector2(nodeList[i][j].pos);
 
             //node.clickable = temp;
+            
             //node.connectedNodes
+            for (int k = 0; k < nodeList[i][j].connectedNodes.size(); k++)
+            {
+                AEGfxVertexList* newLine;
+                AEGfxMeshStart();
+                AEGfxVertexAdd(nodeList[i][j].pos.x, nodeList[i][j].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+                AEGfxVertexAdd(nodeList[i][j].connectedNodes[k]->pos.x, nodeList[i][j].connectedNodes[k]->pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+                newLine = AEGfxMeshEnd();
+                MapData.connectedLines.push_back(newLine);
+            }
         }
     }
 }

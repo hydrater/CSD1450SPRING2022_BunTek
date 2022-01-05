@@ -71,11 +71,14 @@ public:
         Vector2 pos;
         bool reached;
         vector<Node*> connectedNodes;
-        vector<AEGfxVertexList*> connectedLines; // this wont render lmao
-        // Let's try render it in the scene and keep between scene changes.
-        // Render is call via scene.Update()
-        // Do we even free? :thinking:
+       
     };
+    // this wont render lmao
+    vector<AEGfxVertexList*> connectedLines;
+	// Let's try render it in the scene and keep between scene changes.
+	// Render is call via scene.Update()
+	// Do we even free? :thinking:
+
     Node currentNode;
     static _mapData& Instance(void);
     void GenerateMapData(Vector2 originPos);
