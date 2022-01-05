@@ -18,9 +18,9 @@ void Scene_MainMenu::Start(void)
 	Battle = new GameObject();
 	SpriteRenderer* tempRenderer;
 	tempRenderer = Battle->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(20, 100);
-	tempRenderer->SetTexture("paddle.png");
-	Battle->transform->SetPosition(Vector2(0, 0));
+	tempRenderer->Size(200, 100);
+	tempRenderer->SetTexture("WhiteTexture.png");
+	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
 	button = Battle->AddComponent<Button>();
 	button->sr = tempRenderer;

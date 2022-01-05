@@ -31,14 +31,15 @@ void Scene_Battle::Start(void)
 	friendlyArea = new GameObject();
 	tempRenderer = friendlyArea->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(620, 800);
-	tempRenderer->SetTexture("BlackTexture.png");
+	tempRenderer->SetTexture("WhiteTexture.png");
+	tempRenderer->SetColor(0, 0, 0);
 	tempRenderer->SetTransparency(0.5f);
 	friendlyArea->transform->SetPosition(Vector2(-590, 70));
 
 	neutralArea = new GameObject();
 	tempRenderer = neutralArea->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(560, 800);
-	tempRenderer->SetTexture("YellowTexture.png");
+	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0.5f, 0.5f);
 	tempRenderer->SetTransparency(0.5f);
 	neutralArea->transform->SetPosition(Vector2(0, 70));
@@ -46,7 +47,8 @@ void Scene_Battle::Start(void)
 	hostileArea = new GameObject();
 	tempRenderer = hostileArea->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(620, 800);
-	tempRenderer->SetTexture("BlackTexture.png");
+	tempRenderer->SetTexture("WhiteTexture.png");
+	tempRenderer->SetColor(0, 0, 0);
 	tempRenderer->SetTransparency(0.5f);
 	hostileArea->transform->SetPosition(Vector2(590, 70));
 
