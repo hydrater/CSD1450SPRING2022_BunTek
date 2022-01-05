@@ -17,7 +17,7 @@ _assetManager::_assetManager()
     LoadTexture("Buttons.png");
     //font
     LoadFont("Roboto-Regular.ttf");
-    LoadFont("Dreamscape.ttf");
+    LoadFont("Stargaze.otf");
 
     mesh = 0;
 

@@ -20,7 +20,7 @@ void Scene_MainMenu::Start(void)
 	tempRenderer->Size(200, 100);
 	tempRenderer->SetTexture("Buttons.png");
 	//tempRenderer->SetTexture("WhiteTexture.png");
-	tempRenderer->SetFont("Dreamscape.ttf");
+	tempRenderer->SetFont("Stargaze.otf");
 	tempRenderer->SetTextColor(1, 1, 1);
 	tempRenderer->SetText("Battle");
 
