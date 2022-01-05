@@ -31,7 +31,7 @@ public:
 
 private:
 	string textureString = "Steven.jpg";
-	string fontString = "Roboto-Regular.ttf";
+	string fontString = "Stargaze.otf";
 	string text = "";
 	float halfWidth = 100;
 	float halfHeight = 100;
