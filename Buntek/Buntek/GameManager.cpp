@@ -133,29 +133,21 @@ void _mapData::GenerateMapData(Vector2 originPos)
         widthOffset += cellSize / 2;
 
         nodeList.push_back(vector<Node>());
-        if (i > 0)
-        {
-            int previousRowSize = nodeList[(size_t)i-1].size();
-            int minimumLinksPerNode = width / previousRowSize;
-            int extraNodes = width % previousRowSize;
-        }
+        //if (i > 0)
+        //{
+        //    int previousRowSize = nodeList[(size_t)i-1].size();
+        //    int minimumLinksPerNode = width / previousRowSize;
+        //    int extraNodes = width % previousRowSize;
+        //}
 
         for (short j = 0; j < width; j++)
         {
             Node node = Node();
 
-            GameObject* temp = new GameObject;
-            SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
-            tempRenderer->Size(50, 50);
-            tempRenderer->SetTexture("Steven.jpg");
-
             float offsetX = RandFloatMinMax(-cellSize / 3, cellSize / 3);
             float offsetY = RandFloatMinMax(-100, 100);
 
-            temp->transform->worldposition = Vector2(j + widthOffset + offsetX, i * 300 + originPos.y + offsetY);
-
-            node.clickable = temp;
-            //node.connectedNodes
+            node.pos = Vector2(j + widthOffset + offsetX, i * 300 + originPos.y + offsetY);
 
             widthOffset += cellSize;
 
@@ -171,7 +163,15 @@ void _mapData::GenerateMapObject(void)
     {
         for (int j = 0; j < nodeList[i].size(); ++j)
         {
-            
+            GameObject* temp = new GameObject;
+            SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
+            tempRenderer->Size(50, 50);
+            tempRenderer->SetTexture("Steven.jpg");
+
+            temp->transform->worldposition = Vector2(nodeList[i][j].pos);
+
+            //node.clickable = temp;
+            //node.connectedNodes
         }
     }
 }

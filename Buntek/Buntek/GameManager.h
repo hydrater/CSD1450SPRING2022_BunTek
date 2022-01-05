@@ -68,8 +68,13 @@ public:
     {
     public:
         GameObject* clickable;
+        Vector2 pos;
         bool reached;
         vector<Node*> connectedNodes;
+        vector<AEGfxVertexList*> connectingLines; // this wont render lmao
+        // Let's try render it in the scene and keep between scene changes.
+        // Render is call via scene.Update()
+        // Do we even free? :thinking:
     };
     Node currentNode;
     static _mapData& Instance(void);
@@ -81,3 +86,17 @@ private:
     static _mapData* instance;
     vector<vector<Node>> nodeList;
 };
+
+//	// Informing the library that we're about to start adding vertices
+//	AEGfxMeshStart();
+//
+//	// This shape has 5 vertices
+//	AEGfxVertexAdd(0.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+//	AEGfxVertexAdd(100.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+//	AEGfxVertexAdd(200.0f, 150.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+//	AEGfxVertexAdd(300.0f, -100.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+//	AEGfxVertexAdd(100.0f, -250.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+//	AEGfxVertexAdd(100.0f, -250.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+//	AEGfxVertexAdd(0.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
+//
+//	pMeshLine = AEGfxMeshEnd();
