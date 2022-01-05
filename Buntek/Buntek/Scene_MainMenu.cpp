@@ -22,7 +22,7 @@ void Scene_MainMenu::Start(void)
 	//tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetFont("Stargaze.otf");
 	tempRenderer->SetTextColor(1, 1, 1);
-	tempRenderer->SetText("Battle");
+	tempRenderer->SetText("B a t t l e");
 
 	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
