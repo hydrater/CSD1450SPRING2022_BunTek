@@ -11,6 +11,7 @@ _assetManager::_assetManager()
     LoadTexture("Background.jpg");
     LoadTexture("WhiteTexture.png");
     LoadTexture("ball.png");
+    LoadTexture("Trail.png");
     LoadTexture("paddle.png");
     LoadTexture("MainMenu.png");
     LoadTexture("BetterNebula.png");

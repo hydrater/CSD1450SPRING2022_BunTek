@@ -27,8 +27,6 @@ void BattleInput2::Start(void)
 
 void BattleInput2::Update(void)
 {
-	playerpaddle->movePaddle(GameManager.GetCursorPosition(), true);
-
 	for (int i = 0; i < ballList.size(); ++i)
 	{
 		if (ballList[i]->listCheck != 139)
@@ -47,62 +45,91 @@ void BattleInput2::Update(void)
 		}
 	}
 
+	// PlayerAI Activate
+	if (AEInputCheckTriggered(AEVK_O))
+	{
+		PlayerAIEnabled = !PlayerAIEnabled;
+	}
+	playerpaddle->setplayerpaddle(!PlayerAIEnabled);
+	playerCursor->setplayerpossess(!PlayerAIEnabled);
+
+	if (PlayerAIEnabled || AIEnabled)
+		AIscalingTimer += DeltaTime;
+
+	if (PlayerAIEnabled)
+	{
+		PlayerAITimer -= DeltaTime;
+		UpdateAIPosition(playerCursor, playerpaddle, &PlayerAITimer, true);
+	}
+	else
+	{
+		playerpaddle->movePaddle(GameManager.GetCursorPosition(), true);
+	}
+
 	if (AIEnabled)
 	{
 		AITimer -= DeltaTime;
-		AIscalingTimer += DeltaTime;
-
-		BallBehavior* targetedBall = ballList[0];
-
-		for (BallBehavior* x : ballList)
-		{
-			if (x->playerPossess)
-				continue;
-
-			if (x->Owner()->transform->worldposition.x > targetedBall->Owner()->transform->worldposition.x)
-				targetedBall = x;
-		}
-
-		Transform* temp = targetedBall->Owner()->transform;
-
-		if (temp->worldposition.x >= GameManager.hostileAreaX && targetedBall->listCheck == 139 && !targetedBall->playerPossess)
-		{
-			float estimate = AIposition.operator-(AITargetPosition).Length() - targetedBall->velocity.Length();
-
-			AITargetPosition.x = temp->worldposition.x + (targetedBall->velocity.x * estimate);
-			AITargetPosition.y = temp->worldposition.y + (targetedBall->velocity.y * estimate);
-			AITargetPosition.x = AEClamp(AITargetPosition.x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
-			AITargetPosition.y = AEClamp(AITargetPosition.y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
-		}
-		else
-		{
-			AITargetPosition = Vector2(800, 0);
-		}
-
-		// Move position towards the targetedPosition
-		AIposition = AIposition.Lerp(AITargetPosition, AIspeed);
-
-		// Calculate Distance to targetedBall
-		float dist = AIposition.operator-(temp->worldposition).Length();
-		// Hit Ball if within AOE
-		if (dist <= GameManager.clickAoERadius)
-		{
-			targetedBall->HitBall(
-				Vector2(temp->worldposition.x + RandFloatMinMax(1, GameManager.clickAoERadius),
-					temp->worldposition.y + RandIntMinMax(-1,1) * RandFloatMinMax(1, GameManager.clickAoERadius / 1.3f)),
-				false);
-			if (AITimer < 0)
-			{
-				targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 3);
-				AITimer = RandFloatMinMax(0.7f - AIscalingTimer * 0.005f, 1.5f - AIscalingTimer * 0.005f);
-			}
-		}
-
-		AIposition.x = AEClamp(AIposition.x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
-		AIposition.y = AEClamp(AIposition.y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
-
-		AICursor->setcursorposition(AIposition);
-
-		AIPaddle->movePaddle(AIposition, false);
+		UpdateAIPosition(AICursor, AIPaddle, &AITimer, false);
 	}
+}
+
+void BattleInput2::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Paddle, float* Timer, bool isPlayer)
+{
+	Vector2* vecPosition = isPlayer ? &PlayerAIposition : &AIposition;
+	Vector2* vecTargetPosition = isPlayer ? &PlayerAITargetPosition : &AITargetPosition;
+
+	BallBehavior* targetedBall = ballList[0];
+
+	for (BallBehavior* x : ballList)
+	{
+		if (x->playerPossess == isPlayer)
+			continue;
+
+		if (x->Owner()->transform->worldposition.x > targetedBall->Owner()->transform->worldposition.x)
+			targetedBall = x;
+	}
+
+	Transform* temp = targetedBall->Owner()->transform;
+
+	bool acceptableRange = (temp->worldposition.x >= GameManager.hostileAreaX && !isPlayer) || (temp->worldposition.x <= GameManager.friendlyAreaX && isPlayer);
+
+	if (targetedBall->listCheck == 139 && targetedBall->playerPossess == isPlayer && acceptableRange)
+	{
+		float estimate = (*vecPosition).operator-(*vecTargetPosition).Length() - targetedBall->velocity.Length();
+
+		vecTargetPosition->x = temp->worldposition.x + (targetedBall->velocity.x * estimate);
+		vecTargetPosition->y = temp->worldposition.y + (targetedBall->velocity.y * estimate);
+		vecTargetPosition->x = AEClamp(vecTargetPosition->x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
+		vecTargetPosition->y = AEClamp(vecTargetPosition->y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
+	}
+	else
+	{
+		*vecTargetPosition = isPlayer ? Vector2(-800, 0) : Vector2(800, 0);
+	}
+
+	// Move position towards the targetedPosition
+	*vecPosition = (*vecPosition).Lerp(*vecTargetPosition, AIspeed);
+
+	// Calculate Distance to targetedBall
+	float dist = (*vecPosition).operator-(temp->worldposition).Length();
+	// Hit Ball if within AOE
+	if (dist <= GameManager.clickAoERadius)
+	{
+		targetedBall->HitBall(
+			Vector2(temp->worldposition.x + RandFloatMinMax(1, GameManager.clickAoERadius),
+				temp->worldposition.y + RandIntMinMax(-1, 1) * RandFloatMinMax(1, GameManager.clickAoERadius / 1.3f)),
+			isPlayer);
+		if (Timer < 0)
+		{
+			targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 3);
+			*Timer = RandFloatMinMax(0.7f - AIscalingTimer * 0.005f, 1.5f - AIscalingTimer * 0.005f);
+		}
+	}
+
+	vecPosition->x = AEClamp(vecPosition->x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
+	vecPosition->y = AEClamp(vecPosition->y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
+
+	Cursor->setcursorposition(*vecPosition);
+
+	Paddle->movePaddle(*vecPosition, false);
 }

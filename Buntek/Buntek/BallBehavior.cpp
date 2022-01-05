@@ -52,7 +52,7 @@ void BallBehavior::UpdateTrail(void)
 {
 	// Reset Color and Transform
 	srBallTrail->SetColor(sr->GetColor('R'), sr->GetColor('G'), sr->GetColor('B'));
-	ballTrail->transform->SetScale(Vector2(1.0, speed / initspeed));
+	ballTrail->transform->SetScale(Vector2(1.0, speed / initspeed * 2.0f));
 
 	// Correct ang based on velocity
 	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
