@@ -64,10 +64,10 @@ void SpriteRenderer::SetText(string _text)
 	TextWidth = TextWidth * (float)AEGetWindowWidth()/2;
 	TextHeight = TextHeight* (float)AEGetWindowHeight()/2;
 	if (TextWidth / 2 > halfWidth) {
-		halfWidth = TextWidth / 2;
+		halfWidth = TextWidth / 2 + buffer;
 	}
 	if (TextHeight / 2 > halfHeight) {
-		halfHeight = TextHeight / 2;
+		halfHeight = TextHeight / 2 + buffer;
 	}
 }
 float SpriteRenderer::GetTransparency()
