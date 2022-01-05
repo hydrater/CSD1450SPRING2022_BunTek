@@ -36,4 +36,5 @@ private:
 	float halfWidth = 100;
 	float halfHeight = 100;
 	float transparency = 1;
+	float buffer = 10;
 };
