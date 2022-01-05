@@ -17,6 +17,7 @@ void SpriteRenderer::Size(float width, float height)
 	halfHeight = height / 2;
 }
 
+
 float SpriteRenderer::GetHalfWidth(void)
 {
 	return halfWidth;
@@ -59,6 +60,15 @@ string SpriteRenderer::GetText(void)
 void SpriteRenderer::SetText(string _text)
 {
 	text = _text;
+	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, TextWidth, TextHeight);
+	TextWidth = TextWidth * (float)AEGetWindowWidth()/2;
+	TextHeight = TextHeight* (float)AEGetWindowHeight()/2;
+	if (TextWidth / 2 > halfWidth) {
+		halfWidth = TextWidth / 2 + buffer;
+	}
+	if (TextHeight / 2 > halfHeight) {
+		halfHeight = TextHeight / 2 + buffer;
+	}
 }
 float SpriteRenderer::GetTransparency()
 {

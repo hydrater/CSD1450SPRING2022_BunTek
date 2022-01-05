@@ -15,7 +15,10 @@ _assetManager::_assetManager()
     LoadTexture("paddle.png");
     LoadTexture("MainMenu.png");
     LoadTexture("BetterNebula.png");
+    LoadTexture("Buttons.png");
+    //font
     LoadFont("Roboto-Regular.ttf");
+    LoadFont("Stargaze.otf");
 
     mesh = 0;
 
@@ -131,7 +134,10 @@ void _assetManager::RenderAll(void)
         //AEGfxMeshFree(mesh);
         
         //Text Rendering
-        AEGfxPrint(GetFont(rendererList[i]->GetFontName()), &rendererList[i]->GetText()[0], (transform->worldposition.x - halfWidth)/ ((float)AEGetWindowWidth() / 2), (transform->worldposition.y - halfHeight/2) / ((float)AEGetWindowHeight() / 2), 1, rendererList[i]->TextR, rendererList[i]->TextG, rendererList[i]->TextB);
+        AEGfxPrint(GetFont(rendererList[i]->GetFontName()), &rendererList[i]->GetText()[0],
+            (transform->worldposition.x - rendererList[i]->TextWidth/2)/ ((float)AEGetWindowWidth() / 2),
+            (transform->worldposition.y - rendererList[i]->TextHeight/2) / ((float)AEGetWindowHeight() / 2),
+            rendererList[i]->textScale, rendererList[i]->TextR, rendererList[i]->TextG, rendererList[i]->TextB);
 
     }
 }
@@ -179,7 +185,7 @@ AEGfxTexture* _assetManager::GetTexture(string name)
 void _assetManager::LoadFont(string name)
 {
     string pathname = "./Assets/" + name;
-    char font = AEGfxCreateFont(&pathname.front(), 72);
+    char font = AEGfxCreateFont(&pathname.front(), 48);
     FontDatabase[name] = font;
     AE_ASSERT_MESG(font, "Failed to create Font1!!");
 }

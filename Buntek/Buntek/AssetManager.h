@@ -18,11 +18,12 @@ private:
     map<string, char> FontDatabase;
     void LoadTexture(string name);
     void LoadFont(string name);
-    char GetFont(string name);
+    
 
 public:
     static _assetManager& Instance(void);
     AEGfxTexture* GetTexture(string name);
+    char GetFont(string name);
     void AddToList(SpriteRenderer* spriteRenderer);
     void RenderAll(void);
     void FreeAll(void);
