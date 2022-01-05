@@ -20,9 +20,9 @@ void Scene_MainMenu::Start(void)
 	tempRenderer->Size(200, 100);
 	tempRenderer->SetTexture("Buttons.png");
 	//tempRenderer->SetTexture("WhiteTexture.png");
-	tempRenderer->SetFont("Naden.otf");
+	tempRenderer->SetFont("Metrolic.ttf");
 	tempRenderer->SetTextColor(1, 1, 1);
-	tempRenderer->SetText("B a t t l e");
+	tempRenderer->SetText("B A T T L E");
 
 	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
