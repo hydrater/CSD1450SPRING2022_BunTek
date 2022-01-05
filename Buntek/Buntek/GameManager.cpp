@@ -158,7 +158,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
 			int previousRowSize = nodeList[(size_t)i - 1].size();
 			int minimumLinksPerNode = width / previousRowSize;
 			int extraNodes = width % previousRowSize;
-            int k = 0, int l = 0;
+            int k = 0, l = 0;
 
             for (int j = 0; j < nodeList[(size_t)i - 1].size(); ++j)
             {
