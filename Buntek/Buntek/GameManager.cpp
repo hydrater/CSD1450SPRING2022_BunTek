@@ -145,49 +145,50 @@ void _mapData::GenerateMapData(Vector2 originPos)
 
             nodeList[i].push_back(node);
         }
-
-        // Everything connects to the last node
-        if (i == cellRows - 1)
-        {
-            for (int j = 0; j < nodeList[8].size(); ++j)
-            {
-                nodeList[(size_t)cellRows - 2][j].connectedNodes.push_back(&nodeList[(size_t)cellRows - 1][0]);
-            }
-        }
     }
 
     // Assigning the connection via random
     for (int i = 0; i < nodeList.size(); ++i)
     {
-        for (int j = 0; j < nodeList[i].size(); ++j)
+        for (int j = 0; j < nodeList[i].size() - 1; ++j)
         {
-            // if first row
-            if (j == 0)
-            {
-
-            }
-
             // If 2nd last row
-            if (j == nodeList[i].size() - 2)
+            if (i == nodeList.size() - 2)
             {
                 nodeList[i][j].connectedNodes.push_back(&nodeList[(size_t)nodeList.size() - 1][0]);
             }
+            else
+            {
+                bool connectionType = RandIntMinMax(0, 2);
+
+                // branch
+                if (connectionType)
+                {
+                    
+                }
+                // twig
+                else
+                {
+                    //nodeList[i][j].connectedNodes.push_back(&nodeList[(size_t)i + 1][? ? ? ? ]);
+                }
+
+            }
 
             // Random generation
-            bool connectionType = RandIntMinMax(0, 2);
+            
         }
     }
 
     nodeList[(size_t)nodeList.size() - 1][0].isConnected = true;
 
     // Check for unconnected nodes
-    for (int i = nodeList.size(); i > 0; --i)
-    {
-        for (int j = 0; j < nodeList[i].size(); ++j)
-        {
+    //for (int i = nodeList.size(); i > 0; --i)
+    //{
+    //    for (int j = 0; j < nodeList[i].size(); ++j)
+    //    {
 
-        }
-    }
+    //    }
+    //}
 }
 
 	/*int previousRowSize = nodeList[(size_t)i - 1].size();
