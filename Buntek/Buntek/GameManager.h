@@ -69,9 +69,9 @@ public:
     public:
         GameObject* clickable;
         Vector2 pos;
+        bool isConnected;
         bool reached;
         vector<Node*> connectedNodes;
-       
     };
     // this wont render lmao
     vector<AEGfxVertexList*> connectedLines;
@@ -86,6 +86,7 @@ public:
     void ClearList(void);
 
 private:
+    bool canAccessFirstNode = true; // REMEMBER TO RESET THIS
     static _mapData* instance;
     const float widthSize = 1600;
     const float cellHeight = 300;

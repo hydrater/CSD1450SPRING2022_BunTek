@@ -67,8 +67,6 @@ Vector2& Vector2::operator*=(float scalar)
 	return *this;
 }
 
-
-
 void Vector2::Set(const Vector2& vec)
 {
 	x = vec.x;

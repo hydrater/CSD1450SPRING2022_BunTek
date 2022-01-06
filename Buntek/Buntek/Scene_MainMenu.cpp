@@ -8,8 +8,6 @@ void MoveToBattle(void);
 
 void Scene_MainMenu::Start(void)
 {
-	
-
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
 	background->GetComponent<SpriteRenderer>()->SetTexture("MainMenu.png");
@@ -29,7 +27,6 @@ void Scene_MainMenu::Start(void)
 	button = Battle->AddComponent<Button>();
 	button->sr = tempRenderer;
 	button->ButtonEffect = &MoveToBattle;
-	
 }
 
 void Scene_MainMenu::Update(void)

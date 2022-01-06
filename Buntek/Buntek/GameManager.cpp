@@ -123,7 +123,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
     for (int i = 0; i < cellRows; i++)
     {
         short width = 1;
-        if (!(i == 0 || i == cellRows-1))
+        if (!(i == 0 || i == cellRows - 1))
             width = (short)RandIntMinMax(2, 6);
 
         float cellSize = widthSize / width;
@@ -132,6 +132,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
 
         nodeList.push_back(vector<Node>());
 
+        // Generate X nodes
         for (short j = 0; j < width; j++)
         {
             Node node = Node();
@@ -142,35 +143,68 @@ void _mapData::GenerateMapData(Vector2 originPos)
 
             widthOffset += cellSize;
 
-            // Should maybe store a pointer
             nodeList[i].push_back(node);
         }
 
-        if (i == cellRows-1)
+        // Everything connects to the last node
+        if (i == cellRows - 1)
         {
             for (int j = 0; j < nodeList[8].size(); ++j)
             {
-                nodeList[(size_t)cellRows-2][j].connectedNodes.push_back(&nodeList[(size_t)cellRows-1][0]);
+                nodeList[(size_t)cellRows - 2][j].connectedNodes.push_back(&nodeList[(size_t)cellRows - 1][0]);
             }
         }
-        else if (i > 0)
-		{
-			int previousRowSize = nodeList[(size_t)i - 1].size();
-			int minimumLinksPerNode = width / previousRowSize;
-			int extraNodes = width % previousRowSize;
-            int k = 0, l = 0;
+    }
 
-            for (int j = 0; j < nodeList[(size_t)i - 1].size(); ++j)
+    // Assigning the connection via random
+    for (int i = 0; i < nodeList.size(); ++i)
+    {
+        for (int j = 0; j < nodeList[i].size(); ++j)
+        {
+            // if first row
+            if (j == 0)
             {
-                for (int k = 0; k < minimumLinksPerNode; ++k)
-                {
-                    nodeList[(size_t)i - 1][j].connectedNodes.push_back(&nodeList[i][l]);
-                    ++l;
-                }
+
             }
-		}
+
+            // If 2nd last row
+            if (j == nodeList[i].size() - 2)
+            {
+                nodeList[i][j].connectedNodes.push_back(&nodeList[(size_t)nodeList.size() - 1][0]);
+            }
+
+            // Random generation
+            bool connectionType = RandIntMinMax(0, 2);
+        }
+    }
+
+    nodeList[(size_t)nodeList.size() - 1][0].isConnected = true;
+
+    // Check for unconnected nodes
+    for (int i = nodeList.size(); i > 0; --i)
+    {
+        for (int j = 0; j < nodeList[i].size(); ++j)
+        {
+
+        }
     }
 }
+
+	/*int previousRowSize = nodeList[(size_t)i - 1].size();
+	int minimumLinksPerNode = width / previousRowSize;
+	int extraNodes = width % previousRowSize;
+
+	int k = 0, l = 0;
+
+	for (int j = 0; j < nodeList[(size_t)i - 1].size(); ++j)
+	{
+		for (int k = 0; k < minimumLinksPerNode; ++k)
+		{
+			nodeList[(size_t)i - 1][j].connectedNodes.push_back(&nodeList[i][l]);
+			++l;
+		}
+	}*/
+            
 
 void _mapData::GenerateMapObject(void)
 {
