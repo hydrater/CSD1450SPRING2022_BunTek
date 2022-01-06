@@ -1,7 +1,7 @@
 #pragma once
 #include "GameScript.h"
 #include "SpriteRenderer.h"
-
+#include "TextRenderer.h"
 
 class Button : public GameScript
 {
@@ -25,7 +25,7 @@ public:
 
 
 	SpriteRenderer* sr = 0;
-
+	TextRenderer* tr = 0;
 private:
 	Transform* transform = 0;
 };

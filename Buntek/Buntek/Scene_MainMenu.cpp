@@ -1,5 +1,6 @@
 #include "Scene_MainMenu.h"
 #include "SpriteRenderer.h"
+#include "TextRenderer.h"
 #include "Button.h"
 #include "Scene_Battle.h"
 
@@ -17,15 +18,18 @@ void Scene_MainMenu::Start(void)
 	tempRenderer = Battle->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(200, 100);
 	tempRenderer->SetTexture("Buttons.png");
+	TextRenderer* tempTextRenderer;
+	tempTextRenderer = Battle->AddComponent<TextRenderer>();
 	//tempRenderer->SetTexture("WhiteTexture.png");
-	tempRenderer->SetFont("Metrolic.ttf");
-	tempRenderer->SetTextColor(1, 1, 1);
-	tempRenderer->SetText("B A T T L E");
+	tempTextRenderer->SetFont("Metrolic.ttf");
+	tempTextRenderer->SetTextColor(1, 1, 1);
+	tempTextRenderer->SetText("B A T T L E");
 
 	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
 	button = Battle->AddComponent<Button>();
 	button->sr = tempRenderer;
+	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToBattle;
 }
 

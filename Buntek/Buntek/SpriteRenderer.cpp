@@ -43,33 +43,6 @@ void SpriteRenderer::SetTexture(string textureName)
 	textureString = textureName;
 }
 
-string SpriteRenderer::GetFontName(void)
-{
-	return fontString;
-}
-
-void SpriteRenderer::SetFont(string fontName)
-{
-	fontString = fontName;
-}
-string SpriteRenderer::GetText(void)
-{
-	return text;
-}
-
-void SpriteRenderer::SetText(string _text)
-{
-	text = _text;
-	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, TextWidth, TextHeight);
-	TextWidth = TextWidth * (float)AEGetWindowWidth()/2;
-	TextHeight = TextHeight* (float)AEGetWindowHeight()/2;
-	if (TextWidth / 2 > halfWidth) {
-		halfWidth = TextWidth / 2 + buffer;
-	}
-	if (TextHeight / 2 > halfHeight) {
-		halfHeight = TextHeight / 2 + buffer;
-	}
-}
 float SpriteRenderer::GetTransparency()
 {
 	return transparency;
@@ -94,8 +67,4 @@ float SpriteRenderer::GetColor(char color)
 void SpriteRenderer::SetColor(float _R, float _G, float _B)
 {
 	R = _R, G = _G, B = _B;
-}
-void SpriteRenderer::SetTextColor(float _R, float _G, float _B)
-{
-	TextR = _R, TextG = _G, TextB = _B;
 }

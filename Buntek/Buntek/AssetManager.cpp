@@ -134,12 +134,22 @@ void _assetManager::RenderAll(void)
         AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()), 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
         //AEGfxMeshFree(mesh);
-        
+    }
+}
+
+void _assetManager::RenderAllText(void)
+{
+    AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
+
+    for (int i = 0; i < rendererTextList.size(); ++i)
+    {
+        Transform* transform = rendererTextList[i]->GetTransform();
         //Text Rendering
-        AEGfxPrint(GetFont(rendererList[i]->GetFontName()), &rendererList[i]->GetText()[0],
-            (transform->worldposition.x - rendererList[i]->TextWidth/2)/ ((float)AEGetWindowWidth() / 2),
-            (transform->worldposition.y - rendererList[i]->TextHeight/2) / ((float)AEGetWindowHeight() / 2),
-            rendererList[i]->textScale, rendererList[i]->TextR, rendererList[i]->TextG, rendererList[i]->TextB);
+        AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &rendererTextList[i]->GetText()[0],
+            (transform->worldposition.x - rendererTextList[i]->TextWidth / 2) / ((float)AEGetWindowWidth() / 2),
+            (transform->worldposition.y - rendererTextList[i]->TextHeight / 2) / ((float)AEGetWindowHeight() / 2),
+            rendererTextList[i]->textScale, rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
 
     }
 }
@@ -149,10 +159,15 @@ void _assetManager::AddToList(SpriteRenderer* spriteRenderer)
     rendererList.push_back(spriteRenderer);
 }
 
+void _assetManager::AddToTextList(TextRenderer* textRenderer)
+{
+    rendererTextList.push_back(textRenderer);
+}
+
 void _assetManager::FreeAll(void)
 {
     rendererList.clear();
-
+    rendererTextList.clear();
     // memory leak? lol
    /* try {
         if (mesh != 0)

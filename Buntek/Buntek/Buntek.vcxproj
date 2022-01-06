@@ -114,6 +114,7 @@
     <ClCompile Include="Scene_Navigation.cpp" />
     <ClCompile Include="Scene_Test.cpp" />
     <ClCompile Include="Skills.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Scene_Battle.cpp" />
     <ClCompile Include="Scene_Splash.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScript.h" />
+    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="hisMath.h" />
     <ClInclude Include="PaddleBehavior.h" />
     <ClInclude Include="Parallaxer.h" />

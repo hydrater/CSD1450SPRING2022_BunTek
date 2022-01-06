@@ -114,6 +114,9 @@
     <ClCompile Include="Skills.cpp">
       <Filter>Source Files\ECS\Components</Filter>
     </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -195,6 +198,9 @@
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
     <ClInclude Include="Skills.h">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
   </ItemGroup>
