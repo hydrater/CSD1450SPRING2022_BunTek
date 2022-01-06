@@ -190,7 +190,6 @@ void _mapData::GenerateMapData(Vector2 originPos)
                             Node* temp = nodeList[i][j].connectedNodes[k];
                             nodeList[i][j].connectedNodes[k] = nodeList[i][l].connectedNodes[o];
                             nodeList[i][l].connectedNodes[o] = temp;
-                            goto a;
                         }
                     }
                 }
