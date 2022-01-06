@@ -138,7 +138,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
             Node node = Node();
 
             float offsetX = RandFloatMinMax(-cellSize / 5, cellSize / 5);
-            float offsetY = RandFloatMinMax(-70, 70);
+            float offsetY = RandFloatMinMax(-50, 50);
             node.pos = Vector2(j + widthOffset + offsetX, i * cellHeight + originPos.y + offsetY);
 
             widthOffset += cellSize;
@@ -179,21 +179,29 @@ void _mapData::AssignLines(vector<Node>* largerList, vector<Node> *smallerList)
         if (i == 0)
         {
             (*largerList)[i].connectedNodes.push_back(&(*smallerList)[0]);
+            if (RandIntMinMax(0, 3) && (*smallerList).size() > 1)
+            {
+                (*largerList)[i].connectedNodes.push_back(&(*smallerList)[1]);
+            }
         }
         else if (i == largerList->size() - 1)
         {
             (*largerList)[i].connectedNodes.push_back(&(*smallerList)[(size_t)smallerList->size()-1]);
+            if (RandIntMinMax(0, 3) && (*smallerList).size() > 1)
+            {
+                (*largerList)[i].connectedNodes.push_back(&(*smallerList)[(size_t)smallerList->size() - 2]);
+            }
         }
         else
         {
-            bool connectionType = RandIntMinMax(0, 2);
-            if (connectionType)
+            if (RandIntMinMax(0, 2))
             {
-                //(*largerList)[i].connectedNodes.push_back(&(*smallerList)[]);
+                (*largerList)[i].connectedNodes.push_back(&(*smallerList)[RandIntMinMax(0, smallerList->size()-1)]);
             }
             else
             {
-                //(*largerList)[i].connectedNodes.push_back(&(*smallerList)[]);
+                (*largerList)[i].connectedNodes.push_back(&(*smallerList)[RandIntMinMax(0, smallerList->size() - 1)]);
+                (*largerList)[i].connectedNodes.push_back(&(*smallerList)[RandIntMinMax(0, smallerList->size() - 1)]);
             }
         }
     }

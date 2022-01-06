@@ -23,18 +23,19 @@ void Scene_Navigation::EarlyUpdate(void)
 		AEGfxMeshStart();
 
 		AEGfxTriAdd(
-			-35.0f, -60.0f, 0x00FF00FF, 0.0f, 1.0f,
-			35.0f, -60.0f, 0x00FFFF00, 1.0f, 1.0f,
-			-35.0f, 60.0f, 0x0000FFFF, 0.0f, 0.0f);
+			-2160.0f, -3840.0f, 0x00FF00FF, 0.0f, 1.0f,
+			2160.0f, -3840.0f, 0x00FFFF00, 1.0f, 1.0f,
+			-2160.0f, 3840.0f, 0x0000FFFF, 0.0f, 0.0f);
 
 		AEGfxTriAdd(
-			35.0f, -60.0f, 0x00FFFFFF, 1.0f, 1.0f,
-			35.0f, 60.0f, 0x00FFFFFF, 1.0f, 0.0f,
-			-35.0f, 60.0f, 0x00FFFFFF, 0.0f, 0.0f);
+			2160.0f, -3840.0f, 0x00FFFFFF, 1.0f, 1.0f,
+			2160.0f, 3840.0f, 0x00FFFFFF, 1.0f, 0.0f,
+			-2160.0f, 3840.0f, 0x00FFFFFF, 0.0f, 0.0f);
 		mesh = AEGfxMeshEnd();
 	}
 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+	AEGfxSetPosition(0.0f, 0.0f);
 	AEGfxTextureSet(AssetManager.GetTexture("BetterNebula.png"), 0, 0);
 	AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
 
