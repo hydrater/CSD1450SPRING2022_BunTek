@@ -55,10 +55,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Handling Input
 		AEInputUpdate();
 
-		//if (AEInputCheckTriggered(AEVK_1))
-		//{
-		//	SceneManager.LoadScene(new Scene_Navigation);
-		//}
+		if (AEInputCheckTriggered(AEVK_1))
+		{
+			SceneManager.LoadScene(new Scene_Navigation);
+		}
+
+		if (AEInputCheckTriggered(AEVK_2))
+		{
+			SceneManager.LoadScene(new Scene_Battle);
+		}
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();

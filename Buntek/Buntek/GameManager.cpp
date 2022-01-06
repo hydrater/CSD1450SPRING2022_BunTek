@@ -120,6 +120,8 @@ _mapData& _mapData::Instance(void)
 
 void _mapData::GenerateMapData(Vector2 originPos)
 {
+    nodeList.clear();
+
     for (int i = 0; i < cellRows; i++)
     {
         short width = 1;
@@ -158,6 +160,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
                 nodeList[i][j].connectedNodes.push_back(&nodeList[(size_t)nodeList.size() - 1][0]);
             }
         }
+        // Assign using function
         else if (i < nodeList.size() - 1)
         {
             if (nodeList[i].size() > nodeList[(size_t)i + 1].size())
@@ -170,12 +173,29 @@ void _mapData::GenerateMapData(Vector2 originPos)
             }
         }
     }
+
+    cout << "done" << endl;
+
+    // Swap criss cross
+   /* for (int i = 0; i < nodeList.size(); ++i)
+    {
+        for (int j = 0; j < nodeList.size(); ++j)
+        {
+            for (int k = 0; k < nodeList.size(); ++k)
+            {
+
+
+
+            }
+        }
+    }*/
 }
 
 void _mapData::AssignLines(vector<Node>* largerList, vector<Node> *smallerList)
 {
     for (int i = 0; i < largerList->size(); ++i)
     {
+        // If first position of layer
         if (i == 0)
         {
             (*largerList)[i].connectedNodes.push_back(&(*smallerList)[0]);
@@ -184,9 +204,10 @@ void _mapData::AssignLines(vector<Node>* largerList, vector<Node> *smallerList)
                 (*largerList)[i].connectedNodes.push_back(&(*smallerList)[1]);
             }
         }
+        // If last position of layer
         else if (i == largerList->size() - 1)
         {
-            (*largerList)[i].connectedNodes.push_back(&(*smallerList)[(size_t)smallerList->size()-1]);
+			(*largerList)[i].connectedNodes.push_back(&(*smallerList)[(size_t)smallerList->size() - 1]);
             if (RandIntMinMax(0, 3) && (*smallerList).size() > 1)
             {
                 (*largerList)[i].connectedNodes.push_back(&(*smallerList)[(size_t)smallerList->size() - 2]);
@@ -194,13 +215,15 @@ void _mapData::AssignLines(vector<Node>* largerList, vector<Node> *smallerList)
         }
         else
         {
-            if (RandIntMinMax(0, 2))
+            // 1/3 chance to form 2 connections
+            if (RandIntMinMax(0, 3) && smallerList->size() > 2)
             {
-                (*largerList)[i].connectedNodes.push_back(&(*smallerList)[RandIntMinMax(0, smallerList->size()-1)]);
+                size_t targetID = RandIntMinMax(0, smallerList->size() - 2);
+                (*largerList)[i].connectedNodes.push_back(&(*smallerList)[targetID]);
+				(*largerList)[i].connectedNodes.push_back(&(*smallerList)[targetID + 1]);
             }
             else
             {
-                (*largerList)[i].connectedNodes.push_back(&(*smallerList)[RandIntMinMax(0, smallerList->size() - 1)]);
                 (*largerList)[i].connectedNodes.push_back(&(*smallerList)[RandIntMinMax(0, smallerList->size() - 1)]);
             }
         }
@@ -209,6 +232,7 @@ void _mapData::AssignLines(vector<Node>* largerList, vector<Node> *smallerList)
 
 void _mapData::GenerateMapObject(void)
 {
+    MapData.connectedLines.clear();
     for (int i = 0; i < nodeList.size(); ++i)
     {
         for (int j = 0; j < nodeList[i].size(); ++j)
