@@ -174,21 +174,29 @@ void _mapData::GenerateMapData(Vector2 originPos)
         }
     }
 
-    cout << "done" << endl;
-
     // Swap criss cross
-   /* for (int i = 0; i < nodeList.size(); ++i)
+    for (int i = 0; i < nodeList.size(); ++i)
     {
-        for (int j = 0; j < nodeList.size(); ++j)
+        for (int j = 0; j < nodeList[i].size(); ++j)
         {
-            for (int k = 0; k < nodeList.size(); ++k)
+            for (int k = 0; k < nodeList[i][j].connectedNodes.size(); ++k)
             {
-
-
-
+                for (int l = nodeList[i].size() - 1; l > -1; --l)
+                {
+                    for (int o = 0; o < nodeList[i][l].connectedNodes.size(); ++o)
+                    {
+                        if (&nodeList[i][j].connectedNodes[k] > &nodeList[i][l].connectedNodes[o])
+                        {
+                            Node* temp = nodeList[i][j].connectedNodes[k];
+                            nodeList[i][j].connectedNodes[k] = nodeList[i][l].connectedNodes[o];
+                            nodeList[i][l].connectedNodes[o] = temp;
+                            goto a;
+                        }
+                    }
+                }
             }
         }
-    }*/
+    }
 }
 
 void _mapData::AssignLines(vector<Node>* largerList, vector<Node> *smallerList)
@@ -216,7 +224,7 @@ void _mapData::AssignLines(vector<Node>* largerList, vector<Node> *smallerList)
         else
         {
             // 1/3 chance to form 2 connections
-            if (RandIntMinMax(0, 3) && smallerList->size() > 2)
+            if (smallerList->size() > 2 && RandIntMinMax(0, 3))
             {
                 size_t targetID = RandIntMinMax(0, smallerList->size() - 2);
                 (*largerList)[i].connectedNodes.push_back(&(*smallerList)[targetID]);
