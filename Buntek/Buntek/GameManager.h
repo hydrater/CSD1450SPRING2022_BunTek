@@ -69,7 +69,6 @@ public:
     public:
         GameObject* clickable;
         Vector2 pos;
-        bool isConnected;
         bool reached;
         vector<Node*> connectedNodes;
     };
@@ -86,9 +85,10 @@ public:
     void ClearList(void);
 
 private:
+    void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
     bool canAccessFirstNode = true; // REMEMBER TO RESET THIS
     static _mapData* instance;
-    const float widthSize = 1600;
+    const float widthSize = 1400;
     const float cellHeight = 300;
     const int cellRows = 10;
     vector<vector<Node>> nodeList;
