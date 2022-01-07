@@ -24,6 +24,7 @@ _audioManager::_audioManager()
     //LoadMusic("Summer.mp3");
     //LoadMusic("GhostFinal.mp3");
     LoadMusic("Evans.mp3");
+    LoadMusic("NavigationBGM.mp3");
 }
 
 _audioManager::~_audioManager()

@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "SpriteRenderer.h"
 #include "AssetManager.h"
+#include "AudioEngine.h"
 
 void Scene_Navigation::Start(void)
 {
@@ -12,6 +13,8 @@ void Scene_Navigation::Start(void)
 	inputHandler = new GameObject();
 	inputHandler->AddComponent<CursorCamera>()->camPos = Vector2(0, -900);
 	AEGfxSetCamPosition(0, -900);
+	AudioManager.PlayMusic("NavigationBGM.mp3");
+	AudioManager.SetMusicVolume(0.1f);
 }
 
 void Scene_Navigation::EarlyUpdate(void)
@@ -36,6 +39,7 @@ void Scene_Navigation::EarlyUpdate(void)
 
 	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 	AEGfxSetPosition(0.0f, 0.0f);
+	AEGfxSetTintColor(1, 1, 1, 1);
 	AEGfxTextureSet(AssetManager.GetTexture("BetterNebula.png"), 0, 0);
 	AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
 
