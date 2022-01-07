@@ -89,7 +89,77 @@ bool BoxCollider::Collide(Collider2D* col)
 	}
 	//Box-Box collision
 	else if (typeid(*col) == typeid(BoxCollider)) {
+		if (col->transform == NULL || transform == NULL)
+		{
+			return false;
+		}
 
+		// Box 1
+		Vector2 box1Pos = transform->worldposition;
+		// Top Left
+		Vector2 box1Offset = Vector2(-width / 2, -height / 2);
+		box1Offset.Rotate(angle);
+		Vector2 box1TopLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		// Top Right
+		box1Offset = Vector2(width / 2, -height / 2);
+		box1Offset.Rotate(angle);
+		Vector2 box1TopRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		// Bottom Left
+		box1Offset = Vector2(-width / 2, height / 2);
+		box1Offset.Rotate(angle);
+		Vector2 box1BottomLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		// Bottom Right
+		box1Offset = Vector2(width / 2, height / 2);
+		box1Offset.Rotate(angle);
+		Vector2 box1BottomRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+
+		// Box 2
+		BoxCollider* box2Col = (BoxCollider*)col;
+		Vector2 box2Pos = transform->worldposition;
+		// Top Left
+		Vector2 box2Offset = Vector2(-box2Col->width / 2, -box2Col->height / 2);
+		box2Offset.Rotate(box2Col->angle);
+		Vector2 box2TopLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		// Top Right
+		box2Offset = Vector2(box2Col->width / 2, -box2Col->height / 2);
+		box2Offset.Rotate(box2Col->angle);
+		Vector2 box2TopRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		// Bottom Left
+		box2Offset = Vector2(-box2Col->width / 2, box2Col->height / 2);
+		box2Offset.Rotate(box2Col->angle);
+		Vector2 box2BottomLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		// Bottom Right
+		box2Offset = Vector2(box2Col->width / 2, box2Col->height / 2);
+		box2Offset.Rotate(box2Col->angle);
+		Vector2 box2BottomRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+
+		Vector2 box1TopNorm = (box1TopRight.operator-(box1TopLeft)).Normalize();
+		Vector2 box1SideNorm = (box1BottomLeft.operator-(box1TopLeft)).Normalize();
+		// Get each box corners for length (Seperating Axis Theorem)
+		bool axis1 = false;
+		bool axis2 = false;
+		// Axis 1 (box1Top)
+		float box1TopDist = (box1TopRight.operator-(box1TopLeft)).Length();
+		float box2TopLeftDist = (box1TopRight.operator-(box2TopLeft)).Length();
+		float box2TopRightDist = (box1TopRight.operator-(box2TopRight)).Length();
+		float box2BottomLeftDist = (box1TopRight.operator-(box2BottomLeft)).Length();
+		float box2BottomRightDist = (box1TopRight.operator-(box2BottomRight)).Length();
+		if (box2TopLeftDist < box1TopDist || box2TopRightDist < box1TopDist || box2BottomLeftDist < box1TopDist || box2BottomRightDist < box1TopDist)
+			axis1 = true;
+		// Axis 2 (box1Side)
+		float box1SideDist = (box1BottomLeft.operator-(box1TopLeft)).Length();
+		box2TopLeftDist = (box1BottomLeft.operator-(box2TopLeft)).Length();
+		box2TopRightDist = (box1BottomLeft.operator-(box2TopRight)).Length();
+		box2BottomLeftDist = (box1BottomLeft.operator-(box2BottomLeft)).Length();
+		box2BottomRightDist = (box1BottomLeft.operator-(box2BottomRight)).Length();
+		if (box2TopLeftDist < box1TopDist || box2TopRightDist < box1TopDist || box2BottomLeftDist < box1TopDist || box2BottomRightDist < box1TopDist)
+			axis2 = true;
+
+		// Check Collision
+		if (axis1 && axis2)
+		{
+			return true;
+		}
 	}
 
 	return true;
