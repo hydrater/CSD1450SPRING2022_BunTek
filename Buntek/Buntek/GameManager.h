@@ -54,11 +54,6 @@ public:
     float friendlyAreaX = 0;
     float hostileAreaX = 0;
 
-    float easeIn(float t);
-    float flip(float x);
-    float easeOut(float t);
-    float easeInOut(float t);
-    float lerpF(float start_value, float end_value, float t);
 };
 
 class Connection

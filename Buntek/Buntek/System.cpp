@@ -81,8 +81,15 @@ _sceneManager& _sceneManager::Instance(void)
 _sceneManager::_sceneManager()
 {
     scene = 0;
+    nextScene = 0;
+    CurrentTransitionTypes = TransitionTypes::None;
+    CurrentTransitionStage = TransitionStage::NotTransitioning;
+    TransitionTimer = 0;
+    TransitionDuration = 2;
+    Transitor = 0;
     notStarted = true;
     notAwake = true;
+    Transitioning = true;
 }
 
 _sceneManager::~_sceneManager()
@@ -90,16 +97,22 @@ _sceneManager::~_sceneManager()
 
 }
 
-void _sceneManager::LoadScene(Scene* newScene)
+void _sceneManager::LoadScene(Scene* newScene, TransitionTypes TransitionType)
 {
+    //if (scene != NULL)
+    //{
+    //    AssetManager.FreeAll();
+    //    GameScriptManager.ClearList();
+    //    delete scene;
+    //}
+    cout << "load" << endl;
     if (scene != NULL)
-    {
-        AssetManager.FreeAll();
-        GameScriptManager.ClearList();
-        delete scene;
-    }
+        nextScene = newScene;
+    else
+        scene = newScene;
     notStarted = true;
-    scene = newScene;
+    CurrentTransitionTypes = TransitionType;
+    Transitioning = true;
     GameManager.cameraLerpBack = false;
     AEGfxSetCamPosition(0, 0);
 }
@@ -111,10 +124,31 @@ Scene* _sceneManager::GetScene(void)
 
 void _sceneManager::Update(void)
 {
-    if (notStarted)
-    {
-        scene->Start();
-        notStarted = false;
+    if (Transitioning) {
+        switch (CurrentTransitionTypes)
+        {
+        case TransitionTypes::None:
+            if (scene != NULL && nextScene != NULL)
+            {
+                AssetManager.FreeAll();
+                GameScriptManager.ClearList();
+                delete scene;
+                scene = nextScene;
+                nextScene = 0;
+            }
+            if (notStarted)
+            {
+                scene->Start();
+                notStarted = false;
+            }
+            Transitioning = false;
+            break;
+        case TransitionTypes::FadeToBlack:
+            FadeToBlack();
+            break;
+        default:
+            break;
+        }
     }
     scene->Update();
 }
@@ -127,6 +161,63 @@ void _sceneManager::LateUpdate(void)
 void _sceneManager::EarlyUpdate(void)
 {
     scene->EarlyUpdate();
+}
+void _sceneManager::FadeToBlack(void) {
+    switch (CurrentTransitionStage)
+    {
+    case TransitionStage::NotTransitioning:
+        TransitionTimer = 0;
+        Transitor = new GameObject();
+        Transitor->AddComponent<SpriteRenderer>()->Size((float)AEGetWindowWidth(), (float)AEGetWindowHeight());
+        Transitor->GetComponent<SpriteRenderer>()->SetTexture("BlackTexture.png");
+        Transitor->GetComponent<SpriteRenderer>()->SetTransparency(0);
+        CurrentTransitionStage = TransitionStage::TransitionTo;
+        break;
+
+    case TransitionStage::TransitionTo:
+        TransitionTimer += DeltaTime;
+        Transitor->GetComponent<SpriteRenderer>()->SetTransparency(lerpF(0,1,easeIn(TransitionTimer/TransitionDuration)));
+        if (TransitionTimer > TransitionDuration) {
+            TransitionTimer = 0;
+            CurrentTransitionStage = TransitionStage::Transitioning;
+        }
+        break;
+
+    case TransitionStage::Transitioning:
+        if (scene != NULL && nextScene != NULL)
+        {
+            AssetManager.FreeAll();
+            GameScriptManager.ClearList();
+            delete scene;
+            scene = nextScene;
+            nextScene = 0;
+        }
+        if (notStarted)
+        {
+            scene->Start();
+            notStarted = false;
+        }
+        Transitor = new GameObject();
+        Transitor->AddComponent<SpriteRenderer>()->Size((float)AEGetWindowWidth(), (float)AEGetWindowHeight());
+        Transitor->GetComponent<SpriteRenderer>()->SetTexture("BlackTexture.png");
+        Transitor->GetComponent<SpriteRenderer>()->SetTransparency(1);
+        CurrentTransitionStage = TransitionStage::TransitionFrom;
+        break;
+
+    case TransitionStage::TransitionFrom:
+        TransitionTimer += DeltaTime;
+        Transitor->GetComponent<SpriteRenderer>()->SetTransparency(lerpF(1, 0, easeIn(TransitionTimer / TransitionDuration)));
+        if (TransitionTimer > TransitionDuration) {
+            Transitor->Delete();
+            TransitionTimer = 0;
+            Transitioning = false;
+            CurrentTransitionStage = TransitionStage::NotTransitioning;
+        }
+        break;
+
+    default:
+        break;
+    }
 }
 
 _gameScriptManager::_gameScriptManager()

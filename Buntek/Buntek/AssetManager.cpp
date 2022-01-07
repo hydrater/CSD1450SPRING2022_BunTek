@@ -10,6 +10,7 @@ _assetManager::_assetManager()
     LoadTexture("splash.png");
     LoadTexture("Background.jpg");
     LoadTexture("WhiteTexture.png");
+    LoadTexture("BlackTexture.png");
     LoadTexture("ball.png");
     LoadTexture("Trail.png");
     LoadTexture("paddle.png");
