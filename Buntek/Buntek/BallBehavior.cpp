@@ -73,7 +73,8 @@ float BallBehavior::GetSpeed(void)
 
 void BallBehavior::SetSpeed(float _speed)
 {
-	speed = _speed;
+	speed = _speed > maxSpeed? maxSpeed : _speed;
+
 }
 
 void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)

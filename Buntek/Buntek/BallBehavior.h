@@ -32,6 +32,7 @@ public:
 	bool elemElemental = false;
 
 private:
+	const float maxSpeed = 600;
 	float initspeed = 300;
 	float speed = 300;
 	float angrange = 45;
