@@ -47,4 +47,16 @@ void _CollisionManager2D::CollideAll(void)
         }
     }
 
+    //Boxes with everything else
+    for (int i = 0; i < boxColliderList.size(); ++i)
+    {
+        for (int j = i + 1; j < boxColliderList.size(); ++j)
+        {
+            (boxColliderList[i])->Collide(boxColliderList[j]);
+        }
+        for (int j = 0; j < circleColliderList.size(); ++j)
+        {
+            (boxColliderList[i])->Collide(circleColliderList[j]);
+        }
+    }
 }

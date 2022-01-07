@@ -51,9 +51,7 @@ bool BoxCollider::Collide(Collider2D* col)
 		CircleCollider* circleCol = (CircleCollider*)col;
 
 		if (col->transform == NULL || transform == NULL)
-		{
 			return false;
-		}
 
 		Vector2 boxPos = transform->worldposition;
 		Vector2 vecDist = boxPos.operator-(circleCol->transform->worldposition);
@@ -83,16 +81,12 @@ bool BoxCollider::Collide(Collider2D* col)
 
 		// Check Collision
 		if (abs(dotproductx) < width / 2 + circleCol->radius && abs(dotproducty) < height / 2 + circleCol->radius)
-		{
 			return true;
-		}
 	}
 	//Box-Box collision
 	else if (typeid(*col) == typeid(BoxCollider)) {
 		if (col->transform == NULL || transform == NULL)
-		{
 			return false;
-		}
 
 		// Box 1
 		Vector2 box1Pos = transform->worldposition;
@@ -115,7 +109,7 @@ bool BoxCollider::Collide(Collider2D* col)
 
 		// Box 2
 		BoxCollider* box2Col = (BoxCollider*)col;
-		Vector2 box2Pos = transform->worldposition;
+		Vector2 box2Pos = box2Col->transform->worldposition;
 		// Top Left
 		Vector2 box2Offset = Vector2(-box2Col->width / 2, -box2Col->height / 2);
 		box2Offset.Rotate(box2Col->angle);
@@ -138,28 +132,42 @@ bool BoxCollider::Collide(Collider2D* col)
 		// Get each box corners for length (Seperating Axis Theorem)
 		bool axis1 = false;
 		bool axis2 = false;
-		// Axis 1 (box1Top)
+		// Axis 1 (box1Top) Get the bigger distance
 		float box1TopDist = (box1TopRight.operator-(box1TopLeft)).Length();
-		float box2TopLeftDist = (box1TopRight.operator-(box2TopLeft)).Length();
-		float box2TopRightDist = (box1TopRight.operator-(box2TopRight)).Length();
-		float box2BottomLeftDist = (box1TopRight.operator-(box2BottomLeft)).Length();
-		float box2BottomRightDist = (box1TopRight.operator-(box2BottomRight)).Length();
+		float box2TopLeftDist = abs((box1TopRight.operator-(box2TopLeft)).Dot(box1TopNorm));
+		if (box2TopLeftDist < abs((box1TopLeft.operator-(box2TopLeft)).Dot(box1TopNorm)))
+			box2TopLeftDist = abs((box1TopLeft.operator-(box2TopLeft)).Dot(box1TopNorm));
+		float box2TopRightDist = abs((box1TopRight.operator-(box2TopRight)).Dot(box1TopNorm));
+		if (box2TopRightDist < abs((box1TopLeft.operator-(box2TopRight)).Dot(box1TopNorm)))
+			box2TopRightDist = abs((box1TopLeft.operator-(box2TopRight)).Dot(box1TopNorm));
+		float box2BottomLeftDist = abs((box1TopRight.operator-(box2BottomLeft)).Dot(box1TopNorm));
+		if (box2BottomLeftDist < abs((box1TopLeft.operator-(box2BottomLeft)).Dot(box1TopNorm)))
+			box2BottomLeftDist = abs((box1TopLeft.operator-(box2BottomLeft)).Dot(box1TopNorm));
+		float box2BottomRightDist = abs((box1TopRight.operator-(box2BottomRight)).Dot(box1TopNorm));
+		if (box2BottomRightDist < abs((box1TopLeft.operator-(box2BottomRight)).Dot(box1TopNorm)))
+			box2BottomRightDist = abs((box1TopLeft.operator-(box2BottomRight)).Dot(box1TopNorm));
 		if (box2TopLeftDist < box1TopDist || box2TopRightDist < box1TopDist || box2BottomLeftDist < box1TopDist || box2BottomRightDist < box1TopDist)
 			axis1 = true;
 		// Axis 2 (box1Side)
 		float box1SideDist = (box1BottomLeft.operator-(box1TopLeft)).Length();
-		box2TopLeftDist = (box1BottomLeft.operator-(box2TopLeft)).Length();
-		box2TopRightDist = (box1BottomLeft.operator-(box2TopRight)).Length();
-		box2BottomLeftDist = (box1BottomLeft.operator-(box2BottomLeft)).Length();
-		box2BottomRightDist = (box1BottomLeft.operator-(box2BottomRight)).Length();
-		if (box2TopLeftDist < box1TopDist || box2TopRightDist < box1TopDist || box2BottomLeftDist < box1TopDist || box2BottomRightDist < box1TopDist)
+		box2TopLeftDist = abs((box1BottomLeft.operator-(box2TopLeft)).Dot(box1SideNorm));
+		if (box2TopLeftDist < abs((box1TopRight.operator-(box2TopLeft)).Dot(box1SideNorm)))
+			box2TopLeftDist = abs((box1TopRight.operator-(box2TopLeft)).Dot(box1SideNorm));
+		box2TopRightDist = abs((box1BottomLeft.operator-(box2TopRight)).Dot(box1SideNorm));
+		if (box2TopRightDist < abs((box1TopRight.operator-(box2TopRight)).Dot(box1SideNorm)))
+			box2TopRightDist = abs((box1TopRight.operator-(box2TopRight)).Dot(box1SideNorm));
+		box2BottomLeftDist = abs((box1BottomLeft.operator-(box2BottomLeft)).Dot(box1SideNorm));
+		if (box2BottomLeftDist < abs((box1TopRight.operator-(box2BottomLeft)).Dot(box1SideNorm)))
+			box2BottomLeftDist = abs((box1TopRight.operator-(box2BottomLeft)).Dot(box1SideNorm));
+		box2BottomRightDist = abs((box1BottomLeft.operator-(box2BottomRight)).Dot(box1SideNorm));
+		if (box2BottomRightDist < abs((box1TopRight.operator-(box2BottomRight)).Dot(box1SideNorm)))
+			box2BottomRightDist = abs((box1TopRight.operator-(box2BottomRight)).Dot(box1SideNorm));
+		if (box2TopLeftDist < box1SideDist || box2TopRightDist < box1SideDist || box2BottomLeftDist < box1SideDist || box2BottomRightDist < box1SideDist)
 			axis2 = true;
 
 		// Check Collision
 		if (axis1 && axis2)
-		{
 			return true;
-		}
 	}
 
 	return true;
@@ -209,9 +217,7 @@ bool CircleCollider::Collide(Collider2D* col)
 		BoxCollider* boxCol = (BoxCollider*)col;
 
 		if (col->transform == NULL || transform == NULL)
-		{
 			return false;
-		}
 
 		Vector2 boxPos = col->transform->worldposition;
 		Vector2 vecDist = boxPos.operator-(transform->worldposition);
@@ -241,9 +247,7 @@ bool CircleCollider::Collide(Collider2D* col)
 
 		// Check Collision
 		if (abs(dotproductx) < boxCol->width/2 + radius && abs(dotproducty) < boxCol->height/2 + radius)
-		{
 			return true;
-		}
 	}
 
 	return false;
