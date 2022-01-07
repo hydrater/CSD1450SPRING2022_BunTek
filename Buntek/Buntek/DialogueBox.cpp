@@ -1,5 +1,6 @@
 #include "DialogueBox.h"
 #include <fstream>
+#include <sstream>
 
 DialogueBox::DialogueBox(void)
 {
@@ -20,7 +21,11 @@ void DialogueBox::LoadFromFile(string flag)
         exit(EXIT_FAILURE);
     }
 
-    dialogue = string((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
-    cout << dialogue << endl;
+    string input = string((std::istreambuf_iterator<char>(input_file)), std::istreambuf_iterator<char>());
+
+    auto ss = stringstream{input};
+
+    for (string line; getline(ss, line, '\n');)
+        dialogueList.push_back(line);
 }
 

@@ -3,7 +3,7 @@
 #include "TextRenderer.h"
 #include "Button.h"
 #include "Scene_Battle.h"
-
+#include "DialogueBox.h"
 
 void MoveToBattle(void);
 
@@ -12,6 +12,7 @@ void Scene_MainMenu::Start(void)
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
 	background->GetComponent<SpriteRenderer>()->SetTexture("MainMenu.png");
+	background->AddComponent<DialogueBox>()->LoadFromFile("asd");
 
 	Battle = new GameObject();
 	SpriteRenderer* tempRenderer;
