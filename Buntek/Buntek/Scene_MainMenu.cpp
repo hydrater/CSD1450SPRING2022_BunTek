@@ -36,7 +36,7 @@ void Scene_MainMenu::Start(void)
 
 void Scene_MainMenu::Update(void)
 {
-	
+	background->GetComponent<DialogueBox>()->WriteToDialogue();
 	//string s = "test";
 
 	//Battle->GetComponent<Button>()->ButtonEffect();
