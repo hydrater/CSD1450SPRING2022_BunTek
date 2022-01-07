@@ -71,7 +71,7 @@ public:
     public:
         GameObject* clickable;
         Vector2 pos;
-        bool reached;
+        bool reached = false;
         vector<Node*> connectedNodes;
         vector<Node*> connectedFrom;
     };
