@@ -55,10 +55,18 @@ void DialogueBox::WriteToDialogue(void)
 
     if (dialogueList[dialogueNo].rfind("/", 0) == 0)
     {
+        if (dialogueList[dialogueNo].length() < 3)
+        {
+            cout << "Error: Comamnd has no parameters" << endl;
+            return;
+        }
+
+        string parameters = dialogueList[dialogueNo].substr(3, dialogueList[dialogueNo].length());
+
         switch (dialogueList[dialogueNo][1])
         {
         case 'a':
-            cout << "command is called " << endl;
+            cout << "Actor Name: " << parameters << endl;
             break;
 
         default:
@@ -70,5 +78,6 @@ void DialogueBox::WriteToDialogue(void)
     {
         cout << dialogueList[dialogueNo] << endl;
     }
+
     ++dialogueNo;
 }
