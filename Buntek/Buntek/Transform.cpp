@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "Entity.h"
+#include "Collider2D.h"
 
 Transform::Transform() :
 	localscale(1, 1),
@@ -53,6 +54,9 @@ void Transform::Translate(Vector2 translate)
 void Transform::Rotate(float rotate)
 {
 	this->worldrotation = worldrotation + rotate;
+
+	if (this->Owner()->GetComponent<Collider2D>())
+		this->Owner()->GetComponent<Collider2D>()->UpdateDimension();
 }
 
 void Transform::Scale(float scale)

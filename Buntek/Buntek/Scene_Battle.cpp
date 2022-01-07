@@ -69,18 +69,20 @@ void Scene_Battle::Start(void)
 
 	inputHandler->GetComponent<BattleInput2>()->playerpaddle = temppaddle;
 
-	/*Testpaddle = new GameObject();
+	Testpaddle = new GameObject();
 	tempRenderer = Testpaddle->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(20, 100);
 	tempRenderer->SetTexture("paddle.png");
 	tempRenderer->SetColor(0, 1, 0);
 	Testpaddle->transform->SetPosition(Vector2(-590, 70));
+	Testpaddle->transform->Rotate(45);
 	temppaddle = Testpaddle->AddComponent<PaddleBehavior>();
 	temppaddle->setplayerpaddle(false);
 	temppaddle->setMaxspeed(1200);
 	temppaddle->setMinMoveDist(10);
 	temppaddle->sr = tempRenderer;
-	tempcol = Testpaddle->AddComponent<BoxCollider>();*/
+	tempcol = Testpaddle->AddComponent<BoxCollider>();
+	tempcol->UpdateDimension();
 
 	AIpaddle = new GameObject();
 	tempRenderer = AIpaddle->AddComponent<SpriteRenderer>();
@@ -94,6 +96,7 @@ void Scene_Battle::Start(void)
 	temppaddle->setMinMoveDist(10);
 	temppaddle->sr = tempRenderer;
 	tempcol = AIpaddle->AddComponent<BoxCollider>();
+	tempcol->UpdateDimension();
 
 	inputHandler->GetComponent<BattleInput2>()->AIPaddle = temppaddle;
 
