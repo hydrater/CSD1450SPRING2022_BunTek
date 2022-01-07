@@ -17,9 +17,9 @@ _assetManager::_assetManager()
     LoadTexture("BetterNebula.png");
     LoadTexture("Buttons.png");
     //font
-    LoadFont("Roboto-Regular.ttf");
-    LoadFont("Stargaze.otf");
-    LoadFont("Naden.otf");
+
+    LoadFont("EquinoxR.otf");
+    LoadFont("EquinoxB.otf");
     LoadFont("Metrolic.ttf");
 
     mesh = 0;
