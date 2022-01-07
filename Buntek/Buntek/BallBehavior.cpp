@@ -14,7 +14,8 @@ BallBehavior::~BallBehavior(void)
 void BallBehavior::Start(void)
 {
 	transform = this->Owner()->transform;
-	circoll->transform = transform;
+	this->Owner()->GetComponent<CircleCollider>()->UpdateDimension();
+	this->Owner()->GetComponent<CircleCollider>()->transform = transform;
 
 	//Create a Trail
 	ballTrail->transform->SetPosition(Vector2(transform->worldposition.x, transform->worldposition.y - (ballTrail->transform->worldscale.y * 20 / 2.f)));

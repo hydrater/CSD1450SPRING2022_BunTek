@@ -24,7 +24,6 @@ public:
 	short listCheck = 139;
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
-	CircleCollider* circoll = 0;
 	bool skillApplied = false;
 
 	// Basic Elements

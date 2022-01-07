@@ -17,7 +17,8 @@ PaddleBehavior::~PaddleBehavior()
 void PaddleBehavior::Start(void)
 {
 	transform = this->Owner()->transform;
-	boxcoll->transform = transform;
+	this->Owner()->GetComponent<BoxCollider>()->UpdateDimension();
+	this->Owner()->GetComponent<BoxCollider>()->transform = transform;
 }
 
 void PaddleBehavior::Update(void)

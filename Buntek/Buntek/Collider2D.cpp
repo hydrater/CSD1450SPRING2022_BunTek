@@ -21,9 +21,13 @@ bool Collider2D::Collide(Collider2D col)
 // ============ BOX COLLIDER ============ 
 BoxCollider::BoxCollider()
 {
-	/*
-	if (thistransform != NULL) {
-		angle = thistransform->worldrotation;
+	CollisionManager2D.AddToList(this);
+}
+
+void BoxCollider::UpdateDimension(void)
+{
+	if (transform != NULL) {
+		angle = transform->worldrotation;
 	}
 	else {
 		angle = 0.0f;
@@ -38,20 +42,50 @@ BoxCollider::BoxCollider()
 		width = 100;
 		height = 100;
 	}
-	*/
-	angle = 0;
-	width = -1;
-	height = -1;
-	CollisionManager2D.AddToList(this);
-
 }
-
 
 bool BoxCollider::Collide(Collider2D* col)
 {
 	//Box-Circle collision
 	if (typeid(*col) == typeid(CircleCollider)) {
+		CircleCollider* circleCol = (CircleCollider*)col;
 
+		if (col->transform == NULL || transform == NULL)
+		{
+			return false;
+		}
+
+		Vector2 boxPos = transform->worldposition;
+		Vector2 vecDist = boxPos.operator-(circleCol->transform->worldposition);
+
+		// Top Left
+		Vector2 boxOffset = Vector2(-width / 2, -height / 2);
+		boxOffset.Rotate(angle);
+		Vector2 boxTopLeft = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
+		// Top Right
+		boxOffset = Vector2(width / 2, -height / 2);
+		boxOffset.Rotate(angle);
+		Vector2 boxTopRight = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
+		// Bottom Left
+		boxOffset = Vector2(-width / 2, height / 2);
+		boxOffset.Rotate(angle);
+		Vector2 boxBottomLeft = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
+		// Bottom Right
+		boxOffset = Vector2(width / 2, height / 2);
+		boxOffset.Rotate(angle);
+		Vector2 boxBottomRight = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
+
+		Vector2 boxTop = (boxTopRight.operator-(boxTopLeft)).Normalize();
+		Vector2 boxSide = (boxBottomLeft.operator-(boxTopLeft)).Normalize();
+
+		float dotproductx = boxTop.Dot(vecDist);
+		float dotproducty = boxSide.Dot(vecDist);
+
+		// Check Collision
+		if (abs(dotproductx) < width / 2 + circleCol->radius && abs(dotproducty) < height / 2 + circleCol->radius)
+		{
+			return true;
+		}
 	}
 	//Box-Box collision
 	else if (typeid(*col) == typeid(BoxCollider)) {
@@ -71,17 +105,18 @@ BoxCollider::~BoxCollider(void)
 // ============ CIRCLE COLLIDER ============ 
 CircleCollider::CircleCollider(void)
 {
-	/*
-	SpriteRenderer* _sr = this->gameObject->GetComponent<SpriteRenderer>();
+	CollisionManager2D.AddToList(this);
+}
+
+void CircleCollider::UpdateDimension(void)
+{
+	SpriteRenderer* _sr = this->Owner()->GetComponent<SpriteRenderer>();
 	if (_sr != NULL) {
 		radius = _sr->GetHalfWidth() + _sr->GetHalfHeight();
 	}
 	else {
 		radius = 50;
 	}
-	*/
-	radius = -1;
-	CollisionManager2D.AddToList(this);
 }
 
 bool CircleCollider::Collide(Collider2D* col)
@@ -103,14 +138,8 @@ bool CircleCollider::Collide(Collider2D* col)
 
 		BoxCollider* boxCol = (BoxCollider*)col;
 
-		if (col->transform == NULL)
+		if (col->transform == NULL || transform == NULL)
 		{
-			cout << "col null" << endl;
-			return false;
-		}
-		else if (transform == NULL)
-		{
-			cout << "this null" << endl;
 			return false;
 		}
 
@@ -143,7 +172,6 @@ bool CircleCollider::Collide(Collider2D* col)
 		// Check Collision
 		if (abs(dotproductx) < boxCol->width/2 + radius && abs(dotproducty) < boxCol->height/2 + radius)
 		{
-			cout << "meep" << endl;
 			return true;
 		}
 	}

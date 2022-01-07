@@ -9,6 +9,7 @@
 #include "CollisionManager2D.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
+#include "Collider2D.h"
 
 // ---------------------------------------------------------------------------
 // main

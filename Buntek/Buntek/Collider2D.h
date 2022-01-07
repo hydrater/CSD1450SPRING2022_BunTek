@@ -18,6 +18,7 @@ class BoxCollider : public Collider2D
 public:
 	BoxCollider(void);
 	~BoxCollider(void);
+	void UpdateDimension(void);
 	bool Collide(Collider2D* other);
 	float width;
 	float height;
@@ -34,6 +35,7 @@ class CircleCollider : public Collider2D
 public:
 	CircleCollider(void);
 	~CircleCollider(void);
+	void UpdateDimension(void);
 	bool Collide(Collider2D* other);
 	float radius;
 	
