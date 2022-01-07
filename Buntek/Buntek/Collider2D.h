@@ -7,6 +7,7 @@ public:
 	Collider2D(void);
 	~Collider2D(void);
 	bool Collide(Collider2D col);
+	Transform* transform = 0;
 
 private:
 

@@ -1,6 +1,7 @@
 #include "PaddleBehavior.h"
 #include "GameManager.h"
 #include "SpriteRenderer.h"
+#include "Collider2D.h"
 
 
 PaddleBehavior::PaddleBehavior()
@@ -16,6 +17,7 @@ PaddleBehavior::~PaddleBehavior()
 void PaddleBehavior::Start(void)
 {
 	transform = this->Owner()->transform;
+	boxcoll->transform = transform;
 }
 
 void PaddleBehavior::Update(void)

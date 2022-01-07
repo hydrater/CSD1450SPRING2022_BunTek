@@ -14,6 +14,7 @@ BallBehavior::~BallBehavior(void)
 void BallBehavior::Start(void)
 {
 	transform = this->Owner()->transform;
+	circoll->transform = transform;
 
 	//Create a Trail
 	ballTrail->transform->SetPosition(Vector2(transform->worldposition.x, transform->worldposition.y - (ballTrail->transform->worldscale.y * 20 / 2.f)));
@@ -124,7 +125,7 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 				}
 			}
 			else if (180 - angrange < ang && ang <= 180) {
-				cout << ang << endl;
+				//cout << ang << endl;
 				if (velocity.x < 0) {
 					velocity = Vector2(0, -1);
 					velocity.Rotate(angrange);

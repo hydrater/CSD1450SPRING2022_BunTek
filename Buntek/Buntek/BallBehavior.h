@@ -1,6 +1,7 @@
 #pragma once
 #include "GameScript.h"
 #include "SpriteRenderer.h"
+#include "Collider2D.h"
 
 class BallBehavior : public GameScript
 {
@@ -23,6 +24,7 @@ public:
 	short listCheck = 139;
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
+	CircleCollider* circoll = 0;
 	bool skillApplied = false;
 
 	// Basic Elements

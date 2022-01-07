@@ -1,6 +1,7 @@
 #pragma once
 #include "GameScript.h"
 #include "SpriteRenderer.h"
+#include "Collider2D.h"
 
 class PaddleBehavior : public GameScript
 {
@@ -12,6 +13,7 @@ public:
 	Vector2 velocity = Vector2(0, 0);
 
 	SpriteRenderer* sr = 0;
+	BoxCollider* boxcoll = 0;
 
 	void Start(void) override;
 	void Update(void) override;

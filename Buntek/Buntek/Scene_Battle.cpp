@@ -64,6 +64,9 @@ void Scene_Battle::Start(void)
 	temppaddle->setMaxspeed(1200);
 	temppaddle->setMinMoveDist(10);
 	temppaddle->sr = tempRenderer;
+	BoxCollider* tempcoll;
+	tempcoll = playerpaddle->AddComponent<BoxCollider>();
+	temppaddle->boxcoll = tempcoll;
 
 	inputHandler->GetComponent<BattleInput2>()->playerpaddle = temppaddle;
 
@@ -78,6 +81,8 @@ void Scene_Battle::Start(void)
 	temppaddle->setMaxspeed(1200);
 	temppaddle->setMinMoveDist(10);
 	temppaddle->sr = tempRenderer;
+	tempcoll = AIpaddle->AddComponent<BoxCollider>();
+	temppaddle->boxcoll = tempcoll;
 
 	inputHandler->GetComponent<BattleInput2>()->AIPaddle = temppaddle;
 
@@ -123,6 +128,7 @@ void Scene_Battle::Update(void)
 	{
 		SpriteRenderer* tempRenderer;
 		BallBehavior* tempBall;
+		CircleCollider* tempcoll;
 
 		//Create Trail first (Render Trail before Ball)
 		GameObject* tempballTrail = new GameObject();
@@ -148,6 +154,9 @@ void Scene_Battle::Update(void)
 		tempBall->SetSpeed(tempBall->GetSpeed() +(scalingTimer * 3));
 		tempBall->sr = tempRenderer;
 		dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
+
+		tempcoll = ball->AddComponent<CircleCollider>();
+		tempBall->circoll = tempcoll;
 
 		ballList->push_back(tempBall);
 		
