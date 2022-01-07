@@ -66,7 +66,7 @@ void DialogueBox::WriteToDialogue(void)
         switch (dialogueList[dialogueNo][1])
         {
         case 'a':
-            cout << parameters << endl;
+            cout << "Actor Name: " << parameters << endl;
             break;
 
         default:
