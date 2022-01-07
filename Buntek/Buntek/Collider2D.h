@@ -44,3 +44,19 @@ private:
 	
 
 };
+
+
+class LineCollider : public Collider2D
+{
+public:
+	LineCollider(void);
+	~LineCollider(void);
+	bool Collide(Collider2D* other);
+	Vector2 point1;
+	Vector2 point2;
+
+
+private:
+
+
+};

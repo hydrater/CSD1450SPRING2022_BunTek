@@ -61,6 +61,13 @@ public:
     float lerpF(float start_value, float end_value, float t);
 };
 
+class Connection
+{
+public:
+    Vector2 point1;
+    Vector2 point2;
+};
+
 class _mapData
 {
 public:
@@ -71,6 +78,7 @@ public:
         Vector2 pos;
         bool reached;
         vector<Node*> connectedNodes;
+        vector<Node*> connectedFrom;
     };
     // this wont render lmao
     vector<AEGfxVertexList*> connectedLines;
@@ -92,7 +100,10 @@ private:
     const float cellHeight = 300;
     const int cellRows = 10;
     vector<vector<Node>> nodeList;
+    bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };
+
+
 
 //	// Informing the library that we're about to start adding vertices
 //	AEGfxMeshStart();

@@ -14,11 +14,13 @@ private:
     ~_CollisionManager2D();
     vector<CircleCollider*> circleColliderList;
     vector<BoxCollider*> boxColliderList;
+    vector<LineCollider*> lineColliderList;
     
 
 public:
     static _CollisionManager2D& Instance(void);
     void AddToList(CircleCollider* collider);
     void AddToList(BoxCollider* collider);
+    void AddToList(LineCollider* collider);
     void CollideAll(void);
 };

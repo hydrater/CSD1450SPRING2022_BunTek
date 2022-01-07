@@ -31,6 +31,10 @@ void _CollisionManager2D::AddToList(BoxCollider* collider)
 {
     boxColliderList.push_back(collider);
 }
+void _CollisionManager2D::AddToList(LineCollider* collider)
+{
+    lineColliderList.push_back(collider);
+}
 
 void _CollisionManager2D::CollideAll(void)
 {

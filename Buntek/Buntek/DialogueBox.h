@@ -8,8 +8,10 @@ public:
 	DialogueBox(void);
 	~DialogueBox(void);
 	void LoadFromFile(string flag);
+	void WriteToDialogue(void);
 
 private:
-	string name, dialogue;
+	string name, dialogueTxt;
 	vector<string> dialogueList;
+	int dialogueNo = 0;
 };
