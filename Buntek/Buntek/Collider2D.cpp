@@ -259,6 +259,59 @@ CircleCollider::~CircleCollider(void)
 
 // ============ CIRCLE COLLIDER END ============ 
 
+// ============ LINE COLLIDER ============ 
+LineCollider::LineCollider(void)
+{
+	/*
+	SpriteRenderer* _sr = this->gameObject->GetComponent<SpriteRenderer>();
+	if (_sr != NULL) {
+		radius = _sr->GetHalfWidth() + _sr->GetHalfHeight();
+	}
+	else {
+		radius = 50;
+	}
+	*/
+	
+	CollisionManager2D.AddToList(this);
+}
+
+bool LineCollider::Collide(Collider2D* col)
+{
+	//Line-Line collision
+	if (typeid(*col) == typeid(LineCollider)) {
+		LineCollider* other = (LineCollider*)col;
+		Vector2 a = point1;
+		Vector2 b = point2;
+
+		Vector2 c = other->point1;
+		Vector2 d = other->point2;
+
+		float denominator = ((b.x - a.x) * (d.y - c.y)) - ((b.y - a.y) * (d.x - c.x));
+		float numerator1 = ((a.y - c.y) * (d.x - c.x)) - ((a.x - c.x) * (d.y - c.y));
+		float numerator2 = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y));
+
+		// Detect coincident lines (has a problem, read below)
+		if (denominator == 0) return numerator1 == 0 && numerator2 == 0;
+
+		float r = numerator1 / denominator;
+		float s = numerator2 / denominator;
+
+		return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
+
+	}
+	//Circle-Box collision
+	else if (typeid(*col) == typeid(BoxCollider)) {
+
+	}
+
+	return false;
+}
+LineCollider::~LineCollider(void)
+{
+
+}
+
+// ============ CIRCLE COLLIDER END ============ 
 //bool CircleRectCol(CircleGameObject* c1, BoxGameObject* b1, bool doPhysics) {
 //
 //	Vector2 boxTopLeft = b1->gameObject.position;
