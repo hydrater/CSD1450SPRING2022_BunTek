@@ -23,7 +23,7 @@ public:
 	float buffer = 10;
 
 private:
-	string fontString = "Stargaze.otf";
+	string fontString = "EquinoxB.otf";
 	string text = "";
 
 };

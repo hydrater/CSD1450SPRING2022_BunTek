@@ -21,9 +21,9 @@ void Scene_MainMenu::Start(void)
 	TextRenderer* tempTextRenderer;
 	tempTextRenderer = Battle->AddComponent<TextRenderer>();
 	//tempRenderer->SetTexture("WhiteTexture.png");
-	tempTextRenderer->SetFont("Metrolic.ttf");
+	tempTextRenderer->SetFont("EquinoxR.otf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
-	tempTextRenderer->SetText("B A T T L E");
+	tempTextRenderer->SetText("B a t t l e");
 
 	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
