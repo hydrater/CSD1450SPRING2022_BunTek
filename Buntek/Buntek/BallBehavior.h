@@ -3,9 +3,8 @@
 #include "GameScript.h"
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
-//#include "BattleInput2.h"
+#include "BattleInput2.h"
 
-class BattleInput2;
 class BallBehavior : public GameScript
 {
 public:

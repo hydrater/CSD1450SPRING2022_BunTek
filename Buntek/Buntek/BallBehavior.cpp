@@ -8,6 +8,7 @@ BallBehavior::BallBehavior(void)
 
 BallBehavior::~BallBehavior(void)
 {
+	battleInput->RemoveFromList(this);
 	GameManager.CameraShake(0.5, 50, Vector2(0, 0));
 }
 

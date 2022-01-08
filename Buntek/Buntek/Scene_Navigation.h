@@ -9,6 +9,6 @@ public:
     void Update(void) override;
 private:
     ~Scene_Navigation(void);
-    GameObject* inputHandler, *background;
+    GameObject* inputHandler = 0, *background = 0;
     AEGfxVertexList* mesh = 0;
 };

@@ -29,12 +29,9 @@ void BattleInput::Update(void)
 
 	for (int i = 0; i < ballList.size(); ++i)
 	{
-		if (ballList[i]->listCheck != 139)
-		{
-			ballList.erase(ballList.begin() + i);
-			--i;
-			continue;
-		}
+		ballList.erase(ballList.begin() + i);
+		--i;
+		continue;
 	}
 
 	if (AEInputCheckTriggered(AEVK_LBUTTON))

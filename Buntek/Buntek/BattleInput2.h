@@ -2,7 +2,6 @@
 #define BATTLEINPUT_H
 #include "Component.h"
 #include "GameScript.h"
-//#include "BallBehavior.h"
 #include "PaddleBehavior.h"
 #include "Cursor.h"
 
@@ -17,8 +16,8 @@ public:
 	void RemoveFromList(BallBehavior* ballbehavior);
 	void UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Paddle, float* Timer, bool isPlayer);
 	vector<BallBehavior*> ballList;
-	PaddleBehavior* playerpaddle, * AIPaddle;
-	CursorBehaviour* playerCursor, * AICursor;
+	PaddleBehavior* playerpaddle = 0, * AIPaddle = 0;
+	CursorBehaviour* playerCursor = 0, * AICursor = 0;
 
 private:
 
