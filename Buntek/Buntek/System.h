@@ -10,14 +10,6 @@ using namespace std;
 #define GameScriptManager _gameScriptManager::Instance()
 #define DeltaTime (float)AEFrameRateControllerGetFrameTime()
 
-enum class TransitionStage :short
-{
-    NotTransitioning = 0,
-    TransitionTo = 1,
-    Transitioning = 2,
-    TransitionFrom = 3
-};
-
 enum class TransitionTypes :short
 {
     None = 0,
@@ -51,10 +43,10 @@ private:
     _sceneManager();
     ~_sceneManager();
     Scene* scene, *nextScene;
-    bool notStarted, notAwake, transitioning;
-    float transitionTimer, transitionDuration;
+    bool notStarted, notAwake, transitioning, transitionInDone;
+    float transitionTimer;
+    const float transitionStageDuration = 2;
     TransitionTypes currentTransitionTypes;
-    TransitionStage currentTransitionStage;
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;
 
