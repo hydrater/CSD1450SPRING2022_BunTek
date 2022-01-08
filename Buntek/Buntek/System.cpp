@@ -114,7 +114,6 @@ _sceneManager::~_sceneManager()
 
 void _sceneManager::LoadScene(Scene* newScene, TransitionTypes TransitionType)
 {
-    cout << "load" << endl;
     if (scene != NULL)
         nextScene = newScene;
     else
@@ -123,7 +122,6 @@ void _sceneManager::LoadScene(Scene* newScene, TransitionTypes TransitionType)
     currentTransitionTypes = TransitionType;
     transitioning = true;
     GameManager.cameraLerpBack = false;
-    AEGfxSetCamPosition(0, 0);
 }
 
 Scene* _sceneManager::GetScene(void)
@@ -188,6 +186,7 @@ void _sceneManager::FadeToBlack(void) {
                 AssetManager.FreeAll();
                 GameScriptManager.ClearList();
                 delete scene;
+                AEGfxSetCamPosition(0, 0);
                 scene = nextScene;
                 nextScene = 0;
             }
@@ -259,7 +258,6 @@ void _gameScriptManager::Update(void)
 
         gameScriptList[i]->Update();
     }
-    //cout << gameScriptList.size() << endl;
 }
 
 void _gameScriptManager::ClearList(void)

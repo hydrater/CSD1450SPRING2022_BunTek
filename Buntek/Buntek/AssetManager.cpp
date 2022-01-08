@@ -42,21 +42,17 @@ _assetManager::_assetManager()
 
 _assetManager::~_assetManager()
 {
-
+    AEGfxMeshFree(mesh);
 }
 
 _assetManager& _assetManager::Instance(void)
 {
     if (instance != 0)
-    {
         return *instance;
-    }
     instance = new _assetManager();
-    // Init here
 
     return *instance;
 }
-
 
 void _assetManager::RenderAll(void)
 {
@@ -93,29 +89,7 @@ void _assetManager::RenderAll(void)
 
         AEGfxSetPosition(transform->worldposition.x, transform->worldposition.y);
 
-        // In case matrix is unable to rotate properly
-        /*AEGfxMeshStart();
-
-        AEGfxTriAdd(
-            BottomLeft.x, BottomLeft.y, 0x00FF00FF, 0.0f, 1.0f,
-            BottomRight.x, BottomRight.y, 0x00FFFF00, 1.0f, 1.0f,
-            TopLeft.x, TopLeft.y, 0x0000FFFF, 0.0f, 0.0f);
-
-        AEGfxTriAdd(
-            BottomRight.x, BottomRight.y, 0x00FFFFFF, 1.0f, 1.0f,
-            TopRight.x, TopRight.y, 0x00FFFFFF, 1.0f, 0.0f,
-            TopLeft.x, TopLeft.y, 0x00FFFFFF, 0.0f, 0.0f);
-
-        mesh = AEGfxMeshEnd();
-
-        float TransformMatrix[3][3]{
-            {halfWidth * 2,0,transform->worldposition.x},
-            {0,halfHeight * 2,transform->worldposition.y},
-            {0,0,1}
-        };*/
-
         // Scale and Rotate Matrix
-        //rotationAngle = 0;
         float cosAngle = cosf(rotationAngle / 180.0f * 3.1415926535897932384626433832795f);
         float sinAngle = sinf(rotationAngle / 180.0f * 3.1415926535897932384626433832795f);
         float width = halfWidth * 2;
@@ -133,14 +107,12 @@ void _assetManager::RenderAll(void)
         //AEGfxSetTextureMode(AE_GFX_TM_PRECISE); Different quality if using average
         AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()), 0, 0);
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
-        //AEGfxMeshFree(mesh);
     }
 }
 
 void _assetManager::RenderAllText(void)
 {
     AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-
 
     for (int i = 0; i < rendererTextList.size(); ++i)
     {
@@ -150,7 +122,6 @@ void _assetManager::RenderAllText(void)
             (transform->worldposition.x - rendererTextList[i]->TextWidth / 2) / ((float)AEGetWindowWidth() / 2),
             (transform->worldposition.y - rendererTextList[i]->TextHeight / 2) / ((float)AEGetWindowHeight() / 2),
             rendererTextList[i]->textScale, rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
-
     }
 }
 
@@ -168,19 +139,6 @@ void _assetManager::FreeAll(void)
 {
     rendererList.clear();
     rendererTextList.clear();
-    // memory leak? lol
-   /* try {
-        if (mesh != 0)
-            AEGfxMeshFree(mesh);
-        map<string, AEGfxTexture*>::iterator start;
-        for (start = textureDatabase.begin(); start != textureDatabase.end(); start++)
-            AEGfxTextureUnload(start->second);
-
-        textureDatabase.clear();
-    }
-    catch (const std::exception) {
-
-    }*/
 }
 
 void _assetManager::LoadTexture(string name)
@@ -214,4 +172,3 @@ char _assetManager::GetFont(string name)
         return search->second;
     return NULL;
 }
-

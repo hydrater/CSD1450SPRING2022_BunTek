@@ -57,12 +57,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		if (AEInputCheckTriggered(AEVK_1))
 		{
-			SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::None);
+			SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::FadeToBlack);
 		}
 
 		if (AEInputCheckTriggered(AEVK_2))
 		{
-			SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
+			SceneManager.LoadScene(new Scene_Battle, TransitionTypes::FadeToBlack);
 		}
 
 		// --------------------------------------------- Update --------------------------------------------- //
