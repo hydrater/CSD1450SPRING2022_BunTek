@@ -34,6 +34,24 @@ void BattleInput::Update(void)
 			x->HitBall(GameManager.GetCursorPosition(), true);
 		}
 	}
+	if (LaunchLine != 0)
+	{
+		Vector2 temp = GameManager.GetCursorPosition();
+		Vector2 tempCalculation = temp;
+		float tempAngle = 0;
+
+		temp = (temp - LaunchBall->transform->worldposition);
+		LaunchLine->transform->Owner()->GetComponent<SpriteRenderer>()->Size(5,temp.Length());
+		tempAngle = Vector2(0, 1).AngleBetween(temp) / 3.1415926535897932384626433832795f * 180.0f;
+		if (tempCalculation.x < LaunchBall->transform->worldposition.x)
+		{
+			tempAngle = -tempAngle;
+		}
+
+		LaunchLine->transform->SetRotation(tempAngle);
+		temp = temp.Divide(2) + LaunchBall->transform->worldposition;
+		LaunchLine->transform->SetPosition(temp);
+	}
 	if (AEInputCheckTriggered(AEVK_RBUTTON))
 	{
 		Vector2 tempcursorposition = GameManager.GetCursorPosition();
@@ -48,7 +66,7 @@ void BattleInput::Update(void)
 			LaunchTrailRenderer->SetTexture("Trail.png");
 			LaunchTrailRenderer->SetColor(1, 1, 1);
 			LaunchTrailRenderer->SetTransparency(0.75f);
-
+			
 			LaunchBall = new GameObject();
 			SpriteRenderer* temporaryRenderer;
 			temporaryRenderer = LaunchBall->AddComponent<SpriteRenderer>();
@@ -65,6 +83,11 @@ void BattleInput::Update(void)
 			temporaryBall->sr = temporaryRenderer;
 			temporaryRenderer->SetColor(0, 0, 1);
 			launchcol = LaunchBall->AddComponent<CircleCollider>();
+
+			LaunchLine = new GameObject();
+			temporaryRenderer = LaunchLine->AddComponent<SpriteRenderer>();
+			temporaryRenderer->SetTexture("WhiteTexture.png");
+			temporaryRenderer->Size(0, 0);
 		}
 	}
 	else if (AEInputCheckReleased(AEVK_RBUTTON) && LaunchBall != NULL)
@@ -82,6 +105,8 @@ void BattleInput::Update(void)
 		
 		this->ballList.push_back(LaunchBallCalculator);
 		LaunchBall = 0;
+		LaunchLine->Delete();
+		LaunchLine = 0;
 	}
 	// PlayerAI Activate
 	if (AEInputCheckTriggered(AEVK_O))
