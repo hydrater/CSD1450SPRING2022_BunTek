@@ -34,7 +34,6 @@ void BattleInput::Update(void)
 			x->HitBall(GameManager.GetCursorPosition(), true);
 		}
 	}
-
 	if (AEInputCheckTriggered(AEVK_RBUTTON))
 	{
 		Vector2 tempcursorposition = GameManager.GetCursorPosition();
