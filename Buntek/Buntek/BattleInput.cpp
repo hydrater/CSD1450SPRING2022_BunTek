@@ -61,10 +61,7 @@ void BattleInput::Update(void)
 			temporaryBall->ballTrail = launchBallTrail;
 			temporaryBall->srBallTrail = LaunchTrailRenderer;
 			temporaryBall->Owner()->transform->SetPosition(tempcursorposition);
-
-			bool dir = RandIntMinMax(0, 1);
 			temporaryBall->playerPossess = false;
-			temporaryBall->velocity = Vector2((float)(dir ? -1 : 1), RandFloatMinMax(0, 1));
 			temporaryBall->radius = 10;
 			temporaryBall->sr = temporaryRenderer;
 			temporaryRenderer->SetColor(0, 0, 1);
