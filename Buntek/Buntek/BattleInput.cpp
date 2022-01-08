@@ -73,12 +73,12 @@ void BattleInput::Update(void)
 		BallBehavior* LaunchBallCalculator;
 		LaunchBallCalculator = LaunchBall->GetComponent<BallBehavior>();
 		Vector2 temp = GameManager.GetCursorPosition();
-		temp = temp - LaunchBallCalculator->Owner()->transform->worldposition;
+		temp = -(temp - LaunchBallCalculator->Owner()->transform->worldposition);
 		if (temp.x < 0)
 		{
 			temp.x = -temp.x;
 		}
-		LaunchBallCalculator->SetSpeed(temp.Length());
+		LaunchBallCalculator->SetSpeed(300);
 		LaunchBallCalculator->velocity = temp.Normalize();
 		
 		this->ballList.push_back(LaunchBallCalculator);
