@@ -51,11 +51,11 @@ private:
     _sceneManager();
     ~_sceneManager();
     Scene* scene, *nextScene;
-    bool notStarted, notAwake, Transitioning;
-    float TransitionTimer, TransitionDuration;
-    TransitionTypes CurrentTransitionTypes;
-    TransitionStage CurrentTransitionStage;
-    GameObject* Transitor;
+    bool notStarted, notAwake, transitioning;
+    float transitionTimer, transitionDuration;
+    TransitionTypes currentTransitionTypes;
+    TransitionStage currentTransitionStage;
+    GameObject* transitionObject;
 
 public:
 

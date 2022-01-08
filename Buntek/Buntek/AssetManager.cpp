@@ -60,7 +60,6 @@ _assetManager& _assetManager::Instance(void)
 
 void _assetManager::RenderAll(void)
 {
-    AEGfxSetBlendMode(AE_GFX_BM_BLEND);
     AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
     AEGfxSetTransparency(1.0f);
 
@@ -136,6 +135,54 @@ void _assetManager::RenderAll(void)
         AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
         //AEGfxMeshFree(mesh);
     }
+}
+
+void _assetManager::RenderSprite(SpriteRenderer* spriteRenderer)
+{
+ 
+    AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+    AEGfxSetTransparency(1.0f);
+
+    float halfWidth = spriteRenderer->GetHalfWidth();
+    float halfHeight = spriteRenderer->GetHalfHeight();
+    halfWidth *= spriteRenderer->GetTransform()->worldscale.x;
+    halfHeight *= spriteRenderer->GetTransform()->worldscale.y;
+
+    Transform* transform = spriteRenderer->GetTransform();
+
+    float rotationAngle = transform->worldrotation;
+    Vector2 BottomLeft = Vector2(halfWidth, -halfHeight);
+    Vector2 BottomRight = Vector2(-halfWidth, -halfHeight);
+    Vector2 TopLeft = Vector2(halfWidth, halfHeight);
+    Vector2 TopRight = Vector2(-halfWidth, halfHeight);
+
+    BottomLeft.Rotate(rotationAngle);
+    BottomRight.Rotate(rotationAngle);
+    TopLeft.Rotate(rotationAngle);
+    TopRight.Rotate(rotationAngle);
+
+    AEGfxSetPosition(transform->worldposition.x, transform->worldposition.y);
+
+    // Scale and Rotate Matrix
+    //rotationAngle = 0;
+    float cosAngle = cosf(rotationAngle / 180.0f * 3.1415926535897932384626433832795f);
+    float sinAngle = sinf(rotationAngle / 180.0f * 3.1415926535897932384626433832795f);
+    float width = halfWidth * 2;
+    float height = halfHeight * 2;
+    // Multiply Matrix by scale according to the GameObject Size then by rotation
+    float TransformMatrix[3][3]{
+        {cosAngle * width,sinAngle * height,transform->worldposition.x},
+        {-sinAngle * width,cosAngle * height,transform->worldposition.y},
+        {0,0,1}
+    };
+
+    AEGfxSetTransform(TransformMatrix);
+
+    AEGfxSetTintColor(spriteRenderer->R, spriteRenderer->G, spriteRenderer->B, spriteRenderer->GetTransparency());
+    //AEGfxSetTextureMode(AE_GFX_TM_PRECISE); Different quality if using average
+    AEGfxTextureSet(GetTexture(spriteRenderer->GetTextureName()), 0, 0);
+    AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
+    //AEGfxMeshFree(mesh);
 }
 
 void _assetManager::RenderAllText(void)

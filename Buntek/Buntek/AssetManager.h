@@ -30,5 +30,6 @@ public:
     void AddToTextList(TextRenderer* textRenderer);
     void RenderAll(void);
     void RenderAllText(void);
+    void RenderSprite(SpriteRenderer* spriteRenderer);
     void FreeAll(void);
 };
