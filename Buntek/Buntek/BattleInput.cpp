@@ -97,7 +97,7 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 
 	bool acceptableRange = (temp->worldposition.x >= GameManager.hostileAreaX && !isPlayer) || (temp->worldposition.x <= GameManager.friendlyAreaX && isPlayer);
 
-	if (targetedBall->listCheck == 139 && targetedBall->playerPossess == isPlayer && acceptableRange)
+	if (targetedBall->playerPossess == isPlayer && acceptableRange)
 	{
 		float estimate = (*vecPosition).operator-(*vecTargetPosition).Length() - targetedBall->velocity.Length();
 

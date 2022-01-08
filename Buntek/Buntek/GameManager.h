@@ -24,7 +24,7 @@ public:
         Epic = 2,
         Legendary = 3
     };
-    RarityTypes rarity = common;
+    //RarityTypes rarity = common;
 };
 
 class _gameManager

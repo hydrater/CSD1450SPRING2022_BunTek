@@ -178,7 +178,7 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
 {
    
     cout << endl;
-    int minconn = firstList->size() > secondList->size() ? firstList->size() : secondList->size();
+    int minconn = firstList->size() > secondList->size() ? (int)firstList->size() : (int)secondList->size();
     vector<Connection> ConnectionList;
 
     for (int i = 0; i < firstList->size(); ++i)
