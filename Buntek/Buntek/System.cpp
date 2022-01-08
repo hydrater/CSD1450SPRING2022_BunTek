@@ -75,6 +75,7 @@ _sceneManager& _sceneManager::Instance(void)
         return *instance;
     }
     instance = new _sceneManager();
+
     return *instance;
 }
 
@@ -86,10 +87,25 @@ _sceneManager::_sceneManager()
     currentTransitionStage = TransitionStage::NotTransitioning;
     transitionTimer = 0;
     transitionDuration = 2;
-    transitionObject = 0;
     notStarted = true;
     notAwake = true;
     transitioning = true;
+    transitionMesh = 0;
+    transitionTransparency = 0;
+
+    AEGfxMeshStart();
+
+    AEGfxTriAdd(
+        -2160.0f, -3840.0f, 0x00FF00FF, 0.0f, 1.0f,
+        2160.0f, -3840.0f, 0x00FFFF00, 1.0f, 1.0f,
+        -2160.0f, 3840.0f, 0x0000FFFF, 0.0f, 0.0f);
+
+    AEGfxTriAdd(
+        2160.0f, -3840.0f, 0x00FFFFFF, 1.0f, 1.0f,
+        2160.0f, 3840.0f, 0x00FFFFFF, 1.0f, 0.0f,
+        -2160.0f, 3840.0f, 0x00FFFFFF, 0.0f, 0.0f);
+
+    transitionMesh = AEGfxMeshEnd();
 }
 
 _sceneManager::~_sceneManager()
@@ -99,12 +115,6 @@ _sceneManager::~_sceneManager()
 
 void _sceneManager::LoadScene(Scene* newScene, TransitionTypes TransitionType)
 {
-    //if (scene != NULL)
-    //{
-    //    AssetManager.FreeAll();
-    //    GameScriptManager.ClearList();
-    //    delete scene;
-    //}
     cout << "load" << endl;
     if (scene != NULL)
         nextScene = newScene;
@@ -155,8 +165,12 @@ void _sceneManager::Update(void)
 
 void _sceneManager::LateUpdate(void)
 {
-    if (transitionObject != 0) {
-        AssetManager.RenderSprite(transitionObject->GetComponent<SpriteRenderer>());
+    if (currentTransitionStage != TransitionStage::NotTransitioning) {
+        AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+        AEGfxSetPosition(0.0f, 0.0f);
+        AEGfxSetTintColor(0, 0, 0, transitionTransparency);
+        AEGfxTextureSet(AssetManager.GetTexture("WhiteTexture.png"), 0, 0);
+        AEGfxMeshDraw(transitionMesh, AE_GFX_MDM_TRIANGLES);
     }
     scene->LateUpdate();
 }
@@ -170,17 +184,13 @@ void _sceneManager::FadeToBlack(void) {
     {
     case TransitionStage::NotTransitioning:
         transitionTimer = 0;
-        transitionObject = new GameObject();
-        transitionObject->AddComponent<SpriteRenderer>()->Size((float)AEGetWindowWidth(), (float)AEGetWindowHeight());
-        transitionObject->GetComponent<SpriteRenderer>()->SetTexture("WhiteTexture.png");
-        transitionObject->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
-        transitionObject->GetComponent<SpriteRenderer>()->SetTransparency(0);
+        transitionTransparency = 0;
         currentTransitionStage = TransitionStage::TransitionTo;
         break;
 
     case TransitionStage::TransitionTo:
         transitionTimer += DeltaTime;
-        transitionObject->GetComponent<SpriteRenderer>()->SetTransparency(lerpF(0,1,easeIn(transitionTimer/transitionDuration)));
+        transitionTransparency = lerpF(0, 1, easeIn(transitionTimer / transitionDuration));
         if (transitionTimer > transitionDuration) {
             transitionTimer = 0;
             currentTransitionStage = TransitionStage::Transitioning;
@@ -195,27 +205,20 @@ void _sceneManager::FadeToBlack(void) {
             delete scene;
             scene = nextScene;
             nextScene = 0;
-            transitionObject = 0;
         }
         if (notStarted)
         {
             scene->Start();
             notStarted = false;
         }
-        transitionObject = new GameObject();
-        transitionObject->AddComponent<SpriteRenderer>()->Size((float)AEGetWindowWidth(), (float)AEGetWindowHeight());
-        transitionObject->GetComponent<SpriteRenderer>()->SetTexture("WhiteTexture.png");
-        transitionObject->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
-        transitionObject->GetComponent<SpriteRenderer>()->SetTransparency(1);
+        transitionTransparency = 1;
         currentTransitionStage = TransitionStage::TransitionFrom;
         break;
 
     case TransitionStage::TransitionFrom:
         transitionTimer += DeltaTime;
-        transitionObject->GetComponent<SpriteRenderer>()->SetTransparency(lerpF(1, 0, easeIn(transitionTimer / transitionDuration)));
+        transitionTransparency = (lerpF(1, 0, easeIn(transitionTimer / transitionDuration)));
         if (transitionTimer > transitionDuration) {
-            transitionObject->Delete();
-            transitionObject = 0;
             transitionTimer = 0;
             transitioning = false;
             currentTransitionStage = TransitionStage::NotTransitioning;

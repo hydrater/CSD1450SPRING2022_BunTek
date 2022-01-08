@@ -55,10 +55,10 @@ private:
     float transitionTimer, transitionDuration;
     TransitionTypes currentTransitionTypes;
     TransitionStage currentTransitionStage;
-    GameObject* transitionObject;
+    AEGfxVertexList* transitionMesh;
+    float transitionTransparency;
 
 public:
-
     static _sceneManager& Instance(void);
     void LoadScene(Scene* newScene, TransitionTypes TransitionType);
     Scene* GetScene(void);
@@ -66,9 +66,6 @@ public:
     void Update(void);
     void LateUpdate(void);
     void FadeToBlack(void);
-
-
-
 };
 
 class _gameScriptManager

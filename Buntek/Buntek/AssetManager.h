@@ -20,7 +20,6 @@ private:
     map<string, char> FontDatabase;
     void LoadTexture(string name);
     void LoadFont(string name);
-    
 
 public:
     static _assetManager& Instance(void);
@@ -30,6 +29,5 @@ public:
     void AddToTextList(TextRenderer* textRenderer);
     void RenderAll(void);
     void RenderAllText(void);
-    void RenderSprite(SpriteRenderer* spriteRenderer);
     void FreeAll(void);
 };
