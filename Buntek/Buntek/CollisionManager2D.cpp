@@ -1,5 +1,7 @@
 #include "CollisionManager2D.h"
 #include "System.h"
+#include "BallBehavior.h"
+#include "PaddleBehavior.h"
 
 _CollisionManager2D* _CollisionManager2D::instance = 0;
 
@@ -47,7 +49,12 @@ void _CollisionManager2D::CollideAll(void)
         }
         for (int j = 0; j < boxColliderList.size(); ++j)
         {
-            (circleColliderList[i])->Collide(boxColliderList[j]);
+            bool collide = (circleColliderList[i])->Collide(boxColliderList[j]);
+            if (collide && circleColliderList[i]->Owner()->GetComponent<BallBehavior>() && boxColliderList[j]->Owner()->GetComponent<PaddleBehavior>())
+            {
+                bool isPlayer = !circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->playerPossess;
+                circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->BounceBall(isPlayer);
+            }
         }
     }
 

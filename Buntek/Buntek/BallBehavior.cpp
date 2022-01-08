@@ -148,3 +148,13 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 	}	
 }
 
+void BallBehavior::BounceBall(bool isPlayer)
+{
+	if ((!isPlayer && transform->worldposition.x < GameManager.friendlyAreaX) ||
+		(isPlayer && transform->worldposition.x > GameManager.hostileAreaX))
+	{
+		velocity.x *= -1;
+		playerPossess = !playerPossess;
+		playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
+	}
+}
