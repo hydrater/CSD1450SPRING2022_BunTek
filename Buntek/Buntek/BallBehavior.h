@@ -4,6 +4,7 @@
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
 #include "BattleInput.h"
+#include "CollisionManager2D.h"
 
 class BallBehavior : public GameScript
 {

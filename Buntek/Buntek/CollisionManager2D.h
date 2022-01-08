@@ -22,5 +22,8 @@ public:
     void AddToList(CircleCollider* collider);
     void AddToList(BoxCollider* collider);
     void AddToList(LineCollider* collider);
+    void RemoveFromList(CircleCollider* collider);
+    void RemoveFromList(BoxCollider* collider);
+    void RemoveFromList(LineCollider* collider);
     void CollideAll(void);
 };

@@ -39,6 +39,7 @@ void BallBehavior::Update(void)
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * (float)AEFrameRateControllerGetFrameTime(), transform->worldposition.y + velocity.y * speed * (float)AEFrameRateControllerGetFrameTime()));
 
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
+		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
 		this->Owner()->Delete();
 		ballTrail->Delete();
 	}

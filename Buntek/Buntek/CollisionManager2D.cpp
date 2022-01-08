@@ -37,6 +37,39 @@ void _CollisionManager2D::AddToList(LineCollider* collider)
 {
     lineColliderList.push_back(collider);
 }
+void _CollisionManager2D::RemoveFromList(CircleCollider* collider)
+{
+    for (int i = 0; i < circleColliderList.size(); ++i)
+    {
+        if (circleColliderList[i] == collider)
+        {
+            circleColliderList.erase(circleColliderList.begin() + i);
+            return;
+        }
+    }
+}
+void _CollisionManager2D::RemoveFromList(BoxCollider* collider)
+{
+    for (int i = 0; i < boxColliderList.size(); ++i)
+    {
+        if (boxColliderList[i] == collider)
+        {
+            boxColliderList.erase(boxColliderList.begin() + i);
+            return;
+        }
+    }
+}
+void _CollisionManager2D::RemoveFromList(LineCollider* collider)
+{
+    for (int i = 0; i < lineColliderList.size(); ++i)
+    {
+        if (lineColliderList[i] == collider)
+        {
+            lineColliderList.erase(lineColliderList.begin() + i);
+            return;
+        }
+    }
+}
 
 void _CollisionManager2D::CollideAll(void)
 {
