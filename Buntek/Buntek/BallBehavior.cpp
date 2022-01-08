@@ -50,6 +50,11 @@ void BallBehavior::Update(void)
 	UpdateTrail();
 }
 
+void BallBehavior::AssignListPointer(BattleInput2* _battleInput)
+{
+	battleInput = _battleInput;
+}
+
 void BallBehavior::UpdateTrail(void)
 {
 	// Reset Color and Transform

@@ -1,8 +1,11 @@
-#pragma once
+#ifndef BALLBEHAVIOR_H
+#define BALLBEHAVIOR_H
 #include "GameScript.h"
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
+//#include "BattleInput2.h"
 
+class BattleInput2;
 class BallBehavior : public GameScript
 {
 public:
@@ -10,7 +13,7 @@ public:
 	~BallBehavior(void);
 	void Start(void) override;
 	void Update(void) override;
-
+	void AssignListPointer(BattleInput2* _battleInput);
 	void UpdateTrail(void);
 
 	GameObject* ballTrail;
@@ -38,4 +41,6 @@ private:
 	float speed = 300;
 	float angrange = 45;
 	Transform* transform = 0;
+	BattleInput2* battleInput = 0;
 };
+#endif

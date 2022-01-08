@@ -73,6 +73,18 @@ void BattleInput2::Update(void)
 	}
 }
 
+void BattleInput2::RemoveFromList(BallBehavior* ballbehavior)
+{
+	for (int i = 0; i < ballList.size(); ++i)
+	{
+		if (ballList[i] == ballbehavior)
+		{
+			ballList.erase(ballList.begin() + i);
+			return;
+		}
+	}
+}
+
 void BattleInput2::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Paddle, float* Timer, bool isPlayer)
 {
 	Vector2* vecPosition = isPlayer ? &PlayerAIposition : &AIposition;

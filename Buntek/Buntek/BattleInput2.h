@@ -1,10 +1,12 @@
-#pragma once
+#ifndef BATTLEINPUT_H
+#define BATTLEINPUT_H
 #include "Component.h"
 #include "GameScript.h"
-#include "BallBehavior.h"
+//#include "BallBehavior.h"
 #include "PaddleBehavior.h"
 #include "Cursor.h"
 
+class BallBehavior;
 class BattleInput2 : public GameScript
 {
 public:
@@ -12,11 +14,11 @@ public:
 	~BattleInput2(void);
 	void Start(void) override;
 	void Update(void) override;
+	void RemoveFromList(BallBehavior* ballbehavior);
 	void UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Paddle, float* Timer, bool isPlayer);
 	vector<BallBehavior*> ballList;
 	PaddleBehavior* playerpaddle, * AIPaddle;
 	CursorBehaviour* playerCursor, * AICursor;
-
 
 private:
 
@@ -33,3 +35,4 @@ private:
 	float AIspeed = 0.05f;
 	float AIscalingTimer = 0;
 };
+#endif

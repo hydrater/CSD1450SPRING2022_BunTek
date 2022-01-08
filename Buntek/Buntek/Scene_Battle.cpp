@@ -158,6 +158,7 @@ void Scene_Battle::Update(void)
 		tempRenderer->Size(20, 20);
 		tempRenderer->SetTexture("ball.png");
 		tempBall = ball->AddComponent<BallBehavior>();
+		tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput2>());
 		//tempBall->battleInput = cursorManager->GetComponent<BattleInput>();
 		tempBall->ballTrail = tempballTrail;
 		tempBall->srBallTrail = tempballTrailRenderer;
