@@ -75,33 +75,53 @@ _sceneManager& _sceneManager::Instance(void)
         return *instance;
     }
     instance = new _sceneManager();
+
     return *instance;
 }
 
 _sceneManager::_sceneManager()
 {
     scene = 0;
+    nextScene = 0;
+    currentTransitionTypes = TransitionTypes::None;
+    transitionTimer = 0;
     notStarted = true;
     notAwake = true;
+    transitioning = true;
+    transitionInDone = false;
+    transitionMesh = 0;
+    transitionTransparency = 0;
+
+    AEGfxMeshStart();
+
+    AEGfxTriAdd(
+        -2160.0f, -3840.0f, 0x00FF00FF, 0.0f, 1.0f,
+        2160.0f, -3840.0f, 0x00FFFF00, 1.0f, 1.0f,
+        -2160.0f, 3840.0f, 0x0000FFFF, 0.0f, 0.0f);
+
+    AEGfxTriAdd(
+        2160.0f, -3840.0f, 0x00FFFFFF, 1.0f, 1.0f,
+        2160.0f, 3840.0f, 0x00FFFFFF, 1.0f, 0.0f,
+        -2160.0f, 3840.0f, 0x00FFFFFF, 0.0f, 0.0f);
+
+    transitionMesh = AEGfxMeshEnd();
 }
 
 _sceneManager::~_sceneManager()
 {
-
+    AEGfxMeshFree(transitionMesh);
 }
 
-void _sceneManager::LoadScene(Scene* newScene)
+void _sceneManager::LoadScene(Scene* newScene, TransitionTypes TransitionType)
 {
     if (scene != NULL)
-    {
-        AssetManager.FreeAll();
-        GameScriptManager.ClearList();
-        delete scene;
-    }
+        nextScene = newScene;
+    else
+        scene = newScene;
     notStarted = true;
-    scene = newScene;
+    currentTransitionTypes = TransitionType;
+    transitioning = true;
     GameManager.cameraLerpBack = false;
-    AEGfxSetCamPosition(0, 0);
 }
 
 Scene* _sceneManager::GetScene(void)
@@ -111,22 +131,86 @@ Scene* _sceneManager::GetScene(void)
 
 void _sceneManager::Update(void)
 {
-    if (notStarted)
-    {
-        scene->Start();
-        notStarted = false;
+    if (transitioning) {
+        switch (currentTransitionTypes)
+        {
+        case TransitionTypes::None:
+            if (scene != NULL && nextScene != NULL)
+            {
+                AssetManager.FreeAll();
+                GameScriptManager.ClearList();
+                delete scene;
+                scene = nextScene;
+                nextScene = 0;
+            }
+            if (notStarted)
+            {
+                scene->Start();
+                notStarted = false;
+            }
+            transitioning = false;
+            break;
+        case TransitionTypes::FadeToBlack:
+            FadeToBlack();
+            break;
+        default:
+            break;
+        }
     }
     scene->Update();
 }
 
 void _sceneManager::LateUpdate(void)
 {
+    if (transitionTimer != 0 || transitionInDone) {
+        AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+        AEGfxSetPosition(0.0f, 0.0f);
+        AEGfxSetTintColor(0, 0, 0, transitionTransparency);
+        AEGfxTextureSet(AssetManager.GetTexture("WhiteTexture.png"), 0, 0);
+        AEGfxMeshDraw(transitionMesh, AE_GFX_MDM_TRIANGLES);
+    }
     scene->LateUpdate();
 }
 
 void _sceneManager::EarlyUpdate(void)
 {
     scene->EarlyUpdate();
+}
+void _sceneManager::FadeToBlack(void) {
+    if (!transitionInDone) {
+        transitionTimer += DeltaTime;
+        transitionTransparency = lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration));
+        if (transitionTimer > transitionStageDuration) {
+            if (scene != NULL && nextScene != NULL)
+            {
+                AssetManager.FreeAll();
+                GameScriptManager.ClearList();
+                delete scene;
+                AEGfxSetCamPosition(0, 0);
+                scene = nextScene;
+                nextScene = 0;
+            }
+            if (notStarted)
+            {
+                scene->Start();
+                notStarted = false;
+            }
+
+            transitionTimer = 0;
+            transitionInDone = true;
+            transitionTransparency = 1;
+        }
+    }
+    else {
+        transitionTimer += DeltaTime;
+        transitionTransparency = (lerpF(1, 0, easeIn(transitionTimer / transitionStageDuration)));
+        if (transitionTimer > transitionStageDuration) {
+            transitionTimer = 0;
+            transitionTransparency = 0;
+            transitioning = false;
+            transitionInDone = false;
+        }
+    }
 }
 
 _gameScriptManager::_gameScriptManager()
@@ -174,7 +258,6 @@ void _gameScriptManager::Update(void)
 
         gameScriptList[i]->Update();
     }
-    //cout << gameScriptList.size() << endl;
 }
 
 void _gameScriptManager::ClearList(void)

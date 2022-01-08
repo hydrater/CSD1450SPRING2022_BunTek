@@ -8,6 +8,7 @@ BallBehavior::BallBehavior(void)
 
 BallBehavior::~BallBehavior(void)
 {
+	battleInput->RemoveFromList(this);
 	GameManager.CameraShake(0.5, 50, Vector2(0, 0));
 }
 
@@ -50,6 +51,11 @@ void BallBehavior::Update(void)
 	UpdateTrail();
 }
 
+void BallBehavior::AssignListPointer(BattleInput* _battleInput)
+{
+	battleInput = _battleInput;
+}
+
 void BallBehavior::UpdateTrail(void)
 {
 	// Reset Color and Transform
@@ -59,7 +65,7 @@ void BallBehavior::UpdateTrail(void)
 	// Correct ang based on velocity
 	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
 	ang = (velocity.x < 0) ? 360 - ang : ang;
-	Vector2 trailoffset = Vector2(0, (double)ballTrail->transform->worldscale.y * 20 / 2.0);
+	Vector2 trailoffset = Vector2(0, (double)ballTrail->transform->worldscale.y * 20 / 2.0f);
 	trailoffset.Rotate(ang);
 
 	// Update position and offset

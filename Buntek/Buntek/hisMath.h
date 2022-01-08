@@ -107,12 +107,39 @@ namespace Math
 		return (num + min);
 	}//end of RandFloatMinMax function
 
-	inline float LerpF(float start_value, float end_value, float t)
+	//inline float LerpF(float start_value, float end_value, float t)
+	//{
+	//	t = t > 1 ? 1 : t;
+	//	t = t < 0 ? 0 : t;
+	//	return start_value + (end_value - start_value) * t;
+	//}//end of LerpF function
+
+	inline float easeIn(float t)
 	{
-		t = t > 1 ? 1 : t;
-		t = t < 0 ? 0 : t;
+		return t * t;
+	}
+
+	inline float flip(float x)
+	{
+		return 1 - x;
+	}
+
+	inline float easeOut(float t)
+	{
+		float tmp = flip(t);
+		return flip(tmp * tmp);
+	}
+	inline float lerpF(float start_value, float end_value, float t)
+	{
+		t = Clamp(t, 0.0f, 1.0f);
 		return start_value + (end_value - start_value) * t;
-	}//end of LerpF function
+	}
+	inline float easeInOut(float t)
+	{
+		return lerpF(easeIn(t), easeOut(t), t);
+		//t*t*t * (t * (6f*t - 15f) + 10f)
+	}
+
 
 }//end namespace Math
 

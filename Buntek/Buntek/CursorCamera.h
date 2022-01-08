@@ -11,7 +11,7 @@ public:
 	Vector2 camPos = Vector2(0, 0);
 
 private:
-	s32 x, y;
+	s32 x = 0, y = 0;
 	const float upperBoundary = 200, lowerBoundary = 860, leftBoundary = 200, rightBoundary = 1720;
 	const float maxX = 400, maxY = 1200;
 	const float cameraMoveSpeed = 300;

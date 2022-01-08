@@ -10,7 +10,6 @@
 #include "AudioEngine.h"
 #include "GameManager.h"
 #include "Collider2D.h"
-
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -42,10 +41,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AssetManager;
 	AudioManager;
 	MapData;
-	SceneManager.LoadScene(new Scene_MainMenu);
-	//SceneManager.LoadScene(new Scene_Battle);
-	//SceneManager.LoadScene(new Scene_Splash);
-	//SceneManager.LoadScene(new Scene_Navigation);
+	SceneManager.LoadScene(new Scene_MainMenu, TransitionTypes::None);
+	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
+	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
+	//SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::None);
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
@@ -58,12 +57,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		if (AEInputCheckTriggered(AEVK_1))
 		{
-			SceneManager.LoadScene(new Scene_Navigation);
+			SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::FadeToBlack);
 		}
 
 		if (AEInputCheckTriggered(AEVK_2))
 		{
-			SceneManager.LoadScene(new Scene_Battle);
+			SceneManager.LoadScene(new Scene_Battle, TransitionTypes::FadeToBlack);
 		}
 
 		// --------------------------------------------- Update --------------------------------------------- //

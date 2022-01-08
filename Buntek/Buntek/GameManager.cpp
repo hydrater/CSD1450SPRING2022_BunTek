@@ -122,13 +122,6 @@ void _mapData::GenerateMapData(Vector2 originPos)
 {
     nodeList.clear();
 
-    // cellRows is the number of layers, including master start and master end
-    // 
-    // nodeList is a 2D List containing a list of: (lists of nodes that make up a layer)
-
-
-
-    
     for (int i = 0; i < cellRows; i++)
     {
         short width = 1;
@@ -160,7 +153,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
     for (int i = 0; i < nodeList.size(); ++i)
     {
         if (i == 0) {
-            for (int q = 0; q < nodeList[i+1].size(); ++q)
+            for (int q = 0; q < nodeList[(size_t)i+1].size(); ++q)
             {
                 nodeList[0][0].connectedNodes.push_back(&nodeList[1][q]);
             }
@@ -177,49 +170,15 @@ void _mapData::GenerateMapData(Vector2 originPos)
         else if (i < nodeList.size() - 1)
         {
             AssignLines(&nodeList[i], &nodeList[(size_t)i + 1]);
-            /*
-            if (nodeList[i].size() > nodeList[(size_t)i + 1].size())
-            {
-                AssignLines(&nodeList[i], &nodeList[(size_t)i + 1]);
-            }
-            else
-            {
-                AssignLines(&nodeList[(size_t)i + 1], &nodeList[i]);
-            }
-            */
         }
     }
-    /*
-    // Swap criss cross
-    for (int i = 0; i < nodeList.size(); ++i)
-    {
-        for (int j = 0; j < nodeList[i].size(); ++j)
-        {
-            for (int k = 0; k < nodeList[i][j].connectedNodes.size(); ++k)
-            {
-                for (int l = nodeList[i].size() - 1; l > -1; --l)
-                {
-                    for (int o = 0; o < nodeList[i][l].connectedNodes.size(); ++o)
-                    {
-                        if (&nodeList[i][j].connectedNodes[k] > &nodeList[i][l].connectedNodes[o])
-                        {
-                            Node* temp = nodeList[i][j].connectedNodes[k];
-                            nodeList[i][j].connectedNodes[k] = nodeList[i][l].connectedNodes[o];
-                            nodeList[i][l].connectedNodes[o] = temp;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    */
 }
 
 void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
 {
    
     cout << endl;
-    int minconn = firstList->size() > secondList->size() ? firstList->size() : secondList->size();
+    int minconn = firstList->size() > secondList->size() ? (int)firstList->size() : (int)secondList->size();
     vector<Connection> ConnectionList;
 
     for (int i = 0; i < firstList->size(); ++i)
@@ -294,15 +253,15 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
                             break;
                         }
                         for (int q = 0; q < (*firstList)[p].connectedNodes.size(); q++) {
-                            cout << endl;
-                            cout << "Checking if collision happened between line " << q << " of node " << p << ", and line " << k << " of node " << i << "...\n";
+                           /* cout << endl;
+                            cout << "Checking if collision happened between line " << q << " of node " << p << ", and line " << k << " of node " << i << "...\n";*/
                             if (CollideLines(c1.point1, c1.point2, (*firstList)[p].pos, (*firstList)[p].connectedNodes[q]->pos))
                             {
                                 hascollided = 1;
-                                cout << "Some collision happened between line " << q << " of node " << p << ", and line " << k << " of node \n" << i;
+                                //cout << "Some collision happened between line " << q << " of node " << p << ", and line " << k << " of node \n" << i;
 
                                 if (q != (*firstList)[p].connectedNodes.size() - 1) {
-                                    cout << "Thus, Line not added.\n";
+                                    //cout << "Thus, Line not added.\n";
                                     break;
                                 }
                                 else {
@@ -332,7 +291,7 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
                         }
                     }
                     if (!hascollided) {
-                        cout << "\nNew Line added, no collision detected\n";
+                        //cout << "\nNew Line added, no collision detected\n";
                         if (RandFloatMinMax(0, 1) < chance) {
                             (*firstList)[i].connectedNodes.push_back(&(*secondList)[z]);
                             (*secondList)[z].connectedFrom.push_back(&(*firstList)[i]);
@@ -343,10 +302,6 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
                 }
                 z++;
             }
-
-
-
-            
         }
         // If last position of layer
         else
@@ -409,8 +364,6 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
 
     bool redoCheck = true;
 
-
-
     for (int i = 0; i < firstList->size(); ++i)
     {
         if ((*firstList)[i].connectedNodes.size() == 0) {
@@ -422,13 +375,9 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
         if ((*secondList)[i].connectedFrom.size() == 0) {
             secondList->erase(secondList->begin() + i);
         }
-
-
     }
     
 }
-
-
 
 bool _mapData::CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d) {
     //Line-Line collision
@@ -489,30 +438,4 @@ void _mapData::ClearList(void)
     nodeList.clear();
 }
 
-float _gameManager::easeIn(float t)
-{
-    return t * t;
-}
 
-float _gameManager::flip(float x)
-{
-    return 1 - x;
-}
-
-float _gameManager::easeOut(float t)
-{
-    float tmp = flip(t);
-    return flip(tmp * tmp);
-}
-
-float _gameManager::easeInOut(float t)
-{
-    return lerpF(easeIn(t), easeOut(t), t);
-    //t*t*t * (t * (6f*t - 15f) + 10f)
-}
-
-float _gameManager::lerpF(float start_value, float end_value, float t)
-{
-    t = AEClamp(t, 0, 1);
-    return start_value + (end_value - start_value) * t;
-}

@@ -26,7 +26,7 @@ void CursorBehaviour::Update(void)
 	// Follow the enemy position will be called by the AI
 
 	// Create a Glow Effect
-	scale = LerpF(scale, targetScale, scaleSpeed);
+	scale = lerpF(scale, targetScale, scaleSpeed);
 
 	if (scale >= targetScale - 0.01f && scale <= targetScale + 0.01f)
 	{
@@ -36,7 +36,7 @@ void CursorBehaviour::Update(void)
 
 	transform->SetScale(Vector2(scale, scale));
 
-	trans = LerpF(trans, targetTrans, transSpeed);
+	trans = lerpF(trans, targetTrans, transSpeed);
 
 	if (trans >= targetTrans - 0.01f && trans <= targetTrans + 0.01f)
 	{

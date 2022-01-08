@@ -1,7 +1,9 @@
-#pragma once
+#ifndef BALLBEHAVIOR_H
+#define BALLBEHAVIOR_H
 #include "GameScript.h"
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
+#include "BattleInput.h"
 
 class BallBehavior : public GameScript
 {
@@ -10,10 +12,10 @@ public:
 	~BallBehavior(void);
 	void Start(void) override;
 	void Update(void) override;
-
+	void AssignListPointer(BattleInput* _battleInput);
 	void UpdateTrail(void);
 
-	GameObject* ballTrail;
+	GameObject* ballTrail = 0;
 	SpriteRenderer* srBallTrail = 0;
 
 	Vector2 velocity = Vector2(0, 0);
@@ -21,7 +23,6 @@ public:
 	float GetSpeed(void);
 	void SetSpeed(float _speed);
 	void HitBall(Vector2 mousePos, bool isPlayer);
-	short listCheck = 139;
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
 	bool skillApplied = false;
@@ -38,4 +39,6 @@ private:
 	float speed = 300;
 	float angrange = 45;
 	Transform* transform = 0;
+	BattleInput* battleInput = 0;
 };
+#endif

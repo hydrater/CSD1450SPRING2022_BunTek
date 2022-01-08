@@ -45,5 +45,5 @@ void Scene_MainMenu::Update(void)
 
 void MoveToBattle(void)
 {
-	SceneManager.LoadScene(new Scene_Battle);
+	SceneManager.LoadScene(new Scene_Battle, TransitionTypes::FadeToBlack);
 }

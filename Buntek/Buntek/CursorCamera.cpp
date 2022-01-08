@@ -17,7 +17,7 @@ void CursorCamera::Update(void)
 	AEInputGetCursorPosition(&x, &y);
 	if (y < upperBoundary)
 	{
-		float value = camPos.y + cameraMoveSpeed * AEFrameRateControllerGetFrameTime();
+		float value = (float)(camPos.y + cameraMoveSpeed * AEFrameRateControllerGetFrameTime());
 		value = AEClamp(value, -maxY, maxY);
 		camPos.y = value;
 
@@ -26,7 +26,7 @@ void CursorCamera::Update(void)
 
 	if (y > lowerBoundary)
 	{
-		float value = camPos.y - cameraMoveSpeed * AEFrameRateControllerGetFrameTime();
+		float value = (float)(camPos.y - cameraMoveSpeed * AEFrameRateControllerGetFrameTime());
 		value = AEClamp(value, -maxY, maxY);
 		camPos.y = value;
 
@@ -35,7 +35,7 @@ void CursorCamera::Update(void)
 
 	if (x < leftBoundary)
 	{
-		float value = camPos.x - cameraMoveSpeed * AEFrameRateControllerGetFrameTime();
+		float value = (float)(camPos.x - cameraMoveSpeed * AEFrameRateControllerGetFrameTime());
 		value = AEClamp(value, -maxX, maxX);
 		camPos.x = value;
 
@@ -44,7 +44,7 @@ void CursorCamera::Update(void)
 
 	if (x > rightBoundary)
 	{
-		float value = camPos.x + cameraMoveSpeed * AEFrameRateControllerGetFrameTime();
+		float value = (float)(camPos.x + cameraMoveSpeed * AEFrameRateControllerGetFrameTime());
 		value = AEClamp(value, -maxX, maxX);
 		camPos.x = value;
 

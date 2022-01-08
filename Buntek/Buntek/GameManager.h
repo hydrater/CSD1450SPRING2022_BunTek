@@ -24,7 +24,7 @@ public:
         Epic = 2,
         Legendary = 3
     };
-    RarityTypes rarity = common;
+    //RarityTypes rarity = common;
 };
 
 class _gameManager
@@ -54,11 +54,6 @@ public:
     float friendlyAreaX = 0;
     float hostileAreaX = 0;
 
-    float easeIn(float t);
-    float flip(float x);
-    float easeOut(float t);
-    float easeInOut(float t);
-    float lerpF(float start_value, float end_value, float t);
 };
 
 class Connection
@@ -76,15 +71,12 @@ public:
     public:
         GameObject* clickable;
         Vector2 pos;
-        bool reached;
+        bool reached = false;
         vector<Node*> connectedNodes;
         vector<Node*> connectedFrom;
     };
     // this wont render lmao
     vector<AEGfxVertexList*> connectedLines;
-	// Let's try render it in the scene and keep between scene changes.
-	// Render is call via scene.Update()
-	// Do we even free? :thinking:
 
     Node currentNode;
     static _mapData& Instance(void);
