@@ -35,6 +35,58 @@ void BattleInput::Update(void)
 		}
 	}
 
+	if (AEInputCheckTriggered(AEVK_RBUTTON))
+	{
+		Vector2 tempcursorposition = GameManager.GetCursorPosition();
+		if (tempcursorposition.x < GameManager.friendlyAreaX && tempcursorposition.x > GameManager.areaLeftBoundary && tempcursorposition.y 
+			< GameManager.areaTopBoundary && tempcursorposition.y > GameManager.areaBottomBoundary)
+		{
+			CircleCollider* launchcol;
+			GameObject* launchBallTrail = new GameObject();
+			SpriteRenderer* LaunchTrailRenderer;
+			LaunchTrailRenderer = launchBallTrail->AddComponent<SpriteRenderer>();
+			LaunchTrailRenderer->Size(20, 20);
+			LaunchTrailRenderer->SetTexture("Trail.png");
+			LaunchTrailRenderer->SetColor(1, 1, 1);
+			LaunchTrailRenderer->SetTransparency(0.75f);
+
+			LaunchBall = new GameObject();
+			SpriteRenderer* temporaryRenderer;
+			temporaryRenderer = LaunchBall->AddComponent<SpriteRenderer>();
+			temporaryRenderer->Size(20, 20);
+			temporaryRenderer->SetTexture("ball.png");
+			BallBehavior* temporaryBall;
+			temporaryBall = LaunchBall->AddComponent<BallBehavior>();
+			temporaryBall->AssignListPointer(this);
+			temporaryBall->ballTrail = launchBallTrail;
+			temporaryBall->srBallTrail = LaunchTrailRenderer;
+			temporaryBall->Owner()->transform->SetPosition(tempcursorposition);
+
+			bool dir = RandIntMinMax(0, 1);
+			temporaryBall->playerPossess = false;
+			temporaryBall->velocity = Vector2((float)(dir ? -1 : 1), RandFloatMinMax(0, 1));
+			temporaryBall->radius = 10;
+			temporaryBall->sr = temporaryRenderer;
+			temporaryRenderer->SetColor(0, 0, 1);
+			launchcol = LaunchBall->AddComponent<CircleCollider>();
+		}
+	}
+	else if (AEInputCheckReleased(AEVK_RBUTTON) && LaunchBall != NULL)
+	{
+		BallBehavior* LaunchBallCalculator;
+		LaunchBallCalculator = LaunchBall->GetComponent<BallBehavior>();
+		Vector2 temp = GameManager.GetCursorPosition();
+		temp = temp - LaunchBallCalculator->Owner()->transform->worldposition;
+		if (temp.x < 0)
+		{
+			temp.x = -temp.x;
+		}
+		LaunchBallCalculator->SetSpeed(temp.Length());
+		LaunchBallCalculator->velocity = temp.Normalize();
+		
+		this->ballList.push_back(LaunchBallCalculator);
+		LaunchBall = 0;
+	}
 	// PlayerAI Activate
 	if (AEInputCheckTriggered(AEVK_O))
 	{

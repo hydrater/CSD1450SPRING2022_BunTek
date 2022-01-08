@@ -18,7 +18,7 @@ public:
 	vector<BallBehavior*> ballList;
 	PaddleBehavior* playerpaddle = 0, * AIPaddle = 0;
 	CursorBehaviour* playerCursor = 0, * AICursor = 0;
-
+	GameObject* LaunchBall;
 private:
 
 	bool AIEnabled = false;
