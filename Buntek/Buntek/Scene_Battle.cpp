@@ -4,7 +4,7 @@
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
 #include "System.h"
-#include "BattleInput2.h"
+#include "BattleInput.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
 
@@ -19,8 +19,8 @@ void Scene_Battle::Start(void)
 	GameManager.cameraLerpBack = true;
 
 	inputHandler = new GameObject();
-	inputHandler->AddComponent<BattleInput2>();
-	ballList = &inputHandler->GetComponent<BattleInput2>()->ballList;
+	inputHandler->AddComponent<BattleInput>();
+	ballList = &inputHandler->GetComponent<BattleInput>()->ballList;
 
 	SpriteRenderer* tempRenderer;
 
@@ -67,7 +67,7 @@ void Scene_Battle::Start(void)
 	BoxCollider* tempcol;
 	tempcol = playerpaddle->AddComponent<BoxCollider>();
 
-	inputHandler->GetComponent<BattleInput2>()->playerpaddle = temppaddle;
+	inputHandler->GetComponent<BattleInput>()->playerpaddle = temppaddle;
 
 	Testpaddle = new GameObject();
 	tempRenderer = Testpaddle->AddComponent<SpriteRenderer>();
@@ -98,7 +98,7 @@ void Scene_Battle::Start(void)
 	tempcol = AIpaddle->AddComponent<BoxCollider>();
 	tempcol->UpdateDimension();
 
-	inputHandler->GetComponent<BattleInput2>()->AIPaddle = temppaddle;
+	inputHandler->GetComponent<BattleInput>()->AIPaddle = temppaddle;
 
 	playercursor = new GameObject();
 	tempRenderer = playercursor->AddComponent<SpriteRenderer>();
@@ -110,7 +110,7 @@ void Scene_Battle::Start(void)
 	tempcursor->setplayerpossess(true);
 	tempcursor->sr = tempRenderer;
 
-	inputHandler->GetComponent<BattleInput2>()->playerCursor = tempcursor;
+	inputHandler->GetComponent<BattleInput>()->playerCursor = tempcursor;
 
 	AIcursor = new GameObject();
 	tempRenderer = AIcursor->AddComponent<SpriteRenderer>();
@@ -121,7 +121,7 @@ void Scene_Battle::Start(void)
 	tempcursor->setplayerpossess(false);
 	tempcursor->sr = tempRenderer;
 
-	inputHandler->GetComponent<BattleInput2>()->AICursor = tempcursor;
+	inputHandler->GetComponent<BattleInput>()->AICursor = tempcursor;
 
 	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
@@ -158,7 +158,7 @@ void Scene_Battle::Update(void)
 		tempRenderer->Size(20, 20);
 		tempRenderer->SetTexture("ball.png");
 		tempBall = ball->AddComponent<BallBehavior>();
-		tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput2>());
+		tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput>());
 		//tempBall->battleInput = cursorManager->GetComponent<BattleInput>();
 		tempBall->ballTrail = tempballTrail;
 		tempBall->srBallTrail = tempballTrailRenderer;

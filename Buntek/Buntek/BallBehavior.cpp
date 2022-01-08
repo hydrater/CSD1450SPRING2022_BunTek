@@ -51,7 +51,7 @@ void BallBehavior::Update(void)
 	UpdateTrail();
 }
 
-void BallBehavior::AssignListPointer(BattleInput2* _battleInput)
+void BallBehavior::AssignListPointer(BattleInput* _battleInput)
 {
 	battleInput = _battleInput;
 }

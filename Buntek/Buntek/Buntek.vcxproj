@@ -95,12 +95,11 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="BallBehavior.cpp" />
-    <ClCompile Include="BattleInput2.cpp" />
+    <ClCompile Include="BattleInput.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Collider2D.cpp" />
     <ClCompile Include="CollisionManager2D.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="BattleInput.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CursorCamera.cpp" />
     <ClCompile Include="DialogueBox.cpp" />
@@ -127,12 +126,11 @@
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="BallBehavior.h" />
-    <ClInclude Include="BattleInput2.h" />
+    <ClInclude Include="BattleInput.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Collider2D.h" />
     <ClInclude Include="CollisionManager2D.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="BattleInput.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CursorCamera.h" />
     <ClInclude Include="DialogueBox.h" />
