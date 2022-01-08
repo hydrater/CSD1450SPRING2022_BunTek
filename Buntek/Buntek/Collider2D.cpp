@@ -52,39 +52,20 @@ bool BoxCollider::Collide(Collider2D* col)
 {
 	//Box-Circle collision
 	if (typeid(*col) == typeid(CircleCollider)) {
-		CircleCollider* circleCol = (CircleCollider*)col;
+		CircleCollider* CirCol = (CircleCollider*)col;
 
 		if (col->transform == NULL || transform == NULL)
 			return false;
 
 		Vector2 boxPos = transform->worldposition;
-		Vector2 vecDist = boxPos.operator-(circleCol->transform->worldposition);
+		Vector2 vecDist = boxPos.operator-(CirCol->transform->worldposition);
 
-		// Top Left
-		Vector2 boxOffset = Vector2(-width / 2, -height / 2);
-		boxOffset.Rotate(angle);
-		Vector2 boxTopLeft = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
-		// Top Right
-		boxOffset = Vector2(width / 2, -height / 2);
-		boxOffset.Rotate(angle);
-		Vector2 boxTopRight = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
-		// Bottom Left
-		boxOffset = Vector2(-width / 2, height / 2);
-		boxOffset.Rotate(angle);
-		Vector2 boxBottomLeft = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
-		// Bottom Right
-		boxOffset = Vector2(width / 2, height / 2);
-		boxOffset.Rotate(angle);
-		Vector2 boxBottomRight = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
-
-		Vector2 boxTop = (boxTopRight.operator-(boxTopLeft)).Normalize();
-		Vector2 boxSide = (boxBottomLeft.operator-(boxTopLeft)).Normalize();
-
-		float dotproductx = boxTop.Dot(vecDist);
-		float dotproducty = boxSide.Dot(vecDist);
+		// Rotate Circle according to boxPos
+		vecDist.Rotate(angle);
+		Vector2 rotCircle = boxPos.operator+(vecDist);
 
 		// Check Collision
-		if (abs(dotproductx) < width / 2 + circleCol->radius && abs(dotproducty) < height / 2 + circleCol->radius)
+		if (abs(rotCircle.x - boxPos.x) < CirCol->radius + width / 2 && abs(rotCircle.y - boxPos.y) < CirCol->radius + height / 2)
 			return true;
 	}
 	//Box-Box collision
@@ -94,38 +75,53 @@ bool BoxCollider::Collide(Collider2D* col)
 
 		// Box 1
 		Vector2 box1Pos = transform->worldposition;
+		BoxCollider* box2Col = (BoxCollider*)col;
+		Vector2 box2Pos = box2Col->transform->worldposition;
 		// Corners
 		// Rotate box1 to angle 0
-		Vector2 box1Offset = Vector2(-width / 2, -height / 2);
-		box1Offset.Rotate(0);
+		Vector2 box1Offset = Vector2(-width / 2, height / 2);
 		Vector2 box1TopLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
-		box1Offset = Vector2(width / 2, -height / 2);
-		box1Offset.Rotate(0);
-		Vector2 box1TopRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
-		box1Offset = Vector2(-width / 2, height / 2);
-		box1Offset.Rotate(0);
-		Vector2 box1BottomLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
 		box1Offset = Vector2(width / 2, height / 2);
-		box1Offset.Rotate(0);
+		Vector2 box1TopRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		box1Offset = Vector2(-width / 2, -height / 2);
+		Vector2 box1BottomLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		box1Offset = Vector2(width / 2, -height / 2);
 		Vector2 box1BottomRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
 
 		// Box 2
 		// Rotate box2 according box1 angle
-		BoxCollider* box2Col = (BoxCollider*)col;
-		Vector2 box2Pos = box2Col->transform->worldposition;
+		box2Pos = box2Pos.operator-(box1Pos);
+		box2Pos.Rotate(angle);
+		box2Pos = box1Pos.operator+(box2Pos);
 		// Corners
-		Vector2 box2Offset = Vector2(-box2Col->width / 2, -box2Col->height / 2);
-		box2Offset.Rotate(box2Col->angle - angle);
-		Vector2 box2TopLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
-		box2Offset = Vector2(box2Col->width / 2, -box2Col->height / 2);
-		box2Offset.Rotate(box2Col->angle - angle);
-		Vector2 box2TopRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
-		box2Offset = Vector2(-box2Col->width / 2, box2Col->height / 2);
-		box2Offset.Rotate(box2Col->angle - angle);
-		Vector2 box2BottomLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		Vector2 box2Offset = Vector2(-box2Col->width / 2, box2Col->height / 2);
+		box2Offset.Rotate(box2Col->angle + angle);
+		Vector2 box2TopLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y - box2Offset.y);
 		box2Offset = Vector2(box2Col->width / 2, box2Col->height / 2);
-		box2Offset.Rotate(box2Col->angle - angle);
-		Vector2 box2BottomRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		box2Offset.Rotate(box2Col->angle + angle);
+		Vector2 box2TopRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y - box2Offset.y);
+		box2Offset = Vector2(-box2Col->width / 2, -box2Col->height / 2);
+		box2Offset.Rotate(box2Col->angle + angle);
+		Vector2 box2BottomLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y - box2Offset.y);
+		box2Offset = Vector2(box2Col->width / 2, -box2Col->height / 2);
+		box2Offset.Rotate(box2Col->angle + angle);
+		Vector2 box2BottomRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y - box2Offset.y);
+		//===========
+		//// Rotate box1 according box2 angle
+		//float sin = sinf((-angle - box2Col->angle) / 180.0f * 3.1415926535897932384626433832795f);
+		//float cos = cosf((-angle - box2Col->angle) / 180.0f * 3.1415926535897932384626433832795f);
+		//box2Offset = Vector2(-width / 2, height / 2);
+		//box2Offset = Vector2(box2Offset.x * cos + box2Offset.y * sin, box2Offset.x * sin + box2Offset.y * cos);
+		//box2TopLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		//box2Offset = Vector2(width / 2, height / 2);
+		//box2Offset = Vector2(box2Offset.x * cos + box2Offset.y * sin, box2Offset.x * sin + box2Offset.y * cos);
+		//box2TopRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		//box2Offset = Vector2(-width / 2, -height / 2);
+		//box2Offset = Vector2(box2Offset.x * cos + box2Offset.y * sin, box2Offset.x * sin + box2Offset.y * cos);
+		//box2BottomLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		//box2Offset = Vector2(width / 2, -height / 2);
+		//box2Offset = Vector2(box2Offset.x * cos + box2Offset.y * sin, box2Offset.x * sin + box2Offset.y * cos);
+		//box2BottomRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
 
 		// Get each box corners for length (Seperating Axis Theorem)
 		// Box 1 Axis
@@ -148,12 +144,23 @@ bool BoxCollider::Collide(Collider2D* col)
 		minvec = minvec.x > box2BottomRightVec.x ? box2BottomRightVec : minvec;
 		maxvec = maxvec.x < box2BottomRightVec.x ? box2BottomRightVec : maxvec;
 		// Check if the box 1 vectors x value is within min and max vec
-		if (box1TopLeft.x >= minvec.x && box1TopLeft.x <= maxvec.x || box1TopRight.x >= minvec.x && box1TopRight.x <= maxvec.x
-			|| box1TopLeft.x < minvec.x && box1TopRight.x >= minvec.x || box1TopLeft.x <= maxvec.x && box1TopRight.x > maxvec.x)
-			box1axis1 = true;
-		else if (angle == 0 && box2Col->angle == 45)
+		Vector2 MinCoord = box1TopLeft;
+		Vector2 MaxCoord = box1TopRight;
+		if (MinCoord.x > MaxCoord.x)
 		{
-			cout << "box1axis1 false" << endl;
+			Vector2 tempvec = MinCoord;
+			MinCoord = MaxCoord;
+			MaxCoord = tempvec;
+		}
+		if (MinCoord.x >= minvec.x && MinCoord.x <= maxvec.x || MaxCoord.x >= minvec.x && MaxCoord.x <= maxvec.x
+			|| MinCoord.x < minvec.x && MaxCoord.x >= minvec.x || MinCoord.x <= maxvec.x && MaxCoord.x > maxvec.x)
+			box1axis1 = true;
+		else
+		{
+			/*if (angle != 1 && box2Col->angle != 1)
+			{
+				cout << "box1axis1 false" << endl;
+			}*/
 			return false;
 		}
 
@@ -163,53 +170,89 @@ bool BoxCollider::Collide(Collider2D* col)
 		minvec = box2TopLeftVec;
 		maxvec = box2TopLeftVec;
 		box2TopRightVec = box2TopRight;// box1SideVec.operator*(box2TopRight.Dot(box1SideNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box2TopRightVec)).Length() ? box2TopRightVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box2TopRightVec.operator-(minvec)).Length() ? box2TopRightVec : maxvec;
+		minvec = minvec.y > box2TopRightVec.y ? box2TopRightVec : minvec;
+		maxvec = maxvec.y < box2TopRightVec.y ? box2TopRightVec : maxvec;
 		box2BottomLeftVec = box2BottomLeft;// box1SideVec.operator*(box2BottomLeft.Dot(box1SideNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box2BottomLeftVec)).Length() ? box2BottomLeftVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box2BottomLeftVec.operator-(minvec)).Length() ? box2BottomLeftVec : maxvec;
+		minvec = minvec.y > box2BottomLeftVec.y ? box2BottomLeftVec : minvec;
+		maxvec = maxvec.y < box2BottomLeftVec.y ? box2BottomLeftVec : maxvec;
 		box2BottomRightVec = box2BottomRight;// box1SideVec.operator*(box2BottomRight.Dot(box1SideNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box2BottomRightVec)).Length() ? box2BottomRightVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box2BottomRightVec.operator-(minvec)).Length() ? box2BottomRightVec : maxvec;
+		minvec = minvec.y > box2BottomRightVec.y ? box2BottomRightVec : minvec;
+		maxvec = maxvec.y < box2BottomRightVec.y ? box2BottomRightVec : maxvec;
 		// Check if the box 1 vectors y value is within min and max vec
-		if (box1TopLeft.y >= minvec.y && box1TopLeft.y <= maxvec.y || box1BottomLeft.y >= minvec.y && box1BottomLeft.y <= maxvec.y
-			|| box1TopLeft.y < minvec.y && box1BottomLeft.y >= minvec.y || box1TopLeft.y <= maxvec.y && box1BottomLeft.y > maxvec.y)
-			box1axis2 = true;
-		else if (angle == 0 && box2Col->angle == 45)
+		MinCoord = box1TopLeft;
+		MaxCoord = box1BottomLeft;
+		if (MinCoord.y > MaxCoord.y)
 		{
-			cout << "box1axis2 false" << endl;
+			Vector2 tempvec = MinCoord;
+			MinCoord = MaxCoord;
+			MaxCoord = tempvec;
+		}
+		if (MinCoord.y >= minvec.y && MinCoord.y <= maxvec.y || MaxCoord.y >= minvec.y && MaxCoord.y <= maxvec.y
+			|| MinCoord.y < minvec.y && MaxCoord.y >= minvec.y || MinCoord.y <= maxvec.y && MaxCoord.y > maxvec.y)
+			box1axis2 = true;
+		else
+		{
+			/*if (angle != 1 && box2Col->angle != 1)
+			{
+				cout << "box1axis2 false" << endl;
+			}*/
 			return false;
 		}
 
+		// Box 1
+		box1Pos = transform->worldposition;
+		box2Pos = box2Col->transform->worldposition;
+		//===
+		box1Pos = box1Pos.operator-(box2Pos);
+		box1Pos.Rotate(box2Col->angle);
+		box1Pos = box2Pos.operator+(box1Pos);
+		////====================
+		//box1Pos = transform->worldposition;
+		//sin = sinf((-box2Col->angle) / 180.0f * 3.1415926535897932384626433832795f);
+		//cos = cosf((-box2Col->angle) / 180.0f * 3.1415926535897932384626433832795f);
+		//box1Offset = box1Pos.operator-(box2Pos);
+		//box1Offset = Vector2(box1Offset.x * cos + box1Offset.y * sin, box1Offset.x * sin + box1Offset.y * cos);
 		// Corners
 		// Rotate box1 according box2 angle
-		box1Offset = Vector2(-width / 2, -height / 2);
-		box1Offset.Rotate(angle - box2Col->angle);
-		box1TopLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
-		box1Offset = Vector2(width / 2, -height / 2);
-		box1Offset.Rotate(angle - box2Col->angle);
-		box1TopRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
 		box1Offset = Vector2(-width / 2, height / 2);
-		box1Offset.Rotate(angle - box2Col->angle);
-		box1BottomLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		box1Offset.Rotate(angle + box2Col->angle);
+		box1TopLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y - box1Offset.y);
 		box1Offset = Vector2(width / 2, height / 2);
-		box1Offset.Rotate(angle - box2Col->angle);
-		box1BottomRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		box1Offset.Rotate(angle + box2Col->angle);
+		box1TopRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y - box1Offset.y);
+		box1Offset = Vector2(-width / 2, -height / 2);
+		box1Offset.Rotate(angle + box2Col->angle);
+		box1BottomLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y - box1Offset.y);
+		box1Offset = Vector2(width / 2, -height / 2);
+		box1Offset.Rotate(angle + box2Col->angle);
+		box1BottomRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y - box1Offset.y);
+		//===========
+		//// Rotate box1 according box2 angle
+		//sin = sinf((-angle - box2Col->angle) / 180.0f * 3.1415926535897932384626433832795f);
+		//cos = cosf((-angle - box2Col->angle) / 180.0f * 3.1415926535897932384626433832795f);
+		//box1Offset = Vector2(-width / 2, height / 2);
+		//box1Offset = Vector2(box1Offset.x * cos + box1Offset.y * sin, box1Offset.x * sin + box1Offset.y * cos);
+		//box1TopLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		//box1Offset = Vector2(width / 2, height / 2);
+		//box1Offset = Vector2(box1Offset.x * cos + box1Offset.y * sin, box1Offset.x * sin + box1Offset.y * cos);
+		//box1TopRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		//box1Offset = Vector2(-width / 2, -height / 2);
+		//box1Offset = Vector2(box1Offset.x * cos + box1Offset.y * sin, box1Offset.x * sin + box1Offset.y * cos);
+		//box1BottomLeft = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
+		//box1Offset = Vector2(width / 2, -height / 2);
+		//box1Offset = Vector2(box1Offset.x * cos + box1Offset.y * sin, box1Offset.x * sin + box1Offset.y * cos);
+		//box1BottomRight = Vector2(box1Pos.x + box1Offset.x, box1Pos.y + box1Offset.y);
 
 		// Box 2
 		// Rotate box2 angle to 0
 		// Corners
-		box2Offset = Vector2(-box2Col->width / 2, -box2Col->height / 2);
-		box2Offset.Rotate(0);
-		box2TopLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
-		box2Offset = Vector2(box2Col->width / 2, -box2Col->height / 2);
-		box2Offset.Rotate(0);
-		box2TopRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
 		box2Offset = Vector2(-box2Col->width / 2, box2Col->height / 2);
-		box2Offset.Rotate(0);
-		box2BottomLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		box2TopLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
 		box2Offset = Vector2(box2Col->width / 2, box2Col->height / 2);
-		box2Offset.Rotate(0);
+		box2TopRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		box2Offset = Vector2(-box2Col->width / 2, -box2Col->height / 2);
+		box2BottomLeft = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
+		box2Offset = Vector2(box2Col->width / 2, -box2Col->height / 2);
 		box2BottomRight = Vector2(box2Pos.x + box2Offset.x, box2Pos.y + box2Offset.y);
 
 		// Get each box corners for length (Seperating Axis Theorem)
@@ -224,35 +267,58 @@ bool BoxCollider::Collide(Collider2D* col)
 		minvec = box1TopLeftVec;
 		maxvec = box1TopLeftVec;
 		Vector2 box1TopRightVec = box1TopRight;// box2TopVec.operator*(box1TopRight.Dot(box2TopNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box1TopRightVec)).Length() ? box1TopRightVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box1TopRightVec.operator-(minvec)).Length() ? box1TopRightVec : maxvec;
+		minvec = minvec.x > box1TopRightVec.x ? box1TopRightVec : minvec;
+		maxvec = maxvec.x < box1TopRightVec.x ? box1TopRightVec : maxvec;
 		Vector2 box1BottomLeftVec = box1BottomLeft;// box2TopVec.operator*(box1BottomLeft.Dot(box2TopNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box1BottomLeftVec)).Length() ? box1BottomLeftVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box1BottomLeftVec.operator-(minvec)).Length() ? box1BottomLeftVec : maxvec;
+		minvec = minvec.x > box1BottomLeftVec.x ? box1BottomLeftVec : minvec;
+		maxvec = maxvec.x < box1BottomLeftVec.x ? box1BottomLeftVec : maxvec;
 		Vector2 box1BottomRightVec = box1BottomRight;// box2TopVec.operator*(box1BottomRight.Dot(box2TopNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box1BottomRightVec)).Length() ? box1BottomRightVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box1BottomRightVec.operator-(minvec)).Length() ? box1BottomRightVec : maxvec;
+		minvec = minvec.x > box1BottomRightVec.x ? box1BottomRightVec : minvec;
+		maxvec = maxvec.x < box1BottomRightVec.x ? box1BottomRightVec : maxvec;
 		// Check if the box 2 vectors x value is within min and max vec
-		if (box2TopLeft.x >= minvec.x && box2TopLeft.x <= maxvec.x || box2TopRight.x >= minvec.x && box2TopRight.x <= maxvec.x
-			|| box2TopLeft.x < minvec.x && box2TopRight.x >= minvec.x || box2TopLeft.x <= maxvec.x && box2TopRight.x > maxvec.x)
+		MinCoord = box2TopLeft;
+		MaxCoord = box2TopRight;
+		if (MinCoord.x > MaxCoord.x)
 		{
-			cout << "Unwanted true box2axis1" << endl;
-			//printf("box1TopLeft: %f | %f \n", box1TopLeft.x, box1TopLeft.y);
-			//printf("Dotbox2TopLeft: %f\n", box2TopLeft.Dot(box1TopNorm));
-			printf("box1Offset: %f | %f \n", box1Offset.x, box1Offset.y);
-			printf("box1TopLeftVec: %f | %f \n", box1TopLeftVec.x, box1TopLeftVec.y);
-			printf("box1TopRightVec: %f | %f \n", box1TopRightVec.x, box1TopRightVec.y);
-			printf("min: %f | %f \n", minvec.x, minvec.y);
-			printf("max: %f | %f \n", maxvec.x, maxvec.y);
-			printf("box2Offset: %f | %f \n", box2Offset.x, box2Offset.y);
-			printf("box2TopLeft: %f | %f \n", box2TopLeft.x, box2TopLeft.y);
-			printf("box2TopRight: %f | %f \n", box2TopRight.x, box2TopRight.y);
-			printf("box2TopVec: %f | %f \n", box2TopVec.x, box2TopVec.y);
-			box2axis1 = true;
+			Vector2 tempvec = MinCoord;
+			MinCoord = MaxCoord;
+			MaxCoord = tempvec;
 		}
-		else if (angle == 0 && box2Col->angle == 45)
+		if (MinCoord.x >= minvec.x && MinCoord.x <= maxvec.x || MaxCoord.x >= minvec.x && MaxCoord.x <= maxvec.x
+			|| MinCoord.x < minvec.x && MaxCoord.x >= minvec.x || MinCoord.x <= maxvec.x && MaxCoord.x > maxvec.x)
 		{
-			cout << "box2axis1 false" << endl;
+			box2axis1 = true;
+			//if (angle != 1 && box2Col->angle != 1)
+			//	{
+			//		//cout << "box2axis1 true" << endl;
+			//		box1Offset = Vector2(-width / 2, height / 2);
+			//		box1Offset.Rotate(angle + box2Col->angle);
+			//		printf("box1OffsetTL: %f | %f\n", box1Offset.x, box1Offset.y);
+			//		box1Offset = Vector2(width / 2, height / 2);
+			//		box1Offset.Rotate(angle + box2Col->angle);
+			//		printf("box1OffsetTR: %f | %f\n", box1Offset.x, box1Offset.y);
+			//		printf("Oribox1Pos: %f | %f\n", transform->worldposition.x, transform->worldposition.y);
+			//		printf("Oribox2Pos: %f | %f\n", box2Col->transform->worldposition.x, box2Col->transform->worldposition.y);
+			//		printf("box1Pos: %f | %f\n", box1Pos.x, box1Pos.y);
+			//		printf("box2Pos: %f | %f\n", box2Pos.x, box2Pos.y);
+			//		printf("box2TopLeft: %f | %f\n", box2TopLeft.x, box2TopLeft.y);
+			//		printf("box2TopRight: %f | %f\n", box2TopRight.x, box2TopRight.y);
+			//		printf("MinCoord: %f | %f\n", MinCoord.x, MinCoord.y);
+			//		printf("MaxCoord: %f | %f\n", MaxCoord.x, MaxCoord.y);
+			//		printf("minvec: %f | %f\n", minvec.x, minvec.y);
+			//		printf("maxvec: %f | %f\n", maxvec.x, maxvec.y);
+			//		printf("box1TopLeftVec: %f | %f\n", box1TopLeftVec.x, box1TopLeftVec.y);
+			//		printf("box1TopRightVec: %f | %f\n", box1TopRightVec.x, box1TopRightVec.y);
+			//		printf("box1BottomLeftVec: %f | %f\n", box1BottomLeftVec.x, box1BottomLeftVec.y);
+			//		printf("box1BottomRightVec: %f | %f\n", box1BottomRightVec.x, box1BottomRightVec.y);
+			//	}
+		}
+		else
+		{
+			/*if (angle != 1 && box2Col->angle != 1)
+			{
+				cout << "box2axis1 false" << endl;
+			}*/
 			return false;
 		}
 
@@ -262,51 +328,42 @@ bool BoxCollider::Collide(Collider2D* col)
 		minvec = box1TopLeftVec;
 		maxvec = box1TopLeftVec;
 		box1TopRightVec = box1TopRight;// box2SideVec.operator*(box1TopRight.Dot(box2SideNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box1TopRightVec)).Length() ? box1TopRightVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box1TopRightVec.operator-(minvec)).Length() ? box1TopRightVec : maxvec;
+		minvec = minvec.y > box1TopRightVec.y ? box1TopRightVec : minvec;
+		maxvec = maxvec.y < box1TopRightVec.y ? box1TopRightVec : maxvec;
 		box1BottomLeftVec = box1BottomLeft;// box2SideVec.operator*(box1BottomLeft.Dot(box2SideNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box1BottomLeftVec)).Length() ? box1BottomLeftVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box1BottomLeftVec.operator-(minvec)).Length() ? box1BottomLeftVec : maxvec;
+		minvec = minvec.y > box1BottomLeftVec.y ? box1BottomLeftVec : minvec;
+		maxvec = maxvec.y < box1BottomLeftVec.y ? box1BottomLeftVec : maxvec;
 		box1BottomRightVec = box1BottomRight;// box2SideVec.operator*(box1BottomRight.Dot(box2SideNorm));
-		minvec = (maxvec.operator-(minvec)).Length() < (maxvec.operator-(box1BottomRightVec)).Length() ? box1BottomRightVec : minvec;
-		maxvec = (maxvec.operator-(minvec)).Length() < (box1BottomRightVec.operator-(minvec)).Length() ? box1BottomRightVec : maxvec;
+		minvec = minvec.y > box1BottomRightVec.y ? box1BottomRightVec : minvec;
+		maxvec = maxvec.y < box1BottomRightVec.y ? box1BottomRightVec : maxvec;
 		// Check if the box 1 vectors y value is within min and max vec
-		if (box2TopLeft.y >= minvec.y && box2TopLeft.y <= maxvec.y || box2BottomLeft.y >= minvec.y && box2BottomLeft.y <= maxvec.y
-			|| box2TopLeft.y < minvec.y && box2BottomLeft.y >= minvec.y || box2TopLeft.y <= maxvec.y && box2BottomLeft.y > maxvec.y)
+		MinCoord = box2TopLeft;
+		MaxCoord = box2BottomLeft;
+		if (MinCoord.y > MaxCoord.y)
 		{
-			box2axis2 = true;
-			if (angle == 0 && box2Col->angle == 45)
-			{
-				cout << "meet" << endl;
-			}
+			Vector2 tempvec = MinCoord;
+			MinCoord = MaxCoord;
+			MaxCoord = tempvec;
 		}
-		else if (angle == 0 && box2Col->angle == 45)
+		if (MinCoord.y >= minvec.y && MinCoord.y <= maxvec.y || MaxCoord.y >= minvec.y && MaxCoord.y <= maxvec.y
+			|| MinCoord.y < minvec.y && MaxCoord.y >= minvec.y || MinCoord.y <= maxvec.y && MaxCoord.y > maxvec.y)
 		{
-			cout << "box2axis2 false" << endl;
+			box2axis2 = true;/*
+			cout << "~~~~~~~~" << endl;
+			cout << "meet" << endl;*/
+			return true;
+		}
+		else
+		{
+			/*if (angle != 1 && box2Col->angle != 1)
+			{
+				cout << "box2axis2 false" << endl;
+			}*/
 			return false;
 		}
-
-		//// Check Collision
-		//if (angle == 0 && box2Col->angle == 45)
-		//{
-		//	cout << "::::::::::::::::" << endl;
-		//	cout << box1axis1 << endl;
-		//	cout << box1axis2 << endl;
-		//}
-		//if (box1axis1 && box1axis2 && angle == 0 && box2Col->angle == 45)
-		//{
-		//	cout << "============" << endl;
-		//	cout << box2axis1 << endl;
-		//	cout << box2axis2 << endl;
-		//}
-		//if (box1axis1 && box1axis2 && box2axis1 && box2axis2 && angle == 0 && box2Col->angle == 45)
-		//{
-		//	cout << "meet" << endl;
-		//	return true;
-		//}
 	}
 
-	return true;
+	return false;
 }
 
 
@@ -344,34 +401,15 @@ bool CircleCollider::Collide(Collider2D* col)
 		if (col->transform == NULL || transform == NULL)
 			return false;
 
-		Vector2 boxPos = col->transform->worldposition;
+		Vector2 boxPos = boxCol->transform->worldposition;
 		Vector2 vecDist = boxPos.operator-(transform->worldposition);
 
-		// Top Left
-		Vector2 boxOffset = Vector2(-boxCol->width / 2, -boxCol->height / 2);
-		boxOffset.Rotate(boxCol->angle);
-		Vector2 boxTopLeft = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
-		// Top Right
-		boxOffset = Vector2(boxCol->width / 2, -boxCol->height / 2);
-		boxOffset.Rotate(boxCol->angle);
-		Vector2 boxTopRight = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
-		// Bottom Left
-		boxOffset = Vector2(-boxCol->width / 2, boxCol->height / 2);
-		boxOffset.Rotate(boxCol->angle);
-		Vector2 boxBottomLeft = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
-		// Bottom Right
-		boxOffset = Vector2(boxCol->width / 2, boxCol->height / 2);
-		boxOffset.Rotate(boxCol->angle);
-		Vector2 boxBottomRight = Vector2(boxPos.x + boxOffset.x, boxPos.y + boxOffset.y);
-
-		Vector2 boxTop = (boxTopRight.operator-(boxTopLeft)).Normalize();
-		Vector2 boxSide = (boxBottomLeft.operator-(boxTopLeft)).Normalize();
-
-		float dotproductx = boxTop.Dot(vecDist);
-		float dotproducty = boxSide.Dot(vecDist);
+		// Rotate Circle according to boxPos
+		vecDist.Rotate(boxCol->angle);
+		Vector2 rotCircle = boxPos.operator+(vecDist);
 
 		// Check Collision
-		if (abs(dotproductx) < boxCol->width/2 + radius && abs(dotproducty) < boxCol->height/2 + radius)
+		if (abs(rotCircle.x - boxPos.x) < radius + boxCol->width/2 && abs(rotCircle.y - boxPos.y) < radius + boxCol->height/2)
 			return true;
 	}
 
