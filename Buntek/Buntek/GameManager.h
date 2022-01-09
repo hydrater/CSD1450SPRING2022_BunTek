@@ -9,6 +9,15 @@ using namespace std;
 #define GameManager _gameManager::Instance()
 #define MapData _mapData::Instance()
 
+enum class RarityTypes : short
+{
+    Common = 0,
+    Uncommon = 1,
+    Rare = 2,
+    Epic = 3,
+    Legendary = 4
+};
+
 class Skill
 {
 private:
@@ -17,14 +26,8 @@ public:
     void SpawnSkillObject(void);
     int id = 0;
     string description;
-    enum RarityTypes
-    {
-        common = 0,
-        Rare = 1,
-        Epic = 2,
-        Legendary = 3
-    };
-    //RarityTypes rarity = common;
+   
+    RarityTypes rarity = RarityTypes::Common;
 };
 
 class _gameManager
@@ -42,10 +45,12 @@ public:
     Vector2 GetCursorPosition(void);
     Skill skill1, skill2, skill3;
 
+    // Camera info
     void CameraUpdate(void);
     void CameraShake(float period, float cameraStrength, Vector2 direction);
     bool cameraLerpBack = false;
 
+    // Battle arena info
     float clickAoERadius = 50;
     float areaTopBoundary = 0;
     float areaBottomBoundary = 0;
@@ -54,6 +59,12 @@ public:
     float friendlyAreaX = 0;
     float hostileAreaX = 0;
 
+    // Player metrics, move to private?
+    int health = 0;
+    int damage = 0;
+    int paddleSpeed = 0;
+    int ballSpeed = 0;
+    int ballSpawnSpeed = 0;
 };
 
 class Connection
@@ -75,7 +86,6 @@ public:
         vector<Node*> connectedNodes;
         vector<Node*> connectedFrom;
     };
-    // this wont render lmao
     vector<AEGfxVertexList*> connectedLines;
 
     Node currentNode;
@@ -86,7 +96,7 @@ public:
 
 private:
     void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
-    bool canAccessFirstNode = true; // REMEMBER TO RESET THIS
+    bool canAccessFirstNode = true; // REMEMBER TO RESET THIS if using multiple start nodes
     static _mapData* instance;
     const float widthSize = 1400;
     const float cellHeight = 300;
@@ -94,19 +104,3 @@ private:
     vector<vector<Node>> nodeList;
     bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };
-
-
-
-//	// Informing the library that we're about to start adding vertices
-//	AEGfxMeshStart();
-//
-//	// This shape has 5 vertices
-//	AEGfxVertexAdd(0.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
-//	AEGfxVertexAdd(100.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
-//	AEGfxVertexAdd(200.0f, 150.0f, 0xFFFFFFFF, 0.0f, 0.0f);
-//	AEGfxVertexAdd(300.0f, -100.0f, 0xFFFFFFFF, 0.0f, 0.0f);
-//	AEGfxVertexAdd(100.0f, -250.0f, 0xFFFFFFFF, 0.0f, 0.0f);
-//	AEGfxVertexAdd(100.0f, -250.0f, 0xFFFFFFFF, 0.0f, 0.0f);
-//	AEGfxVertexAdd(0.0f, 0.0f, 0xFFFFFFFF, 0.0f, 0.0f);
-//
-//	pMeshLine = AEGfxMeshEnd();

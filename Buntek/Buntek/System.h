@@ -10,7 +10,7 @@ using namespace std;
 #define GameScriptManager _gameScriptManager::Instance()
 #define DeltaTime (float)AEFrameRateControllerGetFrameTime()
 
-enum class TransitionTypes :short
+enum class TransitionTypes : short
 {
     None = 0,
     FadeToBlack = 1
