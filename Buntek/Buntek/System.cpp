@@ -119,9 +119,9 @@ void _sceneManager::LoadScene(Scene* newScene, TransitionTypes TransitionType)
     else
         scene = newScene;
     notStarted = true;
+    GameManager.cameraLerpBack = false;
     currentTransitionTypes = TransitionType;
     transitioning = true;
-    GameManager.cameraLerpBack = false;
 }
 
 Scene* _sceneManager::GetScene(void)
