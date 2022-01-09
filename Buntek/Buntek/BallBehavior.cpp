@@ -149,12 +149,49 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 	}	
 }
 
-void BallBehavior::BounceBall(bool isPlayer)
+void BallBehavior::BounceBall(bool isPlayer, Vector2 wallCoord, float angle)
 {
 	if ((!isPlayer && transform->worldposition.x < GameManager.friendlyAreaX) ||
 		(isPlayer && transform->worldposition.x > GameManager.hostileAreaX))
 	{
-		velocity.x *= -1;
+		// Create reflection axis
+		Vector2 normal = Vector2(wallCoord.x - transform->worldposition.x, 0.f);
+		// Rotate (Vector.rotate goes counter clockwise; Angle is based in clockwise)
+		normal.Rotate(angle);
+		normal.Normalize();
+
+		// Get new velocity
+		Vector2 proj = normal.operator*(normal.Dot(velocity));
+		Vector2 newvel = (proj.operator+(proj)).operator-(velocity);
+		velocity = newvel.operator*(-1);
+
+		// Force Direction Limit (Ball going opposite direction)
+		velocity.x = (isPlayer && velocity.x > 0 || !isPlayer && velocity.x < 0) ? velocity.x * -1 : velocity.x;
+
+		float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
+		if (0 <= ang && ang < angrange) {
+			if (velocity.x < 0) {
+				velocity = Vector2(0, 1);
+				velocity.Rotate(-angrange);
+			}
+			else {
+				velocity = Vector2(0, 1);
+				velocity.Rotate(angrange);
+			}
+		}
+		else if (180 - angrange < ang && ang <= 180) {
+			//cout << ang << endl;
+			if (velocity.x < 0) {
+				velocity = Vector2(0, -1);
+				velocity.Rotate(angrange);
+			}
+			else {
+				velocity = Vector2(0, -1);
+				velocity.Rotate(-angrange);
+			}
+		}
+
+
 		playerPossess = !playerPossess;
 		playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
 	}
