@@ -43,7 +43,6 @@ private:
 public:
     static _gameManager& Instance(void);
     Vector2 GetCursorPosition(void);
-    Artifact skill1, skill2, skill3;
 
     // Camera info
     void CameraUpdate(void);
@@ -65,6 +64,11 @@ public:
     int paddleSpeed = 0;
     int ballSpeed = 0;
     int ballSpawnSpeed = 0;
+
+    // Currency
+    int stardust = 0;
+    int ballSpawnID = 0;
+    vector<int> artifactStacks;
 };
 
 class Connection
