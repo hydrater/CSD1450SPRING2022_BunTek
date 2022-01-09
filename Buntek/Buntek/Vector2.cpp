@@ -118,17 +118,24 @@ Vector2 Vector2::Normalized(void) const throw(DivideByZero)
 {
 	float d = Length();
 	if (d <= Math::epsilon && -d <= Math::epsilon)
-		throw DivideByZero();
+	{
+		return Vector2(1, 0);
+	}
 	return Vector2(x / d, y / d);
 }
 
 Vector2& Vector2::Normalize(void) throw(DivideByZero)
 {
 	float d = Length();
-	if (d <= Math::epsilon && -d <= Math::epsilon)
-		throw DivideByZero();
+	if (d <= Math::epsilon && -d <= Math::epsilon) {
+		x = 1;
+		y = 0;
+		return *this;
+	}
+
 	x /= d;
 	y /= d;
+	
 	return *this;
 }
 
