@@ -86,7 +86,8 @@ void _CollisionManager2D::CollideAll(void)
             if (collide && circleColliderList[i]->Owner()->GetComponent<BallBehavior>() && boxColliderList[j]->Owner()->GetComponent<PaddleBehavior>())
             {
                 bool isPlayer = !circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->playerPossess;
-                circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->BounceBall(isPlayer);
+                circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->
+                    BounceBall(isPlayer, boxColliderList[j]->Owner()->transform->worldposition, boxColliderList[j]->Owner()->transform->worldrotation);
             }
         }
     }
