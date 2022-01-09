@@ -1,5 +1,5 @@
 #include "Scene_Splash.h"
-#include "Scene_Battle.h"
+#include "Scene_MainMenu.h"
 #include "AudioEngine.h"
 
 void Scene_Splash::Start(void) 
@@ -41,7 +41,7 @@ void Scene_Splash::Update(void)
 		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
 		break;
 	case 4:
-		SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
+		SceneManager.LoadScene(new Scene_MainMenu, TransitionTypes::None);
 		break;
 	}
 

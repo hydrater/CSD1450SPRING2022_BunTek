@@ -103,7 +103,7 @@ void _gameManager::CameraShake(float period, float _shakeStrength, Vector2 direc
     maxCameraShakeTime = period;
 }
 
-void Skill::SpawnSkillObject(void)
+void Artifact::SpawnSkillObject(void)
 {
 
 }

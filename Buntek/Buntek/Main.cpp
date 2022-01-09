@@ -41,9 +41,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AssetManager;
 	AudioManager;
 	MapData;
-	SceneManager.LoadScene(new Scene_MainMenu, TransitionTypes::None);
+	//SceneManager.LoadScene(new Scene_MainMenu, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
-	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
+	SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::None);
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)

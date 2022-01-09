@@ -12,13 +12,13 @@ using namespace std;
 enum class RarityTypes : short
 {
     Common = 0,
-    Uncommon = 1,
-    Rare = 2,
-    Epic = 3,
-    Legendary = 4
+    Rare = 1,
+    Lunary = 2,
+    Astral = 3,
+    Universal = 4
 };
 
-class Skill
+class Artifact
 {
 private:
 
@@ -43,7 +43,7 @@ private:
 public:
     static _gameManager& Instance(void);
     Vector2 GetCursorPosition(void);
-    Skill skill1, skill2, skill3;
+    Artifact skill1, skill2, skill3;
 
     // Camera info
     void CameraUpdate(void);
