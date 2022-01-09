@@ -84,7 +84,7 @@ void Vector2::SetZero()
 	x = y = 0;
 }
 
-//Does Clockwise Rotatoin
+//Does Antilockwise Rotation
 void Vector2::Rotate(float degrees)
 {
 	float sin = sinf(degrees / 180.0f * 3.1415926535897932384626433832795f);
