@@ -176,8 +176,6 @@ void _mapData::GenerateMapData(Vector2 originPos)
 
 void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
 {
-   
-    cout << endl;
     int minconn = firstList->size() > secondList->size() ? (int)firstList->size() : (int)secondList->size();
     vector<Connection> ConnectionList;
 
@@ -203,7 +201,6 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
                 c2.point2 = (*secondList)[0].pos;
                 ConnectionList.push_back(c2);
             }
-
         }
         //If not last position of layer
         else if (i != firstList->size() - 1)
@@ -217,7 +214,6 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
                 }
             }
             // z is now default target node
-
 
             if (z < 2) {
                 z = 0;
@@ -376,7 +372,6 @@ void _mapData::AssignLines(vector<Node>* firstList, vector<Node>* secondList)
             secondList->erase(secondList->begin() + i);
         }
     }
-    
 }
 
 bool _mapData::CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d) {
@@ -409,7 +404,6 @@ void _mapData::GenerateMapObject(void)
             temp->transform->worldposition = Vector2(nodeList[i][j].pos);
 
             //node.clickable = temp;
-            
             //node.connectedNodes
             for (int k = 0; k < nodeList[i][j].connectedNodes.size(); k++)
             {
@@ -437,5 +431,3 @@ void _mapData::ClearList(void)
 
     nodeList.clear();
 }
-
-
