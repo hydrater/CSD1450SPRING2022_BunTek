@@ -15,7 +15,7 @@ public:
 
 	void LoadFromFile(string flag);
 	void WriteToDialogue(void);
-	void ToggleDisplay(bool flag);
+	void ToggleDisplay(bool isDisplayed);
 	void NextDialogue(void);
 
 	bool isMainDialogue = false;

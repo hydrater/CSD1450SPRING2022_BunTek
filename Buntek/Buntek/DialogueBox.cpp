@@ -137,9 +137,9 @@ void DialogueBox::WriteToDialogue(void)
     }
 }
 
-void DialogueBox::ToggleDisplay(bool flag)
+void DialogueBox::ToggleDisplay(bool isDisplayed)
 {
-    if (flag && !isOpen)
+    if (isDisplayed && !isOpen)
     {
         // Open Dialogue
         isOpen = true;
@@ -155,7 +155,7 @@ void DialogueBox::ToggleDisplay(bool flag)
             actorBox->tr->ScaleTexture(sr);
         }
     }
-    else if (!flag && isOpen)
+    else if (!isDisplayed && isOpen)
     {
         // Close Dialogue
         doneDisplay = false;
