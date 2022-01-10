@@ -7,9 +7,6 @@ active(true),
 remove(false)
 {
 	transform = AddComponent<Transform>();
-	//AddComponent<Material>();
-	id = entity_count;
-	++entity_count;
 }
 
 

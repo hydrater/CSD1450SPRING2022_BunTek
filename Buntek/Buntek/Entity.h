@@ -76,8 +76,6 @@ private:
 	bool active;
 	
 	vector<Component*> components;
-
-	static int entity_count;
 };
 
 #endif
