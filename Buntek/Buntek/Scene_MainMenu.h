@@ -7,5 +7,6 @@ public:
     void Start(void) override;
     void Update(void) override;
 private:
-    GameObject* background, *Battle;
+    GameObject* background, *Battle, *dialogue;
+    bool TestDialogueDisplay = false; // [TO REMOVE] This code is just to test DialogueBox functionality
 };

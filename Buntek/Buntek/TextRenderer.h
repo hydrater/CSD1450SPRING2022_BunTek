@@ -14,6 +14,7 @@ public:
 	void SetFont(string textureName);
 	string GetText(void);
 	void SetText(string textureName);
+	vector<float> GetTextColor(void);
 	void SetTextColor(float _R, float _G, float _B);
 	void ScaleTexture(SpriteRenderer* sr);
 	float textScale = 1;

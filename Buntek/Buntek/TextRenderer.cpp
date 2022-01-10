@@ -36,6 +36,12 @@ void TextRenderer::SetText(string _text)
 	text = _text;
 
 }
+
+vector<float> TextRenderer::GetTextColor(void)
+{
+	return vector<float>{TextR, TextG, TextB};
+}
+
 void TextRenderer::SetTextColor(float _R, float _G, float _B)
 {
 	TextR = _R, TextG = _G, TextB = _B;
