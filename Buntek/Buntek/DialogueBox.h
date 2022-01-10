@@ -18,6 +18,7 @@ public:
 	void ToggleDisplay(bool flag);
 	void NextDialogue(void);
 
+	float fontSize = 1;
 	bool isMainDialogue = false;
 	bool isOpen = false;
 
@@ -35,7 +36,6 @@ private:
 	float displayTimer = 0;
 	float displaySpeed = 0.001f; // No of char per sec
 	int displayNo = 0;
-
 	float doneDisplay = true;
 
 	Transform* transform = 0;

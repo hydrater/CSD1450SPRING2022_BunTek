@@ -12,6 +12,7 @@ public:
 	Transform* GetTransform(void);
 	string GetFontName(void);
 	void SetFont(string textureName);
+	void SetScale(float _scale);
 	string GetText(void);
 	void SetText(string textureName);
 	vector<float> GetTextColor(void);

@@ -15,6 +15,9 @@ void DialogueBox::Start(void)
 {
     transform = this->Owner()->transform;
 
+    if (tr)
+        tr->SetScale(fontSize); // Set Scale for text
+
     if (isMainDialogue && sr && actorBox)
     {
         // Get Offset

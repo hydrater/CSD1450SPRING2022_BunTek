@@ -26,6 +26,12 @@ void TextRenderer::SetFont(string fontName)
 {
 	fontString = fontName;
 }
+
+void TextRenderer::SetScale(float _scale)
+{
+	textScale = _scale;
+}
+
 string TextRenderer::GetText(void)
 {
 	return text;
