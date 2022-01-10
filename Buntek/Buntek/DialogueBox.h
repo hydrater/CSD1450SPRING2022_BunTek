@@ -10,9 +10,10 @@ class DialogueBox : public GameScript
 public:
 	DialogueBox(void);
 	~DialogueBox(void);
-	//void Start(void) override;
+	void Start(void) override;
 	//void Update(void) override;
 
+	void AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRenderer* _dialogueSprite, TextRenderer* _actorTxt, TextRenderer* _dialogueTxt);
 	/*void StartDialogueEvent(string flag);
 	void CloseDialogueEvent(void);
 	void WriteToDialogue(void);
@@ -22,14 +23,11 @@ public:
 	bool isOpen = false;
 
 	SpriteRenderer* actorSprite = 0, *dialogueSprite = 0;
-	TextRenderer* actorTxt = 0, *dialogueTxtObj = 0;
-
-	// If DialogueBox holds the dialogue
-	DialogueBox* actorBox = 0;
+	TextRenderer* actorTxt = 0, *dialogueTxt = 0;
 
 private:
 	void LoadFromFile(string flag);
-	string name, dialogueTxt, dialogueDisplayTxt;
+	string name, dialogueText, dialogueDisplayTxt;
 	vector<string> dialogueList;
 	int dialogueNo = 0;
 
@@ -37,6 +35,4 @@ private:
 	const float displaySpeed = 0.001f; // No of char per sec
 	int displayNo = 0;
 	float doneDisplay = true;
-
-	Transform* transform = 0;
 };

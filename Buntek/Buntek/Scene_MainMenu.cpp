@@ -32,7 +32,8 @@ void Scene_MainMenu::Start(void)
 	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToBattle;
 
-	// Get main dialogue box
+	
+	// Create main dialogue box
 	dialogue = new GameObject();
 	dialogue->transform->SetPosition(Vector2(0, -280));
 	tempRenderer = dialogue->AddComponent<SpriteRenderer>();
@@ -41,28 +42,21 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer = dialogue->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("EquinoxR.otf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
-
-	//// Get actor name dialogue box
-	//GameObject* tempGameObject = new GameObject();
-	//tempRenderer = tempGameObject->AddComponent<SpriteRenderer>();
-	//tempRenderer->Size(300, 80);
-	//tempRenderer->SetTexture("EncounterBox.png");
-	//tempTextRenderer = tempGameObject->AddComponent<TextRenderer>();
-	//tempTextRenderer->SetFont("EquinoxR.otf");
-	//tempTextRenderer->SetTextColor(1, 1, 1);
-	//DialogueBox* tempdialogue;
-	//tempdialogue = tempGameObject->AddComponent<DialogueBox>();
-	//tempdialogue->sr = tempRenderer;
-	//tempdialogue->tr = tempTextRenderer;
-
-	//// Assign actor name dialogue box to main dialogue box
-	//tempdialogue = dialogue->AddComponent<DialogueBox>();
-	//tempdialogue->isMainDialogue = true;
-	//tempdialogue->sr = dialogue->GetComponent<SpriteRenderer>();
-	//tempdialogue->tr = dialogue->GetComponent<TextRenderer>();
-	//tempdialogue->tr->SetScale(1.5f);
-	//tempdialogue->actorBox = tempGameObject->GetComponent<DialogueBox>();
-	//tempdialogue->LoadFromFile("asd");
+	
+	// Create actor box
+	SpriteRenderer* tempRenderer2 = 0;
+	TextRenderer* tempTxtRenderer2 = 0;
+	GameObject* tempGameObject = new GameObject();
+	tempRenderer2 = tempGameObject->AddComponent<SpriteRenderer>();
+	tempRenderer2->Size(400, 80);
+	tempRenderer2->SetTexture("EncounterBox.png");
+	tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();
+	tempTxtRenderer2->SetFont("EquinoxR.otf");
+	tempTxtRenderer2->SetTextColor(1, 1, 1);
+	
+	// Create dialoguebox and assign
+	DialogueBox* tempdialogue = tempGameObject->AddComponent<DialogueBox>();
+	tempdialogue->AssignObjReferences(tempRenderer2, tempRenderer, tempTxtRenderer2, tempTextRenderer);
 }
 
 void Scene_MainMenu::Update(void)

@@ -11,21 +11,10 @@ DialogueBox::~DialogueBox(void)
 {
 }
 
-//void DialogueBox::Start(void)
-//{
-//    transform = this->Owner()->transform;
-//
-//    if (isMainDialogue && sr && actorBox)
-//    {
-//        // Get Offset
-//        Vector2 offset = Vector2(-sr->GetHalfWidth() + actorBox->sr->GetHalfWidth(), sr->GetHalfHeight() + actorBox->sr->GetHalfHeight());
-//        actorBox->transform->SetPosition(Vector2(transform->worldposition.x + offset.x, transform->worldposition.y + offset.y));
-//
-//        // Set default as isOpen
-//        isOpen = false;
-//        ToggleDisplay(true);
-//    }
-//}
+void DialogueBox::Start(void)
+{
+    
+}
 
 //void DialogueBox::Update(void)
 //{
@@ -55,6 +44,19 @@ DialogueBox::~DialogueBox(void)
 //            tr->SetText(dialogueDisplayTxt);
 //    }
 //}
+
+void DialogueBox::AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRenderer* _dialogueSprite, TextRenderer* _actorTxt, TextRenderer* _dialogueTxt)
+{
+    actorSprite = _actorSprite;
+    dialogueSprite = _dialogueSprite;
+    actorTxt = _actorTxt;
+    dialogueTxt = _dialogueTxt;
+
+    actorSprite->Owner()->transform->SetPosition(Vector2(
+        dialogueSprite->GetTransform()->worldposition.x - dialogueSprite->GetHalfWidth() + actorSprite->GetHalfWidth(),
+        dialogueSprite->GetTransform()->worldposition.y + dialogueSprite->GetHalfHeight() + actorSprite->GetHalfHeight())
+    );
+}
 
 //void DialogueBox::StartDialogueEvent(string flag)
 //{
