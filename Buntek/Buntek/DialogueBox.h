@@ -25,7 +25,7 @@ public:
 	TextRenderer* tr = 0;
 
 	// If DialogueBox holds the dialogue
-	DialogueBox* actorBox;
+	DialogueBox* actorBox = 0;
 
 private:
 	string name, dialogueTxt, dialogueDisplayTxt;
