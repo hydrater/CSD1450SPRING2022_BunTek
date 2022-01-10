@@ -54,6 +54,8 @@ void DialogueBox::AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRender
         _dialogueSprite->GetTransform()->worldposition.x - _dialogueSprite->GetHalfWidth() + _actorSprite->GetHalfWidth(),
         _dialogueSprite->GetTransform()->worldposition.y + _dialogueSprite->GetHalfHeight() + _actorSprite->GetHalfHeight())
     );
+    actorTxt->Owner()->Deactivate();
+    dialogueTxt->Owner()->Deactivate();
 }
 
 //void DialogueBox::StartDialogueEvent(string flag)
