@@ -68,7 +68,7 @@ void _assetManager::RenderAll(void)
             continue;
         }
 
-        if (!rendererList[i]->IsActive())
+        if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive())
 			continue;
 
         float halfWidth = rendererList[i]->GetHalfWidth();
@@ -118,6 +118,17 @@ void _assetManager::RenderAllText(void)
 
     for (int i = 0; i < rendererTextList.size(); ++i)
     {
+        if (rendererTextList[i]->remove)
+        {
+            delete rendererTextList[i];
+            rendererTextList.erase(rendererTextList.begin() + i);
+            --i;
+            continue;
+        }
+
+        if (!rendererTextList[i]->IsActive() || !rendererTextList[i]->Owner()->IsActive())
+            continue;
+
         Transform* transform = rendererTextList[i]->GetTransform();
         //Text Rendering
         AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &rendererTextList[i]->GetText()[0],

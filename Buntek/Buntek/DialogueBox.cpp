@@ -56,6 +56,38 @@ void DialogueBox::Update(void)
     }
 }
 
+void DialogueBox::StartDialogueEvent(string flag)
+{
+    LoadFromFile(flag);
+    isOpen = true;
+    doneDisplay = false;
+    dialogueNo = 0;
+    displayTimer = 0;
+    WriteToDialogue();
+    sr->SetTransparency(1);
+    if (tr != NULL || sr != NULL)
+        tr->ScaleTexture(sr);
+    if (actorBox && (actorBox->tr != NULL || actorBox->sr != NULL)) {
+        actorBox->sr->SetTransparency(1);
+        actorBox->tr->ScaleTexture(sr);
+    }
+}
+
+void DialogueBox::CloseDialogueEvent(void)
+{
+    doneDisplay = false;
+    dialogueNo = 0;
+    displayTimer = 0;
+    tr->SetText("");
+    sr->SetTransparency(0);
+    if (actorBox) {
+        actorBox->tr->SetText("");
+        actorBox->sr->SetTransparency(0);
+    }
+    isOpen = false;
+}
+
+
 void DialogueBox::LoadFromFile(string flag)
 {
     string path = "./Assets/Dialogue.txt";
@@ -134,40 +166,6 @@ void DialogueBox::WriteToDialogue(void)
         displayNo = 0;
         dialogueTxt = "";
         dialogueDisplayTxt = dialogueList[dialogueNo];
-    }
-}
-
-void DialogueBox::ToggleDisplay(bool isDisplayed)
-{
-    if (isDisplayed && !isOpen)
-    {
-        // Open Dialogue
-        isOpen = true;
-        doneDisplay = false;
-        dialogueNo = 0; 
-        displayTimer = 0;
-        WriteToDialogue();
-        sr->SetTransparency(1);
-        if (tr != NULL || sr != NULL)
-            tr->ScaleTexture(sr);
-        if (actorBox && (actorBox->tr != NULL || actorBox->sr != NULL)) {
-            actorBox->sr->SetTransparency(1);
-            actorBox->tr->ScaleTexture(sr);
-        }
-    }
-    else if (!isDisplayed && isOpen)
-    {
-        // Close Dialogue
-        doneDisplay = false;
-        dialogueNo = 0;
-        displayTimer = 0;
-        tr->SetText("");
-        sr->SetTransparency(0);
-        if (actorBox) {
-            actorBox->tr->SetText("");
-            actorBox->sr->SetTransparency(0);
-        }
-        isOpen = false;
     }
 }
 

@@ -13,21 +13,22 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
-	void LoadFromFile(string flag);
+	void StartDialogueEvent(string flag);
+	void CloseDialogueEvent(void);
 	void WriteToDialogue(void);
-	void ToggleDisplay(bool isDisplayed);
 	void NextDialogue(void);
 
 	bool isMainDialogue = false;
 	bool isOpen = false;
 
-	SpriteRenderer* sr = 0;
-	TextRenderer* tr = 0;
+	SpriteRenderer* actorSprite = 0, *dialogueSprite = 0;
+	TextRenderer* actorTxt = 0, * dialogueTxt = 0;
 
 	// If DialogueBox holds the dialogue
 	DialogueBox* actorBox = 0;
 
 private:
+	void LoadFromFile(string flag);
 	string name, dialogueTxt, dialogueDisplayTxt;
 	vector<string> dialogueList;
 	int dialogueNo = 0;

@@ -250,7 +250,7 @@ void _gameScriptManager::Update(void)
             continue;
         }
 
-        if (!gameScriptList[i]->IsActive())
+        if (!gameScriptList[i]->IsActive() || !gameScriptList[i]->Owner()->IsActive())
             continue;
 
         if (!gameScriptList[i]->getStarted())
