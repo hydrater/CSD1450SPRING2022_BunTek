@@ -32,6 +32,10 @@ void TextRenderer::SetScale(float _scale)
 	textScale = _scale;
 }
 
+float TextRenderer::GetScale(void) {
+	return textScale;
+}
+
 string TextRenderer::GetText(void)
 {
 	return text;

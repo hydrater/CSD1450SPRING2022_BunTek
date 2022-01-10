@@ -24,6 +24,7 @@ void BallBehavior::Start(void)
 
 void BallBehavior::Update(void)
 {
+	BallVerticalCheck();
 	// Element Virtual
 	if (elemVirtual && GameManager.friendlyAreaX < transform->worldposition.x && transform->worldposition.x < GameManager.hostileAreaX)
 	{
@@ -119,32 +120,6 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 			playerPossess = !playerPossess;
 			playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
 
-			float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
-			if (0 <= ang && ang < angrange) {
-				if (velocity.x < 0) {
-					velocity = Vector2(0, 1);
-					velocity.Rotate(-angrange);
-					//velocity.Rotate(-(angrange - ang));
-				}
-				else {
-					velocity = Vector2(0, 1);
-					velocity.Rotate(angrange);
-					//velocity.Rotate(angrange - ang);
-				}
-			}
-			else if (180 - angrange < ang && ang <= 180) {
-				//cout << ang << endl;
-				if (velocity.x < 0) {
-					velocity = Vector2(0, -1);
-					velocity.Rotate(angrange);
-					//velocity.Rotate(ang - (180 - angrange));
-				}
-				else {
-					velocity = Vector2(0, -1);
-					velocity.Rotate(-angrange);
-					//velocity.Rotate(-(ang - (180 - angrange)));
-				}
-			}
 		}
 	}	
 }
@@ -194,5 +169,33 @@ void BallBehavior::BounceBall(bool isPlayer, Vector2 wallCoord, float angle)
 
 		playerPossess = !playerPossess;
 		playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
+	}
+}
+void BallBehavior::BallVerticalCheck(void) {
+	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
+	if (0 <= ang && ang < angrange) {
+		if (velocity.x < 0) {
+			velocity = Vector2(0, 1);
+			velocity.Rotate(-angrange);
+			//velocity.Rotate(-(angrange - ang));
+		}
+		else {
+			velocity = Vector2(0, 1);
+			velocity.Rotate(angrange);
+			//velocity.Rotate(angrange - ang);
+		}
+	}
+	else if (180 - angrange < ang && ang <= 180) {
+		//cout << ang << endl;
+		if (velocity.x < 0) {
+			velocity = Vector2(0, -1);
+			velocity.Rotate(angrange);
+			//velocity.Rotate(ang - (180 - angrange));
+		}
+		else {
+			velocity = Vector2(0, -1);
+			velocity.Rotate(-angrange);
+			//velocity.Rotate(-(ang - (180 - angrange)));
+		}
 	}
 }

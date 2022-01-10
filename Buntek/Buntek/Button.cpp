@@ -21,10 +21,15 @@ void Button::Update(void)
 	if (tr != NULL || sr != NULL) {
 		tr->ScaleTexture(sr);
 	}
-	if (AEInputCheckTriggered(AEVK_LBUTTON))
-	{
-		bool triggered = CheckTriggered(GameManager.GetCursorPosition());
-		if (triggered) {
+	if (CheckTriggered(GameManager.GetCursorPosition())) {
+		if (HoverEffect != NULL) {
+			HoverEffect();
+		}
+		if (AEInputCheckTriggered(AEVK_LBUTTON) && ClickEffect != NULL) {
+			ClickEffect();
+		}
+		else if (AEInputCheckReleased(AEVK_LBUTTON))
+		{
 			ButtonEffect();
 		}
 	}
@@ -38,6 +43,6 @@ bool Button::CheckTriggered(Vector2 mousePos) {
 		}
 	}
 	return false;
-	//add check for rotated button
+	//add check for rotated button???
 }
 

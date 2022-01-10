@@ -13,12 +13,12 @@ public:
 	string GetFontName(void);
 	void SetFont(string textureName);
 	void SetScale(float _scale);
+	float GetScale(void);
 	string GetText(void);
 	void SetText(string textureName);
 	vector<float> GetTextColor(void);
 	void SetTextColor(float _R, float _G, float _B);
 	void ScaleTexture(SpriteRenderer* sr);
-	float textScale = 1;
 	float TextR = 1, TextG = 1, TextB = 1;
 	float TextWidth = 0;
 	float TextHeight = 0;
@@ -26,6 +26,7 @@ public:
 
 private:
 	string fontString = "EquinoxB.otf";
+	float textScale = 1;
 	string text = "";
 
 };

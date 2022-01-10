@@ -120,7 +120,7 @@ void _assetManager::RenderAllText(void)
         AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &rendererTextList[i]->GetText()[0],
             (transform->worldposition.x - rendererTextList[i]->TextWidth / 2) / ((float)AEGetWindowWidth() / 2),
             (transform->worldposition.y - rendererTextList[i]->TextHeight / 2) / ((float)AEGetWindowHeight() / 2),
-            rendererTextList[i]->textScale, rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
+            rendererTextList[i]->GetScale(), rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
     }
 }
 

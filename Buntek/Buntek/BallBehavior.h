@@ -42,5 +42,6 @@ private:
 	float angrange = 45;
 	Transform* transform = 0;
 	BattleInput* battleInput = 0;
+	void BallVerticalCheck(void);
 };
 #endif
