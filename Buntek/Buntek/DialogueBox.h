@@ -18,7 +18,6 @@ public:
 	void ToggleDisplay(bool flag);
 	void NextDialogue(void);
 
-	float fontSize = 1;
 	bool isMainDialogue = false;
 	bool isOpen = false;
 

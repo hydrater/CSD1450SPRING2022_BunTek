@@ -56,9 +56,9 @@ void Scene_MainMenu::Start(void)
 	// Assign actor name dialogue box to main dialogue box
 	tempdialogue = dialogue->AddComponent<DialogueBox>();
 	tempdialogue->isMainDialogue = true;
-	tempdialogue->fontSize = 1.5f;
 	tempdialogue->sr = dialogue->GetComponent<SpriteRenderer>();
 	tempdialogue->tr = dialogue->GetComponent<TextRenderer>();
+	tempdialogue->tr->SetScale(1.5f);
 	tempdialogue->actorBox = tempGameObject->GetComponent<DialogueBox>();
 	tempdialogue->LoadFromFile("asd");
 }
