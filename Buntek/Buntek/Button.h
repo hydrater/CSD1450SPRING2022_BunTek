@@ -22,7 +22,8 @@ public:
 	//char fontId = -1;
 	string ButtonText = "";
 	void(*ButtonEffect)(void) = NULL;
-
+	void(*HoverEffect)(void) = NULL;
+	void(*ClickEffect)(void) = NULL;
 
 	SpriteRenderer* sr = 0;
 	TextRenderer* tr = 0;
