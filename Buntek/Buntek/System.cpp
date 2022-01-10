@@ -250,6 +250,9 @@ void _gameScriptManager::Update(void)
             continue;
         }
 
+        if (!gameScriptList[i]->IsActive())
+            continue;
+
         if (!gameScriptList[i]->getStarted())
         {
             gameScriptList[i]->Start();

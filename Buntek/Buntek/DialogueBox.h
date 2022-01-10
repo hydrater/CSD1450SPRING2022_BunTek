@@ -33,7 +33,7 @@ private:
 	int dialogueNo = 0;
 
 	float displayTimer = 0;
-	float displaySpeed = 0.001f; // No of char per sec
+	const float displaySpeed = 0.001f; // No of char per sec
 	int displayNo = 0;
 	float doneDisplay = true;
 

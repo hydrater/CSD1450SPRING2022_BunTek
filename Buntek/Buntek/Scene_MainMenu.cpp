@@ -41,6 +41,7 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer = dialogue->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("EquinoxR.otf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
+
 	// Get actor name dialogue box
 	GameObject* tempGameObject = new GameObject();
 	tempRenderer = tempGameObject->AddComponent<SpriteRenderer>();
@@ -53,6 +54,7 @@ void Scene_MainMenu::Start(void)
 	tempdialogue = tempGameObject->AddComponent<DialogueBox>();
 	tempdialogue->sr = tempRenderer;
 	tempdialogue->tr = tempTextRenderer;
+
 	// Assign actor name dialogue box to main dialogue box
 	tempdialogue = dialogue->AddComponent<DialogueBox>();
 	tempdialogue->isMainDialogue = true;

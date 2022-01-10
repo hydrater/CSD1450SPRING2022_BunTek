@@ -68,6 +68,9 @@ void _assetManager::RenderAll(void)
             continue;
         }
 
+        if (!rendererList[i]->IsActive())
+			continue;
+
         float halfWidth = rendererList[i]->GetHalfWidth();
         float halfHeight = rendererList[i]->GetHalfHeight();
         halfWidth *= rendererList[i]->GetTransform()->worldscale.x;
