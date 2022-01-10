@@ -2,8 +2,6 @@
 #include "Transform.h"
 #include "Component.h"
 
-int GameObject::entity_count = 0;
-
 GameObject::GameObject() :
 active(true),
 remove(false)
