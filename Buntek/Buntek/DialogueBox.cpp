@@ -47,14 +47,12 @@ void DialogueBox::Start(void)
 
 void DialogueBox::AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRenderer* _dialogueSprite, TextRenderer* _actorTxt, TextRenderer* _dialogueTxt)
 {
-    actorSprite = _actorSprite;
-    dialogueSprite = _dialogueSprite;
     actorTxt = _actorTxt;
     dialogueTxt = _dialogueTxt;
 
-    actorSprite->Owner()->transform->SetPosition(Vector2(
-        dialogueSprite->GetTransform()->worldposition.x - dialogueSprite->GetHalfWidth() + actorSprite->GetHalfWidth(),
-        dialogueSprite->GetTransform()->worldposition.y + dialogueSprite->GetHalfHeight() + actorSprite->GetHalfHeight())
+    _actorSprite->Owner()->transform->SetPosition(Vector2(
+        _dialogueSprite->GetTransform()->worldposition.x - _dialogueSprite->GetHalfWidth() + _actorSprite->GetHalfWidth(),
+        _dialogueSprite->GetTransform()->worldposition.y + _dialogueSprite->GetHalfHeight() + _actorSprite->GetHalfHeight())
     );
 }
 

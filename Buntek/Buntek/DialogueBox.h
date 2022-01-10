@@ -22,7 +22,6 @@ public:
 	bool isMainDialogue = false;
 	bool isOpen = false;
 
-	SpriteRenderer* actorSprite = 0, *dialogueSprite = 0;
 	TextRenderer* actorTxt = 0, *dialogueTxt = 0;
 
 private:
