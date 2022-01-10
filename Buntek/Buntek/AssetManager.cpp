@@ -140,6 +140,11 @@ void _assetManager::FreeAll(void)
     rendererTextList.clear();
 }
 
+void _assetManager::UnloadTexture(string name)
+{
+    textureDatabase.erase(name);
+}
+
 void _assetManager::LoadTexture(string name)
 {
     string pathname = "./Assets/" + name;

@@ -18,6 +18,7 @@ private:
     AEGfxVertexList* mesh;
     map<string, AEGfxTexture*> textureDatabase;
     map<string, char> FontDatabase;
+    void UnloadTexture(string name);
     void LoadTexture(string name);
     void LoadFont(string name);
 
