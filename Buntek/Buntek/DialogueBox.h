@@ -10,19 +10,19 @@ class DialogueBox : public GameScript
 public:
 	DialogueBox(void);
 	~DialogueBox(void);
-	void Start(void) override;
-	void Update(void) override;
+	//void Start(void) override;
+	//void Update(void) override;
 
-	void StartDialogueEvent(string flag);
+	/*void StartDialogueEvent(string flag);
 	void CloseDialogueEvent(void);
 	void WriteToDialogue(void);
-	void NextDialogue(void);
+	void NextDialogue(void);*/
 
 	bool isMainDialogue = false;
 	bool isOpen = false;
 
 	SpriteRenderer* actorSprite = 0, *dialogueSprite = 0;
-	TextRenderer* actorTxt = 0, * dialogueTxt = 0;
+	TextRenderer* actorTxt = 0, *dialogueTxtObj = 0;
 
 	// If DialogueBox holds the dialogue
 	DialogueBox* actorBox = 0;

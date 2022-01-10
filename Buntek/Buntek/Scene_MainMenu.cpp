@@ -42,36 +42,36 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer->SetFont("EquinoxR.otf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
 
-	// Get actor name dialogue box
-	GameObject* tempGameObject = new GameObject();
-	tempRenderer = tempGameObject->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(300, 80);
-	tempRenderer->SetTexture("EncounterBox.png");
-	tempTextRenderer = tempGameObject->AddComponent<TextRenderer>();
-	tempTextRenderer->SetFont("EquinoxR.otf");
-	tempTextRenderer->SetTextColor(1, 1, 1);
-	DialogueBox* tempdialogue;
-	tempdialogue = tempGameObject->AddComponent<DialogueBox>();
-	tempdialogue->sr = tempRenderer;
-	tempdialogue->tr = tempTextRenderer;
+	//// Get actor name dialogue box
+	//GameObject* tempGameObject = new GameObject();
+	//tempRenderer = tempGameObject->AddComponent<SpriteRenderer>();
+	//tempRenderer->Size(300, 80);
+	//tempRenderer->SetTexture("EncounterBox.png");
+	//tempTextRenderer = tempGameObject->AddComponent<TextRenderer>();
+	//tempTextRenderer->SetFont("EquinoxR.otf");
+	//tempTextRenderer->SetTextColor(1, 1, 1);
+	//DialogueBox* tempdialogue;
+	//tempdialogue = tempGameObject->AddComponent<DialogueBox>();
+	//tempdialogue->sr = tempRenderer;
+	//tempdialogue->tr = tempTextRenderer;
 
-	// Assign actor name dialogue box to main dialogue box
-	tempdialogue = dialogue->AddComponent<DialogueBox>();
-	tempdialogue->isMainDialogue = true;
-	tempdialogue->sr = dialogue->GetComponent<SpriteRenderer>();
-	tempdialogue->tr = dialogue->GetComponent<TextRenderer>();
-	tempdialogue->tr->SetScale(1.5f);
-	tempdialogue->actorBox = tempGameObject->GetComponent<DialogueBox>();
-	tempdialogue->LoadFromFile("asd");
+	//// Assign actor name dialogue box to main dialogue box
+	//tempdialogue = dialogue->AddComponent<DialogueBox>();
+	//tempdialogue->isMainDialogue = true;
+	//tempdialogue->sr = dialogue->GetComponent<SpriteRenderer>();
+	//tempdialogue->tr = dialogue->GetComponent<TextRenderer>();
+	//tempdialogue->tr->SetScale(1.5f);
+	//tempdialogue->actorBox = tempGameObject->GetComponent<DialogueBox>();
+	//tempdialogue->LoadFromFile("asd");
 }
 
 void Scene_MainMenu::Update(void)
 {
-	// [TO REMOVE] This code is just to test DialogueBox functionality
-	if (AEInputCheckTriggered(AEVK_RBUTTON)) {
-		dialogue->GetComponent<DialogueBox>()->ToggleDisplay(TestDialogueDisplay);
-		TestDialogueDisplay = !TestDialogueDisplay;
-	}
+	//// [TO REMOVE] This code is just to test DialogueBox functionality
+	//if (AEInputCheckTriggered(AEVK_RBUTTON)) {
+	//	dialogue->GetComponent<DialogueBox>()->ToggleDisplay(TestDialogueDisplay);
+	//	TestDialogueDisplay = !TestDialogueDisplay;
+	//}
 
 	//Battle->GetComponent<Button>()->ButtonEffect();
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
