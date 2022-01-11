@@ -45,7 +45,7 @@ private:
     Scene* scene, *nextScene;
     bool notStarted, notAwake, transitioning, transitionInDone;
     float transitionTimer;
-    const float transitionStageDuration = 2;
+    const float transitionStageDuration = 0.3f;
     TransitionTypes currentTransitionTypes;
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;
