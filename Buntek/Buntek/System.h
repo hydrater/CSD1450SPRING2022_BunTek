@@ -46,6 +46,7 @@ private:
     bool notStarted, notAwake, transitioning, transitionInDone, transitionDone;
     float transitionTimer;
     const float transitionStageDuration = 0.3f;
+    const float transitionDuration = 0.1f;
     TransitionTypes currentTransitionTypes;
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;

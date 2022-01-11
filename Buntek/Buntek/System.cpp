@@ -182,6 +182,16 @@ void _sceneManager::FadeToBlack(void) {
         transitionTimer += DeltaTime;
         transitionTransparency = lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration));
         if (transitionTimer > transitionStageDuration) {
+            transitionTimer = 0;
+            transitionInDone = true;
+            transitionTransparency = 1;
+        }
+    }
+    else if(!transitionDone)
+    {
+        transitionTransparency = 1;
+        transitionTimer += DeltaTime;
+        if (transitionTimer > transitionDuration) {
             if (scene != NULL && nextScene != NULL)
             {
                 AssetManager.FreeAll();
@@ -196,18 +206,6 @@ void _sceneManager::FadeToBlack(void) {
                 scene->Start();
                 notStarted = false;
             }
-
-            transitionTimer = 0;
-            transitionInDone = true;
-            transitionTransparency = 1;
-        }
-    }
-    else if(!transitionDone)
-    {
-        transitionTransparency = 1;
-        transitionTimer += DeltaTime;
-        if (transitionTimer > 0.1f) {
-
             transitionTimer = 0;
             transitionDone = true;
         }

@@ -18,23 +18,27 @@ void DialogueBox::Start(void)
 
 void DialogueBox::Update(void)
 {
+    if (dialogueNo >= dialogueList.size())
+        return;
+
     if (AEInputCheckTriggered(AEVK_LBUTTON))
     {
         if (displayNo < dialogueList.size())
-        {
             doneDisplay = true;
-        }
         else
         {
-            ++dialogueNo;
-            WriteToDialogue();
+            if (dialogueNo < dialogueList.size() - 1)
+            {
+                ++dialogueNo;
+                WriteToDialogue();
+            }
+            else
+                CloseDialogueEvent();
         }
     }
 
     if (doneDisplay)
-    {
         dialogueTxt->SetText(dialogueOutput);
-    }
     else
     {
         if (dialogueNo < dialogueList.size())
@@ -153,7 +157,6 @@ void DialogueBox::WriteToDialogue(void)
     }
     else
     {
-        // cout << dialogueList[dialogueNo] << endl;
         displayNo = 0;
         dialogueOutput = "";
         dialogueFinalDisplayTxt = dialogueList[dialogueNo];

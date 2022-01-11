@@ -57,7 +57,7 @@ void Scene_MainMenu::Start(void)
 	// Create dialoguebox and assign
 	DialogueBox* tempdialogue = tempGameObject->AddComponent<DialogueBox>();
 	tempdialogue->AssignObjReferences(tempRenderer2, tempRenderer, tempTxtRenderer2, tempTextRenderer);
-	//tempdialogue->StartDialogueEvent("asd");
+	tempdialogue->StartDialogueEvent("asd");
 }
 
 void Scene_MainMenu::Update(void)
