@@ -11,22 +11,19 @@ public:
 	DialogueBox(void);
 	~DialogueBox(void);
 	void Start(void) override;
-	//void Update(void) override;
+	void Update(void) override;
 
 	void AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRenderer* _dialogueSprite, TextRenderer* _actorTxt, TextRenderer* _dialogueTxt);
-	/*void StartDialogueEvent(string flag);
+	void StartDialogueEvent(string flag);
 	void CloseDialogueEvent(void);
 	void WriteToDialogue(void);
-	void NextDialogue(void);*/
-
-	bool isMainDialogue = false;
-	bool isOpen = false;
+	void NextDialogue(void);
 
 	TextRenderer* actorTxt = 0, *dialogueTxt = 0;
 
 private:
 	void LoadFromFile(string flag);
-	string name, dialogueText, dialogueDisplayTxt;
+	string name, dialogueOutput, dialogueFinalDisplayTxt;
 	vector<string> dialogueList;
 	int dialogueNo = 0;
 
