@@ -118,14 +118,50 @@ _mapData& _mapData::Instance(void)
     return *instance;
 }
 
+
+
 void _mapData::GenerateMapData(Vector2 originPos)
 {
     nodeList.clear();
-    float StartXCoord = (float)-AEGetWindowWidth() / 2;
+    float StartXCoord = (float)(-AEGetWindowWidth() / 2)+buffer;
+    float EndXCoord = (float)(AEGetWindowWidth() / 2)-buffer;
+    float StartYCoord = (float)(-AEGetWindowHeight() / 2)+buffer;
+    float EndYCoord = (float)(AEGetWindowHeight() / 2)-buffer;
+
+    
+
+    
+
 
     for (int i = 0; i < numNodes; i++) {
         Node node = Node();
-        node.pos = Vector2(RandIntMinMax(-AEGetWindowWidth()/2, AEGetWindowWidth()/2), RandIntMinMax(-AEGetWindowHeight()/2, AEGetWindowHeight()/2));
+        bool regenerateClose = true;
+        bool hasNoConnection = false;
+        node.pos = Vector2(RandIntMinMax(StartXCoord, EndXCoord), RandIntMinMax(StartYCoord, EndYCoord));
+        float minsq = minDistance * minDistance;
+        float maxsq = maxDistance * maxDistance;
+        if (nodeList.size() == 0) {
+            nodeList.push_back(node);
+            continue;
+        }
+        while (regenerateClose || hasNoConnection) {
+            node.pos = Vector2(RandIntMinMax(StartXCoord, EndXCoord), RandIntMinMax(StartYCoord, EndYCoord));
+            regenerateClose = false;
+            hasNoConnection = true;
+            
+            for (int j = 0; j < nodeList.size(); j++) {
+                float distSq = (node.pos - nodeList[j].pos).LengthSquared();
+                cout << "Checking if " << distSq << "is <= " << maxsq << endl;
+                if (distSq <= minsq) {
+                    regenerateClose = true;
+                    break;
+                }
+                else if (distSq <= maxsq){
+                    
+                    hasNoConnection = false;
+                }
+            }
+        }
         nodeList.push_back(node);
     }
 

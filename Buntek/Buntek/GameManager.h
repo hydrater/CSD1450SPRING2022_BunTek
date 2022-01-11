@@ -87,6 +87,7 @@ public:
         GameObject* clickable;
         Vector2 pos;
         bool reached = false;
+        vector<Node> LinkedTo;
         
     };
     vector<AEGfxVertexList*> connectedLines;
@@ -101,9 +102,10 @@ private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
     bool canAccessFirstNode = true; // REMEMBER TO RESET THIS if using multiple start nodes
     static _mapData* instance;
-    const float widthSize = 1400;
-    const float cellHeight = 300;
-    const int numNodes = 50;
+    float minDistance= 150;
+    float maxDistance = 400;
+    float buffer = 75;
+    const int numNodes = 25;
     vector<Node> nodeList;
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };
