@@ -128,12 +128,28 @@ void _assetManager::RenderAllText(void)
 
         if (!rendererTextList[i]->IsActive() || !rendererTextList[i]->Owner()->IsActive())
             continue;
-
         Transform* transform = rendererTextList[i]->GetTransform();
+        int linecount = 0;
+        int start = 0;
+        string tempTextString = rendererTextList[i]->GetText();
+        float textheight = rendererTextList[i]->TextHeight;
+        float textwidth = rendererTextList[i]->TextWidth;
+        for (int x = 0; char c = tempTextString[x]; x++) {
+            if (c == '\n') {
+                tempTextString[x] = '\0';
+                AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &tempTextString[start],
+                    (transform->worldposition.x - textwidth / 2) / ((float)AEGetWindowWidth() / 2),
+                    (transform->worldposition.y - textheight / 2 - linecount * (textheight + rendererTextList[i]->lineBuffer)) / ((float)AEGetWindowHeight() / 2),
+                    rendererTextList[i]->GetScale(), rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
+                linecount++;
+                start = x+1;
+            }
+
+        }
         //Text Rendering
-        AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &rendererTextList[i]->GetText()[0],
-            (transform->worldposition.x - rendererTextList[i]->TextWidth / 2) / ((float)AEGetWindowWidth() / 2),
-            (transform->worldposition.y - rendererTextList[i]->TextHeight / 2) / ((float)AEGetWindowHeight() / 2),
+        AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &tempTextString[start],
+            (transform->worldposition.x - textwidth / 2) / ((float)AEGetWindowWidth() / 2),
+            (transform->worldposition.y - textheight / 2 - linecount * (textheight + rendererTextList[i]->lineBuffer)) / ((float)AEGetWindowHeight() / 2),
             rendererTextList[i]->GetScale(), rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
     }
 }

@@ -23,6 +23,7 @@ public:
 	float TextWidth = 0;
 	float TextHeight = 0;
 	float buffer = 10;
+	float lineBuffer = 10;
 
 private:
 	string fontString = "EquinoxB.otf";
