@@ -51,23 +51,46 @@ vector<float> TextRenderer::GetTextColor(void)
 {
 	return vector<float>{TextR, TextG, TextB};
 }
-
+void TextRenderer::SetTextWidth(float _TextWidth) {
+	textWidth = _TextWidth;
+}
+void TextRenderer::SetTextHeight(float _TextHeight) {
+	textHeight = _TextHeight;
+}
+float TextRenderer::GetTextWidth(void) {
+	return textWidth;
+}
+float TextRenderer::GetTextHeight(void) {
+	return textHeight;
+}
+void TextRenderer::SetBuffer(float _Buffer) {
+	buffer = _Buffer;
+}
+void TextRenderer::SetLineBuffer(float _LineBuffer) {
+	lineBuffer = _LineBuffer;
+}
+float TextRenderer::GetBuffer(void) {
+	return buffer;
+}
+float TextRenderer::GetLineBuffer(void) {
+	return lineBuffer;
+}
 void TextRenderer::SetTextColor(float _R, float _G, float _B)
 {
 	TextR = _R, TextG = _G, TextB = _B;
 }
 
 void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
-	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, TextWidth, TextHeight);
-	TextWidth = TextWidth * (float)AEGetWindowWidth() / 2;
-	TextHeight = TextHeight * (float)AEGetWindowHeight() / 2;
+	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, textWidth, textHeight);
+	textWidth = textWidth * (float)AEGetWindowWidth() / 2;
+	textHeight = textHeight * (float)AEGetWindowHeight() / 2;
 	float width = sr->GetHalfWidth();
 	float height = sr->GetHalfHeight();
-	if (TextWidth / 2 > width) {
-		width = TextWidth / 2 + buffer;
+	if (textWidth / 2 > width) {
+		width = textWidth / 2 + buffer;
 	}
-	if (TextHeight / 2 > height) {
-		height = TextHeight / 2 + buffer;
+	if (textHeight / 2 > height) {
+		height = textHeight / 2 + buffer;
 	}
 	sr->Size(width*2, height*2);
 }

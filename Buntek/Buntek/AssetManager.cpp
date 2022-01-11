@@ -132,14 +132,14 @@ void _assetManager::RenderAllText(void)
         int linecount = 0;
         int start = 0;
         string tempTextString = rendererTextList[i]->GetText();
-        float textheight = rendererTextList[i]->TextHeight;
-        float textwidth = rendererTextList[i]->TextWidth;
+        float textheight = rendererTextList[i]->GetTextHeight();
+        float textwidth = rendererTextList[i]->GetTextWidth();
         for (int x = 0; char c = tempTextString[x]; x++) {
             if (c == '\n') {
                 tempTextString[x] = '\0';
                 AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &tempTextString[start],
                     (transform->worldposition.x - textwidth / 2) / ((float)AEGetWindowWidth() / 2),
-                    (transform->worldposition.y - textheight / 2 - linecount * (textheight + rendererTextList[i]->lineBuffer)) / ((float)AEGetWindowHeight() / 2),
+                    (transform->worldposition.y - textheight / 2 - linecount * (textheight + rendererTextList[i]->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
                     rendererTextList[i]->GetScale(), rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
                 linecount++;
                 start = x+1;
@@ -149,7 +149,7 @@ void _assetManager::RenderAllText(void)
         //Text Rendering
         AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &tempTextString[start],
             (transform->worldposition.x - textwidth / 2) / ((float)AEGetWindowWidth() / 2),
-            (transform->worldposition.y - textheight / 2 - linecount * (textheight + rendererTextList[i]->lineBuffer)) / ((float)AEGetWindowHeight() / 2),
+            (transform->worldposition.y - textheight / 2 - linecount * (textheight + rendererTextList[i]->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
             rendererTextList[i]->GetScale(), rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
     }
 }
