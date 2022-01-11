@@ -120,8 +120,8 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="DialogueEngine.cpp">
-      <Filter>Source Files\Engine</Filter>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Source Files\ECS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,8 +212,8 @@
     <ClInclude Include="Renderer.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="DialogueEngine.h">
-      <Filter>Source Files\Engine</Filter>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Source Files\ECS</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
