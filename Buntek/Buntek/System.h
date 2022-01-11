@@ -43,7 +43,7 @@ private:
     _sceneManager();
     ~_sceneManager();
     Scene* scene, *nextScene;
-    bool notStarted, notAwake, transitioning, transitionInDone;
+    bool notStarted, notAwake, transitioning, transitionInDone, transitionDone;
     float transitionTimer;
     const float transitionStageDuration = 0.3f;
     TransitionTypes currentTransitionTypes;

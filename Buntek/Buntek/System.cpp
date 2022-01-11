@@ -89,6 +89,7 @@ _sceneManager::_sceneManager()
     notAwake = true;
     transitioning = true;
     transitionInDone = false;
+    transitionDone = false;
     transitionMesh = 0;
     transitionTransparency = 0;
 
@@ -201,6 +202,16 @@ void _sceneManager::FadeToBlack(void) {
             transitionTransparency = 1;
         }
     }
+    else if(!transitionDone)
+    {
+        transitionTransparency = 1;
+        transitionTimer += DeltaTime;
+        if (transitionTimer > 0.1f) {
+
+            transitionTimer = 0;
+            transitionDone = true;
+        }
+    }
     else {
         transitionTimer += DeltaTime;
         transitionTransparency = (lerpF(1, 0, easeIn(transitionTimer / transitionStageDuration)));
@@ -209,6 +220,7 @@ void _sceneManager::FadeToBlack(void) {
             transitionTransparency = 0;
             transitioning = false;
             transitionInDone = false;
+            transitionDone = false;
         }
     }
 }
