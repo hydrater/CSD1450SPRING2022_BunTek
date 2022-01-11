@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include "AssetManager.h"
+#include "RenderComponent.h"
 
 #define Renderer _renderer::Instance()
 
@@ -12,7 +13,10 @@ private:
     static _renderer* instance;
     _renderer();
     ~_renderer();
+    vector<RenderComponent*> RenderList;
 
 public:
     static _renderer& Instance(void);
+    void Update(void);
+    void AddTolist(RenderComponent* entry);
 };

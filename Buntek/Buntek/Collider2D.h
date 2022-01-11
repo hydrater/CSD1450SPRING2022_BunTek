@@ -12,10 +12,10 @@ public:
 	vector<Vector2> GetRectCorners(Vector2 pos, float width, float height, float angle); // Rotates in counter-clockwise rot (Follows vector2.h Rotate)
 	Transform* transform = 0;
 
-	float width;
-	float height;
-	float radius;
-	float angle; //clockwise rotation
+	float width = 0;
+	float height = 0;
+	float radius = 0;
+	float angle = 0; //clockwise rotation
 
 private:
 
