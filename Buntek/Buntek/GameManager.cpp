@@ -137,7 +137,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
         Node node = Node();
         bool regenerateClose = true;
         bool hasNoConnection = false;
-        node.pos = Vector2(RandIntMinMax(StartXCoord, EndXCoord), RandIntMinMax(StartYCoord, EndYCoord));
+        node.pos = Vector2(RandIntMinMax((int)StartXCoord, (int)EndXCoord), RandIntMinMax((int)StartYCoord, (int)EndYCoord));
         float minsq = minDistance * minDistance;
         float maxsq = maxDistance * maxDistance;
         if (nodeList.size() == 0) {
@@ -145,20 +145,21 @@ void _mapData::GenerateMapData(Vector2 originPos)
             continue;
         }
         while (regenerateClose || hasNoConnection) {
-            node.pos = Vector2(RandIntMinMax(StartXCoord, EndXCoord), RandIntMinMax(StartYCoord, EndYCoord));
+            node.pos = Vector2(RandIntMinMax((int)StartXCoord, (int)EndXCoord), RandIntMinMax((int)StartYCoord, (int)EndYCoord));
             regenerateClose = false;
             hasNoConnection = true;
             
             for (int j = 0; j < nodeList.size(); j++) {
                 float distSq = (node.pos - nodeList[j].pos).LengthSquared();
-                cout << "Checking if " << distSq << "is <= " << maxsq << endl;
                 if (distSq <= minsq) {
+                    cout << distSq << endl;
                     regenerateClose = true;
                     break;
                 }
                 else if (distSq <= maxsq){
                     
                     hasNoConnection = false;
+                    node.LinkedTo.push_back(nodeList[j]);
                 }
             }
         }
@@ -457,6 +458,7 @@ void _mapData::GenerateMapObject(void)
     for (int i = 0; i < nodeList.size(); ++i)
     {
         
+        
         GameObject* temp = new GameObject;
         SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
         tempRenderer->Size(50, 50);
@@ -464,15 +466,21 @@ void _mapData::GenerateMapObject(void)
 
         temp->transform->worldposition = Vector2(nodeList[i].pos);
 
+
+        for (int k = 0; k < nodeList[i].LinkedTo.size(); k++)
+        {
+            AEGfxVertexList* newLine;
+            AEGfxMeshStart();
+            AEGfxVertexAdd(nodeList[i].pos.x, nodeList[i].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+            AEGfxVertexAdd(nodeList[i].LinkedTo[k].pos.x, nodeList[i].LinkedTo[k].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+            newLine = AEGfxMeshEnd();
+            MapData.connectedLines.push_back(newLine);
+        }
         
     }
 }
 
 void _mapData::ClearList(void)
 {
-    for (int i = 0; i < 10; i++)
-    {
-        nodeList[i].clickable->Delete();
-    }
     nodeList.clear();
 }

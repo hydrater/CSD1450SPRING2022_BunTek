@@ -84,7 +84,6 @@ public:
     class Node
     {
     public:
-        GameObject* clickable;
         Vector2 pos;
         bool reached = false;
         vector<Node> LinkedTo;
@@ -105,7 +104,7 @@ private:
     float minDistance= 150;
     float maxDistance = 400;
     float buffer = 75;
-    const int numNodes = 25;
+    const int numNodes = 20;
     vector<Node> nodeList;
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };
