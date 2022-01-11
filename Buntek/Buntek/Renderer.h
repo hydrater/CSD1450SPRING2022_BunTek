@@ -13,7 +13,7 @@ private:
     static _renderer* instance;
     _renderer();
     ~_renderer();
-    vector<RenderComponent*> RenderList;
+    vector<RenderComponent*> renderList;
 
 public:
     static _renderer& Instance(void);

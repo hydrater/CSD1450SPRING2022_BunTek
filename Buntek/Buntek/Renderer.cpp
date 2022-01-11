@@ -21,13 +21,26 @@ _renderer& _renderer::Instance(void)
 
 void _renderer::Update(void)
 {
-    for (int i = 0; i < RenderList.size(); ++i)
+    for (int i = 0; i < renderList.size(); ++i)
     {
-        //RenderList[i].
+        switch (renderList[i]->GetType())
+        {
+        case RenderType::Sprite:
+
+            break;
+        case RenderType::Font:
+
+            break;
+        case RenderType::Line:
+
+            break;
+        default:
+            break;
+        }
     }
 }
 
 void _renderer::AddTolist(RenderComponent* entry)
 {
-    RenderList.push_back(entry);
+    renderList.push_back(entry);
 }
