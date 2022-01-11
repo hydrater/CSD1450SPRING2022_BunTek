@@ -9,7 +9,7 @@
 #include "CollisionManager2D.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
-#include "Collider2D.h"
+#include "Renderer.h"
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -41,6 +41,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AssetManager;
 	AudioManager;
 	MapData;
+	Renderer;
 	SceneManager.LoadScene(new Scene_MainMenu, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);

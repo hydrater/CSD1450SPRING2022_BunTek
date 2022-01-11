@@ -4,15 +4,15 @@
 #include <map>
 #include "AssetManager.h"
 
-#define Renderer _Renderer::Instance()
+#define Renderer _renderer::Instance()
 
-class _Renderer
+class _renderer
 {
 private:
-    static _Renderer* instance;
-    _Renderer();
-    ~_Renderer();
+    static _renderer* instance;
+    _renderer();
+    ~_renderer();
 
 public:
-    static _Renderer& Instance(void);
+    static _renderer& Instance(void);
 };
