@@ -17,7 +17,6 @@ public:
 	void StartDialogueEvent(string flag);
 	void CloseDialogueEvent(void);
 	void WriteToDialogue(void);
-	void NextDialogue(void);
 
 	TextRenderer* actorTxt = 0, *dialogueTxt = 0;
 
