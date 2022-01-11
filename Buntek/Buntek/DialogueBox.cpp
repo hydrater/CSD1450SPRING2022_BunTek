@@ -19,26 +19,40 @@ void DialogueBox::Start(void)
 void DialogueBox::Update(void)
 {
     if (AEInputCheckTriggered(AEVK_LBUTTON))
-        NextDialogue();
-
-    // Show char by char
-    if (dialogueNo < dialogueList.size())
     {
-        displayTimer -= DeltaTime;
-
-        if (displayTimer < 0 && !doneDisplay)
+        if (displayNo < dialogueList.size())
         {
-            if (displayNo < dialogueFinalDisplayTxt.size())
-                dialogueOutput.append(dialogueFinalDisplayTxt, displayNo++, 1);
-            else
-                doneDisplay = true;
-
-            dialogueTxt->SetText(dialogueOutput);
-
-            displayTimer = displaySpeed * DeltaTime;
+            doneDisplay = true;
         }
-        else if (doneDisplay)
-            dialogueTxt->SetText(dialogueOutput);
+        else
+        {
+            ++dialogueNo;
+            WriteToDialogue();
+        }
+    }
+
+    if (doneDisplay)
+    {
+        dialogueTxt->SetText(dialogueOutput);
+    }
+    else
+    {
+        if (dialogueNo < dialogueList.size())
+        {
+            displayTimer -= DeltaTime;
+
+            if (displayTimer < 0 && !doneDisplay)
+            {
+                if (displayNo < dialogueFinalDisplayTxt.size())
+                    dialogueOutput.append(dialogueFinalDisplayTxt, displayNo++, 1);
+                else
+                    doneDisplay = true;
+
+                dialogueTxt->SetText(dialogueOutput);
+
+                displayTimer = displaySpeed * DeltaTime;
+            }
+        }
     }
 }
 
@@ -60,7 +74,6 @@ void DialogueBox::StartDialogueEvent(string flag)
 {
     LoadFromFile(flag);
     doneDisplay = false;
-    dialogueNo = 0;
     displayTimer = 0;
     WriteToDialogue();
     actorTxt->Owner()->Activate();
@@ -72,7 +85,6 @@ void DialogueBox::CloseDialogueEvent(void)
     actorTxt->Owner()->Deactivate();
     dialogueTxt->Owner()->Deactivate();
 }
-
 
 void DialogueBox::LoadFromFile(string flag)
 {
@@ -130,15 +142,14 @@ void DialogueBox::WriteToDialogue(void)
             cout << "Actor Name: " << parameters << endl;
             name = parameters;
             actorTxt->SetText(name);
+            ++dialogueNo;
+            WriteToDialogue();
             break;
 
         default:
             cout << "default line " << endl;
             break;
         }
-
-        NextDialogue();
-        NextDialogue();
     }
     else
     {
@@ -146,16 +157,6 @@ void DialogueBox::WriteToDialogue(void)
         displayNo = 0;
         dialogueOutput = "";
         dialogueFinalDisplayTxt = dialogueList[dialogueNo];
-    }
-}
-
-void DialogueBox::NextDialogue(void)
-{
-    if (doneDisplay && dialogueNo < dialogueList.size()) {
         doneDisplay = false;
-        ++dialogueNo;
-        WriteToDialogue();
     }
-    else if (!doneDisplay)
-        doneDisplay = true;
 }

@@ -67,7 +67,7 @@ void BallBehavior::UpdateTrail(void)
 	// Correct ang based on velocity
 	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
 	ang = (velocity.x < 0) ? 360 - ang : ang;
-	Vector2 trailoffset = Vector2(0, (double)ballTrail->transform->worldscale.y * 20 / 2.0f);
+	Vector2 trailoffset = Vector2(0.0f, (float)(ballTrail->transform->worldscale.y) * 20 / 2.0f);
 	trailoffset.Rotate(ang);
 
 	// Update position and offset
