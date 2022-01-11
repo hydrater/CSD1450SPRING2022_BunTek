@@ -29,8 +29,12 @@ void Transform::Set(Vector2 position, Vector2 scale, float rotation)
 void Transform::SetPosition(Vector2 position)
 {
 	this->worldposition = position;
-	/*for (size_t i = 0; i < children.size(); ++i)
-		children[i]->SetPosition(position);*/
+
+	if (parent)
+		this->localposition = this->worldposition - parent->worldposition;
+
+	for (size_t i = 0; i < children.size(); ++i)
+		children[i]->SetPosition(position + children[i]->localposition);
 }
 
 void Transform::SetScale(Vector2 scale)
@@ -44,7 +48,7 @@ void Transform::SetRotation(float rotation)
 {
 	this->worldrotation = rotation;
 	for (size_t i = 0; i < children.size(); ++i)
-		children[i]->SetRotation(rotation);
+		children[i]->Rotate(rotation);
 }
 
 void Transform::SetRight(Vector2 right)

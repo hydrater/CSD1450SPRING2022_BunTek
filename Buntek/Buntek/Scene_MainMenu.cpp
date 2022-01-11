@@ -62,12 +62,6 @@ void Scene_MainMenu::Start(void)
 
 void Scene_MainMenu::Update(void)
 {
-	//// [TO REMOVE] This code is just to test DialogueBox functionality
-	//if (AEInputCheckTriggered(AEVK_RBUTTON)) {
-	//	dialogue->GetComponent<DialogueBox>()->ToggleDisplay(TestDialogueDisplay);
-	//	TestDialogueDisplay = !TestDialogueDisplay;
-	//}
-
 	//Battle->GetComponent<Button>()->ButtonEffect();
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }

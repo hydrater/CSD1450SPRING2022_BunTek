@@ -49,6 +49,7 @@ void GameObject::AddChild(GameObject* child)
 {
 	//children.push_back(child);
 	//child->parent = this;
+	child->transform->localposition = child->transform->worldposition - transform->worldposition;
 	transform->children.push_back(child->transform);
 	//transform->parent = transform;
 	child->transform->parent = transform;
