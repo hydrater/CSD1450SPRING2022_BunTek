@@ -59,6 +59,16 @@ void SpriteRenderer::SetTransparency(float value)
 	transparency = value;
 }
 
+AEGfxBlendMode SpriteRenderer::GetBlendMode()
+{
+	return blendMode;
+}
+
+void SpriteRenderer::SetBlendMode(AEGfxBlendMode value)
+{
+	blendMode = value;
+}
+
 float SpriteRenderer::GetColor(char color)
 {
 	switch (color)

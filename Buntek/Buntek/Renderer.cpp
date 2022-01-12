@@ -56,9 +56,7 @@ void _renderer::Update(void)
 			SpriteRenderer* spriteRenderer = (SpriteRenderer*)rendererList[i];
 
 			AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-			//AEGfxSetBlendMode(AE_GFX_BM_ADD);
-			//AEGfxSetBlendMode(AE_GFX_BM_NONE);
-			
+			AEGfxSetBlendMode(spriteRenderer->GetBlendMode());
 			AEGfxSetTransparency(1.0f);
 
 			float halfWidth = spriteRenderer->GetHalfWidth();
