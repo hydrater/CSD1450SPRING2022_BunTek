@@ -16,7 +16,7 @@ public:
 	void SetTexture(string textureName);
 	float GetTransparency();
 	void SetTransparency(float value);
-	AEGfxBlendMode GetBlendMode();
+	short GetBlendMode();
 	void SetBlendMode(AEGfxBlendMode value);
 	float GetColor(char color);
 	void SetColor(float _R, float _G, float _B);
@@ -27,5 +27,5 @@ private:
 	float halfWidth = 100;
 	float halfHeight = 100;
 	float transparency = 1;
-	AEGfxBlendMode blendMode = AE_GFX_BM_BLEND;
+	AEGfxBlendMode blendMode = AEGfxBlendMode::AE_GFX_BM_BLEND;
 };

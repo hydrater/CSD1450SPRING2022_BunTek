@@ -59,9 +59,9 @@ void SpriteRenderer::SetTransparency(float value)
 	transparency = value;
 }
 
-AEGfxBlendMode SpriteRenderer::GetBlendMode()
+short SpriteRenderer::GetBlendMode()
 {
-	return blendMode;
+	return (short)blendMode;
 }
 
 void SpriteRenderer::SetBlendMode(AEGfxBlendMode value)
