@@ -103,6 +103,7 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CursorCamera.cpp" />
     <ClCompile Include="DialogueBox.cpp" />
+    <ClCompile Include="EncounterBox.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScript.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CursorCamera.h" />
     <ClInclude Include="DialogueBox.h" />
+    <ClInclude Include="EncounterBox.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScript.h" />
