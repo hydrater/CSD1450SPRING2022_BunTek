@@ -1,5 +1,4 @@
 #include "EncounterBox.h"
-#include "Renderer.h"
 #include "System.h"
 #include <fstream>
 #include <sstream>
@@ -129,7 +128,7 @@ void EncounterBox::WriteToEncounterEvent(void)
         else
         {
             descriptionText->SetText(descriptList[descriptNo]);
-            Renderer.WrapAround(descriptionText);
+            descriptionText->SetWarpAround(true);
         }
     }
 
