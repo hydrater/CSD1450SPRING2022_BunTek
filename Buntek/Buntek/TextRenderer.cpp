@@ -46,7 +46,6 @@ string TextRenderer::GetText(void)
 void TextRenderer::SetText(string _text)
 {
 	text = _text;
-
 }
 
 vector<float> TextRenderer::GetTextColor(void)
@@ -101,11 +100,14 @@ TextRenderer::yAlignmentTypes TextRenderer::GetYAlignment(void) {
 	return yAlignment;
 }
 
-
-void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
+void TextRenderer::CalculateTextSize(void) {
 	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, textWidth, textHeight);
 	textWidth = textWidth * (float)AEGetWindowWidth() / 2;
 	textHeight = textHeight * (float)AEGetWindowHeight() / 2;
+}
+
+void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
+	CalculateTextSize();
 	float width = sr->GetHalfWidth();
 	float height = sr->GetHalfHeight();
 	if (textWidth / 2 > width) {

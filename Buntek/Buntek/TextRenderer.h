@@ -27,7 +27,7 @@ public:
 	void SetScale(float _scale);
 	float GetScale(void);
 	string GetText(void);
-	void SetText(string textureName);
+	void SetText(string text);
 	void SetTextWidth(float _TextWidth);
 	void SetTextHeight(float _TextHeight);
 	float GetTextWidth(void);
@@ -42,7 +42,7 @@ public:
 	void SetTextColor(float _R, float _G, float _B);
 	void ScaleTexture(SpriteRenderer* sr);
 	float TextR = 1, TextG = 1, TextB = 1;
-
+	void CalculateTextSize(void);
 	void SetXAlignment(xAlignmentTypes _xAlignment);
 	void SetYAlignment(yAlignmentTypes _yAlignment);
 	xAlignmentTypes GetXAlignment(void);
