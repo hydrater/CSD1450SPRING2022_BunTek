@@ -23,4 +23,7 @@ public:
     void Update(void);
     void AddToList(RenderComponent* entry);
     void FreeAll(void);
+
+    float TextAlignmentX(TextRenderer* textRenderer);
+    float TextAlignmentY(TextRenderer* textRenderer);
 };

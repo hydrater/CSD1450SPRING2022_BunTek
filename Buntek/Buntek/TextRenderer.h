@@ -9,6 +9,18 @@ public:
 	TextRenderer(void);
 	~TextRenderer(void);
 
+	enum class xAlignmentTypes:char {
+		Mid = 0,
+		Left = 1,
+		Right = 2
+	};
+
+	enum class yAlignmentTypes:char{
+		Mid = 0,
+		Top = 1,
+		Bottom = 2
+	};
+
 	Transform* GetTransform(void);
 	string GetFontName(void);
 	void SetFont(string textureName);
@@ -20,14 +32,22 @@ public:
 	void SetTextHeight(float _TextHeight);
 	float GetTextWidth(void);
 	float GetTextHeight(void);
-	void SetBuffer(float _Buffer);
+	void SetXBuffer(float _Buffer);
+	void SetYBuffer(float _Buffer);
 	void SetLineBuffer(float _LineBuffer);
-	float GetBuffer(void);
+	float GetXBuffer(void);
+	float GetYBuffer(void);
 	float GetLineBuffer(void);
 	vector<float> GetTextColor(void);
 	void SetTextColor(float _R, float _G, float _B);
 	void ScaleTexture(SpriteRenderer* sr);
 	float TextR = 1, TextG = 1, TextB = 1;
+
+	void SetXAlignment(xAlignmentTypes _xAlignment);
+	void SetYAlignment(yAlignmentTypes _yAlignment);
+	xAlignmentTypes GetXAlignment(void);
+	yAlignmentTypes GetYAlignment(void);
+	
 
 private:
 	string fontString = "EquinoxB.otf";
@@ -35,7 +55,12 @@ private:
 	string text = "";
 	float textWidth = 0;
 	float textHeight = 0;
-	float buffer = 10;
+	float xbuffer = 10;
+	float ybuffer = 10;
 	float lineBuffer = 10;
+
+	xAlignmentTypes xAlignment = TextRenderer::xAlignmentTypes::Mid;
+	yAlignmentTypes yAlignment = TextRenderer::yAlignmentTypes::Mid;
+
 
 };

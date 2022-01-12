@@ -65,14 +65,20 @@ float TextRenderer::GetTextWidth(void) {
 float TextRenderer::GetTextHeight(void) {
 	return textHeight;
 }
-void TextRenderer::SetBuffer(float _Buffer) {
-	buffer = _Buffer;
+void TextRenderer::SetXBuffer(float _xBuffer) {
+	xbuffer = _xBuffer;
+}
+void TextRenderer::SetYBuffer(float _yBuffer) {
+	ybuffer = _yBuffer;
 }
 void TextRenderer::SetLineBuffer(float _LineBuffer) {
 	lineBuffer = _LineBuffer;
 }
-float TextRenderer::GetBuffer(void) {
-	return buffer;
+float TextRenderer::GetXBuffer(void) {
+	return xbuffer;
+}
+float TextRenderer::GetYBuffer(void) {
+	return ybuffer;
 }
 float TextRenderer::GetLineBuffer(void) {
 	return lineBuffer;
@@ -82,6 +88,20 @@ void TextRenderer::SetTextColor(float _R, float _G, float _B)
 	TextR = _R, TextG = _G, TextB = _B;
 }
 
+void TextRenderer::SetXAlignment(xAlignmentTypes _xAlignment) {
+	xAlignment = _xAlignment;
+}
+void TextRenderer::SetYAlignment(yAlignmentTypes _yAlignment) {
+	yAlignment = _yAlignment;
+}
+TextRenderer::xAlignmentTypes TextRenderer::GetXAlignment(void) {
+	return xAlignment;
+}
+TextRenderer::yAlignmentTypes TextRenderer::GetYAlignment(void) {
+	return yAlignment;
+}
+
+
 void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
 	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, textWidth, textHeight);
 	textWidth = textWidth * (float)AEGetWindowWidth() / 2;
@@ -89,10 +109,10 @@ void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
 	float width = sr->GetHalfWidth();
 	float height = sr->GetHalfHeight();
 	if (textWidth / 2 > width) {
-		width = textWidth / 2 + buffer;
+		width = textWidth / 2 + xbuffer;
 	}
 	if (textHeight / 2 > height) {
-		height = textHeight / 2 + buffer;
+		height = textHeight / 2 + ybuffer;
 	}
 	sr->Size(width*2, height*2);
 }

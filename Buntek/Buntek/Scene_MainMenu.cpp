@@ -24,7 +24,8 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer->SetFont("EquinoxR.otf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
 	tempTextRenderer->SetText("B a t t l e");
-
+	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
+	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 	Battle->transform->SetPosition(Vector2(0, -200));
 	Button* button;
 	button = Battle->AddComponent<Button>();

@@ -124,8 +124,8 @@ void _renderer::Update(void)
 				if (c == '\n') {
 					tempTextString[x] = '\0';
 					AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
-						(transform->worldposition.x - textwidth / 2) / ((float)AEGetWindowWidth() / 2),
-						(transform->worldposition.y - textheight / 2 - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
+						TextAlignmentX(textRenderer) / ((float)AEGetWindowWidth() / 2),
+						(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
 						textRenderer->GetScale(), textRenderer->TextR, textRenderer->TextG, textRenderer->TextB);
 					linecount++;
 					start = x + 1;
@@ -134,8 +134,8 @@ void _renderer::Update(void)
 			}
 			//Text Rendering
 			AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
-				(transform->worldposition.x - textwidth / 2) / ((float)AEGetWindowWidth() / 2),
-				(transform->worldposition.y - textheight / 2 - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
+				TextAlignmentX(textRenderer) / ((float)AEGetWindowWidth() / 2),
+				(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
 				textRenderer->GetScale(), textRenderer->TextR, textRenderer->TextG, textRenderer->TextB);
 		}
 
@@ -146,6 +146,43 @@ void _renderer::Update(void)
 		default:
 			break;
 		}
+	}
+}
+
+float _renderer::TextAlignmentX(TextRenderer* textRenderer) {
+	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
+	switch (textRenderer->GetXAlignment())
+	{
+	case TextRenderer::xAlignmentTypes::Left:
+		return (textRenderer->GetTransform()->worldposition.x - tempSR->GetHalfWidth() + textRenderer->GetXBuffer());
+		break;
+	case TextRenderer::xAlignmentTypes::Right:
+		return (textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth() - textRenderer->GetTextWidth() - textRenderer->GetXBuffer());
+		break;
+	case TextRenderer::xAlignmentTypes::Mid:
+		return (textRenderer->GetTransform()->worldposition.x - textRenderer->GetTextWidth() / 2);;
+		break;
+	default:
+		return 0;
+		break;
+	}
+}
+float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
+	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
+	switch (textRenderer->GetYAlignment())
+	{
+	case TextRenderer::yAlignmentTypes::Top:
+		return (textRenderer->GetTransform()->worldposition.y + tempSR->GetHalfHeight() - textRenderer->GetTextHeight() - textRenderer->GetYBuffer());
+		break;
+	case TextRenderer::yAlignmentTypes::Bottom:
+		return (textRenderer->GetTransform()->worldposition.y - tempSR->GetHalfHeight() + textRenderer->GetYBuffer());
+		break;
+	case TextRenderer::yAlignmentTypes::Mid:
+		return (textRenderer->GetTransform()->worldposition.y - textRenderer->GetTextHeight() / 2);
+		break;
+	default:
+		return 0;
+		break;
 	}
 }
 
