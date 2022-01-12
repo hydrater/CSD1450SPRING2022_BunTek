@@ -24,7 +24,7 @@ void Scene_Test::Start(void)
 
 void Scene_Test::Update(void)
 {
-	
+	AEGfxSetBlendMode(AE_GFX_BM_ADD);
 
 	
 }
