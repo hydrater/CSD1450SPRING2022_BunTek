@@ -116,13 +116,16 @@ void _renderer::Update(void)
 
 			AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 			TextRenderer* textRenderer = (TextRenderer*)rendererList[i];
-
+			textRenderer->CalculateTextSize();
 			Transform* transform = textRenderer->GetTransform();
 			int linecount = 0;
 			int start = 0;
 			string tempTextString = textRenderer->GetText();
 			float textheight = textRenderer->GetTextHeight();
 			float textwidth = textRenderer->GetTextWidth();
+
+			//WrapAround(textRenderer);
+
 			for (int x = 0; char c = tempTextString[x]; x++) {
 				if (c == '\n') {
 					tempTextString[x] = '\0';
@@ -190,7 +193,32 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 }
 
 void  _renderer::WrapAround(TextRenderer* textRenderer) {
-	TextAlignmentX(textRenderer);
+	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
+	float length = tempSR->GetHalfWidth() - TextAlignmentX(textRenderer);
+	float textScale = textRenderer->GetScale();
+	float alteredStringLength = textRenderer->GetXBuffer();
+	float charWidth = 0;
+	float charHeight = 0;
+	string tempTextString = textRenderer->GetText();
+	string alteredString;
+	char tempChar;
+	for (int x = 0; char c = tempTextString[x]; x++) {
+		tempChar = tempTextString[x];
+		if (tempChar == '\n') {
+			alteredStringLength = textRenderer->GetXBuffer();
+		}
+		else {
+			AEGfxGetPrintSize(AssetManager.GetFont(textRenderer->GetFontName()), &tempChar, textScale, charWidth, charHeight);
+			charWidth = charWidth * (float)AEGetWindowWidth() / 2;
+			if ((alteredStringLength + charWidth) > length) {
+				alteredString.append(1, '\n');
+				alteredStringLength = textRenderer->GetXBuffer();
+			}
+			alteredStringLength += charWidth;
+		}
+		alteredString.append(1, tempChar);
+	}
+	textRenderer->SetText(alteredString);
 }
 
 void _renderer::AddToList(RenderComponent* entry)
