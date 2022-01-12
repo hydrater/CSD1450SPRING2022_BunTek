@@ -17,7 +17,7 @@ public:
 	float GetTransparency();
 	void SetTransparency(float value);
 	short GetBlendMode();
-	void SetBlendMode(AEGfxBlendMode value);
+	void SetBlendMode(short value);
 	float GetColor(char color);
 	void SetColor(float _R, float _G, float _B);
 	float R = 1, G = 1, B = 1;
@@ -27,5 +27,5 @@ private:
 	float halfWidth = 100;
 	float halfHeight = 100;
 	float transparency = 1;
-	AEGfxBlendMode blendMode = AEGfxBlendMode::AE_GFX_BM_BLEND;
+	short blendMode = AE_GFX_BM_BLEND;
 };

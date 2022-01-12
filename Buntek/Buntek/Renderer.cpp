@@ -76,8 +76,6 @@ void _renderer::Update(void)
 				break;
 			}
 
-			AEGfxSetBlendMode( AEGfxBlendMode( ));
-
 			AEGfxSetTransparency(1.0f);
 
 			float halfWidth = spriteRenderer->GetHalfWidth();

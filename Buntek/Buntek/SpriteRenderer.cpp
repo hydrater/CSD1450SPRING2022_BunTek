@@ -61,10 +61,10 @@ void SpriteRenderer::SetTransparency(float value)
 
 short SpriteRenderer::GetBlendMode()
 {
-	return (short)blendMode;
+	return blendMode;
 }
 
-void SpriteRenderer::SetBlendMode(AEGfxBlendMode value)
+void SpriteRenderer::SetBlendMode(short value)
 {
 	blendMode = value;
 }
