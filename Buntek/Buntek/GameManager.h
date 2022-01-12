@@ -1,13 +1,10 @@
 #pragma once
-#include <iostream>
-#include <string>
+#include <typeinfo>
 #include <vector>
 #include "Vector2.h"
-#include "Component.h"
 using namespace std;
 
 #define GameManager _gameManager::Instance()
-#define MapData _mapData::Instance()
 
 enum class RarityTypes : short
 {
@@ -78,33 +75,3 @@ public:
     Vector2 point2;
 };
 
-class _mapData
-{
-public:
-    class Node
-    {
-    public:
-        Vector2 pos;
-        bool reached = false;
-        vector<Node> LinkedTo;
-        
-    };
-    vector<AEGfxVertexList*> connectedLines;
-
-    Node currentNode;
-    static _mapData& Instance(void);
-    void GenerateMapData(Vector2 originPos);
-    void GenerateMapObject(void);
-    void ClearList(void);
-
-private:
-    //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
-    bool canAccessFirstNode = true; // REMEMBER TO RESET THIS if using multiple start nodes
-    static _mapData* instance;
-    float minDistance= 150;
-    float maxDistance = 400;
-    float buffer = 75;
-    const int numNodes = 20;
-    vector<Node> nodeList;
-    //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
-};

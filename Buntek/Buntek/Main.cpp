@@ -10,6 +10,7 @@
 #include "AudioEngine.h"
 #include "GameManager.h"
 #include "Renderer.h"
+#include "MapGenerator.h"
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

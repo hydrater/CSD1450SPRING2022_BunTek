@@ -123,6 +123,9 @@
     <ClCompile Include="RenderComponent.cpp">
       <Filter>Source Files\ECS</Filter>
     </ClCompile>
+    <ClCompile Include="MapGenerator.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -214,6 +217,9 @@
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
       <Filter>Source Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="MapGenerator.h">
+      <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
