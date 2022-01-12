@@ -39,8 +39,6 @@ void Scene_Test::Start(void)
 
 void Scene_Test::Update(void)
 {
-	//AEGfxSetBlendMode(AE_GFX_BM_ADD);
-	//Vector2 finalPos = splashimage2->transform->worldposition;
 	Vector2 addPos = Vector2((float)(10 * DeltaTime), (float)0);
 	splashimage2->GetComponent<Parallaxer>()->anchorPoint += addPos;
 	
