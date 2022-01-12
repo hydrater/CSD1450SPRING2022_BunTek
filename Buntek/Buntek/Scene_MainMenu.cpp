@@ -42,6 +42,7 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer = dialogue->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("EquinoxR.otf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
+	tempTextRenderer->SetLayer(1);
 	
 	// Create actor box
 	SpriteRenderer* tempRenderer2 = 0;
@@ -50,9 +51,11 @@ void Scene_MainMenu::Start(void)
 	tempRenderer2 = tempGameObject->AddComponent<SpriteRenderer>();
 	tempRenderer2->Size(400, 80);
 	tempRenderer2->SetTexture("EncounterBox.png");
+	tempRenderer2->SetLayer(1);
 	tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();
 	tempTxtRenderer2->SetFont("EquinoxR.otf");
 	tempTxtRenderer2->SetTextColor(1, 1, 1);
+	tempTxtRenderer2->SetLayer(2);
 	
 	// Create dialoguebox and assign
 	DialogueBox* tempdialogue = tempGameObject->AddComponent<DialogueBox>();

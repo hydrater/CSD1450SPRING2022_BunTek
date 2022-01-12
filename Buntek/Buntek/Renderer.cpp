@@ -152,11 +152,52 @@ void _renderer::Update(void)
 void _renderer::AddToList(RenderComponent* entry)
 {
     rendererList.push_back(entry);
-
-	//Sort algorithm
+	insertionSort();
 }
 
 void _renderer::FreeAll(void)
 {
 	rendererList.clear();
+}
+
+int _renderer::binarySearch(vector<RenderComponent*> a, int item, int low, int high)
+{
+	if (high <= low)
+		return (item > a[low]->GetLayer()) ?
+		(low + 1) : low;
+
+	int mid = (low + high) / 2;
+
+	if (item == a[mid]->GetLayer())
+		return mid + 1;
+
+	if (item > a[mid]->GetLayer())
+		return binarySearch(a, item,
+			mid + 1, high);
+	return binarySearch(a, item, low,
+		mid - 1);
+}
+
+void _renderer::insertionSort(void)
+{
+	int i, loc, j;
+
+	RenderComponent* selected;
+
+	for (i = 1; i < rendererList.size(); ++i)
+	{
+		j = i - 1;
+		selected = rendererList[i];
+
+		// find location where selected should be inseretd
+		loc = binarySearch(rendererList, selected->GetLayer(), 0, j);
+
+		// Move all elements after location to create space
+		while (j >= loc)
+		{
+			rendererList[(size_t)j + 1] = rendererList[j];
+			j--;
+		}
+		rendererList[(size_t)j + 1] = selected;
+	}
 }
