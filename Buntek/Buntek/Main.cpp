@@ -65,6 +65,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			SceneManager.LoadScene(new Scene_Battle, TransitionTypes::FadeToBlack);
 		}
+		if (AEInputCheckTriggered(AEVK_3))
+		{
+			SceneManager.LoadScene(new Scene_Test, TransitionTypes::FadeToBlack);
+		}
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();

@@ -59,6 +59,16 @@ void SpriteRenderer::SetTransparency(float value)
 	transparency = value;
 }
 
+short SpriteRenderer::GetBlendMode()
+{
+	return blendMode;
+}
+
+void SpriteRenderer::SetBlendMode(short value)
+{
+	blendMode = value;
+}
+
 float SpriteRenderer::GetColor(char color)
 {
 	switch (color)
