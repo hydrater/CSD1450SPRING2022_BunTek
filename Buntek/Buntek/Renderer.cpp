@@ -57,6 +57,8 @@ void _renderer::Update(void)
 
 			AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
 			//AEGfxSetBlendMode(AE_GFX_BM_ADD);
+			//AEGfxSetBlendMode(AE_GFX_BM_NONE);
+			
 			AEGfxSetTransparency(1.0f);
 
 			float halfWidth = spriteRenderer->GetHalfWidth();
