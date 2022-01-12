@@ -80,7 +80,30 @@ float SpriteRenderer::GetColor(char color)
 	}
 }
 
-void SpriteRenderer::SetColor(float _R, float _G, float _B)
-{
+void SpriteRenderer::SetColor(float _R, float _G, float _B){
 	R = _R, G = _G, B = _B;
+}
+
+void SpriteRenderer::SetStretch(float left, float top, float right, float bottom){
+	leftStretch = left;
+	topStretch = top;
+	rightStretch = right;
+	bottomStretch = bottom;
+	hasStretched = true;
+}
+
+float SpriteRenderer::GetLeftStretch() {
+	return leftStretch;
+}
+
+float SpriteRenderer::GetTopStretch() {
+	return topStretch;
+}
+
+float SpriteRenderer::GetRightStretch() {
+	return rightStretch;
+}
+
+float SpriteRenderer::GetBottomStretch() {
+	return bottomStretch;
 }

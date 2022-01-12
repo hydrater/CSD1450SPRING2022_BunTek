@@ -20,6 +20,9 @@ _assetManager::_assetManager()
     LoadTexture("BgNebula1.png");
     LoadTexture("BgNebula2.png");
     LoadTexture("BgNebula3.png");
+
+    LoadTexture("Stars2.png");
+    LoadTexture("Stars3.png");
     //font
 
     LoadFont("EquinoxR.otf");

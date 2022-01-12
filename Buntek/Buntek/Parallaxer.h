@@ -13,7 +13,8 @@ public:
 
 	Vector2 anchorPoint;
 	float distance;
-
+	bool inverseMouseX = false;
+	bool inverseMouseY = false;
 
 private:
 	
