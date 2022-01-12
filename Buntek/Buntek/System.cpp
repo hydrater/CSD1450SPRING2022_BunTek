@@ -1,5 +1,5 @@
 #include "System.h"
-#include "AssetManager.h"
+#include "Renderer.h"
 #include "GameManager.h"
 
 _eventManager* _eventManager::instance = 0;
@@ -138,7 +138,7 @@ void _sceneManager::Update(void)
         case TransitionTypes::None:
             if (scene != NULL && nextScene != NULL)
             {
-                AssetManager.FreeAll();
+                Renderer.FreeAll();
                 GameScriptManager.ClearList();
                 delete scene;
                 scene = nextScene;
@@ -194,7 +194,7 @@ void _sceneManager::FadeToBlack(void) {
         if (transitionTimer > transitionDuration) {
             if (scene != NULL && nextScene != NULL)
             {
-                AssetManager.FreeAll();
+                Renderer.FreeAll();
                 GameScriptManager.ClearList();
                 delete scene;
                 AEGfxSetCamPosition(0, 0);

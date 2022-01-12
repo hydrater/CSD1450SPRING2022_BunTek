@@ -1,9 +1,11 @@
 #include "TextRenderer.h"
 #include "AssetManager.h"
+#include "Renderer.h"
 
 TextRenderer::TextRenderer(void)
 {
-	AssetManager.AddToTextList(this);
+	SetType(1);
+	Renderer.AddToList(this);
 }
 
 TextRenderer::~TextRenderer(void)

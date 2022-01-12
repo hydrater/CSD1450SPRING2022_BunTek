@@ -22,8 +22,6 @@ _assetManager::_assetManager()
     LoadFont("EquinoxB.otf");
     LoadFont("Metrolic.ttf");
 
-    mesh = 0;
-
     AEGfxMeshStart();
 
     AEGfxTriAdd(
@@ -53,107 +51,6 @@ _assetManager& _assetManager::Instance(void)
     return *instance;
 }
 
-void _assetManager::RenderAll(void)
-{
-    AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-    AEGfxSetTransparency(1.0f);
-
-    for (int i = 0; i < rendererList.size(); ++i)
-    {
-        if (rendererList[i]->remove)
-        {
-            delete rendererList[i];
-            rendererList.erase(rendererList.begin() + i);
-            --i;
-            continue;
-        }
-
-        if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive())
-			continue;
-
-        float halfWidth = rendererList[i]->GetHalfWidth();
-        float halfHeight = rendererList[i]->GetHalfHeight();
-        halfWidth *= rendererList[i]->GetTransform()->worldscale.x;
-        halfHeight *= rendererList[i]->GetTransform()->worldscale.y;
-
-        Transform* transform = rendererList[i]->GetTransform();
-
-        float rotationAngle = transform->worldrotation;
-		Vector2 BottomLeft = Vector2(halfWidth, -halfHeight);
-		Vector2 BottomRight = Vector2(-halfWidth, -halfHeight);
-		Vector2 TopLeft = Vector2(halfWidth, halfHeight);
-		Vector2 TopRight = Vector2(-halfWidth, halfHeight);
-
-        BottomLeft.Rotate(rotationAngle);
-        BottomRight.Rotate(rotationAngle);
-        TopLeft.Rotate(rotationAngle);
-        TopRight.Rotate(rotationAngle);
-
-        AEGfxSetPosition(transform->worldposition.x, transform->worldposition.y);
-
-        // Scale and Rotate Matrix
-        float cosAngle = cosf(rotationAngle / 180.0f * 3.1415926535897932384626433832795f);
-        float sinAngle = sinf(rotationAngle / 180.0f * 3.1415926535897932384626433832795f);
-        float width = halfWidth * 2;
-        float height = halfHeight * 2;
-        // Multiply Matrix by scale according to the GameObject Size then by rotation
-        float TransformMatrix[3][3]{
-            {cosAngle*width,sinAngle*height,transform->worldposition.x},
-            {-sinAngle*width,cosAngle*height,transform->worldposition.y},
-            {0,0,1}
-        };
-
-        AEGfxSetTransform(TransformMatrix);
-
-        AEGfxSetTintColor(rendererList[i]->R, rendererList[i]->G, rendererList[i]->B, rendererList[i]->GetTransparency());
-        //AEGfxSetTextureMode(AE_GFX_TM_PRECISE); Different quality if using average
-        AEGfxTextureSet(GetTexture(rendererList[i]->GetTextureName()), 0, 0);
-        AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
-    }
-}
-
-void _assetManager::RenderAllText(void)
-{
-    AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-
-    for (int i = 0; i < rendererTextList.size(); ++i)
-    {
-        if (rendererTextList[i]->remove)
-        {
-            delete rendererTextList[i];
-            rendererTextList.erase(rendererTextList.begin() + i);
-            --i;
-            continue;
-        }
-
-        if (!rendererTextList[i]->IsActive() || !rendererTextList[i]->Owner()->IsActive())
-            continue;
-        Transform* transform = rendererTextList[i]->GetTransform();
-        int linecount = 0;
-        int start = 0;
-        string tempTextString = rendererTextList[i]->GetText();
-        float textheight = rendererTextList[i]->GetTextHeight();
-        float textwidth = rendererTextList[i]->GetTextWidth();
-        for (int x = 0; char c = tempTextString[x]; x++) {
-            if (c == '\n') {
-                tempTextString[x] = '\0';
-                AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &tempTextString[start],
-                    (transform->worldposition.x - textwidth / 2) / ((float)AEGetWindowWidth() / 2),
-                    (transform->worldposition.y - textheight / 2 - linecount * (textheight + rendererTextList[i]->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
-                    rendererTextList[i]->GetScale(), rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
-                linecount++;
-                start = x+1;
-            }
-
-        }
-        //Text Rendering
-        AEGfxPrint(GetFont(rendererTextList[i]->GetFontName()), &tempTextString[start],
-            (transform->worldposition.x - textwidth / 2) / ((float)AEGetWindowWidth() / 2),
-            (transform->worldposition.y - textheight / 2 - linecount * (textheight + rendererTextList[i]->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
-            rendererTextList[i]->GetScale(), rendererTextList[i]->TextR, rendererTextList[i]->TextG, rendererTextList[i]->TextB);
-    }
-}
-
 void _assetManager::AddToList(SpriteRenderer* spriteRenderer)
 {
     rendererList.push_back(spriteRenderer);
@@ -162,12 +59,6 @@ void _assetManager::AddToList(SpriteRenderer* spriteRenderer)
 void _assetManager::AddToTextList(TextRenderer* textRenderer)
 {
     rendererTextList.push_back(textRenderer);
-}
-
-void _assetManager::FreeAll(void)
-{
-    rendererList.clear();
-    rendererTextList.clear();
 }
 
 void _assetManager::UnloadTexture(string name)

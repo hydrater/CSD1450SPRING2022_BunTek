@@ -7,5 +7,5 @@ public:
     void Start(void) override;
     void Update(void) override;
 private:
-    GameObject* background, *Battle, *dialogue;
+    GameObject* background = 0, *Battle = 0, *dialogue = 0;
 };

@@ -1,9 +1,9 @@
 #pragma once
 #include "Transform.h"
-#include "Component.h"
+#include "RenderComponent.h"
 #include "SpriteRenderer.h"
 
-class TextRenderer : public Component
+class TextRenderer : public RenderComponent
 {
 public:
 	TextRenderer(void);

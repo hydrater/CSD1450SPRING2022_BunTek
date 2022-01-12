@@ -1,8 +1,8 @@
 #pragma once
 #include "Transform.h"
-#include "Component.h"
+#include "RenderComponent.h"
 
-class SpriteRenderer : public Component
+class SpriteRenderer : public RenderComponent
 {
 public:
 	SpriteRenderer(void);

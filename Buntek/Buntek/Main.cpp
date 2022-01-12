@@ -5,7 +5,6 @@
 #include "Scene_MainMenu.h"
 #include "Scene_Navigation.h"
 #include "Scene_Test.h"
-#include "AssetManager.h"
 #include "CollisionManager2D.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
@@ -75,8 +74,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// --------------------------------------------- Render --------------------------------------------- //
 		GameManager.CameraUpdate();
-		AssetManager.RenderAll();
-		AssetManager.RenderAllText();
+		Renderer.Update();
 		SceneManager.LateUpdate();
 		// --------------------------------------------- Collision --------------------------------------------- //
 		CollisionManager2D.CollideAll();
@@ -88,7 +86,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		if (AEInputCheckTriggered(AEVK_ESCAPE) || 0 == AESysDoesWindowExist())
 		{
 			gGameRunning = 0;
-			AssetManager.FreeAll();
+			Renderer.FreeAll();
 		}
 	}
 	//

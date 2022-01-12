@@ -1,10 +1,12 @@
 #include "SpriteRenderer.h"
 #include "AssetManager.h"
 #include "Collider2D.h"
+#include "Renderer.h"
 
 SpriteRenderer::SpriteRenderer(void)
 {
-	AssetManager.AddToList(this);
+	SetType(0);
+	Renderer.AddToList(this);
 }
 
 SpriteRenderer::~SpriteRenderer(void)

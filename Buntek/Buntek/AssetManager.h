@@ -28,7 +28,4 @@ public:
     char GetFont(string name);
     void AddToList(SpriteRenderer* spriteRenderer);
     void AddToTextList(TextRenderer* textRenderer);
-    void RenderAll(void);
-    void RenderAllText(void);
-    void FreeAll(void);
 };

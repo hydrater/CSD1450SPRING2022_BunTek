@@ -13,10 +13,12 @@ private:
     static _renderer* instance;
     _renderer();
     ~_renderer();
-    vector<RenderComponent*> renderList;
+    AEGfxVertexList* mesh;
+    vector<RenderComponent*> rendererList;
 
 public:
     static _renderer& Instance(void);
     void Update(void);
-    void AddTolist(RenderComponent* entry);
+    void AddToList(RenderComponent* entry);
+    void FreeAll(void);
 };
