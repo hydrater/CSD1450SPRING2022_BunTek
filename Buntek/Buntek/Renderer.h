@@ -24,6 +24,7 @@ public:
     void FreeAll(void);
     float TextAlignmentX(TextRenderer* textRenderer);
     float TextAlignmentY(TextRenderer* textRenderer);
+    void WrapAround(TextRenderer* textRenderer);
     void InsertionSort(void);
 
 };

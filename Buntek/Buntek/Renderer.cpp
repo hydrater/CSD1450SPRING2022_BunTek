@@ -56,6 +56,7 @@ void _renderer::Update(void)
 			SpriteRenderer* spriteRenderer = (SpriteRenderer*)rendererList[i];
 
 			AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+			//AEGfxSetBlendMode(AE_GFX_BM_ADD);
 			AEGfxSetTransparency(1.0f);
 
 			float halfWidth = spriteRenderer->GetHalfWidth();
@@ -184,6 +185,10 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 		return 0;
 		break;
 	}
+}
+
+void  _renderer::WrapAround(TextRenderer* textRenderer) {
+	TextAlignmentX(textRenderer);
 }
 
 void _renderer::AddToList(RenderComponent* entry)
