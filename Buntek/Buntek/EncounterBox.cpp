@@ -1,4 +1,5 @@
 #include "EncounterBox.h"
+#include "Renderer.h"
 #include "System.h"
 #include <fstream>
 #include <sstream>
@@ -31,14 +32,27 @@ void EncounterBox::AssignObjReferences(SpriteRenderer* _header, SpriteRenderer* 
 
 void EncounterBox::StartEncounterEvent(string flag)
 {
+    buttonNo = 0;
+    header->Owner()->Activate();
+    display->Owner()->Activate();
+    background->Owner()->Activate();
+    headerText->Owner()->Activate();
+    descriptionText->Owner()->Activate();
+    for (int i = 0; i < buttonList.size(); ++i)
+        buttonList[i]->Owner()->Activate();
     LoadFromFile(flag);
     WriteToEncounterEvent();
-    this->Owner()->Activate();
 }
 
 void EncounterBox::CloseEncounterEvent(void)
 {
-    this->Owner()->Deactivate();
+    header->Owner()->Deactivate();
+    display->Owner()->Deactivate();
+    background->Owner()->Deactivate();
+    headerText->Owner()->Deactivate();
+    descriptionText->Owner()->Deactivate();
+    for (int i = 0; i < buttonList.size(); ++i)
+        buttonList[i]->Owner()->Deactivate();
 }
 
 void EncounterBox::LoadFromFile(string flag)
@@ -81,36 +95,45 @@ void EncounterBox::LoadFromFile(string flag)
 
 void EncounterBox::WriteToEncounterEvent(void)
 {
-    if (descriptList[descriptNo].rfind("/", 0) == 0)
+    for (descriptNo = 0; descriptNo < descriptList.size(); ++descriptNo)
     {
-        if (descriptList[descriptNo].length() < 3)
+        if (descriptList[descriptNo].rfind("/", 0) == 0)
         {
-            cout << "Error: Comamnd has no parameters" << endl;
-            return;
+            if (descriptList[descriptNo].length() < 3)
+            {
+                cout << "Error: Comamnd has no parameters" << endl;
+                return;
+            }
+
+            string parameters = descriptList[descriptNo].substr(3, descriptList[descriptNo].length());
+
+            switch (descriptList[descriptNo][1])
+            {
+            case 'i':
+                display->SetTexture(parameters);
+                break;
+            case 'h':
+                headerText->SetText(parameters);
+                break;
+
+            case 'b':
+                if (buttonNo < buttonList.size())
+                    buttonList[buttonNo++]->tr->SetText(parameters);
+                break;
+
+            default:
+                //cout << "default line " << endl;
+                break;
+            }
         }
-
-        string parameters = descriptList[descriptNo].substr(3, descriptList[descriptNo].length());
-
-        switch (descriptList[descriptNo][1])
+        else
         {
-        case 'h':
-            cout << "Header Name: " << parameters << endl;
-            headerText->SetText(parameters);
-            break;
-
-        case 'b':
-            cout << "Button Name: " << parameters << endl;
-            if (buttonNo < buttonList.size())
-                buttonList[buttonNo++]->tr->SetText(parameters);
-            break;
-
-        default:
-            cout << "default line " << endl;
-            break;
+            descriptionText->SetText(descriptList[descriptNo]);
+            Renderer.WrapAround(descriptionText);
         }
     }
-    else
-    {
-        descriptionText->SetText(descriptList[descriptNo]);
-    }
+
+    // Deactivate non-used buttons
+    for (; buttonNo < buttonList.size(); ++buttonNo)
+        buttonList[buttonNo]->Owner()->Deactivate();
 }

@@ -6,6 +6,12 @@
 #include "SpriteRenderer.h"
 #include "TextRenderer.h"
 
+/* Encounter /parameters */
+// i : image/texture name
+// h : Header Name
+// b : Button Name
+
+
 class EncounterBox : public GameScript
 {
 public:

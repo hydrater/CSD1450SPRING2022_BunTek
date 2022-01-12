@@ -7,6 +7,7 @@
 #include "EncounterBox.h"
 
 void MoveToBattle(void);
+void RemoveEncounter(void);
 
 void Scene_MainMenu::Start(void)
 {
@@ -150,6 +151,7 @@ void Scene_MainMenu::CreateEncounter(Vector2 position, int sortingLayer, string 
 		tempButtonTxtRenderer->SetFont("EquinoxR.otf");
 		tempButtonTxtRenderer->SetTextColor(1, 1, 0);
 		tempButtonTxtRenderer->SetText("SCREM");
+		tempButtonTxtRenderer->SetScale(0.75f);
 		tempButtonTxtRenderer->SetLayer(sortingLayer);
 		tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 		tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
@@ -159,6 +161,7 @@ void Scene_MainMenu::CreateEncounter(Vector2 position, int sortingLayer, string 
 		Button* tempButton = tempButtonObj->AddComponent<Button>();
 		tempButton->sr = tempButtonRenderer;
 		tempButton->tr = tempButtonTxtRenderer;
+		tempButton->ButtonEffect = &RemoveEncounter;
 		
 		encounter->AddChild(tempButtonObj);
 		buttonList.push_back(tempButton);
@@ -166,6 +169,7 @@ void Scene_MainMenu::CreateEncounter(Vector2 position, int sortingLayer, string 
 	
 
 	tempEncounter->AssignObjReferences(tempHeaderRenderer, tempDisplayRenderer, tempBckgdRenderer, tempHeaderTxtRenderer, tempDescTxtRenderer, buttonList);
+	tempEncounter->StartEncounterEvent(flag);
 }
 
 void Scene_MainMenu::Update(void)
@@ -174,7 +178,18 @@ void Scene_MainMenu::Update(void)
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
 
+void Scene_MainMenu::CloseEncounter(void)
+{
+	encounter->GetComponent<EncounterBox>()->CloseEncounterEvent();
+}
+
 void MoveToBattle(void)
 {
 	SceneManager.LoadScene(new Scene_Battle, TransitionTypes::FadeToBlack);
+}
+
+void RemoveEncounter(void)
+{
+	Scene_MainMenu* scene = (Scene_MainMenu*)SceneManager.GetScene();
+	scene->CloseEncounter();
 }
