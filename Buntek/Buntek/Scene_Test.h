@@ -7,6 +7,7 @@ class Scene_Test : public Scene
 private:
 	GameObject* splashimage1 = 0;
 	SpriteRenderer* testRenderer1 = 0;
+
 	GameObject* splashimage2 = 0;
 	SpriteRenderer* testRenderer2 = 0;
 
