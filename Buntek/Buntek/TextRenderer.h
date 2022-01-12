@@ -48,7 +48,8 @@ public:
 	xAlignmentTypes GetXAlignment(void);
 	yAlignmentTypes GetYAlignment(void);
 	
-
+	void SetWarpAround(bool _warparound);
+	bool GetWarpAround(void);
 private:
 	string fontString = "EquinoxB.otf";
 	float textScale = 1;
@@ -58,7 +59,7 @@ private:
 	float xbuffer = 10;
 	float ybuffer = 10;
 	float lineBuffer = 10;
-
+	bool warparound = false;
 	xAlignmentTypes xAlignment = TextRenderer::xAlignmentTypes::Mid;
 	yAlignmentTypes yAlignment = TextRenderer::yAlignmentTypes::Mid;
 

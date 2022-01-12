@@ -118,3 +118,10 @@ void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
 	}
 	sr->Size(width*2, height*2);
 }
+
+void TextRenderer::SetWarpAround(bool _warparound) {
+	warparound = _warparound;
+}
+bool TextRenderer::GetWarpAround(void) {
+	return warparound;
+}
