@@ -27,6 +27,7 @@ void Scene_Battle::Start(void)
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
 	background->GetComponent<SpriteRenderer>()->SetTexture("Background.jpg");
+	background->GetComponent<SpriteRenderer>()->SetLayer(-1);
 
 	friendlyArea = new GameObject();
 	tempRenderer = friendlyArea->AddComponent<SpriteRenderer>();
@@ -57,6 +58,7 @@ void Scene_Battle::Start(void)
 	tempRenderer->Size(20, 100);
 	tempRenderer->SetTexture("paddle.png");
 	tempRenderer->SetColor(0, 0, 1);
+	tempRenderer->SetLayer(1);
 	playerpaddle->transform->SetPosition(Vector2(-590, 70));
 	playerpaddle->transform->Rotate(0);
 	PaddleBehavior* temppaddle;
@@ -76,6 +78,7 @@ void Scene_Battle::Start(void)
 	tempRenderer->Size(20, 100);
 	tempRenderer->SetTexture("paddle.png");
 	tempRenderer->SetColor(1, 0, 0);
+	tempRenderer->SetLayer(1);
 	AIpaddle->transform->SetPosition(Vector2(590, 70));
 	AIpaddle->transform->Rotate(0);
 	temppaddle = AIpaddle->AddComponent<PaddleBehavior>();
@@ -143,6 +146,7 @@ void Scene_Battle::Update(void)
 
 		ball = new GameObject();
 		tempRenderer = ball->AddComponent<SpriteRenderer>();
+		tempRenderer->SetLayer(1);
 		tempRenderer->Size(20, 20);
 		tempRenderer->SetTexture("ball.png");
 		tempBall = ball->AddComponent<BallBehavior>();

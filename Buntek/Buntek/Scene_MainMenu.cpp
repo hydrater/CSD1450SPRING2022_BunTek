@@ -12,6 +12,7 @@ void Scene_MainMenu::Start(void)
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
 	background->GetComponent<SpriteRenderer>()->SetTexture("MainMenu.png");
+	background->GetComponent<SpriteRenderer>()->SetLayer(-1);
 
 	Battle = new GameObject();
 	SpriteRenderer* tempRenderer;
@@ -33,13 +34,13 @@ void Scene_MainMenu::Start(void)
 	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToBattle;
 
-	
 	// Create main dialogue box
 	dialogue = new GameObject();
 	dialogue->transform->SetPosition(Vector2(0, -280));
 	tempRenderer = dialogue->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(1800, 360);
 	tempRenderer->SetTexture("EncounterBox.png");
+	tempRenderer->SetLayer(1);
 	tempTextRenderer = dialogue->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("EquinoxR.otf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
@@ -56,7 +57,7 @@ void Scene_MainMenu::Start(void)
 	tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();
 	tempTxtRenderer2->SetFont("EquinoxR.otf");
 	tempTxtRenderer2->SetTextColor(1, 1, 1);
-	tempTxtRenderer2->SetLayer(2);
+	tempTxtRenderer2->SetLayer(1);
 	
 	// Create dialoguebox and assign
 	DialogueBox* tempdialogue = tempGameObject->AddComponent<DialogueBox>();

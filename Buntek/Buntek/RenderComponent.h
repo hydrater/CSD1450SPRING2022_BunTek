@@ -21,7 +21,6 @@ public:
 	void SetType(short _type);
 	RenderType GetType(void);
 private:
-	void SortList(void);
 	short layer = 0;
 	RenderType type = RenderType::Sprite;
 };

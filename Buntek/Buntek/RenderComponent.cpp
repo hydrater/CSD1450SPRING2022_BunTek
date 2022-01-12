@@ -1,4 +1,5 @@
 #include "RenderComponent.h"
+#include "Renderer.h"
 
 RenderComponent::RenderComponent()
 {
@@ -11,7 +12,7 @@ RenderComponent::~RenderComponent()
 void RenderComponent::SetLayer(short _layer)
 {
 	layer = _layer;
-	SortList();
+	Renderer.InsertionSort();
 }
 
 short RenderComponent::GetLayer(void)
@@ -27,9 +28,4 @@ void RenderComponent::SetType(short _type)
 RenderType RenderComponent::GetType(void)
 {
 	return type;
-}
-
-void RenderComponent::SortList(void)
-{
-	// Sort by layer in ascending order
 }

@@ -189,7 +189,7 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 void _renderer::AddToList(RenderComponent* entry)
 {
     rendererList.push_back(entry);
-	insertionSort();
+	InsertionSort();
 }
 
 void _renderer::FreeAll(void)
@@ -215,7 +215,7 @@ int _renderer::binarySearch(vector<RenderComponent*> a, int item, int low, int h
 		mid - 1);
 }
 
-void _renderer::insertionSort(void)
+void _renderer::InsertionSort(void)
 {
 	int i, loc, j;
 
