@@ -31,7 +31,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	//AEToogleFullScreen(true);
 
 	// Changing the window title
-	AESysSetWindowTitle("idk we need a pong game name atm");
+	AESysSetWindowTitle("Person who made this engine is gay");
 
 	// reset the system modules-
 	AESysReset();
