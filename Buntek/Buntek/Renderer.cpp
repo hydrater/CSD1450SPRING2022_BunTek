@@ -22,6 +22,7 @@ _renderer::_renderer()
 
 _renderer::~_renderer()
 {
+	AEGfxMeshFree(mesh);
 }
 
 _renderer& _renderer::Instance(void)
@@ -151,6 +152,8 @@ void _renderer::Update(void)
 void _renderer::AddToList(RenderComponent* entry)
 {
     rendererList.push_back(entry);
+
+	//Sort algorithm
 }
 
 void _renderer::FreeAll(void)

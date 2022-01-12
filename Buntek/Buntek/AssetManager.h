@@ -15,7 +15,6 @@ private:
     ~_assetManager();
     vector<SpriteRenderer*> rendererList;
     vector<TextRenderer*> rendererTextList;
-    AEGfxVertexList* mesh;
     map<string, AEGfxTexture*> textureDatabase;
     map<string, char> FontDatabase;
     void UnloadTexture(string name);
