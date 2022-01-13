@@ -23,6 +23,7 @@ _assetManager::_assetManager()
 
     LoadTexture("Stars2.png");
     LoadTexture("Stars3.png");
+    LoadTexture("star123.png");
     //font
 
     LoadFont("EquinoxR.otf");

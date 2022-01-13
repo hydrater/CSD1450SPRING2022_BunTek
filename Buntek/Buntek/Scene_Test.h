@@ -11,6 +11,9 @@ private:
 	GameObject* splashimage2 = 0;
 	SpriteRenderer* testRenderer2 = 0;
 
+	GameObject* splashimage3 = 0;
+	SpriteRenderer* testRenderer3 = 0;
+
 public:
     void Start(void) override;
     void Update(void) override;

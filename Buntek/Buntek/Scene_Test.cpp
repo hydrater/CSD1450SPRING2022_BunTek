@@ -30,14 +30,13 @@ void Scene_Test::Start(void)
 	splashimage2->transform->SetPosition(Vector2(0, 0));
 	splashimage2->AddComponent<Parallaxer>()->distance = 30;
 
-	/*splashimage1 = new GameObject();
-	splashimage1->AddComponent<SpriteRenderer>()->SetTransparency(1);
-	testRenderer1 = splashimage1->GetComponent<SpriteRenderer>();
-	testRenderer1->SetTexture("Stars1.png");
-	testRenderer2->SetBlendMode(AE_GFX_BM_ADD);
-	testRenderer1->Size(1920, 1080);
-	splashimage1->transform->SetPosition(Vector2(0, 0));
-	splashimage1->AddComponent<Parallaxer>()->distance = 12;*/
+	splashimage3 = new GameObject();
+	splashimage3->AddComponent<SpriteRenderer>()->SetTransparency(1);
+	testRenderer3 = splashimage3->GetComponent<SpriteRenderer>();
+	testRenderer3->SetTexture("star123.png");
+	testRenderer3->SetBlendMode(AE_GFX_BM_ADD);
+	testRenderer3->Size(3960, 1080);
+	splashimage3->transform->SetPosition(Vector2(-990, 0));
 
 	
 
@@ -46,7 +45,7 @@ void Scene_Test::Start(void)
 
 void Scene_Test::Update(void)
 {
-	Vector2 addPos = Vector2((float)(10 * DeltaTime), (float)0);
-	//splashimage2->GetComponent<Parallaxer>()->anchorPoint += addPos;
+	Vector2 addPos = Vector2((float)(0.5f * DeltaTime), (float)0);
+	splashimage3->transform->worldposition += addPos;
 	
 }

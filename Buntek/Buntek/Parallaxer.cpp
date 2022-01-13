@@ -18,14 +18,26 @@ void Parallaxer::Start(void)
 void Parallaxer::Update(void)
 {
 	Vector2 vecDiff = GameManager.GetCursorPosition();
+	
+	if (distance > 0) {
+		vecDiff.Divide(distance);
+		if (inverseMouseX) {
+			vecDiff.x = -vecDiff.x;
+		}
+		if (inverseMouseY) {
+			vecDiff.y = -vecDiff.y;
+		}
 
-	vecDiff.Divide(distance);
-	if (inverseMouseX) {
-		vecDiff.x = -vecDiff.x;
+		this->Owner()->transform->worldposition = anchorPoint + vecDiff;
 	}
-	if (inverseMouseY) {
-		vecDiff.y = -vecDiff.y;
+	else if (distance == 0){
+		if (inverseMouseX) {
+			vecDiff.x = -vecDiff.x;
+		}
+		if (inverseMouseY) {
+			vecDiff.y = -vecDiff.y;
+		}
+		this->Owner()->transform->worldposition = anchorPoint + vecDiff;
 	}
-
-	this->Owner()->transform->worldposition = anchorPoint + vecDiff;
+	
 }
