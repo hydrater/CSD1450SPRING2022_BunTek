@@ -7,6 +7,16 @@
 
 #define MapData _mapData::Instance()
 
+enum class NodeType {
+    Nothing,
+    Enemy,
+    Elite,
+    Boss,
+    Encounter,
+    Rest,
+    Shop
+};
+
 class _mapData
 {
 public:
@@ -16,8 +26,7 @@ public:
         Vector2 pos;
         bool reached = false;
         vector<Node> LinkedTo;
-
-        
+        NodeType nodeType = NodeType::Nothing;
     };
     vector<AEGfxVertexList*> connectedLines;
 

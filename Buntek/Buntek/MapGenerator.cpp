@@ -2,7 +2,6 @@
 
 _mapData* _mapData::instance = 0;
 
-
 _mapData& _mapData::Instance(void)
 {
     if (instance != 0)
@@ -12,8 +11,6 @@ _mapData& _mapData::Instance(void)
     instance = new _mapData();
     return *instance;
 }
-
-
 
 void _mapData::GenerateMapData(Vector2 originPos)
 {
