@@ -361,7 +361,7 @@ void _mapData::GenerateMapObject(void)
             tempRenderer->SetTexture("UI/Elite.png");
             break;
         default:
-            tempRenderer->SetTexture("Steven.jpg");
+            tempRenderer->SetTexture("UI/Rest.png");
             break;
         }
 

@@ -56,6 +56,12 @@ void _audioManager::PlayMusic(string musicTrack)
     fmodSystem->playSound(audioClip, nullptr, false, &musicChannel);
 }
 
+void _audioManager::StopMusic(void)
+{
+    // Play the sound.
+    musicChannel->stop();
+}
+
 void _audioManager::SetAudioVolume(float volume)
 {
     channel->setVolume(volume);

@@ -40,9 +40,9 @@ void Scene_MainMenu::Start(void)
 	//dialogue->AddComponent<DialogueBox>();
 	//dialogue->GetComponent<DialogueBox>()->CreateDialogue("asd");
 	//
-	//encounter = new GameObject();
-	//encounter->AddComponent<EncounterBox>();
-	//encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+	encounter = new GameObject();
+	encounter->AddComponent<EncounterBox>();
+	encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
 	 
 	/*enemynode = new GameObject();
 	enemynode->AddComponent<EnemyNodeBox>();
