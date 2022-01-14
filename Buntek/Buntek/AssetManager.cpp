@@ -18,6 +18,7 @@ _assetManager::_assetManager()
     LoadTexture("Buttons.png");
 
     LoadTexture("UI/Texture.png");
+    LoadTexture("UI/Button.png");
 
     LoadTexture("UI/Enemy.png");
     LoadTexture("UI/Elite.png");
