@@ -21,9 +21,13 @@ public:
 	ButtonTypes ButtonType = None;
 	//char fontId = -1;
 	string ButtonText = "";
-	void(*ButtonEffect)(void) = NULL;
-	void(*HoverEffect)(void) = NULL;
-	void(*ClickEffect)(void) = NULL;
+	void(*ButtonEffect)(Button*) = NULL;
+	void(*HoverEffect)(Button*) = NULL;
+	void(*ClickEffect)(Button*) = NULL;
+
+	GameObject* affectedObject = NULL;
+	GameObject* affectedHoverObject = NULL;
+	GameObject* affectedClickObject = NULL;
 
 	SpriteRenderer* sr = 0;
 	TextRenderer* tr = 0;

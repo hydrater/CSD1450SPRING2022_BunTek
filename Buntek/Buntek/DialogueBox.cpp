@@ -60,6 +60,41 @@ void DialogueBox::Update(void)
     }
 }
 
+void DialogueBox::CreateDialogue(string flag) {
+
+    GameObject* dialogue = this->Owner();
+    //Create main dialogue box
+    SpriteRenderer* tempRenderer = 0;
+    TextRenderer* tempTextRenderer = 0;
+    dialogue->transform->SetPosition(Vector2(0, -280));
+    tempRenderer = dialogue->AddComponent<SpriteRenderer>();
+    tempRenderer->Size(1800, 360);
+    tempRenderer->SetTexture("UI/Texture.png");
+    tempRenderer->SetLayer(1);
+    tempTextRenderer = dialogue->AddComponent<TextRenderer>();
+    tempTextRenderer->SetFont("EquinoxR.otf");
+    tempTextRenderer->SetTextColor(1, 1, 1);
+    tempTextRenderer->SetLayer(1);
+
+    // Create actor box
+    SpriteRenderer* tempRenderer2 = 0;
+    TextRenderer* tempTxtRenderer2 = 0;
+    GameObject* tempGameObject = new GameObject();
+    tempRenderer2 = tempGameObject->AddComponent<SpriteRenderer>();
+    tempRenderer2->Size(400, 80);
+    tempRenderer2->SetTexture("EncounterBox.png");
+    tempRenderer2->SetLayer(1);
+    tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();
+    tempTxtRenderer2->SetFont("EquinoxR.otf");
+    tempTxtRenderer2->SetTextColor(1, 1, 1);
+    tempTxtRenderer2->SetLayer(1);
+
+    // Create dialoguebox and assign
+    DialogueBox* tempdialogue = tempGameObject->AddComponent<DialogueBox>();
+    tempdialogue->AssignObjReferences(tempRenderer2, tempRenderer, tempTxtRenderer2, tempTextRenderer);
+    tempdialogue->StartDialogueEvent(flag);
+}
+
 void DialogueBox::AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRenderer* _dialogueSprite, TextRenderer* _actorTxt, TextRenderer* _dialogueTxt)
 {
     actorTxt = _actorTxt;

@@ -23,14 +23,14 @@ void Button::Update(void)
 	}
 	if (CheckTriggered(GameManager.GetCursorPosition())) {
 		if (HoverEffect != NULL) {
-			HoverEffect();
+			HoverEffect(this);
 		}
 		if (AEInputCheckTriggered(AEVK_LBUTTON) && ClickEffect != NULL) {
-			ClickEffect();
+			ClickEffect(this);
 		}
 		else if (AEInputCheckReleased(AEVK_LBUTTON))
 		{
-			ButtonEffect();
+			ButtonEffect(this);
 		}
 	}
 }

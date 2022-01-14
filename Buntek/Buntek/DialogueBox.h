@@ -12,7 +12,7 @@ public:
 	~DialogueBox(void);
 	void Start(void) override;
 	void Update(void) override;
-
+	void CreateDialogue(string flag);
 	void AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRenderer* _dialogueSprite, TextRenderer* _actorTxt, TextRenderer* _dialogueTxt);
 	void StartDialogueEvent(string flag);
 	void CloseDialogueEvent(void);

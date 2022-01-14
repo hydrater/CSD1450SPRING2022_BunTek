@@ -18,6 +18,7 @@ public:
 	EncounterBox(void);
 	~EncounterBox(void);
 
+	void CreateEncounter(Vector2 position, int sortingLayer, string flag);
 	void AssignObjReferences(SpriteRenderer* _header, SpriteRenderer* _display, SpriteRenderer* _background, TextRenderer* _headerText, TextRenderer* _descriptionText, vector<Button*> _buttonList);
 	void StartEncounterEvent(string flag);
 	void CloseEncounterEvent(void);
