@@ -154,17 +154,22 @@ void _renderer::Update(void)
 				continue;
 
 			AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+
 			TextRenderer* textRenderer = (TextRenderer*)rendererList[i];
 			textRenderer->CalculateTextSize();
 			Transform* transform = textRenderer->GetTransform();
 			int linecount = 0;
 			int start = 0;
+			if (textRenderer->GetWarpAround()) {
+				WrapAround(textRenderer);
+				textRenderer->SetWarpAround(false);
+			}
 			string tempTextString = textRenderer->GetText();
 			float textheight = textRenderer->GetTextHeight();
 			float textwidth = textRenderer->GetTextWidth();
 
-			if(textRenderer->GetWarpAround())
-				WrapAround(textRenderer);
+
+				
 
 			for (int x = 0; char c = tempTextString[x]; x++) {
 				if (c == '\n') {
