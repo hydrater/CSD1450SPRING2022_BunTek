@@ -348,20 +348,35 @@ void _mapData::GenerateMapObject(void)
         GameObject* temp = new GameObject;
         SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
         tempRenderer->Size(50, 50);
-        tempRenderer->SetTexture("Steven.jpg");
+
+        switch (RandIntMinMax(0,3))
+        {
+        case 0:
+            tempRenderer->SetTexture("UI/Encounter.png");
+            break;
+        case 1:
+            tempRenderer->SetTexture("UI/Enemy.png");
+            break;
+        case 2:
+            tempRenderer->SetTexture("UI/Elite.png");
+            break;
+        default:
+            tempRenderer->SetTexture("Steven.jpg");
+            break;
+        }
 
         temp->transform->worldposition = Vector2(nodeList[i].pos);
 
-
-        for (int k = 0; k < nodeList[i].LinkedTo.size(); k++)
-        {
-            AEGfxVertexList* newLine;
-            AEGfxMeshStart();
-            AEGfxVertexAdd(nodeList[i].pos.x, nodeList[i].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-            AEGfxVertexAdd(nodeList[i].LinkedTo[k].pos.x, nodeList[i].LinkedTo[k].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-            newLine = AEGfxMeshEnd();
-            MapData.connectedLines.push_back(newLine);
-        }
+        
+        //for (int k = 0; k < nodeList[i].LinkedTo.size(); k++)
+        //{
+        //    AEGfxVertexList* newLine;
+        //    AEGfxMeshStart();
+        //    AEGfxVertexAdd(nodeList[i].pos.x, nodeList[i].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+        //    AEGfxVertexAdd(nodeList[i].LinkedTo[k].pos.x, nodeList[i].LinkedTo[k].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+        //    newLine = AEGfxMeshEnd();
+        //    MapData.connectedLines.push_back(newLine);
+        //}
 
     }
 }

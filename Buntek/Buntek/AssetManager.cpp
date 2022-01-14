@@ -16,6 +16,10 @@ _assetManager::_assetManager()
     LoadTexture("MainMenu.png");
     LoadTexture("BetterNebula.png");
     LoadTexture("Buttons.png");
+    LoadTexture("UI/Texture.png");
+    LoadTexture("UI/Enemy.png");
+    LoadTexture("UI/Elite.png");
+    LoadTexture("UI/Encounter.png");
 
     LoadTexture("BgNebula1.png");
     LoadTexture("BgNebula2.png");

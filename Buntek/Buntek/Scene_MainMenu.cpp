@@ -41,7 +41,7 @@ void Scene_MainMenu::Start(void)
 	dialogue->transform->SetPosition(Vector2(0, -280));
 	tempRenderer = dialogue->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(1800, 360);
-	tempRenderer->SetTexture("EncounterBox.png");
+	tempRenderer->SetTexture("UI/Texture.png");
 	tempRenderer->SetLayer(1);
 	tempTextRenderer = dialogue->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("EquinoxR.otf");
