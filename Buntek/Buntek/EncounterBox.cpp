@@ -23,7 +23,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     SpriteRenderer* tempBckgdRenderer = 0;
     tempBckgdRenderer = tempBackground->AddComponent<SpriteRenderer>();
     tempBckgdRenderer->Size(1500, 600);
-    tempBckgdRenderer->SetTexture("EncounterBox.png");
+    tempBckgdRenderer->SetTexture("UI/Texture.png");
     tempBckgdRenderer->SetLayer(sortingLayer - 2);
     encounter->AddChild(tempBackground);
 
@@ -85,8 +85,9 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
         GameObject* tempButtonObj = new GameObject();
         SpriteRenderer* tempButtonRenderer = 0;
         tempButtonRenderer = tempButtonObj->AddComponent<SpriteRenderer>();
-        tempButtonRenderer->Size(1000, 50);
-        tempButtonRenderer->SetTexture("Buttons.png");
+        tempButtonRenderer->Size(504, 56);
+        tempButtonRenderer->SetTexture("UI/Button.png");
+        tempButtonRenderer->SetBlendMode(2);
         tempButtonRenderer->SetLayer(sortingLayer - 1);
 
         TextRenderer* tempButtonTxtRenderer = 0;
@@ -99,7 +100,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
         tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
         tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 
-        tempButtonObj->transform->SetPosition(Vector2(position.x + tempBckgdRenderer->GetHalfWidth() - tempButtonRenderer->GetHalfWidth() - 20,
+        tempButtonObj->transform->SetPosition(Vector2(position.x + tempBckgdRenderer->GetHalfWidth() - tempButtonRenderer->GetHalfWidth() - 300,
             position.y - tempBckgdRenderer->GetHalfHeight() + (i + 1) * tempBckgdRenderer->GetHalfHeight() / 4 - 10));
         Button* tempButton = tempButtonObj->AddComponent<Button>();
         tempButton->sr = tempButtonRenderer;
