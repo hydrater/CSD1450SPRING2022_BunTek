@@ -163,8 +163,12 @@ void _renderer::Update(void)
 			float textheight = textRenderer->GetTextHeight();
 			float textwidth = textRenderer->GetTextWidth();
 
-			if(textRenderer->GetWarpAround())
+			if (textRenderer->GetWarpAround()) {
 				WrapAround(textRenderer);
+				textRenderer->SetWarpAround(false);
+				tempTextString = textRenderer->GetText();
+			}
+				
 
 			for (int x = 0; char c = tempTextString[x]; x++) {
 				if (c == '\n') {
