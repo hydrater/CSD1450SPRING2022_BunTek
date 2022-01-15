@@ -9,8 +9,6 @@
 #include "EnemyNodeBox.h"
 
 void MoveToBattle(Button* button);
-void EnemyNodeHovers(Button* button);
-void EnemyNodeNotHovers(Button* button);
 
 void Scene_MainMenu::Start(void)
 {
@@ -38,27 +36,22 @@ void Scene_MainMenu::Start(void)
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToBattle;
-	button->affectedHoverObject = enemynode;
-	button->HoverEffect = &EnemyNodeHovers;
-	button->NotHoverEffect = &EnemyNodeNotHovers;
+	Battle->AddComponent<EnemyNodeBox>();
+	Battle->GetComponent<EnemyNodeBox>()->CreateEnemyNode(Battle, 3, 10);
+
 	//dialogue = new GameObject();
 	//dialogue->AddComponent<DialogueBox>();
 	//dialogue->GetComponent<DialogueBox>()->CreateDialogue("asd");
 	
-	encounter = new GameObject();
-	encounter->AddComponent<EncounterBox>();
-	encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+	//encounter = new GameObject();
+	//encounter->AddComponent<EncounterBox>();
+	//encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
 
-	rewardsel = new GameObject();
-	rewardsel->AddComponent<UI_RewardSelection>();
-	vector<string> rewards{ "E" };
-	rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);
+	//rewardsel = new GameObject();
+	//rewardsel->AddComponent<UI_RewardSelection>();
+	//vector<string> rewards{ "E" };
+	//rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);
 
-	enemynode = new GameObject();
-	enemynode->AddComponent<EnemyNodeBox>();
-	enemynode->GetComponent<EnemyNodeBox>()->CreateEnemyNode(Battle, 3, 10);
-	enemynode->Deactivate();
-	button->affectedHoverObject = enemynode;
 }
 
 void Scene_MainMenu::Update(void)
@@ -71,13 +64,3 @@ void MoveToBattle(Button* button)
 	SceneManager.LoadScene(new Scene_Battle, TransitionTypes::FadeToBlack);
 }
 
-void EnemyNodeHovers(Button* button) 
-{
-	button->affectedHoverObject->Activate();
-	float xpos = button->sr->GetHalfWidth() + button->affectedHoverObject->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	button->affectedHoverObject->transform->SetPosition(Vector2(xpos, button->Owner()->transform->worldposition.y));
-}
-void EnemyNodeNotHovers(Button* button)
-{
-	button->affectedHoverObject->Deactivate();
-}
