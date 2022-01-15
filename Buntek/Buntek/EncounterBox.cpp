@@ -27,6 +27,14 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     tempBckgdRenderer->SetLayer(sortingLayer - 2);
     encounter->AddChild(tempBackground);
 
+    // Description
+    GameObject* tempDescription = new GameObject();
+    SpriteRenderer* tempDescRenderer = 0;
+    tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
+    tempDescRenderer->Size(1000, tempBckgdRenderer->GetHalfHeight() / 1.5f);
+    tempDescRenderer->SetTexture("EncounterBox.png");
+    tempDescRenderer->SetLayer(sortingLayer - 2);
+
     // Header
     GameObject* tempHeader = new GameObject();
     SpriteRenderer* tempHeaderRenderer = 0;
@@ -48,14 +56,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     tempHeader->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempHeaderRenderer->GetHalfWidth(), position.y + tempBckgdRenderer->GetHalfHeight() - 20));
     encounter->AddChild(tempHeader);
 
-    // Description
-    GameObject* tempDescription = new GameObject();
-    SpriteRenderer* tempDescRenderer = 0;
-    tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
-    tempDescRenderer->Size(1000, 300);
-    tempDescRenderer->SetTexture("EncounterBox.png");
-    tempDescRenderer->SetTransparency(0.8f);
-    tempDescRenderer->SetLayer(sortingLayer - 2);
+ 
 
     // Description
     TextRenderer* tempDescTxtRenderer = 0;

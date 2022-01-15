@@ -102,6 +102,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CursorCamera.cpp" />
+    <ClCompile Include="Devtools.cpp" />
     <ClCompile Include="DialogueBox.cpp" />
     <ClCompile Include="EncounterBox.cpp" />
     <ClCompile Include="EnemyNodeBox.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CursorCamera.h" />
+    <ClInclude Include="Devtools.h" />
     <ClInclude Include="DialogueBox.h" />
     <ClInclude Include="EncounterBox.h" />
     <ClInclude Include="EnemyNodeBox.h" />

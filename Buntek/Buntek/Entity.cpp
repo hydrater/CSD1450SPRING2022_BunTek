@@ -9,7 +9,6 @@ remove(false)
 	transform = AddComponent<Transform>();
 }
 
-
 GameObject::~GameObject()
 {
 	transform->children.clear();

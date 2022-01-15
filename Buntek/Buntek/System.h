@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 #include "GameScript.h"
+#include "Devtools.h"
 using namespace std;
 
 #define EventManager _eventManager::Instance()

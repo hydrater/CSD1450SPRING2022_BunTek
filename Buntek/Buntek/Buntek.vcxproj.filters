@@ -132,6 +132,12 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyNodeBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Devtools.cpp">
+      <Filter>Source Files\Non ECS Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -228,6 +234,12 @@
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
+      <Filter>Source Files\Non ECS Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyNodeBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Devtools.h">
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClInclude>
   </ItemGroup>

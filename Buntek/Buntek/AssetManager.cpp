@@ -32,6 +32,10 @@ _assetManager::_assetManager()
     LoadTexture("Stars2.png");
     LoadTexture("Stars3.png");
     LoadTexture("star123.png");
+    LoadTexture("Static Stars 1.png");
+    LoadTexture("Static Stars 2.png");
+    LoadTexture("More Stars 1.png");
+    LoadTexture("More Stars 2.png");
     //font
 
     LoadFont("EquinoxR.otf");
