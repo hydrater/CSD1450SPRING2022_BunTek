@@ -8,10 +8,10 @@ void Scene_Test::Start(void)
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 
 	splashimage1 = devTools.createSpriteGameObject("Static Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
-	splashimage1->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, 3.0f);
+	splashimage1->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.6f, 3.0f);
 
 	splashimage2 = devTools.createSpriteGameObject("Static Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
-	splashimage2->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, 2.0f);
+	splashimage2->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.6f, 2.0f);
 
 	splashimage3 = devTools.createSpriteGameObject("More Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
 	splashimage3->AddComponent<AlphaChanger>()->SetOscillation(6.0f, 1.0f, 0.6f, 1.0f);
