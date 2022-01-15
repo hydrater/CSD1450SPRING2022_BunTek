@@ -23,6 +23,7 @@ public:
 	string ButtonText = "";
 	void(*ButtonEffect)(Button*) = NULL;
 	void(*HoverEffect)(Button*) = NULL;
+	void(*NotHoverEffect)(Button*) = NULL;
 	void(*ClickEffect)(Button*) = NULL;
 
 	GameObject* affectedObject = NULL;

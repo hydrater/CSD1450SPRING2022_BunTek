@@ -10,6 +10,7 @@ public:
 	~EnemyNodeBox(void);
 	void Start(void) override;
 	void Update(void) override;
+	void LoadFromFile(string flag);
 	//void AssignObjReferences(void);
 	//void StartEnemyNode(void);
 	//void CloseEnemyNode(void);
@@ -20,6 +21,8 @@ public:
 
 	//vector<string> artifactList;
 	//string name, description, ballartifact;
+	vector<string> descriptList;
+	int descriptNo = 0;
 
 private:
 
