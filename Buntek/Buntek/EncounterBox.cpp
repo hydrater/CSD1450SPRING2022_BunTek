@@ -31,7 +31,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     GameObject* tempDescription = new GameObject();
     SpriteRenderer* tempDescRenderer = 0;
     tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
-    tempDescRenderer->Size(1000, tempBckgdRenderer->GetHalfHeight() / 1.5);
+    tempDescRenderer->Size(1000, tempBckgdRenderer->GetHalfHeight() / 1.5f);
     tempDescRenderer->SetTexture("EncounterBox.png");
     tempDescRenderer->SetLayer(sortingLayer - 2);
 

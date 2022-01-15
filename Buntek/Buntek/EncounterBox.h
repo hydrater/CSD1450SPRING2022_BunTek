@@ -27,8 +27,8 @@ public:
 private:
 	void LoadFromFile(string flag);
 
-	SpriteRenderer* header, * display, * background;
-	TextRenderer* headerText, *descriptionText;
+	SpriteRenderer* header = 0, * display = 0, * background = 0;
+	TextRenderer* headerText = 0, *descriptionText = 0;
 	vector<Button*> buttonList;
 	int buttonNo = 0;
 
