@@ -22,46 +22,46 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     GameObject* tempBackground = new GameObject();
     SpriteRenderer* tempBckgdRenderer = 0;
     tempBckgdRenderer = tempBackground->AddComponent<SpriteRenderer>();
-    tempBckgdRenderer->Size(1500, 600);
+    tempBckgdRenderer->Size(1652, 734);
     tempBckgdRenderer->SetTexture("UI/Texture.png");
     tempBckgdRenderer->SetLayer(sortingLayer - 2);
     encounter->AddChild(tempBackground);
-
-    // Description
-    GameObject* tempDescription = new GameObject();
-    SpriteRenderer* tempDescRenderer = 0;
-    tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
-    tempDescRenderer->Size(1000, tempBckgdRenderer->GetHalfHeight() / 1.5f);
-    tempDescRenderer->SetTexture("EncounterBox.png");
-    tempDescRenderer->SetLayer(sortingLayer - 2);
 
     // Header
     GameObject* tempHeader = new GameObject();
     SpriteRenderer* tempHeaderRenderer = 0;
     tempHeaderRenderer = tempHeader->AddComponent<SpriteRenderer>();
     tempHeaderRenderer->Size(800, 100);
-    tempHeaderRenderer->SetTexture("paddle.png");
+    tempHeaderRenderer->SetTexture("WhiteTexture.png");
+    tempHeaderRenderer->SetColor(0, 0, 0.1f);
+    tempHeaderRenderer->SetTransparency(0.8f);
     tempHeaderRenderer->SetLayer(sortingLayer - 1);
 
     // HeaderText
     TextRenderer* tempHeaderTxtRenderer = 0;
     tempHeaderTxtRenderer = tempHeader->AddComponent<TextRenderer>();
     tempHeaderTxtRenderer->SetFont("EquinoxR.otf");
-    tempHeaderTxtRenderer->SetTextColor(1, 0, 1);
-    tempHeaderTxtRenderer->SetText("MING");
+    tempHeaderTxtRenderer->SetTextColor(0, 1, 1);
     tempHeaderTxtRenderer->SetLayer(sortingLayer);
-    tempHeaderTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Left);
     tempHeaderTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
     tempHeaderTxtRenderer->SetXBuffer(50);
-    tempHeader->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempHeaderRenderer->GetHalfWidth(), position.y + tempBckgdRenderer->GetHalfHeight()));
+    tempHeader->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempHeaderRenderer->GetHalfWidth(), position.y + tempBckgdRenderer->GetHalfHeight() - 20));
     encounter->AddChild(tempHeader);
+
+    // Description
+    GameObject* tempDescription = new GameObject();
+    SpriteRenderer* tempDescRenderer = 0;
+    tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
+    tempDescRenderer->Size(1000, 300);
+    tempDescRenderer->SetTexture("EncounterBox.png");
+    tempDescRenderer->SetTransparency(0.8f);
+    tempDescRenderer->SetLayer(sortingLayer - 2);
 
     // Description
     TextRenderer* tempDescTxtRenderer = 0;
     tempDescTxtRenderer = tempDescription->AddComponent<TextRenderer>();
     tempDescTxtRenderer->SetFont("EquinoxR.otf");
     tempDescTxtRenderer->SetTextColor(0, 1, 1);
-    tempDescTxtRenderer->SetText("A CHICKEN FISH");
     tempDescTxtRenderer->SetLayer(sortingLayer);
     tempDescTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Left);
     tempDescTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Top);
@@ -76,7 +76,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     tempDisplayRenderer->Size(450, 450);
     tempDisplayRenderer->SetTexture("Steven.jpg");
     tempDisplayRenderer->SetLayer(sortingLayer - 2);
-    tempDisplay->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempDisplayRenderer->GetHalfWidth() + 20, position.y - 20));
+    tempDisplay->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempDisplayRenderer->GetHalfWidth() + 100, position.y + 20));
     encounter->AddChild(tempDisplay);
 
     // Buttons (Max 3)
@@ -101,7 +101,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
         tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 
         tempButtonObj->transform->SetPosition(Vector2(position.x + tempBckgdRenderer->GetHalfWidth() - tempButtonRenderer->GetHalfWidth() - 300,
-            position.y - tempBckgdRenderer->GetHalfHeight() + (i + 1) * tempBckgdRenderer->GetHalfHeight() / 4 - 10));
+            position.y - tempBckgdRenderer->GetHalfHeight() + (i + 1) * tempBckgdRenderer->GetHalfHeight() / 5 + 40));
         Button* tempButton = tempButtonObj->AddComponent<Button>();
         tempButton->sr = tempButtonRenderer;
         tempButton->tr = tempButtonTxtRenderer;
