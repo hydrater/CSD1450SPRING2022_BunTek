@@ -1,6 +1,10 @@
 #include "EnemyNodeBox.h"
+#include "Button.h"
 #include <fstream>
 #include <sstream>
+
+void EnemyNodeHovers(Button* button);
+void EnemyNodeNotHovers(Button* button);
 
 EnemyNodeBox::EnemyNodeBox(void)
 {
@@ -23,8 +27,10 @@ void EnemyNodeBox::Update(void)
 
 void EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int ArtifactTypes) {
 
-	GameObject* enemynode = this->Owner();
+	enemynode = new GameObject;
 	enemynode->transform->SetPosition(button->transform->worldposition);
+	button->GetComponent<Button>()->HoverEffect = &EnemyNodeHovers;
+	button->GetComponent<Button>()->NotHoverEffect = &EnemyNodeNotHovers;
 
 	SpriteRenderer* tempBckgdRenderer = 0;
 	tempBckgdRenderer = enemynode->AddComponent<SpriteRenderer>();
@@ -128,6 +134,9 @@ void EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int Art
 	tempArtifactBckgdRenderer->SetLayer(sortingLayer - 2);
 	tempArtifactBckgd->transform->SetPosition(Vector2(enemynodepos.x, enemynodepos.y - tempBckgdRenderer->GetHalfHeight() - tempArtifactBckgdRenderer->GetHalfHeight()));
 	enemynode->AddChild(tempArtifactBckgd);
+
+	enemynode->Deactivate();
+
 }
 void EnemyNodeBox::LoadFromFile(string flag)
 {
@@ -165,4 +174,22 @@ void EnemyNodeBox::LoadFromFile(string flag)
 		if (inputList[i] == flag)
 			canAdd = true;
 	}
+}
+
+GameObject* EnemyNodeBox::GetEnemyNode(void){
+	return enemynode;
+}
+
+void EnemyNodeHovers(Button* button)
+{
+	GameObject* enemynode = button->Owner()->GetComponent<EnemyNodeBox>()->GetEnemyNode();
+	enemynode->Activate();
+	float xpos = button->sr->GetHalfWidth() + enemynode->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	enemynode->transform->SetPosition(Vector2(xpos, button->Owner()->transform->worldposition.y));
+}
+
+void EnemyNodeNotHovers(Button* button)
+{
+	GameObject* enemynode = button->Owner()->GetComponent<EnemyNodeBox>()->GetEnemyNode();
+	enemynode->Deactivate();
 }
