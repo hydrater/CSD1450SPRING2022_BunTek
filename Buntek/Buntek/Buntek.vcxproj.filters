@@ -153,6 +153,9 @@
     <ClCompile Include="Devtools.cpp">
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClCompile>
+    <ClCompile Include="AlphaChanger.cpp">
+      <Filter>Source Files\ECS\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="Devtools.h">
       <Filter>Source Files\Non ECS Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="AlphaChanger.h">
+      <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -38,7 +38,8 @@ _assetManager::_assetManager()
     LoadTexture("Static Stars 2.png");
     LoadTexture("More Stars 1.png");
     LoadTexture("More Stars 2.png");
-    
+    LoadTexture("NebulaBig.png");
+    LoadTexture("NebulaCloudBig.png");
     //font
     LoadFont("Astral.ttf");
     LoadFont("Gabriola.ttf");
