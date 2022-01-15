@@ -72,7 +72,7 @@ void DialogueBox::CreateDialogue(string flag) {
     tempRenderer->SetTexture("UI/Texture.png");
     tempRenderer->SetLayer(1);
     tempTextRenderer = dialogue->AddComponent<TextRenderer>();
-    tempTextRenderer->SetFont("EquinoxR.otf");
+    tempTextRenderer->SetFont("Astral.ttf");
     tempTextRenderer->SetTextColor(1, 1, 1);
     tempTextRenderer->SetLayer(1);
 
@@ -85,7 +85,7 @@ void DialogueBox::CreateDialogue(string flag) {
     tempRenderer2->SetTexture("EncounterBox.png");
     tempRenderer2->SetLayer(1);
     tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();
-    tempTxtRenderer2->SetFont("EquinoxR.otf");
+    tempTxtRenderer2->SetFont("Astral.ttf");
     tempTxtRenderer2->SetTextColor(1, 1, 1);
     tempTxtRenderer2->SetLayer(1);
 

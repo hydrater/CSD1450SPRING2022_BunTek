@@ -17,9 +17,11 @@ _assetManager::_assetManager()
     LoadTexture("BetterNebula.png");
     LoadTexture("Buttons.png");
 
+    // UI
     LoadTexture("UI/Texture.png");
     LoadTexture("UI/Button.png");
 
+    // UI Navigation
     LoadTexture("UI/Enemy.png");
     LoadTexture("UI/Elite.png");
     LoadTexture("UI/Encounter.png");
@@ -36,11 +38,10 @@ _assetManager::_assetManager()
     LoadTexture("Static Stars 2.png");
     LoadTexture("More Stars 1.png");
     LoadTexture("More Stars 2.png");
+    
     //font
-
-    LoadFont("EquinoxR.otf");
-    LoadFont("EquinoxB.otf");
-    LoadFont("Metrolic.ttf");
+    LoadFont("Astral.ttf");
+    LoadFont("Gabriola.ttf");
 }
 
 _assetManager::~_assetManager()

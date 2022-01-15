@@ -48,7 +48,7 @@ void EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int Art
 	//nametext
 	TextRenderer* tempEnemynameTxtRenderer = 0;
 	tempEnemynameTxtRenderer = tempEnemyname->AddComponent<TextRenderer>();
-	tempEnemynameTxtRenderer->SetFont("EquinoxR.otf");
+	tempEnemynameTxtRenderer->SetFont("Astral.ttf");
 	tempEnemynameTxtRenderer->SetTextColor(0, 0, 0);
 	tempEnemynameTxtRenderer->SetText("Test name");
 	tempEnemynameTxtRenderer->SetScale(0.5f);
@@ -72,7 +72,7 @@ void EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int Art
 	//EnemyDescriptionText
 	TextRenderer* tempEnemyDescriptionTxtRenderer = 0;
 	tempEnemyDescriptionTxtRenderer = tempEnemyDescription->AddComponent<TextRenderer>();
-	tempEnemyDescriptionTxtRenderer->SetFont("EquinoxR.otf");
+	tempEnemyDescriptionTxtRenderer->SetFont("Astral.ttf");
 	tempEnemyDescriptionTxtRenderer->SetTextColor(0, 0, 0);
 	tempEnemyDescriptionTxtRenderer->SetText("Test des");
 	tempEnemyDescriptionTxtRenderer->SetScale(0.5f);
@@ -108,7 +108,7 @@ void EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int Art
 		//artifactText
 		TextRenderer* tempArtifactTxtRenderer = 0;
 		tempArtifactTxtRenderer = tempArtifact->AddComponent<TextRenderer>();
-		tempArtifactTxtRenderer->SetFont("EquinoxR.otf");
+		tempArtifactTxtRenderer->SetFont("Astral.ttf");
 		tempArtifactTxtRenderer->SetTextColor(0, 0, 0);
 		tempArtifactTxtRenderer->SetText("3");
 		tempArtifactTxtRenderer->SetScale(0.5f);

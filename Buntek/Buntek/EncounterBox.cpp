@@ -48,7 +48,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     // HeaderText
     TextRenderer* tempHeaderTxtRenderer = 0;
     tempHeaderTxtRenderer = tempHeader->AddComponent<TextRenderer>();
-    tempHeaderTxtRenderer->SetFont("EquinoxR.otf");
+    tempHeaderTxtRenderer->SetFont("Gabriola.ttf");
     tempHeaderTxtRenderer->SetTextColor(0, 1, 1);
     tempHeaderTxtRenderer->SetLayer(sortingLayer);
     tempHeaderTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
@@ -61,7 +61,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     // Description
     TextRenderer* tempDescTxtRenderer = 0;
     tempDescTxtRenderer = tempDescription->AddComponent<TextRenderer>();
-    tempDescTxtRenderer->SetFont("EquinoxR.otf");
+    tempDescTxtRenderer->SetFont("Gabriola.ttf");
     tempDescTxtRenderer->SetTextColor(0, 1, 1);
     tempDescTxtRenderer->SetLayer(sortingLayer);
     tempDescTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Left);
@@ -93,7 +93,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
 
         TextRenderer* tempButtonTxtRenderer = 0;
         tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
-        tempButtonTxtRenderer->SetFont("EquinoxR.otf");
+        tempButtonTxtRenderer->SetFont("Gabriola.ttf");
         tempButtonTxtRenderer->SetTextColor(1, 1, 0);
         tempButtonTxtRenderer->SetText("SCREM");
         tempButtonTxtRenderer->SetScale(0.75f);
