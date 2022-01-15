@@ -39,7 +39,7 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
     // HeaderText
     TextRenderer* tempHeaderTxtRenderer = 0;
     tempHeaderTxtRenderer = tempHeader->AddComponent<TextRenderer>();
-    tempHeaderTxtRenderer->SetFont("EquinoxR.otf");
+    tempHeaderTxtRenderer->SetFont("Gabriola.ttf");
     tempHeaderTxtRenderer->SetTextColor(1, 0, 1);
     tempHeaderTxtRenderer->SetText("Choose Your Reward");
     tempHeaderTxtRenderer->SetLayer(sortingLayer);
@@ -55,12 +55,12 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
         SpriteRenderer* tempButtonRenderer = 0;
         tempButtonRenderer = tempButtonObj->AddComponent<SpriteRenderer>();
         tempButtonRenderer->Size(350, 500);
-        tempButtonRenderer->SetTexture("Buttons.png");
+        tempButtonRenderer->SetTexture("paddle.png");
         tempButtonRenderer->SetLayer(sortingLayer - 1);
 
         TextRenderer* tempButtonTxtRenderer = 0;
         tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
-        tempButtonTxtRenderer->SetFont("EquinoxR.otf");
+        tempButtonTxtRenderer->SetFont("Gabriola.ttf");
         tempButtonTxtRenderer->SetTextColor(1, 1, 0);
         tempButtonTxtRenderer->SetText("I am a Reward");
         tempButtonTxtRenderer->SetScale(0.75f);
@@ -88,6 +88,7 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
             tempButtonObj->transform->SetPosition(Vector2(position.x + tempButtonRenderer->GetHalfWidth()*3, position.y));
             break;
         case 3:
+            tempButtonRenderer->SetTexture("Buttons.png");
             tempButtonTxtRenderer->SetText("Skip to get sum guud seedz");
             tempButtonRenderer->Size(500, 150);
             tempButtonObj->transform->SetPosition(Vector2(position.x, position.y - tempBckgdRenderer->GetHalfHeight() / 1.5f));
