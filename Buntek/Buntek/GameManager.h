@@ -67,11 +67,3 @@ public:
     int ballSpawnID = 0;
     vector<int> artifactStacks;
 };
-
-class Connection
-{
-public:
-    Vector2 point1;
-    Vector2 point2;
-};
-

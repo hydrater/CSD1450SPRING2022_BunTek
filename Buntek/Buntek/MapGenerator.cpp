@@ -385,3 +385,8 @@ void _mapData::ClearList(void)
 {
     nodeList.clear();
 }
+
+void _mapData::Travel(Node* destination)
+{
+
+}

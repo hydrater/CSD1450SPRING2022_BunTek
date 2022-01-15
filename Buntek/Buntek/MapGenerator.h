@@ -35,6 +35,7 @@ public:
     void GenerateMapData(Vector2 originPos);
     void GenerateMapObject(void);
     void ClearList(void);
+    void Travel(Node* destination);
 
 private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
