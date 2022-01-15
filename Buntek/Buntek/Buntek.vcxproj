@@ -125,6 +125,7 @@
     <ClCompile Include="Scene_Splash.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UI_RewardSelection.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,7 @@
     <ClInclude Include="Scene_Splash.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UI_RewardSelection.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

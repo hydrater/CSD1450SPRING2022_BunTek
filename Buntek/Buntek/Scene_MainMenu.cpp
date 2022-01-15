@@ -5,6 +5,7 @@
 #include "Scene_Battle.h"
 #include "DialogueBox.h"
 #include "EncounterBox.h"
+#include "UI_RewardSelection.h"
 #include "EnemyNodeBox.h"
 
 void MoveToBattle(Button* button);
@@ -40,10 +41,15 @@ void Scene_MainMenu::Start(void)
 	//dialogue->AddComponent<DialogueBox>();
 	//dialogue->GetComponent<DialogueBox>()->CreateDialogue("asd");
 	//
-	encounter = new GameObject();
+	/*encounter = new GameObject();
 	encounter->AddComponent<EncounterBox>();
-	encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+	encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");*/
 	 
+	rewardsel = new GameObject();
+	rewardsel->AddComponent<UI_RewardSelection>();
+	vector<string> rewards{"E"};
+	rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);
+
 	/*enemynode = new GameObject();
 	enemynode->AddComponent<EnemyNodeBox>();
 	enemynode->GetComponent<EnemyNodeBox>()->CreateEnemyNode(Battle, 3, 10);*/
