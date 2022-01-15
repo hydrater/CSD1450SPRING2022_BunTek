@@ -1,0 +1,34 @@
+#include "Devtools.h"
+
+_devTools* _devTools::instance = 0;
+
+_devTools::_devTools()
+{
+
+}
+
+_devTools::~_devTools()
+{
+
+}
+
+_devTools& _devTools::Instance(void)
+{
+    if (instance != 0)
+    {
+        return *instance;
+    }
+    instance = new _devTools();
+    return *instance;
+}
+
+GameObject* _devTools::createSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode,Vector2 pos) {
+    GameObject* temp = new GameObject();
+    temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
+    SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();
+    tempRenderer->SetTexture(spriteName);
+    tempRenderer->Size(xSize, ySize);
+    tempRenderer->SetBlendMode((AEGfxBlendMode)blendMode);
+    temp->transform->SetPosition(pos);
+    return temp;
+}

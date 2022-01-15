@@ -29,6 +29,7 @@ public:
 	void DetachChild(int number);
 	void DetachAllChild(void);
 	void DetachParent(void);
+	Transform* GetParent(void);
 	void Delete(void);
 
 	template <typename T>

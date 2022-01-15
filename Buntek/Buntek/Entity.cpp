@@ -9,7 +9,6 @@ remove(false)
 	transform = AddComponent<Transform>();
 }
 
-
 GameObject::~GameObject()
 {
 	transform->children.clear();
@@ -87,6 +86,10 @@ void GameObject::DetachAllChild(void)
 void GameObject::DetachParent(void)
 {
 	transform->parent = NULL;
+}
+Transform* GameObject::GetParent(void)
+{
+	return transform->parent;
 }
 
 void GameObject::Delete(void)

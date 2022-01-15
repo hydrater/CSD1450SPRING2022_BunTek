@@ -5,10 +5,11 @@
 #include "Scene_Battle.h"
 #include "DialogueBox.h"
 #include "EncounterBox.h"
-#include "UI_RewardSelection.h"
 #include "EnemyNodeBox.h"
 
 void MoveToBattle(Button* button);
+void EnemyNodeHovers(Button* button);
+void EnemyNodeNotHovers(Button* button);
 
 void Scene_MainMenu::Start(void)
 {
@@ -25,7 +26,7 @@ void Scene_MainMenu::Start(void)
 	TextRenderer* tempTextRenderer;
 	tempTextRenderer = Battle->AddComponent<TextRenderer>();
 	//tempRenderer->SetTexture("WhiteTexture.png");
-	tempTextRenderer->SetFont("EquinoxR.otf");
+	tempTextRenderer->SetFont("Astral.ttf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
 	tempTextRenderer->SetText("B a t t l e");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
@@ -36,24 +37,21 @@ void Scene_MainMenu::Start(void)
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToBattle;
-
+	button->affectedHoverObject = enemynode;
+	button->HoverEffect = &EnemyNodeHovers;
+	button->NotHoverEffect = &EnemyNodeNotHovers;
 	//dialogue = new GameObject();
 	//dialogue->AddComponent<DialogueBox>();
 	//dialogue->GetComponent<DialogueBox>()->CreateDialogue("asd");
-	//
-	/*encounter = new GameObject();
+	
+	encounter = new GameObject();
 	encounter->AddComponent<EncounterBox>();
-	encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");*/
-	 
-	rewardsel = new GameObject();
-	rewardsel->AddComponent<UI_RewardSelection>();
-	vector<string> rewards{"E"};
-	rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);
-
-	/*enemynode = new GameObject();
+	encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+	enemynode = new GameObject();
 	enemynode->AddComponent<EnemyNodeBox>();
-	enemynode->GetComponent<EnemyNodeBox>()->CreateEnemyNode(Battle, 3, 10);*/
-		
+	enemynode->GetComponent<EnemyNodeBox>()->CreateEnemyNode(Battle, 3, 10);
+	enemynode->Deactivate();
+	button->affectedHoverObject = enemynode;
 }
 
 void Scene_MainMenu::Update(void)
@@ -68,10 +66,11 @@ void MoveToBattle(Button* button)
 
 void EnemyNodeHovers(Button* button) 
 {
-	//EnemyNodeBox* enemyNodeBox = button->Owner()->GetComponent<EnemyNodeBox>();
-	//if (button->test != NULL)
-	//	return;
-	//GameObject* enemyNodeBox = button->test;
-	//enemyNodeBox->GetComponent<EnemyNodeBox>()->StartEnemyNode();
-	//enemyNodeBox->GetComponent<EnemyNodeBox>()->CloseEnemyNode();
+	button->affectedHoverObject->Activate();
+	float xpos = button->sr->GetHalfWidth() + button->affectedHoverObject->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	button->affectedHoverObject->transform->SetPosition(Vector2(xpos, button->Owner()->transform->worldposition.y));
+}
+void EnemyNodeNotHovers(Button* button)
+{
+	button->affectedHoverObject->Deactivate();
 }

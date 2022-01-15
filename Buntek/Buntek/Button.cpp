@@ -33,6 +33,9 @@ void Button::Update(void)
 			ButtonEffect(this);
 		}
 	}
+	else if (HoverEffect != NULL && NotHoverEffect != NULL) {
+		NotHoverEffect(this);
+	}
 }
 
 bool Button::CheckTriggered(Vector2 mousePos) {
