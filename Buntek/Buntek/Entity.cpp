@@ -87,6 +87,10 @@ void GameObject::DetachParent(void)
 {
 	transform->parent = NULL;
 }
+Transform* GameObject::GetParent(void)
+{
+	return transform->parent;
+}
 
 void GameObject::Delete(void)
 {

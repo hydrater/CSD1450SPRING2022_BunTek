@@ -50,7 +50,8 @@ void _renderer::Update(void)
 				continue;
 			}
 
-			if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive())
+			if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive() || 
+				(rendererList[i]->Owner()->GetParent() != NULL && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()))
 				continue;
 
 			SpriteRenderer* spriteRenderer = (SpriteRenderer*)rendererList[i];
@@ -150,7 +151,8 @@ void _renderer::Update(void)
 				continue;
 			}
 
-			if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive())
+			if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive() ||
+				(rendererList[i]->Owner()->GetParent() != NULL && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()))
 				continue;
 
 			AEGfxSetBlendMode(AE_GFX_BM_BLEND);
