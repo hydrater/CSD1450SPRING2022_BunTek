@@ -2,10 +2,10 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
-#include "rapidjson/document.h"
 #include "rapidjson/istreamwrapper.h"
 #include "rapidjson/ostreamwrapper.h"
 #include "rapidjson/writer.h"
+#include "rapidjson/document.h"
 
 using namespace std;
 using namespace rapidjson;
@@ -32,26 +32,24 @@ _saveManager& _saveManager::Instance(void)
 
 void _saveManager::SaveData(void)
 {
-    Document d;
     //d.Parse(json);
+    Document doc;
 
-    ofstream ofs("output.json");
+    ofstream ofs("./Save/output.json");
     OStreamWrapper osw(ofs);
 
     Writer<OStreamWrapper> writer(osw);
-    d.Accept(writer);
+    doc.Accept(writer);
 }
 
 void _saveManager::LoadData(void)
 {
-    using namespace rapidjson;
-    using namespace std;
+    Document doc;
 
     ifstream ifs("./Save/alice.json");
     IStreamWrapper isw(ifs);
 
-    Document d;
-    d.ParseStream(isw);
+    doc.ParseStream(isw);
 
-    printf("Title = %s\n", d["book"].GetString());
+    printf("Title = %s\n", doc["book"].GetString());
 }

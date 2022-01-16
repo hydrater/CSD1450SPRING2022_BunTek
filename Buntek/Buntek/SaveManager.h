@@ -1,13 +1,8 @@
-#ifndef SAVEMANAGER_H
-#define SAVEMANAGER_H
-
 #include <string>
 
 using namespace std;
 
 #define SaveManager _saveManager::Instance()
-
-
 
 class _saveManager
 {
@@ -25,4 +20,3 @@ public:
     void SaveData(void);
     void LoadData(void);
 };
-#endif
