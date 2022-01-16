@@ -59,7 +59,7 @@ void _saveManager::LoadData(void)
 {
     Document doc;
 
-    ifstream ifs("./Save/input.json");
+    ifstream ifs("./Save/alice.json");
     IStreamWrapper isw(ifs);
 
     doc.ParseStream(isw);

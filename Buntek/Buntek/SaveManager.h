@@ -15,8 +15,16 @@ public:
     static _saveManager& Instance(void);
     struct Profile
     {
-        string name;
-        string test;
+        // Stats
+        int health;
+        int damage;
+        int paddleSpeed;
+        int ballSpeed;
+        int ballSpawnFreq;
+
+        int stardust;
+
+
     } profile;
     void SaveData(void);
     void LoadData(void);
