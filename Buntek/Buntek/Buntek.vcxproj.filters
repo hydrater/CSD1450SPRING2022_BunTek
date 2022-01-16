@@ -162,6 +162,9 @@
     <ClCompile Include="EnemyDatabase.cpp">
       <Filter>Source Files\Custom</Filter>
     </ClCompile>
+    <ClCompile Include="ArtifactDatabase.cpp">
+      <Filter>Source Files\Custom</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -288,6 +291,9 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="EnemyDatabase.h">
+      <Filter>Source Files\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="ArtifactDatabase.h">
       <Filter>Source Files\Custom</Filter>
     </ClInclude>
   </ItemGroup>

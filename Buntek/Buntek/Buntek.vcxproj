@@ -93,6 +93,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AlphaChanger.cpp" />
+    <ClCompile Include="ArtifactDatabase.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="BallBehavior.cpp" />
@@ -134,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlphaChanger.h" />
+    <ClInclude Include="ArtifactDatabase.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="BallBehavior.h" />
