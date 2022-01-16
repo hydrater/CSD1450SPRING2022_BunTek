@@ -1,8 +1,8 @@
 #include <string>
 
-using namespace std;
-
 #define SaveManager _saveManager::Instance()
+
+using namespace std;
 
 class _saveManager
 {
@@ -13,10 +13,11 @@ private:
 
 public:
     static _saveManager& Instance(void);
-    struct profile
+    struct Profile
     {
         string name;
-    };
+        string test;
+    } profile;
     void SaveData(void);
     void LoadData(void);
 };

@@ -7,7 +7,6 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/document.h"
 
-using namespace std;
 using namespace rapidjson;
 
 _saveManager* _saveManager::instance = 0;
@@ -32,8 +31,12 @@ _saveManager& _saveManager::Instance(void)
 
 void _saveManager::SaveData(void)
 {
-    //d.Parse(json);
     Document doc;
+    const char json[] = " { \"hello\" : \"world\", \"t\" : true , \"f\" : false, \"n\": null, \"i\":123, \"pi\": 3.1416, \"a\":[1, 2, 3, 4] } ";
+
+    profile.name = "Steven";
+    doc.Parse(json);
+
 
     ofstream ofs("./Save/output.json");
     OStreamWrapper osw(ofs);

@@ -45,6 +45,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None);
 
 	SaveManager.LoadData();
+	SaveManager.SaveData();
 
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
