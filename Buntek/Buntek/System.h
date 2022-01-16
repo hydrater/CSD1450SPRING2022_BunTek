@@ -21,8 +21,8 @@ class _eventManager
 {
 private:
     static _eventManager* instance;
-    _eventManager();
-    ~_eventManager();
+    _eventManager(void);
+    ~_eventManager(void);
 
 public:
     static _eventManager& Instance(void);
@@ -41,8 +41,8 @@ class _sceneManager
 {
 private:
     static _sceneManager* instance;
-    _sceneManager();
-    ~_sceneManager();
+    _sceneManager(void);
+    ~_sceneManager(void);
     Scene* scene, *nextScene;
     bool notStarted, notAwake, transitioning, transitionInDone, transitionDone;
     float transitionTimer;
@@ -66,8 +66,8 @@ class _gameScriptManager
 {
 private:
     static _gameScriptManager* instance;
-    _gameScriptManager();
-    ~_gameScriptManager();
+    _gameScriptManager(void);
+    ~_gameScriptManager(void);
     vector<GameScript*> gameScriptList;
 
 public:

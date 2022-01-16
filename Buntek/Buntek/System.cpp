@@ -6,12 +6,12 @@ _eventManager* _eventManager::instance = 0;
 _sceneManager* _sceneManager::instance = 0;
 _gameScriptManager* _gameScriptManager::instance = 0;
 
-_eventManager::_eventManager()
+_eventManager::_eventManager(void)
 {
 
 }
 
-_eventManager::~_eventManager()
+_eventManager::~_eventManager(void)
 {
 
 }
@@ -108,7 +108,7 @@ _sceneManager::_sceneManager()
     transitionMesh = AEGfxMeshEnd();
 }
 
-_sceneManager::~_sceneManager()
+_sceneManager::~_sceneManager(void)
 {
     AEGfxMeshFree(transitionMesh);
 }
@@ -223,12 +223,12 @@ void _sceneManager::FadeToBlack(void) {
     }
 }
 
-_gameScriptManager::_gameScriptManager()
+_gameScriptManager::_gameScriptManager(void)
 {
 
 }
 
-_gameScriptManager::~_gameScriptManager()
+_gameScriptManager::~_gameScriptManager(void)
 {
 
 }

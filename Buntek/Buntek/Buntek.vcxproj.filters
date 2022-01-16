@@ -16,20 +16,20 @@
     <Filter Include="Source Files\Scenes">
       <UniqueIdentifier>{ac52d8c5-1201-42b9-a279-8c9b7855d82d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ECS">
-      <UniqueIdentifier>{563f52c5-f145-4778-9b54-9f0f50cdf0ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Common">
       <UniqueIdentifier>{8533180e-c7ff-419e-8291-57d4c658c283}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\ECS\Components">
-      <UniqueIdentifier>{62378dff-4a0f-4386-9a47-ccc97006a793}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{6e15f47c-36b7-400d-81a6-ca5038cac463}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Non ECS Objects">
+    <Filter Include="Source Files\Engine\ECS">
+      <UniqueIdentifier>{563f52c5-f145-4778-9b54-9f0f50cdf0ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Custom">
       <UniqueIdentifier>{c414ba6e-d41f-4b5d-a611-deba90295028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Custom\Components">
+      <UniqueIdentifier>{62378dff-4a0f-4386-9a47-ccc97006a793}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -43,16 +43,16 @@
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="BallBehavior.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="System.cpp">
       <Filter>Source Files\Engine</Filter>
@@ -61,13 +61,13 @@
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameScript.cpp">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="Collider2D.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager2D.cpp">
       <Filter>Source Files\Engine</Filter>
@@ -76,70 +76,70 @@
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="CursorCamera.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="PaddleBehavior.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="Scene_MainMenu.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Parallaxer.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="Scene_Test.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="Cursor.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="BattleInput.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="Skills.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="TextRenderer.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="DialogueBox.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClCompile>
     <ClCompile Include="EncounterBox.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="MapGenerator.cpp">
-      <Filter>Source Files\Non ECS Objects</Filter>
+      <Filter>Source Files\Custom</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files\Non ECS Objects</Filter>
+      <Filter>Source Files\Custom</Filter>
     </ClCompile>
     <ClCompile Include="EnemyNodeBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UI_RewardSelection.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="Devtools.cpp">
-      <Filter>Source Files\Non ECS Objects</Filter>
+      <Filter>Source Files\Custom</Filter>
     </ClCompile>
     <ClCompile Include="EnemyNodeBox.cpp">
       <Filter>Source Files</Filter>
@@ -154,7 +154,7 @@
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClCompile>
     <ClCompile Include="AlphaChanger.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClCompile>
     <ClCompile Include="SaveManager.cpp">
       <Filter>Source Files\Engine</Filter>
@@ -168,7 +168,7 @@
       <Filter>Source Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>Source Files\Common</Filter>
@@ -177,16 +177,16 @@
       <Filter>Source Files\Common</Filter>
     </ClInclude>
     <ClInclude Include="BallBehavior.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="AudioEngine.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameScript.h">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClInclude>
     <ClInclude Include="System.h">
       <Filter>Source Files\Engine</Filter>
@@ -195,7 +195,7 @@
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Collider2D.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager2D.h">
       <Filter>Source Files\Engine</Filter>
@@ -204,67 +204,67 @@
       <Filter>Source Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="CursorCamera.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="PaddleBehavior.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="Scene_MainMenu.h">
       <Filter>Source Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Parallaxer.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="Scene_Test.h">
       <Filter>Source Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Cursor.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="BattleInput.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="Skills.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="TextRenderer.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="DialogueBox.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
-      <Filter>Source Files\ECS</Filter>
+      <Filter>Source Files\Engine\ECS</Filter>
     </ClInclude>
     <ClInclude Include="EncounterBox.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="MapGenerator.h">
-      <Filter>Source Files\Non ECS Objects</Filter>
+      <Filter>Source Files\Custom</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>Source Files\Non ECS Objects</Filter>
+      <Filter>Source Files\Custom</Filter>
     </ClInclude>
     <ClInclude Include="EnemyNodeBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI_RewardSelection.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="Devtools.h">
-      <Filter>Source Files\Non ECS Objects</Filter>
+      <Filter>Source Files\Custom</Filter>
     </ClInclude>
     <ClInclude Include="EnemyNodeBox.h">
       <Filter>Header Files</Filter>
@@ -279,7 +279,7 @@
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClInclude>
     <ClInclude Include="AlphaChanger.h">
-      <Filter>Source Files\ECS\Components</Filter>
+      <Filter>Source Files\Custom\Components</Filter>
     </ClInclude>
     <ClInclude Include="SaveManager.h">
       <Filter>Source Files\Engine</Filter>
