@@ -26,6 +26,8 @@ public:
 	void SetFont(string textureName);
 	void SetScale(float _scale);
 	float GetScale(void);
+	void SetFontSize(float _fontsize);
+	float GetFontSize(void);
 	string GetText(void);
 	void SetText(string text);
 	void SetTextWidth(float _TextWidth);

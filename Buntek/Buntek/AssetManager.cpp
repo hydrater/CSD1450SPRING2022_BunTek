@@ -93,7 +93,7 @@ AEGfxTexture* _assetManager::GetTexture(string name)
 void _assetManager::LoadFont(string name)
 {
     string pathname = "./Assets/" + name;
-    char font = AEGfxCreateFont(&pathname.front(), 48);
+    char font = AEGfxCreateFont(&pathname.front(), defaultFontSize);
     FontDatabase[name] = font;
     AE_ASSERT_MESG(font, "Failed to create Font1!!");
 }
@@ -104,4 +104,7 @@ char _assetManager::GetFont(string name)
     if (search != FontDatabase.end())
         return search->second;
     return NULL;
+}
+int _assetManager::GetdefaultFontSize(void) {
+    return defaultFontSize;
 }

@@ -20,6 +20,7 @@ private:
     void UnloadTexture(string name);
     void LoadTexture(string name);
     void LoadFont(string name);
+    int defaultFontSize = 48;
 
 public:
     static _assetManager& Instance(void);
@@ -27,4 +28,5 @@ public:
     char GetFont(string name);
     void AddToList(SpriteRenderer* spriteRenderer);
     void AddToTextList(TextRenderer* textRenderer);
+    int GetdefaultFontSize(void);
 };

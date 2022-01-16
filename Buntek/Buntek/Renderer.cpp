@@ -240,29 +240,38 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 
 void  _renderer::WrapAround(TextRenderer* textRenderer) {
 	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
-	float length = tempSR->GetHalfWidth() - TextAlignmentX(textRenderer);
+	float length = (textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth()) - TextAlignmentX(textRenderer) - textRenderer->GetXBuffer();
 	float textScale = textRenderer->GetScale();
-	float alteredStringLength = textRenderer->GetXBuffer();
-	float charWidth = 0;
-	float charHeight = 0;
+	float alteredStringLength = 0;
+	float wordWidth = 0;
+	float wordHeight = 0;
 	string tempTextString = textRenderer->GetText();
-	string alteredString;
-	char tempChar;
-	for (int x = 0; char c = tempTextString[x]; x++) {
-		tempChar = tempTextString[x];
-		if (tempChar == '\n') {
-			alteredStringLength = textRenderer->GetXBuffer();
-		}
-		else {
-			AEGfxGetPrintSize(AssetManager.GetFont(textRenderer->GetFontName()), &tempChar, textScale, charWidth, charHeight);
-			charWidth = charWidth * (float)AEGetWindowWidth() / 2;
-			if ((alteredStringLength + charWidth) > length) {
-				alteredString.append(1, '\n');
-				alteredStringLength = textRenderer->GetXBuffer();
+	string alteredString = "";
+	string word = "";
+	char tempChar = 0;
+
+	for (string::iterator it = tempTextString.begin(); it != tempTextString.end(); ++it) {
+		tempChar = *it;
+		word.append(1, tempChar);
+		if (isspace(tempChar) || it == tempTextString.end()-1) {
+			if (tempChar == '\n') {
+				alteredString.replace(alteredString.end()-1, alteredString.end(), 1, tempChar);
 			}
-			alteredStringLength += charWidth;
+			else{
+				AEGfxGetPrintSize(AssetManager.GetFont(textRenderer->GetFontName()), &word[0], textScale, wordWidth, wordHeight);
+				wordWidth = wordWidth * ((float)AEGetWindowWidth() / 2.0f);
+				if ((alteredStringLength + wordWidth) > length) {
+					alteredString.replace(alteredString.end()-1, alteredString.end(), 1,'\n');
+					alteredString.append(word);
+					alteredStringLength = wordWidth;
+				}
+				else {
+					alteredString.append(word);
+				}
+				alteredStringLength = alteredStringLength + wordWidth;
+				word.clear();
+			}
 		}
-		alteredString.append(1, tempChar);
 	}
 	textRenderer->SetText(alteredString);
 }

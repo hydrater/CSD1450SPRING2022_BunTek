@@ -1,6 +1,6 @@
 #include "TextRenderer.h"
-#include "AssetManager.h"
 #include "Renderer.h"
+
 
 TextRenderer::TextRenderer(void)
 {
@@ -37,7 +37,12 @@ void TextRenderer::SetScale(float _scale)
 float TextRenderer::GetScale(void) {
 	return textScale;
 }
-
+void TextRenderer::SetFontSize(float _fontsize) {
+	textScale = _fontsize / AssetManager.GetdefaultFontSize();
+}
+float TextRenderer::GetFontSize(void) {
+	return textScale * AssetManager.GetdefaultFontSize();
+}
 string TextRenderer::GetText(void)
 {
 	return text;
@@ -102,8 +107,8 @@ TextRenderer::yAlignmentTypes TextRenderer::GetYAlignment(void) {
 
 void TextRenderer::CalculateTextSize(void) {
 	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, textWidth, textHeight);
-	textWidth = textWidth * (float)AEGetWindowWidth() / 2;
-	textHeight = textHeight * (float)AEGetWindowHeight() / 2;
+	textWidth = textWidth * (float)AEGetWindowWidth() / 2.0f;
+	textHeight = textHeight * (float)AEGetWindowHeight() / 2.0f;
 }
 
 void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
