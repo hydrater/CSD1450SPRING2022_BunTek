@@ -61,6 +61,6 @@ void Scene_MainMenu::Update(void)
 
 void MoveToBattle(Button* button)
 {
-	SceneManager.LoadScene(new Scene_Battle, TransitionTypes::FadeToBlack);
+	SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
 }
 

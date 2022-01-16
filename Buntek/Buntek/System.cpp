@@ -83,7 +83,7 @@ _sceneManager::_sceneManager()
 {
     scene = 0;
     nextScene = 0;
-    currentTransitionTypes = TransitionTypes::None;
+    currentTransitionTypes = TransitionType::None;
     transitionTimer = 0;
     notStarted = true;
     notAwake = true;
@@ -113,7 +113,7 @@ _sceneManager::~_sceneManager()
     AEGfxMeshFree(transitionMesh);
 }
 
-void _sceneManager::LoadScene(Scene* newScene, TransitionTypes TransitionType)
+void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType)
 {
     if (scene != NULL)
         nextScene = newScene;
@@ -135,7 +135,7 @@ void _sceneManager::Update(void)
     if (transitioning) {
         switch (currentTransitionTypes)
         {
-        case TransitionTypes::None:
+        case TransitionType::None:
             if (scene != NULL && nextScene != NULL)
             {
                 Renderer.FreeAll();
@@ -151,7 +151,7 @@ void _sceneManager::Update(void)
             }
             transitioning = false;
             break;
-        case TransitionTypes::FadeToBlack:
+        case TransitionType::FadeToBlack:
             FadeToBlack();
             break;
         default:

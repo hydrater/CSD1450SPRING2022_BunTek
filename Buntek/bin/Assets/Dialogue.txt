@@ -22,3 +22,15 @@ AHHHHHH! They are in my eyes! AHHHHHH! AH! They are in my eyes! AH! AHHHHHH! The
 /b Leave
 /b Curl up and cry [-5 HP][Gain Trauma]
 /b Release more bees! [-10 HP][Gain Bee Movie]
+
+flavor text
+text1
+text2
+text3
+
+flavor name
+name1
+name2
+name3
+
+

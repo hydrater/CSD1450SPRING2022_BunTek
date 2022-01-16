@@ -11,7 +11,7 @@ using namespace std;
 #define GameScriptManager _gameScriptManager::Instance()
 #define DeltaTime (float)AEFrameRateControllerGetFrameTime()
 
-enum class TransitionTypes : short
+enum class TransitionType : short
 {
     None = 0,
     FadeToBlack = 1
@@ -48,13 +48,13 @@ private:
     float transitionTimer;
     const float transitionStageDuration = 0.3f;
     const float transitionDuration = 0.1f;
-    TransitionTypes currentTransitionTypes;
+    TransitionType currentTransitionTypes;
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;
 
 public:
     static _sceneManager& Instance(void);
-    void LoadScene(Scene* newScene, TransitionTypes TransitionType);
+    void LoadScene(Scene* newScene, TransitionType TransitionType);
     Scene* GetScene(void);
     void EarlyUpdate(void);
     void Update(void);

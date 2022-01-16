@@ -10,6 +10,7 @@
 #include "GameManager.h"
 #include "Renderer.h"
 #include "MapGenerator.h"
+//#include "SaveManager.h"
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -21,7 +22,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// --------------------------------------------- Awake --------------------------------------------- //
-	// Move to main
 	int gGameRunning = 1;
 
 	// ------------------------------------------ System Init ------------------------------------------- //
@@ -42,7 +42,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AudioManager;
 	MapData;
 	Renderer;
-	SceneManager.LoadScene(new Scene_MainMenu, TransitionTypes::None);
+	SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None);
+
+	//SaveManager.SaveData();
+
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::None);
@@ -58,16 +61,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		if (AEInputCheckTriggered(AEVK_1))
 		{
-			SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::FadeToBlack);
+			SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack);
 		}
 
 		if (AEInputCheckTriggered(AEVK_2))
 		{
-			SceneManager.LoadScene(new Scene_Battle, TransitionTypes::FadeToBlack);
+			SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
 		}
 		if (AEInputCheckTriggered(AEVK_3))
 		{
-			SceneManager.LoadScene(new Scene_Test, TransitionTypes::FadeToBlack);
+			SceneManager.LoadScene(new Scene_Test, TransitionType::FadeToBlack);
 		}
 
 		// --------------------------------------------- Update --------------------------------------------- //
