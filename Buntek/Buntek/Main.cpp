@@ -10,7 +10,7 @@
 #include "GameManager.h"
 #include "Renderer.h"
 #include "MapGenerator.h"
-//#include "SaveManager.h"
+#include "SaveManager.h"
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -44,7 +44,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Renderer;
 	SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None);
 
-	//SaveManager.SaveData();
+	SaveManager.SaveData();
 
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
