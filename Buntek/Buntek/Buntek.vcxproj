@@ -106,6 +106,7 @@
     <ClCompile Include="Devtools.cpp" />
     <ClCompile Include="DialogueBox.cpp" />
     <ClCompile Include="EncounterBox.cpp" />
+    <ClCompile Include="EnemyDatabase.cpp" />
     <ClCompile Include="EnemyNodeBox.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Devtools.h" />
     <ClInclude Include="DialogueBox.h" />
     <ClInclude Include="EncounterBox.h" />
+    <ClInclude Include="EnemyDatabase.h" />
     <ClInclude Include="EnemyNodeBox.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameManager.h" />
