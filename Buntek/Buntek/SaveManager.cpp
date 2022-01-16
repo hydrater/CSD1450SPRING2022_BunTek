@@ -32,24 +32,34 @@ _saveManager& _saveManager::Instance(void)
 void _saveManager::SaveData(void)
 {
     Document doc;
-    const char json[] = " { \"hello\" : \"world\", \"t\" : true , \"f\" : false, \"n\": null, \"i\":123, \"pi\": 3.1416, \"a\":[1, 2, 3, 4] } ";
 
-    profile.name = "Steven";
-    doc.Parse(json);
+    StringBuffer s;
+    Writer<StringBuffer> writer(s);
 
+    writer.StartObject();
+    writer.Key("name");
+    writer.String("Steven");
+    writer.Key("a");
+    writer.StartArray();
+    for (unsigned i = 0; i < 4; i++)
+        writer.Uint(i);
+    writer.EndArray();
+    writer.EndObject();
+
+    doc.Parse(s.GetString());
 
     ofstream ofs("./Save/output.json");
     OStreamWrapper osw(ofs);
 
-    Writer<OStreamWrapper> writer(osw);
-    doc.Accept(writer);
+    Writer<OStreamWrapper> asd(osw);
+    doc.Accept(asd);
 }
 
 void _saveManager::LoadData(void)
 {
     Document doc;
 
-    ifstream ifs("./Save/alice.json");
+    ifstream ifs("./Save/input.json");
     IStreamWrapper isw(ifs);
 
     doc.ParseStream(isw);
