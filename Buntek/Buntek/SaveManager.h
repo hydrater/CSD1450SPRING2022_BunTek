@@ -27,7 +27,7 @@ public:
         int stardust;
 
 
-    } profile;
+    } profile = {};
     void SaveData(void);
     void LoadData(void);
 };
