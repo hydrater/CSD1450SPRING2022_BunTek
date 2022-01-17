@@ -21,16 +21,23 @@ void Scene_Test::Start(void)
 	splashimage4->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, PI/2);
 
 	splashimage5 = devTools.createSpriteGameObject("NebulaBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
-	splashimage6 = devTools.createSpriteGameObject("NebulaCloudBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+
+	splashimage6 = devTools.createSpriteGameObject("NebulaCloudBig.png", 3960, 1080, AE_GFX_BM_BLEND, Vector2(0, 0),(short)1);
 	//splashimage1->AddComponent<Parallaxer>()->distance = 50;
+
 	spawner = new GameObject();
-	spawner->AddComponent<ParticleSystem>()->renderLayer = 1;
+	ParticleSystem* _spawnerPs = spawner->AddComponent<ParticleSystem>();
+	_spawnerPs->renderLayer = 1;
+	_spawnerPs->textureString = "NebulaCloudBig.png";
+	_spawnerPs->xSize = 3960;
+	_spawnerPs->ySize = 1080;
+	
 	
 }
 
 void Scene_Test::Update(void)
 {
-	Vector2 addPos = Vector2((float)(0.5f * DeltaTime), (float)0);
-	//splashimage3->transform->worldposition += addPos;
+	Vector2 addPos = Vector2((float)(50.0f * DeltaTime), (float)0);
+	splashimage6->transform->worldposition += addPos;
 	
 }
