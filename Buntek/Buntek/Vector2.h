@@ -44,6 +44,7 @@ public:
 
 	static Vector2 Zero();
 	static Vector2 Splat(float splat);
+	Vector2 RandUnitVector(void);
 
 	Vector2 Lerp(Vector2 destination, float speed);
 };

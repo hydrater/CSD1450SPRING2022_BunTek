@@ -158,6 +158,13 @@ Vector2 Vector2::Splat(float splat)
 	return Vector2(splat, splat);
 }
 
+Vector2 Vector2::RandUnitVector(void)
+{
+	Vector2 randVect = Vector2(0, 1);
+	randVect.Rotate(RandFloatMinMax(0.0f, 360.0f));
+	return randVect;
+}
+
 //speed is min 0 max 1
 Vector2 Vector2::Lerp(Vector2 destination, float speed)
 {

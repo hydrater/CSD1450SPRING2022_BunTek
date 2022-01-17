@@ -2,6 +2,7 @@
 #include "AudioEngine.h"
 #include "Parallaxer.h"
 #include "AlphaChanger.h"
+#include "ParticleSystem.h"
 
 void Scene_Test::Start(void)
 {
@@ -22,7 +23,8 @@ void Scene_Test::Start(void)
 	splashimage5 = devTools.createSpriteGameObject("NebulaBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
 	splashimage6 = devTools.createSpriteGameObject("NebulaCloudBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
 	//splashimage1->AddComponent<Parallaxer>()->distance = 50;
-	
+	spawner = new GameObject();
+	spawner->AddComponent<ParticleSystem>();
 	
 }
 
