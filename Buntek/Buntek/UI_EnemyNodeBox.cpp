@@ -126,14 +126,14 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 			artifactGridRowCount++;
 		}
 	}
-	GameObject* tempArtifactBckgd = new GameObject();
+	artifactgrid = new GameObject();
 	SpriteRenderer* tempArtifactBckgdRenderer = 0;
-	tempArtifactBckgdRenderer = tempArtifactBckgd->AddComponent<SpriteRenderer>();
+	tempArtifactBckgdRenderer = artifactgrid->AddComponent<SpriteRenderer>();
 	tempArtifactBckgdRenderer->Size(tempBckgdRenderer->GetHalfWidth() * 2, artifactGridHeight * artifactGridRowCount);
 	tempArtifactBckgdRenderer->SetTexture("WhiteTexture.png");
 	tempArtifactBckgdRenderer->SetLayer(sortingLayer - 2);
-	tempArtifactBckgd->transform->SetPosition(Vector2(enemynodepos.x, enemynodepos.y - tempBckgdRenderer->GetHalfHeight() - tempArtifactBckgdRenderer->GetHalfHeight()));
-	enemynode->AddChild(tempArtifactBckgd);
+	artifactgrid->transform->SetPosition(Vector2(enemynodepos.x, enemynodepos.y - tempBckgdRenderer->GetHalfHeight() - tempArtifactBckgdRenderer->GetHalfHeight()));
+	enemynode->AddChild(artifactgrid);
 
 	enemynode->Deactivate();
 
@@ -179,16 +179,28 @@ void UI_EnemyNodeBox::LoadFromFile(string flag)
 GameObject* UI_EnemyNodeBox::GetEnemyNode(void){
 	return enemynode;
 }
-
+GameObject* UI_EnemyNodeBox::GetArtifactGrid(void) {
+	return artifactgrid;
+}
 void EnemyNodeHovers(Button* button)
 {
 	GameObject* enemynode = button->Owner()->GetComponent<UI_EnemyNodeBox>()->GetEnemyNode();
+	GameObject* artifactgrid = button->Owner()->GetComponent<UI_EnemyNodeBox>()->GetArtifactGrid();
 	enemynode->Activate();
 	float xpos = button->sr->GetHalfWidth() + enemynode->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	if(((float)AEGetWindowWidth()/2 - button->Owner()->transform->worldposition.x) < enemynode->GetComponent<SpriteRenderer>()->GetHalfWidth()*2)
-		enemynode->transform->SetPosition(Vector2(button->Owner()->transform->worldposition.x - xpos, button->Owner()->transform->worldposition.y));
+	float ypos = button->Owner()->transform->worldposition.y + enemynode->GetComponent<SpriteRenderer>()->GetHalfHeight() ;
+
+	if (((float)AEGetWindowWidth() / 2 - button->Owner()->transform->worldposition.x) < enemynode->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2 )
+		xpos = button->Owner()->transform->worldposition.x - xpos;
 	else
-		enemynode->transform->SetPosition(Vector2(button->Owner()->transform->worldposition.x + xpos, button->Owner()->transform->worldposition.y));
+		xpos = button->Owner()->transform->worldposition.x + xpos;
+
+	if (((float)AEGetWindowHeight() / 2 - button->Owner()->transform->worldposition.y) < enemynode->GetComponent<SpriteRenderer>()->GetHalfHeight() * 2 )
+		ypos -= enemynode->GetComponent<SpriteRenderer>()->GetHalfHeight() * 2;
+	else if(((float)AEGetWindowHeight() / 2 - fabs(button->Owner()->transform->worldposition.y)) < enemynode->GetComponent<SpriteRenderer>()->GetHalfHeight() * 2)
+		ypos += artifactgrid->GetComponent<SpriteRenderer>()->GetHalfHeight() * 2;
+
+	enemynode->transform->SetPosition(Vector2(xpos, ypos));
 }
 
 void EnemyNodeNotHovers(Button* button)
