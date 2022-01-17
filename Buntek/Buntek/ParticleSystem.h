@@ -24,6 +24,7 @@ public:
 	short blendMode = AE_GFX_BM_BLEND;
 	float xSize = 100;
 	float ySize = 100;
+	short renderLayer = 0;
 
 	// Directional Vector, will be turned into unit vector
 	Vector2 directionalVector2 = Vector2(0, 1);

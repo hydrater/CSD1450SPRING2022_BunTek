@@ -24,7 +24,7 @@ void Scene_Test::Start(void)
 	splashimage6 = devTools.createSpriteGameObject("NebulaCloudBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
 	//splashimage1->AddComponent<Parallaxer>()->distance = 50;
 	spawner = new GameObject();
-	spawner->AddComponent<ParticleSystem>();
+	spawner->AddComponent<ParticleSystem>()->renderLayer = 1;
 	
 }
 

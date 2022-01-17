@@ -25,7 +25,7 @@ public:
 
 private:
 
-	SpriteRenderer* header, * background;
-	TextRenderer* headerText;
+	SpriteRenderer* header, * background = 0;
+	TextRenderer* headerText = 0;
 	vector<Button*> buttonList;
 };

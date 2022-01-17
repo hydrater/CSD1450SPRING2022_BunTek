@@ -7,7 +7,7 @@ ParticleSystem::ParticleSystem(void)
 
 ParticleSystem::~ParticleSystem(void)
 {
-	for (int i = particleList.size() - 1; i >= 0; i--) {
+	for (int i = (int)particleList.size() - 1; i >= 0; i--) {
 		particleList[i]->Delete();
 	}
 	particleList.clear();
@@ -62,7 +62,7 @@ void ParticleSystem::Update(void)
 	}
 	
 
-	for (int i = particleList.size()-1; i >= 0; i--) {
+	for (int i = (int)particleList.size()-1; i >= 0; i--) {
 		//If lived long enough
 		if (timerList[i] > lifespanList[i]) {
 			//Delete particle
@@ -93,7 +93,7 @@ void ParticleSystem::SpawnParticle(void) {
 	}
 
 	//Creates particle objects and constituent
-	GameObject* temp = devTools.createSpriteGameObject(textureString, xSize, ySize, blendMode, this->Owner()->transform->worldposition);
+	GameObject* temp = devTools.createSpriteGameObject(textureString, xSize, ySize, blendMode, this->Owner()->transform->worldposition,renderLayer);
 	particleList.push_back(temp);
 	directionalVector2.Normalize();
 	Vector2 newVec = directionalVector2;
