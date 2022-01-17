@@ -3,11 +3,11 @@
 #include "SpriteRenderer.h"
 #include "TextRenderer.h"
 
-class EnemyNodeBox : public GameScript
+class UI_EnemyNodeBox : public GameScript
 {
 public:
-	EnemyNodeBox(void);
-	~EnemyNodeBox(void);
+	UI_EnemyNodeBox(void);
+	~UI_EnemyNodeBox(void);
 	void Start(void) override;
 	void Update(void) override;
 	void LoadFromFile(string flag);

@@ -1,4 +1,4 @@
-#include "EnemyNodeBox.h"
+#include "UI_EnemyNodeBox.h"
 #include "Button.h"
 #include <fstream>
 #include <sstream>
@@ -6,26 +6,26 @@
 void EnemyNodeHovers(Button* button);
 void EnemyNodeNotHovers(Button* button);
 
-EnemyNodeBox::EnemyNodeBox(void)
+UI_EnemyNodeBox::UI_EnemyNodeBox(void)
 {
 
 }
 
-EnemyNodeBox::~EnemyNodeBox(void)
+UI_EnemyNodeBox::~UI_EnemyNodeBox(void)
 {
 }
 
-void EnemyNodeBox::Start(void)
-{
-
-}
-
-void EnemyNodeBox::Update(void)
+void UI_EnemyNodeBox::Start(void)
 {
 
 }
 
-void EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int ArtifactTypes) {
+void UI_EnemyNodeBox::Update(void)
+{
+
+}
+
+void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int ArtifactTypes) {
 
 	enemynode = new GameObject;
 	enemynode->transform->SetPosition(button->transform->worldposition);
@@ -138,7 +138,7 @@ void EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int Art
 	enemynode->Deactivate();
 
 }
-void EnemyNodeBox::LoadFromFile(string flag)
+void UI_EnemyNodeBox::LoadFromFile(string flag)
 {
 	string path = "./Assets/Dialogue.txt";
 
@@ -176,13 +176,13 @@ void EnemyNodeBox::LoadFromFile(string flag)
 	}
 }
 
-GameObject* EnemyNodeBox::GetEnemyNode(void){
+GameObject* UI_EnemyNodeBox::GetEnemyNode(void){
 	return enemynode;
 }
 
 void EnemyNodeHovers(Button* button)
 {
-	GameObject* enemynode = button->Owner()->GetComponent<EnemyNodeBox>()->GetEnemyNode();
+	GameObject* enemynode = button->Owner()->GetComponent<UI_EnemyNodeBox>()->GetEnemyNode();
 	enemynode->Activate();
 	float xpos = button->sr->GetHalfWidth() + enemynode->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	enemynode->transform->SetPosition(Vector2(xpos, button->Owner()->transform->worldposition.y));
@@ -190,6 +190,6 @@ void EnemyNodeHovers(Button* button)
 
 void EnemyNodeNotHovers(Button* button)
 {
-	GameObject* enemynode = button->Owner()->GetComponent<EnemyNodeBox>()->GetEnemyNode();
+	GameObject* enemynode = button->Owner()->GetComponent<UI_EnemyNodeBox>()->GetEnemyNode();
 	enemynode->Deactivate();
 }

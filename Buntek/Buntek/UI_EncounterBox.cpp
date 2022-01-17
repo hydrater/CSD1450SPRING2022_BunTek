@@ -1,19 +1,19 @@
-#include "EncounterBox.h"
+#include "UI_EncounterBox.h"
 #include "System.h"
 #include <fstream>
 #include <sstream>
 
 void RemoveEncounter(Button* button);
 
-EncounterBox::EncounterBox(void)
+UI_EncounterBox::UI_EncounterBox(void)
 {
 }
 
-EncounterBox::~EncounterBox(void)
+UI_EncounterBox::~UI_EncounterBox(void)
 {
 }
 
-void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string flag)
+void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string flag)
 {
     GameObject* encounter = this->Owner();
     encounter->transform->SetPosition(position);
@@ -32,7 +32,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     SpriteRenderer* tempDescRenderer = 0;
     tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
     tempDescRenderer->Size(1000, tempBckgdRenderer->GetHalfHeight() / 1.5f);
-    tempDescRenderer->SetTexture("EncounterBox.png");
+    tempDescRenderer->SetTexture("UI_EncounterBox.png");
     tempDescRenderer->SetLayer(sortingLayer - 2);
 
     // Header
@@ -116,7 +116,7 @@ void EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string fl
     this->StartEncounterEvent(flag);
 }
 
-void EncounterBox::AssignObjReferences(SpriteRenderer* _header, SpriteRenderer* _display, SpriteRenderer* _background, TextRenderer* _headerText, TextRenderer* _descriptionText, vector<Button*> _buttonList)
+void UI_EncounterBox::AssignObjReferences(SpriteRenderer* _header, SpriteRenderer* _display, SpriteRenderer* _background, TextRenderer* _headerText, TextRenderer* _descriptionText, vector<Button*> _buttonList)
 {
     header = _header;
     display = _display;
@@ -134,7 +134,7 @@ void EncounterBox::AssignObjReferences(SpriteRenderer* _header, SpriteRenderer* 
         buttonList[i]->Owner()->Deactivate();
 }
 
-void EncounterBox::StartEncounterEvent(string flag)
+void UI_EncounterBox::StartEncounterEvent(string flag)
 {
     buttonNo = 0;
     header->Owner()->Activate();
@@ -148,7 +148,7 @@ void EncounterBox::StartEncounterEvent(string flag)
     WriteToEncounterEvent();
 }
 
-void EncounterBox::CloseEncounterEvent(void)
+void UI_EncounterBox::CloseEncounterEvent(void)
 {
     header->Owner()->Deactivate();
     display->Owner()->Deactivate();
@@ -159,7 +159,7 @@ void EncounterBox::CloseEncounterEvent(void)
         buttonList[i]->Owner()->Deactivate();
 }
 
-void EncounterBox::LoadFromFile(string flag)
+void UI_EncounterBox::LoadFromFile(string flag)
 {
     string path = "./Assets/Dialogue.txt";
 
@@ -197,7 +197,7 @@ void EncounterBox::LoadFromFile(string flag)
     }
 }
 
-void EncounterBox::WriteToEncounterEvent(void)
+void UI_EncounterBox::WriteToEncounterEvent(void)
 {
     for (descriptNo = 0; descriptNo < descriptList.size(); ++descriptNo)
     {
@@ -245,5 +245,5 @@ void EncounterBox::WriteToEncounterEvent(void)
 void RemoveEncounter(Button* button)
 {
     GameObject* tmp = button->affectedObject;
-    tmp->GetComponent<EncounterBox>()->CloseEncounterEvent();
+    tmp->GetComponent<UI_EncounterBox>()->CloseEncounterEvent();
 }

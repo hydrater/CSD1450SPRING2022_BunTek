@@ -1,22 +1,22 @@
-#include "DialogueBox.h"
+#include "UI_DialogueBox.h"
 #include "System.h"
 #include <fstream>
 #include <sstream>
 
-DialogueBox::DialogueBox(void)
+UI_DialogueBox::UI_DialogueBox(void)
 {
 }
 
-DialogueBox::~DialogueBox(void)
+UI_DialogueBox::~UI_DialogueBox(void)
 {
 }
 
-void DialogueBox::Start(void)
+void UI_DialogueBox::Start(void)
 {
     
 }
 
-void DialogueBox::Update(void)
+void UI_DialogueBox::Update(void)
 {
     if (dialogueNo >= dialogueList.size())
         return;
@@ -60,7 +60,7 @@ void DialogueBox::Update(void)
     }
 }
 
-void DialogueBox::CreateDialogue(string flag) {
+void UI_DialogueBox::CreateDialogue(string flag) {
 
     GameObject* dialogue = this->Owner();
     //Create main dialogue box
@@ -90,13 +90,13 @@ void DialogueBox::CreateDialogue(string flag) {
     tempTxtRenderer2->SetTextColor(1, 1, 1);
     tempTxtRenderer2->SetLayer(1);
 
-    // Create dialoguebox and assign
-    DialogueBox* tempdialogue = tempGameObject->AddComponent<DialogueBox>();
+    // Create UI_DialogueBox and assign
+    UI_DialogueBox* tempdialogue = tempGameObject->AddComponent<UI_DialogueBox>();
     tempdialogue->AssignObjReferences(tempRenderer2, tempRenderer, tempTxtRenderer2, tempTextRenderer);
     tempdialogue->StartDialogueEvent(flag);
 }
 
-void DialogueBox::AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRenderer* _dialogueSprite, TextRenderer* _actorTxt, TextRenderer* _dialogueTxt)
+void UI_DialogueBox::AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRenderer* _dialogueSprite, TextRenderer* _actorTxt, TextRenderer* _dialogueTxt)
 {
     actorTxt = _actorTxt;
     dialogueTxt = _dialogueTxt;
@@ -110,7 +110,7 @@ void DialogueBox::AssignObjReferences(SpriteRenderer* _actorSprite, SpriteRender
     dialogueTxt->Owner()->Deactivate();
 }
 
-void DialogueBox::StartDialogueEvent(string flag)
+void UI_DialogueBox::StartDialogueEvent(string flag)
 {
     LoadFromFile(flag);
     doneDisplay = false;
@@ -120,13 +120,13 @@ void DialogueBox::StartDialogueEvent(string flag)
     dialogueTxt->Owner()->Activate();
 }
 
-void DialogueBox::CloseDialogueEvent(void)
+void UI_DialogueBox::CloseDialogueEvent(void)
 {
     actorTxt->Owner()->Deactivate();
     dialogueTxt->Owner()->Deactivate();
 }
 
-void DialogueBox::LoadFromFile(string flag)
+void UI_DialogueBox::LoadFromFile(string flag)
 {
     string path = "./Assets/Dialogue.txt";
 
@@ -164,7 +164,7 @@ void DialogueBox::LoadFromFile(string flag)
     }
 }
 
-void DialogueBox::WriteToDialogue(void)
+void UI_DialogueBox::WriteToDialogue(void)
 {
     if (dialogueList[dialogueNo].rfind("/", 0) == 0)
     {

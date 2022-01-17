@@ -3,11 +3,11 @@
 #include "TextRenderer.h"
 #include "Button.h"
 #include "Scene_Battle.h"
-#include "DialogueBox.h"
-#include "EncounterBox.h"
+#include "UI_DialogueBox.h"
+#include "UI_EncounterBox.h"
 #include "UI_RewardSelection.h"
 #include "UI_Shop.h"
-#include "EnemyNodeBox.h"
+#include "UI_EnemyNodeBox.h"
 
 void MoveToBattle(Button* button);
 
@@ -37,16 +37,16 @@ void Scene_MainMenu::Start(void)
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToBattle;
-	Battle->AddComponent<EnemyNodeBox>();
-	Battle->GetComponent<EnemyNodeBox>()->CreateEnemyNode(Battle, 3, 10);
+	Battle->AddComponent<UI_EnemyNodeBox>();
+	Battle->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(Battle, 3, 10);
 
 	//dialogue = new GameObject();
-	//dialogue->AddComponent<DialogueBox>();
-	//dialogue->GetComponent<DialogueBox>()->CreateDialogue("asd");
+	//dialogue->AddComponent<UI_DialogueBox>();
+	//dialogue->GetComponent<UI_DialogueBox>()->CreateDialogue("asd");
 	
 	//encounter = new GameObject();
-	//encounter->AddComponent<EncounterBox>();
-	//encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+	//encounter->AddComponent<UI_EncounterBox>();
+	//encounter->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
 
 	/*rewardsel = new GameObject();
 	rewardsel->AddComponent<UI_RewardSelection>();
