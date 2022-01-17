@@ -6,27 +6,6 @@ using namespace std;
 
 #define GameManager _gameManager::Instance()
 
-enum class RarityTypes : short
-{
-    Common = 0,
-    Rare = 1,
-    Lunary = 2,
-    Astral = 3,
-    Universal = 4
-};
-
-class Artifact
-{
-private:
-
-public:
-    void SpawnSkillObject(void);
-    int id = 0;
-    string description;
-   
-    RarityTypes rarity = RarityTypes::Common;
-};
-
 class _gameManager
 {
 private:
@@ -55,7 +34,7 @@ public:
     float hostileAreaX = 0;
 
     // Battle
-    void InitBattle(double _playerHp, double _enemyHp);
-    void DealDamage(double damage, bool isPlayer);
-    double playerHp = 0, enemyHp = 0;
+    void InitBattle(float _playerHp, float _enemyHp);
+    void DealDamage(float damage, bool isPlayer);
+    float playerHp = 0, enemyHp = 0;
 };
