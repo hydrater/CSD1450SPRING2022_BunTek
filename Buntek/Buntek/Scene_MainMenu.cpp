@@ -6,6 +6,7 @@
 #include "DialogueBox.h"
 #include "EncounterBox.h"
 #include "UI_RewardSelection.h"
+#include "UI_Shop.h"
 #include "EnemyNodeBox.h"
 
 void MoveToBattle(Button* button);
@@ -47,11 +48,16 @@ void Scene_MainMenu::Start(void)
 	//encounter->AddComponent<EncounterBox>();
 	//encounter->GetComponent<EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
 
-	//rewardsel = new GameObject();
-	//rewardsel->AddComponent<UI_RewardSelection>();
-	//vector<string> rewards{ "E" };
-	//rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);
+	/*rewardsel = new GameObject();
+	rewardsel->AddComponent<UI_RewardSelection>();
+	vector<string> rewards{ "E" };
+	rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);*/
 
+	/*shopui = new GameObject();
+	shopui->AddComponent<UI_Shop>();
+	vector<string> artifacts{ "E", "E", "A", "E", "E", "A" };
+	vector<string> stats{ "E", "A", "E", "E", "A" };
+	shopui->GetComponent<UI_Shop>()->CreateShop(4, artifacts, stats);*/
 }
 
 void Scene_MainMenu::Update(void)

@@ -17,24 +17,14 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
     rewardSelect->transform->SetPosition(position);
 
     // Background
-    GameObject* tempBackground = new GameObject();
-    SpriteRenderer* tempBckgdRenderer = 0;
-    tempBckgdRenderer = tempBackground->AddComponent<SpriteRenderer>();
-    tempBckgdRenderer->Size(AEGetWindowWidth(), AEGetWindowHeight());
-    tempBckgdRenderer->Owner()->transform->SetPosition(Vector2(0, 0));
-    tempBckgdRenderer->SetTexture("EncounterBox.png");
-    tempBckgdRenderer->SetLayer(sortingLayer - 1);
-    tempBckgdRenderer->SetTransparency(0.75f);
+    GameObject* tempBackground = devTools.createSpriteGameObject("Encounter.png", AEGetWindowWidth(), AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0, 0));
+    tempBackground->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
+    tempBackground->GetComponent<SpriteRenderer>()->SetTransparency(0.75f);
     rewardSelect->AddChild(tempBackground);
 
     // Header
-    GameObject* tempHeader = new GameObject();
-    SpriteRenderer* tempHeaderRenderer = 0;
-    tempHeaderRenderer = tempHeader->AddComponent<SpriteRenderer>();
-    tempHeaderRenderer->Size(800, 100);
-    tempHeaderRenderer->SetTexture("paddle.png");
-    tempHeaderRenderer->SetLayer(sortingLayer - 1);
-    tempHeader->transform->SetPosition(Vector2(position.x, position.y + tempBckgdRenderer->GetHalfHeight()/1.5f));
+    GameObject* tempHeader = devTools.createSpriteGameObject("paddle.png", 800, 100, AE_GFX_BM_BLEND, Vector2(position.x, position.y + tempBackground->GetComponent<SpriteRenderer>()->GetHalfHeight() / 1.5f));
+    tempHeader->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
 
     // HeaderText
     TextRenderer* tempHeaderTxtRenderer = 0;
@@ -51,12 +41,9 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
     // Buttons (3 selection and 1 skip)
     vector<Button*> tempbuttonList;
     for (int i = 0; i < 4; ++i) {
-        GameObject* tempButtonObj = new GameObject();
-        SpriteRenderer* tempButtonRenderer = 0;
-        tempButtonRenderer = tempButtonObj->AddComponent<SpriteRenderer>();
-        tempButtonRenderer->Size(350, 500);
-        tempButtonRenderer->SetTexture("paddle.png");
-        tempButtonRenderer->SetLayer(sortingLayer - 1);
+
+        GameObject* tempButtonObj = devTools.createSpriteGameObject("paddle.png", 350, 500, AE_GFX_BM_BLEND, Vector2(position.x, position.y - tempBackground->GetComponent<SpriteRenderer>()->GetHalfHeight() / 1.5f));
+        tempButtonObj->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
 
         TextRenderer* tempButtonTxtRenderer = 0;
         tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
@@ -69,7 +56,7 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
         tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
         
         Button* tempButton = tempButtonObj->AddComponent<Button>();
-        tempButton->sr = tempButtonRenderer;
+        tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
         tempButton->tr = tempButtonTxtRenderer;
         tempButton->affectedObject = rewardSelect;
         tempButton->ButtonEffect = &RemoveRewardSelection;
@@ -82,22 +69,21 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
             tempButtonObj->transform->SetPosition(Vector2(position.x, position.y));
             break;
         case 1:
-            tempButtonObj->transform->SetPosition(Vector2(position.x - tempButtonRenderer->GetHalfWidth()*3, position.y));
+            tempButtonObj->transform->SetPosition(Vector2(position.x - tempButton->sr->GetHalfWidth()*3, position.y));
             break;
         case 2:
-            tempButtonObj->transform->SetPosition(Vector2(position.x + tempButtonRenderer->GetHalfWidth()*3, position.y));
+            tempButtonObj->transform->SetPosition(Vector2(position.x + tempButton->sr->GetHalfWidth()*3, position.y));
             break;
         case 3:
-            tempButtonRenderer->SetTexture("Buttons.png");
+            tempButton->sr->SetTexture("Buttons.png");
             tempButtonTxtRenderer->SetText("Skip to get sum guud seedz");
-            tempButtonRenderer->Size(500, 150);
-            tempButtonObj->transform->SetPosition(Vector2(position.x, position.y - tempBckgdRenderer->GetHalfHeight() / 1.5f));
+            tempButton->sr->Size(500, 150);
             break;
         }
     }
     
-    header = tempHeaderRenderer;
-    background = tempBckgdRenderer;
+    header = tempHeader->GetComponent<SpriteRenderer>();
+    background = tempBackground->GetComponent<SpriteRenderer>();
     headerText = tempHeaderTxtRenderer;
     buttonList = tempbuttonList;
 
