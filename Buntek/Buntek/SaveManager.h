@@ -22,6 +22,8 @@ public:
         int ballSpeed;
         int ballSpawnFreq;
 
+        // Current
+        double hp;
         int stardust;
 
 
