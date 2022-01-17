@@ -18,7 +18,7 @@ void Button::Start(void)
 
 void Button::Update(void)
 {
-	if (tr != NULL || sr != NULL) {
+	if (tr != NULL && sr != NULL) {
 		tr->ScaleTexture(sr);
 	}
 	if (CheckTriggered(GameManager.GetCursorPosition())) {
@@ -28,7 +28,7 @@ void Button::Update(void)
 		if (AEInputCheckTriggered(AEVK_LBUTTON) && ClickEffect != NULL) {
 			ClickEffect(this);
 		}
-		else if (AEInputCheckReleased(AEVK_LBUTTON))
+		else if (AEInputCheckReleased(AEVK_LBUTTON) && canClick)
 		{
 			ButtonEffect(this);
 		}
@@ -36,6 +36,10 @@ void Button::Update(void)
 	else if (HoverEffect != NULL && NotHoverEffect != NULL) {
 		NotHoverEffect(this);
 	}
+}
+
+void Button::SetClickable(bool _canClick) {
+	canClick = _canClick;
 }
 
 bool Button::CheckTriggered(Vector2 mousePos) {

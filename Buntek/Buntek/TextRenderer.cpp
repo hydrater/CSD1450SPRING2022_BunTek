@@ -55,7 +55,7 @@ void TextRenderer::SetText(string _text)
 
 vector<float> TextRenderer::GetTextColor(void)
 {
-	return vector<float>{TextR, TextG, TextB};
+	return vector<float>{textR, textG, textB};
 }
 void TextRenderer::SetTextWidth(float _TextWidth) {
 	textWidth = _TextWidth;
@@ -89,7 +89,7 @@ float TextRenderer::GetLineBuffer(void) {
 }
 void TextRenderer::SetTextColor(float _R, float _G, float _B)
 {
-	TextR = _R, TextG = _G, TextB = _B;
+	textR = _R, textG = _G, textB = _B;
 }
 
 void TextRenderer::SetXAlignment(xAlignmentTypes _xAlignment) {

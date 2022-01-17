@@ -1,3 +1,4 @@
+#include "MapGenerator.h"
 #include "UI_Shop.h"
 #include "Devtools.h"
 #include "System.h"
@@ -122,6 +123,8 @@ void UI_Shop::CreateShop(int sortingLayer, vector<string> artifacts, vector<stri
     CloseShop();
 
     StartShop();
+
+    SetClickable(false);
 }
 
 void UI_Shop::StartShop(void)
@@ -148,8 +151,17 @@ void UI_Shop::CloseShop(void)
         buttonStatsList[i]->Owner()->Deactivate();
 }
 
+void UI_Shop::SetClickable(bool _canClick)
+{
+    for (int i = 0; i < buttonArtifactList.size(); ++i)
+        buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
+    for (int i = 0; i < buttonStatsList.size(); ++i)
+        buttonStatsList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
+}
+
 void RemoveShop(Button* button)
 {
     GameObject* tmp = button->affectedObject;
     tmp->GetComponent<UI_Shop>()->CloseShop();
+    MapData.SetClickable(true);
 }

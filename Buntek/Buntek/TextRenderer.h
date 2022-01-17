@@ -43,7 +43,7 @@ public:
 	vector<float> GetTextColor(void);
 	void SetTextColor(float _R, float _G, float _B);
 	void ScaleTexture(SpriteRenderer* sr);
-	float TextR = 1, TextG = 1, TextB = 1;
+	float textR = 1, textG = 1, textB = 1;
 	void CalculateTextSize(void);
 	void SetXAlignment(xAlignmentTypes _xAlignment);
 	void SetYAlignment(yAlignmentTypes _yAlignment);

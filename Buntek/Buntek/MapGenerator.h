@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "System.h"
 #include "Vector2.h"
 #include "Component.h"
 #include <AEEngine.h>
@@ -23,9 +24,10 @@ public:
     class Node
     {
     public:
+        GameObject* nodeObject = 0;
         Vector2 pos;
         bool reached = false;
-        vector<Node> LinkedTo;
+        vector<Node> linkedTo;
         NodeType nodeType = NodeType::Nothing;
     };
     vector<AEGfxVertexList*> connectedLines;
@@ -36,6 +38,9 @@ public:
     void GenerateMapObject(void);
     void ClearList(void);
     void Travel(Node* destination);
+    void SetClickable(bool _canClick);
+
+    GameObject* shopUI = 0, * encounterUI = 0, * dialogueUI = 0;
 
 private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);

@@ -2,14 +2,14 @@
 #include "SpriteRenderer.h"
 #include "TextRenderer.h"
 #include "Button.h"
-#include "Scene_Battle.h"
+#include "Scene_Navigation.h"
 #include "UI_DialogueBox.h"
 #include "UI_EncounterBox.h"
 #include "UI_RewardSelection.h"
 #include "UI_Shop.h"
 #include "UI_EnemyNodeBox.h"
 
-void MoveToBattle(Button* button);
+void MoveToNavigation(Button* button);
 
 void Scene_MainMenu::Start(void)
 {
@@ -28,7 +28,7 @@ void Scene_MainMenu::Start(void)
 	//tempRenderer->SetTexture("WhiteTexture.png");
 	tempTextRenderer->SetFont("Astral.ttf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
-	tempTextRenderer->SetText("B a t t l e");
+	tempTextRenderer->SetText("S T A R T");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 	Battle->transform->SetPosition(Vector2(0, -200));
@@ -36,28 +36,12 @@ void Scene_MainMenu::Start(void)
 	button = Battle->AddComponent<Button>();
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
-	button->ButtonEffect = &MoveToBattle;
-	Battle->AddComponent<UI_EnemyNodeBox>();
-	Battle->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(Battle, 3, 10);
-
-	//dialogue = new GameObject();
-	//dialogue->AddComponent<UI_DialogueBox>();
-	//dialogue->GetComponent<UI_DialogueBox>()->CreateDialogue("asd");
-	
-	//encounter = new GameObject();
-	//encounter->AddComponent<UI_EncounterBox>();
-	//encounter->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+	button->ButtonEffect = &MoveToNavigation;
 
 	/*rewardsel = new GameObject();
 	rewardsel->AddComponent<UI_RewardSelection>();
 	vector<string> rewards{ "E" };
 	rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);*/
-
-	/*shopui = new GameObject();
-	shopui->AddComponent<UI_Shop>();
-	vector<string> artifacts{ "E", "E", "A", "E", "E", "A" };
-	vector<string> stats{ "E", "A", "E", "E", "A" };
-	shopui->GetComponent<UI_Shop>()->CreateShop(4, artifacts, stats);*/
 }
 
 void Scene_MainMenu::Update(void)
@@ -65,8 +49,8 @@ void Scene_MainMenu::Update(void)
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 }
 
-void MoveToBattle(Button* button)
+void MoveToNavigation(Button* button)
 {
-	SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+	SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack);
 }
 

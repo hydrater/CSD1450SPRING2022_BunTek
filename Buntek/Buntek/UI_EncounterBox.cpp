@@ -1,3 +1,4 @@
+#include "MapGenerator.h"
 #include "UI_EncounterBox.h"
 #include "System.h"
 #include <fstream>
@@ -33,7 +34,7 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string
     tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
     tempDescRenderer->Size(1000, tempBckgdRenderer->GetHalfHeight() / 1.5f);
     tempDescRenderer->SetTexture("UI_EncounterBox.png");
-    tempDescRenderer->SetLayer(sortingLayer - 2);
+    tempDescRenderer->SetLayer(sortingLayer - 1);
 
     // Header
     GameObject* tempHeader = new GameObject();
@@ -56,8 +57,6 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string
     tempHeader->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempHeaderRenderer->GetHalfWidth(), position.y + tempBckgdRenderer->GetHalfHeight() - 20));
     encounter->AddChild(tempHeader);
 
- 
-
     // Description
     TextRenderer* tempDescTxtRenderer = 0;
     tempDescTxtRenderer = tempDescription->AddComponent<TextRenderer>();
@@ -76,7 +75,7 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string
     tempDisplayRenderer = tempDisplay->AddComponent<SpriteRenderer>();
     tempDisplayRenderer->Size(450, 450);
     tempDisplayRenderer->SetTexture("Steven.jpg");
-    tempDisplayRenderer->SetLayer(sortingLayer - 2);
+    tempDisplayRenderer->SetLayer(sortingLayer - 1);
     tempDisplay->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempDisplayRenderer->GetHalfWidth() + 100, position.y + 20));
     encounter->AddChild(tempDisplay);
 
@@ -112,8 +111,10 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string
         encounter->AddChild(tempButtonObj);
         buttonList.push_back(tempButton);
     }
+
     this->AssignObjReferences(tempHeaderRenderer, tempDisplayRenderer, tempBckgdRenderer, tempHeaderTxtRenderer, tempDescTxtRenderer, buttonList);
     this->StartEncounterEvent(flag);
+    this->SetClickable(false);
 }
 
 void UI_EncounterBox::AssignObjReferences(SpriteRenderer* _header, SpriteRenderer* _display, SpriteRenderer* _background, TextRenderer* _headerText, TextRenderer* _descriptionText, vector<Button*> _buttonList)
@@ -130,8 +131,10 @@ void UI_EncounterBox::AssignObjReferences(SpriteRenderer* _header, SpriteRendere
     background->Owner()->Deactivate();
     headerText->Owner()->Deactivate();
     descriptionText->Owner()->Deactivate();
-    for (int i = 0; i < buttonList.size(); ++i)
+    for (int i = 0; i < buttonList.size(); ++i) {
         buttonList[i]->Owner()->Deactivate();
+        buttonList[i]->Owner()->GetComponent<Button>()->SetClickable(false);
+    }
 }
 
 void UI_EncounterBox::StartEncounterEvent(string flag)
@@ -142,8 +145,10 @@ void UI_EncounterBox::StartEncounterEvent(string flag)
     background->Owner()->Activate();
     headerText->Owner()->Activate();
     descriptionText->Owner()->Activate();
-    for (int i = 0; i < buttonList.size(); ++i)
+    for (int i = 0; i < buttonList.size(); ++i) {
         buttonList[i]->Owner()->Activate();
+        buttonList[i]->Owner()->GetComponent<Button>()->SetClickable(true);
+    }
     LoadFromFile(flag);
     WriteToEncounterEvent();
 }
@@ -242,8 +247,15 @@ void UI_EncounterBox::WriteToEncounterEvent(void)
         buttonList[buttonNo]->Owner()->Deactivate();
 }
 
+void UI_EncounterBox::SetClickable(bool _canClick)
+{
+    for (int i = 0; i < buttonList.size(); ++i)
+        buttonList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
+}
+
 void RemoveEncounter(Button* button)
 {
     GameObject* tmp = button->affectedObject;
     tmp->GetComponent<UI_EncounterBox>()->CloseEncounterEvent();
+    MapData.SetClickable(true);
 }

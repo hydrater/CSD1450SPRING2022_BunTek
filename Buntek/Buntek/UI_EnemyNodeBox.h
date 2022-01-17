@@ -16,6 +16,8 @@ public:
 	//void CloseEnemyNode(void);
 	void CreateEnemyNode(GameObject* button, int sortingLayer, int ArtifactTypes);
 	GameObject* GetEnemyNode(void);
+	GameObject* GetArtifactGrid(void);
+
 	//SpriteRenderer* Name, * display, * background;
 	//TextRenderer* NameText, * descriptionText;
 
@@ -26,4 +28,5 @@ public:
 
 private:
 	GameObject* enemynode = 0;
+	GameObject* artifactgrid = 0;
 };

@@ -21,11 +21,12 @@ public:
 	void CreateShop(int sortingLayer, vector<string> artifacts, vector<string> stats);
 	void StartShop(void);
 	void CloseShop(void);
+	void SetClickable(bool _canClick);
 
 private:
 	Vector2 buttonArtifactSize = Vector2(175, 250);
-	vector<Vector2> buttonArtifactPos = { Vector2(-buttonArtifactSize.x * 3, buttonArtifactSize.y/1.25), Vector2(-buttonArtifactSize.x, buttonArtifactSize.y / 1.25),
-		Vector2(buttonArtifactSize.x, buttonArtifactSize.y / 1.25), Vector2(buttonArtifactSize.x * 3, buttonArtifactSize.y / 1.25),
+	vector<Vector2> buttonArtifactPos = { Vector2(-buttonArtifactSize.x * 3, buttonArtifactSize.y/1.25f), Vector2(-buttonArtifactSize.x, buttonArtifactSize.y / 1.25f),
+		Vector2(buttonArtifactSize.x, buttonArtifactSize.y / 1.25f), Vector2(buttonArtifactSize.x * 3, buttonArtifactSize.y / 1.25f),
 		Vector2(-buttonArtifactSize.x * 2, -buttonArtifactSize.y / 2), Vector2(buttonArtifactSize.x * 2, -buttonArtifactSize.y / 2)};
 
 	Vector2 stastHolderSize = Vector2(buttonArtifactSize.x * 2, buttonArtifactSize.y);

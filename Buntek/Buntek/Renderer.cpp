@@ -178,7 +178,7 @@ void _renderer::Update(void)
 					AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
 						TextAlignmentX(textRenderer) / ((float)AEGetWindowWidth() / 2),
 						(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
-						textRenderer->GetScale(), textRenderer->TextR, textRenderer->TextG, textRenderer->TextB);
+						textRenderer->GetScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
 					linecount++;
 					start = x + 1;
 				}
@@ -188,7 +188,7 @@ void _renderer::Update(void)
 			AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
 				TextAlignmentX(textRenderer) / ((float)AEGetWindowWidth() / 2),
 				(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
-				textRenderer->GetScale(), textRenderer->TextR, textRenderer->TextG, textRenderer->TextB);
+				textRenderer->GetScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
 		}
 
 			break;
