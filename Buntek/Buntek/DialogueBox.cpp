@@ -70,6 +70,7 @@ void DialogueBox::CreateDialogue(string flag) {
     tempRenderer = dialogue->AddComponent<SpriteRenderer>();
     tempRenderer->Size(1800, 360);
     tempRenderer->SetTexture("UI/Texture.png");
+    tempRenderer->SetColor(0.7f, 0.7f, 0.7f);
     tempRenderer->SetLayer(1);
     tempTextRenderer = dialogue->AddComponent<TextRenderer>();
     tempTextRenderer->SetFont("Astral.ttf");
