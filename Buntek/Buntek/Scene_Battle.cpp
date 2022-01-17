@@ -177,6 +177,6 @@ void Scene_Battle::Update(void)
 Scene_Battle::~Scene_Battle(void)
 {
 	AudioManager.StopMusic();
-	AudioManager.Free();
+	AudioManager.Free("hysteric.ogg");
 }
 

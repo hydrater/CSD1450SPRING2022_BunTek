@@ -16,6 +16,7 @@ void Scene_Navigation::Start(void)
 	inputHandler = new GameObject();
 	//inputHandler->AddComponent<CursorCamera>()->camPos = Vector2(0, -900);
 	//AEGfxSetCamPosition(0, -900);
+	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
 	AudioManager.SetMusicVolume(0.1f);
 }
@@ -68,5 +69,6 @@ void Scene_Navigation::LateUpdate(void)
 
 Scene_Navigation::~Scene_Navigation(void)
 {
+	AudioManager.Free("NavigationBGM.mp3");
 	AEGfxMeshFree(mesh);
 }

@@ -3,15 +3,6 @@ _audioManager* _audioManager::instance = 0;
 
 _audioManager::_audioManager(void)
 {
-    Init();
-}
-
-_audioManager::~_audioManager(void)
-{
-}
-
-void _audioManager::Init(void)
-{
     // Create the main system object.
     System_Create(&fmodSystem);
 
@@ -32,7 +23,10 @@ void _audioManager::Init(void)
     // Load Music here
     //LoadMusic("Summer.mp3");
     //LoadMusic("GhostFinal.mp3");
-    LoadMusic("NavigationBGM.mp3");
+}
+
+_audioManager::~_audioManager(void)
+{
 }
 
 void _audioManager::PlayAudio(string clipName)
@@ -114,11 +108,10 @@ void _audioManager::LoadMusic(string name)
     musicDatabase[name] = music;
 }
 
-void _audioManager::Free(void)
+void _audioManager::Free(string name)
 {
-    fmodSystem->release();
+    musicDatabase[name]->release();
     musicDatabase.clear();
-    Init();
 }
 
 Sound* _audioManager::GetSound(string name)

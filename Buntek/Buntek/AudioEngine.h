@@ -16,7 +16,6 @@ private:
     static _audioManager* instance;
     _audioManager(void);
     ~_audioManager(void);
-    void Init(void);
     System* fmodSystem = NULL;
     Channel* channel = nullptr;
     Channel* musicChannel = nullptr;
@@ -37,7 +36,7 @@ public:
     void Update(void);
     void LoadSound(string name);
     void LoadMusic(string name);
-    void Free(void);
+    void Free(string name);
     Sound* GetSound(string name);
 };
 
