@@ -19,8 +19,6 @@ public:
 
 	void movePaddle(Vector2 mousePos, bool isPlayer);
 
-
-
 	void setplayerpaddle(bool _playerpaddle);
 	void setspeed(float _speed);
 	void setMaxspeed(float _Maxspeed);
@@ -30,6 +28,6 @@ private:
 	bool playerPaddle = false;
 	float speed = 0;
 	float Maxspeed = 0;
-	float MinMoveDist = 1;
+	float MinMoveDist = 100;
 	Transform* transform = 0;
 };

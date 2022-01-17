@@ -22,10 +22,12 @@ public:
         int ballSpeed;
         int ballSpawnFreq;
 
+        // Current
+        double hp;
         int stardust;
 
 
-    } profile;
+    } profile = {};
     void SaveData(void);
     void LoadData(void);
 };

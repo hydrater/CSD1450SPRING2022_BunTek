@@ -37,9 +37,23 @@ void _saveManager::SaveData(void)
     Writer<StringBuffer> writer(s);
 
     writer.StartObject();
-    writer.Key("name");
-    writer.String("Steven");
-    writer.Key("a");
+
+    writer.Key("health");
+    writer.Int(profile.health);
+    writer.Key("damage");
+    writer.Int(profile.damage);
+    writer.Key("paddleSpeed");
+    writer.Int(profile.paddleSpeed);
+    writer.Key("ballSpeed");
+    writer.Int(profile.ballSpeed);
+    writer.Key("ballSpawnFreq");
+    writer.Int(profile.ballSpawnFreq);
+
+    writer.Key("hp");
+    writer.Double(profile.hp);
+    writer.Key("stardust");
+    writer.Int(profile.stardust);
+
     writer.StartArray();
     for (unsigned i = 0; i < 4; i++)
         writer.Uint(i);
@@ -48,7 +62,7 @@ void _saveManager::SaveData(void)
 
     doc.Parse(s.GetString());
 
-    ofstream ofs("./Save/output.json");
+    ofstream ofs("./Save/sav.dat");
     OStreamWrapper osw(ofs);
 
     Writer<OStreamWrapper> asd(osw);
@@ -59,10 +73,17 @@ void _saveManager::LoadData(void)
 {
     Document doc;
 
-    ifstream ifs("./Save/alice.json");
+    ifstream ifs("./Save/sav.dat");
     IStreamWrapper isw(ifs);
 
     doc.ParseStream(isw);
 
-    printf("Title = %s\n", doc["book"].GetString());
+    profile.health = doc["health"].GetInt();
+    profile.damage = doc["damage"].GetInt();
+    profile.paddleSpeed = doc["paddleSpeed"].GetInt();
+    profile.ballSpeed = doc["ballSpeed"].GetInt();
+    profile.ballSpawnFreq = doc["ballSpawnFreq"].GetInt();
+
+    profile.hp = doc["hp"].GetInt();
+    profile.stardust = doc["stardust"].GetInt();
 }

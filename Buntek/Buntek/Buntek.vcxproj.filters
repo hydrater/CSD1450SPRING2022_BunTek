@@ -141,9 +141,6 @@
     <ClCompile Include="UI_RewardSelection.cpp">
       <Filter>Source Files\ECS\Components</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyNodeBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Devtools.cpp">
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClCompile>
@@ -166,6 +163,9 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="UI_EnemyNodeBox.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,9 +275,6 @@
     <ClInclude Include="UI_RewardSelection.h">
       <Filter>Source Files\ECS\Components</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyNodeBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Devtools.h">
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClInclude>
@@ -300,6 +297,9 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="UI_EnemyNodeBox.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>

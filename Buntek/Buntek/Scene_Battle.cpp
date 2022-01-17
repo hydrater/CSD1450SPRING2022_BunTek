@@ -64,8 +64,7 @@ void Scene_Battle::Start(void)
 	PaddleBehavior* temppaddle;
 	temppaddle = playerpaddle->AddComponent<PaddleBehavior>();
 	temppaddle->setplayerpaddle(true);
-	temppaddle->setMaxspeed(1200);
-	temppaddle->setMinMoveDist(10);
+	temppaddle->setMaxspeed(500);
 	temppaddle->sr = tempRenderer;
 	BoxCollider* tempcol;
 	tempcol = playerpaddle->AddComponent<BoxCollider>();
@@ -83,8 +82,7 @@ void Scene_Battle::Start(void)
 	AIpaddle->transform->Rotate(0);
 	temppaddle = AIpaddle->AddComponent<PaddleBehavior>();
 	temppaddle->setplayerpaddle(false);
-	temppaddle->setMaxspeed(1200);
-	temppaddle->setMinMoveDist(10);
+	temppaddle->setMaxspeed(500);
 	temppaddle->sr = tempRenderer;
 	tempcol = AIpaddle->AddComponent<BoxCollider>();
 	tempcol->UpdateDimension();
