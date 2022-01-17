@@ -5,11 +5,11 @@
 #include "SpriteRenderer.h"
 #include "TextRenderer.h"
 
-class DialogueBox : public GameScript
+class UI_DialogueBox : public GameScript
 {
 public:
-	DialogueBox(void);
-	~DialogueBox(void);
+	UI_DialogueBox(void);
+	~UI_DialogueBox(void);
 	void Start(void) override;
 	void Update(void) override;
 	void CreateDialogue(string flag);
