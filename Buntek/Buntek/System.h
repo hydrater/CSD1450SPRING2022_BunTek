@@ -28,6 +28,22 @@ public:
     static _eventManager& Instance(void);
 };
 
+template<typename T>
+class IEvent
+{
+public:
+    virtual ~IEvent();
+
+    virtual void Subscribe(T listener);
+
+    virtual bool Unsubscribe(T listener);
+
+    virtual void Notify() = 0;
+
+protected:
+    vector<T> listeners;
+};
+
 class Scene
 {
 public:

@@ -52,6 +52,31 @@ _eventManager& _eventManager::Instance(void)
 //    //scene->Update();
 //}
 
+template<typename T>
+IEvent<T>::~IEvent()
+{
+    listeners.clear();
+};
+template<typename T>
+void IEvent<T>::Subscribe(T listener)
+{
+    listeners.push_back(listener);
+};
+template<typename T>
+bool IEvent<T>::Unsubscribe(T listener)
+{
+    for (int i = 0; i < listeners.size(); i++)
+    {
+        if (listeners[i] == listener)
+        {
+            listeners.erase(listeners.begin() + i);
+            return true;
+        }
+    }
+
+    return false;
+};
+
 void Scene::Start(void)
 {
 }
