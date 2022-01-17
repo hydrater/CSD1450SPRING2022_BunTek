@@ -185,7 +185,10 @@ void EnemyNodeHovers(Button* button)
 	GameObject* enemynode = button->Owner()->GetComponent<UI_EnemyNodeBox>()->GetEnemyNode();
 	enemynode->Activate();
 	float xpos = button->sr->GetHalfWidth() + enemynode->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	enemynode->transform->SetPosition(Vector2(xpos, button->Owner()->transform->worldposition.y));
+	if(((float)AEGetWindowWidth()/2 - button->Owner()->transform->worldposition.x) < enemynode->GetComponent<SpriteRenderer>()->GetHalfWidth()*2)
+		enemynode->transform->SetPosition(Vector2(button->Owner()->transform->worldposition.x - xpos, button->Owner()->transform->worldposition.y));
+	else
+		enemynode->transform->SetPosition(Vector2(button->Owner()->transform->worldposition.x + xpos, button->Owner()->transform->worldposition.y));
 }
 
 void EnemyNodeNotHovers(Button* button)
