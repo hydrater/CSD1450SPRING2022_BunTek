@@ -6,6 +6,8 @@
 #include "AssetManager.h"
 #include "AudioEngine.h"
 #include "MapGenerator.h"
+#include "UI_Shop.h"
+#include "UI_EncounterBox.h"
 
 void Scene_Navigation::Start(void)
 {
@@ -54,6 +56,14 @@ void Scene_Navigation::EarlyUpdate(void)
 
 void Scene_Navigation::Update(void)
 {
+}
+
+void Scene_Navigation::LateUpdate(void)
+{
+	if (MapData.shopUI && MapData.shopUI->IsActive())
+		MapData.shopUI->GetComponent<UI_Shop>()->SetClickable(true);
+	if (MapData.encounterUI && MapData.encounterUI->IsActive())
+		MapData.encounterUI->GetComponent<UI_EncounterBox>()->SetClickable(true);
 }
 
 Scene_Navigation::~Scene_Navigation(void)

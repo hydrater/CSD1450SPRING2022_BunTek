@@ -1,4 +1,13 @@
 #include "MapGenerator.h"
+#include "Scene_Battle.h"
+#include "UI_EnemyNodeBox.h"
+#include "UI_EncounterBox.h"
+#include "UI_Shop.h"
+#include "Button.h"
+
+void MoveToBattle(Button* button);
+void DisplayEncounter(Button* button);
+void DisplayShop(Button* button);
 
 _mapData* _mapData::instance = 0;
 
@@ -46,7 +55,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
                 else if (distSq <= maxsq) {
 
                     hasNoConnection = false;
-                    node.LinkedTo.push_back(nodeList[j]);
+                    node.linkedTo.push_back(nodeList[j]);
                 }
             }
         }
@@ -349,25 +358,38 @@ void _mapData::GenerateMapObject(void)
         SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
         tempRenderer->Size(50, 50);
 
+        Button* tempButton = temp->AddComponent<Button>();
+        tempButton->sr = tempRenderer;
+        tempButton->tr = NULL;
+        tempButton->affectedObject = temp;
+
         switch (RandIntMinMax(0,3))
         {
         case 0:
             tempRenderer->SetTexture("UI/Encounter.png");
+            tempButton->ButtonEffect = &DisplayEncounter;
             break;
         case 1:
             tempRenderer->SetTexture("UI/Enemy.png");
+            temp->AddComponent<UI_EnemyNodeBox>();
+            temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
+            tempButton->ButtonEffect = &MoveToBattle;
             break;
         case 2:
             tempRenderer->SetTexture("UI/Elite.png");
+            temp->AddComponent<UI_EnemyNodeBox>();
+            temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
+            tempButton->ButtonEffect = &MoveToBattle;
             break;
         default:
             tempRenderer->SetTexture("UI/Rest.png");
+            tempButton->ButtonEffect = &DisplayShop;
             break;
         }
 
         temp->transform->worldposition = Vector2(nodeList[i].pos);
+        nodeList[i].nodeObject = temp;
 
-        
         //for (int k = 0; k < nodeList[i].LinkedTo.size(); k++)
         //{
         //    AEGfxVertexList* newLine;
@@ -389,4 +411,36 @@ void _mapData::ClearList(void)
 void _mapData::Travel(Node* destination)
 {
 
+}
+
+void _mapData::SetClickable(bool _canClick)
+{
+    for (int i = 0; i < nodeList.size(); ++i)
+    {
+        if (nodeList[i].nodeObject)
+            nodeList[i].nodeObject->GetComponent<Button>()->SetClickable(_canClick);
+    }
+}
+
+void MoveToBattle(Button* button)
+{
+    SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+}
+
+void DisplayEncounter(Button* button)
+{
+    MapData.SetClickable(false);
+    MapData.encounterUI = new GameObject();
+    MapData.encounterUI->AddComponent<UI_EncounterBox>();
+    MapData.encounterUI->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+}
+
+void DisplayShop(Button* button)
+{
+    MapData.SetClickable(false);
+    MapData.shopUI = new GameObject();
+    MapData.shopUI->AddComponent<UI_Shop>();
+    vector<string> artifacts{ "E", "E", "A", "E", "E", "A" };
+    vector<string> stats{ "E", "A", "E", "E", "A" };
+    MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, artifacts, stats);
 }

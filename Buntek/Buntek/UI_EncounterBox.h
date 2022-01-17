@@ -23,6 +23,7 @@ public:
 	void StartEncounterEvent(string flag);
 	void CloseEncounterEvent(void);
 	void WriteToEncounterEvent(void);
+	void SetClickable(bool _canClick);
 
 private:
 	void LoadFromFile(string flag);

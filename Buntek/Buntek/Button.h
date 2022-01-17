@@ -10,6 +10,7 @@ public:
 	~Button(void);
 	void Start(void) override;
 	void Update(void) override;
+	void SetClickable(bool _canClick);
 
 	bool CheckTriggered(Vector2 mousePos);
 
@@ -34,4 +35,5 @@ public:
 	TextRenderer* tr = 0;
 private:
 	Transform* transform = 0;
+	bool canClick = true;
 };
