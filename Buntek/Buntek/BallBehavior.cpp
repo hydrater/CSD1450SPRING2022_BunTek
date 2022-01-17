@@ -25,22 +25,12 @@ void BallBehavior::Start(void)
 void BallBehavior::Update(void)
 {
 	BallVerticalCheck();
-	// Element Virtual
-	if (elemVirtual && GameManager.friendlyAreaX < transform->worldposition.x && transform->worldposition.x < GameManager.hostileAreaX)
-	{
-		sr->SetTransparency(1);
-	}
-	else if (elemVirtual && !elemVirtualTriggered)
-	{
-		sr->SetTransparency(0.5f);
-		elemVirtualTriggered = true;
-	}
-	// The ball is translucent until it touches the middle of the field
 
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * (float)AEFrameRateControllerGetFrameTime(), transform->worldposition.y + velocity.y * speed * (float)AEFrameRateControllerGetFrameTime()));
 
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
+		GameManager.DealDamage(10, !playerPossess);
 		this->Owner()->Delete();
 		ballTrail->Delete();
 	}
@@ -100,28 +90,6 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 	if ((isPlayer && transform->worldposition.x > GameManager.friendlyAreaX) ||
 		(!isPlayer && transform->worldposition.x < GameManager.hostileAreaX))
 		return;
-
-	float xDelta = mousePos.x - tempTransform->worldposition.x, yDelta = mousePos.y - tempTransform->worldposition.y;
-
-	// Update the delta to prevent almost direct vertical velocity (commented out cuz of weird speed)
-	//yDelta = AEClamp(yDelta, GameManager.clickAoERadius * -0.9f, GameManager.clickAoERadius * 0.9f);
-
-	if (abs(xDelta) <= GameManager.clickAoERadius && abs(yDelta) <= GameManager.clickAoERadius)
-	{
-		float mag = Vector2(xDelta, yDelta).Length();
-
-		if (mag <= GameManager.clickAoERadius) {
-			velocity = (Vector2(-(mousePos.x - tempTransform->worldposition.x) / mag, -(mousePos.y - tempTransform->worldposition.y) / mag));
-
-			// Change direction if click is in opposite direction
-			if (isPlayer && mousePos.x > tempTransform->worldposition.x || !isPlayer && mousePos.x < tempTransform->worldposition.x)
-				velocity.x *= -1;
-
-			playerPossess = !playerPossess;
-			playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
-
-		}
-	}	
 }
 
 void BallBehavior::BounceBall(bool isPlayer, Vector2 wallCoord, float angle)
@@ -165,7 +133,6 @@ void BallBehavior::BounceBall(bool isPlayer, Vector2 wallCoord, float angle)
 				velocity.Rotate(-angrange);
 			}
 		}
-
 
 		playerPossess = !playerPossess;
 		playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);

@@ -28,7 +28,7 @@ public:
     //bool succeededOrWarn(const std::string& message, FMOD_RESULT result);
     Channel* GetMusicChannel(void);
     void CleanPlaying(void);
-    void PlayAudio(string audiClip);
+    void PlayClip(string audiClip);
     void PlayMusic(string musicTrack);
     void StopMusic(void);
     void SetAudioVolume(float volume);

@@ -47,7 +47,6 @@ public:
     bool cameraLerpBack = false;
 
     // Battle arena info
-    float clickAoERadius = 50;
     float areaTopBoundary = 0;
     float areaBottomBoundary = 0;
     float areaLeftBoundary = 0;
@@ -55,15 +54,8 @@ public:
     float friendlyAreaX = 0;
     float hostileAreaX = 0;
 
-    // Player metrics, move to private?
-    int health = 0;
-    int damage = 0;
-    int paddleSpeed = 0;
-    int ballSpeed = 0;
-    int ballSpawnSpeed = 0;
-
-    // Currency
-    int stardust = 0;
-    int ballSpawnID = 0;
-    vector<int> artifactStacks;
+    // Battle
+    void InitBattle(double _playerHp, double _enemyHp);
+    void DealDamage(double damage, bool isPlayer);
+    double playerHp = 0, enemyHp = 0;
 };

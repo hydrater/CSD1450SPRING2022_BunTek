@@ -119,6 +119,8 @@ void Scene_Battle::Start(void)
 	GameManager.areaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	GameManager.friendlyAreaX = friendlyArea->transform->worldposition.x + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	GameManager.hostileAreaX = hostileArea->transform->worldposition.x - hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+
+	GameManager.InitBattle(100, 100);
 }	
 
 void Scene_Battle::Update(void)

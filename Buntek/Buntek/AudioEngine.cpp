@@ -18,7 +18,7 @@ _audioManager::_audioManager(void)
     musicChannel->setCallback(&channelGroupCallback);
 
     // Load sounds here
-    LoadSound("splash.mp3");
+    //LoadSound("splash.mp3");
 
     // Load Music here
     //LoadMusic("Summer.mp3");
@@ -29,7 +29,7 @@ _audioManager::~_audioManager(void)
 {
 }
 
-void _audioManager::PlayAudio(string clipName)
+void _audioManager::PlayClip(string clipName)
 {
     // Create the sound.
     Sound* audioClip = 0;

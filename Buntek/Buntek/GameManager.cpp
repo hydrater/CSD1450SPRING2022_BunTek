@@ -1,6 +1,7 @@
 #include "GameManager.h"
 #include "System.h"
 #include "SpriteRenderer.h"
+#include "Scene_Navigation.h"
 
 using namespace Math;
 
@@ -101,6 +102,34 @@ void _gameManager::CameraShake(float period, float _shakeStrength, Vector2 direc
     shakeStrength = _shakeStrength;
     cameraShakeTime = period;
     maxCameraShakeTime = period;
+}
+
+void _gameManager::InitBattle(double _playerHp, double _enemyHp)
+{
+    playerHp = _playerHp;
+    enemyHp = _enemyHp;
+}
+
+void _gameManager::DealDamage(double damage, bool isPlayer)
+{
+    if (isPlayer)
+    {
+        playerHp -= damage;
+        if (playerHp <= 0)
+        {
+            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack);
+        }
+    }
+    else
+    {
+        enemyHp -= damage;
+        if (enemyHp <= 0)
+        {
+            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack);
+        }
+    }
+
+    cout << "player hp: " << playerHp << " enemy hp: " << enemyHp << endl;
 }
 
 void Artifact::SpawnSkillObject(void)

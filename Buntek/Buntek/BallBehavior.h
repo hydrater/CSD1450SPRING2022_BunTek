@@ -27,13 +27,6 @@ public:
 	void HitBall(Vector2 mousePos, bool isPlayer);
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
-	bool skillApplied = false;
-
-	// Basic Elements
-	bool elemAstral = false;
-	bool elemVirtual = false;
-	bool elemVirtualTriggered = false;
-	bool elemElemental = false;
 
 private:
 	const float maxSpeed = 600;

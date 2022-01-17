@@ -189,22 +189,6 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 	// Move position towards the targetedPosition
 	*vecPosition = (*vecPosition).Lerp(*vecTargetPosition, AIspeed);
 
-	// Calculate Distance to targetedBall
-	float dist = (*vecPosition).operator-(temp->worldposition).Length();
-	// Hit Ball if within AOE
-	if (dist <= GameManager.clickAoERadius)
-	{
-		targetedBall->HitBall(
-			Vector2(temp->worldposition.x + RandFloatMinMax(1, GameManager.clickAoERadius),
-				temp->worldposition.y + RandIntMinMax(-1, 1) * RandFloatMinMax(1, GameManager.clickAoERadius / 1.3f)),
-			isPlayer);
-		if (Timer < 0)
-		{
-			targetedBall->SetSpeed(targetedBall->GetSpeed() + AIscalingTimer * 3);
-			*Timer = RandFloatMinMax(0.7f - AIscalingTimer * 0.005f, 1.5f - AIscalingTimer * 0.005f);
-		}
-	}
-
 	vecPosition->x = AEClamp(vecPosition->x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
 	vecPosition->y = AEClamp(vecPosition->y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
 

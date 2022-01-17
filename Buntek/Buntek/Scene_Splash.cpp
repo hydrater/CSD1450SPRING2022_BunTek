@@ -28,9 +28,12 @@ void Scene_Splash::Update(void)
 		splashTransform->SetScale(Vector2(splashTransform->worldscale.x + DeltaTime, splashTransform->worldscale.y + DeltaTime));
 		break;
 	case 1:
-		if (playSound)
-			AudioManager.PlayAudio("splash.mp3");
-		playSound = false;
+		if (canPlayAudio)
+		{
+			AudioManager.LoadSound("splash.mp3");
+			AudioManager.PlayClip("splash.mp3");
+		}
+		canPlayAudio = false;
 		break;
 	case 2:
 		splashTransform->SetPosition(Vector2(0.0f, splashTransform->worldposition.y + DeltaTime * 400));
@@ -50,4 +53,9 @@ void Scene_Splash::Update(void)
 		++cycle;
 		timer = 0;
 	}
+}
+
+Scene_Splash::~Scene_Splash(void)
+{
+	AudioManager.Free("splash.mp3");
 }
