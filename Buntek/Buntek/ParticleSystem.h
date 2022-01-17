@@ -41,7 +41,6 @@ public:
 	// Rotational Velocity Min and Max
 	float randRotRangeMin = -15.0f;
 	float randRotRangeMax = 15.0f;
-	
 
 	// ========    Particle Spawning Over Time settings     ========
 	float spawnRate = 5.0f; //particles per second
@@ -54,10 +53,13 @@ public:
 	int numBurst = 100;
 	bool isLoop = true;	//if true, keeps bursting over and over again. Else, deletes self after 1 burst
 
-private:
-	
 	//SpawnParticle
 	void SpawnParticle();
+	
+
+private:
+	
+	
 	
 
 };
