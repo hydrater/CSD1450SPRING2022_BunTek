@@ -70,6 +70,7 @@ void BattleInput::Update(void)
 			LaunchBall = new GameObject();
 			SpriteRenderer* temporaryRenderer;
 			temporaryRenderer = LaunchBall->AddComponent<SpriteRenderer>();
+			temporaryRenderer->SetLayer(2);
 			temporaryRenderer->Size(20, 20);
 			temporaryRenderer->SetTexture("ball.png");
 			BallBehavior* temporaryBall;
@@ -86,6 +87,7 @@ void BattleInput::Update(void)
 
 			LaunchLine = new GameObject();
 			temporaryRenderer = LaunchLine->AddComponent<SpriteRenderer>();
+			temporaryRenderer->SetLayer(3);
 			temporaryRenderer->SetTexture("WhiteTexture.png");
 			temporaryRenderer->Size(0, 0);
 		}

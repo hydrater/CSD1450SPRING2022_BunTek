@@ -146,7 +146,7 @@ void Scene_Battle::Update(void)
 
 		ball = new GameObject();
 		tempRenderer = ball->AddComponent<SpriteRenderer>();
-		tempRenderer->SetLayer(1);
+		tempRenderer->SetLayer(2);
 		tempRenderer->Size(20, 20);
 		tempRenderer->SetTexture("ball.png");
 		tempBall = ball->AddComponent<BallBehavior>();
