@@ -48,7 +48,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
             for (int j = 0; j < nodeList.size(); j++) {
                 float distSq = (node.pos - nodeList[j].pos).LengthSquared();
                 if (distSq <= minsq) {
-                    cout << distSq << endl;
+                    //cout << distSq << endl;
                     regenerateClose = true;
                     break;
                 }

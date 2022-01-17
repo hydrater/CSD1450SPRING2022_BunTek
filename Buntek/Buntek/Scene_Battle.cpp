@@ -13,7 +13,8 @@ using namespace Math;
 void Scene_Battle::Start(void)
 {
 	// Setting up the scene
-	AudioManager.PlayMusic("Evans.mp3");
+	AudioManager.LoadMusic("hysteric.ogg");
+	AudioManager.PlayMusic("hysteric.ogg");
 	AudioManager.SetMusicVolume(0.1f);
 
 	GameManager.cameraLerpBack = true;
@@ -171,5 +172,11 @@ void Scene_Battle::Update(void)
 	//test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
 	//test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
 	//test->transform->Rotate(20*DeltaTime);
+}
+
+Scene_Battle::~Scene_Battle(void)
+{
+	AudioManager.StopMusic();
+	AudioManager.Free();
 }
 

@@ -1,7 +1,16 @@
 #include "AudioEngine.h"
 _audioManager* _audioManager::instance = 0;
 
-_audioManager::_audioManager()
+_audioManager::_audioManager(void)
+{
+    Init();
+}
+
+_audioManager::~_audioManager(void)
+{
+}
+
+void _audioManager::Init(void)
 {
     // Create the main system object.
     System_Create(&fmodSystem);
@@ -23,12 +32,7 @@ _audioManager::_audioManager()
     // Load Music here
     //LoadMusic("Summer.mp3");
     //LoadMusic("GhostFinal.mp3");
-    LoadMusic("Evans.mp3");
     LoadMusic("NavigationBGM.mp3");
-}
-
-_audioManager::~_audioManager()
-{
 }
 
 void _audioManager::PlayAudio(string clipName)
@@ -108,6 +112,13 @@ void _audioManager::LoadMusic(string name)
     Sound* music = 0;
     fmodSystem->createSound(pathName, FMOD_LOOP_NORMAL, nullptr, &music);
     musicDatabase[name] = music;
+}
+
+void _audioManager::Free(void)
+{
+    fmodSystem->release();
+    musicDatabase.clear();
+    Init();
 }
 
 Sound* _audioManager::GetSound(string name)

@@ -9,7 +9,7 @@ public:
     void Update(void) override;
     void LateUpdate(void) override;
 private:
-    ~Scene_Navigation(void);
+    ~Scene_Navigation(void) override;
     GameObject* inputHandler = 0, *background = 0;
     AEGfxVertexList* mesh = 0;
 };

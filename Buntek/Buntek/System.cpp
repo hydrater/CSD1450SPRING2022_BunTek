@@ -219,6 +219,7 @@ void _sceneManager::FadeToBlack(void) {
         if (transitionTimer > transitionDuration) {
             if (scene != NULL && nextScene != NULL)
             {
+                cout << "Scene deleted via transition" << endl;
                 Renderer.FreeAll();
                 GameScriptManager.ClearList();
                 delete scene;

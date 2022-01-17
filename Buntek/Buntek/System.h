@@ -51,6 +51,7 @@ public:
     virtual void EarlyUpdate(void);
     virtual void Update(void);
     virtual void LateUpdate(void);
+    virtual ~Scene() = default;
 };
 
 class _sceneManager
