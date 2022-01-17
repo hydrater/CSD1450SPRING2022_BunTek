@@ -23,7 +23,7 @@ public:
         int ballSpawnFreq;
 
         // Current
-        double hp;
+        float hp;
         int stardust;
 
 

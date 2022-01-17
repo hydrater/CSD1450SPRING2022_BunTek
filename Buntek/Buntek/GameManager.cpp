@@ -104,13 +104,13 @@ void _gameManager::CameraShake(float period, float _shakeStrength, Vector2 direc
     maxCameraShakeTime = period;
 }
 
-void _gameManager::InitBattle(double _playerHp, double _enemyHp)
+void _gameManager::InitBattle(float _playerHp, float _enemyHp)
 {
     playerHp = _playerHp;
     enemyHp = _enemyHp;
 }
 
-void _gameManager::DealDamage(double damage, bool isPlayer)
+void _gameManager::DealDamage(float damage, bool isPlayer)
 {
     if (isPlayer)
     {
@@ -130,9 +130,4 @@ void _gameManager::DealDamage(double damage, bool isPlayer)
     }
 
     cout << "player hp: " << playerHp << " enemy hp: " << enemyHp << endl;
-}
-
-void Artifact::SpawnSkillObject(void)
-{
-
 }
