@@ -168,6 +168,9 @@
     <ClCompile Include="UI_Shop.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -300,6 +303,9 @@
       <Filter>Source Files\Custom</Filter>
     </ClInclude>
     <ClInclude Include="UI_Shop.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
