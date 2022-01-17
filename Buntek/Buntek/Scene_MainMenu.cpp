@@ -28,7 +28,7 @@ void Scene_MainMenu::Start(void)
 	//tempRenderer->SetTexture("WhiteTexture.png");
 	tempTextRenderer->SetFont("Astral.ttf");
 	tempTextRenderer->SetTextColor(1, 1, 1);
-	tempTextRenderer->SetText("B a t t l e");
+	tempTextRenderer->SetText("S T A R T");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 	Battle->transform->SetPosition(Vector2(0, -200));
