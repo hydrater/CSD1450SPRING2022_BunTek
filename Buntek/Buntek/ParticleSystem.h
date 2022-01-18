@@ -70,6 +70,14 @@ public:
 		string newTextureString, Vector2 newWorldPos,
 		short newRenderLayer, short newBlendMode);
 
+	void SetBurstingParticle(
+		Vector2 directionalVector, float newSpawnRate, float newNumBurst, bool newIsLoop,
+		float newAngleSpread, float powerMin, float powerMax,
+		float randRotMin, float randRotMax,
+		float xDimension, float yDimension,
+		string newTextureString, Vector2 newWorldPos,
+		short newRenderLayer, short newBlendMode);
+
 private:
 	
 	
