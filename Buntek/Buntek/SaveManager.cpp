@@ -1,6 +1,5 @@
 #include "SaveManager.h"
 #include <fstream>
-#include <vector>
 #include <iostream>
 
 _saveManager* _saveManager::instance = 0;
@@ -30,7 +29,6 @@ void _saveManager::SaveData(void)
         cout << "Cannot open file!" << endl;
         return;
     }
-
     wf.write((char*)&profile, sizeof(Profile));
     wf.close();
     if (!wf.good()) {

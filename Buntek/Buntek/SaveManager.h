@@ -1,4 +1,5 @@
 #include <string>
+#include <vector>
 
 #define SaveManager _saveManager::Instance()
 
@@ -25,9 +26,17 @@ public:
         // Current
         float hp;
         int stardust;
+        int mapSize;
 
-
+        // Artifact
+        int test[10];
     } profile = {};
+    struct MapSave
+    {
+        float NodeWidth[32];
+        float NodeHeight[32];
+    };
+
     void SaveData(void);
     void LoadData(void);
 };
