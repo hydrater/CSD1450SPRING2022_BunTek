@@ -45,14 +45,13 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 	//Name
 	float enemyNameX = tempBckgdRenderer->GetHalfWidth() * 2;
 	float enemyNameY = tempBckgdRenderer->GetHalfHeight() * 2 / 5;
-	GameObject* enemyName = devTools.CreateSpriteGameObject("HoverTexture.png", enemyNameX, enemyNameY, 1, Vector2(0, 0), sortingLayer - 1, (1));
+	GameObject* enemyName = devTools.CreateSpriteGameObject("HoverTexture.png", enemyNameX, enemyNameY, 1, Vector2(0, 0), (short)(sortingLayer - 1), (1));
 	SpriteRenderer* tempEnemynameRenderer = enemyName->GetComponent<SpriteRenderer>();
 	//tempEnemynameRenderer->SetColor(0, 0, 0);
 	enemyName->transform->SetPosition(Vector2(enemynodepos.x, enemynodepos.y + tempBckgdRenderer->GetHalfHeight() - tempEnemynameRenderer->GetHalfHeight()));
 
 	//nametext
-	TextRenderer* tempEnemynameTxtRenderer = 0;
-	tempEnemynameTxtRenderer = enemyName->AddComponent<TextRenderer>();
+	TextRenderer* tempEnemynameTxtRenderer = enemyName->AddComponent<TextRenderer>();
 	tempEnemynameTxtRenderer->SetFont("Astral.ttf");
 	tempEnemynameTxtRenderer->SetTextColor(0, 0, 0);
 	tempEnemynameTxtRenderer->SetText("Test name");
@@ -68,17 +67,14 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 	float enemyDescriptionWidth = tempBckgdRenderer->GetHalfWidth() * 2;
 	float enemyDescriptionHeight = tempBckgdRenderer->GetHalfHeight() * 8 / 5;
 	GameObject* enemyDescription = devTools.CreateSpriteGameObject("HoverTexture.png", enemyDescriptionWidth, enemyDescriptionHeight, 1, Vector2(0, 0), sortingLayer - 1, (1));
-	SpriteRenderer* tempEnemyDescriptionRenderer = 0;
-	tempEnemyDescriptionRenderer = enemyDescription->AddComponent<SpriteRenderer>();
-	tempEnemyDescriptionRenderer->SetLayer(sortingLayer - 1);
+	
 	//tempEnemyDescriptionRenderer->SetTransparency(0.5f);
 	//tempEnemyDescriptionRenderer->SetColor(0, 1, 0);
-	tempEnemyDescriptionRenderer->SetTexture("HoverTexture.png");
-	enemyDescription->transform->SetPosition(Vector2(enemynodepos.x, enemyName->transform->worldposition.y - tempEnemynameRenderer->GetHalfHeight() - tempEnemyDescriptionRenderer->GetHalfHeight()));
+	enemyDescription->transform->SetPosition(Vector2(enemynodepos.x, enemyName->transform->worldposition.y - tempEnemynameRenderer->GetHalfHeight() - enemyDescription->GetComponent<SpriteRenderer>()->GetHalfHeight()));
 
 	//EnemyDescriptionText
-	TextRenderer* tempEnemyDescriptionTxtRenderer = 0;
-	tempEnemyDescriptionTxtRenderer = enemyDescription->AddComponent<TextRenderer>();
+	TextRenderer* tempEnemyDescriptionTxtRenderer = enemyDescription->AddComponent<TextRenderer>();
+
 	tempEnemyDescriptionTxtRenderer->SetFont("Astral.ttf");
 	tempEnemyDescriptionTxtRenderer->SetTextColor(0, 0, 0);
 	tempEnemyDescriptionTxtRenderer->SetText("Test des");
@@ -91,12 +87,11 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 
 	// Ball artifact
 	GameObject* tempBallArtifact = new GameObject();
-	SpriteRenderer* tempBallArtifactRenderer = 0;
-	tempBallArtifactRenderer = tempBallArtifact->AddComponent<SpriteRenderer>();
+	SpriteRenderer* tempBallArtifactRenderer = tempBallArtifact->AddComponent<SpriteRenderer>();
 	tempBallArtifactRenderer->Size(tempBckgdRenderer->GetHalfWidth() * 2 / 5, tempBckgdRenderer->GetHalfHeight() * 2 / 5);
 	tempBallArtifactRenderer->SetTexture("Steven.jpg");
 	tempBallArtifactRenderer->SetLayer(sortingLayer - 1);
-	tempBallArtifact->transform->SetPosition(Vector2(enemynodepos.x - tempBckgdRenderer->GetHalfWidth() + tempBallArtifactRenderer->GetHalfWidth(), enemyDescription->transform->worldposition.y - tempEnemyDescriptionRenderer->GetHalfHeight() - tempBallArtifactRenderer->GetHalfHeight()));
+	tempBallArtifact->transform->SetPosition(Vector2(enemynodepos.x - tempBckgdRenderer->GetHalfWidth() + tempBallArtifactRenderer->GetHalfWidth(), enemyDescription->transform->worldposition.y - enemyDescription->GetComponent<SpriteRenderer>()->GetHalfHeight() - tempBallArtifactRenderer->GetHalfHeight()));
 	enemynode->AddChild(tempBallArtifact);
 
 	float artifactGridWidth = tempBallArtifactRenderer->GetHalfWidth() * 2;
@@ -105,16 +100,15 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 	for (int i = 1; i <= ArtifactTypes + 1; i++) {
 		////artifact
 		GameObject* tempArtifact = new GameObject();
-		SpriteRenderer* tempArtifactRenderer = 0;
-		tempArtifactRenderer = tempArtifact->AddComponent<SpriteRenderer>();
+		SpriteRenderer* tempArtifactRenderer = tempArtifact->AddComponent<SpriteRenderer>();
+
 		tempArtifactRenderer->Size(artifactGridWidth, artifactGridHeight);
 		tempArtifactRenderer->SetTexture("Steven.jpg");
 		tempArtifactRenderer->SetLayer(sortingLayer - 1);
 		tempArtifact->transform->SetPosition(Vector2(tempBallArtifact->transform->worldposition.x + artifactGridWidth * (i % 5), tempBallArtifact->transform->worldposition.y - artifactGridHeight * (i / 5)));
 
 		//artifactText
-		TextRenderer* tempArtifactTxtRenderer = 0;
-		tempArtifactTxtRenderer = tempArtifact->AddComponent<TextRenderer>();
+		TextRenderer* tempArtifactTxtRenderer = tempArtifact->AddComponent<TextRenderer>();
 		tempArtifactTxtRenderer->SetFont("Astral.ttf");
 		tempArtifactTxtRenderer->SetTextColor(0, 0, 0);
 		tempArtifactTxtRenderer->SetText("3");
@@ -128,8 +122,7 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 		}
 	}
 	artifactgrid = new GameObject();
-	SpriteRenderer* tempArtifactBckgdRenderer = 0;
-	tempArtifactBckgdRenderer = artifactgrid->AddComponent<SpriteRenderer>();
+	SpriteRenderer* tempArtifactBckgdRenderer = artifactgrid->AddComponent<SpriteRenderer>();
 	tempArtifactBckgdRenderer->Size(tempBckgdRenderer->GetHalfWidth() * 2, artifactGridHeight * artifactGridRowCount);
 	tempArtifactBckgdRenderer->SetTexture("WhiteTexture.png");
 	tempArtifactBckgdRenderer->SetLayer(sortingLayer - 2);

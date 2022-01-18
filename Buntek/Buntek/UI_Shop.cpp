@@ -13,7 +13,7 @@ UI_Shop::~UI_Shop(void)
 {
 }
 
-void UI_Shop::CreateShop(int sortingLayer, vector<string> artifacts, vector<string> stats)
+void UI_Shop::CreateShop(short sortingLayer, vector<string> artifacts, vector<string> stats)
 {
     GameObject* shopUI = this->Owner();
 

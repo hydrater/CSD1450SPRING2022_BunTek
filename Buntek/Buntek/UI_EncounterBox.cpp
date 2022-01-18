@@ -14,7 +14,7 @@ UI_EncounterBox::~UI_EncounterBox(void)
 {
 }
 
-void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string flag)
+void UI_EncounterBox::CreateEncounter(Vector2 position, short sortingLayer, string flag)
 {
     GameObject* encounter = this->Owner();
     encounter->transform->SetPosition(position);

@@ -18,7 +18,7 @@ public:
 	* (Same with vector<strgin> stats)
 	*///===========
 
-	void CreateShop(int sortingLayer, vector<string> artifacts, vector<string> stats);
+	void CreateShop(short sortingLayer, vector<string> artifacts, vector<string> stats);
 	void StartShop(void);
 	void CloseShop(void);
 	void SetClickable(bool _canClick);
