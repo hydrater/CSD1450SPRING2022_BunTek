@@ -20,42 +20,20 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string
     encounter->transform->SetPosition(position);
 
     // Background
-    GameObject* tempBackground = new GameObject();
     SpriteRenderer* tempBckgdRenderer = 0;
-    tempBckgdRenderer = tempBackground->AddComponent<SpriteRenderer>();
-    tempBckgdRenderer->Size(1652, 734);
+    tempBckgdRenderer = encounter->AddComponent<SpriteRenderer>();
+    tempBckgdRenderer->Size(1600, 900);
     tempBckgdRenderer->SetTexture("UI/Texture.png");
     tempBckgdRenderer->SetLayer(sortingLayer - 2);
-    encounter->AddChild(tempBackground);
+
 
     // Description
     GameObject* tempDescription = new GameObject();
     SpriteRenderer* tempDescRenderer = 0;
     tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
-    tempDescRenderer->Size(1000, tempBckgdRenderer->GetHalfHeight() / 1.5f);
+    tempDescRenderer->Size(tempBckgdRenderer->GetHalfWidth()/8*10, tempBckgdRenderer->GetHalfHeight());
     tempDescRenderer->SetTexture("UI_EncounterBox.png");
     tempDescRenderer->SetLayer(sortingLayer - 1);
-
-    // Header
-    GameObject* tempHeader = new GameObject();
-    SpriteRenderer* tempHeaderRenderer = 0;
-    tempHeaderRenderer = tempHeader->AddComponent<SpriteRenderer>();
-    tempHeaderRenderer->Size(800, 100);
-    tempHeaderRenderer->SetTexture("WhiteTexture.png");
-    tempHeaderRenderer->SetColor(0, 0, 0.1f);
-    tempHeaderRenderer->SetTransparency(0.8f);
-    tempHeaderRenderer->SetLayer(sortingLayer - 1);
-
-    // HeaderText
-    TextRenderer* tempHeaderTxtRenderer = 0;
-    tempHeaderTxtRenderer = tempHeader->AddComponent<TextRenderer>();
-    tempHeaderTxtRenderer->SetFont("Gabriola.ttf");
-    tempHeaderTxtRenderer->SetTextColor(0, 1, 1);
-    tempHeaderTxtRenderer->SetLayer(sortingLayer);
-    tempHeaderTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-    tempHeaderTxtRenderer->SetXBuffer(50);
-    tempHeader->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempHeaderRenderer->GetHalfWidth(), position.y + tempBckgdRenderer->GetHalfHeight() - 20));
-    encounter->AddChild(tempHeader);
 
     // Description
     TextRenderer* tempDescTxtRenderer = 0;
@@ -69,14 +47,35 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string
         position.y + tempBckgdRenderer->GetHalfHeight() - tempDescRenderer->GetHalfHeight() - 100));
     encounter->AddChild(tempDescription);
 
+    // Header
+    GameObject* tempHeader = new GameObject();
+    SpriteRenderer* tempHeaderRenderer = 0;
+    tempHeaderRenderer = tempHeader->AddComponent<SpriteRenderer>();
+    tempHeaderRenderer->Size(tempBckgdRenderer->GetHalfWidth(), tempBckgdRenderer->GetHalfHeight()/5);
+    tempHeaderRenderer->SetTexture("UI/Texture.png");
+    tempHeaderRenderer->SetColor(0, 0, 0.1f);
+    tempHeaderRenderer->SetTransparency(0.8f);
+    tempHeaderRenderer->SetLayer(sortingLayer - 1);
+
+    // HeaderText
+    TextRenderer* tempHeaderTxtRenderer = 0;
+    tempHeaderTxtRenderer = tempHeader->AddComponent<TextRenderer>();
+    tempHeaderTxtRenderer->SetFont("Gabriola.ttf");
+    tempHeaderTxtRenderer->SetTextColor(0, 1, 1);
+    tempHeaderTxtRenderer->SetLayer(sortingLayer);
+    tempHeaderTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
+    tempHeaderTxtRenderer->SetXBuffer(50);
+    tempHeader->transform->SetPosition(Vector2(position.x - tempHeaderRenderer->GetHalfWidth(), position.y + tempBckgdRenderer->GetHalfHeight() - tempHeaderRenderer->GetHalfHeight()));
+    encounter->AddChild(tempHeader);
+
     // Display
     GameObject* tempDisplay = new GameObject();
     SpriteRenderer* tempDisplayRenderer = 0;
     tempDisplayRenderer = tempDisplay->AddComponent<SpriteRenderer>();
-    tempDisplayRenderer->Size(450, 450);
+    tempDisplayRenderer->Size(tempBckgdRenderer->GetHalfWidth()*2/16*4, tempBckgdRenderer->GetHalfHeight() * 2 /9*4);
     tempDisplayRenderer->SetTexture("Steven.jpg");
     tempDisplayRenderer->SetLayer(sortingLayer - 1);
-    tempDisplay->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() + tempDisplayRenderer->GetHalfWidth() + 100, position.y + 20));
+    tempDisplay->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() /8*7 + tempDisplayRenderer->GetHalfWidth() , position.y));
     encounter->AddChild(tempDisplay);
 
     // Buttons (Max 3)
@@ -85,7 +84,7 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string
         GameObject* tempButtonObj = new GameObject();
         SpriteRenderer* tempButtonRenderer = 0;
         tempButtonRenderer = tempButtonObj->AddComponent<SpriteRenderer>();
-        tempButtonRenderer->Size(504, 56);
+        tempButtonRenderer->Size(tempDescRenderer->GetHalfWidth() *2, tempDescRenderer->GetHalfHeight() / 3);
         tempButtonRenderer->SetTexture("UI/Button.png");
         tempButtonRenderer->SetBlendMode(2);
         tempButtonRenderer->SetLayer(sortingLayer - 1);
@@ -100,8 +99,8 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, int sortingLayer, string
         tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
         tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 
-        tempButtonObj->transform->SetPosition(Vector2(position.x + tempBckgdRenderer->GetHalfWidth() - tempButtonRenderer->GetHalfWidth() - 300,
-            position.y - tempBckgdRenderer->GetHalfHeight() + (i + 1) * tempBckgdRenderer->GetHalfHeight() / 5 + 40));
+        tempButtonObj->transform->SetPosition(Vector2(tempDescription->transform->worldposition.x ,
+            position.y - tempBckgdRenderer->GetHalfHeight() + (i + 0.8f) * tempBckgdRenderer->GetHalfHeight() / 5 + 40));
         Button* tempButton = tempButtonObj->AddComponent<Button>();
         tempButton->sr = tempButtonRenderer;
         tempButton->tr = tempButtonTxtRenderer;
