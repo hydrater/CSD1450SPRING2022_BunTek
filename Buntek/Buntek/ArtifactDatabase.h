@@ -14,14 +14,11 @@ enum class RarityTypes : short
     Universal = 4
 };
 
+// Yo we can have a constellation based on rarity amounts
+// Init a list, one for each behavior type
 class Artifact
 {
-private:
-
-public:
-    int id = 0;
-    string description;
-
+    int ID = 0, count = 0;
     RarityTypes rarity = RarityTypes::Common;
 };
 
@@ -34,5 +31,11 @@ private:
 
 public:
     static _artifactdatabase& Instance(void);
+    string GetName(int id);
+    string GetDescription (int id);
 
+    // Pass in all parameters that u need into these behavior such as object references
+    void Behavior_Reflect(int id);
+    void Behavior_DealDamage(int id);
+    void Behavior_TakeDamage(int id);
 };

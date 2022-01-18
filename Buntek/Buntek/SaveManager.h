@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include "ArtifactDatabase.h"
 
 #define SaveManager _saveManager::Instance()
 
@@ -31,10 +32,18 @@ public:
         // Artifact
         int artifactCount[2048];
     } profile = {};
+
     struct MapSave
     {
         float NodeWidth[64];
         float NodeHeight[64];
+    }mapSave = {};
+
+    struct ArtifactInventory
+    {
+        vector<Artifact> behaviorList_Reflect;
+        vector<Artifact> behaviorList_DealDamage;
+        vector<Artifact> behaviorList_TakeDamage;
     };
 
     void SaveData(void);
