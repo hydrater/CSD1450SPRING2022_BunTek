@@ -18,7 +18,12 @@ public:
     
     static _devTools& Instance(void);
 
+    //Basic function
     GameObject* CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos);
 
+    //Layer option override
     GameObject* CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer);
+
+    //Opacity option override
+    GameObject* CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer, float opacity);
 };

@@ -18,9 +18,8 @@ void UI_Shop::CreateShop(int sortingLayer, vector<string> artifacts, vector<stri
     GameObject* shopUI = this->Owner();
 
     // Header
-    GameObject* tempHeader = devTools.CreateSpriteGameObject("Encounter.png", 600, 150, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.5f));
-    tempHeader->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
-    tempHeader->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
+    GameObject* tempHeader = devTools.CreateSpriteGameObject("Encounter.png", 600, 150, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.5f),(short)(sortingLayer - 1), 0.5f);
+   
 
     // HeaderText
     TextRenderer* tempHeaderTxtRenderer = 0;
