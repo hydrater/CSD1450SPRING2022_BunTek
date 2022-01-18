@@ -18,7 +18,7 @@ void UI_Shop::CreateShop(int sortingLayer, vector<string> artifacts, vector<stri
     GameObject* shopUI = this->Owner();
 
     // Header
-    GameObject* tempHeader = devTools.createSpriteGameObject("Encounter.png", 600, 150, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.5f));
+    GameObject* tempHeader = devTools.CreateSpriteGameObject("Encounter.png", 600, 150, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.5f));
     tempHeader->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
     tempHeader->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
 
@@ -35,7 +35,7 @@ void UI_Shop::CreateShop(int sortingLayer, vector<string> artifacts, vector<stri
     shopUI->AddChild(tempHeader);
 
     // Leave Button
-    GameObject* tempLeave = devTools.createSpriteGameObject("Buttons.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 3.f));
+    GameObject* tempLeave = devTools.CreateSpriteGameObject("Buttons.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 3.f));
     TextRenderer* tempLeaveTxtRenderer = 0;
     tempLeaveTxtRenderer = tempLeave->AddComponent<TextRenderer>();
     tempLeaveTxtRenderer->SetFont("Gabriola.ttf");
@@ -53,7 +53,7 @@ void UI_Shop::CreateShop(int sortingLayer, vector<string> artifacts, vector<stri
     for (int i = 0; i < artifacts.size(); ++i) {
         if (i < buttonArtifactPos.size())
         {
-            GameObject* tempButtonObj = devTools.createSpriteGameObject("Encounter.png", buttonArtifactSize.x, buttonArtifactSize.y, AE_GFX_BM_BLEND, Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y));
+            GameObject* tempButtonObj = devTools.CreateSpriteGameObject("Encounter.png", buttonArtifactSize.x, buttonArtifactSize.y, AE_GFX_BM_BLEND, Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y));
             tempButtonObj->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
             tempButtonObj->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
 
@@ -79,7 +79,7 @@ void UI_Shop::CreateShop(int sortingLayer, vector<string> artifacts, vector<stri
     }
 
     // Create Stats Holder
-    GameObject* tempStatsHolder = devTools.createSpriteGameObject("Encounter.png", buttonArtifactSize.x * 2, buttonArtifactSize.y, AE_GFX_BM_BLEND, Vector2(0.f, -buttonArtifactSize.y / 2));
+    GameObject* tempStatsHolder = devTools.CreateSpriteGameObject("Encounter.png", buttonArtifactSize.x * 2, buttonArtifactSize.y, AE_GFX_BM_BLEND, Vector2(0.f, -buttonArtifactSize.y / 2));
     tempStatsHolder->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
     tempStatsHolder->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
 
@@ -88,7 +88,7 @@ void UI_Shop::CreateShop(int sortingLayer, vector<string> artifacts, vector<stri
     for (int i = 0; i < stats.size(); ++i) {
         if (i < buttonStatsPos.size())
         {
-            GameObject* tempButtonObj = devTools.createSpriteGameObject("Encounter.png", buttonStatsSize.x, buttonStatsSize.y, AE_GFX_BM_BLEND, Vector2(tempStatsHolder->transform->worldposition.x + buttonStatsPos[i].x, tempStatsHolder->transform->worldposition.y + buttonStatsPos[i].y));
+            GameObject* tempButtonObj = devTools.CreateSpriteGameObject("Encounter.png", buttonStatsSize.x, buttonStatsSize.y, AE_GFX_BM_BLEND, Vector2(tempStatsHolder->transform->worldposition.x + buttonStatsPos[i].x, tempStatsHolder->transform->worldposition.y + buttonStatsPos[i].y));
             tempButtonObj->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
             tempButtonObj->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
 

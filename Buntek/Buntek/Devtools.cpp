@@ -22,7 +22,7 @@ _devTools& _devTools::Instance(void)
     return *instance;
 }
 
-GameObject* _devTools::createSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos) {
+GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos) {
     GameObject* temp = new GameObject();
     temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
     SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();
@@ -34,7 +34,7 @@ GameObject* _devTools::createSpriteGameObject(string spriteName, float xSize, fl
     return temp;
 }
 
-GameObject* _devTools::createSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer) {
+GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer) {
     GameObject* temp = new GameObject();
     temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
     SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();

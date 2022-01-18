@@ -93,7 +93,7 @@ void ParticleSystem::SpawnParticle(void) {
 	}
 
 	//Creates particle objects and constituent
-	GameObject* temp = devTools.createSpriteGameObject(textureString, xSize, ySize, blendMode, this->Owner()->transform->worldposition,renderLayer);
+	GameObject* temp = devTools.CreateSpriteGameObject(textureString, xSize, ySize, blendMode, this->Owner()->transform->worldposition,renderLayer);
 	particleList.push_back(temp);
 	directionalVector2.Normalize();
 	Vector2 newVec = directionalVector2;
