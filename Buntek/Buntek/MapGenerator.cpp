@@ -422,6 +422,15 @@ void _mapData::SetClickable(bool _canClick)
     }
 }
 
+void _mapData::SetHoverable(bool _canHover)
+{
+    for (int i = 0; i < nodeList.size(); ++i)
+    {
+        if (nodeList[i].nodeObject)
+            nodeList[i].nodeObject->GetComponent<Button>()->SetHoverable(_canHover);
+    }
+}
+
 void MoveToBattle(Button* button)
 {
     SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
@@ -430,6 +439,7 @@ void MoveToBattle(Button* button)
 void DisplayEncounter(Button* button)
 {
     MapData.SetClickable(false);
+    MapData.SetHoverable(false);
     MapData.encounterUI = new GameObject();
     MapData.encounterUI->AddComponent<UI_EncounterBox>();
     MapData.encounterUI->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
@@ -438,6 +448,7 @@ void DisplayEncounter(Button* button)
 void DisplayShop(Button* button)
 {
     MapData.SetClickable(false);
+    MapData.SetHoverable(false);
     MapData.shopUI = new GameObject();
     MapData.shopUI->AddComponent<UI_Shop>();
     vector<string> artifacts{ "E", "E", "A", "E", "E", "A" };

@@ -258,4 +258,5 @@ void RemoveEncounter(Button* button)
     GameObject* tmp = button->affectedObject;
     tmp->GetComponent<UI_EncounterBox>()->CloseEncounterEvent();
     MapData.SetClickable(true);
+    MapData.SetHoverable(true);
 }
