@@ -105,3 +105,22 @@ void ParticleSystem::SpawnParticle(void) {
 	rotationVelList.push_back(RandFloatMinMax(randRotRangeMin,randRotRangeMax));
 	lifespanList.push_back(RandFloatMinMax(maxLifespanMin, maxLifespanMax));
 }
+
+void ParticleSystem::SetScrollingParticle(Vector2 directionalVector, float scrollSpeed, float xDimension, float yDimension, string newTextureString, Vector2 newWorldPos) {
+	directionalVector2 = directionalVector;
+	powerRangeMax = scrollSpeed;
+	powerRangeMin = scrollSpeed;
+	randRotRangeMin = 0;
+	randRotRangeMax = 0;
+	xSize = xDimension;
+	ySize = yDimension;
+	spawnRate = powerRangeMin / xSize;
+	maxLifespanMax = 2.0f / spawnRate;
+	maxLifespanMin = 2.0f / spawnRate;
+	internalTimer = maxLifespanMin / 2;
+	renderLayer = 1;
+	textureString = newTextureString;
+	angleSpread = 0;
+	SpawnParticle();
+	this->Owner()->transform->worldposition = newWorldPos;
+}

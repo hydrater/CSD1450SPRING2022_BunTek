@@ -16,29 +16,15 @@ void Scene_Test::Start(void)
 	splashimage4 = devTools.createSpriteGameObject("More Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
 	splashimage4->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, PI/2);
 	splashimage5 = devTools.createSpriteGameObject("NebulaBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
-
+	splashimage5->AddComponent<AlphaChanger>()->SetOscillation(6.0f, 1.0f, 0.8f, PI / 2);
 	//splashimage6 = devTools.createSpriteGameObject("NebulaCloudBig.png", 3960, 1080, AE_GFX_BM_BLEND, Vector2(0, 0),(short)1);
 	//splashimage1->AddComponent<Parallaxer>()->distance = 50;
 
 	spawner = new GameObject();
 	spawner->transform->worldposition = Vector2(0, 0);
 	ParticleSystem* _spawnerPs = spawner->AddComponent<ParticleSystem>();
-	_spawnerPs->directionalVector2 = Vector2(-1, 0);
-	_spawnerPs->powerRangeMax = 60;
-	_spawnerPs->powerRangeMin = 60;
-	_spawnerPs->randRotRangeMin = 0;
-	_spawnerPs->randRotRangeMax = 0;
-	_spawnerPs->xSize = 3960;
-	_spawnerPs->ySize = 1080;
-	_spawnerPs->spawnRate = _spawnerPs->powerRangeMin / _spawnerPs->xSize;
-	_spawnerPs->maxLifespanMax = 2.0f/_spawnerPs->spawnRate;
-	_spawnerPs->maxLifespanMin = 2.0f/_spawnerPs->spawnRate;
-	_spawnerPs->internalTimer = _spawnerPs->maxLifespanMin / 2;
-	_spawnerPs->renderLayer = 1;
-	_spawnerPs->textureString = "NebulaCloudBig.png";
-	_spawnerPs->angleSpread = 0;
-	_spawnerPs->SpawnParticle();
-	spawner->transform->worldposition = Vector2(-3960, 0);
+	_spawnerPs->SetScrollingParticle(Vector2(-1, 0), 60.0f, 3960, 1080, "NebulaCloudBig.png", Vector2(-3960, 0));
+	
 }
 
 void Scene_Test::Update(void)

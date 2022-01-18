@@ -55,7 +55,7 @@ public:
 
 	//SpawnParticle
 	void SpawnParticle();
-	
+	void SetScrollingParticle(Vector2 directionalVector, float scrollSpeed, float xDimension, float yDimension, string newTextureString, Vector2 newWorldPos);
 
 private:
 	
