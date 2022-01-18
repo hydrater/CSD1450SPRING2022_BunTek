@@ -164,4 +164,5 @@ void RemoveShop(Button* button)
     GameObject* tmp = button->affectedObject;
     tmp->GetComponent<UI_Shop>()->CloseShop();
     MapData.SetClickable(true);
+    MapData.SetHoverable(true);
 }

@@ -39,6 +39,7 @@ public:
     void ClearList(void);
     void Travel(Node* destination);
     void SetClickable(bool _canClick);
+    void SetHoverable(bool _canHover);
 
     GameObject* shopUI = 0, * encounterUI = 0, * dialogueUI = 0;
 

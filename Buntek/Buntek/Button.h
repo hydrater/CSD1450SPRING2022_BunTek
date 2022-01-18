@@ -11,6 +11,7 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 	void SetClickable(bool _canClick);
+	void SetHoverable(bool _canHover);
 
 	bool CheckTriggered(Vector2 mousePos);
 
@@ -35,5 +36,6 @@ public:
 	TextRenderer* tr = 0;
 private:
 	Transform* transform = 0;
+	bool canHover = true;
 	bool canClick = true;
 };

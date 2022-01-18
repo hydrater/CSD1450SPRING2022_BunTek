@@ -21,7 +21,7 @@ void Button::Update(void)
 	if (tr != NULL && sr != NULL) {
 		tr->ScaleTexture(sr);
 	}
-	if (CheckTriggered(GameManager.GetCursorPosition())) {
+	if (CheckTriggered(GameManager.GetCursorPosition()) && canHover) {
 		if (HoverEffect != NULL) {
 			HoverEffect(this);
 		}
@@ -40,6 +40,10 @@ void Button::Update(void)
 
 void Button::SetClickable(bool _canClick) {
 	canClick = _canClick;
+}
+
+void Button::SetHoverable(bool _canHover) {
+	canHover = _canHover;
 }
 
 bool Button::CheckTriggered(Vector2 mousePos) {
