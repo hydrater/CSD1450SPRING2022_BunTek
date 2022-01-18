@@ -17,13 +17,13 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
     rewardSelect->transform->SetPosition(position);
 
     // Background
-    GameObject* tempBackground = devTools.createSpriteGameObject("Encounter.png",(float) AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0, 0));
+    GameObject* tempBackground = devTools.CreateSpriteGameObject("Encounter.png",(float) AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0, 0));
     tempBackground->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
     tempBackground->GetComponent<SpriteRenderer>()->SetTransparency(0.75f);
     rewardSelect->AddChild(tempBackground);
 
     // Header
-    GameObject* tempHeader = devTools.createSpriteGameObject("paddle.png", 800, 100, AE_GFX_BM_BLEND, Vector2(position.x, position.y + tempBackground->GetComponent<SpriteRenderer>()->GetHalfHeight() / 1.5f));
+    GameObject* tempHeader = devTools.CreateSpriteGameObject("paddle.png", 800, 100, AE_GFX_BM_BLEND, Vector2(position.x, position.y + tempBackground->GetComponent<SpriteRenderer>()->GetHalfHeight() / 1.5f));
     tempHeader->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
 
     // HeaderText
@@ -42,7 +42,7 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
     vector<Button*> tempbuttonList;
     for (int i = 0; i < 4; ++i) {
 
-        GameObject* tempButtonObj = devTools.createSpriteGameObject("paddle.png", 350, 500, AE_GFX_BM_BLEND, Vector2(position.x, position.y - tempBackground->GetComponent<SpriteRenderer>()->GetHalfHeight() / 1.5f));
+        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("paddle.png", 350, 500, AE_GFX_BM_BLEND, Vector2(position.x, position.y - tempBackground->GetComponent<SpriteRenderer>()->GetHalfHeight() / 1.5f));
         tempButtonObj->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
 
         TextRenderer* tempButtonTxtRenderer = 0;

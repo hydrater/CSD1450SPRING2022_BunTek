@@ -93,7 +93,7 @@ void ParticleSystem::SpawnParticle(void) {
 	}
 
 	//Creates particle objects and constituent
-	GameObject* temp = devTools.createSpriteGameObject(textureString, xSize, ySize, blendMode, this->Owner()->transform->worldposition,renderLayer);
+	GameObject* temp = devTools.CreateSpriteGameObject(textureString, xSize, ySize, blendMode, this->Owner()->transform->worldposition,renderLayer);
 	particleList.push_back(temp);
 	directionalVector2.Normalize();
 	Vector2 newVec = directionalVector2;
@@ -106,7 +106,12 @@ void ParticleSystem::SpawnParticle(void) {
 	lifespanList.push_back(RandFloatMinMax(maxLifespanMin, maxLifespanMax));
 }
 
-void ParticleSystem::SetScrollingParticle(Vector2 directionalVector, float scrollSpeed, float xDimension, float yDimension, string newTextureString, Vector2 newWorldPos) {
+void ParticleSystem::SetScrollingParticle(
+	Vector2 directionalVector, float scrollSpeed, 
+	float xDimension, float yDimension, 
+	string newTextureString, Vector2 newWorldPos, 
+	short newRenderLayer, short newBlendMode) {
+	
 	directionalVector2 = directionalVector;
 	powerRangeMax = scrollSpeed;
 	powerRangeMin = scrollSpeed;
@@ -118,9 +123,64 @@ void ParticleSystem::SetScrollingParticle(Vector2 directionalVector, float scrol
 	maxLifespanMax = 2.0f / spawnRate;
 	maxLifespanMin = 2.0f / spawnRate;
 	internalTimer = maxLifespanMin / 2;
-	renderLayer = 1;
+	renderLayer = newRenderLayer;
 	textureString = newTextureString;
 	angleSpread = 0;
+	blendMode = newBlendMode;
 	SpawnParticle();
 	this->Owner()->transform->worldposition = newWorldPos;
+}
+
+void ParticleSystem::SetEmittingParticle(
+	Vector2 directionalVector, float newSpawnRate,
+	float newAngleSpread, float powerMin, float powerMax, 
+	float randRotMin, float randRotMax,
+	float xDimension, float yDimension,
+	string newTextureString, Vector2 newWorldPos,
+	short newRenderLayer, short newBlendMode) {
+
+	isBurst = false;
+	isLoop = true;
+	directionalVector2 = directionalVector;
+	spawnRate = newSpawnRate;
+	randRotRangeMin = randRotMin;
+	randRotRangeMax = randRotMax;
+	powerRangeMin = powerMin;
+	powerRangeMax = powerMax;
+	angleSpread = newAngleSpread;
+	xSize = xDimension;
+	ySize = yDimension;
+	textureString = newTextureString;
+	this->Owner()->transform->worldposition = newWorldPos;
+	blendMode = newBlendMode;
+	renderLayer = newRenderLayer;
+	SpawnParticle();
+}
+
+void ParticleSystem::SetBurstingParticle(
+	Vector2 directionalVector, float newSpawnRate, float newNumBurst, bool newIsLoop,
+	float newAngleSpread, float powerMin, float powerMax,
+	float randRotMin, float randRotMax,
+	float xDimension, float yDimension,
+	string newTextureString, Vector2 newWorldPos,
+	short newRenderLayer, short newBlendMode) {
+
+	isBurst = true;
+	isLoop = newIsLoop;
+	numBurst = newNumBurst;
+	spawnRate = newSpawnRate;
+
+	directionalVector2 = directionalVector;
+	randRotRangeMin = randRotMin;
+	randRotRangeMax = randRotMax;
+	powerRangeMin = powerMin;
+	powerRangeMax = powerMax;
+	angleSpread = newAngleSpread;
+	xSize = xDimension;
+	ySize = yDimension;
+	textureString = newTextureString;
+	this->Owner()->transform->worldposition = newWorldPos;
+	blendMode = newBlendMode;
+	renderLayer = newRenderLayer;
+	SpawnParticle();
 }

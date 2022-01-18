@@ -82,7 +82,7 @@ void UI_DialogueBox::CreateDialogue(string flag) {
     TextRenderer* tempTxtRenderer2 = 0;
     GameObject* tempGameObject = new GameObject();
     tempRenderer2 = tempGameObject->AddComponent<SpriteRenderer>();
-    tempRenderer2->Size(400, 80);
+    tempRenderer2->Size(tempRenderer->GetHalfWidth() *2 /4.5f, tempRenderer->GetHalfHeight()/2);
     tempRenderer2->SetTexture("EncounterBox.png");
     tempRenderer2->SetLayer(1);
     tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();

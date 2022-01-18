@@ -22,7 +22,7 @@ _devTools& _devTools::Instance(void)
     return *instance;
 }
 
-GameObject* _devTools::createSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos) {
+GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos) {
     GameObject* temp = new GameObject();
     temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
     SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();
@@ -31,10 +31,11 @@ GameObject* _devTools::createSpriteGameObject(string spriteName, float xSize, fl
     tempRenderer->Size(xSize, ySize);
     tempRenderer->SetBlendMode((AEGfxBlendMode)blendMode);
     temp->transform->SetPosition(pos);
+    tempRenderer->SetTransparency(1.0f);
     return temp;
 }
 
-GameObject* _devTools::createSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer) {
+GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer) {
     GameObject* temp = new GameObject();
     temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
     SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();
@@ -43,5 +44,19 @@ GameObject* _devTools::createSpriteGameObject(string spriteName, float xSize, fl
     tempRenderer->Size(xSize, ySize);
     tempRenderer->SetBlendMode((AEGfxBlendMode)blendMode);
     temp->transform->SetPosition(pos);
+    tempRenderer->SetTransparency(1.0f);
+    return temp;
+}
+
+GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer, float opacity) {
+    GameObject* temp = new GameObject();
+    temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
+    SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();
+    tempRenderer->SetLayer(layer);
+    tempRenderer->SetTexture(spriteName);
+    tempRenderer->Size(xSize, ySize);
+    tempRenderer->SetBlendMode((AEGfxBlendMode)blendMode);
+    temp->transform->SetPosition(pos);
+    tempRenderer->SetTransparency(opacity);
     return temp;
 }

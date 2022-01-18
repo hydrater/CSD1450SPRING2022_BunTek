@@ -36,9 +36,9 @@ private:
 		Vector2(buttonStatsSize.x, buttonStatsSize.y / 2), Vector2(-buttonStatsSize.x, -buttonStatsSize.y / 2),
 		Vector2(0.f, -buttonStatsSize.y / 2), Vector2(buttonStatsSize.x, -buttonStatsSize.y / 2) };
 
-	SpriteRenderer* header, *statsHolder;
-	TextRenderer* headerText;
-	Button* leaveButton;
+	SpriteRenderer* header = 0, *statsHolder = 0;
+	TextRenderer* headerText = 0;
+	Button* leaveButton = 0;
 	vector<Button*> buttonArtifactList;
 	vector<Button*> buttonStatsList;
 };
