@@ -115,6 +115,7 @@ _sceneManager::_sceneManager()
     transitioning = true;
     transitionInDone = false;
     transitionDone = false;
+    transitionwait = false;
     transitionMesh = 0;
     transitionTransparency = 0;
 
@@ -206,6 +207,7 @@ void _sceneManager::FadeToBlack(void) {
     if (!transitionInDone) {
         transitionTimer += DeltaTime;
         transitionTransparency = lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration));
+        cout << transitionTransparency << endl;
         if (transitionTimer > transitionStageDuration) {
             transitionTimer = 0;
             transitionInDone = true;
@@ -233,18 +235,28 @@ void _sceneManager::FadeToBlack(void) {
             }
             transitionTimer = 0;
             transitionDone = true;
+            transitionwait = true;
         }
     }
     else {
-        transitionTimer += DeltaTime;
-        transitionTransparency = (lerpF(1, 0, easeIn(transitionTimer / transitionStageDuration)));
-        if (transitionTimer > transitionStageDuration) {
-            transitionTimer = 0;
-            transitionTransparency = 0;
-            transitioning = false;
-            transitionInDone = false;
-            transitionDone = false;
+        if (transitionwait) {
+            transitionwait = false;
         }
+        else
+        {
+            transitionTimer += DeltaTime;
+            transitionTransparency = 1 - (lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration)));
+            cout << transitionTransparency << endl;
+            if (transitionTimer > transitionStageDuration) {
+
+                transitionTimer = 0;
+                transitionTransparency = 0;
+                transitioning = false;
+                transitionInDone = false;
+                transitionDone = false;
+            }
+        }
+
     }
 }
 

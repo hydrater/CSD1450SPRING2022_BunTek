@@ -61,9 +61,9 @@ private:
     _sceneManager(void);
     ~_sceneManager(void);
     Scene* scene, *nextScene;
-    bool notStarted, notAwake, transitioning, transitionInDone, transitionDone;
+    bool notStarted, notAwake, transitioning, transitionInDone, transitionDone, transitionwait;
     float transitionTimer;
-    const float transitionStageDuration = 0.3f;
+    const float transitionStageDuration = 0.4f;
     const float transitionDuration = 0.1f;
     TransitionType currentTransitionTypes;
     AEGfxVertexList* transitionMesh;
