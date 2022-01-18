@@ -40,6 +40,7 @@ _assetManager::_assetManager()
     LoadTexture("More Stars 2.png");
     LoadTexture("NebulaBig.png");
     LoadTexture("NebulaCloudBig.png");
+    LoadTexture("HoverTexture.png");
     //font
     LoadFont("Astral.ttf");
     LoadFont("Gabriola.ttf");
