@@ -24,12 +24,25 @@ _saveManager& _saveManager::Instance(void)
 
 void _saveManager::SaveData(void)
 {
+    profile.health = 0;
+    profile.damage = 0;
+    profile.paddleSpeed = 0;
+    profile.ballSpeed = 0;
+    profile.ballSpawnFreq = 0;
+    profile.hp = 0;
+    profile.mapSize = 0;
+    profile.stardust = 0;
+
     ofstream wf("./Save/sav.dat", ios::out | ios::binary);
     if (!wf) {
         cout << "Cannot open file!" << endl;
         return;
     }
     wf.write((char*)&profile, sizeof(Profile));
+    wf.write((char*)&_size, sizeof(_size));
+    wf.write((char*)&_stringSize, sizeof(_stringSize));
+    wf.write((char*)&_count, sizeof(_count));
+
     wf.close();
     if (!wf.good()) {
         cout << "Error occurred at writing time!" << endl;
@@ -45,6 +58,9 @@ void _saveManager::LoadData(void)
         return;
     }
     rf.read((char*)&profile, sizeof(Profile));
+    rf.read((char*)&_size, sizeof(_size));
+    rf.read((char*)&_stringSize, sizeof(_stringSize));
+    rf.read((char*)&_count, sizeof(_count));
     rf.close();
     if (!rf.good()) {
         cout << "Error occurred at reading time!" << endl;

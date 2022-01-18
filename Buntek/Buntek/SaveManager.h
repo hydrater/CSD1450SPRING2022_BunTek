@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <map>
 #include "ArtifactDatabase.h"
 
 #define SaveManager _saveManager::Instance()
@@ -12,6 +13,13 @@ private:
     static _saveManager* instance;
     _saveManager();
     ~_saveManager();
+
+    // Make sure to update the size if total artifact count goes above
+    int _size = 0;
+    unsigned long _stringSize[128] = {};
+    int _count[128] = {};
+
+    map<unsigned long, int> artifactSaveData;
 
 public:
     static _saveManager& Instance(void);
@@ -28,9 +36,6 @@ public:
         float hp;
         int stardust;
         int mapSize;
-
-        // Artifact
-        int artifactCount[2048];
     } profile = {};
 
     struct MapSave

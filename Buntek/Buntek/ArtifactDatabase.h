@@ -18,7 +18,7 @@ enum class RarityTypes : short
 // Init a list, one for each behavior type
 class Artifact
 {
-    int ID = 0, count = 0;
+    unsigned long ID = 0, count = 0;
     RarityTypes rarity = RarityTypes::Common;
 };
 
