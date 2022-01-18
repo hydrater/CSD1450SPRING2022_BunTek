@@ -165,4 +165,5 @@ void RemoveShop(Button* button)
     tmp->GetComponent<UI_Shop>()->CloseShop();
     MapData.SetClickable(true);
     MapData.SetHoverable(true);
+    MapData.DisplayCurrentRoutes();
 }

@@ -5,6 +5,7 @@
 #include "Component.h"
 #include <AEEngine.h>
 #include "SpriteRenderer.h"
+#include "Button.h"
 
 #define MapData _mapData::Instance()
 
@@ -24,19 +25,22 @@ public:
     class Node
     {
     public:
-        GameObject* nodeObject = 0;
+        GameObject* nodeObject;
         Vector2 pos;
         bool reached = false;
-        vector<Node> linkedTo;
+        vector<Node*> linkedTo;
         NodeType nodeType = NodeType::Nothing;
     };
     vector<AEGfxVertexList*> connectedLines;
 
-    Node currentNode;
+    Node* currentNode;
+    Node * exitNode;
     static _mapData& Instance(void);
     void GenerateMapData(Vector2 originPos);
     void GenerateMapObject(void);
     void ClearList(void);
+    void DisplayCurrentRoutes(void);
+    void DisplayBossNode(void);
     void Travel(Node* destination);
     void SetClickable(bool _canClick);
     void SetHoverable(bool _canHover);
@@ -51,6 +55,6 @@ private:
     float maxDistance = 400;
     float buffer = 75;
     const int numNodes = 20;
-    vector<Node> nodeList;
+    vector<Node*> nodeList;
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };

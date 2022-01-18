@@ -30,10 +30,10 @@ void _mapData::GenerateMapData(Vector2 originPos)
     float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
 
     for (int i = 0; i < numNodes; i++) {
-        Node node = Node();
+        Node* node = new Node();
         bool regenerateClose = true;
         bool hasNoConnection = false;
-        node.pos = Vector2(RandIntMinMax((int)StartXCoord, (int)EndXCoord), RandIntMinMax((int)StartYCoord, (int)EndYCoord));
+        node->pos = Vector2(RandIntMinMax((int)StartXCoord, (int)EndXCoord), RandIntMinMax((int)StartYCoord, (int)EndYCoord));
         float minsq = minDistance * minDistance;
         float maxsq = maxDistance * maxDistance;
         if (nodeList.size() == 0) {
@@ -41,12 +41,12 @@ void _mapData::GenerateMapData(Vector2 originPos)
             continue;
         }
         while (regenerateClose || hasNoConnection) {
-            node.pos = Vector2(RandIntMinMax((int)StartXCoord, (int)EndXCoord), RandIntMinMax((int)StartYCoord, (int)EndYCoord));
+            node->pos = Vector2(RandIntMinMax((int)StartXCoord, (int)EndXCoord), RandIntMinMax((int)StartYCoord, (int)EndYCoord));
             regenerateClose = false;
             hasNoConnection = true;
 
             for (int j = 0; j < nodeList.size(); j++) {
-                float distSq = (node.pos - nodeList[j].pos).LengthSquared();
+                float distSq = (node->pos - nodeList[j]->pos).LengthSquared();
                 if (distSq <= minsq) {
                     //cout << distSq << endl;
                     regenerateClose = true;
@@ -55,7 +55,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
                 else if (distSq <= maxsq) {
 
                     hasNoConnection = false;
-                    node.linkedTo.push_back(nodeList[j]);
+                    node->linkedTo.push_back(nodeList[j]);
                 }
             }
         }
@@ -351,7 +351,11 @@ void _mapData::GenerateMapData(Vector2 originPos)
 
 void _mapData::GenerateMapObject(void)
 {
-    MapData.connectedLines.clear();
+    if (nodeList.size() > 0)
+    {
+        currentNode = nodeList[0];
+        exitNode = nodeList[0];
+    }
     for (int i = 0; i < nodeList.size(); ++i)
     {
         GameObject* temp = new GameObject;
@@ -367,45 +371,77 @@ void _mapData::GenerateMapObject(void)
         {
         case 0:
             tempRenderer->SetTexture("UI/Encounter.png");
+            nodeList[i]->nodeType = NodeType::Encounter;
             tempButton->ButtonEffect = &DisplayEncounter;
             break;
         case 1:
             tempRenderer->SetTexture("UI/Enemy.png");
+            nodeList[i]->nodeType = NodeType::Enemy;
             temp->AddComponent<UI_EnemyNodeBox>();
             temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
             tempButton->ButtonEffect = &MoveToBattle;
             break;
         case 2:
             tempRenderer->SetTexture("UI/Elite.png");
+            nodeList[i]->nodeType = NodeType::Elite;
             temp->AddComponent<UI_EnemyNodeBox>();
             temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
             tempButton->ButtonEffect = &MoveToBattle;
             break;
-        default:
-            tempRenderer->SetTexture("UI/Rest.png");
+        case 3:
+            tempRenderer->SetTexture("Steven.jpg");
+            nodeList[i]->nodeType = NodeType::Shop;
             tempButton->ButtonEffect = &DisplayShop;
+            break;
+        case 4:
+            tempRenderer->SetTexture("UI/Rest.png");
+            nodeList[i]->nodeType = NodeType::Rest;
+            break;
+        default:
+            tempRenderer->SetTexture("Steven.jpg");
+            nodeList[i]->nodeType = NodeType::Nothing;
             break;
         }
 
-        temp->transform->worldposition = Vector2(nodeList[i].pos);
-        nodeList[i].nodeObject = temp;
+        temp->transform->worldposition = Vector2(nodeList[i]->pos);
+        nodeList[i]->nodeObject = temp;
 
-        //for (int k = 0; k < nodeList[i].LinkedTo.size(); k++)
-        //{
-        //    AEGfxVertexList* newLine;
-        //    AEGfxMeshStart();
-        //    AEGfxVertexAdd(nodeList[i].pos.x, nodeList[i].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-        //    AEGfxVertexAdd(nodeList[i].LinkedTo[k].pos.x, nodeList[i].LinkedTo[k].pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-        //    newLine = AEGfxMeshEnd();
-        //    MapData.connectedLines.push_back(newLine);
-        //}
-
+        // Get current node and exit node
+        currentNode = (nodeList[i]->pos.x < (*currentNode).pos.x) ? nodeList[i] : currentNode;
+        exitNode = (nodeList[i]->pos.x > (*exitNode).pos.x) ? nodeList[i] : exitNode;
     }
 }
 
 void _mapData::ClearList(void)
 {
     nodeList.clear();
+}
+
+void _mapData::DisplayCurrentRoutes(void)
+{
+    MapData.connectedLines.clear();
+    MapData.SetClickable(false);
+    for (int k = 0; k < (*currentNode).linkedTo.size(); k++)
+    {
+        if ((*currentNode).linkedTo[k] != currentNode)
+        {
+            AEGfxVertexList* newLine;
+            Node linkedNode = *((*currentNode).linkedTo[k]);
+            AEGfxMeshStart();
+            AEGfxVertexAdd((*currentNode).pos.x, (*currentNode).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+            AEGfxVertexAdd(linkedNode.pos.x, linkedNode.pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+            newLine = AEGfxMeshEnd();
+            MapData.connectedLines.push_back(newLine);
+            linkedNode.nodeObject->GetComponent<Button>()->SetClickable(true);
+        }
+    }
+}
+
+void _mapData::DisplayBossNode(void)
+{
+    exitNode->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/boss.png");
+    exitNode->nodeType = NodeType::Boss;
+    exitNode->nodeObject->GetComponent<Button>()->ButtonEffect = &MoveToBattle;
 }
 
 void _mapData::Travel(Node* destination)
@@ -417,8 +453,8 @@ void _mapData::SetClickable(bool _canClick)
 {
     for (int i = 0; i < nodeList.size(); ++i)
     {
-        if (nodeList[i].nodeObject)
-            nodeList[i].nodeObject->GetComponent<Button>()->SetClickable(_canClick);
+        if (nodeList[i]->nodeObject)
+            nodeList[i]->nodeObject->GetComponent<Button>()->SetClickable(_canClick);
     }
 }
 
@@ -426,8 +462,8 @@ void _mapData::SetHoverable(bool _canHover)
 {
     for (int i = 0; i < nodeList.size(); ++i)
     {
-        if (nodeList[i].nodeObject)
-            nodeList[i].nodeObject->GetComponent<Button>()->SetHoverable(_canHover);
+        if (nodeList[i]->nodeObject)
+            nodeList[i]->nodeObject->GetComponent<Button>()->SetHoverable(_canHover);
     }
 }
 
