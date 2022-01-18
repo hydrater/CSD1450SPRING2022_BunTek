@@ -106,7 +106,12 @@ void ParticleSystem::SpawnParticle(void) {
 	lifespanList.push_back(RandFloatMinMax(maxLifespanMin, maxLifespanMax));
 }
 
-void ParticleSystem::SetScrollingParticle(Vector2 directionalVector, float scrollSpeed, float xDimension, float yDimension, string newTextureString, Vector2 newWorldPos) {
+void ParticleSystem::SetScrollingParticle(
+	Vector2 directionalVector, float scrollSpeed, 
+	float xDimension, float yDimension, 
+	string newTextureString, Vector2 newWorldPos, 
+	short newRenderLayer, short newBlendMode) {
+	
 	directionalVector2 = directionalVector;
 	powerRangeMax = scrollSpeed;
 	powerRangeMin = scrollSpeed;
@@ -118,9 +123,34 @@ void ParticleSystem::SetScrollingParticle(Vector2 directionalVector, float scrol
 	maxLifespanMax = 2.0f / spawnRate;
 	maxLifespanMin = 2.0f / spawnRate;
 	internalTimer = maxLifespanMin / 2;
-	renderLayer = 1;
+	renderLayer = newRenderLayer;
 	textureString = newTextureString;
 	angleSpread = 0;
+	blendMode = newBlendMode;
 	SpawnParticle();
 	this->Owner()->transform->worldposition = newWorldPos;
+}
+
+void ParticleSystem::SetEmittingParticle(
+	Vector2 directionalVector, float newSpawnRate,
+	float newAngleSpread, float powerMin, float powerMax, 
+	float randRotMin, float randRotMax,
+	float xDimension, float yDimension,
+	string newTextureString, Vector2 newWorldPos,
+	short newRenderLayer, short newBlendMode) {
+
+	directionalVector2 = directionalVector;
+	spawnRate = newSpawnRate;
+	randRotRangeMin = randRotMin;
+	randRotRangeMax = randRotMax;
+	powerRangeMin = powerMin;
+	powerRangeMax = powerMax;
+	angleSpread = newAngleSpread;
+	xSize = xDimension;
+	ySize = yDimension;
+	textureString = newTextureString;
+	this->Owner()->transform->worldposition = newWorldPos;
+	blendMode = newBlendMode;
+	renderLayer = newRenderLayer;
+	SpawnParticle();
 }

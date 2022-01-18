@@ -55,11 +55,22 @@ public:
 
 	//SpawnParticle
 	void SpawnParticle();
-	void SetScrollingParticle(Vector2 directionalVector, float scrollSpeed, float xDimension, float yDimension, string newTextureString, Vector2 newWorldPos);
+
+	void SetScrollingParticle(
+		Vector2 directionalVector, float scrollSpeed, 
+		float xDimension, float yDimension, 
+		string newTextureString, Vector2 newWorldPos, short newRenderLayer, 
+		short newBlendMode);
+
+	void SetEmittingParticle(
+		Vector2 directionalVector, float newSpawnRate,
+		float newAngleSpread, float powerMin, float powerMax,
+		float randRotMin, float randRotMax,
+		float xDimension, float yDimension,
+		string newTextureString, Vector2 newWorldPos,
+		short newRenderLayer, short newBlendMode);
 
 private:
 	
 	
-	
-
 };
