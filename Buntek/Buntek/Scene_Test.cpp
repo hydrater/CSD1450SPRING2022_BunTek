@@ -23,9 +23,12 @@ void Scene_Test::Start(void)
 	spawner = new GameObject();
 	spawner->transform->worldposition = Vector2(0, 0);
 	ParticleSystem* _spawnerPs = spawner->AddComponent<ParticleSystem>();
-	_spawnerPs->SetScrollingParticle(Vector2(-1, 0), 60.0f, 3960, 1080, "NebulaCloudBig.png", Vector2(-3960, 0),1,(short)AE_GFX_BM_ADD);
-	_spawnerPs->blendMode = (short)AE_GFX_BM_ADD;
-	
+
+	_spawnerPs->SetScrollingParticle(
+		Vector2(-1, 0), 60.0f,
+		3960, 1080, "NebulaCloudBig.png",
+		Vector2(-3960, 0),1,(short)AE_GFX_BM_ADD);
+
 }
 
 void Scene_Test::Update(void)
