@@ -29,12 +29,12 @@ public:
         int mapSize;
 
         // Artifact
-        int test[10];
+        int artifactCount[2048];
     } profile = {};
     struct MapSave
     {
-        float NodeWidth[32];
-        float NodeHeight[32];
+        float NodeWidth[64];
+        float NodeHeight[64];
     };
 
     void SaveData(void);

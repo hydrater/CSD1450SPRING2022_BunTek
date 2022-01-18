@@ -28,7 +28,6 @@ void Scene_Test::Start(void)
 		Vector2(-1, 0), 60.0f,
 		3960, 1080, "NebulaCloudBig.png",
 		Vector2(-3960, 0),1,(short)AE_GFX_BM_ADD);
-
 }
 
 void Scene_Test::Update(void)
