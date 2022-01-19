@@ -97,7 +97,7 @@ void ParticleSystem::SpawnParticle(void) {
 	particleList.push_back(temp);
 	directionalVector2.Normalize();
 	Vector2 newVec = directionalVector2;
-	newVec.Rotate(RandFloatMinMax(-angleSpread / 2, angleSpread / 2));
+	newVec.RotateAC(RandFloatMinMax(-angleSpread / 2, angleSpread / 2));
 	newVec = newVec * RandFloatMinMax(powerRangeMin, powerRangeMax);
 
 	velocityList.push_back(newVec);

@@ -29,7 +29,8 @@ public:
 	void Set(const Vector2& vec);
 	void Set(float x, float y);
 	void SetZero();
-	void Rotate(float degrees); //Counterclockwise
+	void RotateAC(float degrees); //Counterclockwise
+	void RotateC(float degrees); //Clockwise
 	
 
 	float Length(void) const;

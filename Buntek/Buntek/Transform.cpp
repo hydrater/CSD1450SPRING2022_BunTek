@@ -46,18 +46,14 @@ void Transform::SetScale(Vector2 scale)
 
 void Transform::SetRotation(float rotation)
 {
-	this->worldrotation = rotation;
 	for (Transform* child : children)
 	{
 		Vector2 childPos = child->worldposition.operator-(worldposition);
-		cout << childPos.x << "||" << childPos.y << endl;
-		cout << rotation << endl;
-		childPos.Rotate(-rotation);
-		child->worldposition = worldposition.operator+(childPos);
-		cout << childPos.x << ")(" << childPos.y << endl;
-		//		child->SetPosition(worldposition.operator+(childPos));
-		child->Rotate(rotation);
+		childPos.RotateC(rotation - this->worldrotation);
+		child->SetPosition(worldposition.operator+(childPos));
+		child->Rotate(rotation - this->worldrotation);
 	}
+	this->worldrotation = rotation;
 }
 
 void Transform::SetRight(Vector2 right)
@@ -81,8 +77,13 @@ void Transform::Rotate(float rotate)
 	if (this->Owner()->GetComponent<Collider2D>())
 		this->Owner()->GetComponent<Collider2D>()->UpdateDimension();
 
-	for (size_t i = 0; i < children.size(); ++i)
-		children[i]->Rotate(rotate);
+	for (Transform* child : children)
+	{
+		Vector2 childPos = child->worldposition.operator-(worldposition);
+		childPos.RotateC(rotate);
+		child->SetPosition(worldposition.operator+(childPos));
+		child->Rotate(rotate);
+	}
 }
 
 void Transform::Scale(float scale)
