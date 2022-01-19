@@ -5,7 +5,6 @@
 #include "SpriteRenderer.h"
 #include "SaveManager.h"
 
-float hp = 100;
 UI_Hp::UI_Hp(void)
 {
 
@@ -16,27 +15,31 @@ UI_Hp::~UI_Hp(void)
 
 }
 
-void UI_Hp::GenerateHpBackground(void) //empty white bar
+void UI_Hp::GenerateHpBackground(bool _isplayer)
 {
-	hpBackground = devTools.CreateSpriteGameObject("WhiteTexture.png", 600, 100, AE_GFX_BM_NONE, Vector2(300.f, AEGetWindowHeight() / 2.5f), (short)(5 - 2), 1);
-}
-void UI_Hp::GenerateHpForeground(void) //bar to update
-{
-	hpForeground = devTools.CreateSpriteGameObject("WhiteTexture.png", 600, 100, AE_GFX_BM_NONE, Vector2(300.f, AEGetWindowHeight() / 2.5f), (short)(5 - 1), 1);
+	//empty white bar
+	hpBackground = devTools.CreateSpriteGameObject("WhiteTexture.png", 600, 100, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 2), 1);
+	//bar to update
+	hpForeground = devTools.CreateSpriteGameObject("WhiteTexture.png", 600, 100, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 1), 1);
+	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
+	hpForegroundRenderer->SetColor(1, 0, 0);
+	isplayer = _isplayer;
 }
 void UI_Hp::Start(void)
 {
-	//hp = SaveManager.profile.hp;
+	maxHealth = 1000;
+	health = maxHealth;
 }
 
 void UI_Hp::Update(void)
 {
-	float beforeDamageHp = hp;
-	hp -= 1;
-	if (beforeDamageHp > hp)
-	{
-		float calculation = beforeDamageHp - hp;
-		float sizeReduction = calculation * 10;
-		hpForeground->GetComponent<SpriteRenderer>()->Size(hpForeground->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2 - sizeReduction, hpForeground->GetComponent<SpriteRenderer>()->GetHalfHeight() * 2);
-	}
+	health -= 1;
+	SpriteRenderer* hpBackgroundRenderer = hpBackground->GetComponent<SpriteRenderer>();
+	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
+	health = AEClamp(health, 0, maxHealth);
+	hpForegroundRenderer->Size(hpBackgroundRenderer->GetHalfWidth()*2/ maxHealth * health, hpForegroundRenderer->GetHalfHeight() * 2);
+	if(isplayer)
+		hpForeground->transform->SetPosition(Vector2(hpBackground->transform->worldposition.x - hpBackgroundRenderer->GetHalfWidth() + hpForegroundRenderer->GetHalfWidth(), hpBackground->transform->worldposition.y));
+	else
+		hpForeground->transform->SetPosition(Vector2(hpBackground->transform->worldposition.x + hpBackgroundRenderer->GetHalfWidth() - hpForegroundRenderer->GetHalfWidth(), hpBackground->transform->worldposition.y));
 }

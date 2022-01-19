@@ -7,6 +7,7 @@
 #include "BattleInput.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
+#include "UI_Hp.h"
 
 using namespace Math;
 
@@ -119,6 +120,16 @@ void Scene_Battle::Start(void)
 	GameManager.areaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	GameManager.friendlyAreaX = friendlyArea->transform->worldposition.x + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	GameManager.hostileAreaX = hostileArea->transform->worldposition.x - hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+
+	//hpBar = new GameObject();
+	//UI_Hp* ui_hpBar = hpBar->AddComponent<UI_Hp>();
+	//hpBar->transform->SetPosition(Vector2(-500, -400));
+	//ui_hpBar->GenerateHpBackground(true);
+
+	//enemyhpBar = new GameObject();
+	//UI_Hp* ui_EhpBar = enemyhpBar->AddComponent<UI_Hp>();
+	//enemyhpBar->transform->SetPosition(Vector2(500, -400));
+	//ui_EhpBar->GenerateHpBackground(false);
 
 	GameManager.InitBattle(100, 100);
 }	
