@@ -249,5 +249,5 @@ void RemoveEncounter(Button* button)
     tmp->GetComponent<UI_EncounterBox>()->CloseEncounterEvent();
     MapData.SetClickable(true);
     MapData.SetHoverable(true);
-    MapData.DisplayCurrentRoutes();
+    MapData.DisplayCurrentRoutes(MapData.playerTravelDistance);
 }
