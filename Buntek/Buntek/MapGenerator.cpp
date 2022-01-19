@@ -51,7 +51,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
                     break;
                 }
                 else if (distSq <= maxsq) {
-
+                    cout << distSq << "\tis close enough to \t" << maxsq << endl;
                     hasNoConnection = false;
                     node->linkedTo.push_back(nodeList[j]);
                     nodeList[j]->linkedTo.push_back(node);
