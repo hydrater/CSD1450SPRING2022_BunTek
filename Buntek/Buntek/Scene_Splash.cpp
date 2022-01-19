@@ -44,7 +44,7 @@ void Scene_Splash::Update(void)
 		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
 		break;
 	case 4:
-		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None);
+		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
 		break;
 	}
 

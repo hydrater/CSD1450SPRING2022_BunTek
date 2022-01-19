@@ -461,13 +461,13 @@ void _mapData::Travel(Node* destination)
             encounterUI->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
             break;
         case NodeType::Enemy:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
             break;
         case NodeType::Elite:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
             break;
         case NodeType::Boss:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
             break;
         case NodeType::Shop:
             SetClickable(false);

@@ -42,7 +42,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AudioManager;
 	MapData;
 	Renderer;
-	SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None);
+	SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
 	//SaveManager.SaveData();
 	//SaveManager.LoadData();
 
@@ -61,16 +61,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		if (AEInputCheckTriggered(AEVK_1))
 		{
-			SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack);
+			SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack, true);
 		}
 
 		if (AEInputCheckTriggered(AEVK_2))
 		{
-			SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+			SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
 		}
 		if (AEInputCheckTriggered(AEVK_3))
 		{
-			SceneManager.LoadScene(new Scene_Test, TransitionType::FadeToBlack);
+			SceneManager.LoadScene(new Scene_Test, TransitionType::FadeToBlack, true);
 		}
 		if (AEInputCheckTriggered(AEVK_4))
 		{

@@ -68,10 +68,11 @@ private:
     TransitionType currentTransitionTypes;
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;
+    bool deleteScene = true;
 
 public:
     static _sceneManager& Instance(void);
-    void LoadScene(Scene* newScene, TransitionType TransitionType);
+    void LoadScene(Scene* newScene, TransitionType TransitionType, bool deleteCurrScene);
     Scene* GetScene(void);
     void EarlyUpdate(void);
     void Update(void);

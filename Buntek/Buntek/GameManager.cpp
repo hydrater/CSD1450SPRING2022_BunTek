@@ -117,7 +117,7 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
         playerHp -= damage;
         if (playerHp <= 0)
         {
-            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack);
+            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack, true);
         }
     }
     else
@@ -125,7 +125,7 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
         enemyHp -= damage;
         if (enemyHp <= 0)
         {
-            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack);
+            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack, true);
         }
     }
 

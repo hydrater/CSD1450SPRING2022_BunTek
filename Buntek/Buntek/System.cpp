@@ -139,7 +139,7 @@ _sceneManager::~_sceneManager(void)
     AEGfxMeshFree(transitionMesh);
 }
 
-void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType)
+void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bool deleteCurrScene)
 {
     if (scene != NULL)
         nextScene = newScene;
@@ -149,6 +149,7 @@ void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType)
     GameManager.cameraLerpBack = false;
     currentTransitionTypes = TransitionType;
     transitioning = true;
+    deleteScene = deleteCurrScene;
 }
 
 Scene* _sceneManager::GetScene(void)
@@ -166,7 +167,8 @@ void _sceneManager::Update(void)
             {
                 Renderer.FreeAll();
                 GameScriptManager.ClearList();
-                delete scene;
+                if (deleteScene)
+                    delete scene;
                 scene = nextScene;
                 nextScene = 0;
             }
@@ -222,7 +224,8 @@ void _sceneManager::FadeToBlack(void) {
             {
                 Renderer.FreeAll();
                 GameScriptManager.ClearList();
-                delete scene;
+                if (deleteScene)
+                    delete scene;
                 AEGfxSetCamPosition(0, 0);
                 scene = nextScene;
                 nextScene = 0;
@@ -254,7 +257,6 @@ void _sceneManager::FadeToBlack(void) {
                 transitionDone = false;
             }
         }
-
     }
 }
 
