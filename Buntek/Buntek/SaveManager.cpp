@@ -33,6 +33,16 @@ void _saveManager::SaveData(void)
     profile.mapSize = 0;
     profile.stardust = 0;
 
+    _key[0] = 50;
+    _value[0] = 30;
+    _key[1] = 10248;
+    _value[2] = 500;
+    _key[3] = 500000;
+    _value[3] = 340;
+
+    _size = 3;
+
+
     ofstream wf("./Save/sav.dat", ios::out | ios::binary);
     if (!wf) {
         cout << "Cannot open file!" << endl;
@@ -40,8 +50,8 @@ void _saveManager::SaveData(void)
     }
     wf.write((char*)&profile, sizeof(Profile));
     wf.write((char*)&_size, sizeof(_size));
-    wf.write((char*)&_stringSize, sizeof(_stringSize));
-    wf.write((char*)&_count, sizeof(_count));
+    wf.write((char*)&_key, sizeof(_key));
+    wf.write((char*)&_value, sizeof(_value));
 
     wf.close();
     if (!wf.good()) {
@@ -59,11 +69,18 @@ void _saveManager::LoadData(void)
     }
     rf.read((char*)&profile, sizeof(Profile));
     rf.read((char*)&_size, sizeof(_size));
-    rf.read((char*)&_stringSize, sizeof(_stringSize));
-    rf.read((char*)&_count, sizeof(_count));
+    rf.read((char*)&_key, sizeof(_key));
+    rf.read((char*)&_value, sizeof(_value));
     rf.close();
     if (!rf.good()) {
         cout << "Error occurred at reading time!" << endl;
         return;
     }
+
+    for (int i = 0; i < _size; i++)
+    {
+        artifactSaveData[_key[i]] = _value[i];
+    }
+
+    cout << artifactSaveData[50] << endl;
 }

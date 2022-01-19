@@ -16,8 +16,8 @@ private:
 
     // Make sure to update the size if total artifact count goes above
     int _size = 0;
-    unsigned long _stringSize[128] = {};
-    int _count[128] = {};
+    unsigned long _key[128] = {};
+    int _value[128] = {};
 
     map<unsigned long, int> artifactSaveData;
 
