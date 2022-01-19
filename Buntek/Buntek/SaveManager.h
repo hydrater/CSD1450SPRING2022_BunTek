@@ -19,8 +19,6 @@ private:
     unsigned long _key[128] = {};
     int _value[128] = {};
 
-    map<unsigned long, int> artifactSaveData;
-
 public:
     static _saveManager& Instance(void);
     struct Profile
@@ -38,11 +36,7 @@ public:
         int mapSize;
     } profile = {};
 
-    struct MapSave
-    {
-        float NodeWidth[64];
-        float NodeHeight[64];
-    }mapSave = {};
+    map<unsigned long, int> artifactSaveData;
 
     struct ArtifactInventory
     {
@@ -50,6 +44,12 @@ public:
         vector<Artifact> behaviorList_DealDamage;
         vector<Artifact> behaviorList_TakeDamage;
     };
+
+    struct MapSave
+    {
+        float NodeWidth[64];
+        float NodeHeight[64];
+    }mapSave = {};
 
     void SaveData(void);
     void LoadData(void);
