@@ -92,11 +92,12 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 		return;
 }
 
-void BallBehavior::BounceBall(bool isPlayer, Vector2 wallCoord, float angle)
+void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 {
 	if ((!isPlayer && transform->worldposition.x < GameManager.friendlyAreaX) ||
 		(isPlayer && transform->worldposition.x > GameManager.hostileAreaX))
 	{
+		Vector2 wallCoord = wall->transform->worldposition;
 		// Create reflection axis
 		Vector2 normal = Vector2(wallCoord.x - transform->worldposition.x, 0.f);
 		// Rotate (Vector.rotate goes counter clockwise; Angle is based in clockwise)
