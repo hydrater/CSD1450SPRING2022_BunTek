@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "Transform.h"
 #include "RenderComponent.h"
 #include "SpriteRenderer.h"
