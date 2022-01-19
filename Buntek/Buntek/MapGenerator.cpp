@@ -54,6 +54,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
 
                     hasNoConnection = false;
                     node->linkedTo.push_back(nodeList[j]);
+                    nodeList[j]->linkedTo.push_back(node);
                 }
             }
         }
