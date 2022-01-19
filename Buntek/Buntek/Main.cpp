@@ -43,8 +43,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	MapData;
 	Renderer;
 	SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None);
-	SaveManager.SaveData();
-	SaveManager.LoadData();
+	//SaveManager.SaveData();
+	//SaveManager.LoadData();
 
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);

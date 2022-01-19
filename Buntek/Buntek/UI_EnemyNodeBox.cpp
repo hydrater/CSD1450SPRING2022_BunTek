@@ -124,7 +124,7 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 	artifactgrid = new GameObject();
 	SpriteRenderer* tempArtifactBckgdRenderer = artifactgrid->AddComponent<SpriteRenderer>();
 	tempArtifactBckgdRenderer->Size(tempBckgdRenderer->GetHalfWidth() * 2, artifactGridHeight * artifactGridRowCount);
-	tempArtifactBckgdRenderer->SetTexture("WhiteTexture.png");
+	tempArtifactBckgdRenderer->SetTexture("HoverTexture.png");
 	tempArtifactBckgdRenderer->SetLayer(sortingLayer - 2);
 	artifactgrid->transform->SetPosition(Vector2(enemynodepos.x, enemynodepos.y - tempBckgdRenderer->GetHalfHeight() - tempArtifactBckgdRenderer->GetHalfHeight()));
 	enemynode->AddChild(artifactgrid);

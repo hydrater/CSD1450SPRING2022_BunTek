@@ -25,7 +25,7 @@ public:
     class Node
     {
     public:
-        GameObject* nodeObject;
+        GameObject* nodeObject = nullptr;
         Vector2 pos;
         bool reached = false;
         vector<Node*> linkedTo;

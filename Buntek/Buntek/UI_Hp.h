@@ -12,10 +12,12 @@ public:
 
 	UI_Hp(void);
 	~UI_Hp(void);
-	void GenerateHpBackground(int sortingLayer, bool isPlayer, bool isEnemy);
-	void GenerateHpForeground(int sortingLayer, bool isPlayer, bool isEnemy);
-	void UpdateHp(void);
-	void StartHp(void);
+	void GenerateHpBackground(void);
+	void GenerateHpForeground(void);
+	void Start(void) override;
+	void Update(void) override;
+	GameObject* hpForeground;
+	GameObject* hpBackground;
 private:
 
 
