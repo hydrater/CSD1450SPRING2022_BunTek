@@ -2,6 +2,7 @@
 #include "System.h"
 #include "BallBehavior.h"
 #include "PaddleBehavior.h"
+#include "ArtifactDatabase.h"
 
 _CollisionManager2D* _CollisionManager2D::instance = 0;
 
@@ -98,6 +99,8 @@ void _CollisionManager2D::CollideAll(void)
                 bool isPlayer = !circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->playerPossess;
                 circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->
                     BounceBall(isPlayer, boxColliderList[j]->Owner(), boxColliderList[j]->Owner()->transform->worldrotation);
+
+                ArtifactDatabase.Behavior_Reflect(00000, circleColliderList[i]->Owner());
             }
         }
     }

@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "Entity.h"
 using namespace std;
 
 #define ArtifactDatabase _artifactdatabase::Instance()
@@ -33,9 +34,8 @@ public:
     static _artifactdatabase& Instance(void);
     string GetName(int id);
     string GetDescription (int id);
-
     // Pass in all parameters that u need into these behavior such as object references
-    void Behavior_Reflect(int id);
-    void Behavior_DealDamage(int id);
-    void Behavior_TakeDamage(int id);
+    void Behavior_Reflect(int id, GameObject* gameObject);
+    void Behavior_DealDamage(int id, GameObject* gameObject);
+    void Behavior_TakeDamage(int id, GameObject* gameObject);
 };

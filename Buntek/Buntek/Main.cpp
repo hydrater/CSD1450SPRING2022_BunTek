@@ -37,12 +37,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// --------------------------------------------- Init --------------------------------------------- //
 	InitRNG();
+	ArtifactDatabase;
 	GameManager;
 	AssetManager;
 	AudioManager;
 	MapData;
 	Renderer;
 	SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
+
 	//SaveManager.SaveData();
 	//SaveManager.LoadData();
 
