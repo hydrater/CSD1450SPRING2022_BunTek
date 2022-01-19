@@ -25,5 +25,6 @@ public:
     void RemoveFromList(CircleCollider* collider);
     void RemoveFromList(BoxCollider* collider);
     void RemoveFromList(LineCollider* collider);
+    void RemoveAll(void);
     void CollideAll(void);
 };
