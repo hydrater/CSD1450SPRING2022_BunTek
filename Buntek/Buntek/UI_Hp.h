@@ -12,12 +12,14 @@ public:
 
 	UI_Hp(void);
 	~UI_Hp(void);
-	void GenerateHpBackground(void);
-	void GenerateHpForeground(void);
+	void GenerateHpBackground(bool _isplayer);
 	void Start(void) override;
 	void Update(void) override;
-	GameObject* hpForeground;
-	GameObject* hpBackground;
+	GameObject* hpForeground = 0;
+	GameObject* hpBackground = 0;
+	bool isplayer = false;
+	float health = 1000;
+	float maxHealth = 1000;
 private:
 
 
