@@ -11,6 +11,7 @@
 
 void Scene_Navigation::Start(void)
 {
+	SceneManager.navigationScene = this;
 	MapData.GenerateMapData(Vector2(0, -1200));
 	MapData.GenerateMapObject();
 	MapData.DisplayCurrentRoutes();

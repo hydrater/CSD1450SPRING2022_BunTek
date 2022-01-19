@@ -417,6 +417,7 @@ void _mapData::DisplayCurrentRoutes(void)
 {
     MapData.connectedLines.clear();
     MapData.SetClickable(false);
+    MapData.SetHoverable(false);
     for (int k = 0; k < (*currentNode).linkedTo.size(); k++)
     {
         if ((*currentNode).linkedTo[k] != currentNode)
@@ -429,6 +430,7 @@ void _mapData::DisplayCurrentRoutes(void)
             newLine = AEGfxMeshEnd();
             MapData.connectedLines.push_back(newLine);
             (*linkedNode).nodeObject->GetComponent<Button>()->SetClickable(true);
+            (*linkedNode).nodeObject->GetComponent<Button>()->SetHoverable(true);
         }
     }
 }
