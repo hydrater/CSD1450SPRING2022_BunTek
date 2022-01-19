@@ -44,17 +44,18 @@ void _mapData::GenerateMapData(Vector2 originPos)
             hasNoConnection = true;
 
             for (int j = 0; j < nodeList.size(); j++) {
+
                 float distSq = (node->pos - nodeList[j]->pos).LengthSquared();
+
                 if (distSq <= minsq) {
-                    //cout << distSq << endl;
                     regenerateClose = true;
                     break;
                 }
                 else if (distSq <= maxsq) {
                     cout << distSq << "\tis close enough to \t" << maxsq << endl;
                     hasNoConnection = false;
-                    node->linkedTo.push_back(nodeList[j]);
-                    nodeList[j]->linkedTo.push_back(node);
+                   /* node->linkedTo.push_back(nodeList[j]);
+                    nodeList[j]->linkedTo.push_back(node);*/
                 }
             }
         }
@@ -413,24 +414,28 @@ void _mapData::ClearList(void)
     nodeList.clear();
 }
 
-void _mapData::DisplayCurrentRoutes(void)
+void _mapData::DisplayCurrentRoutes(float travelDistance)
 {
     MapData.connectedLines.clear();
     MapData.SetClickable(false);
     MapData.SetHoverable(false);
-    for (int k = 0; k < (*currentNode).linkedTo.size(); k++)
+    for (int k = 0; k < nodeList.size(); k++)
     {
-        if ((*currentNode).linkedTo[k] != currentNode)
+        bool closeEnough = false;
+        float distBetSq = (nodeList[k]->pos - currentNode->pos).LengthSquared();
+        closeEnough = distBetSq <= travelDistance * travelDistance;
+
+        if (nodeList[k] != currentNode && closeEnough)
         {
             AEGfxVertexList* newLine;
-            Node* linkedNode = (*currentNode).linkedTo[k];
             AEGfxMeshStart();
             AEGfxVertexAdd((*currentNode).pos.x, (*currentNode).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-            AEGfxVertexAdd((*linkedNode).pos.x, (*linkedNode).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+            AEGfxVertexAdd((*nodeList[k]).pos.x, (*nodeList[k]).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
             newLine = AEGfxMeshEnd();
             MapData.connectedLines.push_back(newLine);
-            (*linkedNode).nodeObject->GetComponent<Button>()->SetClickable(true);
-            (*linkedNode).nodeObject->GetComponent<Button>()->SetHoverable(true);
+
+            nodeList[k]->nodeObject->GetComponent<Button>()->SetClickable(true);
+            nodeList[k]->nodeObject->GetComponent<Button>()->SetHoverable(true);
         }
     }
 }
@@ -450,7 +455,7 @@ void _mapData::Travel(Node* destination)
         vector<string> stats{ "E", "A", "E", "E", "A" };
         // Enact dest node effects
         currentNode = destinationNode;
-        DisplayCurrentRoutes();
+        DisplayCurrentRoutes(playerTravelDistance);
         switch (destinationNode->nodeType)
         {
         case NodeType::Encounter:
@@ -461,13 +466,13 @@ void _mapData::Travel(Node* destination)
             encounterUI->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
             break;
         case NodeType::Enemy:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
             break;
         case NodeType::Elite:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
             break;
         case NodeType::Boss:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
             break;
         case NodeType::Shop:
             SetClickable(false);
