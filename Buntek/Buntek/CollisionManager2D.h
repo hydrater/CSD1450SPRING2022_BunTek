@@ -27,4 +27,5 @@ public:
     void RemoveFromList(LineCollider* collider);
     void RemoveAll(void);
     void CollideAll(void);
+    Collider2D* CheckCollision(Collider2D* collider);
 };

@@ -40,6 +40,22 @@ void BallBehavior::Update(void)
 		transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + 5, GameManager.areaTopBoundary - 5);
 	}
 
+	// Check for collision
+	if (this->Owner()->GetComponent<CircleCollider>())
+	{
+		Collider2D* collision = CollisionManager2D.CheckCollision(this->Owner()->GetComponent<CircleCollider>());
+		
+		// Possible collision effects
+		if (collision != nullptr)
+		{
+			// Collision with Paddle
+			if (collision->Owner() && collision->Owner()->GetComponent<PaddleBehavior>())
+			{
+				BounceBall(!playerPossess, collision->Owner(), collision->Owner()->transform->worldrotation);
+			}
+		}
+	}
+
 	UpdateTrail();
 }
 

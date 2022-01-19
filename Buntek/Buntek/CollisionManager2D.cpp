@@ -93,15 +93,7 @@ void _CollisionManager2D::CollideAll(void)
         }
         for (int j = 0; j < boxColliderList.size(); ++j)
         {
-            bool collide = (circleColliderList[i])->Collide(boxColliderList[j]);
-            if (collide && circleColliderList[i]->Owner()->GetComponent<BallBehavior>() && boxColliderList[j]->Owner()->GetComponent<PaddleBehavior>())
-            {
-                bool isPlayer = !circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->playerPossess;
-                circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->
-                    BounceBall(isPlayer, boxColliderList[j]->Owner(), boxColliderList[j]->Owner()->transform->worldrotation);
-
-                //ArtifactDatabase.Behavior_Reflect(00000, circleColliderList[i]->Owner());
-            }
+            (circleColliderList[i])->Collide(boxColliderList[j]);
         }
     }
 
@@ -117,4 +109,40 @@ void _CollisionManager2D::CollideAll(void)
             (boxColliderList[i])->Collide(circleColliderList[j]);
         }
     }
+}
+
+// Returns own self if no collision
+Collider2D* _CollisionManager2D::CheckCollision(Collider2D* collider)
+{
+    for (CircleCollider* otherCol : circleColliderList)
+    {
+        if (collider != otherCol)
+        {
+            if (otherCol->Collide(collider))
+            {
+                return otherCol;
+            }
+        }
+    }
+    for (BoxCollider* otherCol : boxColliderList)
+    {
+        if (collider != otherCol)
+        {
+            if (otherCol->Collide(collider))
+            {
+                return otherCol;
+            }
+        }
+    }
+    for (LineCollider* otherCol : lineColliderList)
+    {
+        if (collider != otherCol)
+        {
+            if (otherCol->Collide(collider))
+            {
+                return otherCol;
+            }
+        }
+    }
+    return nullptr;
 }
