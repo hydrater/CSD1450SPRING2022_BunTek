@@ -13,14 +13,14 @@ void Scene_Navigation::Start(void)
 {
 	MapData.GenerateMapData(Vector2(0, -1200));
 	MapData.GenerateMapObject();
-	MapData.DisplayCurrentRoutes(MapData.playerTravelDistance);
+	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
 	MapData.DisplayBossNode();
 	inputHandler = new GameObject();
 	//inputHandler->AddComponent<CursorCamera>()->camPos = Vector2(0, -900);
 	//AEGfxSetCamPosition(0, -900);
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
-	AudioManager.SetMusicVolume(0.1f);
+	AudioManager.SetMusicVolume(1.0f);
 }
 
 // Draw all lines
@@ -53,6 +53,10 @@ void Scene_Navigation::EarlyUpdate(void)
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	AEGfxSetPosition(0.0f, 0.0f);
 
+	
+	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
+
+	//Draw connected lines
 	for (int i = 0; i < MapData.connectedLines.size(); i++)
 	{
 		AEGfxMeshDraw(MapData.connectedLines[i], AE_GFX_MDM_LINES_STRIP);

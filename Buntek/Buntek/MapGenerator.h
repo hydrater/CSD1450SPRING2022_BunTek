@@ -40,7 +40,8 @@ public:
     void GenerateMapData(Vector2 originPos);
     void GenerateMapObject(void);
     void ClearList(void);
-    void DisplayCurrentRoutes(float travelDistance);
+    void DisplayNodeRoutes( float travelDistance);
+    bool CheckHovered(Node* thisNode, Vector2 mousePos);
     void DisplayBossNode(void);
     void Travel(Node* destination);
     void SetClickable(bool _canClick);
@@ -51,6 +52,7 @@ public:
     GameObject* shopUI = 0, * encounterUI = 0, * dialogueUI = 0;
 
     bool isTravelling = false; // Flag used for checking when travelling across nodes before enacting node
+    vector<Node*> nodeList;
 
 private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
@@ -60,6 +62,6 @@ private:
     float maxDistance = 400;
     float buffer = 75;
     const int numNodes = 20;
-    vector<Node*> nodeList;
+    
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };
