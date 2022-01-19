@@ -57,7 +57,7 @@ void _artifactdatabase::Behavior_Reflect(int id, GameObject* gameObject)
     {
     case 00000:
         tempRender = gameObject->GetComponent<SpriteRenderer>();
-        tempRender->Size(tempRender->GetHalfWidth() * 2 + 10, tempRender->GetHalfHeight() * 2 + 10);
+        tempRender->Size(tempRender->GetHalfWidth() * 2/100*101, tempRender->GetHalfHeight() * 2 / 100 * 101);
         break;
     default:
         break;
