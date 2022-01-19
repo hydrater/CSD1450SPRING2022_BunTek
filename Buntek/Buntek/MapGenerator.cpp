@@ -4,6 +4,7 @@
 #include "UI_EncounterBox.h"
 #include "UI_Shop.h"
 #include "Button.h"
+#include "GameManager.h"
 
 void EnactTravel(Button* button);
 
@@ -414,7 +415,7 @@ void _mapData::ClearList(void)
     nodeList.clear();
 }
 
-void _mapData::DisplayCurrentRoutes(float travelDistance)
+void _mapData::DisplayNodeRoutes(float travelDistance)
 {
     MapData.connectedLines.clear();
     MapData.SetClickable(false);
@@ -437,7 +438,41 @@ void _mapData::DisplayCurrentRoutes(float travelDistance)
             nodeList[k]->nodeObject->GetComponent<Button>()->SetClickable(true);
             nodeList[k]->nodeObject->GetComponent<Button>()->SetHoverable(true);
         }
+        
+        // if node is being hovered over
+        if (CheckHovered(nodeList[k], GameManager.GetCursorPosition())) {
+            for (int i = 0; i < MapData.nodeList.size(); i++)
+            {
+                bool closeEnough = false;
+                float distBetSq = (nodeList[i]->pos - nodeList[k]->pos).LengthSquared();
+                closeEnough = distBetSq <= travelDistance * travelDistance;
+
+                if (closeEnough && nodeList[i] != currentNode && nodeList[k] != currentNode && nodeList[i] != nodeList[k])
+                {
+                    AEGfxVertexList* newLine;
+                    AEGfxMeshStart();
+                    AEGfxVertexAdd((*nodeList[k]).pos.x, (*nodeList[k]).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+                    AEGfxVertexAdd((*nodeList[i]).pos.x, (*nodeList[i]).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+                    newLine = AEGfxMeshEnd();
+                    MapData.connectedLines.push_back(newLine);
+                }
+            }
+        }
+        
     }
+
+   
+}
+
+bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
+    SpriteRenderer* sr = thisNode->nodeObject->GetComponent<SpriteRenderer>();
+    if (thisNode->pos.x - sr->GetHalfWidth() < mousePos.x && thisNode->pos.x + sr->GetHalfWidth() > mousePos.x) {
+
+        if (thisNode->pos.y - sr->GetHalfHeight() < mousePos.y && thisNode->pos.y + sr->GetHalfHeight() > mousePos.y) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void _mapData::DisplayBossNode(void)
@@ -455,7 +490,7 @@ void _mapData::Travel(Node* destination)
         vector<string> stats{ "E", "A", "E", "E", "A" };
         // Enact dest node effects
         currentNode = destinationNode;
-        DisplayCurrentRoutes(playerTravelDistance);
+        DisplayNodeRoutes(playerTravelDistance);
         switch (destinationNode->nodeType)
         {
         case NodeType::Encounter:
