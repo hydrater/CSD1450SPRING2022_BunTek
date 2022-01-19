@@ -43,7 +43,7 @@ public:
         vector<Artifact> behaviorList_Reflect;
         vector<Artifact> behaviorList_DealDamage;
         vector<Artifact> behaviorList_TakeDamage;
-    };
+    }artifactInventory;
 
     struct MapSave
     {
