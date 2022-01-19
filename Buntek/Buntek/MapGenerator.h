@@ -40,12 +40,13 @@ public:
     void GenerateMapData(Vector2 originPos);
     void GenerateMapObject(void);
     void ClearList(void);
-    void DisplayCurrentRoutes(void);
+    void DisplayCurrentRoutes(float travelDistance);
     void DisplayBossNode(void);
     void Travel(Node* destination);
     void SetClickable(bool _canClick);
     void SetHoverable(bool _canHover);
     Node* GetNode(GameObject* object);
+    float playerTravelDistance = 400;
 
     GameObject* shopUI = 0, * encounterUI = 0, * dialogueUI = 0;
 
@@ -55,7 +56,7 @@ private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
     bool canAccessFirstNode = true; // REMEMBER TO RESET THIS if using multiple start nodes
     static _mapData* instance;
-    float minDistance = 150;
+    float minDistance = 125;
     float maxDistance = 400;
     float buffer = 75;
     const int numNodes = 20;
