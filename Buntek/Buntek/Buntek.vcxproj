@@ -97,6 +97,7 @@
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AudioEngine.cpp" />
     <ClCompile Include="BallBehavior.cpp" />
+    <ClCompile Include="BattleHandler.cpp" />
     <ClCompile Include="BattleInput.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Collider2D.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="Scene_Splash.cpp" />
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="UI_Hp.cpp" />
     <ClCompile Include="UI_RewardSelection.cpp" />
     <ClCompile Include="UI_Shop.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -141,6 +143,7 @@
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AudioEngine.h" />
     <ClInclude Include="BallBehavior.h" />
+    <ClInclude Include="BattleHandler.h" />
     <ClInclude Include="BattleInput.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Collider2D.h" />
@@ -174,6 +177,7 @@
     <ClInclude Include="Scene_Splash.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="UI_Hp.h" />
     <ClInclude Include="UI_RewardSelection.h" />
     <ClInclude Include="UI_Shop.h" />
     <ClInclude Include="Vector2.h" />

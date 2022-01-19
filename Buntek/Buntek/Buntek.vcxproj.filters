@@ -150,9 +150,6 @@
     <ClCompile Include="SaveManager.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyNodeBox.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyDatabase.cpp">
       <Filter>Source Files\Custom</Filter>
     </ClCompile>
@@ -166,6 +163,12 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Hp.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleHandler.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -284,9 +287,6 @@
     <ClInclude Include="SaveManager.h">
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyNodeBox.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyDatabase.h">
       <Filter>Source Files\Custom</Filter>
     </ClInclude>
@@ -300,6 +300,12 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="ParticleSystem.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Hp.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleHandler.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
