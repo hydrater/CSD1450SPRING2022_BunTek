@@ -1,10 +1,11 @@
-#include "MapGenerator.h"
 #include "UI_Hp.h"
 #include "Devtools.h"
 #include "System.h"
 #include "GameScript.h"
 #include "SpriteRenderer.h"
+#include "SaveManager.h"
 
+float hp = 100;
 UI_Hp::UI_Hp(void)
 {
 
@@ -15,20 +16,27 @@ UI_Hp::~UI_Hp(void)
 
 }
 
-void UI_Hp::GenerateHpBackground(int sortingLayer, bool isPlayer, bool isEnemy)
+void UI_Hp::GenerateHpBackground(void) //empty white bar
 {
-	GameObject* hpBackground = devTools.CreateSpriteGameObject("paddle.png", 600, 150, AE_GFX_BM_BLEND, Vector2(100.f, AEGetWindowHeight() / 2.5f), (short)(sortingLayer - 1), 0.5f);
+	hpBackground = devTools.CreateSpriteGameObject("WhiteTexture.png", 600, 100, AE_GFX_BM_NONE, Vector2(300.f, AEGetWindowHeight() / 2.5f), (short)(5 - 2), 1);
 }
-void UI_Hp::GenerateHpForeground(int sortingLayer, bool isPlayer, bool isEnemy)
+void UI_Hp::GenerateHpForeground(void) //bar to update
 {
-	GameObject* hpForeground = devTools.CreateSpriteGameObject("paddle.png", 600, 150, AE_GFX_BM_BLEND, Vector2(50.f, AEGetWindowHeight() / 2.5f), (short)(sortingLayer - 1), 0.5f);
+	hpForeground = devTools.CreateSpriteGameObject("WhiteTexture.png", 600, 100, AE_GFX_BM_NONE, Vector2(300.f, AEGetWindowHeight() / 2.5f), (short)(5 - 1), 1);
 }
-void UI_Hp::StartHp(void)
+void UI_Hp::Start(void)
 {
-
+	//hp = SaveManager.profile.hp;
 }
 
-void UI_Hp::UpdateHp(void)
+void UI_Hp::Update(void)
 {
-
+	float beforeDamageHp = hp;
+	hp -= 1;
+	if (beforeDamageHp > hp)
+	{
+		float calculation = beforeDamageHp - hp;
+		float sizeReduction = calculation * 10;
+		hpForeground->GetComponent<SpriteRenderer>()->Size(hpForeground->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2 - sizeReduction, hpForeground->GetComponent<SpriteRenderer>()->GetHalfHeight() * 2);
+	}
 }
