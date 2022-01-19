@@ -15,7 +15,7 @@ public:
 	void Update(void) override;
 	void AssignListPointer(BattleInput* _battleInput);
 	void UpdateTrail(void);
-	void BounceBall(bool isPlayer, Vector2 wallCoord, float angle);
+	void BounceBall(bool isPlayer, GameObject* wall, float angle);
 
 	GameObject* ballTrail = 0;
 	SpriteRenderer* srBallTrail = 0;

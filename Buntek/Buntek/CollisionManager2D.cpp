@@ -87,7 +87,7 @@ void _CollisionManager2D::CollideAll(void)
             {
                 bool isPlayer = !circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->playerPossess;
                 circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->
-                    BounceBall(isPlayer, boxColliderList[j]->Owner()->transform->worldposition, boxColliderList[j]->Owner()->transform->worldrotation);
+                    BounceBall(isPlayer, boxColliderList[j]->Owner(), boxColliderList[j]->Owner()->transform->worldrotation);
             }
         }
     }
