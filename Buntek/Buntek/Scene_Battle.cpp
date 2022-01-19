@@ -189,6 +189,7 @@ void Scene_Battle::Update(void)
 
 Scene_Battle::~Scene_Battle(void)
 {
+	CollisionManager2D.RemoveAll();
 	AudioManager.StopMusic();
 	AudioManager.Free("hysteric.ogg");
 }

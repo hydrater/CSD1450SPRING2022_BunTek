@@ -109,7 +109,7 @@ bool BoxCollider::Collide(Collider2D* col)
 		Vector2 rotCircle = boxPos.operator+(vecDist);
 
 		// Check Collision
-		if (abs(rotCircle.x - boxPos.x) < CirCol->radius + width / 2 && abs(rotCircle.y - boxPos.y) < CirCol->radius + height / 2)
+		if (abs(rotCircle.x - boxPos.x) < (CirCol->radius + width / 2) && abs(rotCircle.y - boxPos.y) < (CirCol->radius + height / 2))
 			return true;
 	}
 	//Box-Box collision
@@ -216,7 +216,7 @@ bool CircleCollider::Collide(Collider2D* col)
 
 		BoxCollider* boxCol = (BoxCollider*)col;
 
-		if (col->transform == NULL || transform == NULL)
+		if (boxCol->transform == NULL || transform == NULL)
 			return false;
 
 		Vector2 boxPos = boxCol->transform->worldposition;

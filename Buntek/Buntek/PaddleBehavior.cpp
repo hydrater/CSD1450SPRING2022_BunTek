@@ -2,6 +2,7 @@
 #include "GameManager.h"
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
+#include "CollisionManager2D.h"
 
 
 PaddleBehavior::PaddleBehavior()
@@ -11,7 +12,7 @@ PaddleBehavior::PaddleBehavior()
 
 PaddleBehavior::~PaddleBehavior()
 {
-
+	
 }
 
 void PaddleBehavior::Start(void)
