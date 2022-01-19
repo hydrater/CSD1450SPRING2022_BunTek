@@ -8,7 +8,6 @@
 #include "UI_RewardSelection.h"
 #include "UI_Shop.h"
 #include "UI_EnemyNodeBox.h"
-#include "UI_Hp.h"
 
 void MoveToNavigation(Button* button);
 
@@ -38,6 +37,7 @@ void Scene_MainMenu::Start(void)
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToNavigation;
+
 	/*rewardsel = new GameObject();
 	rewardsel->AddComponent<UI_RewardSelection>();
 	vector<string> rewards{ "E" };
