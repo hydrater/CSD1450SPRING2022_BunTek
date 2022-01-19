@@ -11,6 +11,7 @@ using namespace std;
 #define GameScriptManager _gameScriptManager::Instance()
 #define DeltaTime (float)AEFrameRateControllerGetFrameTime()
 
+
 enum class TransitionType : short
 {
     None = 0,

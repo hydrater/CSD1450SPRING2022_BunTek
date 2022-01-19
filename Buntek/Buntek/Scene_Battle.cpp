@@ -136,6 +136,24 @@ void Scene_Battle::Start(void)
 
 void Scene_Battle::Update(void)
 {
+	if (timeScalar == 0.5f)
+	{
+		//cout << checkTimer << endl;
+
+		checkTimer = true;
+		hitPauseTimer = 0.01f;
+	}
+
+	if (checkTimer)
+	{
+		hitPauseTimer -= (float)AEFrameRateControllerGetFrameTime();
+		if (hitPauseTimer < 0)
+		{
+			timeScalar = 1;
+			checkTimer = false;
+		}
+	}
+
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 
 	ballSpawnTimer -= DeltaTime;
@@ -180,7 +198,11 @@ void Scene_Battle::Update(void)
 		
 		ballSpawnTimer = 2- scalingTimer * 0.01f;
 	}
-	
+		//cout << timeScalar << endl;
+
+
+		
+
     //set background color
 	//test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
 	//test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));

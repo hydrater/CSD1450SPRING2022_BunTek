@@ -28,6 +28,10 @@ public:
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
 
+	GameObject* ballParticle = 0;
+	float hitPauseTimer = 0;
+	bool checkTimer = false;
+
 private:
 	const float maxSpeed = 600;
 	float initspeed = 300;

@@ -3,7 +3,7 @@
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
 #include "CollisionManager2D.h"
-
+#include "System.h"
 
 PaddleBehavior::PaddleBehavior()
 {
@@ -48,7 +48,7 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 
 		if (mag != 0) {
 			velocity = Vector2(xDelta / mag, yDelta / mag);
-			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * (float)AEFrameRateControllerGetFrameTime(), transform->worldposition.y + velocity.y * speed * (float)AEFrameRateControllerGetFrameTime()));
+			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime, transform->worldposition.y + velocity.y * speed * DeltaTime));
 		}
 		
 		//Clamp paddle within boundary

@@ -1,6 +1,8 @@
 #include "BallBehavior.h"
 #include "GameManager.h"
 #include "SpriteRenderer.h"
+#include "System.h"
+#include "ParticleSystem.h"
 
 BallBehavior::BallBehavior(void)
 {
@@ -26,7 +28,7 @@ void BallBehavior::Update(void)
 {
 	BallVerticalCheck();
 
-	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * (float)AEFrameRateControllerGetFrameTime(), transform->worldposition.y + velocity.y * speed * (float)AEFrameRateControllerGetFrameTime()));
+	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime, transform->worldposition.y + velocity.y * speed * DeltaTime));
 
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
@@ -52,6 +54,14 @@ void BallBehavior::Update(void)
 			if (collision->Owner() && collision->Owner()->GetComponent<PaddleBehavior>())
 			{
 				BounceBall(!playerPossess, collision->Owner(), collision->Owner()->transform->worldrotation);
+				float timeScale = 0.5f;
+
+				//might change as might not work kb eyes tired pepehands
+				#define DeltaTime (float)AEFrameRateControllerGetFrameTime() * timeScale;
+				ballParticle = new GameObject();
+				ballParticle->AddComponent<ParticleSystem>();
+				ballParticle->GetComponent<ParticleSystem>()->SetBurstingParticle(this->velocity, 3, 3, false, 45, 2, 5, 5, 10, 5, 5, "WhiteTexture", this->Owner()->transform->worldposition, 2, AE_GFX_BM_NONE);
+				
 			}
 		}
 	}
@@ -127,7 +137,7 @@ void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 
 		// Force Direction Limit (Ball going opposite direction)
 		velocity.x = (isPlayer && velocity.x > 0 || !isPlayer && velocity.x < 0) ? velocity.x * -1 : velocity.x;
-
+			
 		float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
 		if (0 <= ang && ang < angrange) {
 			if (velocity.x < 0) {
