@@ -33,8 +33,9 @@ public:
     };
     vector<AEGfxVertexList*> connectedLines;
 
-    Node* currentNode;
-    Node * exitNode;
+    Node* currentNode = nullptr;
+    Node* destinationNode = nullptr;
+    Node* exitNode = nullptr;
     static _mapData& Instance(void);
     void GenerateMapData(Vector2 originPos);
     void GenerateMapObject(void);
@@ -44,8 +45,11 @@ public:
     void Travel(Node* destination);
     void SetClickable(bool _canClick);
     void SetHoverable(bool _canHover);
+    Node* GetNode(GameObject* object);
 
     GameObject* shopUI = 0, * encounterUI = 0, * dialogueUI = 0;
+
+    bool isTravelling = false; // Flag used for checking when travelling across nodes before enacting node
 
 private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);

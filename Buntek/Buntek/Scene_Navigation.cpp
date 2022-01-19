@@ -59,6 +59,12 @@ void Scene_Navigation::EarlyUpdate(void)
 
 void Scene_Navigation::Update(void)
 {
+	// [To ADD: Node travelling Animation]
+	while (MapData.isTravelling)
+	{
+		MapData.isTravelling = false;
+		MapData.Travel(MapData.destinationNode);
+	}
 }
 
 void Scene_Navigation::LateUpdate(void)

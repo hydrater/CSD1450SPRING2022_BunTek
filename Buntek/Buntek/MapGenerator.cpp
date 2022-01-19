@@ -5,9 +5,7 @@
 #include "UI_Shop.h"
 #include "Button.h"
 
-void MoveToBattle(Button* button);
-void DisplayEncounter(Button* button);
-void DisplayShop(Button* button);
+void EnactTravel(Button* button);
 
 _mapData* _mapData::instance = 0;
 
@@ -366,32 +364,29 @@ void _mapData::GenerateMapObject(void)
         tempButton->sr = tempRenderer;
         tempButton->tr = NULL;
         tempButton->affectedObject = temp;
+        tempButton->ButtonEffect = &EnactTravel;
 
         switch (RandIntMinMax(0,3))
         {
         case 0:
             tempRenderer->SetTexture("UI/Encounter.png");
             nodeList[i]->nodeType = NodeType::Encounter;
-            tempButton->ButtonEffect = &DisplayEncounter;
             break;
         case 1:
             tempRenderer->SetTexture("UI/Enemy.png");
             nodeList[i]->nodeType = NodeType::Enemy;
             temp->AddComponent<UI_EnemyNodeBox>();
             temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
-            tempButton->ButtonEffect = &MoveToBattle;
             break;
         case 2:
             tempRenderer->SetTexture("UI/Elite.png");
             nodeList[i]->nodeType = NodeType::Elite;
             temp->AddComponent<UI_EnemyNodeBox>();
             temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
-            tempButton->ButtonEffect = &MoveToBattle;
             break;
         case 3:
             tempRenderer->SetTexture("Steven.jpg");
             nodeList[i]->nodeType = NodeType::Shop;
-            tempButton->ButtonEffect = &DisplayShop;
             break;
         case 4:
             tempRenderer->SetTexture("UI/Rest.png");
@@ -426,13 +421,13 @@ void _mapData::DisplayCurrentRoutes(void)
         if ((*currentNode).linkedTo[k] != currentNode)
         {
             AEGfxVertexList* newLine;
-            Node linkedNode = *((*currentNode).linkedTo[k]);
+            Node* linkedNode = (*currentNode).linkedTo[k];
             AEGfxMeshStart();
             AEGfxVertexAdd((*currentNode).pos.x, (*currentNode).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-            AEGfxVertexAdd(linkedNode.pos.x, linkedNode.pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
+            AEGfxVertexAdd((*linkedNode).pos.x, (*linkedNode).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
             newLine = AEGfxMeshEnd();
             MapData.connectedLines.push_back(newLine);
-            linkedNode.nodeObject->GetComponent<Button>()->SetClickable(true);
+            (*linkedNode).nodeObject->GetComponent<Button>()->SetClickable(true);
         }
     }
 }
@@ -441,12 +436,50 @@ void _mapData::DisplayBossNode(void)
 {
     exitNode->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/boss.png");
     exitNode->nodeType = NodeType::Boss;
-    exitNode->nodeObject->GetComponent<Button>()->ButtonEffect = &MoveToBattle;
 }
 
 void _mapData::Travel(Node* destination)
 {
+    if (destinationNode != nullptr)
+    {
+        // Get Artifacts and Stats [TO BE CHANGED WHEN ARTIFACTS AND STATS IMPLEMENTED!]
+        vector<string> artifacts{ "E", "E", "A", "E", "E", "A" };
+        vector<string> stats{ "E", "A", "E", "E", "A" };
+        // Enact dest node effects
+        currentNode = destinationNode;
+        DisplayCurrentRoutes();
+        switch (destinationNode->nodeType)
+        {
+        case NodeType::Encounter:
+            SetClickable(false);
+            SetHoverable(false);
+            encounterUI = new GameObject();
+            encounterUI->AddComponent<UI_EncounterBox>();
+            encounterUI->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+            break;
+        case NodeType::Enemy:
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            break;
+        case NodeType::Elite:
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            break;
+        case NodeType::Boss:
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+            break;
+        case NodeType::Shop:
+            SetClickable(false);
+            SetHoverable(false);
+            shopUI = new GameObject();
+            shopUI->AddComponent<UI_Shop>();;
+            shopUI->GetComponent<UI_Shop>()->CreateShop(3, artifacts, stats);
+            break;
+        case NodeType::Rest:
 
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void _mapData::SetClickable(bool _canClick)
@@ -467,27 +500,17 @@ void _mapData::SetHoverable(bool _canHover)
     }
 }
 
-void MoveToBattle(Button* button)
+_mapData::Node* _mapData::GetNode(GameObject* object)
 {
-    SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack);
+    for (Node* node : nodeList)
+    {
+        if (node->nodeObject == object)
+            return node;
+    }
 }
 
-void DisplayEncounter(Button* button)
+void EnactTravel(Button* button)
 {
-    MapData.SetClickable(false);
-    MapData.SetHoverable(false);
-    MapData.encounterUI = new GameObject();
-    MapData.encounterUI->AddComponent<UI_EncounterBox>();
-    MapData.encounterUI->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
-}
-
-void DisplayShop(Button* button)
-{
-    MapData.SetClickable(false);
-    MapData.SetHoverable(false);
-    MapData.shopUI = new GameObject();
-    MapData.shopUI->AddComponent<UI_Shop>();
-    vector<string> artifacts{ "E", "E", "A", "E", "E", "A" };
-    vector<string> stats{ "E", "A", "E", "E", "A" };
-    MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, artifacts, stats);
+    MapData.destinationNode = MapData.GetNode(button->Owner());
+    MapData.isTravelling = true;
 }
