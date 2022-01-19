@@ -84,8 +84,8 @@ void Vector2::SetZero()
 	x = y = 0;
 }
 
-//Does Antilockwise Rotation
-void Vector2::Rotate(float degrees)
+//Does Anticlockwise Rotation
+void Vector2::RotateAC(float degrees)
 {
 	float sin = sinf(degrees / 180.0f * 3.1415926535897932384626433832795f);
 	float cos = cosf(degrees / 180.0f * 3.1415926535897932384626433832795f);
@@ -93,6 +93,17 @@ void Vector2::Rotate(float degrees)
 	float ty = y;
 	x = (sin * ty) - (cos * tx);
 	y = (sin * tx) + (cos * ty);
+}
+
+//Does Clockwise Rotation
+void Vector2::RotateC(float degrees)
+{
+	float sin = sinf(degrees / 180.0f * 3.1415926535897932384626433832795f);
+	float cos = cosf(degrees / 180.0f * 3.1415926535897932384626433832795f);
+	float tx = x;
+	float ty = y;
+	x = (cos * tx) + (sin * ty);
+	y = (cos * ty) - (sin * tx);
 }
 
 float Vector2::Length(void) const
@@ -161,7 +172,7 @@ Vector2 Vector2::Splat(float splat)
 Vector2 Vector2::RandUnitVector(void)
 {
 	Vector2 randVect = Vector2(0, 1);
-	randVect.Rotate(RandFloatMinMax(0.0f, 360.0f));
+	randVect.RotateAC(RandFloatMinMax(0.0f, 360.0f));
 	return randVect;
 }
 

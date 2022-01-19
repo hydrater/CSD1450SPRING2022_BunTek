@@ -58,7 +58,7 @@ void BallBehavior::UpdateTrail(void)
 	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
 	ang = (velocity.x < 0) ? 360 - ang : ang;
 	Vector2 trailoffset = Vector2(0.0f, (float)(ballTrail->transform->worldscale.y) * 20 / 2.0f);
-	trailoffset.Rotate(ang);
+	trailoffset.RotateAC(ang);
 
 	// Update position and offset
 	ballTrail->transform->worldposition.x = transform->worldposition.x - velocity.x * 2 - trailoffset.x;
@@ -100,7 +100,7 @@ void BallBehavior::BounceBall(bool isPlayer, Vector2 wallCoord, float angle)
 		// Create reflection axis
 		Vector2 normal = Vector2(wallCoord.x - transform->worldposition.x, 0.f);
 		// Rotate (Vector.rotate goes counter clockwise; Angle is based in clockwise)
-		normal.Rotate(angle);
+		normal.RotateAC(angle);
 		normal.Normalize();
 
 		// Get new velocity
@@ -115,22 +115,22 @@ void BallBehavior::BounceBall(bool isPlayer, Vector2 wallCoord, float angle)
 		if (0 <= ang && ang < angrange) {
 			if (velocity.x < 0) {
 				velocity = Vector2(0, 1);
-				velocity.Rotate(-angrange);
+				velocity.RotateAC(-angrange);
 			}
 			else {
 				velocity = Vector2(0, 1);
-				velocity.Rotate(angrange);
+				velocity.RotateAC(angrange);
 			}
 		}
 		else if (180 - angrange < ang && ang <= 180) {
 			//cout << ang << endl;
 			if (velocity.x < 0) {
 				velocity = Vector2(0, -1);
-				velocity.Rotate(angrange);
+				velocity.RotateAC(angrange);
 			}
 			else {
 				velocity = Vector2(0, -1);
-				velocity.Rotate(-angrange);
+				velocity.RotateAC(-angrange);
 			}
 		}
 
@@ -143,12 +143,12 @@ void BallBehavior::BallVerticalCheck(void) {
 	if (0 <= ang && ang < angrange) {
 		if (velocity.x < 0) {
 			velocity = Vector2(0, 1);
-			velocity.Rotate(-angrange);
+			velocity.RotateAC(-angrange);
 			//velocity.Rotate(-(angrange - ang));
 		}
 		else {
 			velocity = Vector2(0, 1);
-			velocity.Rotate(angrange);
+			velocity.RotateAC(angrange);
 			//velocity.Rotate(angrange - ang);
 		}
 	}
@@ -156,12 +156,12 @@ void BallBehavior::BallVerticalCheck(void) {
 		//cout << ang << endl;
 		if (velocity.x < 0) {
 			velocity = Vector2(0, -1);
-			velocity.Rotate(angrange);
+			velocity.RotateAC(angrange);
 			//velocity.Rotate(ang - (180 - angrange));
 		}
 		else {
 			velocity = Vector2(0, -1);
-			velocity.Rotate(-angrange);
+			velocity.RotateAC(-angrange);
 			//velocity.Rotate(-(ang - (180 - angrange)));
 		}
 	}

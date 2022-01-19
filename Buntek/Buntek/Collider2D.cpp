@@ -40,16 +40,16 @@ vector<Vector2> Collider2D::SortMinMax(vector<Vector2> vectors, bool xaxis)
 vector<Vector2> Collider2D::GetRectCorners(Vector2 pos, float width, float height, float angle)
 {
 	Vector2 Offset = Vector2(-width / 2, height / 2);
-	Offset.Rotate(angle);
+	Offset.RotateAC(angle);
 	Vector2 TopLeft = Vector2(pos.x + Offset.x, pos.y + Offset.y);
 	Offset = Vector2(width / 2, height / 2);
-	Offset.Rotate(angle);
+	Offset.RotateAC(angle);
 	Vector2 TopRight = Vector2(pos.x + Offset.x, pos.y + Offset.y);
 	Offset = Vector2(-width / 2, -height / 2);
-	Offset.Rotate(angle);
+	Offset.RotateAC(angle);
 	Vector2 BottomLeft = Vector2(pos.x + Offset.x, pos.y + Offset.y);
 	Offset = Vector2(width / 2, -height / 2);
-	Offset.Rotate(angle);
+	Offset.RotateAC(angle);
 	Vector2 BottomRight = Vector2(pos.x + Offset.x, pos.y + Offset.y);
 	vector<Vector2>corners{TopLeft, TopRight, BottomLeft, BottomRight};
 	return corners;
@@ -105,7 +105,7 @@ bool BoxCollider::Collide(Collider2D* col)
 		Vector2 vecDist = boxPos.operator-(CirCol->transform->worldposition);
 
 		// Rotate Circle according to boxPos
-		vecDist.Rotate(angle);
+		vecDist.RotateAC(angle);
 		Vector2 rotCircle = boxPos.operator+(vecDist);
 
 		// Check Collision
@@ -127,7 +127,7 @@ bool BoxCollider::Collide(Collider2D* col)
 		Vector2 box2Pos = box2Col->transform->worldposition;
 		// Rotate box2 according box1 angle
 		box2Pos = box2Pos.operator-(box1Pos);
-		box2Pos.Rotate(angle);
+		box2Pos.RotateAC(angle);
 		box2Pos = box1Pos.operator+(box2Pos);
 		vector<Vector2> box2Cor = GetRectCorners(box2Pos, box2Col->width, box2Col->height, -box2Col->angle + angle);
 
@@ -154,7 +154,7 @@ bool BoxCollider::Collide(Collider2D* col)
 		box2Pos = box2Col->transform->worldposition;
 		// Rotate box1 according box2 angle
 		box1Pos = box1Pos.operator-(box2Pos);
-		box1Pos.Rotate(box2Col->angle);
+		box1Pos.RotateAC(box2Col->angle);
 		box1Pos = box2Pos.operator+(box1Pos);
 		box1Cor = GetRectCorners(box1Pos, width, height, -angle + box2Col->angle);
 
@@ -223,7 +223,7 @@ bool CircleCollider::Collide(Collider2D* col)
 		Vector2 vecDist = boxPos.operator-(transform->worldposition);
 
 		// Rotate Circle according to boxPos
-		vecDist.Rotate(boxCol->angle);
+		vecDist.RotateAC(boxCol->angle);
 		Vector2 rotCircle = boxPos.operator+(vecDist);
 
 		// Check Collision

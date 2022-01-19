@@ -42,13 +42,6 @@ void Scene_MainMenu::Start(void)
 	rewardsel->AddComponent<UI_RewardSelection>();
 	vector<string> rewards{ "E" };
 	rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);*/
-
-	/*GameObject* yeet1 = devTools.CreateSpriteGameObject("Steven.jpg", 50, 50, AE_GFX_BM_ADD, Vector2(0,0));
-
-	GameObject* yeet2 = devTools.CreateSpriteGameObject("paddle.png", 50, 50, AE_GFX_BM_ADD, Vector2(50,50));
-	yeet1->AddChild(yeet2);
-
-	yeet1->transform->SetRotation(45);*/
 }
 
 void Scene_MainMenu::Update(void)

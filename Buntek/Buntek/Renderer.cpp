@@ -92,10 +92,10 @@ void _renderer::Update(void)
 			Vector2 TopLeft = Vector2(halfWidth, halfHeight);
 			Vector2 TopRight = Vector2(-halfWidth, halfHeight);
 
-			BottomLeft.Rotate(rotationAngle);
-			BottomRight.Rotate(rotationAngle);
-			TopLeft.Rotate(rotationAngle);
-			TopRight.Rotate(rotationAngle);
+			BottomLeft.RotateAC(rotationAngle);
+			BottomRight.RotateAC(rotationAngle);
+			TopLeft.RotateAC(rotationAngle);
+			TopRight.RotateAC(rotationAngle);
 
 			AEGfxSetPosition(transform->worldposition.x, transform->worldposition.y);
 
