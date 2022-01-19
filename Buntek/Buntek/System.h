@@ -73,7 +73,6 @@ public:
     static _sceneManager& Instance(void);
     void LoadScene(Scene* newScene, TransitionType TransitionType);
     Scene* GetScene(void);
-    Scene* navigationScene;
     void EarlyUpdate(void);
     void Update(void);
     void LateUpdate(void);

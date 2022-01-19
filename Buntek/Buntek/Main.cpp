@@ -74,8 +74,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		if (AEInputCheckTriggered(AEVK_4))
 		{
-			/*if (SceneManager.navigationScene != nullptr)
-				SceneManager.LoadScene(SceneManager.navigationScene, TransitionType::FadeToBlack);*/
+			
 		}
 
 		// --------------------------------------------- Update --------------------------------------------- //
