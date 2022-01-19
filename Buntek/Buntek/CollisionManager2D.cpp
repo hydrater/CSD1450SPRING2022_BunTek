@@ -100,7 +100,7 @@ void _CollisionManager2D::CollideAll(void)
                 circleColliderList[i]->Owner()->GetComponent<BallBehavior>()->
                     BounceBall(isPlayer, boxColliderList[j]->Owner(), boxColliderList[j]->Owner()->transform->worldrotation);
 
-                ArtifactDatabase.Behavior_Reflect(00000, circleColliderList[i]->Owner());
+                //ArtifactDatabase.Behavior_Reflect(00000, circleColliderList[i]->Owner());
             }
         }
     }
