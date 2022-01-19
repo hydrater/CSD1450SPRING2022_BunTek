@@ -207,7 +207,6 @@ void _sceneManager::FadeToBlack(void) {
     if (!transitionInDone) {
         transitionTimer += DeltaTime;
         transitionTransparency = lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration));
-        cout << transitionTransparency << endl;
         if (transitionTimer > transitionStageDuration) {
             transitionTimer = 0;
             transitionInDone = true;
@@ -246,7 +245,6 @@ void _sceneManager::FadeToBlack(void) {
         {
             transitionTimer += DeltaTime;
             transitionTransparency = 1 - (lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration)));
-            cout << transitionTransparency << endl;
             if (transitionTimer > transitionStageDuration) {
 
                 transitionTimer = 0;
