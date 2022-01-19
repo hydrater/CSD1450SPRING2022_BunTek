@@ -27,13 +27,11 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, short sortingLayer, stri
     tempBckgdRenderer->SetLayer(sortingLayer - 2);
 
 
-    // Description
-    GameObject* tempDescription = new GameObject();
+    // Description 
     SpriteRenderer* tempDescRenderer = 0;
-    tempDescRenderer = tempDescription->AddComponent<SpriteRenderer>();
-    tempDescRenderer->Size(tempBckgdRenderer->GetHalfWidth()/8*10, tempBckgdRenderer->GetHalfHeight());
-    tempDescRenderer->SetTexture("UI_EncounterBox.png");
-    tempDescRenderer->SetLayer(sortingLayer - 1);
+    GameObject* tempDescription = devTools.CreateSpriteGameObject("EncounterBox.png", tempBckgdRenderer->GetHalfWidth() / 8 * 10, tempBckgdRenderer->GetHalfHeight(), 
+        1, Vector2(0.f, 0.f), (short)(sortingLayer - 1));
+    tempDescRenderer = tempDescription->GetComponent<SpriteRenderer>();
 
     // Description
     TextRenderer* tempDescTxtRenderer = 0;
@@ -43,19 +41,16 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, short sortingLayer, stri
     tempDescTxtRenderer->SetLayer(sortingLayer);
     tempDescTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Left);
     tempDescTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Top);
-    tempDescription->transform->SetPosition(Vector2(position.x + tempBckgdRenderer->GetHalfWidth() - tempDescRenderer->GetHalfWidth() - 20,
-        position.y + tempBckgdRenderer->GetHalfHeight() - tempDescRenderer->GetHalfHeight() - 100));
+    tempDescription->transform->SetPosition(Vector2(position.x + tempBckgdRenderer->GetHalfWidth()/8*7.5f - tempDescRenderer->GetHalfWidth(),
+        position.y + tempBckgdRenderer->GetHalfHeight()/4.5f*3.5f - tempDescRenderer->GetHalfHeight()));
     encounter->AddChild(tempDescription);
 
     // Header
-    GameObject* tempHeader = new GameObject();
+    GameObject* tempHeader = devTools.CreateSpriteGameObject("UI/Texture.png", tempBckgdRenderer->GetHalfWidth(), tempBckgdRenderer->GetHalfHeight() / 5,
+        1, Vector2(0.f, 0.f), (short)(sortingLayer - 1), 0.8f);
     SpriteRenderer* tempHeaderRenderer = 0;
-    tempHeaderRenderer = tempHeader->AddComponent<SpriteRenderer>();
-    tempHeaderRenderer->Size(tempBckgdRenderer->GetHalfWidth(), tempBckgdRenderer->GetHalfHeight()/5);
-    tempHeaderRenderer->SetTexture("UI/Texture.png");
+    tempHeaderRenderer = tempHeader->GetComponent<SpriteRenderer>();
     tempHeaderRenderer->SetColor(0, 0, 0.1f);
-    tempHeaderRenderer->SetTransparency(0.8f);
-    tempHeaderRenderer->SetLayer(sortingLayer - 1);
 
     // HeaderText
     TextRenderer* tempHeaderTxtRenderer = 0;
@@ -69,25 +64,20 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, short sortingLayer, stri
     encounter->AddChild(tempHeader);
 
     // Display
-    GameObject* tempDisplay = new GameObject();
+    GameObject* tempDisplay = devTools.CreateSpriteGameObject("Steven.jpg", tempBckgdRenderer->GetHalfWidth() * 2 / 16 * 4, tempBckgdRenderer->GetHalfHeight() * 2 / 9 * 4,
+        AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer - 1));
     SpriteRenderer* tempDisplayRenderer = 0;
-    tempDisplayRenderer = tempDisplay->AddComponent<SpriteRenderer>();
-    tempDisplayRenderer->Size(tempBckgdRenderer->GetHalfWidth()*2/16*4, tempBckgdRenderer->GetHalfHeight() * 2 /9*4);
-    tempDisplayRenderer->SetTexture("Steven.jpg");
-    tempDisplayRenderer->SetLayer(sortingLayer - 1);
+    tempDisplayRenderer = tempDisplay->GetComponent<SpriteRenderer>();
     tempDisplay->transform->SetPosition(Vector2(position.x - tempBckgdRenderer->GetHalfWidth() /8*7 + tempDisplayRenderer->GetHalfWidth() , position.y));
     encounter->AddChild(tempDisplay);
 
     // Buttons (Max 3)
     vector<Button*> buttonList;
     for (int i = 0; i < 3; ++i) {
-        GameObject* tempButtonObj = new GameObject();
+        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("UI/Button.png", tempDescRenderer->GetHalfWidth() * 2, tempDescRenderer->GetHalfHeight() / 3,
+            2, Vector2(0.f, 0.f),(short)(sortingLayer - 1));
         SpriteRenderer* tempButtonRenderer = 0;
-        tempButtonRenderer = tempButtonObj->AddComponent<SpriteRenderer>();
-        tempButtonRenderer->Size(tempDescRenderer->GetHalfWidth() *2, tempDescRenderer->GetHalfHeight() / 3);
-        tempButtonRenderer->SetTexture("UI/Button.png");
-        tempButtonRenderer->SetBlendMode(2);
-        tempButtonRenderer->SetLayer(sortingLayer - 1);
+        tempButtonRenderer = tempButtonObj->GetComponent<SpriteRenderer>();
 
         TextRenderer* tempButtonTxtRenderer = 0;
         tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
@@ -100,7 +90,8 @@ void UI_EncounterBox::CreateEncounter(Vector2 position, short sortingLayer, stri
         tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 
         tempButtonObj->transform->SetPosition(Vector2(tempDescription->transform->worldposition.x ,
-            position.y - tempBckgdRenderer->GetHalfHeight() + (i + 0.8f) * tempBckgdRenderer->GetHalfHeight() / 5 + 40));
+            position.y - tempBckgdRenderer->GetHalfHeight() + (i + 0.8f) * tempBckgdRenderer->GetHalfHeight() / 5 + tempBckgdRenderer->GetHalfHeight()/ 9));
+
         Button* tempButton = tempButtonObj->AddComponent<Button>();
         tempButton->sr = tempButtonRenderer;
         tempButton->tr = tempButtonTxtRenderer;

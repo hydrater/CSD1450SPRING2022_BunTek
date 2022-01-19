@@ -80,11 +80,10 @@ void UI_DialogueBox::CreateDialogue(string flag) {
     // Create actor box
     SpriteRenderer* tempRenderer2 = 0;
     TextRenderer* tempTxtRenderer2 = 0;
-    GameObject* tempGameObject = new GameObject();
-    tempRenderer2 = tempGameObject->AddComponent<SpriteRenderer>();
-    tempRenderer2->Size(tempRenderer->GetHalfWidth() *2 /4.5f, tempRenderer->GetHalfHeight()/2);
-    tempRenderer2->SetTexture("EncounterBox.png");
-    tempRenderer2->SetLayer(1);
+    GameObject* tempGameObject = devTools.CreateSpriteGameObject("EncounterBox.png", tempRenderer->GetHalfWidth() * 2 / 4.5f, tempRenderer->GetHalfHeight() / 2,
+        AE_GFX_BM_BLEND, Vector2(0.f, 0.f));
+    tempRenderer2 = tempGameObject->GetComponent<SpriteRenderer>();
+
     tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();
     tempTxtRenderer2->SetFont("Astral.ttf");
     tempTxtRenderer2->SetTextColor(1, 1, 1);
