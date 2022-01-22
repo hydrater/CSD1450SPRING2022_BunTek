@@ -1,7 +1,7 @@
 #include "MapGenerator.h"
 #include "Scene_Battle.h"
 #include "UI_EnemyNodeBox.h"
-#include "UI_EncounterBox.h"
+#include "UI_DialogueHandler.h"
 #include "UI_Shop.h"
 #include "Button.h"
 #include "GameManager.h"
@@ -497,8 +497,8 @@ void _mapData::Travel(Node* destination)
             SetClickable(false);
             SetHoverable(false);
             encounterUI = new GameObject();
-            encounterUI->AddComponent<UI_EncounterBox>();
-            encounterUI->GetComponent<UI_EncounterBox>()->CreateEncounter(Vector2(0, 0), 3, "aed");
+            encounterUI->AddComponent<UI_DialogueHandler>();
+            encounterUI->GetComponent<UI_DialogueHandler>()->CreateDialogueHandler("aed", 3);
             break;
         case NodeType::Enemy:
             SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);

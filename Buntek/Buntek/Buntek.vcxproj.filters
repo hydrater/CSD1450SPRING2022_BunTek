@@ -171,6 +171,9 @@
     <ClCompile Include="BattleHandler.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="UI_DialogueHandler.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -306,6 +309,9 @@
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="BattleHandler.h">
+      <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DialogueHandler.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>

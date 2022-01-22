@@ -1,7 +1,7 @@
 #include "UI_RewardSelection.h"
 #include "System.h"
 
-void RemoveRewardSelection(Button* button);
+//void RemoveRewardSelection(Button* button);
 
 UI_RewardSelection::UI_RewardSelection(void)
 {
@@ -57,9 +57,9 @@ void UI_RewardSelection::CreateRewardSelection(Vector2 position, int sortingLaye
         
         Button* tempButton = tempButtonObj->AddComponent<Button>();
         tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
-        tempButton->tr = tempButtonTxtRenderer;
+        tempButton->tr = tempButtonTxtRenderer;/*
         tempButton->affectedObject = rewardSelect;
-        tempButton->ButtonEffect = &RemoveRewardSelection;
+        tempButton->ButtonEffect = &RemoveRewardSelection;*/
 
         rewardSelect->AddChild(tempButtonObj);
         tempbuttonList.push_back(tempButton);
@@ -110,8 +110,8 @@ void UI_RewardSelection::CloseRewardSelection(void)
         buttonList[i]->Owner()->Deactivate();
 }
 
-void RemoveRewardSelection(Button* button)
-{
-    GameObject* tmp = button->affectedObject;
-    tmp->GetComponent<UI_RewardSelection>()->CloseRewardSelection();
-}
+//void RemoveRewardSelection(Button* button)
+//{
+//    GameObject* tmp = button->affectedObject;
+//    tmp->GetComponent<UI_RewardSelection>()->CloseRewardSelection();
+//}

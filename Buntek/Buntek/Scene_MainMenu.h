@@ -10,5 +10,5 @@ public:
 
     GameObject* enemynode = 0;
 private:
-    GameObject* background = 0, * Battle = 0, * dialogue = 0;
+    GameObject* background = 0, * Battle = 0, * dialogue = 0, *testObj;
 };
