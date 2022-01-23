@@ -1,5 +1,6 @@
 #include "MapGenerator.h"
 #include "UI_DialogueHandler.h"
+#include "DialogueDatabase.h"
 #include "System.h"
 #include <fstream>
 #include <sstream>

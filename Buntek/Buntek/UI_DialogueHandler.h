@@ -43,7 +43,7 @@ private:
 	string selectedFlag = "";
 	vector<string> dialogueList;
 	int dialogueNo = 0;
-	GameObject* dialogueBox, * rewardSel;
+	GameObject* dialogueBox = 0, * rewardSel = 0;
 
 	// Dialogue
 	string dialogueFlag = "asd";

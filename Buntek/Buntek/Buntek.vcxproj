@@ -106,6 +106,7 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CursorCamera.cpp" />
     <ClCompile Include="Devtools.cpp" />
+    <ClCompile Include="DialogueDatabase.cpp" />
     <ClCompile Include="UI_DialogueHandler.cpp" />
     <ClCompile Include="EnemyDatabase.cpp" />
     <ClCompile Include="UI_EnemyNodeBox.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Cursor.h" />
     <ClInclude Include="CursorCamera.h" />
     <ClInclude Include="Devtools.h" />
+    <ClInclude Include="DialogueDatabase.h" />
     <ClInclude Include="UI_DialogueHandler.h" />
     <ClInclude Include="EnemyDatabase.h" />
     <ClInclude Include="UI_EnemyNodeBox.h" />
