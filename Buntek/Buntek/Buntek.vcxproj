@@ -106,9 +106,7 @@
     <ClCompile Include="Cursor.cpp" />
     <ClCompile Include="CursorCamera.cpp" />
     <ClCompile Include="Devtools.cpp" />
-    <ClCompile Include="UI_DialogueBox.cpp" />
     <ClCompile Include="UI_DialogueHandler.cpp" />
-    <ClCompile Include="UI_EncounterBox.cpp" />
     <ClCompile Include="EnemyDatabase.cpp" />
     <ClCompile Include="UI_EnemyNodeBox.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -134,7 +132,6 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UI_Hp.cpp" />
-    <ClCompile Include="UI_RewardSelection.cpp" />
     <ClCompile Include="UI_Shop.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
@@ -154,8 +151,6 @@
     <ClInclude Include="CursorCamera.h" />
     <ClInclude Include="Devtools.h" />
     <ClInclude Include="UI_DialogueHandler.h" />
-    <ClInclude Include="UI_DialogueBox.h" />
-    <ClInclude Include="UI_EncounterBox.h" />
     <ClInclude Include="EnemyDatabase.h" />
     <ClInclude Include="UI_EnemyNodeBox.h" />
     <ClInclude Include="Entity.h" />
@@ -180,7 +175,6 @@
     <ClInclude Include="System.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UI_Hp.h" />
-    <ClInclude Include="UI_RewardSelection.h" />
     <ClInclude Include="UI_Shop.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>

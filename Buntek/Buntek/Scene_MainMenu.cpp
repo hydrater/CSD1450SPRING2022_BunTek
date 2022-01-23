@@ -4,9 +4,6 @@
 #include "Button.h"
 #include "Scene_Navigation.h"
 #include "UI_DialogueHandler.h"
-//#include "UI_DialogueBox.h"
-//#include "UI_EncounterBox.h"
-//#include "UI_RewardSelection.h"
 #include "UI_Shop.h"
 #include "UI_EnemyNodeBox.h"
 
@@ -43,12 +40,6 @@ void Scene_MainMenu::Start(void)
 	rewardsel->AddComponent<UI_RewardSelection>();
 	vector<string> rewards{ "E" };
 	rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);*/
-
-	/*testObj = new GameObject();
-	testObj->AddComponent<UI_DialogueHandler>();
-	testObj->GetComponent<UI_DialogueHandler>()->CreateDialogueHandler("aed", 4);
-	testObj->GetComponent<UI_DialogueHandler>()->CreateDialogueHandler("rsel", 4);
-	testObj->GetComponent<UI_DialogueHandler>()->CreateDialogueHandler("asd", 4);*/
 }
 
 void Scene_MainMenu::Update(void)
