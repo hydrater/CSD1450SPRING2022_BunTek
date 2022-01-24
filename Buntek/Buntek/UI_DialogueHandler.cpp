@@ -87,14 +87,16 @@ void UI_DialogueHandler::CreateDialogueHandler(string flag, short sortingLayer)
 void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
 
     //Create main dialogue box
-    dialogueBox = devTools.CreateSpriteGameObject("UI/Texture.png", 1800, 360,
+    dialogueBox = this->Owner();
+    GameObject* tempdialogue = devTools.CreateSpriteGameObject("UI/Texture.png", 1800, 360,
     AE_GFX_BM_BLEND, Vector2(0, -280), sortingLayer - 2);
-    SpriteRenderer* tempRenderer = dialogueBox->GetComponent<SpriteRenderer>();
+    SpriteRenderer* tempRenderer = tempdialogue->GetComponent<SpriteRenderer>();
     tempRenderer->SetColor(0.7f, 0.7f, 0.7f);
-    TextRenderer* tempTextRenderer = dialogueBox->AddComponent<TextRenderer>();
+    TextRenderer* tempTextRenderer = tempdialogue->AddComponent<TextRenderer>();
     tempTextRenderer->SetFont("Astral.ttf");
     tempTextRenderer->SetTextColor(1, 1, 1);
     tempTextRenderer->SetLayer(sortingLayer);
+    dialogueBox->AddChild(tempdialogue);
 
     // Create actor box
     GameObject* tempGameObject = devTools.CreateSpriteGameObject("EncounterBox.png", tempRenderer->GetHalfWidth() * 2 / 4.5f, tempRenderer->GetHalfHeight() / 2,
@@ -138,18 +140,15 @@ void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
         buttonList.push_back(tempButton);
     }
 
-    // Create UI_DialogueHandler and assign
-    UI_DialogueHandler* tempdialogue = dialogueBox->AddComponent<UI_DialogueHandler>();
-
     // Assign ObjReferences
-    tempdialogue->selectedFlag = flag;
-    tempdialogue->actorTxt = tempTxtRenderer2;
-    tempdialogue->dialogueTxt = tempTextRenderer;
-    tempdialogue->dialogueButtonList = buttonList;
+    selectedFlag = flag;
+    actorTxt = tempTxtRenderer2;
+    dialogueTxt = tempTextRenderer;
+    dialogueButtonList = buttonList;
 
-    tempdialogue->CloseDialogueEvent();
+    CloseDialogueEvent();
 
-    tempdialogue->StartDialogueEvent(flag);
+    StartDialogueEvent(flag);
 }
 
 void UI_DialogueHandler::StartDialogueEvent(string flag)
@@ -312,7 +311,7 @@ void UI_DialogueHandler::CreateRewardSelection(string flag, short sortingLayer)
 {
     Vector2 position = Vector2(0, 0);
 
-    rewardSel = new GameObject();
+    rewardSel = this->Owner();
     rewardSel->transform->SetPosition(position);
 
     // Background
@@ -381,18 +380,15 @@ void UI_DialogueHandler::CreateRewardSelection(string flag, short sortingLayer)
             break;
         }
     }
-
-    // Create UI_DialogueHandler and assign
-    UI_DialogueHandler* tempdialogue = rewardSel->AddComponent<UI_DialogueHandler>();
     
-    tempdialogue->header = tempHeader->GetComponent<SpriteRenderer>();
-    tempdialogue->background = tempBackground->GetComponent<SpriteRenderer>();
-    tempdialogue->headerText = tempHeaderTxtRenderer;
-    tempdialogue->rewardButtonList = tempbuttonList;
+    header = tempHeader->GetComponent<SpriteRenderer>();
+    background = tempBackground->GetComponent<SpriteRenderer>();
+    headerText = tempHeaderTxtRenderer;
+    rewardButtonList = tempbuttonList;
 
-    tempdialogue->CloseRewardSelection();
+    CloseRewardSelection();
 
-    tempdialogue->StartRewardSelection(selectedFlag);
+    StartRewardSelection(selectedFlag);
 }
 
 void UI_DialogueHandler::StartRewardSelection(string flag)

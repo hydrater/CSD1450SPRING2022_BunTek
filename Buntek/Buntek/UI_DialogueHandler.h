@@ -36,7 +36,6 @@ public:
 	void CloseRewardSelection(void);
 	void DeleteRewardSelection(void);
 
-	TextRenderer* actorTxt = 0, * dialogueTxt = 0;
 
 private:
 	void LoadFromFile(string flag);
@@ -46,6 +45,7 @@ private:
 	GameObject* dialogueBox, * rewardSel;
 
 	// Dialogue
+	TextRenderer* actorTxt = 0, * dialogueTxt = 0;
 	string dialogueFlag = "asd";
 	string encounterFlag = "aed";
 	string name, dialogueOutput, dialogueFinalDisplayTxt;
