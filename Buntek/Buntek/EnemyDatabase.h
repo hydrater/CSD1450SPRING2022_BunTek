@@ -5,8 +5,6 @@ using namespace std;
 
 #define EnemyDatabase _enemydatabase::Instance()
 
-
-
 class _enemydatabase
 {
 private:

@@ -129,9 +129,6 @@
     <ClCompile Include="Devtools.cpp">
       <Filter>Source Files\Custom</Filter>
     </ClCompile>
-    <ClCompile Include="UI_RewardSelection.cpp">
-      <Filter>Source Files\ECS\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Devtools.cpp">
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClCompile>
@@ -164,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="UI_DialogueHandler.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogueDatabase.cpp">
+      <Filter>Source Files\Custom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,9 +260,6 @@
     <ClInclude Include="Devtools.h">
       <Filter>Source Files\Custom</Filter>
     </ClInclude>
-    <ClInclude Include="UI_RewardSelection.h">
-      <Filter>Source Files\ECS\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Devtools.h">
       <Filter>Source Files\Non ECS Objects</Filter>
     </ClInclude>
@@ -295,6 +292,9 @@
     </ClInclude>
     <ClInclude Include="UI_DialogueHandler.h">
       <Filter>Source Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueDatabase.h">
+      <Filter>Source Files\Custom</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

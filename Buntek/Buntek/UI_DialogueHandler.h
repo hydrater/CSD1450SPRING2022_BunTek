@@ -42,7 +42,7 @@ private:
 	string selectedFlag = "";
 	vector<string> dialogueList;
 	int dialogueNo = 0;
-	GameObject* dialogueBox, * rewardSel;
+	GameObject* dialogueBox = 0, * rewardSel = 0;
 
 	// Dialogue
 	TextRenderer* actorTxt = 0, * dialogueTxt = 0;
