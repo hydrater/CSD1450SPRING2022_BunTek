@@ -2,6 +2,7 @@
 #include "GameScript.h"
 #include "SpriteRenderer.h"
 #include "Devtools.h"
+#include "System.h"
 
 
 class ParticleSystem : public GameScript

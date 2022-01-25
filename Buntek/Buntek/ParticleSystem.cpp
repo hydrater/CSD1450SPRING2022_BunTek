@@ -24,8 +24,7 @@ void ParticleSystem::Start(void)
 
 void ParticleSystem::Update(void)
 {
-	float DeltaTime = (float)AEFrameRateControllerGetFrameTime();
-	internalTimer += DeltaTime;
+	
 	float MaxTime = (float)1 / spawnRate;
 
 	// If supposed to spawn over time

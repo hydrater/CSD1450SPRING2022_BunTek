@@ -15,6 +15,8 @@ public:
 
 	float angle = 0; //clockwise rotation
 
+	Vector2 CollisionPoint = Vector2();
+
 private:
 
 };

@@ -78,6 +78,12 @@ vector<Vector2> Collider2D::GetRectCorners(Vector2 pos, float width, float heigh
 //	}
 //}
 
+
+
+
+
+
+
 bool Collider2D::Collide(Collider2D col)
 {
 	return false;
