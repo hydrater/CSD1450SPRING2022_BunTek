@@ -6,24 +6,33 @@
 #include "TextRenderer.h"
 #include "Button.h"
 
+#define UIDialogueManager UI_DialogueHandler::Instance()
+
 class UI_DialogueHandler : public GameScript
 {
 public:
 	UI_DialogueHandler(void);
 	~UI_DialogueHandler(void);
 
+	static UI_DialogueHandler& Instance(void);
+
 	void Start(void) override;
 	void Update(void) override;
 
-	void CreateDialogueHandler(string flag, short sortingLayer);
+	void CreateDialoguePreset(string flag, short sortingLayer);
+	void SetDialogueClickable(bool _canClick);
+	void DeleteDialogueEvent(void);
+	void DeleteRewardSelection(void);
+
+
+private:
+
 	void WriteToDialogue(void);
 
 	// Dialogue
 	void CreateDialogue(string flag, short sortingLayer);
 	void StartDialogueEvent(string flag);
 	void CloseDialogueEvent(void);
-	void DeleteDialogueEvent(void);
-	void SetDialogueClickable(bool _canClick);
 
 	/*=====WIP=====
 	* vector<string> rewards will be converted to
@@ -34,10 +43,9 @@ public:
 	void CreateRewardSelection(string flag, short sortingLayer);
 	void StartRewardSelection(string flag);
 	void CloseRewardSelection(void);
-	void DeleteRewardSelection(void);
 
+	static UI_DialogueHandler* instance;
 
-private:
 	void LoadFromFile(string flag);
 	string selectedFlag = "";
 	vector<string> dialogueList;

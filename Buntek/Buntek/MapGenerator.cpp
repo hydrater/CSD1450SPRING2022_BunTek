@@ -497,8 +497,7 @@ void _mapData::Travel(Node* destination)
             SetClickable(false);
             SetHoverable(false);
             encounterUI = new GameObject();
-            encounterUI->AddComponent<UI_DialogueHandler>();
-            encounterUI->GetComponent<UI_DialogueHandler>()->CreateDialogueHandler("aed", 3);
+            UIDialogueManager.CreateDialoguePreset("aed", 3);
             break;
         case NodeType::Enemy:
             SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);

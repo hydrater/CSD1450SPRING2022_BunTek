@@ -8,12 +8,24 @@
 void RemoveDialogue(Button* button);
 void RemoveRewardSelection(Button* button);
 
+UI_DialogueHandler* UI_DialogueHandler::instance = 0;
+
 UI_DialogueHandler::UI_DialogueHandler(void)
 {
 }
 
 UI_DialogueHandler::~UI_DialogueHandler(void)
 {
+}
+
+UI_DialogueHandler& UI_DialogueHandler::Instance(void)
+{
+    if (instance != 0)
+    {
+        return *instance;
+    }
+    instance = new UI_DialogueHandler();
+    return *instance;
 }
 
 void UI_DialogueHandler::Start(void)
@@ -69,7 +81,7 @@ void UI_DialogueHandler::Update(void)
     }
 }
 
-void UI_DialogueHandler::CreateDialogueHandler(string flag, short sortingLayer)
+void UI_DialogueHandler::CreateDialoguePreset(string flag, short sortingLayer)
 {
     selectedFlag = flag;
     DeleteRewardSelection();
@@ -88,7 +100,7 @@ void UI_DialogueHandler::CreateDialogueHandler(string flag, short sortingLayer)
 void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
 
     //Create main dialogue box
-    dialogueBox = this->Owner();
+    dialogueBox = new GameObject;
     GameObject* tempdialogue = devTools.CreateSpriteGameObject("UI/Texture.png", 1800, 360,
     AE_GFX_BM_BLEND, Vector2(0, -280), sortingLayer - 2);
     SpriteRenderer* tempRenderer = tempdialogue->GetComponent<SpriteRenderer>();
@@ -118,7 +130,7 @@ void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
     // Buttons (Max 3)
     vector<Button*> buttonList;
     for (int i = 0; i < 3; ++i) {
-        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("UI/Button.png", AEGfxGetWinMaxX()/2, AEGfxGetWinMaxY() / 6,
+        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("UI/Button.png", tempRenderer->GetHalfWidth() * 2, tempRenderer->GetHalfHeight() / 2,
             2, Vector2(0.f, AEGfxGetWinMaxY() / 6 + (i * AEGfxGetWinMaxY() / 4)), sortingLayer - 1);
         SpriteRenderer* tempButtonRenderer = tempButtonObj->GetComponent<SpriteRenderer>();
 
@@ -199,6 +211,8 @@ void UI_DialogueHandler::DeleteDialogueEvent(void)
 {
     if (dialogueBox)
         dialogueBox->Delete();
+
+    dialogueButtonList.clear();
 }
 
 void UI_DialogueHandler::LoadFromFile(string flag)
@@ -312,7 +326,7 @@ void UI_DialogueHandler::CreateRewardSelection(string flag, short sortingLayer)
 {
     Vector2 position = Vector2(0, 0);
 
-    rewardSel = this->Owner();
+    rewardSel = new GameObject;
     rewardSel->transform->SetPosition(position);
 
     // Background
@@ -424,14 +438,12 @@ void UI_DialogueHandler::DeleteRewardSelection(void)
 
 void RemoveRewardSelection(Button* button)
 {
-    GameObject* tmp = button->affectedObject;
-    tmp->GetComponent<UI_DialogueHandler>()->CloseRewardSelection();
+    UIDialogueManager.DeleteRewardSelection();
 }
 
 void RemoveDialogue(Button* button)
 {
-    GameObject* tmp = button->affectedObject;
-    tmp->GetComponent<UI_DialogueHandler>()->CloseDialogueEvent();
+    UIDialogueManager.DeleteDialogueEvent();
     MapData.SetClickable(true);
     MapData.SetHoverable(true);
     MapData.DisplayNodeRoutes(MapData.playerTravelDistance);

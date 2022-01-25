@@ -77,8 +77,7 @@ void Scene_Navigation::LateUpdate(void)
 {
 	if (MapData.shopUI && MapData.shopUI->IsActive())
 		MapData.shopUI->GetComponent<UI_Shop>()->SetClickable(true);
-	if (MapData.encounterUI && MapData.encounterUI->IsActive())
-		MapData.encounterUI->GetComponent<UI_DialogueHandler>()->SetDialogueClickable(true);
+	UIDialogueManager.SetDialogueClickable(true);
 }
 
 Scene_Navigation::~Scene_Navigation(void)
