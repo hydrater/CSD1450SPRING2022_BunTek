@@ -1,14 +1,211 @@
 #include "BattleHandler.h"
 
+#include "SpriteRenderer.h"
+#include "Collider2D.h"
+#include "System.h"
+#include "BattleInput.h"
+#include "AudioEngine.h"
+#include "GameManager.h"
+#include "UI_Hp.h"
+
+#include "Scene_Battle.h"
+#include "Component.h"
+#include "Entity.h"
 BattleHandler::BattleHandler(void) {
 
 }
 BattleHandler::~BattleHandler(void) {
-
+	CollisionManager2D.RemoveAll();
+	AudioManager.StopMusic();
+	AudioManager.Free("hysteric.ogg");
 }
 void BattleHandler::Start(void) {
+	// Setting up the scene
+	GameManager.cameraLerpBack = true;
+
+	inputHandler = new GameObject();
+	inputHandler->AddComponent<BattleInput>();
+	ballList = &inputHandler->GetComponent<BattleInput>()->ballList;
+
+	SpriteRenderer* tempRenderer;
+
+	background = new GameObject();
+	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
+	background->GetComponent<SpriteRenderer>()->SetTexture("Background.jpg");
+	background->GetComponent<SpriteRenderer>()->SetLayer(-1);
+
+	friendlyArea = new GameObject();
+	tempRenderer = friendlyArea->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(620, 800);
+	tempRenderer->SetTexture("WhiteTexture.png");
+	tempRenderer->SetColor(0, 0, 0);
+	tempRenderer->SetTransparency(0.5f);
+	friendlyArea->transform->SetPosition(Vector2(-590, 70));
+
+	neutralArea = new GameObject();
+	tempRenderer = neutralArea->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(560, 800);
+	tempRenderer->SetTexture("WhiteTexture.png");
+	tempRenderer->SetColor(0, 0.5f, 0.5f);
+	tempRenderer->SetTransparency(0.5f);
+	neutralArea->transform->SetPosition(Vector2(0, 70));
+
+	hostileArea = new GameObject();
+	tempRenderer = hostileArea->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(620, 800);
+	tempRenderer->SetTexture("WhiteTexture.png");
+	tempRenderer->SetColor(0, 0, 0);
+	tempRenderer->SetTransparency(0.5f);
+	hostileArea->transform->SetPosition(Vector2(590, 70));
+
+	playerpaddle = new GameObject();
+	tempRenderer = playerpaddle->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(20, 100);
+	tempRenderer->SetTexture("paddle.png");
+	tempRenderer->SetColor(0, 0, 1);
+	tempRenderer->SetLayer(1);
+	playerpaddle->transform->SetPosition(Vector2(-590, 70));
+	playerpaddle->transform->Rotate(0);
+	PaddleBehavior* temppaddle = playerpaddle->AddComponent<PaddleBehavior>();
+	temppaddle->setplayerpaddle(true);
+	temppaddle->setMaxspeed(500);
+	temppaddle->sr = tempRenderer;
+	BoxCollider* tempcol;
+	tempcol = playerpaddle->AddComponent<BoxCollider>();
+
+	inputHandler->GetComponent<BattleInput>()->playerpaddle = temppaddle;
+
+	AIpaddle = new GameObject();
+	tempRenderer = AIpaddle->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(20, 100);
+	tempRenderer->SetTexture("paddle.png");
+	tempRenderer->SetColor(1, 0, 0);
+	tempRenderer->SetLayer(1);
+	AIpaddle->transform->SetPosition(Vector2(590, 70));
+	AIpaddle->transform->Rotate(0);
+	temppaddle = AIpaddle->AddComponent<PaddleBehavior>();
+	temppaddle->setplayerpaddle(false);
+	temppaddle->setMaxspeed(500);
+	temppaddle->sr = tempRenderer;
+	tempcol = AIpaddle->AddComponent<BoxCollider>();
+
+	inputHandler->GetComponent<BattleInput>()->AIPaddle = temppaddle;
+
+	playercursor = new GameObject();
+	tempRenderer = playercursor->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(50, 50);
+	tempRenderer->SetTexture("ball.png");
+	tempRenderer->SetColor(0.5f, 0.5f, 1);
+	CursorBehaviour* tempcursor;
+	tempcursor = playercursor->AddComponent<CursorBehaviour>();
+	tempcursor->setplayerpossess(true);
+	tempcursor->sr = tempRenderer;
+
+	inputHandler->GetComponent<BattleInput>()->playerCursor = tempcursor;
+
+	AIcursor = new GameObject();
+	tempRenderer = AIcursor->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(50, 50);
+	tempRenderer->SetTexture("ball.png");
+	tempRenderer->SetColor(1, 0.5f, 0.5f);
+	tempcursor = AIcursor->AddComponent<CursorBehaviour>();
+	tempcursor->setplayerpossess(false);
+	tempcursor->sr = tempRenderer;
+
+	inputHandler->GetComponent<BattleInput>()->AICursor = tempcursor;
+
+	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.areaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.areaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.friendlyAreaX = friendlyArea->transform->worldposition.x + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.hostileAreaX = hostileArea->transform->worldposition.x - hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+
+	//hpBar = new GameObject();
+	//UI_Hp* ui_hpBar = hpBar->AddComponent<UI_Hp>();
+	//hpBar->transform->SetPosition(Vector2(-500, -400));
+	//ui_hpBar->GenerateHpBackground(true);
+
+	//enemyhpBar = new GameObject();
+	//UI_Hp* ui_EhpBar = enemyhpBar->AddComponent<UI_Hp>();
+	//enemyhpBar->transform->SetPosition(Vector2(500, -400));
+	//ui_EhpBar->GenerateHpBackground(false);
+
+	GameManager.InitBattle(100, 100); // Inits Player and Enemy HP
 
 }
-void BattleHandler::Update(void) {
+void BattleHandler::StartBattle(void) {
+	battleStarted = true;
+	AudioManager.LoadMusic("hysteric.ogg");
+	AudioManager.PlayMusic("hysteric.ogg");
+	AudioManager.SetMusicVolume(0.1f);
+}
 
+void BattleHandler::Update(void) {
+	if (battleStarted) {
+		if (timeScalar == 0.5f)
+		{
+			//cout << checkTimer << endl;
+
+			checkTimer = true;
+			hitPauseTimer = 0.01f;
+		}
+		if (checkTimer)
+		{
+			hitPauseTimer -= (float)AEFrameRateControllerGetFrameTime();
+			if (hitPauseTimer < 0)
+			{
+				timeScalar = 1;
+				checkTimer = false;
+			}
+		}
+		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+		ballSpawnTimer -= DeltaTime;
+		scalingTimer += DeltaTime;
+		if (ballSpawnTimer < 0)
+		{
+			SpriteRenderer* tempRenderer;
+			BallBehavior* tempBall;
+			CircleCollider* tempcol;
+
+			//Create Trail first (Render Trail before Ball)
+			GameObject* tempballTrail = new GameObject();
+			SpriteRenderer* tempballTrailRenderer;
+			tempballTrailRenderer = tempballTrail->AddComponent<SpriteRenderer>();
+			tempballTrailRenderer->Size(20, 20);
+			tempballTrailRenderer->SetTexture("Trail.png");
+			tempballTrailRenderer->SetColor(1, 1, 1);
+			tempballTrailRenderer->SetTransparency(0.75f);
+
+			ball = new GameObject();
+			tempRenderer = ball->AddComponent<SpriteRenderer>();
+			tempRenderer->SetLayer(2);
+			tempRenderer->Size(20, 20);
+			tempRenderer->SetTexture("ball.png");
+			tempBall = ball->AddComponent<BallBehavior>();
+			tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput>());
+			//tempBall->battleInput = cursorManager->GetComponent<BattleInput>();
+			tempBall->ballTrail = tempballTrail;
+			tempBall->srBallTrail = tempballTrailRenderer;
+			bool dir = RandIntMinMax(0, 1);
+			tempBall->playerPossess = (dir ? true : false);
+			tempBall->velocity = Vector2((float)(dir ? -1 : 1), RandFloatMinMax(0, 1));
+			tempBall->radius = 10;
+			tempBall->SetSpeed(tempBall->GetSpeed() + (scalingTimer * 3));
+			tempBall->sr = tempRenderer;
+			dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
+
+			tempcol = ball->AddComponent<CircleCollider>();
+
+			ballList->push_back(tempBall);
+
+			ballSpawnTimer = 2 - scalingTimer * 0.01f;
+		}
+		//cout << timeScalar << endl;
+	//set background color
+	//test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
+	//test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
+	//test->transform->Rotate(20*DeltaTime);
+	}
+	
 }

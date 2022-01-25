@@ -1,21 +1,14 @@
 #pragma once
 #include "System.h"
-#include "BallBehavior.h"
 
 class Scene_Battle : public Scene
 {
 public:
     void Start(void) override;
     void Update(void) override;
-
-    float timeScalar = 1;
+    GameObject* BattleManager = 0;
 
 private:
     ~Scene_Battle(void) override;
-    GameObject* inputHandler = 0;
-	GameObject* background = 0, * ball = 0, * friendlyArea = 0, * hostileArea = 0, * neutralArea = 0, * playerpaddle = 0, * playercursor = 0, * AIpaddle = 0, * AIcursor = 0,* hpBar = 0, * enemyhpBar = 0, *ballParticle = 0;
-    float ballSpawnTimer = 0, scalingTimer = 0;
-    vector<BallBehavior*>* ballList = 0;
-    float hitPauseTimer = 0;
-    bool checkTimer = false;
+    
 };

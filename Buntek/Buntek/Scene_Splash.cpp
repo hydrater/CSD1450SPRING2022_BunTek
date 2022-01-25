@@ -15,7 +15,6 @@ void Scene_Splash::Start(void)
 void Scene_Splash::Update(void)
 {
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-
 	timer += DeltaTime;
 	Transform* splashTransform = splash->transform;
 

@@ -6,7 +6,7 @@ class Collider2D : public Component
 public:
 	Collider2D(void);
 	~Collider2D(void);
-	void UpdateDimension(void);
+	//void UpdateDimension(void);
 	bool Collide(Collider2D col);
 	vector<Vector2> SortMinMax(vector<Vector2> vectors, bool xaxis);
 	vector<Vector2> GetRectCorners(Vector2 pos, float width, float height, float angle); // Rotates in counter-clockwise rot (Follows vector2.h Rotate)
