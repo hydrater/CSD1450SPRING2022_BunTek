@@ -1,5 +1,4 @@
 #include "BattleHandler.h"
-
 #include "SpriteRenderer.h"
 #include "Collider2D.h"
 #include "System.h"
@@ -7,19 +6,29 @@
 #include "AudioEngine.h"
 #include "GameManager.h"
 #include "UI_Hp.h"
-
 #include "Scene_Battle.h"
 #include "Component.h"
 #include "Entity.h"
-BattleHandler::BattleHandler(void) {
 
+_battleHandler::_battleHandler(void) {
+	
 }
-BattleHandler::~BattleHandler(void) {
+_battleHandler::~_battleHandler(void) {
 	CollisionManager2D.RemoveAll();
 	AudioManager.StopMusic();
 	AudioManager.Free("hysteric.ogg");
 }
-void BattleHandler::Start(void) {
+void _battleHandler::Start(void) {
+	
+
+}
+
+void _battleHandler::StartBattle(void) {
+	battleStarted = true;
+	AudioManager.LoadMusic("hysteric.ogg");
+	AudioManager.PlayMusic("hysteric.ogg");
+	AudioManager.SetMusicVolume(0.1f);
+
 	// Setting up the scene
 	GameManager.cameraLerpBack = true;
 
@@ -132,16 +141,10 @@ void BattleHandler::Start(void) {
 	//ui_EhpBar->GenerateHpBackground(false);
 
 	GameManager.InitBattle(100, 100); // Inits Player and Enemy HP
-
-}
-void BattleHandler::StartBattle(void) {
-	battleStarted = true;
-	AudioManager.LoadMusic("hysteric.ogg");
-	AudioManager.PlayMusic("hysteric.ogg");
-	AudioManager.SetMusicVolume(0.1f);
 }
 
-void BattleHandler::Update(void) {
+
+void _battleHandler::Update(void) {
 	if (battleStarted) {
 		if (timeScalar == 0.5f)
 		{
