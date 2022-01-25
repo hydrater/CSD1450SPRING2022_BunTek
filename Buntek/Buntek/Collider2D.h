@@ -11,10 +11,8 @@ public:
 	vector<Vector2> SortMinMax(vector<Vector2> vectors, bool xaxis);
 	vector<Vector2> GetRectCorners(Vector2 pos, float width, float height, float angle); // Rotates in counter-clockwise rot (Follows vector2.h Rotate)
 	Transform* transform = 0;
+	Vector2 scale = Vector2(1, 1);
 
-	float width = 0;
-	float height = 0;
-	float radius = 0;
 	float angle = 0; //clockwise rotation
 
 private:
@@ -27,10 +25,11 @@ public:
 	BoxCollider(void);
 	~BoxCollider(void);
 	bool Collide(Collider2D* other);
-	
+
+	float width = 0;
+	float height = 0;
 
 private:
-	
 
 };
 
@@ -40,10 +39,10 @@ public:
 	CircleCollider(void);
 	~CircleCollider(void);
 	bool Collide(Collider2D* other);
-	
+
+	float radius = 0;
 
 private:
-	
 
 };
 

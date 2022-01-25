@@ -114,7 +114,7 @@ void _CollisionManager2D::CollideAll(void)
 // Returns own self if no collision
 Collider2D* _CollisionManager2D::CheckCollision(Collider2D* collider)
 {
-    for (CircleCollider* otherCol : circleColliderList)
+    for (BoxCollider* otherCol : boxColliderList)
     {
         if (collider != otherCol)
         {
@@ -124,7 +124,7 @@ Collider2D* _CollisionManager2D::CheckCollision(Collider2D* collider)
             }
         }
     }
-    for (BoxCollider* otherCol : boxColliderList)
+    for (CircleCollider* otherCol : circleColliderList)
     {
         if (collider != otherCol)
         {

@@ -70,7 +70,6 @@ void Scene_Battle::Start(void)
 	temppaddle->sr = tempRenderer;
 	BoxCollider* tempcol;
 	tempcol = playerpaddle->AddComponent<BoxCollider>();
-	tempcol->UpdateDimension();
 
 	inputHandler->GetComponent<BattleInput>()->playerpaddle = temppaddle;
 
@@ -87,7 +86,6 @@ void Scene_Battle::Start(void)
 	temppaddle->setMaxspeed(500);
 	temppaddle->sr = tempRenderer;
 	tempcol = AIpaddle->AddComponent<BoxCollider>();
-	tempcol->UpdateDimension();
 
 	inputHandler->GetComponent<BattleInput>()->AIPaddle = temppaddle;
 

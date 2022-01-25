@@ -55,31 +55,28 @@ vector<Vector2> Collider2D::GetRectCorners(Vector2 pos, float width, float heigh
 	return corners;
 }
 
-void Collider2D::UpdateDimension(void)
-{
-	if (this != NULL)
-	{
-		transform = this->Owner()->transform;
-		if (transform != NULL) {
-			angle = transform->worldrotation;
-		}
-		else {
-			angle = 0.0f;
-		}
-
-		SpriteRenderer* _sr = this->Owner()->GetComponent<SpriteRenderer>();
-		if (_sr != NULL) {
-			width = _sr->GetHalfWidth() * 2;
-			height = _sr->GetHalfHeight() * 2;
-			radius = _sr->GetHalfWidth() + _sr->GetHalfHeight();
-		}
-		else {
-			width = 100;
-			height = 100;
-			radius = 50;
-		}
-	}
-}
+//void Collider2D::UpdateDimension(void)
+//{
+//	if (this != NULL)
+//	{
+//		transform = this->Owner()->transform;
+//		if (transform != NULL) {
+//			angle = transform->worldrotation;
+//		}
+//		else {
+//			angle = 0.0f;
+//		}
+//		
+//		if (this->Owner()->transform != NULL) {
+//			scale.x = this->Owner()->transform->localscale.x;
+//			scale.y = this->Owner()->transform->localscale.y;
+//		}
+//		else {
+//			scale.x = 1;
+//			scale.y = 1;
+//		}
+//	}
+//}
 
 bool Collider2D::Collide(Collider2D col)
 {
@@ -101,6 +98,15 @@ bool BoxCollider::Collide(Collider2D* col)
 		if (col->transform == NULL || transform == NULL)
 			return false;
 
+		// Update dimensions of the width, height, angle and/or radius
+		SpriteRenderer* thissr = this->Owner()->GetComponent<SpriteRenderer>();
+		SpriteRenderer* othersr = CirCol->Owner()->GetComponent<SpriteRenderer>();
+		width = thissr->GetHalfWidth() * 2;
+		height = thissr->GetHalfHeight() * 2;
+		angle = this->Owner()->transform->worldrotation;
+		CirCol->radius = othersr->GetHalfWidth() + othersr->GetHalfHeight();
+		CirCol->angle = CirCol->Owner()->transform->worldrotation;
+
 		Vector2 boxPos = transform->worldposition;
 		Vector2 vecDist = boxPos.operator-(CirCol->transform->worldposition);
 
@@ -117,13 +123,24 @@ bool BoxCollider::Collide(Collider2D* col)
 		if (col->transform == NULL || transform == NULL)
 			return false;
 
+		BoxCollider* box2Col = (BoxCollider*)col;
+
+		// Update dimensions of the width, height and angle
+		SpriteRenderer* thissr = this->Owner()->GetComponent<SpriteRenderer>();
+		SpriteRenderer* othersr = box2Col->Owner()->GetComponent<SpriteRenderer>();
+		width = thissr->GetHalfWidth() * 2;
+		height = thissr->GetHalfHeight() * 2;
+		angle = this->Owner()->transform->worldrotation;
+		box2Col->width = othersr->GetHalfWidth() * 2;
+		box2Col->height = othersr->GetHalfHeight() * 2;
+		box2Col->angle = box2Col->Owner()->transform->worldrotation;
+
 		// Collision Method (Seperating Axis Theorem)
 		// Box 1
 		Vector2 box1Pos = transform->worldposition;
 		vector<Vector2> box1Cor = GetRectCorners(box1Pos, width, height, 0);
 
 		// Box 2
-		BoxCollider* box2Col = (BoxCollider*)col;
 		Vector2 box2Pos = box2Col->transform->worldposition;
 		// Rotate box2 according box1 angle
 		box2Pos = box2Pos.operator-(box1Pos);
@@ -203,6 +220,14 @@ bool CircleCollider::Collide(Collider2D* col)
 	if (typeid(*col) == typeid(CircleCollider)) {
 		CircleCollider* other = (CircleCollider*)col;
 		
+		// Update dimensions of the width, height and/or radius
+		SpriteRenderer* thissr = this->Owner()->GetComponent<SpriteRenderer>();
+		SpriteRenderer* othersr = other->Owner()->GetComponent<SpriteRenderer>();
+		radius = thissr->GetHalfWidth() * 2 + thissr->GetHalfHeight() * 2;
+		angle = this->Owner()->transform->worldrotation;
+		other->radius = othersr->GetHalfWidth() * 2 + othersr->GetHalfHeight() * 2;
+		other->angle = other->Owner()->transform->worldrotation;
+
 		float Dist2 = (radius + other->radius)* (radius + other->radius);
 
 		if ((this->Owner()->transform->worldposition- other->Owner()->transform->worldposition).LengthSquared() <= Dist2 ) {
@@ -218,6 +243,15 @@ bool CircleCollider::Collide(Collider2D* col)
 
 		if (boxCol->transform == NULL || transform == NULL)
 			return false;
+
+		// Update dimensions of the width, height and/or radius
+		SpriteRenderer* thissr = this->Owner()->GetComponent<SpriteRenderer>();
+		SpriteRenderer* othersr = boxCol->Owner()->GetComponent<SpriteRenderer>();
+		radius = thissr->GetHalfWidth() * 2 + thissr->GetHalfHeight() * 2;
+		angle = this->Owner()->transform->worldrotation;
+		boxCol->width = othersr->GetHalfWidth() * 2;
+		boxCol->height = othersr->GetHalfHeight() * 2;
+		boxCol->angle = boxCol->Owner()->transform->worldrotation;
 
 		Vector2 boxPos = boxCol->transform->worldposition;
 		Vector2 vecDist = boxPos.operator-(transform->worldposition);

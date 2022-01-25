@@ -17,7 +17,6 @@ BallBehavior::~BallBehavior(void)
 void BallBehavior::Start(void)
 {
 	transform = this->Owner()->transform;
-	this->Owner()->GetComponent<CircleCollider>()->UpdateDimension();
 	this->Owner()->GetComponent<CircleCollider>()->transform = transform;
 
 	//Create a Trail

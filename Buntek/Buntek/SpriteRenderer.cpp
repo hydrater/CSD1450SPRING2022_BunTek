@@ -16,8 +16,6 @@ SpriteRenderer::~SpriteRenderer(void)
 
 void SpriteRenderer::Size(float width, float height)
 {
-	if (this->Owner()->GetComponent<Collider2D>())
-		this->Owner()->GetComponent<Collider2D>()->UpdateDimension();
 
 	halfWidth = width / 2;
 	halfHeight = height / 2;

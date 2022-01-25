@@ -74,8 +74,6 @@ void Transform::Rotate(float rotate)
 {
 	this->worldrotation = worldrotation + rotate;
 
-	if (this->Owner()->GetComponent<Collider2D>())
-		this->Owner()->GetComponent<Collider2D>()->UpdateDimension();
 
 	for (Transform* child : children)
 	{
