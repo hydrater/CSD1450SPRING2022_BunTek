@@ -63,8 +63,7 @@ void Scene_Battle::Start(void)
 	tempRenderer->SetLayer(1);
 	playerpaddle->transform->SetPosition(Vector2(-590, 70));
 	playerpaddle->transform->Rotate(0);
-	PaddleBehavior* temppaddle;
-	temppaddle = playerpaddle->AddComponent<PaddleBehavior>();
+	PaddleBehavior* temppaddle = playerpaddle->AddComponent<PaddleBehavior>();
 	temppaddle->setplayerpaddle(true);
 	temppaddle->setMaxspeed(500);
 	temppaddle->sr = tempRenderer;

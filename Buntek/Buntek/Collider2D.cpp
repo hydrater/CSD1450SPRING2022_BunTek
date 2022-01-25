@@ -81,6 +81,12 @@ void Collider2D::UpdateDimension(void)
 	}
 }
 
+
+
+
+
+
+
 bool Collider2D::Collide(Collider2D col)
 {
 	return false;

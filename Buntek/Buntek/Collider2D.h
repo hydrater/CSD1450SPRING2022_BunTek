@@ -17,6 +17,8 @@ public:
 	float radius = 0;
 	float angle = 0; //clockwise rotation
 
+	Vector2 CollisionPoint = Vector2();
+
 private:
 
 };
