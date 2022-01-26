@@ -185,6 +185,7 @@ void _battleHandler::Update(void) {
 			tempRenderer->SetLayer(2);
 			tempRenderer->Size(20, 20);
 			tempRenderer->SetTexture("ball.png");
+			tempcol = ball->AddComponent<CircleCollider>();
 			tempBall = ball->AddComponent<BallBehavior>();
 			tempBall->battleInput = inputHandler->GetComponent<BattleInput>();
 			//tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput>());
@@ -198,8 +199,7 @@ void _battleHandler::Update(void) {
 			tempBall->SetSpeed(tempBall->GetSpeed() + (scalingTimer * 3));
 			tempBall->sr = tempRenderer;
 			dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
-
-			tempcol = ball->AddComponent<CircleCollider>();
+			tempBall->col = tempcol;
 
 			ballList->push_back(tempBall);
 

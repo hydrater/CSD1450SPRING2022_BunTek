@@ -37,6 +37,13 @@ void BallBehavior::Update(void)
 		this->Owner()->Delete();
 	}
 
+	// Collision Check
+	Collider2D* othercol = CollisionManager2D.CheckCollision(col);
+	if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<PaddleBehavior>())
+	{
+		BounceBall(!playerPossess, othercol->Owner(), othercol->Owner()->transform->worldrotation);
+		float timeScale = 0.5f;
+	}
 }
 
 
@@ -73,7 +80,7 @@ void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 	{
 		Vector2 wallCoord = wall->transform->worldposition;
 		// Create reflection axis
-		Vector2 normal = Vector2(wallCoord.x - transform->worldposition.x, 0.f);
+		Vector2 normal = Vector2(wallCoord.y - transform->worldposition.y, 0.f);
 		// Rotate (Vector.rotate goes counter clockwise; Angle is based in clockwise)
 		normal.RotateAC(angle);
 		normal.Normalize();
@@ -84,30 +91,9 @@ void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 		velocity = newvel.operator*(-1);
 
 		// Force Direction Limit (Ball going opposite direction)
-		velocity.x = (isPlayer && velocity.x > 0 || !isPlayer && velocity.x < 0) ? velocity.x * -1 : velocity.x;
+		velocity.y = (isPlayer && velocity.y > 0 || !isPlayer && velocity.y < 0) ? velocity.y * -1 : velocity.y;
 			
-		float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
-		if (0 <= ang && ang < angrange) {
-			if (velocity.x < 0) {
-				velocity = Vector2(0, 1);
-				velocity.RotateAC(-angrange);
-			}
-			else {
-				velocity = Vector2(0, 1);
-				velocity.RotateAC(angrange);
-			}
-		}
-		else if (180 - angrange < ang && ang <= 180) {
-			//cout << ang << endl;
-			if (velocity.x < 0) {
-				velocity = Vector2(0, -1);
-				velocity.RotateAC(angrange);
-			}
-			else {
-				velocity = Vector2(0, -1);
-				velocity.RotateAC(-angrange);
-			}
-		}
+		BallHorizontalCheck();
 
 		playerPossess = !playerPossess;
 		playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);

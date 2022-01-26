@@ -24,6 +24,7 @@ public:
 	void HitBall(Vector2 mousePos, bool isPlayer);
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
+	Collider2D* col = 0;
 
 	BattleInput* battleInput = 0;
 	GameObject* ballParticle = 0;
