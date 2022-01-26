@@ -112,20 +112,19 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 
 	BallBehavior* targetedBall = ballList[0];
 
-	for (BallBehavior* x : ballList)
+	for (BallBehavior* ball : ballList)
 	{
-		if (x->playerPossess != isPlayer)
+		if (ball->playerPossess != isPlayer)
 			continue;
 
-		if (x->Owner()->transform->worldposition.x > targetedBall->Owner()->transform->worldposition.x && !isPlayer)
-			targetedBall = x;
-		if (x->Owner()->transform->worldposition.x < targetedBall->Owner()->transform->worldposition.x && isPlayer)
-			targetedBall = x;
+		if ((ball->Owner()->transform->worldposition.y > targetedBall->Owner()->transform->worldposition.y && !isPlayer)
+			|| (ball->Owner()->transform->worldposition.y < targetedBall->Owner()->transform->worldposition.y && isPlayer))
+			targetedBall = ball;
 	}
 
 	Transform* temp = targetedBall->Owner()->transform;
 
-	bool acceptableRange = (temp->worldposition.x >= GameManager.hostileAreaY && !isPlayer) || (temp->worldposition.x <= GameManager.friendlyAreaY && isPlayer);
+	bool acceptableRange = (temp->worldposition.y >= GameManager.hostileAreaY && !isPlayer) || (temp->worldposition.y <= GameManager.friendlyAreaY && isPlayer);
 
 	if (targetedBall->playerPossess == isPlayer && acceptableRange)
 	{

@@ -192,7 +192,7 @@ void _battleHandler::Update(void) {
 			tempBall->srBallTrail = tempballTrailRenderer;
 			bool dir = RandIntMinMax(0, 1);
 			tempBall->playerPossess = (dir ? true : false);
-			tempBall->velocity = Vector2((float)(dir ? -1 : 1), RandFloatMinMax(0, 1));
+			tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? -1 : 1));
 			tempBall->radius = 10;
 			tempBall->SetSpeed(tempBall->GetSpeed() + (scalingTimer * 3));
 			tempBall->sr = tempRenderer;
