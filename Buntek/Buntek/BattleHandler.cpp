@@ -45,11 +45,11 @@ void _battleHandler::StartBattle(void) {
 
 	friendlyArea = new GameObject();
 	tempRenderer = friendlyArea->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(620, 800);
+	tempRenderer->Size(500, 400);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0, 0);
 	tempRenderer->SetTransparency(0.5f);
-	friendlyArea->transform->SetPosition(Vector2(-590, 70));
+	friendlyArea->transform->SetPosition(Vector2(0, -250));
 
 	neutralArea = new GameObject();
 	tempRenderer = neutralArea->AddComponent<SpriteRenderer>();
