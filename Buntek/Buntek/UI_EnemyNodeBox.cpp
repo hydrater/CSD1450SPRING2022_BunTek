@@ -51,14 +51,8 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 	enemyName->transform->SetPosition(Vector2(enemynodepos.x, enemynodepos.y + tempBckgdRenderer->GetHalfHeight() - tempEnemynameRenderer->GetHalfHeight()));
 
 	//nametext
-	TextRenderer* tempEnemynameTxtRenderer = enemyName->AddComponent<TextRenderer>();
-	tempEnemynameTxtRenderer->SetFont("Astral.ttf");
+	TextRenderer* tempEnemynameTxtRenderer = devTools.AddTextToSpriteGameObject(enemyName, "Astral.ttf", "Test name", TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Top, 24, sortingLayer);
 	tempEnemynameTxtRenderer->SetTextColor(0, 0, 0);
-	tempEnemynameTxtRenderer->SetText("Test name");
-	tempEnemynameTxtRenderer->SetScale(0.5f);
-	tempEnemynameTxtRenderer->SetLayer(sortingLayer);
-	tempEnemynameTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Left);
-	tempEnemynameTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Top);
 	//tempEnemynameTxtRenderer->SetXBuffer(70);
 	enemynode->AddChild(enemyName);
 

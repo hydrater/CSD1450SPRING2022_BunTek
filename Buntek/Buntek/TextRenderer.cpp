@@ -57,6 +57,7 @@ vector<float> TextRenderer::GetTextColor(void)
 {
 	return vector<float>{textR, textG, textB};
 }
+
 void TextRenderer::SetTextWidth(float _TextWidth) {
 	textWidth = _TextWidth;
 }

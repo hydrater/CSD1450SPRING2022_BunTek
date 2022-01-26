@@ -60,3 +60,39 @@ GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, fl
     tempRenderer->SetTransparency(opacity);
     return temp;
 }
+
+TextRenderer* _devTools::AddTextToSpriteGameObject(GameObject* gameObject, string fontName, string text, TextRenderer::xAlignmentTypes xAlignment, TextRenderer::yAlignmentTypes yAlignment, float fontsize) {
+    TextRenderer* tempTextRenderer;
+    tempTextRenderer = gameObject->AddComponent<TextRenderer>();
+    tempTextRenderer->SetFont(fontName);
+    tempTextRenderer->SetText(text);
+    tempTextRenderer->SetXAlignment(xAlignment);
+    tempTextRenderer->SetYAlignment(yAlignment);
+    tempTextRenderer->SetFontSize(fontsize);
+    return tempTextRenderer;
+}
+
+TextRenderer* _devTools::AddTextToSpriteGameObject(GameObject* gameObject, string fontName, string text, TextRenderer::xAlignmentTypes xAlignment, TextRenderer::yAlignmentTypes yAlignment, float fontsize, short layer) {
+    TextRenderer* tempTextRenderer;
+    tempTextRenderer = gameObject->AddComponent<TextRenderer>();
+    tempTextRenderer->SetFont(fontName);
+    tempTextRenderer->SetText(text);
+    tempTextRenderer->SetXAlignment(xAlignment);
+    tempTextRenderer->SetYAlignment(yAlignment);
+    tempTextRenderer->SetFontSize(fontsize);
+    tempTextRenderer->SetLayer(layer);
+    return tempTextRenderer;
+}
+
+TextRenderer* _devTools::AddTextToSpriteGameObject(GameObject* gameObject, string fontName, string text, TextRenderer::xAlignmentTypes xAlignment, TextRenderer::yAlignmentTypes yAlignment, float fontsize, short layer, bool warparound) {
+    TextRenderer* tempTextRenderer;
+    tempTextRenderer = gameObject->AddComponent<TextRenderer>();
+    tempTextRenderer->SetFont(fontName);
+    tempTextRenderer->SetText(text);
+    tempTextRenderer->SetXAlignment(xAlignment);
+    tempTextRenderer->SetYAlignment(yAlignment);
+    tempTextRenderer->SetFontSize(fontsize);
+    tempTextRenderer->SetLayer(layer);
+    tempTextRenderer->SetWarpAround(warparound);
+    return tempTextRenderer;
+}
