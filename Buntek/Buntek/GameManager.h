@@ -30,8 +30,8 @@ public:
     float areaBottomBoundary = 0;
     float areaLeftBoundary = 0;
     float areaRightBoundary = 0;
-    float friendlyAreaX = 0;
-    float hostileAreaX = 0;
+    float friendlyAreaY = 0;
+    float hostileAreaY = 0;
 
     // Battle
     void InitBattle(float _playerHp, float _enemyHp);

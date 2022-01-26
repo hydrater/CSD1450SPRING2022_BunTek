@@ -14,8 +14,7 @@ public:
 	~BallBehavior(void);
 	void Start(void) override;
 	void Update(void) override;
-	void AssignListPointer(BattleInput* _battleInput);
-	void UpdateTrail(void);
+
 	void BounceBall(bool isPlayer, GameObject* wall, float angle);
 
 	GameObject* ballTrail = 0;
@@ -39,7 +38,7 @@ private:
 	float speed = 300;
 	float angrange = 45;
 	Transform* transform = 0;
-	BattleInput* battleInput = 0;
+
 	void BallVerticalCheck(void);
 };
 #endif
