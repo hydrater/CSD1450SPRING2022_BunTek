@@ -210,7 +210,10 @@ void UI_DialogueHandler::CloseDialogueEvent(void)
 void UI_DialogueHandler::DeleteDialogueEvent(void)
 {
     if (dialogueBox)
+    {
         dialogueBox->Delete();
+        dialogueBox = 0;
+    }
 
     dialogueButtonList.clear();
 }
@@ -319,7 +322,10 @@ void UI_DialogueHandler::WriteToDialogue(void)
 void UI_DialogueHandler::SetDialogueClickable(bool _canClick)
 {
     for (int i = 0; i < dialogueButtonList.size(); ++i)
-        dialogueButtonList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
+    {
+        if (dialogueButtonList[i]->Owner() && dialogueButtonList[i]->Owner()->GetComponent<Button>())
+            dialogueButtonList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
+    }
 }
 
 void UI_DialogueHandler::CreateRewardSelection(string flag, short sortingLayer)
@@ -433,7 +439,12 @@ void UI_DialogueHandler::CloseRewardSelection(void)
 void UI_DialogueHandler::DeleteRewardSelection(void)
 {
     if (rewardSel)
+    {
         rewardSel->Delete();
+        rewardSel = 0;
+    }
+
+    rewardButtonList.clear();
 }
 
 void RemoveRewardSelection(Button* button)
