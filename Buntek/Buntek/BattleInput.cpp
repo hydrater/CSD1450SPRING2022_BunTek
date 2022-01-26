@@ -110,7 +110,10 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 	Vector2* vecPosition = isPlayer ? &PlayerAIposition : &AIposition;
 	Vector2* vecTargetPosition = isPlayer ? &PlayerAITargetPosition : &AITargetPosition;
 
-	BallBehavior* targetedBall = ballList[0];
+	BallBehavior* targetedBall = nullptr;
+
+	if (ballList.size() > 0)
+		targetedBall = ballList[0];
 
 	for (BallBehavior* ball : ballList)
 	{
@@ -122,18 +125,25 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 			targetedBall = ball;
 	}
 
-	Transform* temp = targetedBall->Owner()->transform;
-
-	bool acceptableRange = (temp->worldposition.y >= GameManager.hostileAreaY && !isPlayer) || (temp->worldposition.y <= GameManager.friendlyAreaY && isPlayer);
-
-	if (targetedBall->playerPossess == isPlayer && acceptableRange)
+	if (targetedBall != nullptr)
 	{
-		float estimate = (*vecPosition).operator-(*vecTargetPosition).Length() - targetedBall->velocity.Length();
+		Transform* temp = targetedBall->Owner()->transform;
 
-		vecTargetPosition->x = temp->worldposition.x + (targetedBall->velocity.x * estimate);
-		vecTargetPosition->y = temp->worldposition.y + (targetedBall->velocity.y * estimate);
-		vecTargetPosition->x = AEClamp(vecTargetPosition->x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
-		vecTargetPosition->y = AEClamp(vecTargetPosition->y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
+		bool acceptableRange = (temp->worldposition.y >= GameManager.hostileAreaY && !isPlayer) || (temp->worldposition.y <= GameManager.friendlyAreaY && isPlayer);
+
+		if (targetedBall->playerPossess == isPlayer && acceptableRange)
+		{
+			float estimate = (*vecPosition).operator-(*vecTargetPosition).Length() - targetedBall->velocity.Length();
+
+			vecTargetPosition->x = temp->worldposition.x + (targetedBall->velocity.x * estimate);
+			vecTargetPosition->y = temp->worldposition.y + (targetedBall->velocity.y * estimate);
+			vecTargetPosition->x = AEClamp(vecTargetPosition->x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
+			vecTargetPosition->y = AEClamp(vecTargetPosition->y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
+		}
+		else
+		{
+			*vecTargetPosition = isPlayer ? Vector2(0, -400) : Vector2(0, 400);
+		}
 	}
 	else
 	{

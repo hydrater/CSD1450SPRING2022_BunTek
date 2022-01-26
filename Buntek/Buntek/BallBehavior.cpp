@@ -10,6 +10,7 @@ BallBehavior::BallBehavior(void)
 
 BallBehavior::~BallBehavior(void)
 {
+	battleInput->RemoveFromList(this);
 	GameManager.CameraShake(0.5, 50, Vector2(0, 0));
 }
 
@@ -17,15 +18,10 @@ void BallBehavior::Start(void)
 {
 	transform = this->Owner()->transform;
 	this->Owner()->GetComponent<CircleCollider>()->transform = transform;
-
-	//Create a Trail
-	ballTrail->transform->SetPosition(Vector2(transform->worldposition.x, transform->worldposition.y - (ballTrail->transform->worldscale.y * 20 / 2.f)));
 }
 
 void BallBehavior::Update(void)
 {
-
-	
 
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime, transform->worldposition.y + velocity.y * speed * DeltaTime));
 
@@ -38,7 +34,6 @@ void BallBehavior::Update(void)
 	{
 		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
 		GameManager.DealDamage(10, !playerPossess);
-		ballTrail->Delete();
 		this->Owner()->Delete();
 	}
 

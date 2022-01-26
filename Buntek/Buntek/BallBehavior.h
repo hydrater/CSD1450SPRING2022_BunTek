@@ -17,9 +17,6 @@ public:
 
 	void BounceBall(bool isPlayer, GameObject* wall, float angle);
 
-	GameObject* ballTrail = 0;
-	SpriteRenderer* srBallTrail = 0;
-
 	Vector2 velocity = Vector2(0, 0);
 	float radius = 250;
 	float GetSpeed(void);
@@ -28,6 +25,7 @@ public:
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
 
+	BattleInput* battleInput = 0;
 	GameObject* ballParticle = 0;
 	float hitPauseTimer = 0;
 	bool checkTimer = false;

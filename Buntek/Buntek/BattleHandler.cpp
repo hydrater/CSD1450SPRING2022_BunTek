@@ -171,14 +171,14 @@ void _battleHandler::Update(void) {
 			BallBehavior* tempBall;
 			CircleCollider* tempcol;
 
-			//Create Trail first (Render Trail before Ball)
-			GameObject* tempballTrail = new GameObject();
-			SpriteRenderer* tempballTrailRenderer;
-			tempballTrailRenderer = tempballTrail->AddComponent<SpriteRenderer>();
-			tempballTrailRenderer->Size(20, 20);
-			tempballTrailRenderer->SetTexture("Trail.png");
-			tempballTrailRenderer->SetColor(1, 1, 1);
-			tempballTrailRenderer->SetTransparency(0.75f);
+			////Create Trail first (Render Trail before Ball)
+			//GameObject* tempballTrail = new GameObject();
+			//SpriteRenderer* tempballTrailRenderer;
+			//tempballTrailRenderer = tempballTrail->AddComponent<SpriteRenderer>();
+			//tempballTrailRenderer->Size(20, 20);
+			//tempballTrailRenderer->SetTexture("Trail.png");
+			//tempballTrailRenderer->SetColor(1, 1, 1);
+			//tempballTrailRenderer->SetTransparency(0.75f);
 
 			ball = new GameObject();
 			tempRenderer = ball->AddComponent<SpriteRenderer>();
@@ -186,10 +186,11 @@ void _battleHandler::Update(void) {
 			tempRenderer->Size(20, 20);
 			tempRenderer->SetTexture("ball.png");
 			tempBall = ball->AddComponent<BallBehavior>();
+			tempBall->battleInput = inputHandler->GetComponent<BattleInput>();
 			//tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput>());
 			//tempBall->battleInput = cursorManager->GetComponent<BattleInput>();
-			tempBall->ballTrail = tempballTrail;
-			tempBall->srBallTrail = tempballTrailRenderer;
+			/*tempBall->ballTrail = tempballTrail;
+			tempBall->srBallTrail = tempballTrailRenderer;*/
 			bool dir = RandIntMinMax(0, 1);
 			tempBall->playerPossess = (dir ? true : false);
 			tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? -1 : 1));
