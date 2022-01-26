@@ -45,7 +45,7 @@ void _battleHandler::StartBattle(void) {
 
 	friendlyArea = new GameObject();
 	tempRenderer = friendlyArea->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(500, 400);
+	tempRenderer->Size(750, 400);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0, 0);
 	tempRenderer->SetTransparency(0.5f);
@@ -53,23 +53,23 @@ void _battleHandler::StartBattle(void) {
 
 	neutralArea = new GameObject();
 	tempRenderer = neutralArea->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(560, 800);
+	tempRenderer->Size(750, 100);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0.5f, 0.5f);
 	tempRenderer->SetTransparency(0.5f);
-	neutralArea->transform->SetPosition(Vector2(0, 70));
+	neutralArea->transform->SetPosition(Vector2(0, 0));
 
 	hostileArea = new GameObject();
 	tempRenderer = hostileArea->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(620, 800);
+	tempRenderer->Size(750, 400);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0, 0);
 	tempRenderer->SetTransparency(0.5f);
-	hostileArea->transform->SetPosition(Vector2(590, 70));
+	hostileArea->transform->SetPosition(Vector2(0, 250));
 
 	playerpaddle = new GameObject();
 	tempRenderer = playerpaddle->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(20, 100);
+	tempRenderer->Size(100, 20);
 	tempRenderer->SetTexture("paddle.png");
 	tempRenderer->SetColor(0, 0, 1);
 	tempRenderer->SetLayer(1);
@@ -86,7 +86,7 @@ void _battleHandler::StartBattle(void) {
 
 	AIpaddle = new GameObject();
 	tempRenderer = AIpaddle->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(20, 100);
+	tempRenderer->Size(100, 20);
 	tempRenderer->SetTexture("paddle.png");
 	tempRenderer->SetColor(1, 0, 0);
 	tempRenderer->SetLayer(1);
@@ -123,12 +123,12 @@ void _battleHandler::StartBattle(void) {
 
 	inputHandler->GetComponent<BattleInput>()->AICursor = tempcursor;
 
-	GameManager.areaTopBoundary = neutralArea->transform->worldposition.y + neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
-	GameManager.areaBottomBoundary = neutralArea->transform->worldposition.y - neutralArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.areaTopBoundary = hostileArea->transform->worldposition.y + hostileArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.areaBottomBoundary = friendlyArea->transform->worldposition.y - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.areaLeftBoundary = friendlyArea->transform->worldposition.x - friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	GameManager.areaRightBoundary = hostileArea->transform->worldposition.x + hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	GameManager.friendlyAreaX = friendlyArea->transform->worldposition.x + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
-	GameManager.hostileAreaX = hostileArea->transform->worldposition.x - hostileArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.areaRightBoundary = friendlyArea->transform->worldposition.x + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	GameManager.friendlyAreaY = friendlyArea->transform->worldposition.y + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
+	GameManager.hostileAreaY = hostileArea->transform->worldposition.y - hostileArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 
 	//hpBar = new GameObject();
 	//UI_Hp* ui_hpBar = hpBar->AddComponent<UI_Hp>();
@@ -186,7 +186,7 @@ void _battleHandler::Update(void) {
 			tempRenderer->Size(20, 20);
 			tempRenderer->SetTexture("ball.png");
 			tempBall = ball->AddComponent<BallBehavior>();
-			tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput>());
+			//tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput>());
 			//tempBall->battleInput = cursorManager->GetComponent<BattleInput>();
 			tempBall->ballTrail = tempballTrail;
 			tempBall->srBallTrail = tempballTrailRenderer;

@@ -27,13 +27,7 @@ void BattleInput::Start(void)
 
 void BattleInput::Update(void)
 {
-	if (AEInputCheckTriggered(AEVK_LBUTTON))
-	{
-		for (BallBehavior* x : ballList)
-		{
-			x->HitBall(GameManager.GetCursorPosition(), true);
-		}
-	}
+	
 	if (LaunchLine != 0)
 	{
 		Vector2 temp = GameManager.GetCursorPosition();
@@ -52,47 +46,8 @@ void BattleInput::Update(void)
 		temp = temp.Divide(2) + LaunchBall->transform->worldposition;
 		LaunchLine->transform->SetPosition(temp);
 	}
-	if (AEInputCheckTriggered(AEVK_RBUTTON))
-	{
-		Vector2 tempcursorposition = GameManager.GetCursorPosition();
-		if (tempcursorposition.x < GameManager.friendlyAreaX && tempcursorposition.x > GameManager.areaLeftBoundary && tempcursorposition.y 
-			< GameManager.areaTopBoundary && tempcursorposition.y > GameManager.areaBottomBoundary)
-		{
-			CircleCollider* launchcol;
-			GameObject* launchBallTrail = new GameObject();
-			SpriteRenderer* LaunchTrailRenderer;
-			LaunchTrailRenderer = launchBallTrail->AddComponent<SpriteRenderer>();
-			LaunchTrailRenderer->Size(20, 20);
-			LaunchTrailRenderer->SetTexture("Trail.png");
-			LaunchTrailRenderer->SetColor(1, 1, 1);
-			LaunchTrailRenderer->SetTransparency(0.75f);
-			
-			LaunchBall = new GameObject();
-			SpriteRenderer* temporaryRenderer;
-			temporaryRenderer = LaunchBall->AddComponent<SpriteRenderer>();
-			temporaryRenderer->SetLayer(2);
-			temporaryRenderer->Size(20, 20);
-			temporaryRenderer->SetTexture("ball.png");
-			BallBehavior* temporaryBall;
-			temporaryBall = LaunchBall->AddComponent<BallBehavior>();
-			temporaryBall->AssignListPointer(this);
-			temporaryBall->ballTrail = launchBallTrail;
-			temporaryBall->srBallTrail = LaunchTrailRenderer;
-			temporaryBall->Owner()->transform->SetPosition(tempcursorposition);
-			temporaryBall->playerPossess = false;
-			temporaryBall->radius = 10;
-			temporaryBall->sr = temporaryRenderer;
-			temporaryRenderer->SetColor(0, 0, 1);
-			launchcol = LaunchBall->AddComponent<CircleCollider>();
-
-			LaunchLine = new GameObject();
-			temporaryRenderer = LaunchLine->AddComponent<SpriteRenderer>();
-			temporaryRenderer->SetLayer(3);
-			temporaryRenderer->SetTexture("WhiteTexture.png");
-			temporaryRenderer->Size(0, 0);
-		}
-	}
-	else if (AEInputCheckReleased(AEVK_RBUTTON) && LaunchBall != NULL)
+	
+	if (AEInputCheckReleased(AEVK_RBUTTON) && LaunchBall != NULL)
 	{
 		BallBehavior* LaunchBallCalculator;
 		LaunchBallCalculator = LaunchBall->GetComponent<BallBehavior>();
@@ -170,7 +125,7 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 
 	Transform* temp = targetedBall->Owner()->transform;
 
-	bool acceptableRange = (temp->worldposition.x >= GameManager.hostileAreaX && !isPlayer) || (temp->worldposition.x <= GameManager.friendlyAreaX && isPlayer);
+	bool acceptableRange = (temp->worldposition.x >= GameManager.hostileAreaY && !isPlayer) || (temp->worldposition.x <= GameManager.friendlyAreaY && isPlayer);
 
 	if (targetedBall->playerPossess == isPlayer && acceptableRange)
 	{
@@ -183,7 +138,7 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 	}
 	else
 	{
-		*vecTargetPosition = isPlayer ? Vector2(-800, 0) : Vector2(800, 0);
+		*vecTargetPosition = isPlayer ? Vector2(0, -400) : Vector2(0, 400);
 	}
 
 	// Move position towards the targetedPosition
