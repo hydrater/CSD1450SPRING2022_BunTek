@@ -24,7 +24,24 @@ void BallBehavior::Start(void)
 
 void BallBehavior::Update(void)
 {
+
+	
+
 	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime, transform->worldposition.y + velocity.y * speed * DeltaTime));
+
+	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
+		velocity.x = -velocity.x;
+		transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
+		BallHorizontalCheck();
+	}
+	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
+	{
+		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
+		GameManager.DealDamage(10, !playerPossess);
+		ballTrail->Delete();
+		this->Owner()->Delete();
+	}
+
 }
 
 
@@ -101,31 +118,26 @@ void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 		playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
 	}
 }
-void BallBehavior::BallVerticalCheck(void) {
-	float ang = Vector2(0, 1).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
-	if (0 <= ang && ang < angrange) {
-		if (velocity.x < 0) {
-			velocity = Vector2(0, 1);
-			velocity.RotateAC(-angrange);
-			//velocity.Rotate(-(angrange - ang));
-		}
-		else {
-			velocity = Vector2(0, 1);
+void BallBehavior::BallHorizontalCheck(void) {
+	float ang = Vector2(1, 0).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
+	if (0 <= ang && ang <= angrange) {
+		if (playerPossess) {
+			velocity = Vector2(-1, 0);
 			velocity.RotateAC(angrange);
-			//velocity.Rotate(angrange - ang);
+		}
+		else{
+			velocity = Vector2(-1, 0);
+			velocity.RotateAC(-angrange);
 		}
 	}
 	else if (180 - angrange < ang && ang <= 180) {
-		//cout << ang << endl;
-		if (velocity.x < 0) {
-			velocity = Vector2(0, -1);
+		if (playerPossess) {
+			velocity = Vector2(-1, 0);
 			velocity.RotateAC(angrange);
-			//velocity.Rotate(ang - (180 - angrange));
 		}
-		else {
-			velocity = Vector2(0, -1);
+		else{
+			velocity = Vector2(-1, 0);
 			velocity.RotateAC(-angrange);
-			//velocity.Rotate(-(ang - (180 - angrange)));
 		}
 	}
 }

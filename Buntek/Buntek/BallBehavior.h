@@ -39,6 +39,6 @@ private:
 	float angrange = 45;
 	Transform* transform = 0;
 
-	void BallVerticalCheck(void);
+	void BallHorizontalCheck(void);
 };
 #endif
