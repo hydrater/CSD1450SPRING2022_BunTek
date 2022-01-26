@@ -20,7 +20,6 @@ public:
 	CursorBehaviour* playerCursor = 0, * AICursor = 0;
 	GameObject* LaunchBall = 0, *LaunchLine = 0;
 private:
-
 	bool AIEnabled = false;
 	Vector2 AIposition = Vector2(0, 0);
 	Vector2 AITargetPosition = Vector2(0, 0);
