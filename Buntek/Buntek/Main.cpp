@@ -85,12 +85,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AudioManager.Update();
 		SceneManager.Update();
 
+		// --------------------------------------------- Collision --------------------------------------------- //
+		CollisionManager2D.CollideAll();
+
 		// --------------------------------------------- Render --------------------------------------------- //
 		GameManager.CameraUpdate();
 		Renderer.Update();
 		SceneManager.LateUpdate();
-		// --------------------------------------------- Collision --------------------------------------------- //
-		CollisionManager2D.CollideAll();
+
 		// ------------------------------------------- End of Loop ------------------------------------------- //
 		// Informing the system about the loop's end
 		AESysFrameEnd();
