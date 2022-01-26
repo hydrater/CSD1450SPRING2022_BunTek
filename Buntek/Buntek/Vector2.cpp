@@ -91,8 +91,8 @@ void Vector2::RotateAC(float degrees)
 	float cos = cosf(degrees / 180.0f * 3.1415926535897932384626433832795f);
 	float tx = x;
 	float ty = y;
-	x = (sin * ty) - (cos * tx);
-	y = (sin * tx) + (cos * ty);
+	x = (cos * tx) - (sin * ty);
+	y = (cos * ty) + (sin * tx);
 }
 
 //Does Clockwise Rotation

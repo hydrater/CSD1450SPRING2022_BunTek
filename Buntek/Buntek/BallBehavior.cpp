@@ -122,12 +122,12 @@ void BallBehavior::BallHorizontalCheck(void) {
 	float ang = Vector2(1, 0).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
 	if (0 <= ang && ang <= angrange) {
 		if (playerPossess) {
-			velocity = Vector2(-1, 0);
-			velocity.RotateAC(angrange);
+			velocity = Vector2(1, 0);
+			velocity.RotateC(angrange);
 		}
 		else{
-			velocity = Vector2(-1, 0);
-			velocity.RotateAC(-angrange);
+			velocity = Vector2(1, 0);
+			velocity.RotateAC(angrange);
 		}
 	}
 	else if (180 - angrange < ang && ang <= 180) {
@@ -137,7 +137,7 @@ void BallBehavior::BallHorizontalCheck(void) {
 		}
 		else{
 			velocity = Vector2(-1, 0);
-			velocity.RotateAC(-angrange);
+			velocity.RotateC(angrange);
 		}
 	}
 }
