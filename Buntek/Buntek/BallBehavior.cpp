@@ -33,7 +33,7 @@ void BallBehavior::Update(void)
 	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
 	{
 		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
-		GameManager.DealDamage(10, !playerPossess);
+		GameManager.DealDamage(10, playerPossess);
 		this->Owner()->Delete();
 	}
 
