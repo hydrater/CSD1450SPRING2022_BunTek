@@ -12,6 +12,31 @@ _saveManager::~_saveManager()
 {
 }
 
+void _saveManager::ArtifactListToHashtable(void)
+{
+    artifactSaveData.clear();
+
+    for (int i = 0; i < artifactInventory.behaviorList_Reflect.size(); ++i)
+    {
+        artifactSaveData.insert(pair<unsigned long, int>(artifactInventory.behaviorList_Reflect[i].ID, artifactInventory.behaviorList_Reflect[i].count));
+    }
+
+    for (int i = 0; i < artifactInventory.behaviorList_DealDamage.size(); ++i)
+    {
+        artifactSaveData.insert(pair<unsigned long, int>(artifactInventory.behaviorList_DealDamage[i].ID, artifactInventory.behaviorList_DealDamage[i].count));
+    }
+
+    for (int i = 0; i < artifactInventory.behaviorList_TakeDamage.size(); ++i)
+    {
+        artifactSaveData.insert(pair<unsigned long, int>(artifactInventory.behaviorList_TakeDamage[i].ID, artifactInventory.behaviorList_TakeDamage[i].count));
+    }
+}
+
+void _saveManager::HashtableToArtifactList(void)
+{
+    // Switch based on event type
+}
+
 _saveManager& _saveManager::Instance(void)
 {
     if (instance != 0)
@@ -24,24 +49,7 @@ _saveManager& _saveManager::Instance(void)
 
 void _saveManager::SaveData(void)
 {
-    //profile.health = 0;
-    //profile.damage = 0;
-    //profile.paddleSpeed = 0;
-    //profile.ballSpeed = 0;
-    //profile.ballSpawnFreq = 0;
-    //profile.hp = 0;
-    //profile.mapSize = 0;
-    //profile.stardust = 0;
-
-    //_key[0] = 50;
-    //_value[0] = 30;
-    //_key[1] = 10248;
-    //_value[2] = 500;
-    //_key[3] = 500000;
-    //_value[3] = 340;
-
-    artifactSaveData[200] = 33;
-    artifactSaveData[30] = 22;
+    ArtifactListToHashtable();
 
     _size = artifactSaveData.size();
 
@@ -54,16 +62,18 @@ void _saveManager::SaveData(void)
     }
 
     ofstream wf("./Save/sav.dat", ios::out | ios::binary);
-    if (!wf) {
+    if (!wf)
+    {
         cout << "Cannot open file!" << endl;
         return;
     }
-    wf.write((char*)&profile, sizeof(Profile));
+    wf.write((char*)&profile, sizeof(_gameManager::Profile));
     wf.write((char*)&_size, sizeof(_size));
     wf.write((char*)&_key, sizeof(_key));
     wf.write((char*)&_value, sizeof(_value));
     wf.close();
-    if (!wf.good()) {
+    if (!wf.good())
+    {
         cout << "Error occurred at writing time!" << endl;
         return;
     }
@@ -72,11 +82,12 @@ void _saveManager::SaveData(void)
 void _saveManager::LoadData(void)
 {
     ifstream rf("./Save/sav.dat", ios::out | ios::binary);
-    if (!rf) {
-        cout << "Cannot open file!" << endl;
-        return;
-    }
-    rf.read((char*)&profile, sizeof(Profile));
+	if (!rf)
+    {
+		cout << "Cannot open file!" << endl;
+		return;
+	}
+    rf.read((char*)&profile, sizeof(_gameManager::Profile));
     rf.read((char*)&_size, sizeof(_size));
     rf.read((char*)&_key, sizeof(_key));
     rf.read((char*)&_value, sizeof(_value));
@@ -87,4 +98,6 @@ void _saveManager::LoadData(void)
     }
     for (int i = 0; i < _size; i++)
         artifactSaveData[_key[i]] = _value[i];
+
+    HashtableToArtifactList();
 }
