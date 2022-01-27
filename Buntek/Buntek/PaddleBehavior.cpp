@@ -12,7 +12,7 @@ PaddleBehavior::PaddleBehavior()
 
 PaddleBehavior::~PaddleBehavior()
 {
-	
+	CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<BoxCollider>());
 }
 
 void PaddleBehavior::Start(void)
