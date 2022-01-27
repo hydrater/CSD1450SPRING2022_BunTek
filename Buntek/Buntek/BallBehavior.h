@@ -37,6 +37,12 @@ private:
 	const float maxSpeed = 2000;
 	float speed = 400;
 	float targetSpeed = speed;
+
+	const float maxRotSpeed = 3600;
+	float rotSpeed = 0;
+	float targetRotSpeed = 0;
+
+
 	float angRange = 60;
 	Transform* transform = 0;
 

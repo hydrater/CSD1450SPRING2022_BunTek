@@ -44,8 +44,9 @@ void BallBehavior::Update(void)
 		ReflectBall(playerPossess, (othercol->Owner()));
 	}
 
-	// Update position
-	transform->SetPosition(transform->worldposition + velocity*speed*DeltaTime);
+	// Update position and rotation
+	transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime);
+	transform->Rotate(rotSpeed * DeltaTime);
 }
 
 
@@ -59,7 +60,6 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			float xdiff = this->Owner()->transform->worldposition.x - paddle->transform->worldposition.x;
 			float sign = xdiff > 0 ? 1 : -1;
 			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
-			
 			multiplier =  Clamp((float)pow(multiplier, 2) *sign, (float)-1, (float)1);
 			velocity.RotateC(multiplier * angRange);
 		}
