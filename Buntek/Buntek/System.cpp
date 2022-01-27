@@ -312,6 +312,9 @@ void _gameScriptManager::Update(void)
 
 void _gameScriptManager::ClearList(void)
 {
+    for (size_t i = 0; i < gameScriptList.size(); i++)
+        delete gameScriptList[i];
+
     gameScriptList.clear();
 }
 
