@@ -74,11 +74,11 @@ void _CollisionManager2D::RemoveFromList(LineCollider* collider)
 
 void _CollisionManager2D::RemoveAll(void)
 {
-    for (int i = circleColliderList.size() - 1; i >= 0; --i)
+    for (int i = (int)circleColliderList.size() - 1; i >= 0; --i)
         circleColliderList.erase(circleColliderList.begin() + i);
-    for (int i = boxColliderList.size() - 1; i >= 0; --i)
+    for (int i = (int)boxColliderList.size() - 1; i >= 0; --i)
         boxColliderList.erase(boxColliderList.begin() + i);
-    for (int i = lineColliderList.size() - 1; i >= 0; --i)
+    for (int i = (int)lineColliderList.size() - 1; i >= 0; --i)
         lineColliderList.erase(lineColliderList.begin() + i);
 }
 

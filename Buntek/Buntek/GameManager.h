@@ -20,6 +20,22 @@ public:
     static _gameManager& Instance(void);
     Vector2 GetCursorPosition(void);
 
+    // Profile
+    struct Profile
+    {
+        // Stats
+        int health;
+        int damage;
+        int paddleSpeed;
+        int ballSpeed;
+        int ballSpawnFreq;
+
+        // Current
+        float hp;
+        int stardust;
+        int mapSize;
+    };
+
     // Camera info
     void CameraUpdate(void);
     void CameraShake(float period, float cameraStrength, Vector2 direction);

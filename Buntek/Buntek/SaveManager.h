@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include "ArtifactDatabase.h"
+#include "GameManager.h"
 
 #define SaveManager _saveManager::Instance()
 
@@ -19,22 +20,12 @@ private:
     unsigned long _key[128] = {};
     int _value[128] = {};
 
+    void ArtifactListToHashtable(void);
+    void HashtableToArtifactList(void);
+
 public:
     static _saveManager& Instance(void);
-    struct Profile
-    {
-        // Stats
-        int health;
-        int damage;
-        int paddleSpeed;
-        int ballSpeed;
-        int ballSpawnFreq;
-
-        // Current
-        float hp;
-        int stardust;
-        int mapSize;
-    } profile = {};
+    _gameManager::Profile profile = {};
 
     map<unsigned long, int> artifactSaveData;
 

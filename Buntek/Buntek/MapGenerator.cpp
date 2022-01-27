@@ -28,11 +28,13 @@ void _mapData::GenerateMapData(Vector2 originPos)
     float StartYCoord = (float)(-AEGetWindowHeight() / 2) + buffer;
     float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
 
-    for (int i = 0; i < numNodes; i++) {
+    for (int i = 0; i < numNodes; i++) 
+    {
         Node* node = new Node();
         bool regenerateClose = true;
         bool hasNoConnection = false;
         node->pos = Vector2(RandIntMinMax((int)StartXCoord, (int)EndXCoord), RandIntMinMax((int)StartYCoord, (int)EndYCoord));
+        node->ID = i;
         float minsq = minDistance * minDistance;
         float maxsq = maxDistance * maxDistance;
         if (nodeList.size() == 0) {
@@ -60,6 +62,8 @@ void _mapData::GenerateMapData(Vector2 originPos)
                 }
             }
         }
+        node->nodeType = (NodeType)RandIntMinMax(0, 4);
+
         nodeList.push_back(node);
     }
 }
@@ -83,35 +87,29 @@ void _mapData::GenerateMapObject(void)
         tempButton->affectedObject = temp;
         tempButton->ButtonEffect = &EnactTravel;
 
-        switch (RandIntMinMax(0,4))
+        switch (nodeList[i]->nodeType)
         {
-        case 0:
+        case NodeType::Encounter:
             tempRenderer->SetTexture("UI/Encounter.png");
-            nodeList[i]->nodeType = NodeType::Encounter;
             break;
-        case 1:
+        case NodeType::Enemy:
             tempRenderer->SetTexture("UI/Enemy.png");
-            nodeList[i]->nodeType = NodeType::Enemy;
             temp->AddComponent<UI_EnemyNodeBox>();
             temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
             break;
-        case 2:
+        case  NodeType::Elite:
             tempRenderer->SetTexture("UI/Elite.png");
-            nodeList[i]->nodeType = NodeType::Elite;
             temp->AddComponent<UI_EnemyNodeBox>();
             temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
             break;
-        case 3:
+        case NodeType::Shop:
             tempRenderer->SetTexture("Steven.jpg");
-            nodeList[i]->nodeType = NodeType::Shop;
             break;
-        case 4:
+        case NodeType::Rest:
             tempRenderer->SetTexture("UI/Rest.png");
-            nodeList[i]->nodeType = NodeType::Rest;
             break;
         default:
             tempRenderer->SetTexture("Steven.jpg");
-            nodeList[i]->nodeType = NodeType::Nothing;
             break;
         }
 
