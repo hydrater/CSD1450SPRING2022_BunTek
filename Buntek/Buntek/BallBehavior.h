@@ -5,7 +5,7 @@
 #include "Collider2D.h"
 #include "BattleInput.h"
 #include "CollisionManager2D.h"
-
+using namespace Math;
 
 class BallBehavior : public GameScript
 {
@@ -21,6 +21,8 @@ public:
 	float radius = 250;
 	float GetSpeed(void);
 	void SetSpeed(float _speed);
+	void SetTargetSpeed(float _targetSpeed);
+	void ReflectBall( bool hasPossession, GameObject* paddle);
 	void HitBall(Vector2 mousePos, bool isPlayer);
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
@@ -32,10 +34,10 @@ public:
 	bool checkTimer = false;
 
 private:
-	const float maxSpeed = 600;
-	float initspeed = 300;
-	float speed = 300;
-	float angrange = 45;
+	const float maxSpeed = 2000;
+	float speed = 400;
+	float targetSpeed = speed;
+	float angRange = 60;
 	Transform* transform = 0;
 
 	void BallHorizontalCheck(void);

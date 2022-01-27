@@ -6,6 +6,7 @@
 
 BallBehavior::BallBehavior(void)
 {
+
 }
 
 BallBehavior::~BallBehavior(void)
@@ -22,14 +23,13 @@ void BallBehavior::Start(void)
 
 void BallBehavior::Update(void)
 {
-
-	transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime, transform->worldposition.y + velocity.y * speed * DeltaTime));
-
+	//Collision check with left/right wall
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		velocity.x = -velocity.x;
 		transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
 		BallHorizontalCheck();
 	}
+	//Collision check with top/bottom wall
 	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
 	{
 		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
@@ -37,15 +37,46 @@ void BallBehavior::Update(void)
 		this->Owner()->Delete();
 	}
 
-	// Collision Check
+	// Collision Check with paddle
 	Collider2D* othercol = CollisionManager2D.CheckCollision(col);
 	if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<PaddleBehavior>())
 	{
-		BounceBall(!playerPossess, othercol->Owner(), othercol->Owner()->transform->worldrotation);
-		float timeScale = 0.5f;
+		ReflectBall(playerPossess, (othercol->Owner()));
 	}
+
+	// Update position
+	transform->SetPosition(transform->worldposition + velocity*speed*DeltaTime);
 }
 
+
+void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
+{
+	if (velocity.y < 0) { 
+		if (hasPossession && transform->worldposition.y < GameManager.friendlyAreaY) { //player bounce
+			velocity = Vector2(0, 1);
+			playerPossess = !playerPossess;
+			sr->SetColor(0, 0, 1);
+			float xdiff = this->Owner()->transform->worldposition.x - paddle->transform->worldposition.x;
+			float sign = xdiff > 0 ? 1 : -1;
+			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
+			
+			multiplier =  Clamp((float)pow(multiplier, 2) *sign, (float)-1, (float)1);
+			velocity.RotateC(multiplier * angRange);
+		}
+	}
+	else {
+		if (!hasPossession && transform->worldposition.y > GameManager.hostileAreaY) { //enemy bounce
+			velocity = Vector2(0, -1);
+			playerPossess = !playerPossess;
+			sr->SetColor(1, 0, 0);
+			float xdiff = this->Owner()->transform->worldposition.x - paddle->transform->worldposition.x;
+			float sign = xdiff > 0 ? 1 : -1;
+			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
+			multiplier = Clamp((float)pow(multiplier, 2) * sign, (float)-1, (float)1);
+			velocity.RotateAC(multiplier * angRange);
+		}
+	}
+}
 
 float BallBehavior::GetSpeed(void)
 {
@@ -55,7 +86,11 @@ float BallBehavior::GetSpeed(void)
 void BallBehavior::SetSpeed(float _speed)
 {
 	speed = _speed > maxSpeed? maxSpeed : _speed;
+}
 
+void BallBehavior::SetTargetSpeed(float _targetSpeed)
+{
+	targetSpeed = _targetSpeed > maxSpeed ? maxSpeed : _targetSpeed;
 }
 
 void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
@@ -101,24 +136,24 @@ void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 }
 void BallBehavior::BallHorizontalCheck(void) {
 	float ang = Vector2(1, 0).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
-	if (0 <= ang && ang <= angrange) {
+	if (0 <= ang && ang <= angRange) {
 		if (playerPossess) {
 			velocity = Vector2(1, 0);
-			velocity.RotateC(angrange);
+			velocity.RotateC(angRange);
 		}
 		else{
 			velocity = Vector2(1, 0);
-			velocity.RotateAC(angrange);
+			velocity.RotateAC(angRange);
 		}
 	}
-	else if (180 - angrange < ang && ang <= 180) {
+	else if (180 - angRange < ang && ang <= 180) {
 		if (playerPossess) {
 			velocity = Vector2(-1, 0);
-			velocity.RotateAC(angrange);
+			velocity.RotateAC(angRange);
 		}
 		else{
 			velocity = Vector2(-1, 0);
-			velocity.RotateC(angrange);
+			velocity.RotateC(angRange);
 		}
 	}
 }

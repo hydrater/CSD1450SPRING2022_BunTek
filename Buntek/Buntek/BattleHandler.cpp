@@ -195,8 +195,9 @@ void _battleHandler::Update(void) {
 			bool dir = RandIntMinMax(0, 1);
 			tempBall->playerPossess = (dir ? true : false);
 			tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? -1 : 1));
+			tempBall->velocity.Normalize();
 			tempBall->radius = 10;
-			tempBall->SetSpeed(tempBall->GetSpeed() + (scalingTimer * 3));
+			tempBall->SetSpeed(tempBall->GetSpeed());
 			tempBall->sr = tempRenderer;
 			dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
 			tempBall->col = tempcol;
