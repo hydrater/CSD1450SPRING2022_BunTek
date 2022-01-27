@@ -25,10 +25,10 @@ public:
     class Node
     {
     public:
+        int ID = 0, linkedTo;
         GameObject* nodeObject = nullptr;
         Vector2 pos;
         bool reached = false;
-        vector<Node*> linkedTo;
         NodeType nodeType = NodeType::Nothing;
     };
     vector<AEGfxVertexList*> connectedLines;

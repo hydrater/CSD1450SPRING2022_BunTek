@@ -28,11 +28,13 @@ void _mapData::GenerateMapData(Vector2 originPos)
     float StartYCoord = (float)(-AEGetWindowHeight() / 2) + buffer;
     float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
 
-    for (int i = 0; i < numNodes; i++) {
+    for (int i = 0; i < numNodes; i++) 
+    {
         Node* node = new Node();
         bool regenerateClose = true;
         bool hasNoConnection = false;
         node->pos = Vector2(RandIntMinMax((int)StartXCoord, (int)EndXCoord), RandIntMinMax((int)StartYCoord, (int)EndYCoord));
+        node->ID = i;
         float minsq = minDistance * minDistance;
         float maxsq = maxDistance * maxDistance;
         if (nodeList.size() == 0) {
