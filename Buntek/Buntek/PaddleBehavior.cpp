@@ -38,11 +38,11 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 		float mag = Vector2(xDelta, yDelta).Length();
 
 		if (mag >= MinMoveDist) {
-			speed = Maxspeed;
+			speed = MaxSpeed;
 		}
 		else {
-			speed = (mag / MinMoveDist)*Maxspeed; //(mag)*5;
-			mag = mag < Maxspeed ? mag: Maxspeed;
+			speed = (mag / MinMoveDist)* MaxSpeed; //(mag)*5;
+			mag = mag < MaxSpeed ? mag: MaxSpeed;
 		}
 
 		if (mag != 0) {
@@ -63,11 +63,11 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 		float mag = Vector2(xDelta, yDelta).Length();
 
 		if (mag >= MinMoveDist) {
-			speed = Maxspeed;
+			speed = MaxSpeed;
 		}
 		else {
-			speed = (mag / MinMoveDist) * Maxspeed; //(mag)*5;
-			mag = mag < Maxspeed ? mag : Maxspeed;
+			speed = (mag / MinMoveDist) * MaxSpeed; //(mag)*5;
+			mag = mag < MaxSpeed ? mag : MaxSpeed;
 		}
 
 		if (mag != 0) {
@@ -92,12 +92,13 @@ void PaddleBehavior::setplayerpaddle(bool _playerpaddle)
 
 void PaddleBehavior::setspeed(float _speed)
 {
+	speed = _speed > MaxSpeed ? MaxSpeed : _speed;
 	speed = _speed;
 }
 
 void PaddleBehavior::setMaxspeed(float _Maxspeed)
 {
-	Maxspeed = _Maxspeed;
+	MaxSpeed = _Maxspeed;
 }
 
 

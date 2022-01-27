@@ -27,7 +27,7 @@ public:
 private:
 	bool playerPaddle = false;
 	float speed = 0;
-	float Maxspeed = 0;
+	float MaxSpeed = 0;
 	float MinMoveDist = 100;
 	Transform* transform = 0;
 };
