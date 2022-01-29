@@ -159,6 +159,13 @@ Scene* _sceneManager::GetScene(void)
 
 void _sceneManager::Update(void)
 {
+    scene->Update();
+}
+
+void _sceneManager::LateUpdate(void)
+{
+    scene->LateUpdate();
+
     if (transitioning) {
         switch (currentTransitionTypes)
         {
@@ -186,19 +193,14 @@ void _sceneManager::Update(void)
             break;
         }
     }
-    scene->Update();
-}
-
-void _sceneManager::LateUpdate(void)
-{
     if (transitionTimer != 0 || transitionInDone) {
+        AEGfxSetBlendMode(AE_GFX_BM_BLEND);
         AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
         AEGfxSetPosition(0.0f, 0.0f);
         AEGfxSetTintColor(0, 0, 0, transitionTransparency);
         AEGfxTextureSet(AssetManager.GetTexture("WhiteTexture.png"), 0, 0);
         AEGfxMeshDraw(transitionMesh, AE_GFX_MDM_TRIANGLES);
     }
-    scene->LateUpdate();
 }
 
 void _sceneManager::EarlyUpdate(void)
