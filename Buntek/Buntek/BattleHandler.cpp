@@ -16,7 +16,7 @@ _battleHandler::_battleHandler(void) {
 _battleHandler::~_battleHandler(void) {
 	CollisionManager2D.RemoveAll();
 	AudioManager.StopMusic();
-	AudioManager.UnloadMusic("Dream.mp3");
+	AudioManager.Free();
 }
 void _battleHandler::Start(void) {
 	
@@ -25,8 +25,17 @@ void _battleHandler::Start(void) {
 
 void _battleHandler::StartBattle(void) {
 	battleStarted = true;
-	AudioManager.LoadMusic("Dream.mp3");
-	AudioManager.PlayMusic("Dream.mp3");
+	if (RandIntMinMax(0, 1))
+	{
+		AudioManager.LoadMusic("Dream.ogg");
+		AudioManager.PlayMusic("Dream.ogg");
+	}
+	else
+	{
+		AudioManager.LoadMusic("www.ogg");
+		AudioManager.PlayMusic("www.ogg");
+	}
+	
 	AudioManager.SetMusicVolume(0.1f);
 
 	// Setting up the scene
