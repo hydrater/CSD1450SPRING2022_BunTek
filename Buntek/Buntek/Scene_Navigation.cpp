@@ -12,7 +12,7 @@
 void Scene_Navigation::Start(void)
 {
 	if (MapData.nodeList.size() == 0)
-		MapData.GenerateMapData(Vector2(0, -1200));
+		MapData.GenerateMapData();
 
 	MapData.GenerateMapObject();
 

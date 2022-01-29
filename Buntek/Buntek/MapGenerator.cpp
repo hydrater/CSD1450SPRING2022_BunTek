@@ -20,7 +20,7 @@ _mapData& _mapData::Instance(void)
     return *instance;
 }
 
-void _mapData::GenerateMapData(Vector2 originPos)
+void _mapData::GenerateMapData(void)
 {
     nodeList.clear();
     float StartXCoord = (float)(-AEGetWindowWidth() / 2) + buffer;

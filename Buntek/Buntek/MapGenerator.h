@@ -39,7 +39,7 @@ public:
     Node* exitNode = nullptr;
     const int numNodes = 20;
     static _mapData& Instance(void);
-    void GenerateMapData(Vector2 originPos);
+    void GenerateMapData(void);
     void GenerateMapObject(void);
     void DisplayNodeRoutes( float travelDistance);
     bool CheckHovered(Node* thisNode, Vector2 mousePos);

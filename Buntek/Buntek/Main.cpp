@@ -84,6 +84,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			SaveManager.LoadData();
 		}
+		if (AEInputCheckTriggered(AEVK_F3))
+		{
+			MapData.GenerateMapData();
+		}
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();

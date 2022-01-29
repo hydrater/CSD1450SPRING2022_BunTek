@@ -6,6 +6,7 @@
 #include "UI_DialogueHandler.h"
 #include "UI_Shop.h"
 #include "UI_EnemyNodeBox.h"
+#include "SaveManager.h"
 
 void MoveToNavigation(Button* button);
 
@@ -35,6 +36,8 @@ void Scene_MainMenu::Start(void)
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToNavigation;
+
+	SaveManager.LoadData();
 
 	/*rewardsel = new GameObject();
 	rewardsel->AddComponent<UI_RewardSelection>();
