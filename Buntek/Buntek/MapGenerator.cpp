@@ -70,11 +70,8 @@ void _mapData::GenerateMapData(Vector2 originPos)
 
 void _mapData::GenerateMapObject(void)
 {
-    if (nodeList.size() > 0)
-    {
-        currentNode = nodeList[0];
-        exitNode = nodeList[0];
-    }
+    currentNode = nodeList[0];
+    exitNode = nodeList[0];
     for (int i = 0; i < nodeList.size(); ++i)
     {
         GameObject* temp = new GameObject;

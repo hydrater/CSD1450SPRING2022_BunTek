@@ -120,7 +120,6 @@ void _saveManager::LoadData(void)
         rf.read((char*)&node->nodeType, sizeof(int));
 
         MapData.nodeList.push_back(node);
-        cout << "Node loaded at (" << node->pos.x << ", " << node->pos.y << ") with type " << (int)node->nodeType << endl;
     }
 
     // Deserializing artifacts 

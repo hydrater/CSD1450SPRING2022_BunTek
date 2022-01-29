@@ -11,13 +11,14 @@
 
 void Scene_Navigation::Start(void)
 {
-	MapData.GenerateMapData(Vector2(0, -1200));
+	if (MapData.nodeList.size() == 0)
+		MapData.GenerateMapData(Vector2(0, -1200));
+
 	MapData.GenerateMapObject();
+
 	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
 	MapData.DisplayBossNode();
 	inputHandler = new GameObject();
-	//inputHandler->AddComponent<CursorCamera>()->camPos = Vector2(0, -900);
-	//AEGfxSetCamPosition(0, -900);
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
 	AudioManager.SetMusicVolume(1.0f);
