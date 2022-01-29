@@ -90,7 +90,7 @@ void _audioManager::CleanPlaying()
 
 void _audioManager::LoadSound(string name)
 {
-    string pathString = "./Assets/" + name + '\0';
+    string pathString = "./Assets/Sound/" + name + '\0';
     char* pathName = new char[pathString.length() + 1];
     copy(pathString.begin(), pathString.end(), pathName);
     Sound* sound = 0;
@@ -100,7 +100,7 @@ void _audioManager::LoadSound(string name)
 
 void _audioManager::LoadMusic(string name)
 {
-    string pathString = "./Assets/" + name + '\0';
+    string pathString = "./Assets/Music/" + name + '\0';
     char* pathName = new char[pathString.length() + 1];
     copy(pathString.begin(), pathString.end(), pathName);
     Sound* music = 0;
@@ -108,9 +108,26 @@ void _audioManager::LoadMusic(string name)
     musicDatabase[name] = music;
 }
 
-void _audioManager::Free(string name)
+void _audioManager::UnloadSound(string name)
+{
+    soundDatabase[name]->release();
+}
+
+void _audioManager::UnloadMusic(string name)
 {
     musicDatabase[name]->release();
+}
+
+void _audioManager::Free(void)
+{
+    for (auto const& x : soundDatabase)
+        x.second->release();
+
+    soundDatabase.clear();
+
+    for (auto const& x : musicDatabase)
+        x.second->release();
+
     musicDatabase.clear();
 }
 

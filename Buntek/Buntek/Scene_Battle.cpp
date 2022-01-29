@@ -2,6 +2,7 @@
 #include "Component.h"
 #include "Entity.h"
 #include "BattleHandler.h"
+#include "AudioEngine.h"
 
 using namespace Math;
 
@@ -20,4 +21,3 @@ Scene_Battle::~Scene_Battle(void)
 {
 
 }
-

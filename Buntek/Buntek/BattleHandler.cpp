@@ -16,7 +16,7 @@ _battleHandler::_battleHandler(void) {
 _battleHandler::~_battleHandler(void) {
 	CollisionManager2D.RemoveAll();
 	AudioManager.StopMusic();
-	AudioManager.Free("hysteric.ogg");
+	AudioManager.UnloadMusic("Dream.mp3");
 }
 void _battleHandler::Start(void) {
 	
@@ -25,8 +25,8 @@ void _battleHandler::Start(void) {
 
 void _battleHandler::StartBattle(void) {
 	battleStarted = true;
-	AudioManager.LoadMusic("hysteric.ogg");
-	AudioManager.PlayMusic("hysteric.ogg");
+	AudioManager.LoadMusic("Dream.mp3");
+	AudioManager.PlayMusic("Dream.mp3");
 	AudioManager.SetMusicVolume(0.1f);
 
 	// Setting up the scene

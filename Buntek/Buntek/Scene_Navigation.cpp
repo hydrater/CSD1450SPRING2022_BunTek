@@ -82,6 +82,6 @@ void Scene_Navigation::LateUpdate(void)
 
 Scene_Navigation::~Scene_Navigation(void)
 {
-	AudioManager.Free("NavigationBGM.mp3");
+	AudioManager.UnloadMusic("NavigationBGM.mp3");
 	AEGfxMeshFree(mesh);
 }

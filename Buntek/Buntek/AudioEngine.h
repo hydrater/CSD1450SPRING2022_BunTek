@@ -36,7 +36,9 @@ public:
     void Update(void);
     void LoadSound(string name);
     void LoadMusic(string name);
-    void Free(string name);
+    void UnloadSound(string name);
+    void UnloadMusic(string name);
+    void Free(void);
     Sound* GetSound(string name);
 };
 

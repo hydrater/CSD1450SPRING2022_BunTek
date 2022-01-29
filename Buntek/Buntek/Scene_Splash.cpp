@@ -56,5 +56,5 @@ void Scene_Splash::Update(void)
 
 Scene_Splash::~Scene_Splash(void)
 {
-	AudioManager.Free("splash.mp3");
+	AudioManager.UnloadSound("splash.mp3");
 }
