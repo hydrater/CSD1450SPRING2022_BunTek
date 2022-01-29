@@ -24,8 +24,9 @@ class _mapData
 public:
     class Node
     {
+    // Not all members are added to the sava manager as binary serialization is not pointer safe
     public:
-        int ID = 0, linkedTo = 0;
+        int ID = 0;
         Vector2 pos;
         bool reached = false;
         NodeType nodeType = NodeType::Nothing;
@@ -36,10 +37,10 @@ public:
     Node* currentNode = nullptr;
     Node* destinationNode = nullptr;
     Node* exitNode = nullptr;
+    const int numNodes = 20;
     static _mapData& Instance(void);
     void GenerateMapData(Vector2 originPos);
     void GenerateMapObject(void);
-    void ClearList(void);
     void DisplayNodeRoutes( float travelDistance);
     bool CheckHovered(Node* thisNode, Vector2 mousePos);
     void DisplayBossNode(void);
@@ -61,7 +62,6 @@ private:
     float minDistance = 125;
     float maxDistance = 400;
     float buffer = 75;
-    const int numNodes = 20;
     
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };

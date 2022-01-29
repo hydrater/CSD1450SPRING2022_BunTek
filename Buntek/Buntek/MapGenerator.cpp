@@ -55,7 +55,7 @@ void _mapData::GenerateMapData(Vector2 originPos)
                     break;
                 }
                 else if (distSq <= maxsq) {
-                    cout << distSq << "\tis close enough to \t" << maxsq << endl;
+                    //cout << distSq << "\tis close enough to \t" << maxsq << endl;
                     hasNoConnection = false;
                     /* node->linkedTo.push_back(nodeList[j]);
                      nodeList[j]->linkedTo.push_back(node);*/
@@ -120,11 +120,6 @@ void _mapData::GenerateMapObject(void)
         currentNode = (nodeList[i]->pos.x < (*currentNode).pos.x) ? nodeList[i] : currentNode;
         exitNode = (nodeList[i]->pos.x > (*exitNode).pos.x) ? nodeList[i] : exitNode;
     }
-}
-
-void _mapData::ClearList(void)
-{
-    nodeList.clear();
 }
 
 void _mapData::DisplayNodeRoutes(float travelDistance)

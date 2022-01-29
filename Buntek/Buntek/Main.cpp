@@ -61,6 +61,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Handling Input
 		AEInputUpdate();
 
+		// Debugging tools
 		if (AEInputCheckTriggered(AEVK_1))
 		{
 			SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack, true);
@@ -74,9 +75,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			SceneManager.LoadScene(new Scene_Test, TransitionType::FadeToBlack, true);
 		}
-		if (AEInputCheckTriggered(AEVK_4))
+
+		if (AEInputCheckTriggered(AEVK_F1))
 		{
-			
+			SaveManager.SaveData();
+		}
+		if (AEInputCheckTriggered(AEVK_F2))
+		{
+			SaveManager.LoadData();
 		}
 
 		// --------------------------------------------- Update --------------------------------------------- //
