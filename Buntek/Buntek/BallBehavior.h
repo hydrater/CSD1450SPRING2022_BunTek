@@ -40,7 +40,7 @@ private:
 	const float maxRotSpeed = 3600;
 	float rotSpeed = 0;
 	float targetRotSpeed = 0;
-	float angRange = 60;
+	float angRange = 30;
 	Transform* transform = 0;
 
 	void BallHorizontalCheck(void);

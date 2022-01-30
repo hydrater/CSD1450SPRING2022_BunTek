@@ -109,13 +109,11 @@ _sceneManager::_sceneManager()
     scene = 0;
     nextScene = 0;
     currentTransitionTypes = TransitionType::None;
+    currentTransitionStage = TransitionStage::TransitionStart;
     transitionTimer = 0;
     notStarted = true;
     notAwake = true;
     transitioning = true;
-    transitionInDone = false;
-    transitionDone = false;
-    transitionwait = false;
     transitionMesh = 0;
     transitionTransparency = 0;
 
@@ -148,6 +146,7 @@ void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bo
     notStarted = true;
     GameManager.cameraLerpBack = false;
     currentTransitionTypes = TransitionType;
+    currentTransitionStage = TransitionStage::TransitionStart;
     transitioning = true;
     deleteScene = deleteCurrScene;
 }
@@ -186,20 +185,12 @@ void _sceneManager::LateUpdate(void)
             }
             transitioning = false;
             break;
-        case TransitionType::FadeToBlack:
-            FadeToBlack();
+        case TransitionType::FadeTransition:
+            FadeTransition();
             break;
         default:
             break;
         }
-    }
-    if (transitionTimer != 0 || transitionInDone) {
-        AEGfxSetBlendMode(AE_GFX_BM_BLEND);
-        AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-        AEGfxSetPosition(0.0f, 0.0f);
-        AEGfxSetTintColor(0, 0, 0, transitionTransparency);
-        AEGfxTextureSet(AssetManager.GetTexture("WhiteTexture.png"), 0, 0);
-        AEGfxMeshDraw(transitionMesh, AE_GFX_MDM_TRIANGLES);
     }
 }
 
@@ -207,59 +198,61 @@ void _sceneManager::EarlyUpdate(void)
 {
     scene->EarlyUpdate();
 }
-void _sceneManager::FadeToBlack(void) {
-    if (!transitionInDone) {
+void _sceneManager::FadeTransition(void) {
+    switch (currentTransitionStage)
+    {
+    case TransitionStage::TransitionStart: //fade start
+        transitionTimer = 0;
+        transitionTransparency = 0;
+        currentTransitionStage = TransitionStage::TransitionIn;
+        break;
+    case TransitionStage::TransitionIn:// fading in
         transitionTimer += DeltaTime;
         transitionTransparency = lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration));
         if (transitionTimer > transitionStageDuration) {
             transitionTimer = 0;
-            transitionInDone = true;
             transitionTransparency = 1;
+            currentTransitionStage = TransitionStage::TransitionScene;
         }
-    }
-    else if(!transitionDone)
-    {
-        transitionTransparency = 1;
-        transitionTimer += DeltaTime;
-        if (transitionTimer > transitionDuration) {
-            if (scene != NULL && nextScene != NULL)
-            {
-                Renderer.FreeAll();
-                GameScriptManager.ClearList();
-                if (deleteScene)
-                    delete scene;
-                AEGfxSetCamPosition(0, 0);
-                scene = nextScene;
-                nextScene = 0;
-            }
-            if (notStarted)
-            {
-                scene->Start();
-                notStarted = false;
-            }
-            transitionTimer = 0;
-            transitionDone = true;
-            transitionwait = true;
-        }
-    }
-    else {
-        if (transitionwait) {
-            transitionwait = false;
-        }
-        else
+        break;
+    case TransitionStage::TransitionScene: //fade scene transition
+        if (scene != NULL && nextScene != NULL)
         {
-            transitionTimer += DeltaTime;
-            transitionTransparency = 1 - (lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration)));
-            if (transitionTimer > transitionStageDuration) {
-
-                transitionTimer = 0;
-                transitionTransparency = 0;
-                transitioning = false;
-                transitionInDone = false;
-                transitionDone = false;
-            }
+            Renderer.FreeAll();
+            GameScriptManager.ClearList();
+            if (deleteScene)
+                delete scene;
+            AEGfxSetCamPosition(0, 0);
+            scene = nextScene;
+            nextScene = 0;
         }
+        if (notStarted)
+        {
+            scene->Start();
+            notStarted = false;
+        }
+        else { //wait for next frame
+            currentTransitionStage = TransitionStage::TransitionOut;
+        }
+        break;
+    case TransitionStage::TransitionOut:// fading out
+        transitionTimer += DeltaTime;
+        transitionTransparency = 1 - (lerpF(0, 1, easeIn(transitionTimer / transitionStageDuration)));
+        if (transitionTimer > transitionStageDuration) {
+            transitionTimer = 0;
+            transitionTransparency = 0;
+            transitioning = false;
+            currentTransitionStage = TransitionStage::TransitionStart;
+        }
+        break;
     }
+    //render the fade 
+    AEGfxSetBlendMode(AE_GFX_BM_BLEND);
+    AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
+    AEGfxSetPosition(0.0f, 0.0f);
+    AEGfxSetTintColor(0, 0, 0, transitionTransparency);
+    AEGfxTextureSet(AssetManager.GetTexture("WhiteTexture.png"), 0, 0);
+    AEGfxMeshDraw(transitionMesh, AE_GFX_MDM_TRIANGLES);
 }
 
 _gameScriptManager::_gameScriptManager(void)

@@ -203,13 +203,13 @@ void _mapData::Travel(Node* destination)
             UIDialogueManager.CreateDialoguePreset("aed", 3);
             break;
         case NodeType::Enemy:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
             break;
         case NodeType::Elite:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
             break;
         case NodeType::Boss:
-            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
+            SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
             break;
         case NodeType::Shop:
             SetClickable(false);

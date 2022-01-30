@@ -64,16 +64,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Debugging tools
 		if (AEInputCheckTriggered(AEVK_1))
 		{
-			SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack, true);
+			SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
 		}
 
 		if (AEInputCheckTriggered(AEVK_2))
 		{
-			SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeToBlack, true);
+			SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
 		}
 		if (AEInputCheckTriggered(AEVK_3))
 		{
-			SceneManager.LoadScene(new Scene_Test, TransitionType::FadeToBlack, true);
+			SceneManager.LoadScene(new Scene_Test, TransitionType::FadeTransition, true);
 		}
 
 		if (AEInputCheckTriggered(AEVK_F1))
