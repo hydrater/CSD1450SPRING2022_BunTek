@@ -69,7 +69,7 @@ void _saveManager::SaveData(void)
     {
         wf.write((char*)&MapData.nodeList[i]->pos.x, sizeof(float));
         wf.write((char*)&MapData.nodeList[i]->pos.y, sizeof(float));
-        wf.write((char*)&MapData.nodeList[i]->reached, sizeof(bool));
+        wf.write((char*)&MapData.nodeList[i]->nodeState, sizeof(short));
         wf.write((char*)&MapData.nodeList[i]->nodeType, sizeof(int));
     }
     wf.write((char*)&MapData.currentNode->ID, sizeof(int));
@@ -113,7 +113,7 @@ void _saveManager::LoadData(void)
         node->ID = i;
         rf.read((char*)&node->pos.x, sizeof(float));
         rf.read((char*)&node->pos.y, sizeof(float));
-        rf.read((char*)&node->reached, sizeof(bool));
+        rf.read((char*)&node->nodeState, sizeof(short));
         rf.read((char*)&node->nodeType, sizeof(int));
 
         MapData.nodeList.push_back(node);

@@ -28,7 +28,7 @@ public:
     public:
         int ID = 0;
         Vector2 pos;
-        bool reached = false;
+        short nodeState = false;
         NodeType nodeType = NodeType::Nothing;
         GameObject* nodeObject = nullptr;
     };

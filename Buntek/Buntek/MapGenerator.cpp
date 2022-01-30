@@ -81,7 +81,6 @@ void _mapData::GenerateMapData(void)
 
 void _mapData::GenerateMapObject(void)
 {
-
     for (int i = 0; i < nodeList.size(); ++i)
     {
         GameObject* temp = new GameObject;
