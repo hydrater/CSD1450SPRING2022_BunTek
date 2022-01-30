@@ -61,6 +61,10 @@ void Scene_Navigation::EarlyUpdate(void)
 	{
 		AEGfxMeshDraw(MapData.connectedLines[i], AE_GFX_MDM_LINES_STRIP);
 	}
+	for (int i = 0; i < MapData.travelHistoryLines.size(); i++)
+	{
+		AEGfxMeshDraw(MapData.travelHistoryLines[i], AE_GFX_MDM_LINES_STRIP);
+	}
 }
 
 void Scene_Navigation::Update(void)

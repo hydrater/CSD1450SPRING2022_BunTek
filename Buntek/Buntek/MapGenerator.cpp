@@ -181,6 +181,35 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
     }
 }
 
+void _mapData::DisplayNodeHistory(void)
+{
+    Node* prevNode = nullptr;
+    Node* currNode = nullptr;
+    for (int selectedID : MapData.travelHistoryIDs)
+    {
+        // Find Node
+        for (Node* selNode : nodeList)
+        {
+            if (selNode->ID == selectedID)
+            {
+                currNode = selNode;
+                break;
+            }
+        }
+        // Draw Line
+        if (prevNode != nullptr && currNode != nullptr && prevNode != currNode)
+        {
+            AEGfxVertexList* newLine;
+            AEGfxMeshStart();
+            AEGfxVertexAdd(prevNode->pos.x, prevNode->pos.y, 0xFFFF0000, 0.0f, 0.0f);
+            AEGfxVertexAdd(currNode->pos.x, currNode->pos.y, 0xFFFF0000, 0.0f, 0.0f);
+            newLine = AEGfxMeshEnd();
+            MapData.travelHistoryLines.push_back(newLine);
+        }
+        prevNode = currNode;
+    }
+}
+
 bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
     SpriteRenderer* sr = thisNode->nodeObject->GetComponent<SpriteRenderer>();
     if (thisNode->pos.x - sr->GetHalfWidth() < mousePos.x && thisNode->pos.x + sr->GetHalfWidth() > mousePos.x) {
@@ -200,6 +229,7 @@ void _mapData::Travel(Node* destination)
         vector<string> artifacts{ "E", "E", "A", "E", "E", "A" };
         vector<string> stats{ "E", "A", "E", "E", "A" };
         // Enact dest node effects
+        MapData.travelHistoryIDs.push_back(currentNode->ID);
         currentNode = destinationNode;
         DisplayNodeRoutes(playerTravelDistance);
         switch (destinationNode->nodeType)
@@ -231,6 +261,8 @@ void _mapData::Travel(Node* destination)
         default:
             break;
         }
+
+        MapData.DisplayNodeHistory();
     }
 }
 

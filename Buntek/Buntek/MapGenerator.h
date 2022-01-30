@@ -42,6 +42,7 @@ public:
     void GenerateMapData(void);
     void GenerateMapObject(void);
     void DisplayNodeRoutes( float travelDistance);
+    void DisplayNodeHistory(void);
     bool CheckHovered(Node* thisNode, Vector2 mousePos);
     void Travel(Node* destination);
     void SetClickable(bool _canClick);
@@ -53,6 +54,8 @@ public:
 
     bool isTravelling = false; // Flag used for checking when travelling across nodes before enacting node
     vector<Node*> nodeList;
+    vector<int> travelHistoryIDs;
+    vector<AEGfxVertexList*> travelHistoryLines;
 
 private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
