@@ -43,7 +43,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AudioManager;
 	MapData;
 	Renderer;
-	SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
+	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
 
 	//SaveManager.SaveData();
 	//SaveManager.LoadData();
