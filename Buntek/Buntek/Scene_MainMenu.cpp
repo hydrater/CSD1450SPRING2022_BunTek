@@ -53,6 +53,6 @@ void Scene_MainMenu::Update(void)
 
 void MoveToNavigation(Button* button)
 {
-	SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeToBlack, true);
+	SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
 }
 

@@ -15,7 +15,15 @@ using namespace std;
 enum class TransitionType : short
 {
     None = 0,
-    FadeToBlack = 1
+    FadeTransition = 1
+};
+
+enum class TransitionStage : short
+{
+    TransitionStart = 0,
+    TransitionIn = 1,
+    TransitionScene = 2,
+    TransitionOut = 3,
 };
 
 class _eventManager
@@ -62,11 +70,11 @@ private:
     _sceneManager(void);
     ~_sceneManager(void);
     Scene* scene, *nextScene;
-    bool notStarted, notAwake, transitioning, transitionInDone, transitionDone, transitionwait;
+    bool notStarted, notAwake, transitioning;
     float transitionTimer;
     const float transitionStageDuration = 0.4f;
-    const float transitionDuration = 0.1f;
     TransitionType currentTransitionTypes;
+    TransitionStage currentTransitionStage;
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;
     bool deleteScene = true;
@@ -78,7 +86,7 @@ public:
     void EarlyUpdate(void);
     void Update(void);
     void LateUpdate(void);
-    void FadeToBlack(void);
+    void FadeTransition(void);
 };
 
 class _gameScriptManager
