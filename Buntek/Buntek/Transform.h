@@ -21,6 +21,7 @@ public:
 	void SetPosition(Vector2 position);
 	void SetScale(Vector2 scale);
 	void SetRotation(float rotation);
+	void SetRight(Vector2 right);
 
 	void Translate(Vector2 translate);
 	void Rotate(float rotate);

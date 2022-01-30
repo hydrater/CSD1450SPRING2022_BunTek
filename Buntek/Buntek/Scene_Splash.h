@@ -9,9 +9,9 @@ public:
     void Update(void) override;
     ~Scene_Splash(void) override;
 private:
-    GameObject* splash = 0;
+    GameObject* splash;
     float timer = 0;
     int cycle = 0;
-    SpriteRenderer* splashRenderer = 0;
+    SpriteRenderer* splashRenderer;
     bool canPlayAudio = true;
 };
