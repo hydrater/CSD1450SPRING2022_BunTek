@@ -50,10 +50,11 @@ public:
     Node* GetNode(GameObject* object);
     float playerTravelDistance = 400;
 
-    GameObject* shopUI = 0, * encounterUI = 0, * dialogueUI = 0;
+    GameObject* shopUI = 0;
 
     bool isTravelling = false; // Flag used for checking when travelling across nodes before enacting node
     vector<Node*> nodeList;
+    int historyIDSize = 0;
     vector<int> travelHistoryIDs;
     vector<AEGfxVertexList*> travelHistoryLines;
 

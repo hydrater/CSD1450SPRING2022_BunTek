@@ -74,6 +74,12 @@ void _saveManager::SaveData(void)
     }
     wf.write((char*)&MapData.currentNode->ID, sizeof(int));
 
+    size_t historySize = MapData.travelHistoryIDs.size();
+    wf.write((char*)&historySize, sizeof(size_t));
+
+    for (int selID : MapData.travelHistoryIDs)
+        wf.write((char*)&selID, sizeof(int));
+
     // Serializing artifacts 
     ArtifactListToHashtable();
     _size = artifactSaveData.size();
@@ -121,6 +127,16 @@ void _saveManager::LoadData(void)
     int currNodeID = 0;
     rf.read((char*)&currNodeID, sizeof(int));
     MapData.currentNode = MapData.nodeList[currNodeID];
+
+    MapData.travelHistoryIDs.clear();
+    size_t historySize = 0;
+    rf.read((char*)&historySize, sizeof(size_t));
+    for (size_t i = 0; i < historySize; ++i)
+    {
+        int selID = 0;
+        rf.read((char*)&selID, sizeof(int));
+        MapData.travelHistoryIDs.push_back(selID);
+    }
 
     // Deserializing artifacts 
     rf.read((char*)&_size, sizeof(_size));
