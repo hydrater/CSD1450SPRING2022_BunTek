@@ -26,32 +26,6 @@ _eventManager& _eventManager::Instance(void)
     return *instance;
 }
 
-//void _eventManager::Awake(void)
-//{
-//	/*if (notAwake)
-//	{
-//		scene->Awake();
-//		notAwake = false;
-//	}*/
-//}
-//
-//void _eventManager::Start(void)
-//{
-//
-//}
-//
-//void _eventManager::Update(void)
-//{
-//    //if (notStarted)
-//    //{
-//    //    Awake();
-//
-//    //    scene->Start();
-//    //    notStarted = false;
-//    //}
-//    //scene->Update();
-//}
-
 template<typename T>
 IEvent<T>::~IEvent()
 {
@@ -205,6 +179,7 @@ void _sceneManager::EarlyUpdate(void)
 {
     scene->EarlyUpdate();
 }
+
 void _sceneManager::FadeTransition(void) {
     switch (currentTransitionStage)
     {
