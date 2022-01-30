@@ -24,5 +24,4 @@ private:
 	short layer = 0;
 	RenderType type = RenderType::Sprite;
 };
-
 #endif

@@ -165,6 +165,9 @@
     <ClCompile Include="DialogueDatabase.cpp">
       <Filter>Source Files\Custom</Filter>
     </ClCompile>
+    <ClCompile Include="LineRenderer.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="DialogueDatabase.h">
       <Filter>Source Files\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="LineRenderer.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

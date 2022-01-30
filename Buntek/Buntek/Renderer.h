@@ -26,5 +26,4 @@ public:
     float TextAlignmentY(TextRenderer* textRenderer);
     void WrapAround(TextRenderer* textRenderer);
     void InsertionSort(void);
-
 };

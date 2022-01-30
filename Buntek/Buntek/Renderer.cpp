@@ -1,5 +1,5 @@
 #include "Renderer.h"
-#include "AssetManager.h"
+#include "LineRenderer.h"
 
 _renderer* _renderer::instance = 0;
 
@@ -38,22 +38,22 @@ void _renderer::Update(void)
 {
     for (int i = 0; i < rendererList.size(); ++i)
     {
+		if (rendererList[i]->remove)
+		{
+			delete rendererList[i];
+			rendererList.erase(rendererList.begin() + i);
+			--i;
+			continue;
+		}
+
+		if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive() ||
+			(rendererList[i]->Owner()->GetParent() != NULL && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()))
+			continue;
+
 		switch (rendererList[i]->GetType())
 		{
 		case RenderType::Sprite:
 		{
-			if (rendererList[i]->remove)
-			{
-				delete rendererList[i];
-				rendererList.erase(rendererList.begin() + i);
-				--i;
-				continue;
-			}
-
-			if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive() || 
-				(rendererList[i]->Owner()->GetParent() != NULL && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()))
-				continue;
-
 			SpriteRenderer* spriteRenderer = (SpriteRenderer*)rendererList[i];
 
 			AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
@@ -143,20 +143,8 @@ void _renderer::Update(void)
 			break;
 		case RenderType::Font:
 		{
-			if (rendererList[i]->remove)
-			{
-				delete rendererList[i];
-				rendererList.erase(rendererList.begin() + i);
-				--i;
-				continue;
-			}
-
-			if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive() ||
-				(rendererList[i]->Owner()->GetParent() != NULL && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()))
-				continue;
-
-			AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 			TextRenderer* textRenderer = (TextRenderer*)rendererList[i];
+			AEGfxSetBlendMode(AE_GFX_BM_BLEND);
 			textRenderer->CalculateTextSize();
 			Transform* transform = textRenderer->GetTransform();
 			int linecount = 0;
@@ -171,7 +159,6 @@ void _renderer::Update(void)
 				tempTextString = textRenderer->GetText();
 			}
 				
-
 			for (int x = 0; char c = tempTextString[x]; x++) {
 				if (c == '\n') {
 					tempTextString[x] = '\0';
@@ -190,10 +177,13 @@ void _renderer::Update(void)
 				(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
 				textRenderer->GetScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
 		}
-
 			break;
 		case RenderType::Line:
-
+		{
+			LineRenderer* lineRenderer = (LineRenderer*)rendererList[i];
+			for (int i = 0; i < lineRenderer->lineList.size(); i++)
+				AEGfxMeshDraw(lineRenderer->lineList[i], AE_GFX_MDM_LINES_STRIP);
+		}
 			break;
 		default:
 			break;
