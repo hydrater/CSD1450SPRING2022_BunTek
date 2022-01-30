@@ -38,7 +38,10 @@ void _mapData::GenerateMapData(void)
         float minsq = minDistance * minDistance;
         float maxsq = maxDistance * maxDistance;
         if (nodeList.size() == 0) {
+            node->nodeType = (NodeType)RandIntMinMax(0, 4);
             nodeList.push_back(node);
+            currentNode = nodeList[0];
+            exitNode = nodeList[0];
             continue;
         }
         while (regenerateClose || hasNoConnection) {
@@ -63,15 +66,22 @@ void _mapData::GenerateMapData(void)
             }
         }
         node->nodeType = (NodeType)RandIntMinMax(0, 4);
-
         nodeList.push_back(node);
+
+        if (nodeList[i]->pos.x < (*currentNode).pos.x)
+            currentNode = nodeList[i];
+
+        if (nodeList[i]->pos.x > (*exitNode).pos.x)
+            exitNode = nodeList[i];
     }
+
+    currentNode->nodeType = NodeType::Nothing;
+    exitNode->nodeType = NodeType::Boss;
 }
 
 void _mapData::GenerateMapObject(void)
 {
-    currentNode = nodeList[0];
-    exitNode = nodeList[0];
+
     for (int i = 0; i < nodeList.size(); ++i)
     {
         GameObject* temp = new GameObject;
@@ -100,10 +110,13 @@ void _mapData::GenerateMapObject(void)
             temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
             break;
         case NodeType::Shop:
-            tempRenderer->SetTexture("Steven.jpg");
+            tempRenderer->SetTexture("UI/Shop.png");
             break;
         case NodeType::Rest:
             tempRenderer->SetTexture("UI/Rest.png");
+            break;
+        case NodeType::Boss:
+            tempRenderer->SetTexture("UI/Boss.png");
             break;
         default:
             tempRenderer->SetTexture("Steven.jpg");
@@ -112,10 +125,6 @@ void _mapData::GenerateMapObject(void)
 
         temp->transform->worldposition = Vector2(nodeList[i]->pos);
         nodeList[i]->nodeObject = temp;
-
-        // Get current node and exit node
-        currentNode = (nodeList[i]->pos.x < (*currentNode).pos.x) ? nodeList[i] : currentNode;
-        exitNode = (nodeList[i]->pos.x > (*exitNode).pos.x) ? nodeList[i] : exitNode;
     }
 }
 
@@ -174,12 +183,6 @@ bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
         }
     }
     return false;
-}
-
-void _mapData::DisplayBossNode(void)
-{
-    exitNode->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/boss.png");
-    exitNode->nodeType = NodeType::Boss;
 }
 
 void _mapData::Travel(Node* destination)

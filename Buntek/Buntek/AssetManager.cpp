@@ -26,7 +26,8 @@ _assetManager::_assetManager()
     LoadTexture("UI/Elite.png");
     LoadTexture("UI/Encounter.png");
     LoadTexture("UI/Rest.png");
-    LoadTexture("UI/boss.png");
+    LoadTexture("UI/Shop.png");
+    LoadTexture("UI/Boss.png");
 
     LoadTexture("BgNebula1.png");
     LoadTexture("BgNebula2.png");

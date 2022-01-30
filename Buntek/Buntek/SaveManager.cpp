@@ -57,7 +57,7 @@ void _saveManager::SaveData(void)
     ofstream wf("./Save/sav.dat", ios::out | ios::binary);
     if (!wf)
     {
-        cout << "Cannot open file!" << endl;
+        cout << "Cannot save file!" << endl;
         return;
     }
 
@@ -97,7 +97,7 @@ void _saveManager::LoadData(void)
     ifstream rf("./Save/sav.dat", ios::out | ios::binary);
 	if (!rf)
     {
-		cout << "Not save file detected!" << endl;
+		cout << "No save file detected!" << endl;
 		return;
 	}
 

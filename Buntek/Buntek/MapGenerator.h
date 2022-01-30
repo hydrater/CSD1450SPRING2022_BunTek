@@ -10,13 +10,13 @@
 #define MapData _mapData::Instance()
 
 enum class NodeType {
-    Nothing,
     Enemy,
     Elite,
-    Boss,
+    Shop,
     Encounter,
     Rest,
-    Shop
+    Boss,
+    Nothing
 };
 
 class _mapData
@@ -43,7 +43,6 @@ public:
     void GenerateMapObject(void);
     void DisplayNodeRoutes( float travelDistance);
     bool CheckHovered(Node* thisNode, Vector2 mousePos);
-    void DisplayBossNode(void);
     void Travel(Node* destination);
     void SetClickable(bool _canClick);
     void SetHoverable(bool _canHover);

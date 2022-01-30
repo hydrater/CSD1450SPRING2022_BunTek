@@ -17,7 +17,6 @@ void Scene_Navigation::Start(void)
 	MapData.GenerateMapObject();
 
 	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
-	MapData.DisplayBossNode();
 	inputHandler = new GameObject();
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
