@@ -139,8 +139,13 @@ _sceneManager::~_sceneManager(void)
 
 void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bool deleteCurrScene)
 {
-    if (scene != NULL)
+    if (scene != NULL) {
         nextScene = newScene;
+        notStarted = true;
+        currentTransitionTypes = TransitionType;
+        currentTransitionStage = TransitionStage::TransitionStart;
+        transitioning = true;
+    }
     else {
         scene = newScene;
         if (notStarted)
@@ -149,11 +154,7 @@ void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bo
             notStarted = false;
         }
     }
-    notStarted = true;
     GameManager.cameraLerpBack = false;
-    currentTransitionTypes = TransitionType;
-    currentTransitionStage = TransitionStage::TransitionStart;
-    transitioning = true;
     deleteScene = deleteCurrScene;
 }
 
