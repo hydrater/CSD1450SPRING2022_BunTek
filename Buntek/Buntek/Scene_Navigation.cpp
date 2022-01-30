@@ -6,6 +6,7 @@
 #include "AssetManager.h"
 #include "AudioEngine.h"
 #include "MapGenerator.h"
+#include "SaveManager.h"
 #include "UI_Shop.h"
 #include "UI_DialogueHandler.h"
 

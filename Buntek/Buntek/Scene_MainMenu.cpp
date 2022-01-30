@@ -37,6 +37,7 @@ void Scene_MainMenu::Start(void)
 	button->tr = tempTextRenderer;
 	button->ButtonEffect = &MoveToNavigation;
 
+	// Load save data
 	SaveManager.LoadData();
 
 	/*rewardsel = new GameObject();

@@ -162,7 +162,6 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
                 }
             }
         }
-        
     }
 }
 

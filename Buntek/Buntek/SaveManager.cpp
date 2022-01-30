@@ -72,6 +72,7 @@ void _saveManager::SaveData(void)
         wf.write((char*)&MapData.nodeList[i]->reached, sizeof(bool));
         wf.write((char*)&MapData.nodeList[i]->nodeType, sizeof(int));
     }
+    wf.write((char*)&MapData.currentNode->ID, sizeof(int));
 
     // Serializing artifacts 
     ArtifactListToHashtable();
@@ -88,11 +89,7 @@ void _saveManager::SaveData(void)
     wf.write((char*)&_value, sizeof(_value));
 
     wf.close();
-    if (!wf.good())
-    {
-        cout << "Error occurred at writing time!" << endl;
-        return;
-    }
+    cout << "Saved" << endl;
 }
 
 void _saveManager::LoadData(void)
@@ -100,7 +97,7 @@ void _saveManager::LoadData(void)
     ifstream rf("./Save/sav.dat", ios::out | ios::binary);
 	if (!rf)
     {
-		cout << "Cannot open file!" << endl;
+		cout << "Not save file detected!" << endl;
 		return;
 	}
 
@@ -121,6 +118,9 @@ void _saveManager::LoadData(void)
 
         MapData.nodeList.push_back(node);
     }
+    int currNodeID = 0;
+    rf.read((char*)&currNodeID, sizeof(int));
+    MapData.currentNode = MapData.nodeList[currNodeID];
 
     // Deserializing artifacts 
     rf.read((char*)&_size, sizeof(_size));
@@ -131,8 +131,5 @@ void _saveManager::LoadData(void)
     HashtableToArtifactList();
 
     rf.close();
-    if (!rf.good()) {
-        cout << "Error occurred at reading time!" << endl;
-        return;
-    }
+    cout << "Save loaded" << endl;
 }

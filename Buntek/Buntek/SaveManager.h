@@ -25,22 +25,18 @@ private:
 
 public:
     static _saveManager& Instance(void);
+
+    // Profile
     _gameManager::Profile profile = {};
 
+    // Arifact
     map<unsigned long, int> artifactSaveData;
-
     struct ArtifactInventory
     {
         vector<Artifact> behaviorList_Reflect;
         vector<Artifact> behaviorList_DealDamage;
         vector<Artifact> behaviorList_TakeDamage;
     }artifactInventory;
-
-    struct MapSave
-    {
-        float NodeWidth[64];
-        float NodeHeight[64];
-    }mapSave = {};
 
     void SaveData(void);
     void LoadData(void);
