@@ -158,11 +158,6 @@ Scene* _sceneManager::GetScene(void)
 
 void _sceneManager::Update(void)
 {
-    if (notStarted)
-    {
-        scene->Start();
-        notStarted = false;
-    }
     scene->Update();
 }
 
@@ -183,6 +178,11 @@ void _sceneManager::LateUpdate(void)
                 scene = nextScene;
                 nextScene = 0;
             }
+            if (notStarted)
+            {
+                scene->Start();
+                notStarted = false;
+            }
             transitioning = false;
             break;
         case TransitionType::FadeTransition:
@@ -198,7 +198,6 @@ void _sceneManager::EarlyUpdate(void)
 {
     scene->EarlyUpdate();
 }
-
 void _sceneManager::FadeTransition(void) {
     switch (currentTransitionStage)
     {
