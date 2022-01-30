@@ -6,7 +6,6 @@
 
 BallBehavior::BallBehavior(void)
 {
-
 }
 
 BallBehavior::~BallBehavior(void)

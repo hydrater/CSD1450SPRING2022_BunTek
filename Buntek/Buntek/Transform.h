@@ -28,12 +28,6 @@ public:
 	// Scale By ( Uniform Scaling )
 	void Scale(float scale);
 
-	// Returns a reference to the transform's right that cannot be modified
-	const Vector2& Right();
-	const Vector2& Left();
-	const Vector2& Up();
-	const Vector2& Down();
-
 	Vector2 localposition;
 	float localrotation;
 	Vector2 localscale;
@@ -42,12 +36,6 @@ public:
 	Vector2 worldscale;
 
 private:
-
-	Vector2 right;
-	Vector2 left;
-	Vector2 up;
-	Vector2 down;
-
 	Transform* parent;
 	vector<Transform*> children;
 };

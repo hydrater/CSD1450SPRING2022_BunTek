@@ -6,10 +6,6 @@ Transform::Transform() :
 	localscale(1, 1),
 	localrotation(),
 	worldrotation(),
-	right(1, 0),
-	left(-1, 0),
-	up(0, 1),
-	down(0, -1),
 	parent(NULL)
 {
 	worldscale = Vector2(1, 1);
@@ -56,13 +52,6 @@ void Transform::SetRotation(float rotation)
 	this->worldrotation = rotation;
 }
 
-void Transform::SetRight(Vector2 right)
-{
-	this->right = right;
-	for (size_t i = 0; i < children.size(); ++i)
-		children[i]->SetRight(right);
-}
-
 void Transform::Translate(Vector2 translate)
 {
 	this->worldposition += translate;
@@ -89,24 +78,4 @@ void Transform::Scale(float scale)
 	this->worldscale *= scale;
 	for (size_t i = 0; i < children.size(); ++i)
 		children[i]->Scale(scale);
-}
-
-const Vector2& Transform::Right()
-{
-	return right;
-}
-
-const Vector2& Transform::Left()
-{
-	return left;
-}
-
-const Vector2& Transform::Up()
-{
-	return up;
-}
-
-const Vector2& Transform::Down()
-{
-	return down;
 }
