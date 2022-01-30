@@ -141,8 +141,14 @@ void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bo
 {
     if (scene != NULL)
         nextScene = newScene;
-    else
+    else {
         scene = newScene;
+        if (notStarted)
+        {
+            scene->Start();
+            notStarted = false;
+        }
+    }
     notStarted = true;
     GameManager.cameraLerpBack = false;
     currentTransitionTypes = TransitionType;
