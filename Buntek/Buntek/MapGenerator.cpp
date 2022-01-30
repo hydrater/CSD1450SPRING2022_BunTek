@@ -129,6 +129,14 @@ void _mapData::GenerateMapObject(void)
 
 void _mapData::DisplayNodeRoutes(float travelDistance)
 {
+    // Don't run if UI or shop is open
+    if (UIDialogueManager.UIOpen || MapData.shopUI)
+    {
+        MapData.SetClickable(false);
+        MapData.SetHoverable(false);
+        return;
+    }
+
     MapData.connectedLines.clear();
     MapData.SetClickable(false);
     MapData.SetHoverable(false);
@@ -199,7 +207,6 @@ void _mapData::Travel(Node* destination)
         case NodeType::Encounter:
             SetClickable(false);
             SetHoverable(false);
-            encounterUI = new GameObject();
             UIDialogueManager.CreateDialoguePreset("aed", 3);
             break;
         case NodeType::Enemy:
@@ -214,9 +221,9 @@ void _mapData::Travel(Node* destination)
         case NodeType::Shop:
             SetClickable(false);
             SetHoverable(false);
-            shopUI = new GameObject();
-            shopUI->AddComponent<UI_Shop>();;
-            shopUI->GetComponent<UI_Shop>()->CreateShop(3, artifacts, stats);
+            MapData.shopUI = new GameObject();
+            MapData.shopUI->AddComponent<UI_Shop>();;
+            MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, artifacts, stats);
             break;
         case NodeType::Rest:
 

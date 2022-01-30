@@ -24,6 +24,7 @@ public:
 	void DeleteDialogueEvent(void);
 	void DeleteRewardSelection(void);
 
+	bool UIOpen = false;
 
 private:
 

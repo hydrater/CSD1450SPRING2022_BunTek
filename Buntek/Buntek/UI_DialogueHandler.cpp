@@ -89,10 +89,12 @@ void UI_DialogueHandler::CreateDialoguePreset(string flag, short sortingLayer)
 
     if (selectedFlag == dialogueFlag || selectedFlag == encounterFlag)
     {
+        UIOpen = true;
         CreateDialogue(selectedFlag, sortingLayer);
     }
     else if (selectedFlag == rewardFlag)
     {
+        UIOpen = true;
         CreateRewardSelection(selectedFlag, sortingLayer);
     }
 }
@@ -273,7 +275,7 @@ void UI_DialogueHandler::WriteToDialogue(void)
         case 'a':
             if (selectedFlag == dialogueFlag)
             {
-                cout << "Actor Name: " << parameters << endl;
+                //cout << "Actor Name: " << parameters << endl;
                 name = parameters;
                 actorTxt->SetText(name);
                 ++dialogueNo;
@@ -281,20 +283,20 @@ void UI_DialogueHandler::WriteToDialogue(void)
             }
             else if (selectedFlag == encounterFlag)
             {
-                cout << "Encounter Name: " << parameters << endl;
+                //cout << "Encounter Name: " << parameters << endl;
                 name = parameters;
                 actorTxt->SetText(name);
             }
             break;
 
         case 'b':
-            cout << "Button: " << parameters << endl;
+            //cout << "Button: " << parameters << endl;
             if (dialogueButtonNo < dialogueButtonList.size())
                 dialogueButtonList[dialogueButtonNo++]->tr->SetText(parameters);
             break;
 
         case 'c':
-            cout << "Choice: " << parameters << endl;
+            //cout << "Choice: " << parameters << endl;
             if (rewardButtonNo < rewardButtonList.size())
                 rewardButtonList[rewardButtonNo++]->tr->SetText(parameters);
             break;
@@ -450,6 +452,7 @@ void UI_DialogueHandler::DeleteRewardSelection(void)
 void RemoveRewardSelection(Button* button)
 {
     UIDialogueManager.DeleteRewardSelection();
+    UIDialogueManager.UIOpen = false;
 }
 
 void RemoveDialogue(Button* button)
@@ -458,4 +461,5 @@ void RemoveDialogue(Button* button)
     MapData.SetClickable(true);
     MapData.SetHoverable(true);
     MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
+    UIDialogueManager.UIOpen = false;
 }
