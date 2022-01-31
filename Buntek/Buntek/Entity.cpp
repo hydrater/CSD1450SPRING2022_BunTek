@@ -105,5 +105,5 @@ void GameObject::Delete(void)
 	{
 		delete components[i];
 	}*/
-	//delete this;
+	delete this;
 }
