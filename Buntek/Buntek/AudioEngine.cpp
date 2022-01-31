@@ -48,7 +48,7 @@ void _audioManager::PlayMusic(string musicTrack)
     if (search != musicDatabase.end())
         audioClip = search->second;
 
-    // Play the sound.
+    // Play the music.
     musicChannel->stop();
     fmodSystem->playSound(audioClip, nullptr, false, &musicChannel);
 }

@@ -49,6 +49,7 @@ private:
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;
     bool deleteScene = true;
+    void ResetScene(void);
 
 public:
     static _sceneManager& Instance(void);

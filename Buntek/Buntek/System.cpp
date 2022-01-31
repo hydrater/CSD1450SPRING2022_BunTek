@@ -18,6 +18,16 @@ void Scene::LateUpdate(void)
 {
 }
 
+void _sceneManager::ResetScene(void)
+{
+    if (notStarted)
+    {
+        scene->Start();
+        notStarted = false;
+    }
+    GameManager.CameraEndShake();
+}
+
 _sceneManager& _sceneManager::Instance(void)
 {
     static _sceneManager instance;
@@ -69,13 +79,8 @@ void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bo
     }
     else {
         scene = newScene;
-        if (notStarted)
-        {
-            scene->Start();
-            notStarted = false;
-        }
+        ResetScene();
     }
-    GameManager.cameraLerpBack = false;
     deleteScene = deleteCurrScene;
 }
 
@@ -106,11 +111,7 @@ void _sceneManager::LateUpdate(void)
                 scene = nextScene;
                 nextScene = 0;
             }
-            if (notStarted)
-            {
-                scene->Start();
-                notStarted = false;
-            }
+            ResetScene();
             transitioning = false;
             break;
         case TransitionType::FadeTransition:
@@ -159,6 +160,7 @@ void _sceneManager::FadeTransition(void) {
         {
             scene->Start();
             notStarted = false;
+            GameManager.CameraEndShake();
         }
         else { //wait for next frame
             currentTransitionStage = TransitionStage::TransitionOut;

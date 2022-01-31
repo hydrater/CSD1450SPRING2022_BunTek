@@ -16,7 +16,8 @@ BattleHandler::BattleHandler(void) {
 BattleHandler::~BattleHandler(void) {
 	CollisionManager2D.RemoveAll();
 	AudioManager.StopMusic();
-	AudioManager.Free();
+	AudioManager.UnloadMusic("Dream.ogg");
+	AudioManager.UnloadMusic("www.ogg");
 }
 void BattleHandler::Start(void) {
 	

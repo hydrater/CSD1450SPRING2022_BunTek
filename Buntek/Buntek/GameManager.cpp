@@ -97,6 +97,12 @@ void _gameManager::CameraShake(float period, float _shakeStrength, Vector2 direc
     maxCameraShakeTime = period;
 }
 
+void _gameManager::CameraEndShake(void)
+{
+    cameraShakeTime = 0;
+    cameraLerpBack = false;
+}
+
 void _gameManager::InitBattle(float _playerHp, float _enemyHp)
 {
     playerHp = _playerHp;

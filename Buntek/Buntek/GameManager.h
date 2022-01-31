@@ -39,6 +39,7 @@ public:
     // Camera info
     void CameraUpdate(void);
     void CameraShake(float period, float cameraStrength, Vector2 direction);
+    void CameraEndShake(void);
     bool cameraLerpBack = false;
 
     // Battle arena info
