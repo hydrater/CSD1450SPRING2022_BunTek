@@ -2,55 +2,6 @@
 #include "Renderer.h"
 #include "GameManager.h"
 
-_eventManager* _eventManager::instance = 0;
-_sceneManager* _sceneManager::instance = 0;
-_gameScriptManager* _gameScriptManager::instance = 0;
-
-_eventManager::_eventManager(void)
-{
-
-}
-
-_eventManager::~_eventManager(void)
-{
-
-}
-
-_eventManager& _eventManager::Instance(void)
-{
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _eventManager();
-    return *instance;
-}
-
-template<typename T>
-IEvent<T>::~IEvent()
-{
-    listeners.clear();
-};
-template<typename T>
-void IEvent<T>::Subscribe(T listener)
-{
-    listeners.push_back(listener);
-};
-template<typename T>
-bool IEvent<T>::Unsubscribe(T listener)
-{
-    for (int i = 0; i < listeners.size(); i++)
-    {
-        if (listeners[i] == listener)
-        {
-            listeners.erase(listeners.begin() + i);
-            return true;
-        }
-    }
-
-    return false;
-};
-
 void Scene::Start(void)
 {
 }
@@ -69,13 +20,8 @@ void Scene::LateUpdate(void)
 
 _sceneManager& _sceneManager::Instance(void)
 {
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _sceneManager();
-
-    return *instance;
+    static _sceneManager instance;
+    return instance;
 }
 
 _sceneManager::_sceneManager()
@@ -108,6 +54,7 @@ _sceneManager::_sceneManager()
 
 _sceneManager::~_sceneManager(void)
 {
+    delete scene;
     AEGfxMeshFree(transitionMesh);
 }
 
@@ -152,7 +99,7 @@ void _sceneManager::LateUpdate(void)
         case TransitionType::None:
             if (scene != NULL && nextScene != NULL)
             {
-                Renderer.FreeAll();
+                Renderer.FreeRenderComponents();
                 GameScriptManager.ClearList();
                 if (deleteScene)
                     delete scene;
@@ -200,7 +147,7 @@ void _sceneManager::FadeTransition(void) {
     case TransitionStage::TransitionScene: //fade scene transition
         if (scene != NULL && nextScene != NULL)
         {
-            Renderer.FreeAll();
+            Renderer.FreeRenderComponents();
             GameScriptManager.ClearList();
             if (deleteScene)
                 delete scene;
@@ -249,12 +196,8 @@ _gameScriptManager::~_gameScriptManager(void)
 
 _gameScriptManager& _gameScriptManager::Instance(void)
 {
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _gameScriptManager();
-    return *instance;
+    static _gameScriptManager instance;
+    return instance;
 }
 
 void _gameScriptManager::AddToList(GameScript* gameScript)
@@ -294,4 +237,3 @@ void _gameScriptManager::ClearList(void)
 
     gameScriptList.clear();
 }
-

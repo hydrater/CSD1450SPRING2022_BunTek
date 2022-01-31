@@ -49,10 +49,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	MapData;
 	Renderer;
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
-
-	//SaveManager.SaveData();
-	//SaveManager.LoadData();
-
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::None);
@@ -117,7 +113,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{
 			gGameRunning = 0;
 			AudioManager.Free();
-			Renderer.FreeAll();
+			AssetManager.Free();
+			Renderer.FreeRenderComponents();
+			Renderer.FreeMesh();
 		}
 	}
 	//

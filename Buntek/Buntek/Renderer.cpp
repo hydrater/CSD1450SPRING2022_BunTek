@@ -1,8 +1,6 @@
 #include "Renderer.h"
 #include "LineRenderer.h"
 
-_renderer* _renderer::instance = 0;
-
 _renderer::_renderer()
 {
 	AEGfxMeshStart();
@@ -22,16 +20,13 @@ _renderer::_renderer()
 
 _renderer::~_renderer()
 {
-	AEGfxMeshFree(mesh);
+	//AEGfxMeshFree(mesh);
 }
 
 _renderer& _renderer::Instance(void)
 {
-    if (instance != 0)
-        return *instance;
-    instance = new _renderer();
-
-    return *instance;
+	static _renderer instance;
+    return instance;
 }
 
 void _renderer::Update(void)
@@ -250,11 +245,6 @@ void _renderer::AddToList(RenderComponent* entry)
 	InsertionSort();
 }
 
-void _renderer::FreeAll(void)
-{
-	rendererList.clear();
-}
-
 int _renderer::binarySearch(vector<RenderComponent*> a, int item, int low, int high)
 {
 	if (high <= low)
@@ -295,4 +285,16 @@ void _renderer::InsertionSort(void)
 		}
 		rendererList[(size_t)j + 1] = selected;
 	}
+}
+
+void _renderer::FreeRenderComponents(void)
+{
+	for (int i = 0; i < rendererList.size(); ++i)
+		delete  rendererList[i];
+	rendererList.clear();
+}
+
+void _renderer::FreeMesh(void)
+{
+	AEGfxMeshFree(mesh);
 }

@@ -15,5 +15,4 @@ public:
 	static string GetDescription(unsigned long id);
 
 private:
-	static _dialogueDatabase* instance;
 };

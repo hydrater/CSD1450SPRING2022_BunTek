@@ -13,7 +13,6 @@ using namespace FMOD;
 class _audioManager
 {
 private:
-    static _audioManager* instance;
     _audioManager(void);
     ~_audioManager(void);
     System* fmodSystem = NULL;

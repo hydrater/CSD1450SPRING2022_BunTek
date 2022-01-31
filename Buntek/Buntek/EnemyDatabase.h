@@ -8,7 +8,6 @@ using namespace std;
 class _enemydatabase
 {
 private:
-    static _enemydatabase* instance;
     _enemydatabase();
     ~_enemydatabase();
 

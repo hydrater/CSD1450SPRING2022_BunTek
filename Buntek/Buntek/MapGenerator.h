@@ -61,10 +61,8 @@ public:
 private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
     bool canAccessFirstNode = true; // REMEMBER TO RESET THIS if using multiple start nodes
-    static _mapData* instance;
     float minDistance = 125;
     float maxDistance = 400;
     float buffer = 75;
-    
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };

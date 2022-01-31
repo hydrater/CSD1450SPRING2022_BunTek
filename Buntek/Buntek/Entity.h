@@ -50,6 +50,8 @@ public:
 	{
 		for (auto& c : components)
 		{
+			if (c->remove)
+				return NULL;
 			if (typeid(*c) == typeid(T))
 			{
 				return static_cast<T*>(c);

@@ -8,16 +8,10 @@
 
 void EnactTravel(Button* button);
 
-_mapData* _mapData::instance = 0;
-
 _mapData& _mapData::Instance(void)
 {
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _mapData();
-    return *instance;
+    static _mapData instance;
+    return instance;
 }
 
 void _mapData::GenerateMapData(void)

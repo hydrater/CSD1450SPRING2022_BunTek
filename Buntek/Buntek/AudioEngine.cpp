@@ -1,5 +1,4 @@
 #include "AudioEngine.h"
-_audioManager* _audioManager::instance = 0;
 
 _audioManager::_audioManager(void)
 {
@@ -154,10 +153,8 @@ Sound* _audioManager::GetSound(string name)
 
 _audioManager& _audioManager::Instance(void)
 {
-    if (instance != 0)
-        return *instance;
-    instance = new _audioManager();
-    return *instance;
+    static _audioManager instance;
+    return instance;
 }
 
 Channel* _audioManager::GetMusicChannel(void)

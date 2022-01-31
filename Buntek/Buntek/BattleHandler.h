@@ -4,11 +4,11 @@
 #include "SpriteRenderer.h"
 #include "BallBehavior.h"
 
-class _battleHandler : public GameScript
+class BattleHandler : public GameScript
 {
 public:
-	_battleHandler(void);
-	~_battleHandler(void);
+	BattleHandler(void);
+	~BattleHandler(void);
 	void Start(void) override;
 	void Update(void) override;
 	void StartBattle(void);
@@ -21,7 +21,6 @@ public:
 	vector<BallBehavior*>* ballList = 0;
 	float hitPauseTimer = 0;
 	bool checkTimer = false;
-
 };
 
 #endif

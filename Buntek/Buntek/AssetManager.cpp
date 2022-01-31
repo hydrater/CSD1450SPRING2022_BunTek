@@ -2,8 +2,6 @@
 #include "System.h"
 #include <math.h>
 
-_assetManager* _assetManager::instance = 0;
-
 _assetManager::_assetManager()
 {
     LoadTexture("Steven.jpg");
@@ -55,11 +53,8 @@ _assetManager::~_assetManager()
 
 _assetManager& _assetManager::Instance(void)
 {
-    if (instance != 0)
-        return *instance;
-    instance = new _assetManager();
-
-    return *instance;
+    static _assetManager instance;
+    return instance;
 }
 
 void _assetManager::AddToList(SpriteRenderer* spriteRenderer)
@@ -108,6 +103,15 @@ char _assetManager::GetFont(string name)
         return search->second;
     return NULL;
 }
+
 int _assetManager::GetdefaultFontSize(void) {
     return defaultFontSize;
+}
+
+void _assetManager::Free(void)
+{
+    for (map<string, AEGfxTexture*>::iterator it = textureDatabase.begin(); it != textureDatabase.end(); ++it)
+    {
+        AEGfxTextureUnload(it->second);
+    }
 }

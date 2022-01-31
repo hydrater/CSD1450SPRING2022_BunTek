@@ -9,7 +9,7 @@ using namespace Math;
 void Scene_Battle::Start(void)
 {
 	BattleManager = new GameObject();
-	BattleManager->AddComponent<_battleHandler>()->StartBattle();
+	BattleManager->AddComponent<BattleHandler>()->StartBattle();
 }
 
 void Scene_Battle::Update(void)
@@ -19,5 +19,5 @@ void Scene_Battle::Update(void)
 
 Scene_Battle::~Scene_Battle(void)
 {
-
+	
 }

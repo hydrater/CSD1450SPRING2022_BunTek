@@ -11,7 +11,6 @@ using namespace std;
 class _saveManager
 {
 private:
-    static _saveManager* instance;
     _saveManager();
     ~_saveManager();
 

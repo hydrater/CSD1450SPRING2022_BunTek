@@ -16,11 +16,9 @@ SpriteRenderer::~SpriteRenderer(void)
 
 void SpriteRenderer::Size(float width, float height)
 {
-
 	halfWidth = width / 2;
 	halfHeight = height / 2;
 }
-
 
 float SpriteRenderer::GetHalfWidth(void)
 {

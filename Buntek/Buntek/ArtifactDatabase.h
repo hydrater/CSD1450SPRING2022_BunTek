@@ -27,7 +27,6 @@ public:
 class _artifactdatabase
 {
 private:
-    static _artifactdatabase* instance;
     _artifactdatabase();
     ~_artifactdatabase();
 

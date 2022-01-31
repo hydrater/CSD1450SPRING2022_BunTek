@@ -10,7 +10,6 @@
 class _assetManager
 {
 private:
-    static _assetManager* instance;
     _assetManager();
     ~_assetManager();
     vector<SpriteRenderer*> rendererList;
@@ -29,4 +28,5 @@ public:
     void AddToList(SpriteRenderer* spriteRenderer);
     void AddToTextList(TextRenderer* textRenderer);
     int GetdefaultFontSize(void);
+    void Free(void);
 };

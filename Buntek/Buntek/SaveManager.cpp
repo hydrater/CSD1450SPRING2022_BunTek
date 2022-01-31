@@ -3,8 +3,6 @@
 #include <fstream>
 #include <iostream>
 
-_saveManager* _saveManager::instance = 0;
-
 _saveManager::_saveManager()
 {
 }
@@ -40,12 +38,8 @@ void _saveManager::HashtableToArtifactList(void)
 
 _saveManager& _saveManager::Instance(void)
 {
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _saveManager();
-    return *instance;
+    static _saveManager instance;
+    return instance;
 }
 
 void _saveManager::SaveData(void)

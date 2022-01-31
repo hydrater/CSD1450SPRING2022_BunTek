@@ -9,13 +9,11 @@
 class _CollisionManager2D
 {
 private:
-    static _CollisionManager2D* instance;
     _CollisionManager2D();
     ~_CollisionManager2D();
     vector<CircleCollider*> circleColliderList;
     vector<BoxCollider*> boxColliderList;
     vector<LineCollider*> lineColliderList;
-    
 
 public:
     static _CollisionManager2D& Instance(void);

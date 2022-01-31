@@ -4,8 +4,6 @@
 #include "PaddleBehavior.h"
 #include "ArtifactDatabase.h"
 
-_CollisionManager2D* _CollisionManager2D::instance = 0;
-
 _CollisionManager2D::_CollisionManager2D()
 {
 }
@@ -16,14 +14,9 @@ _CollisionManager2D::~_CollisionManager2D()
 
 _CollisionManager2D& _CollisionManager2D::Instance(void)
 {
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _CollisionManager2D();
     // Init here
-
-    return *instance;
+    static _CollisionManager2D instance;
+    return instance;
 }
 
 void _CollisionManager2D::AddToList(CircleCollider* collider)

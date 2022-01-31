@@ -10,20 +10,20 @@
 #include "Component.h"
 #include "Entity.h"
 
-_battleHandler::_battleHandler(void) {
+BattleHandler::BattleHandler(void) {
 	
 }
-_battleHandler::~_battleHandler(void) {
+BattleHandler::~BattleHandler(void) {
 	CollisionManager2D.RemoveAll();
 	AudioManager.StopMusic();
 	AudioManager.Free();
 }
-void _battleHandler::Start(void) {
+void BattleHandler::Start(void) {
 	
 
 }
 
-void _battleHandler::StartBattle(void) {
+void BattleHandler::StartBattle(void) {
 	battleStarted = true;
 	if (RandIntMinMax(0, 1))
 	{
@@ -153,7 +153,7 @@ void _battleHandler::StartBattle(void) {
 }
 
 
-void _battleHandler::Update(void) {
+void BattleHandler::Update(void) {
 	if (battleStarted) {
 		if (timeScalar == 0.5f)
 		{

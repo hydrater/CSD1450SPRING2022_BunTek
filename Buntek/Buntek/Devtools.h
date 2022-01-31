@@ -8,11 +8,9 @@
 
 #define devTools _devTools::Instance()
 
-
 class _devTools
 {
 private:
-    static _devTools* instance;
     _devTools();
     ~_devTools();
 public:

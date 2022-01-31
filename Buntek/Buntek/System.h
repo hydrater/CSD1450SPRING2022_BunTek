@@ -11,7 +11,6 @@ using namespace std;
 #define GameScriptManager _gameScriptManager::Instance()
 #define DeltaTime (float)AEFrameRateControllerGetFrameTime()
 
-
 enum class TransitionType : short
 {
     None = 0,
@@ -24,33 +23,6 @@ enum class TransitionStage : short
     TransitionIn = 1,
     TransitionScene = 2,
     TransitionOut = 3,
-};
-
-class _eventManager
-{
-private:
-    static _eventManager* instance;
-    _eventManager(void);
-    ~_eventManager(void);
-
-public:
-    static _eventManager& Instance(void);
-};
-
-template<typename T>
-class IEvent
-{
-public:
-    virtual ~IEvent();
-
-    virtual void Subscribe(T listener);
-
-    virtual bool Unsubscribe(T listener);
-
-    virtual void Notify() = 0;
-
-protected:
-    vector<T> listeners;
 };
 
 class Scene
@@ -66,13 +38,12 @@ public:
 class _sceneManager
 {
 private:
-    static _sceneManager* instance;
     _sceneManager(void);
     ~_sceneManager(void);
     Scene* scene, *nextScene;
     bool notStarted, notAwake, transitioning;
     float transitionTimer;
-    const float transitionStageDuration = 0.4f;
+    const float transitionStageDuration = 0.1f;
     TransitionType currentTransitionTypes;
     TransitionStage currentTransitionStage;
     AEGfxVertexList* transitionMesh;
@@ -92,7 +63,6 @@ public:
 class _gameScriptManager
 {
 private:
-    static _gameScriptManager* instance;
     _gameScriptManager(void);
     ~_gameScriptManager(void);
     vector<GameScript*> gameScriptList;

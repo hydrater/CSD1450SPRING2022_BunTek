@@ -1,7 +1,5 @@
 #include "Devtools.h"
 
-_devTools* _devTools::instance = 0;
-
 _devTools::_devTools()
 {
 
@@ -14,12 +12,8 @@ _devTools::~_devTools()
 
 _devTools& _devTools::Instance(void)
 {
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new _devTools();
-    return *instance;
+    static _devTools instance;
+    return instance;
 }
 
 GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos) {
