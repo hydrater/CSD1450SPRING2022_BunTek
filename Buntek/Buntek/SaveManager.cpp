@@ -82,7 +82,7 @@ void _saveManager::SaveData(void)
 
     // Serializing artifacts 
     ArtifactListToHashtable();
-    _size = artifactSaveData.size();
+    _size = (int)artifactSaveData.size();
     int i = 0;
     for (map<unsigned long, int>::iterator it = artifactSaveData.begin(); it != artifactSaveData.end(); ++it)
     {

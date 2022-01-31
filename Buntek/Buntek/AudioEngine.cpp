@@ -129,6 +129,8 @@ void _audioManager::Free(void)
         x.second->release();
 
     musicDatabase.clear();
+
+    fmodSystem->release();
 }
 
 Sound* _audioManager::GetSound(string name)

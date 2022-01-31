@@ -291,6 +291,7 @@ _mapData::Node* _mapData::GetNode(GameObject* object)
         if (node->nodeObject == object)
             return node;
     }
+    return NULL;
 }
 
 void EnactTravel(Button* button)

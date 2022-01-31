@@ -166,7 +166,7 @@ void ParticleSystem::SetBurstingParticle(
 
 	isBurst = true;
 	isLoop = newIsLoop;
-	numBurst = newNumBurst;
+	numBurst = (int)newNumBurst;
 	spawnRate = newSpawnRate;
 
 	directionalVector2 = directionalVector;

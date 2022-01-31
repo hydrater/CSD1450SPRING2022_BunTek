@@ -57,7 +57,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			playerPossess = !playerPossess;
 			sr->SetColor(0, 0, 1);
 			float xdiff = this->Owner()->transform->worldposition.x - paddle->transform->worldposition.x;
-			float sign = xdiff > 0 ? 1 : -1;
+			float sign = xdiff > 0 ? 1.0f : -1.0f;
 			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
 			multiplier =  Clamp((float)pow(multiplier, 2) *sign, (float)-1, (float)1);
 			velocity.RotateC(multiplier * angRange);
@@ -69,7 +69,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			playerPossess = !playerPossess;
 			sr->SetColor(1, 0, 0);
 			float xdiff = this->Owner()->transform->worldposition.x - paddle->transform->worldposition.x;
-			float sign = xdiff > 0 ? 1 : -1;
+			float sign = xdiff > 0 ? 1.0f : -1.0f;
 			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
 			multiplier = Clamp((float)pow(multiplier, 2) * sign, (float)-1, (float)1);
 			velocity.RotateAC(multiplier * angRange);

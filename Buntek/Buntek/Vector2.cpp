@@ -125,7 +125,7 @@ float Vector2::AngleBetween(const Vector2 vec) {
 	return acos((y * vec.y + x * vec.x)/(sqrt(x * x + y * y)* vec.Length()));
 }
 
-Vector2 Vector2::Normalized(void) const throw(DivideByZero)
+Vector2 Vector2::Normalized(void) const
 {
 	float d = Length();
 	if (d <= Math::epsilon && -d <= Math::epsilon)
@@ -135,7 +135,7 @@ Vector2 Vector2::Normalized(void) const throw(DivideByZero)
 	return Vector2(x / d, y / d);
 }
 
-Vector2& Vector2::Normalize(void) throw(DivideByZero)
+Vector2& Vector2::Normalize(void)
 {
 	float d = Length();
 	if (d <= Math::epsilon && -d <= Math::epsilon) {
@@ -150,7 +150,7 @@ Vector2& Vector2::Normalize(void) throw(DivideByZero)
 	return *this;
 }
 
-Vector2& Vector2::Divide(float scalar) throw(DivideByZero)
+Vector2& Vector2::Divide(float scalar)
 {
 	if (scalar <= Math::epsilon && -scalar <= Math::epsilon)
 		throw DivideByZero();

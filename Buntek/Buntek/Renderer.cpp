@@ -116,29 +116,7 @@ void _renderer::Update(void)
 			AEGfxSetTintColor(spriteRenderer->R, spriteRenderer->G, spriteRenderer->B, spriteRenderer->GetTransparency());
 			//AEGfxSetTextureMode(AE_GFX_TM_PRECISE); Different quality if using average
 			AEGfxTextureSet(AssetManager.GetTexture(spriteRenderer->GetTextureName()), 0, 0);
-
-			if (spriteRenderer->hasStretched)
-			{
-				AEGfxVertexList* skewedMesh;
-				AEGfxMeshStart();
-				AEGfxTriAdd(
-					-0.5f * spriteRenderer->GetBottomStretch(), -0.5f * spriteRenderer->GetLeftStretch(), 0x00FF00FF, 0.0f, 1.0f * spriteRenderer->GetLeftStretch(), //bottom left
-					0.5f * spriteRenderer->GetBottomStretch(), -0.5f * spriteRenderer->GetRightStretch(), 0x00FFFF00, 1.0f * spriteRenderer->GetBottomStretch(), 1.0f * spriteRenderer->GetRightStretch(), //bottom right
-					-0.5f * spriteRenderer->GetTopStretch(), 0.5f * spriteRenderer->GetLeftStretch(), 0x0000FFFF, 0.0f, 0.0f); //top left
-
-				AEGfxTriAdd(
-					0.5f * spriteRenderer->GetBottomStretch(), -0.5f * spriteRenderer->GetRightStretch(), 0x00FFFFFF, 1.0f * spriteRenderer->GetBottomStretch(), 1.0f * spriteRenderer->GetRightStretch(),  //bottom right
-					0.5f * spriteRenderer->GetTopStretch(), 0.5f * spriteRenderer->GetRightStretch(), 0x00FFFFFF, 1.0f * spriteRenderer->GetTopStretch(), 0.0f,	//top right
-					-0.5f * spriteRenderer->GetTopStretch(), 0.5f * spriteRenderer->GetLeftStretch(), 0x00FFFFFF, 0.0f, 0.0f); //top left
-
-				skewedMesh = AEGfxMeshEnd();
-				AEGfxMeshDraw(skewedMesh, AE_GFX_MDM_TRIANGLES);
-				AEGfxMeshFree(skewedMesh);
-			}
-			else
-			{
-				AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
-			}
+			AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
 		}
 			break;
 		case RenderType::Font:
