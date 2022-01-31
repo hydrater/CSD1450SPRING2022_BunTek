@@ -11,16 +11,14 @@ remove(false)
 
 GameObject::~GameObject()
 {
-	transform->children.clear();
-	transform->parent->Owner()->DetachChild(this);
-	transform->parent = NULL;
-	for (unsigned i = 0; i < components.size(); ++i)
+	remove = true;
+	for (int i = 0; i < transform->children.size(); ++i)
 	{
-		if (components[i] != NULL)
-		{
-			delete components[i];
-			components[i] = NULL;
-		}
+		transform->children[i]->Owner()->Delete();
+	}
+	for (auto& c : components)
+	{
+		c->Remove();
 	}
 }
 
@@ -94,13 +92,18 @@ Transform* GameObject::GetParent(void)
 
 void GameObject::Delete(void)
 {
-	remove = true;
-	for (int i = 0; i < transform->children.size(); ++i)
+	//remove = true;
+	//for (int i = 0; i < transform->children.size(); ++i)
+	//{
+	//	transform->children[i]->Owner()->Delete();
+	//}
+	//for (auto& c : components)
+	//{
+	//	c->Remove();
+	//}
+	/*for (size_t i = 0; i < components.size(); i++)
 	{
-		transform->children[i]->Owner()->Delete();
-	}
-	for (auto &c : components)
-	{
-		c->Remove();
-	}
+		delete components[i];
+	}*/
+	//delete this;
 }
