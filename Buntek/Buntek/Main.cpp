@@ -82,7 +82,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneManager.LateUpdate();
 
 		// ------------------------------------------- End of Loop ------------------------------------------- //
-		ECSManager.UpdateList();
+		//ECSManager.UpdateList();
 		
 		// Informing the system about the loop's end
 		AESysFrameEnd();

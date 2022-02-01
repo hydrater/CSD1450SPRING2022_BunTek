@@ -5,7 +5,12 @@
 
 void Scene_Splash::Start(void) 
 {
+	AudioManager.LoadSound("splash.mp3");
+	AudioManager.LoadSound("SplashLogo.mp3");
+
 	AssetManager.LoadTexture("Logo/Digipen_Logo.png");
+	AssetManager.LoadTexture("Logo/BuntekLogo.png");
+
 	splash = new GameObject();
 	splash->AddComponent<SpriteRenderer>()->SetTransparency(1);
 	splashRenderer = splash->GetComponent<SpriteRenderer>();
@@ -13,13 +18,23 @@ void Scene_Splash::Start(void)
 	splashRenderer->Size(1220, 356);
 	splash->transform->SetPosition(Vector2(0, 0));
 	splashRenderer->SetTransparency(0);
+
+	splash2 = new GameObject();
+	splash2->AddComponent<SpriteRenderer>()->SetTransparency(1);
+	splashRenderer2 = splash2->GetComponent<SpriteRenderer>();
+	splashRenderer2->SetTexture("Logo/BuntekLogo.png");
+	splashRenderer2->Size(309, 376);
+	splash2->transform->SetPosition(Vector2(0, 0));
+	splashRenderer2->SetTransparency(0);
+
+	splashTransform = splash->transform;
+	splashTransform2 = splash2->transform;
 }
 
 void Scene_Splash::Update(void)
 {
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-	timer += DeltaTime;
-	Transform* splashTransform = splash->transform;
+	timer += cycle == 4 ? DeltaTime* 1.18f: DeltaTime;
 
 	switch (cycle)
 	{
@@ -34,24 +49,68 @@ void Scene_Splash::Update(void)
 	{
 		/*GameObject* test = new GameObject();
 		test->Delete();*/
-		if (canPlayAudio)
-		{
-			AudioManager.LoadSound("splash.mp3");
-			AudioManager.PlayClip("splash.mp3");
-		}
-		canPlayAudio = false;
 	}
 		break;
 	case 2:
 		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
 		break;
 	case 3:
-		//splashTransform->SetScale(Vector2(splashTransform->worldscale.x + DeltaTime, splashTransform->worldscale.y + DeltaTime));
-		//splashTransform->SetPosition(Vector2(0.0f, splashTransform->worldposition.y + DeltaTime * 200));
-		
+		splashRenderer->SetTransparency(0);
 		break;
 	case 4:
-		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
+	{
+		if (canPlayAudio)
+			AudioManager.PlayClip("SplashLogo.mp3");
+
+		timer2 += DeltaTime;
+		canPlayAudio = false;
+
+		switch (colorType)
+		{
+		case 0:
+			//AEGfxSetBackgroundColor(1.0f, 0.93f, 0.24f);
+			AEGfxSetBackgroundColor(0.5f, 0.0f, 0.0f);
+			break;
+
+		case 1:
+			//AEGfxSetBackgroundColor(0.14f, 0.65f, 1.0f);
+			AEGfxSetBackgroundColor(0.0f, 0.0f, 0.5f);
+			break;
+
+		case 2:
+			//AEGfxSetBackgroundColor(1.0f, 0.29f, 0.89f);
+			AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+			break;
+
+		case 3:
+			AEGfxSetBackgroundColor(0.1f, 0.8f, 5.5f);
+			break;
+
+		default:
+			break;
+		}
+
+		if (timer2 > 0.07f)
+		{
+			++colorType;
+			timer2 = 0;
+		}
+
+		if (colorType == 3)
+			colorType = 0;
+	}
+		break;
+	case 5:
+		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+		splashRenderer2->SetTransparency(1);
+		splashTransform2->SetScale(Vector2(splashTransform2->worldscale.x + DeltaTime * 0.05f, splashTransform2->worldscale.y + DeltaTime * 0.05f));
+		break;
+	case 6:
+		splashTransform2->SetScale(Vector2(splashTransform2->worldscale.x + DeltaTime * 0.05f, splashTransform2->worldscale.y + DeltaTime * 0.05f));
+		splashRenderer2->SetTransparency(splashRenderer2->GetTransparency() - DeltaTime);
+		break;
+	case 7:
+		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
 		break;
 	}
 
@@ -65,7 +124,9 @@ void Scene_Splash::Update(void)
 Scene_Splash::~Scene_Splash(void)
 {
 	AssetManager.UnloadTexture("Logo/Digipen_Logo.png");
+	AssetManager.UnloadTexture("Logo/BuntekLogo.png");
 	AudioManager.UnloadSound("splash.mp3");
+	AudioManager.UnloadSound("SplashLogo.mp3");
 	splash->Delete();
-	//delete splash;
+	splash2->Delete();
 }

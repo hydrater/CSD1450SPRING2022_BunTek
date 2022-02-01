@@ -109,27 +109,37 @@ void _audioManager::LoadMusic(string name)
 
 void _audioManager::UnloadSound(string name)
 {
-    soundDatabase[name]->release();
+    if (isActive && soundDatabase.find(name) != soundDatabase.end())
+        soundDatabase[name]->release();
 }
 
 void _audioManager::UnloadMusic(string name)
 {
-    musicDatabase[name]->release();
+    if (isActive && musicDatabase.find(name) != musicDatabase.end())
+        musicDatabase[name]->release();
 }
 
 void _audioManager::Free(void)
 {
-    for (auto const& x : soundDatabase)
-        x.second->release();
+    //cout << soundDatabase.size() << endl;
+    //std::map<string, Sound*>::iterator it;
 
-    soundDatabase.clear();
+    //for (it = soundDatabase.begin(); it != soundDatabase.end(); ++it)
+    //{
+    //    it->second->release();
+    //    soundDatabase.erase(it);
+    //}
+    //soundDatabase.clear();
 
-    for (auto const& x : musicDatabase)
-        x.second->release();
-
-    musicDatabase.clear();
+    //for (it = musicDatabase.begin(); it != musicDatabase.end(); ++it)
+    //{
+    //    it->second->release();
+    //    musicDatabase.erase(it);
+    //}
+    //musicDatabase.clear();
 
     fmodSystem->release();
+    isActive = false;
 }
 
 Sound* _audioManager::GetSound(string name)
