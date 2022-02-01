@@ -24,6 +24,13 @@ void Scene_Navigation::Start(void)
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
 	AudioManager.SetMusicVolume(1.0f);
+
+	AssetManager.LoadTexture("UI/Enemy.png");
+	AssetManager.LoadTexture("UI/Elite.png");
+	AssetManager.LoadTexture("UI/Encounter.png");
+	AssetManager.LoadTexture("UI/Rest.png");
+	AssetManager.LoadTexture("UI/Shop.png");
+	AssetManager.LoadTexture("UI/Boss.png");
 }
 
 // Draw all lines
@@ -89,6 +96,12 @@ void Scene_Navigation::LateUpdate(void)
 
 Scene_Navigation::~Scene_Navigation(void)
 {
+	AssetManager.UnloadTexture("UI/Enemy.png");
+	AssetManager.UnloadTexture("UI/Elite.png");
+	AssetManager.UnloadTexture("UI/Encounter.png");
+	AssetManager.UnloadTexture("UI/Rest.png");
+	AssetManager.UnloadTexture("UI/Shop.png");
+	AssetManager.UnloadTexture("UI/Boss.png");
 	AudioManager.UnloadMusic("NavigationBGM.mp3");
 	AEGfxMeshFree(mesh);
 }

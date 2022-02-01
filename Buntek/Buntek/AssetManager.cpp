@@ -19,14 +19,6 @@ _assetManager::_assetManager()
     LoadTexture("UI/Texture.png");
     LoadTexture("UI/Button.png");
 
-    // UI Navigation
-    LoadTexture("UI/Enemy.png");
-    LoadTexture("UI/Elite.png");
-    LoadTexture("UI/Encounter.png");
-    LoadTexture("UI/Rest.png");
-    LoadTexture("UI/Shop.png");
-    LoadTexture("UI/Boss.png");
-
     LoadTexture("BgNebula1.png");
     LoadTexture("BgNebula2.png");
     LoadTexture("BgNebula3.png");
@@ -90,7 +82,7 @@ AEGfxTexture* _assetManager::GetTexture(string name)
 
 void _assetManager::LoadFont(string name)
 {
-    string pathname = "./Assets/" + name;
+    string pathname = "./Assets/Font/" + name;
     char font = AEGfxCreateFont(&pathname.front(), defaultFontSize);
     FontDatabase[name] = font;
     AE_ASSERT_MESG(font, "Failed to create Font1!!");
@@ -104,7 +96,8 @@ char _assetManager::GetFont(string name)
     return NULL;
 }
 
-int _assetManager::GetdefaultFontSize(void) {
+int _assetManager::GetdefaultFontSize(void) 
+{
     return defaultFontSize;
 }
 

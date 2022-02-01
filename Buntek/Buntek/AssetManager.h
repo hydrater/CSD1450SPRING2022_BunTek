@@ -16,13 +16,14 @@ private:
     vector<TextRenderer*> rendererTextList;
     map<string, AEGfxTexture*> textureDatabase;
     map<string, char> FontDatabase;
-    void UnloadTexture(string name);
-    void LoadTexture(string name);
+
     void LoadFont(string name);
     int defaultFontSize = 48;
 
 public:
     static _assetManager& Instance(void);
+    void UnloadTexture(string name);
+    void LoadTexture(string name);
     AEGfxTexture* GetTexture(string name);
     char GetFont(string name);
     void AddToList(SpriteRenderer* spriteRenderer);
