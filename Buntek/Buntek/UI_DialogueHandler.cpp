@@ -8,8 +8,6 @@
 void RemoveDialogue(Button* button);
 void RemoveRewardSelection(Button* button);
 
-UI_DialogueHandler* UI_DialogueHandler::instance = 0;
-
 UI_DialogueHandler::UI_DialogueHandler(void)
 {
 }
@@ -20,12 +18,8 @@ UI_DialogueHandler::~UI_DialogueHandler(void)
 
 UI_DialogueHandler& UI_DialogueHandler::Instance(void)
 {
-    if (instance != 0)
-    {
-        return *instance;
-    }
-    instance = new UI_DialogueHandler();
-    return *instance;
+    static UI_DialogueHandler instance;
+    return instance;
 }
 
 void UI_DialogueHandler::Start(void)
@@ -465,4 +459,5 @@ void RemoveDialogue(Button* button)
     MapData.SetHoverable(true);
     MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
     UIDialogueManager.UIOpen = false;
+    DialogueDatabase.ClearDialogueSceneObjs();
 }

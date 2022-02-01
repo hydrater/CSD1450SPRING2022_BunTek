@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <vector>
+#include "Entity.h"
 using namespace std;
 
 #define DialogueDatabase _dialogueDatabase::Instance()
@@ -13,7 +15,9 @@ public:
 	static void SpawnEncounterObject(unsigned long id);
 	static string GetName(unsigned long id);
 	static string GetDescription(unsigned long id);
-	void InitDialogueScene(string id);
 
+	vector<GameObject*> dialogueSceneObjList;
+	void InitDialogueScene(string id);
+	void ClearDialogueSceneObjs(void);
 private:
 };

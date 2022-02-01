@@ -69,9 +69,28 @@ void _dialogueDatabase::InitDialogueScene(string id)
 			Vector2(-1, 0), 60.0f,
 			3960, 1080, "NebulaCloudBig.png",
 			Vector2(-3960, 0), 1, (short)AE_GFX_BM_ADD);
+
+		dialogueSceneObjList.push_back(splashimage1);
+		dialogueSceneObjList.push_back(splashimage2);
+		dialogueSceneObjList.push_back(splashimage3);
+		dialogueSceneObjList.push_back(splashimage4);
+		dialogueSceneObjList.push_back(splashimage5);
+		dialogueSceneObjList.push_back(splashimage6);
+		dialogueSceneObjList.push_back(spawner);
 	}
 		break;
 	default:
 		break;
 	}
+}
+
+void _dialogueDatabase::ClearDialogueSceneObjs(void)
+{
+	if (dialogueSceneObjList.size() == 0)
+		return;
+
+	for (int i = 0; i < dialogueSceneObjList.size(); i++)
+		dialogueSceneObjList[i]->Delete();
+
+	dialogueSceneObjList.clear();
 }

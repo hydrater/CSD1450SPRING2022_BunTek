@@ -13,6 +13,7 @@ Wo ai ni duo duo
 super idol de xiao rong dou mei ni de tian
 
 aed
+/d 0
 /a Look a BEE!
 What is it? What is it? What is that, what is that, what is it? Oh no, not the bees! Not the bees! Aaaaah! My eyes! My eyes! Aaaaah!
 /b Leave

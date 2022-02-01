@@ -45,8 +45,6 @@ private:
 	void StartRewardSelection(string flag);
 	void CloseRewardSelection(void);
 
-	static UI_DialogueHandler* instance;
-
 	void LoadFromFile(string flag);
 	string selectedFlag = "";
 	vector<string> dialogueList;
