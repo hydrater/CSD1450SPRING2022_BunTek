@@ -32,7 +32,7 @@ void BallBehavior::Update(void)
 	//Collision check with top/bottom wall
 	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
 	{
-		//CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
+		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
 		GameManager.DealDamage(10, playerPossess);
 		this->Owner()->Delete();
 		return;
