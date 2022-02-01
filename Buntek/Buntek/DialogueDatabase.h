@@ -13,6 +13,7 @@ public:
 	static void SpawnEncounterObject(unsigned long id);
 	static string GetName(unsigned long id);
 	static string GetDescription(unsigned long id);
+	void InitDialogueScene(string id);
 
 private:
 };

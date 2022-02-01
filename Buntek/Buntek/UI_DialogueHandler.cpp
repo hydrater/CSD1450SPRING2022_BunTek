@@ -301,6 +301,9 @@ void UI_DialogueHandler::WriteToDialogue(void)
                 rewardButtonList[rewardButtonNo++]->tr->SetText(parameters);
             break;
 
+        case 'd':
+            DialogueDatabase.InitDialogueScene(parameters);
+
         default:
             cout << "default line " << endl;
             break;
