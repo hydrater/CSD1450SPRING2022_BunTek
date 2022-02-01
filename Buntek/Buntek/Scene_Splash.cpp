@@ -60,7 +60,10 @@ void Scene_Splash::Update(void)
 	case 4:
 	{
 		if (canPlayAudio)
+		{
 			AudioManager.PlayClip("SplashLogo.mp3");
+			splashRenderer2->SetTransparency(1);
+		}
 
 		timer2 += DeltaTime;
 		canPlayAudio = false;
@@ -92,6 +95,9 @@ void Scene_Splash::Update(void)
 
 		if (timer2 > 0.07f)
 		{
+			splashTransform2->SetPosition(Vector2(RandIntMinMax(-800, 800), RandIntMinMax(-400, 400)));
+			float temp = RandFloatMinMax(0.5f, 3.0f);
+			splashTransform2->SetScale(Vector2(temp, temp));
 			++colorType;
 			timer2 = 0;
 		}
@@ -102,7 +108,7 @@ void Scene_Splash::Update(void)
 		break;
 	case 5:
 		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-		splashRenderer2->SetTransparency(1);
+		splashTransform2->SetPosition(Vector2(0, 0));
 		splashTransform2->SetScale(Vector2(splashTransform2->worldscale.x + DeltaTime * 0.05f, splashTransform2->worldscale.y + DeltaTime * 0.05f));
 		break;
 	case 6:
