@@ -121,23 +121,6 @@ void _audioManager::UnloadMusic(string name)
 
 void _audioManager::Free(void)
 {
-    //cout << soundDatabase.size() << endl;
-    //std::map<string, Sound*>::iterator it;
-
-    //for (it = soundDatabase.begin(); it != soundDatabase.end(); ++it)
-    //{
-    //    it->second->release();
-    //    soundDatabase.erase(it);
-    //}
-    //soundDatabase.clear();
-
-    //for (it = musicDatabase.begin(); it != musicDatabase.end(); ++it)
-    //{
-    //    it->second->release();
-    //    musicDatabase.erase(it);
-    //}
-    //musicDatabase.clear();
-
     fmodSystem->release();
     isActive = false;
 }
