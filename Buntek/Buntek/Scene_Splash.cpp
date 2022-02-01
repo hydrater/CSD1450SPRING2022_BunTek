@@ -1,15 +1,18 @@
 #include "Scene_Splash.h"
 #include "Scene_MainMenu.h"
+#include "AssetManager.h"
 #include "AudioEngine.h"
 
 void Scene_Splash::Start(void) 
 {
+	AssetManager.LoadTexture("Logo/Digipen_Logo.png");
 	splash = new GameObject();
 	splash->AddComponent<SpriteRenderer>()->SetTransparency(1);
 	splashRenderer = splash->GetComponent<SpriteRenderer>();
-	splashRenderer->SetTexture("splash.png");
-	splashRenderer->Size(750,899);
+	splashRenderer->SetTexture("Logo/Digipen_Logo.png");
+	splashRenderer->Size(1220, 356);
 	splash->transform->SetPosition(Vector2(0, 0));
+	splashRenderer->SetTransparency(0);
 }
 
 void Scene_Splash::Update(void)
@@ -24,12 +27,13 @@ void Scene_Splash::Update(void)
 		
 		break;
 	case 0:
-		splashTransform->SetScale(Vector2(splashTransform->worldscale.x + DeltaTime, splashTransform->worldscale.y + DeltaTime));
+		splashTransform->SetScale(Vector2(splashTransform->worldscale.x + DeltaTime * 0.2f, splashTransform->worldscale.y + DeltaTime * 0.2f));
+		splashRenderer->SetTransparency(splashRenderer->GetTransparency() + DeltaTime);
 		break;
 	case 1:
 	{
-		GameObject* test = new GameObject();
-		test->Delete();
+		/*GameObject* test = new GameObject();
+		test->Delete();*/
 		if (canPlayAudio)
 		{
 			AudioManager.LoadSound("splash.mp3");
@@ -37,15 +41,14 @@ void Scene_Splash::Update(void)
 		}
 		canPlayAudio = false;
 	}
-		
 		break;
 	case 2:
-		splashTransform->SetPosition(Vector2(0.0f, splashTransform->worldposition.y + DeltaTime * 400));
+		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
 		break;
 	case 3:
-		splashTransform->SetScale(Vector2(splashTransform->worldscale.x + DeltaTime, splashTransform->worldscale.y + DeltaTime));
-		splashTransform->SetPosition(Vector2(0.0f, splashTransform->worldposition.y + DeltaTime * 200));
-		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
+		//splashTransform->SetScale(Vector2(splashTransform->worldscale.x + DeltaTime, splashTransform->worldscale.y + DeltaTime));
+		//splashTransform->SetPosition(Vector2(0.0f, splashTransform->worldposition.y + DeltaTime * 200));
+		
 		break;
 	case 4:
 		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
@@ -61,6 +64,7 @@ void Scene_Splash::Update(void)
 
 Scene_Splash::~Scene_Splash(void)
 {
+	AssetManager.UnloadTexture("Logo/Digipen_Logo.png");
 	AudioManager.UnloadSound("splash.mp3");
 	splash->Delete();
 	//delete splash;
