@@ -42,7 +42,7 @@ void Scene_Splash::Update(void)
 		
 		break;
 	case 0:
-		splashTransform->SetScale(Vector2(splashTransform->worldscale.x + DeltaTime * 0.2f, splashTransform->worldscale.y + DeltaTime * 0.2f));
+		splashTransform->SetScale(splashTransform->worldscale.Lerp(splashTargetScale,0.07f));
 		splashRenderer->SetTransparency(splashRenderer->GetTransparency() + DeltaTime);
 		break;
 	case 1:
@@ -114,10 +114,11 @@ void Scene_Splash::Update(void)
 			splashTransform2->SetScale(Vector2(1, 1));
 			resetSplash = false;
 		}
-		splashTransform2->SetScale(Vector2(splashTransform2->worldscale.x + DeltaTime * 0.05f, splashTransform2->worldscale.y + DeltaTime * 0.05f));
+		//Slowly increase size
+		splashTransform2->SetScale(splashTransform2->worldscale.Lerp(splash2TargetScale,0.01f));
 		break;
 	case 6:
-		splashTransform2->SetScale(Vector2(splashTransform2->worldscale.x + DeltaTime * 0.05f, splashTransform2->worldscale.y + DeltaTime * 0.05f));
+		splashTransform2->SetScale(splashTransform2->worldscale.Lerp(splash2TargetScale, 0.005f));
 		splashRenderer2->SetTransparency(splashRenderer2->GetTransparency() - DeltaTime);
 		break;
 	case 7:
