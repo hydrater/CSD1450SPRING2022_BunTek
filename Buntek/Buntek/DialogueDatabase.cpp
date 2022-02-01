@@ -45,6 +45,9 @@ void _dialogueDatabase::InitDialogueScene(string id)
 		GameObject* splashimage5 = 0;
 		GameObject* splashimage6 = 0;
 		GameObject* spawner = 0;
+
+		splashimage6 = devTools.CreateSpriteGameObject("WhiteTexture.png", 3960, 1080, AE_GFX_BM_NONE, Vector2(0, 0), -1);
+		splashimage6->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
 		splashimage1 = devTools.CreateSpriteGameObject("Static Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
 		splashimage1->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, 0);
 		splashimage2 = devTools.CreateSpriteGameObject("Static Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
