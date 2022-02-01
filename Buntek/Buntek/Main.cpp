@@ -12,6 +12,7 @@
 #include "MapGenerator.h"
 #include "SaveManager.h"
 #include "ECSManager.h"
+#include "DebuggingTools.h"
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -64,32 +65,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEInputUpdate();
 
 		// Debugging tools
-		if (AEInputCheckTriggered(AEVK_1))
-		{
-			SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
-		}
-
-		if (AEInputCheckTriggered(AEVK_2))
-		{
-			SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
-		}
-		if (AEInputCheckTriggered(AEVK_3))
-		{
-			SceneManager.LoadScene(new Scene_Test, TransitionType::FadeTransition, true);
-		}
-
-		if (AEInputCheckTriggered(AEVK_F1))
-		{
-			SaveManager.SaveData();
-		}
-		if (AEInputCheckTriggered(AEVK_F2))
-		{
-			SaveManager.LoadData();
-		}
-		if (AEInputCheckTriggered(AEVK_F3))
-		{
-			MapData.GenerateMapData();
-		}
+		Debugger.CheatsUpdate();
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();

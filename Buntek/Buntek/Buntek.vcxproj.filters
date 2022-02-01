@@ -171,6 +171,9 @@
     <ClCompile Include="ECSManager.cpp">
       <Filter>Source Files\Engine\ECS</Filter>
     </ClCompile>
+    <ClCompile Include="DebuggingTools.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -307,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="ECSManager.h">
       <Filter>Source Files\Engine\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="DebuggingTools.h">
+      <Filter>Source Files\Engine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
