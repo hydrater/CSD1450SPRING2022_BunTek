@@ -17,5 +17,5 @@ private:
     int colorType = 0;
     SpriteRenderer* splashRenderer = 0, *splashRenderer2 = 0;
     Transform* splashTransform = 0, *splashTransform2 = 0;
-    bool canPlayAudio = true;
+    bool canPlayAudio = true, resetSplash = true;
 };

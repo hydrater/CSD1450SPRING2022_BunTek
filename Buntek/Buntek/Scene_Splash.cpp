@@ -34,7 +34,7 @@ void Scene_Splash::Start(void)
 void Scene_Splash::Update(void)
 {
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-	timer += cycle == 4 ? DeltaTime* 1.18f: DeltaTime;
+	timer += cycle == 4 ? DeltaTime* 1.2f: DeltaTime;
 
 	switch (cycle)
 	{
@@ -107,8 +107,13 @@ void Scene_Splash::Update(void)
 	}
 		break;
 	case 5:
-		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-		splashTransform2->SetPosition(Vector2(0, 0));
+		if (resetSplash)
+		{
+			AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+			splashTransform2->SetPosition(Vector2(0, 0));
+			splashTransform2->SetScale(Vector2(1, 1));
+			resetSplash = false;
+		}
 		splashTransform2->SetScale(Vector2(splashTransform2->worldscale.x + DeltaTime * 0.05f, splashTransform2->worldscale.y + DeltaTime * 0.05f));
 		break;
 	case 6:
