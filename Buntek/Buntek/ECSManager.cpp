@@ -23,5 +23,23 @@ void _ECSManager::AddToList(Component* component)
 
 void _ECSManager::UpdateList(void)
 {
-    cout << componentList.size() << endl;
+    //cout << componentList.size() << endl;
+    for  (unsigned i = 0; i < componentList.size(); ++i)
+    {
+        if (componentList[i] == NULL)
+            continue;
+
+        if (componentList[i]->remove)
+        {
+            //delete componentList[i];
+            componentList[i] = NULL;
+        }
+    }
+    // Clean up null components
+    for (int i = (int)componentList.size() -1; i >= 0; --i)
+    {
+        if (componentList[i] == NULL)
+            componentList.erase(componentList.begin() + i);
+    }
+    //cout << "end" << componentList.size() << endl;
 }

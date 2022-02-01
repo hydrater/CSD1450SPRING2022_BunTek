@@ -20,7 +20,10 @@ void Component::Init(GameObject* owner)
 
 GameObject* Component::Owner(void)
 {
-	return gameObject;
+	if (this != NULL)
+		return gameObject;
+	else
+		return NULL;
 }
 
 bool Component::IsActive()
