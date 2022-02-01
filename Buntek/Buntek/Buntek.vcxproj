@@ -107,6 +107,7 @@
     <ClCompile Include="CursorCamera.cpp" />
     <ClCompile Include="Devtools.cpp" />
     <ClCompile Include="DialogueDatabase.cpp" />
+    <ClCompile Include="ECSManager.cpp" />
     <ClCompile Include="LineRenderer.cpp" />
     <ClCompile Include="UI_DialogueHandler.cpp" />
     <ClCompile Include="EnemyDatabase.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="CursorCamera.h" />
     <ClInclude Include="Devtools.h" />
     <ClInclude Include="DialogueDatabase.h" />
+    <ClInclude Include="ECSManager.h" />
     <ClInclude Include="LineRenderer.h" />
     <ClInclude Include="UI_DialogueHandler.h" />
     <ClInclude Include="EnemyDatabase.h" />

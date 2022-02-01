@@ -11,6 +11,7 @@
 #include "Renderer.h"
 #include "MapGenerator.h"
 #include "SaveManager.h"
+#include "ECSManager.h"
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -105,6 +106,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneManager.LateUpdate();
 
 		// ------------------------------------------- End of Loop ------------------------------------------- //
+		ECSManager.UpdateList();
+		
 		// Informing the system about the loop's end
 		AESysFrameEnd();
 

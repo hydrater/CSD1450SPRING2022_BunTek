@@ -1,10 +1,12 @@
 #include "Component.h"
+#include "ECSManager.h"
 
 Component::Component() :
 	active(true),
 	remove(false)
 {
 	gameObject = NULL;
+	ECSManager.AddToList(this);
 }
 
 Component::~Component()
