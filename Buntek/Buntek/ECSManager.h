@@ -9,10 +9,12 @@ class _ECSManager
 private:
     _ECSManager(void);
     ~_ECSManager(void);
+    vector<GameObject*> GOList;
     vector<Component*> componentList;
 
 public:
     static _ECSManager& Instance(void);
-    void AddToList(Component* component);
+    void AddGameObjectToList(GameObject* GO);
+    void AddComponentToList(Component* component);
     void UpdateList(void);
 };

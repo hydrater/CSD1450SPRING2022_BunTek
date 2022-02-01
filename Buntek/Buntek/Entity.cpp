@@ -1,12 +1,14 @@
 #include "Entity.h"
 #include "Transform.h"
 #include "Component.h"
+#include "ECSManager.h"
 
 GameObject::GameObject() :
 active(true),
 remove(false)
 {
 	transform = AddComponent<Transform>();
+	ECSManager.AddGameObjectToList(this);
 }
 
 GameObject::~GameObject()

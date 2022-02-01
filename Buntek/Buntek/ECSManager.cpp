@@ -8,6 +8,8 @@ _ECSManager::_ECSManager(void)
 
 _ECSManager::~_ECSManager(void)
 {
+    /*for (int i = (int)componentList.size() - 1; i >= 0; --i)
+        delete componentList[i];*/
 }
 
 _ECSManager& _ECSManager::Instance(void)
@@ -16,14 +18,18 @@ _ECSManager& _ECSManager::Instance(void)
     return instance;
 }
 
-void _ECSManager::AddToList(Component* component)
+void _ECSManager::AddGameObjectToList(GameObject* GO)
+{
+    GOList.push_back(GO);
+}
+
+void _ECSManager::AddComponentToList(Component* component)
 {
     componentList.push_back(component);
 }
 
 void _ECSManager::UpdateList(void)
 {
-    //cout << componentList.size() << endl;
     for  (unsigned i = 0; i < componentList.size(); ++i)
     {
         if (componentList[i] == NULL)
@@ -41,5 +47,24 @@ void _ECSManager::UpdateList(void)
         if (componentList[i] == NULL)
             componentList.erase(componentList.begin() + i);
     }
-    //cout << "end" << componentList.size() << endl;
+
+    // For GO
+    for (unsigned i = 0; i < GOList.size(); ++i)
+    {
+        if (GOList[i] == NULL)
+            continue;
+
+        if (GOList[i]->remove)
+        {
+            //delete GOList[i];
+            GOList[i] = NULL;
+        }
+    }
+
+    // Clean up GO
+    for (int i = (int)GOList.size() - 1; i >= 0; --i)
+    {
+        if (GOList[i] == NULL)
+            GOList.erase(GOList.begin() + i);
+    }
 }

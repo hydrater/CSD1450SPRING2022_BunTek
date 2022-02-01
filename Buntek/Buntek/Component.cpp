@@ -6,7 +6,7 @@ Component::Component() :
 	remove(false)
 {
 	gameObject = NULL;
-	ECSManager.AddToList(this);
+	ECSManager.AddComponentToList(this);
 }
 
 Component::~Component()
