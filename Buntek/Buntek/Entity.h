@@ -51,8 +51,8 @@ public:
 		for (auto& c : components)
 		{
 			// UNCOMMENT THIS TO SEE WHAT CAUSE THE ERROR
-			/*if (c->remove)
-				return NULL;*/
+			if (c->remove)
+				return NULL;
 			if (typeid(*c) == typeid(T))
 			{
 				return static_cast<T*>(c);
