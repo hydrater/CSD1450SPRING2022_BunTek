@@ -19,4 +19,5 @@ private:
     GameObject* background = 0, *MainMenu = 0;
     GameObject* startBtn = 0, * optionBtn = 0, * quitBtn = 0;
     SpriteRenderer* polkaDotter = 0;
+    Transform* disc = 0;
 };

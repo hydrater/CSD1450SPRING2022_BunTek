@@ -7,6 +7,7 @@
 #include "GameManager.h"
 #include "AudioEngine.h";
 #include "Parallaxer.h"
+#include "Devtools.h"
 
 void BtnFunc_Start(Button* button);
 void BtnFunc_Options(Button* button);
@@ -34,6 +35,7 @@ void Scene_MainMenu::Start(void)
 	AssetManager.LoadTexture("Menu/PolkaSquare.png");
 	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
+	AssetManager.LoadTexture("Menu/Disc.png");
 
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
@@ -108,6 +110,8 @@ void Scene_MainMenu::Start(void)
 	button->HoverEffect = &BtnFuncHover_Quit;
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
+	disc = devTools.CreateSpriteGameObject("Menu/Disc.png", 400, 400, AE_GFX_BM_BLEND, Vector2(900, -420), 2)->transform;
+
 	// Load save data
 	//SaveManager.LoadData();
 }
@@ -118,6 +122,8 @@ void Scene_MainMenu::Update(void)
 	temp.x -= DeltaTime * 0.1f;
 	temp.y += DeltaTime * 0.1f;
 	polkaDotter->SetTextureOffset(Vector2(temp.x, temp.y));
+
+	disc->Rotate(DeltaTime * 20);
 }
 
 Scene_MainMenu::~Scene_MainMenu(void)
@@ -129,6 +135,7 @@ Scene_MainMenu::~Scene_MainMenu(void)
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
 	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
+	AssetManager.UnloadTexture("Menu/Disc.png");
 	instance = NULL;
 }
 
