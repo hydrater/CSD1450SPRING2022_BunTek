@@ -6,6 +6,7 @@
 #include "AssetManager.h"
 #include "GameManager.h"
 #include "AudioEngine.h";
+#include "Parallaxer.h"
 
 void BtnFunc_Start(Button* button);
 void BtnFunc_Options(Button* button);
@@ -25,17 +26,20 @@ void Scene_MainMenu::Start(void)
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 
 	AudioManager.LoadSound("ButtonHover.mp3");
+	AudioManager.LoadMusic("www.ogg");
+	AudioManager.PlayMusic("www.ogg");
+	AudioManager.SetMusicVolume(0.05f);
 
 	AssetManager.LoadTexture("Menu/MainMenuArt.png");
 	AssetManager.LoadTexture("Menu/PolkaSquare.png");
 	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
 
-
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
 	background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
 	background->GetComponent<SpriteRenderer>()->SetLayer(0);
+	background->AddComponent<Parallaxer>()->distance = 150.0f;
 
 	MainMenu = new GameObject();
 	MainMenu->transform->SetPosition(Vector2(-100, 0));
@@ -119,6 +123,7 @@ void Scene_MainMenu::Update(void)
 Scene_MainMenu::~Scene_MainMenu(void)
 {
 	AudioManager.LoadSound("ButtonHover.mp3");
+	AudioManager.UnloadMusic("www.ogg");
 
 	AssetManager.UnloadTexture("Menu/MainMenu.png");
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
