@@ -40,7 +40,7 @@ void Scene_MainMenu::Start(void)
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
 	background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
-	background->GetComponent<SpriteRenderer>()->SetLayer(0);
+	background->GetComponent<SpriteRenderer>()->SetLayer(-1);
 	background->AddComponent<Parallaxer>()->distance = 150.0f;
 
 	MainMenu = new GameObject();
@@ -48,7 +48,7 @@ void Scene_MainMenu::Start(void)
 	polkaDotter = MainMenu->AddComponent<SpriteRenderer>();
 	polkaDotter->Size(1900, 1100);
 	polkaDotter->SetTexture("Menu/PolkaSquare.png");
-	polkaDotter->SetLayer(-1);
+	polkaDotter->SetLayer(-2);
 
 	startBtn = new GameObject();
 	SpriteRenderer* tempRenderer;
