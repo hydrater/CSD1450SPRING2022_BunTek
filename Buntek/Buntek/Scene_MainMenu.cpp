@@ -3,56 +3,120 @@
 #include "TextRenderer.h"
 #include "Button.h"
 #include "Scene_Navigation.h"
-#include "UI_DialogueHandler.h"
 #include "UI_Shop.h"
-#include "UI_EnemyNodeBox.h"
-#include "SaveManager.h"
+#include "AssetManager.h"
+#include "GameManager.h"
 
-void MoveToNavigation(Button* button);
+void BtnFunc_Start(Button* button);
+void BtnFunc_Options(Button* button);
+void BtnFunc_Quit(Button* button);
 
 void Scene_MainMenu::Start(void)
 {
+	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+
+	AssetManager.LoadTexture("Menu/MainMenuArt.png");
+	AssetManager.LoadTexture("Menu/PolkaSquare.png");
+	AssetManager.LoadTexture("Menu/Button.png");
+
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
-	background->GetComponent<SpriteRenderer>()->SetTexture("MainMenu.png");
-	background->GetComponent<SpriteRenderer>()->SetLayer(-1);
+	background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
+	background->GetComponent<SpriteRenderer>()->SetLayer(0);
 
-	Battle = new GameObject();
+	MainMenu = new GameObject();
+	MainMenu->transform->SetPosition(Vector2(-100, 0));
+	polkaDotter = MainMenu->AddComponent<SpriteRenderer>();
+	polkaDotter->Size(1900, 1100);
+	polkaDotter->SetTexture("Menu/PolkaSquare.png");
+	polkaDotter->SetLayer(-1);
+
+	battleBtn = new GameObject();
 	SpriteRenderer* tempRenderer;
-	tempRenderer = Battle->AddComponent<SpriteRenderer>();
-	tempRenderer->Size(200, 100);
-	tempRenderer->SetTexture("Buttons.png");
+	tempRenderer = battleBtn->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(471, 71);
+	tempRenderer->SetTexture("Menu/Button.png");
 	TextRenderer* tempTextRenderer;
-	tempTextRenderer = Battle->AddComponent<TextRenderer>();
-	//tempRenderer->SetTexture("WhiteTexture.png");
-	tempTextRenderer->SetFont("Astral.ttf");
-	tempTextRenderer->SetTextColor(1, 1, 1);
-	tempTextRenderer->SetText("S T A R T");
+	tempTextRenderer = battleBtn->AddComponent<TextRenderer>();
+	tempTextRenderer->SetFont("GothicA1.ttf");
+	tempTextRenderer->SetLayer(1);
+	tempTextRenderer->SetTextColor(0, 0, 0);
+	tempTextRenderer->SetText("Start");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-	Battle->transform->SetPosition(Vector2(0, -200));
+	battleBtn->transform->SetPosition(Vector2(-670, -200));
 	Button* button;
-	button = Battle->AddComponent<Button>();
+	button = battleBtn->AddComponent<Button>();
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
-	button->ButtonEffect = &MoveToNavigation;
+	button->ButtonEffect = &BtnFunc_Start;
+
+	optionBtn = new GameObject();
+	tempRenderer = optionBtn->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(471, 71);
+	tempRenderer->SetTexture("Menu/Button.png");
+	tempTextRenderer = optionBtn->AddComponent<TextRenderer>();
+	tempTextRenderer->SetFont("GothicA1.ttf");
+	tempTextRenderer->SetLayer(1);
+	tempTextRenderer->SetTextColor(0, 0, 0);
+	tempTextRenderer->SetText("Options");
+	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
+	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
+	optionBtn->transform->SetPosition(Vector2(-670, -300));
+	button = optionBtn->AddComponent<Button>();
+	button->sr = tempRenderer;
+	button->tr = tempTextRenderer;
+	button->ButtonEffect = &BtnFunc_Options;
+
+	quitBtn = new GameObject();
+	tempRenderer = quitBtn->AddComponent<SpriteRenderer>();
+	tempRenderer->Size(471, 71);
+	tempRenderer->SetTexture("Menu/Button.png");
+	tempTextRenderer = quitBtn->AddComponent<TextRenderer>();
+	tempTextRenderer->SetFont("GothicA1.ttf");
+	tempTextRenderer->SetLayer(1);
+	tempTextRenderer->SetTextColor(0, 0, 0);
+	tempTextRenderer->SetText("Quit");
+	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
+	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
+	quitBtn->transform->SetPosition(Vector2(-670, -400));
+	button = quitBtn->AddComponent<Button>();
+	button->sr = tempRenderer;
+	button->tr = tempTextRenderer;
+	button->ButtonEffect = &BtnFunc_Quit;
 
 	// Load save data
-	SaveManager.LoadData();
-
-	/*rewardsel = new GameObject();
-	rewardsel->AddComponent<UI_RewardSelection>();
-	vector<string> rewards{ "E" };
-	rewardsel->GetComponent<UI_RewardSelection>()->CreateRewardSelection(Vector2(0, 0), 4, rewards);*/
+	//SaveManager.LoadData();
 }
 
 void Scene_MainMenu::Update(void)
 {
-	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+	Vector2 temp = polkaDotter->GetTextureOffset();
+	temp.x -= DeltaTime * 0.1f;
+	temp.y += DeltaTime * 0.1f;
+	polkaDotter->SetTextureOffset(Vector2(temp.x, temp.y));
 }
 
-void MoveToNavigation(Button* button)
+Scene_MainMenu::~Scene_MainMenu(void)
+{
+	AssetManager.UnloadTexture("Menu/MainMenu.png");
+	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
+	AssetManager.UnloadTexture("Menu/Button.png");
+}
+
+void BtnFunc_Start(Button* button)
 {
 	SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
+}
+
+void BtnFunc_Options(Button* button)
+{
+	
+}
+
+void BtnFunc_Quit(Button* button)
+{
+	// Should have a "are you sure?"
+	GameManager.exit = true;
 }
 

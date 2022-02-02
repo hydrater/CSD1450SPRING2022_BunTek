@@ -5,7 +5,6 @@
 
 void Scene_Splash::Start(void) 
 {
-	AudioManager.LoadSound("splash.mp3");
 	AudioManager.LoadSound("SplashLogo.mp3");
 
 	AssetManager.LoadTexture("Logo/Digipen_Logo.png");
@@ -137,7 +136,6 @@ Scene_Splash::~Scene_Splash(void)
 {
 	AssetManager.UnloadTexture("Logo/Digipen_Logo.png");
 	AssetManager.UnloadTexture("Logo/BuntekLogo.png");
-	AudioManager.UnloadSound("splash.mp3");
 	AudioManager.UnloadSound("SplashLogo.mp3");
 	splash->Delete();
 	splash2->Delete();

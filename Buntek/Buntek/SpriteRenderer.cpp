@@ -79,3 +79,13 @@ float SpriteRenderer::GetColor(char color)
 void SpriteRenderer::SetColor(float _R, float _G, float _B){
 	R = _R, G = _G, B = _B;
 }
+
+void SpriteRenderer::SetTextureOffset(Vector2 offset)
+{
+	textureOffset = offset;
+}
+
+Vector2 SpriteRenderer::GetTextureOffset(void)
+{
+	return textureOffset;
+}

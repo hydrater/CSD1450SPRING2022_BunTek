@@ -11,14 +11,11 @@ _assetManager::_assetManager()
     LoadTexture("ball.png");
     LoadTexture("Trail.png");
     LoadTexture("paddle.png");
-    LoadTexture("MainMenu.png");
     LoadTexture("BetterNebula.png");
     LoadTexture("Buttons.png");
 
     // UI
     LoadTexture("UI/Texture.png");
-    LoadTexture("UI/Button.png");
-
     LoadTexture("BgNebula1.png");
     LoadTexture("BgNebula2.png");
     LoadTexture("BgNebula3.png");
@@ -36,6 +33,8 @@ _assetManager::_assetManager()
     //font
     LoadFont("Astral.ttf");
     LoadFont("Gabriola.ttf");
+    LoadFont("Metrolic.ttf");
+    LoadFont("GothicA1.ttf");
 }
 
 _assetManager::~_assetManager()
