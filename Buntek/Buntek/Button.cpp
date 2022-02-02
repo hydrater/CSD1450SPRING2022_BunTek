@@ -1,8 +1,6 @@
 #include "Button.h"
 #include "GameManager.h"
 
-
-
 Button::Button(void)
 {
 }
@@ -18,6 +16,9 @@ void Button::Start(void)
 
 void Button::Update(void)
 {
+	if (GameManager.disableInteraction)
+		return;
+
 	if (tr != NULL && sr != NULL) {
 		tr->ScaleTexture(sr);
 	}

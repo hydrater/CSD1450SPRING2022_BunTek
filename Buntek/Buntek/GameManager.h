@@ -19,6 +19,7 @@ private:
 public:
     static _gameManager& Instance(void);
     bool exit = false;
+    bool disableInteraction = false;
     Vector2 GetCursorPosition(void);
 
     // Profile
