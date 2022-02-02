@@ -114,8 +114,8 @@ void Scene_MainMenu::Start(void)
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
 	disc = devTools.CreateSpriteGameObject("Menu/Disc.png", 400, 400, AE_GFX_BM_BLEND, Vector2(900, -420), 2)->transform;
-	fake = devTools.CreateSpriteGameObject("Menu/Fake.png", 1900, 1100, AE_GFX_BM_BLEND, Vector2(0, 0), 3)->transform;
-	fake->SetRotation(-90);
+	fake = devTools.CreateSpriteGameObject("Menu/Fake.png", 2800, 1900, AE_GFX_BM_BLEND, Vector2(0, 0), 0)->transform;
+	fake->SetRotation(-180);
 	fake->SetScale(Vector2(2, 2));
 
 	// Load save data
@@ -133,8 +133,8 @@ void Scene_MainMenu::Update(void)
 
 	if (animTimer < 1)
 	{
-		fake->Translate(Vector2(DeltaTime * -900, 0.0f));
-		fake->Rotate(DeltaTime * 90.2f);
+		fake->Translate(Vector2(DeltaTime * -450.0f, -400.0f * DeltaTime));
+		fake->Rotate(DeltaTime * 180.1f);
 		fake->SetScale(Vector2(fake->worldscale.x -= DeltaTime, fake->worldscale.y -= DeltaTime));
 	}
 	else
@@ -144,6 +144,8 @@ void Scene_MainMenu::Update(void)
 			polkaDotter->SetTransparency(1);
 			fake->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
 			background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
+			AssetManager.UnloadTexture("Menu/MainMenuFull.png");
+			AssetManager.UnloadTexture("Menu/Fake.png");
 			finishedSetup = true;
 		}
 	}
@@ -153,14 +155,11 @@ Scene_MainMenu::~Scene_MainMenu(void)
 {
 	AudioManager.UnloadSound("ButtonHover.mp3");
 	AudioManager.UnloadMusic("www.ogg");
-
 	AssetManager.UnloadTexture("Menu/MainMenu.png");
-	AssetManager.UnloadTexture("Menu/MainMenuFull.png");
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
 	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 	AssetManager.UnloadTexture("Menu/Disc.png");
-	AssetManager.UnloadTexture("Menu/Fake.png");
 	instance = NULL;
 }
 
