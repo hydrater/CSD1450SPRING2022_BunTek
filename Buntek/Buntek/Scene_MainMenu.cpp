@@ -32,14 +32,16 @@ void Scene_MainMenu::Start(void)
 	AudioManager.SetMusicVolume(0.05f);
 
 	AssetManager.LoadTexture("Menu/MainMenuArt.png");
+	AssetManager.LoadTexture("Menu/MainMenuFull.png");
 	AssetManager.LoadTexture("Menu/PolkaSquare.png");
 	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
 	AssetManager.LoadTexture("Menu/Disc.png");
+	AssetManager.LoadTexture("Menu/Fake.png");
 
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
-	background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
+	background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuFull.png");
 	background->GetComponent<SpriteRenderer>()->SetLayer(-1);
 	background->AddComponent<Parallaxer>()->distance = 150.0f;
 
@@ -49,6 +51,7 @@ void Scene_MainMenu::Start(void)
 	polkaDotter->Size(1900, 1100);
 	polkaDotter->SetTexture("Menu/PolkaSquare.png");
 	polkaDotter->SetLayer(-2);
+	polkaDotter->SetTransparency(0);
 
 	startBtn = new GameObject();
 	SpriteRenderer* tempRenderer;
@@ -111,6 +114,9 @@ void Scene_MainMenu::Start(void)
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
 	disc = devTools.CreateSpriteGameObject("Menu/Disc.png", 400, 400, AE_GFX_BM_BLEND, Vector2(900, -420), 2)->transform;
+	fake = devTools.CreateSpriteGameObject("Menu/Fake.png", 1900, 1100, AE_GFX_BM_BLEND, Vector2(0, 0), 3)->transform;
+	fake->SetRotation(-90);
+	fake->SetScale(Vector2(2, 2));
 
 	// Load save data
 	//SaveManager.LoadData();
@@ -118,24 +124,43 @@ void Scene_MainMenu::Start(void)
 
 void Scene_MainMenu::Update(void)
 {
+	animTimer += DeltaTime;
 	Vector2 temp = polkaDotter->GetTextureOffset();
 	temp.x -= DeltaTime * 0.1f;
 	temp.y += DeltaTime * 0.1f;
 	polkaDotter->SetTextureOffset(Vector2(temp.x, temp.y));
-
 	disc->Rotate(DeltaTime * 20);
+
+	if (animTimer < 1)
+	{
+		fake->Translate(Vector2(DeltaTime * -900, 0.0f));
+		fake->Rotate(DeltaTime * 90.2f);
+		fake->SetScale(Vector2(fake->worldscale.x -= DeltaTime, fake->worldscale.y -= DeltaTime));
+	}
+	else
+	{
+		if (!finishedSetup)
+		{
+			polkaDotter->SetTransparency(1);
+			fake->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
+			background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
+			finishedSetup = true;
+		}
+	}
 }
 
 Scene_MainMenu::~Scene_MainMenu(void)
 {
-	AudioManager.LoadSound("ButtonHover.mp3");
+	AudioManager.UnloadSound("ButtonHover.mp3");
 	AudioManager.UnloadMusic("www.ogg");
 
 	AssetManager.UnloadTexture("Menu/MainMenu.png");
+	AssetManager.UnloadTexture("Menu/MainMenuFull.png");
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
 	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 	AssetManager.UnloadTexture("Menu/Disc.png");
+	AssetManager.UnloadTexture("Menu/Fake.png");
 	instance = NULL;
 }
 
