@@ -190,7 +190,7 @@ void Scene_MainMenu::Update(void)
 		displayTxt->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 		displayTxt->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 		displayTxt->SetLayer(3);
-		displayTxt->SetFontScale(0.8f);
+		displayTxt->SetFontSize(42);
 		displayTxt->SetTextColor(0, 0, 0);
 
 		GameManager.disableInteraction = false;
