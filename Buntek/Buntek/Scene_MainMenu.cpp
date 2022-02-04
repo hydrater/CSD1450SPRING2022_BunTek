@@ -38,6 +38,7 @@ void Scene_MainMenu::Start(void)
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
 	AssetManager.LoadTexture("Menu/Disc.png");
 	AssetManager.LoadTexture("Menu/Fake.png");
+	AssetManager.LoadTexture("Menu/Bottom.png");
 
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
@@ -114,9 +115,14 @@ void Scene_MainMenu::Start(void)
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
 	disc = devTools.CreateSpriteGameObject("Menu/Disc.png", 400, 400, AE_GFX_BM_BLEND, Vector2(900, -420), 2)->transform;
+	disc->SetScale(Vector2(0, 0));
+
 	fake = devTools.CreateSpriteGameObject("Menu/Fake.png", 2800, 1900, AE_GFX_BM_BLEND, Vector2(0, 0), 0)->transform;
 	fake->SetRotation(-180);
 	fake->SetScale(Vector2(2, 2));
+
+	bottom = devTools.CreateSpriteGameObject("Menu/Bottom.png", 1920, 83, AE_GFX_BM_BLEND, Vector2(0, -490), 0)->transform;
+	bottom->SetScale(Vector2(0.0f, 2.0f));
 
 	// Load save data
 	//SaveManager.LoadData();
@@ -133,21 +139,43 @@ void Scene_MainMenu::Update(void)
 
 	if (animTimer < 1)
 	{
+		GameManager.disableInteraction = true;
 		fake->Translate(Vector2(DeltaTime * -450.0f, -400.0f * DeltaTime));
 		fake->Rotate(DeltaTime * 180.1f);
 		fake->SetScale(Vector2(fake->worldscale.x -= DeltaTime, fake->worldscale.y -= DeltaTime));
-	}
-	else
-	{
-		if (!finishedSetup)
+
+		if (animTimer <= 0.8f)
 		{
-			polkaDotter->SetTransparency(1);
-			fake->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
-			background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
-			AssetManager.UnloadTexture("Menu/MainMenuFull.png");
-			AssetManager.UnloadTexture("Menu/Fake.png");
-			finishedSetup = true;
+			disc->Scale(DeltaTime * 4);
+			bottom->worldscale += Vector2(DeltaTime * 1.25f, 0.0f);
 		}
+		else
+		{
+			disc->Scale(DeltaTime * -10);
+			bottom->worldscale -= Vector2(0.0f, DeltaTime * 5.0f);
+		}
+			
+	}
+	else if (!finishedSetup)
+	{
+		polkaDotter->SetTransparency(1);
+		fake->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
+		background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
+		AssetManager.UnloadTexture("Menu/MainMenuFull.png");
+		AssetManager.UnloadTexture("Menu/Fake.png");
+		disc->SetScale(Vector2(1, 1));
+		bottom->SetScale(Vector2(1, 1));
+
+		displayTxt = bottom->Owner()->AddComponent<TextRenderer>();
+		displayTxt->SetFont("GothicA1.ttf");
+		displayTxt->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
+		displayTxt->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
+		//displayTxt->SetLayer(4);
+		//displayTxt->SetFontSize(0.8f);
+		//displayTxt->SetTextColor(1.0f, 0.93f, 0.24f);
+
+		GameManager.disableInteraction = false;
+		finishedSetup = true;
 	}
 }
 
@@ -160,6 +188,7 @@ Scene_MainMenu::~Scene_MainMenu(void)
 	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 	AssetManager.UnloadTexture("Menu/Disc.png");
+	AssetManager.UnloadTexture("Menu/Bottom.png");
 	instance = NULL;
 }
 
@@ -197,64 +226,90 @@ void BtnFunc_Quit(Button* button)
 void BtnFuncHover_Start(Button* button)
 {
 	if (menu->startPlay)
+	{
 		AudioManager.PlayClip("ButtonHover.mp3");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		menu->displayTxt->SetText("Start the game");
+		cout << menu->displayTxt << endl;
+		menu->startPlay = false;
+	}
 
 	Vector2 temp = menu->battleBtnPos;
 	temp.x = menu->GetObjRef(0)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(0)->transform->worldposition.x + DeltaTime * 150;
 	menu->GetObjRef(0)->transform->SetPosition(temp);
-	button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
-	menu->startPlay = false;
 }
 
 void BtnFuncHover_Options(Button* button)
 {
 	if (menu->optionPlay)
+	{
 		AudioManager.PlayClip("ButtonHover.mp3");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		menu->displayTxt->SetText("Edit the game's settings");
+		menu->optionPlay = false;
+	}
 
 	Vector2 temp = menu->optionBtnPos;
 	temp.x = menu->GetObjRef(1)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(1)->transform->worldposition.x + DeltaTime * 150;
 	menu->GetObjRef(1)->transform->SetPosition(temp);
-	button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
-
-	menu->optionPlay = false;
 }
 
 void BtnFuncHover_Quit(Button* button)
 {
 	if (menu->quitPlay)
+	{
 		AudioManager.PlayClip("ButtonHover.mp3");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		menu->displayTxt->SetText("Exit the game");
+		menu->quitPlay = false;
+	}
 
 	Vector2 temp = menu->quitBtnPos;
 	temp.x = menu->GetObjRef(2)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(2)->transform->worldposition.x + DeltaTime * 150;
 	menu->GetObjRef(2)->transform->SetPosition(temp);
-	button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
-
-	menu->quitPlay = false;
 }
 
 void BtnFuncUnhover_Start(Button* button)
 {
-	menu->startPlay = true;
+	if (!menu->startPlay)
+	{
+		if (menu->displayTxt != NULL)
+			menu->displayTxt->SetText("");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		menu->startPlay = true;
+	}
+
 	Vector2 temp = menu->battleBtnPos;
 	temp.x = menu->GetObjRef(0)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(0)->transform->worldposition.x - DeltaTime * 150;
 	menu->GetObjRef(0)->transform->SetPosition(temp);
-	button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
 }
 
 void BtnFuncUnHover_Options(Button* button)
 {
-	menu->optionPlay= true;
+	if (!menu->optionPlay)
+	{
+		if (menu->displayTxt != NULL)
+			menu->displayTxt->SetText("");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		menu->optionPlay = true;
+	}
+
 	Vector2 temp = menu->optionBtnPos;
 	temp.x = menu->GetObjRef(1)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(1)->transform->worldposition.x - DeltaTime * 150;
 	menu->GetObjRef(1)->transform->SetPosition(temp);
-	button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
 }
 
 void BtnFuncUnHover_Quit(Button* button)
 {
-	menu->quitPlay= true;
+	if (!menu->quitPlay)
+	{
+		if (menu->displayTxt != NULL)
+			menu->displayTxt->SetText("");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		menu->quitPlay = true;
+	}
+
 	Vector2 temp = menu->quitBtnPos;
 	temp.x = menu->GetObjRef(2)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(2)->transform->worldposition.x - DeltaTime * 150;
 	menu->GetObjRef(2)->transform->SetPosition(temp);
-	button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
 }

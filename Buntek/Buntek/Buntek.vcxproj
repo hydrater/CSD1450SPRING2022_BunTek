@@ -116,7 +116,6 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScript.cpp" />
-    <ClCompile Include="GAMTut.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MapGenerator.cpp" />
     <ClCompile Include="PaddleBehavior.cpp" />

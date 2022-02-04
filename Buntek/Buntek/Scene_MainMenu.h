@@ -14,12 +14,13 @@ public:
     static Scene_MainMenu * instance;
     const Vector2 battleBtnPos = Vector2(-670, -200), optionBtnPos = Vector2(-670, -300), quitBtnPos = Vector2(-670, -400);
     bool startPlay = true, optionPlay = true, quitPlay = true;
+    TextRenderer* displayTxt = 0;
 
 private:
     GameObject* background = 0, *MainMenu = 0;
     GameObject* startBtn = 0, * optionBtn = 0, * quitBtn = 0;
     SpriteRenderer* polkaDotter = 0;
-    Transform* disc = 0, *fake;
+    Transform* disc = 0, *fake = 0, *bottom = 0;
     float animTimer = 0;
     bool finishedSetup = false;
 };

@@ -109,7 +109,7 @@ void _renderer::Update(void)
 			AEGfxSetTransform(TransformMatrix);
 
 			AEGfxSetTintColor(spriteRenderer->R, spriteRenderer->G, spriteRenderer->B, spriteRenderer->GetTransparency());
-			//AEGfxSetTextureMode(AE_GFX_TM_PRECISE); Different quality if using average
+			AEGfxSetTextureMode(AE_GFX_TM_PRECISE); //Different quality if using average
 			Vector2 temp = spriteRenderer->GetTextureOffset();
 			AEGfxTextureSet(AssetManager.GetTexture(spriteRenderer->GetTextureName()), temp.x, temp.y);
 			AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);

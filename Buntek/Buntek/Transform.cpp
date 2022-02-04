@@ -75,7 +75,7 @@ void Transform::Rotate(float rotate)
 
 void Transform::Scale(float scale)
 {
-	this->worldscale *= scale;
+	this->worldscale += Vector2(scale, scale);
 	for (size_t i = 0; i < children.size(); ++i)
 		children[i]->Scale(scale);
 }
