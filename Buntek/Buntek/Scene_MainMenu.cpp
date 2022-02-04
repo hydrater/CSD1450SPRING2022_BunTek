@@ -25,6 +25,7 @@ void Scene_MainMenu::Start(void)
 {
 	Scene_MainMenu::instance = this;
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+	GameManager.disableInteraction = true;
 
 	AudioManager.LoadSound("ButtonHover.mp3");
 	AudioManager.LoadMusic("www.ogg");
@@ -67,7 +68,7 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer->SetText("Start");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-	startBtn->transform->SetPosition(Vector2(-670, -200));
+	startBtn->transform->SetPosition(Vector2(-670, 1000));
 	Button* button;
 	button = startBtn->AddComponent<Button>();
 	button->sr = tempRenderer;
@@ -87,7 +88,7 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer->SetText("Options");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-	optionBtn->transform->SetPosition(Vector2(-670, -300));
+	optionBtn->transform->SetPosition(Vector2(-670, 1000));
 	button = optionBtn->AddComponent<Button>();
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
@@ -106,7 +107,7 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer->SetText("Quit");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-	quitBtn->transform->SetPosition(Vector2(-670, -400));
+	quitBtn->transform->SetPosition(Vector2(-670, 1000));
 	button = quitBtn->AddComponent<Button>();
 	button->sr = tempRenderer;
 	button->tr = tempTextRenderer;
@@ -139,10 +140,13 @@ void Scene_MainMenu::Update(void)
 
 	if (animTimer < 1)
 	{
-		GameManager.disableInteraction = true;
 		fake->Translate(Vector2(DeltaTime * -450.0f, -400.0f * DeltaTime));
 		fake->Rotate(DeltaTime * 180.1f);
 		fake->SetScale(Vector2(fake->worldscale.x -= DeltaTime, fake->worldscale.y -= DeltaTime));
+
+		startBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1200));
+		optionBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1300));
+		quitBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1400));
 
 		if (animTimer <= 0.8f)
 		{
@@ -154,7 +158,6 @@ void Scene_MainMenu::Update(void)
 			disc->Scale(DeltaTime * -10);
 			bottom->worldscale -= Vector2(0.0f, DeltaTime * 5.0f);
 		}
-			
 	}
 	else if (!finishedSetup)
 	{
@@ -165,6 +168,10 @@ void Scene_MainMenu::Update(void)
 		AssetManager.UnloadTexture("Menu/Fake.png");
 		disc->SetScale(Vector2(1, 1));
 		bottom->SetScale(Vector2(1, 1));
+
+		startBtn->transform->SetPosition(Vector2(-670, -200));
+		optionBtn->transform->SetPosition(Vector2(-670, -300));
+		quitBtn->transform->SetPosition(Vector2(-670, -400));
 
 		displayTxt = bottom->Owner()->AddComponent<TextRenderer>();
 		displayTxt->SetFont("GothicA1.ttf");
@@ -308,7 +315,7 @@ void BtnFuncUnHover_Quit(Button* button)
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
 		menu->quitPlay = true;
 	}
-
+	
 	Vector2 temp = menu->quitBtnPos;
 	temp.x = menu->GetObjRef(2)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(2)->transform->worldposition.x - DeltaTime * 150;
 	menu->GetObjRef(2)->transform->SetPosition(temp);
