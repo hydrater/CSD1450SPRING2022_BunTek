@@ -61,7 +61,7 @@ void UI_Shop::CreateShop(short sortingLayer, vector<string> artifacts, vector<st
             tempButtonTxtRenderer->SetFont("Gabriola.ttf");
             tempButtonTxtRenderer->SetTextColor(1, 1, 1);
             tempButtonTxtRenderer->SetText("Artifact");
-            tempButtonTxtRenderer->SetScale(0.75f);
+            tempButtonTxtRenderer->SetFontScale(0.75f);
             tempButtonTxtRenderer->SetLayer(sortingLayer);
             tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
             tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
@@ -96,7 +96,7 @@ void UI_Shop::CreateShop(short sortingLayer, vector<string> artifacts, vector<st
             tempButtonTxtRenderer->SetFont("Gabriola.ttf");
             tempButtonTxtRenderer->SetTextColor(1, 1, 1);
             tempButtonTxtRenderer->SetText("Stats");
-            tempButtonTxtRenderer->SetScale(0.75f);
+            tempButtonTxtRenderer->SetFontScale(0.75f);
             tempButtonTxtRenderer->SetLayer(sortingLayer);
             tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
             tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);

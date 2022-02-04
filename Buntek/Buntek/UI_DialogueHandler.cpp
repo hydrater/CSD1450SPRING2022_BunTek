@@ -134,7 +134,7 @@ void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
         tempButtonTxtRenderer->SetFont("Gabriola.ttf");
         tempButtonTxtRenderer->SetTextColor(1, 1, 0);
         tempButtonTxtRenderer->SetText("SCREM");
-        tempButtonTxtRenderer->SetScale(0.75f);
+        tempButtonTxtRenderer->SetFontScale(0.75f);
         tempButtonTxtRenderer->SetLayer(sortingLayer);
         tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
         tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
@@ -368,7 +368,7 @@ void UI_DialogueHandler::CreateRewardSelection(string flag, short sortingLayer)
         tempButtonTxtRenderer->SetFont("Gabriola.ttf");
         tempButtonTxtRenderer->SetTextColor(0, 0, 0);
         tempButtonTxtRenderer->SetText("I am a Reward");
-        tempButtonTxtRenderer->SetScale(0.75f);
+        tempButtonTxtRenderer->SetFontScale(0.75f);
         tempButtonTxtRenderer->SetLayer(sortingLayer);
         tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
         tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);

@@ -70,7 +70,7 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 	tempEnemyDescriptionTxtRenderer->SetFont("Astral.ttf");
 	tempEnemyDescriptionTxtRenderer->SetTextColor(0, 0, 0);
 	tempEnemyDescriptionTxtRenderer->SetText("Test des");
-	tempEnemyDescriptionTxtRenderer->SetScale(0.5f);
+	tempEnemyDescriptionTxtRenderer->SetFontScale(0.5f);
 	tempEnemyDescriptionTxtRenderer->SetLayer(sortingLayer);
 	tempEnemyDescriptionTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Left);
 	tempEnemyDescriptionTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Top);
@@ -106,7 +106,7 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 		tempArtifactTxtRenderer->SetFont("Astral.ttf");
 		tempArtifactTxtRenderer->SetTextColor(0, 0, 0);
 		tempArtifactTxtRenderer->SetText("3");
-		tempArtifactTxtRenderer->SetScale(0.5f);
+		tempArtifactTxtRenderer->SetFontScale(0.5f);
 		tempArtifactTxtRenderer->SetLayer(sortingLayer);
 		tempArtifactTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Right);
 		tempArtifactTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Bottom);

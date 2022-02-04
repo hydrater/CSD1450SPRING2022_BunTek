@@ -25,8 +25,8 @@ public:
 	Transform* GetTransform(void);
 	string GetFontName(void);
 	void SetFont(string textureName);
-	void SetScale(float _scale);
-	float GetScale(void);
+	void SetFontScale(float _scale);
+	float GetFontScale(void);
 	void SetFontSize(float _fontsize);
 	float GetFontSize(void);
 	string GetText(void);

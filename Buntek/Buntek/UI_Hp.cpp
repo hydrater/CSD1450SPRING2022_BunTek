@@ -32,7 +32,7 @@ void UI_Hp::GenerateHpBar(bool _isplayer)
 	pBarCountTextRenderer->SetFont("Gabriola.ttf");
 	pBarCountTextRenderer->SetTextColor(0, 0, 0);
 	pBarCountTextRenderer->SetText(std::to_string(hpBarNum));
-	pBarCountTextRenderer->SetScale(1);
+	pBarCountTextRenderer->SetFontScale(1);
 	pBarCountTextRenderer->SetLayer(5);
 	pBarCountTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	pBarCountTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);

@@ -29,12 +29,12 @@ void TextRenderer::SetFont(string fontName)
 	fontString = fontName;
 }
 
-void TextRenderer::SetScale(float _scale)
+void TextRenderer::SetFontScale(float _scale)
 {
 	textScale = _scale;
 }
 
-float TextRenderer::GetScale(void) {
+float TextRenderer::GetFontScale(void) {
 	return textScale;
 }
 void TextRenderer::SetFontSize(float _fontsize) {

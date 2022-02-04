@@ -139,7 +139,7 @@ void _renderer::Update(void)
 					AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
 						TextAlignmentX(textRenderer) / ((float)AEGetWindowWidth() / 2),
 						(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
-						textRenderer->GetScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
+						textRenderer->GetFontScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
 					linecount++;
 					start = x + 1;
 				}
@@ -149,7 +149,7 @@ void _renderer::Update(void)
 			AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
 				TextAlignmentX(textRenderer) / ((float)AEGetWindowWidth() / 2),
 				(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
-				textRenderer->GetScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
+				textRenderer->GetFontScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
 		}
 			break;
 		case RenderType::Line:
@@ -205,7 +205,7 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 void  _renderer::WrapAround(TextRenderer* textRenderer) {
 	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
 	float length = (textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth()) - TextAlignmentX(textRenderer) - textRenderer->GetXBuffer();
-	float textScale = textRenderer->GetScale();
+	float textScale = textRenderer->GetFontScale();
 	float alteredStringLength = 0;
 	float wordWidth = 0;
 	float wordHeight = 0;

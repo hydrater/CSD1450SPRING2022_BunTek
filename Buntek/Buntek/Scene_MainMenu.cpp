@@ -168,11 +168,12 @@ void Scene_MainMenu::Update(void)
 
 		displayTxt = bottom->Owner()->AddComponent<TextRenderer>();
 		displayTxt->SetFont("GothicA1.ttf");
+		displayTxt->SetText("BOTTOM");
 		displayTxt->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 		displayTxt->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-		//displayTxt->SetLayer(4);
-		//displayTxt->SetFontSize(0.8f);
-		//displayTxt->SetTextColor(1.0f, 0.93f, 0.24f);
+		displayTxt->SetLayer(4);
+		displayTxt->SetFontScale(0.8f);
+		displayTxt->SetTextColor(1.0f, 0.93f, 0.24f);
 
 		GameManager.disableInteraction = false;
 		finishedSetup = true;
