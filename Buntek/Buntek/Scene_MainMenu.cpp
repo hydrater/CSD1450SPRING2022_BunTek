@@ -132,13 +132,16 @@ void Scene_MainMenu::Start(void)
 void Scene_MainMenu::Update(void)
 {
 	animTimer += DeltaTime;
+	if (animTimer < 0.5f)
+		return;
+
 	Vector2 temp = polkaDotter->GetTextureOffset();
 	temp.x -= DeltaTime * 0.1f;
 	temp.y += DeltaTime * 0.1f;
 	polkaDotter->SetTextureOffset(Vector2(temp.x, temp.y));
 	disc->Rotate(DeltaTime * 20);
 
-	if (animTimer < 1)
+	if (animTimer < 1.5f)
 	{
 		fake->Translate(Vector2(DeltaTime * -450.0f, -400.0f * DeltaTime));
 		fake->Rotate(DeltaTime * 180.1f);
@@ -148,7 +151,7 @@ void Scene_MainMenu::Update(void)
 		optionBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1300));
 		quitBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1400));
 
-		if (animTimer <= 0.8f)
+		if (animTimer <= 1.3f)
 		{
 			disc->Scale(DeltaTime * 4);
 			bottom->worldscale += Vector2(DeltaTime * 1.25f, 0.0f);
