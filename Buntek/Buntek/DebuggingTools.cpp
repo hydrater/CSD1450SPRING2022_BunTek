@@ -43,7 +43,7 @@ void _debuggingTools::CheatsUpdate(void)
 	}
 	if (AEInputCheckTriggered(AEVK_F6))
 	{
-		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
+		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
 	}
 
 	if (AEInputCheckTriggered(AEVK_F1))

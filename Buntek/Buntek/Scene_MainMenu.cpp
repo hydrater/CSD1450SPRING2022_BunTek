@@ -5,7 +5,7 @@
 #include "UI_Shop.h"
 #include "AssetManager.h"
 #include "GameManager.h"
-#include "AudioEngine.h";
+#include "AudioEngine.h"
 #include "Parallaxer.h"
 #include "Devtools.h"
 
