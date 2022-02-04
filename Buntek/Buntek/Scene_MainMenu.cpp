@@ -186,12 +186,12 @@ void Scene_MainMenu::Update(void)
 		quitBtn->transform->SetPosition(Vector2(-670, -400));
 
 		displayTxt = bottom->Owner()->AddComponent<TextRenderer>();
-		displayTxt->SetFont("GothicA1.ttf");
+		displayTxt->SetFont("Ayar.ttf");
 		displayTxt->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 		displayTxt->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 		displayTxt->SetLayer(3);
 		displayTxt->SetFontScale(0.8f);
-		displayTxt->SetTextColor(1.0f, 0.29f, 0.89f);
+		displayTxt->SetTextColor(0, 0, 0);
 
 		GameManager.disableInteraction = false;
 		finishedSetup = true;
