@@ -31,6 +31,7 @@ _assetManager::_assetManager()
     LoadTexture("NebulaCloudBig.png");
     LoadTexture("HoverTexture.png");
     //font
+    LoadFont("Ayar.ttf");
     LoadFont("Astral.ttf");
     LoadFont("Gabriola.ttf");
     LoadFont("Metrolic.ttf");

@@ -61,7 +61,7 @@ void Scene_MainMenu::Start(void)
 	tempRenderer->SetTexture("Menu/Button.png");
 	TextRenderer* tempTextRenderer;
 	tempTextRenderer = startBtn->AddComponent<TextRenderer>();
-	tempTextRenderer->SetFont("GothicA1.ttf");
+	tempTextRenderer->SetFont("Ayar.ttf");
 	tempTextRenderer->SetLayer(1);
 	tempTextRenderer->SetTextColor(0, 0, 0);
 	tempTextRenderer->SetText("Start");
@@ -81,7 +81,7 @@ void Scene_MainMenu::Start(void)
 	tempRenderer->Size(471, 71);
 	tempRenderer->SetTexture("Menu/Button.png");
 	tempTextRenderer = optionBtn->AddComponent<TextRenderer>();
-	tempTextRenderer->SetFont("GothicA1.ttf");
+	tempTextRenderer->SetFont("Ayar.ttf");
 	tempTextRenderer->SetLayer(1);
 	tempTextRenderer->SetTextColor(0, 0, 0);
 	tempTextRenderer->SetText("Options");
@@ -100,7 +100,7 @@ void Scene_MainMenu::Start(void)
 	tempRenderer->Size(471, 71);
 	tempRenderer->SetTexture("Menu/Button.png");
 	tempTextRenderer = quitBtn->AddComponent<TextRenderer>();
-	tempTextRenderer->SetFont("GothicA1.ttf");
+	tempTextRenderer->SetFont("Ayar.ttf");
 	tempTextRenderer->SetLayer(1);
 	tempTextRenderer->SetTextColor(0, 0, 0);
 	tempTextRenderer->SetText("Quit");
@@ -114,14 +114,14 @@ void Scene_MainMenu::Start(void)
 	button->HoverEffect = &BtnFuncHover_Quit;
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
-	disc = devTools.CreateSpriteGameObject("Menu/Disc.png", 400, 400, AE_GFX_BM_BLEND, Vector2(900, -420), 2)->transform;
+	disc = devTools.CreateSpriteGameObject("Menu/Disc.png", 400, 400, AE_GFX_BM_BLEND, Vector2(900, -420), 3)->transform;
 	disc->SetScale(Vector2(0, 0));
 
 	fake = devTools.CreateSpriteGameObject("Menu/Fake.png", 2800, 1900, AE_GFX_BM_BLEND, Vector2(0, 0), 0)->transform;
 	fake->SetRotation(-180);
 	fake->SetScale(Vector2(2, 2));
 
-	bottom = devTools.CreateSpriteGameObject("Menu/Bottom.png", 1920, 83, AE_GFX_BM_BLEND, Vector2(0, -490), 0)->transform;
+	bottom = devTools.CreateSpriteGameObject("Menu/Bottom.png", 1920, 83, AE_GFX_BM_BLEND, Vector2(0, -490), 2)->transform;
 	bottom->SetScale(Vector2(0.0f, 2.0f));
 
 	// Load save data
@@ -168,12 +168,11 @@ void Scene_MainMenu::Update(void)
 
 		displayTxt = bottom->Owner()->AddComponent<TextRenderer>();
 		displayTxt->SetFont("GothicA1.ttf");
-		displayTxt->SetText("BOTTOM");
 		displayTxt->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 		displayTxt->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-		displayTxt->SetLayer(4);
+		displayTxt->SetLayer(3);
 		displayTxt->SetFontScale(0.8f);
-		displayTxt->SetTextColor(1.0f, 0.93f, 0.24f);
+		displayTxt->SetTextColor(1.0f, 0.29f, 0.89f);
 
 		GameManager.disableInteraction = false;
 		finishedSetup = true;
