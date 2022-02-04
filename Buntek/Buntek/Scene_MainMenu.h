@@ -20,7 +20,7 @@ private:
     GameObject* background = 0, *MainMenu = 0;
     GameObject* startBtn = 0, * optionBtn = 0, * quitBtn = 0;
     SpriteRenderer* polkaDotter = 0;
-    Transform* disc = 0, *fake = 0, *bottom = 0;
+    Transform* disc = 0, *fake = 0, *bottom = 0, *border = 0;
     float animTimer = 0;
     bool finishedSetup = false;
 };

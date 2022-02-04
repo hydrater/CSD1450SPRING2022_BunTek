@@ -40,6 +40,7 @@ void Scene_MainMenu::Start(void)
 	AssetManager.LoadTexture("Menu/Disc.png");
 	AssetManager.LoadTexture("Menu/Fake.png");
 	AssetManager.LoadTexture("Menu/Bottom.png");
+	AssetManager.LoadTexture("Menu/Border.png");
 
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
@@ -125,6 +126,9 @@ void Scene_MainMenu::Start(void)
 	bottom = devTools.CreateSpriteGameObject("Menu/Bottom.png", 1920, 83, AE_GFX_BM_BLEND, Vector2(0, -490), 2)->transform;
 	bottom->SetScale(Vector2(0.0f, 2.0f));
 
+	border = devTools.CreateSpriteGameObject("Menu/Border.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 1080), 1)->transform;
+	border->SetRotation(360);
+
 	// Load save data
 	//SaveManager.LoadData();
 }
@@ -147,6 +151,9 @@ void Scene_MainMenu::Update(void)
 		fake->Rotate(DeltaTime * 180.1f);
 		fake->SetScale(Vector2(fake->worldscale.x -= DeltaTime, fake->worldscale.y -= DeltaTime));
 
+		border->Translate(Vector2(0.0f, -1080 * DeltaTime));
+		border->Rotate(DeltaTime * -360.1f);
+
 		startBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1200));
 		optionBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1300));
 		quitBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1400));
@@ -166,9 +173,11 @@ void Scene_MainMenu::Update(void)
 	{
 		polkaDotter->SetTransparency(1);
 		fake->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
+		border->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
 		background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
 		AssetManager.UnloadTexture("Menu/MainMenuFull.png");
 		AssetManager.UnloadTexture("Menu/Fake.png");
+		AssetManager.UnloadTexture("Menu/Border.png");
 		disc->SetScale(Vector2(1, 1));
 		bottom->SetScale(Vector2(1, 1));
 
