@@ -10,4 +10,5 @@ public:
 	static _debuggingTools& Instance(void);
 	void CheatsUpdate(void);
 private:
+	bool fullScreen = true;
 };

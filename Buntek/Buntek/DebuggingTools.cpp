@@ -37,6 +37,11 @@ void _debuggingTools::CheatsUpdate(void)
 	{
 		SceneManager.LoadScene(new Scene_Test, TransitionType::FadeTransition, true);
 	}
+	if (AEInputCheckTriggered(AEVK_F1))
+	{
+		AEToogleFullScreen(fullScreen);
+		fullScreen = !fullScreen;
+	}
 	if (AEInputCheckTriggered(AEVK_F5))
 	{
 		SceneManager.LoadScene(new Scene_Splash, TransitionType::FadeTransition, true);
