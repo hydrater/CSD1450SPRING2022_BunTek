@@ -24,7 +24,7 @@ bool _sceneManager::ResetScene(void)
     {
         scene->Start();
         notStarted = false;
-        loadingTimer = loadingTimerDUration;
+        loadingTimer = loadingTimerDuration;
         GameManager.CameraEndShake();
     }
     return notStarted;
@@ -48,7 +48,7 @@ _sceneManager::_sceneManager()
     transitioning = true;
     transitionMesh = 0;
     transitionTransparency = 0;
-    loadingTimer = loadingTimerDUration;
+    loadingTimer = loadingTimerDuration;
 
     AEGfxMeshStart();
 
