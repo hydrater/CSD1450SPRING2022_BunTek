@@ -18,14 +18,16 @@ void Scene::LateUpdate(void)
 {
 }
 
-void _sceneManager::ResetScene(void)
+bool _sceneManager::ResetScene(void)
 {
     if (notStarted)
     {
         scene->Start();
         notStarted = false;
+        loadingTimer = loadingTimerDUration;
+        GameManager.CameraEndShake();
     }
-    GameManager.CameraEndShake();
+    return notStarted;
 }
 
 _sceneManager& _sceneManager::Instance(void)
@@ -46,6 +48,7 @@ _sceneManager::_sceneManager()
     transitioning = true;
     transitionMesh = 0;
     transitionTransparency = 0;
+    loadingTimer = loadingTimerDUration;
 
     AEGfxMeshStart();
 
@@ -91,7 +94,9 @@ Scene* _sceneManager::GetScene(void)
 
 void _sceneManager::Update(void)
 {
-    scene->Update();
+    loadingTimer -= DeltaTime;
+    if (loadingTimer <= 0)
+        scene->Update();
 }
 
 void _sceneManager::LateUpdate(void)
@@ -156,13 +161,8 @@ void _sceneManager::FadeTransition(void) {
             scene = nextScene;
             nextScene = 0;
         }
-        if (notStarted)
-        {
-            scene->Start();
-            notStarted = false;
-            GameManager.CameraEndShake();
-        }
-        else { //wait for next frame
+        if (!ResetScene())
+        { //wait for next frame
             currentTransitionStage = TransitionStage::TransitionOut;
         }
         break;

@@ -32,7 +32,7 @@ void Scene_MainMenu::Start(void)
 	AudioManager.PlayMusic("www.ogg");
 	AudioManager.SetMusicVolume(0.05f);
 
-	AssetManager.LoadTexture("Menu/MainMenuArt.png");
+	AssetManager.LoadTexture("Menu/Mask_MainMenu.png");
 	AssetManager.LoadTexture("Menu/MainMenuFull.png");
 	AssetManager.LoadTexture("Menu/PolkaSquare.png");
 	AssetManager.LoadTexture("Menu/Button.png");
@@ -171,11 +171,19 @@ void Scene_MainMenu::Update(void)
 	{
 		polkaDotter->SetTransparency(1);
 		fake->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
-		border->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
-		background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuArt.png");
+		//border->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
+		border->SetScale(Vector2(1, 1));
+		border->SetPosition(Vector2(0, 0));
+		border->SetRotation(0);
+		border->Owner()->AddComponent<Parallaxer>()->distance = 150.0f;
+
+		background->GetComponent<SpriteRenderer>()->SetTexture("Menu/Mask_MainMenu.png");
+		background->transform->SetRotation(0);
+		background->transform->SetPosition(Vector2(0, 0));
+		background->transform->SetScale(Vector2(1, 1));
+
 		AssetManager.UnloadTexture("Menu/MainMenuFull.png");
 		AssetManager.UnloadTexture("Menu/Fake.png");
-		AssetManager.UnloadTexture("Menu/Border.png");
 		disc->SetScale(Vector2(1, 1));
 		bottom->SetScale(Vector2(1, 1));
 
@@ -200,21 +208,20 @@ Scene_MainMenu::~Scene_MainMenu(void)
 {
 	AudioManager.UnloadSound("ButtonHover.mp3");
 	AudioManager.UnloadMusic("www.ogg");
-	AssetManager.UnloadTexture("Menu/MainMenu.png");
+	AssetManager.UnloadTexture("Menu/Mask_MainMenu.png");
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
 	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 	AssetManager.UnloadTexture("Menu/Disc.png");
 	AssetManager.UnloadTexture("Menu/Bottom.png");
+	AssetManager.UnloadTexture("Menu/Border.png");
 	instance = NULL;
 }
 
 GameObject* Scene_MainMenu::GetObjRef(short type)
 {
 	if (type == 0)
-	{
 		return startBtn;
-	}
 	else
 	{
 		if (type == 1)

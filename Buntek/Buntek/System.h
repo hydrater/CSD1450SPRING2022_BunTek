@@ -42,14 +42,15 @@ private:
     ~_sceneManager(void);
     Scene* scene, *nextScene;
     bool notStarted, notAwake, transitioning;
-    float transitionTimer;
-    const float transitionStageDuration = 0.1f;
+    float transitionTimer = 0, loadingTimer = 0;
+    const float transitionStageDuration = 0.5f;
+    const float loadingTimerDuration = 1.0f;
     TransitionType currentTransitionTypes;
     TransitionStage currentTransitionStage;
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;
     bool deleteScene = true;
-    void ResetScene(void);
+    bool ResetScene(void);
 
 public:
     static _sceneManager& Instance(void);
