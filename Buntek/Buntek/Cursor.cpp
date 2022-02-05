@@ -44,7 +44,7 @@ void CursorBehaviour::Update(void)
 		transSpeed = RandFloatMinMax(0.005f, 0.025f);
 	}
 
-	sr->SetTransparency(trans);
+	sr->SetOpacity(trans);
 }
 
 void CursorBehaviour::setplayerpossess(bool _playerpossess)

@@ -11,20 +11,20 @@ void Scene_Splash::Start(void)
 	AssetManager.LoadTexture("Logo/BuntekLogo.png");
 
 	splash = new GameObject();
-	splash->AddComponent<SpriteRenderer>()->SetTransparency(1);
+	splash->AddComponent<SpriteRenderer>()->SetOpacity(1);
 	splashRenderer = splash->GetComponent<SpriteRenderer>();
 	splashRenderer->SetTexture("Logo/Digipen_Logo.png");
-	splashRenderer->Size(1220, 356);
+	splashRenderer->Size(1220, 358);
 	splash->transform->SetPosition(Vector2(0, 0));
-	splashRenderer->SetTransparency(0);
+	splashRenderer->SetOpacity(0);
 
 	splash2 = new GameObject();
-	splash2->AddComponent<SpriteRenderer>()->SetTransparency(1);
+	splash2->AddComponent<SpriteRenderer>()->SetOpacity(1);
 	splashRenderer2 = splash2->GetComponent<SpriteRenderer>();
 	splashRenderer2->SetTexture("Logo/BuntekLogo.png");
 	splashRenderer2->Size(309, 376);
 	splash2->transform->SetPosition(Vector2(0, 0));
-	splashRenderer2->SetTransparency(0);
+	splashRenderer2->SetOpacity(0);
 
 	splashTransform = splash->transform;
 	splashTransform2 = splash2->transform;
@@ -42,7 +42,7 @@ void Scene_Splash::Update(void)
 		break;
 	case 0:
 		splashTransform->SetScale(splashTransform->worldscale.Lerp(splashTargetScale,0.07f));
-		splashRenderer->SetTransparency(splashRenderer->GetTransparency() + DeltaTime);
+		splashRenderer->SetOpacity(splashRenderer->GetOpacity() + DeltaTime);
 		break;
 	case 1:
 	{
@@ -51,17 +51,17 @@ void Scene_Splash::Update(void)
 	}
 		break;
 	case 2:
-		splashRenderer->SetTransparency(splashRenderer->GetTransparency() - DeltaTime);
+		splashRenderer->SetOpacity(splashRenderer->GetOpacity() - DeltaTime);
 		break;
 	case 3:
-		splashRenderer->SetTransparency(0);
+		splashRenderer->SetOpacity(0);
 		break;
 	case 4:
 	{
 		if (canPlayAudio)
 		{
 			AudioManager.PlayClip("SplashLogo.mp3");
-			splashRenderer2->SetTransparency(1);
+			splashRenderer2->SetOpacity(1);
 		}
 
 		timer2 += DeltaTime;
@@ -118,7 +118,7 @@ void Scene_Splash::Update(void)
 		break;
 	case 6:
 		splashTransform2->SetScale(splashTransform2->worldscale.Lerp(splash2TargetScale, 0.005f));
-		splashRenderer2->SetTransparency(splashRenderer2->GetTransparency() - DeltaTime);
+		splashRenderer2->SetOpacity(splashRenderer2->GetOpacity() - DeltaTime);
 		break;
 	case 7:
 		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);

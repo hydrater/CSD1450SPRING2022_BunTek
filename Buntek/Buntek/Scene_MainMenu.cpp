@@ -41,11 +41,16 @@ void Scene_MainMenu::Start(void)
 	AssetManager.LoadTexture("Menu/Fake.png");
 	AssetManager.LoadTexture("Menu/Bottom.png");
 	AssetManager.LoadTexture("Menu/Border.png");
+	AssetManager.LoadTexture("Concepts/Mask-Yggdrasil.png");
+	AssetManager.LoadTexture("Concepts/Mask-Volcano.png");
+	AssetManager.LoadTexture("Concepts/Mask-Rainforest.png");
+	AssetManager.LoadTexture("Concepts/Mask-CrystalCaves.png");
 
 	background = new GameObject();
-	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
-	background->GetComponent<SpriteRenderer>()->SetTexture("Menu/MainMenuFull.png");
-	background->GetComponent<SpriteRenderer>()->SetLayer(-1);
+	mainArtRenderer = background->AddComponent<SpriteRenderer>();
+	mainArtRenderer->Size(1920, 1080);
+	mainArtRenderer->SetTexture("Menu/MainMenuFull.png");
+	mainArtRenderer->SetLayer(-1);
 	background->AddComponent<Parallaxer>()->distance = 150.0f;
 
 	MainMenu = new GameObject();
@@ -54,17 +59,18 @@ void Scene_MainMenu::Start(void)
 	polkaDotter->Size(1900, 1100);
 	polkaDotter->SetTexture("Menu/PolkaSquare.png");
 	polkaDotter->SetLayer(-2);
-	polkaDotter->SetTransparency(0);
+	polkaDotter->SetOpacity(0);
 
 	startBtn = new GameObject();
 	SpriteRenderer* tempRenderer;
 	tempRenderer = startBtn->AddComponent<SpriteRenderer>();
+	tempRenderer->SetLayer(2);
 	tempRenderer->Size(471, 71);
 	tempRenderer->SetTexture("Menu/Button.png");
 	TextRenderer* tempTextRenderer;
 	tempTextRenderer = startBtn->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("Ayar.ttf");
-	tempTextRenderer->SetLayer(1);
+	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(0, 0, 0);
 	tempTextRenderer->SetText("Start");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
@@ -80,11 +86,12 @@ void Scene_MainMenu::Start(void)
 
 	optionBtn = new GameObject();
 	tempRenderer = optionBtn->AddComponent<SpriteRenderer>();
+	tempRenderer->SetLayer(2);
 	tempRenderer->Size(471, 71);
 	tempRenderer->SetTexture("Menu/Button.png");
 	tempTextRenderer = optionBtn->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("Ayar.ttf");
-	tempTextRenderer->SetLayer(1);
+	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(0, 0, 0);
 	tempTextRenderer->SetText("Options");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
@@ -101,9 +108,10 @@ void Scene_MainMenu::Start(void)
 	tempRenderer = quitBtn->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(471, 71);
 	tempRenderer->SetTexture("Menu/Button.png");
+	tempRenderer->SetLayer(2);
 	tempTextRenderer = quitBtn->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("Ayar.ttf");
-	tempTextRenderer->SetLayer(1);
+	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(0, 0, 0);
 	tempTextRenderer->SetText("Quit");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
@@ -116,18 +124,22 @@ void Scene_MainMenu::Start(void)
 	button->HoverEffect = &BtnFuncHover_Quit;
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
-	disc = devTools.CreateSpriteGameObject("Menu/Disc.png", 400, 400, AE_GFX_BM_BLEND, Vector2(900, -420), 3)->transform;
-	disc->SetScale(Vector2(0, 0));
+	mask = devTools.CreateSpriteGameObject("Concepts/Yggdrasil.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0), 0)->GetComponent<SpriteRenderer>();
+	mask->Owner()->AddComponent<Parallaxer>()->distance = 150.0f;
+	mask->SetOpacity(0);
 
 	fake = devTools.CreateSpriteGameObject("Menu/Fake.png", 2800, 1900, AE_GFX_BM_BLEND, Vector2(0, 0), 0)->transform;
 	fake->SetRotation(-180);
 	fake->SetScale(Vector2(2, 2));
 
+	border = devTools.CreateSpriteGameObject("Menu/Border.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 1080), 1)->transform;
+	border->SetRotation(360);
+
 	bottom = devTools.CreateSpriteGameObject("Menu/Bottom.png", 1920, 83, AE_GFX_BM_BLEND, Vector2(0, -490), 2)->transform;
 	bottom->SetScale(Vector2(0.0f, 2.0f));
 
-	border = devTools.CreateSpriteGameObject("Menu/Border.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 1080), 1)->transform;
-	border->SetRotation(360);
+	disc = devTools.CreateSpriteGameObject("Menu/Disc.png", 400, 400, AE_GFX_BM_BLEND, Vector2(900, -420), 3)->transform;
+	disc->SetScale(Vector2(0, 0));
 
 	// Load save data
 	//SaveManager.LoadData();
@@ -136,6 +148,46 @@ void Scene_MainMenu::Start(void)
 void Scene_MainMenu::Update(void)
 {
 	animTimer += DeltaTime;
+	artSwitchTimer += DeltaTime;
+
+	if (artSwitchTimer > 3)
+	{
+		mask->SetOpacity(mask->GetOpacity() + DeltaTime);
+		mask->SetTextureOffset(Vector2(mask->GetTextureOffset().x + DeltaTime * 0.005f, 0.0f));
+		switch (cycle)
+		{
+		case 0:
+			mask->SetTexture("Concepts/Mask-Yggdrasil.png");
+			break;
+
+		case 1:
+			mask->SetTexture("Concepts/Mask-Volcano.png");
+			break;
+
+		case 2:
+			mask->SetTexture("Concepts/Mask-Rainforest.png");
+			break;
+
+		case 3:
+			mask->SetTexture("Concepts/Mask-CrystalCaves.png");
+			break;
+		default:
+			break;
+		}
+
+		if (artSwitchTimer > 4)
+		{
+			artSwitchTimer = 1.0f;
+			mainArtRenderer->SetTextureOffset(mask->GetTextureOffset());
+			mask->SetOpacity(0);
+			mask->SetTextureOffset(Vector2(0, 0));
+			mainArtRenderer->SetTexture(mask->GetTextureName());
+			++cycle;
+			if (cycle > 3)
+				cycle = 0;
+		}
+	}
+	mainArtRenderer->SetTextureOffset(Vector2(mainArtRenderer->GetTextureOffset().x + DeltaTime * 0.005f, 0.0f));
 
 	Vector2 temp = polkaDotter->GetTextureOffset();
 	temp.x -= DeltaTime * 0.1f;
@@ -169,8 +221,8 @@ void Scene_MainMenu::Update(void)
 	}
 	else if (!finishedSetup)
 	{
-		polkaDotter->SetTransparency(1);
-		fake->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
+		polkaDotter->SetOpacity(1);
+		fake->Owner()->GetComponent<SpriteRenderer>()->SetOpacity(0);
 		//border->Owner()->GetComponent<SpriteRenderer>()->SetTransparency(0);
 		border->SetScale(Vector2(1, 1));
 		border->SetPosition(Vector2(0, 0));
@@ -195,7 +247,7 @@ void Scene_MainMenu::Update(void)
 		displayTxt->SetFont("Ayar.ttf");
 		displayTxt->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 		displayTxt->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-		displayTxt->SetLayer(3);
+		displayTxt->SetLayer(5);
 		displayTxt->SetFontSize(42);
 		displayTxt->SetTextColor(0, 0, 0);
 
@@ -215,6 +267,10 @@ Scene_MainMenu::~Scene_MainMenu(void)
 	AssetManager.UnloadTexture("Menu/Disc.png");
 	AssetManager.UnloadTexture("Menu/Bottom.png");
 	AssetManager.UnloadTexture("Menu/Border.png");
+	AssetManager.UnloadTexture("Concepts/Mask-Yggdrasil.png");
+	AssetManager.UnloadTexture("Concepts/Mask-Volcano.png");
+	AssetManager.UnloadTexture("Concepts/Mask-Rainforest.png");
+	AssetManager.UnloadTexture("Concepts/Mask-CrystalCaves.png");
 	instance = NULL;
 }
 

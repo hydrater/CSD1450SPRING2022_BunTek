@@ -58,7 +58,7 @@ void BattleHandler::StartBattle(void) {
 	tempRenderer->Size(750, 400);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0, 0);
-	tempRenderer->SetTransparency(0.5f);
+	tempRenderer->SetOpacity(0.5f);
 	friendlyArea->transform->SetPosition(Vector2(0, -250));
 
 	neutralArea = new GameObject();
@@ -66,7 +66,7 @@ void BattleHandler::StartBattle(void) {
 	tempRenderer->Size(750, 100);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0.5f, 0.5f);
-	tempRenderer->SetTransparency(0.5f);
+	tempRenderer->SetOpacity(0.5f);
 	neutralArea->transform->SetPosition(Vector2(0, 0));
 
 	hostileArea = new GameObject();
@@ -74,7 +74,7 @@ void BattleHandler::StartBattle(void) {
 	tempRenderer->Size(750, 400);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0, 0);
-	tempRenderer->SetTransparency(0.5f);
+	tempRenderer->SetOpacity(0.5f);
 	hostileArea->transform->SetPosition(Vector2(0, 250));
 
 	playerpaddle = new GameObject();

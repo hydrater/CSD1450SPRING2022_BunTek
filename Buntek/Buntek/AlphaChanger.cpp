@@ -22,7 +22,7 @@ void AlphaChanger::Update(void)
 	internalTimer += (float)AEFrameRateControllerGetFrameTime();
 	float diff = (alphaRangeMax - alphaRangeMin);
 	float transparency = (sinf(((internalTimer * (2 * PI)) / period)+PI/2+offset)) * diff;
-	_sr->SetTransparency(transparency+alphaRangeMin);
+	_sr->SetOpacity(transparency+alphaRangeMin);
 }
 
 void AlphaChanger::SetOscillation(float newPeriod, float alphaMax, float alphaMin, float newOffset) {

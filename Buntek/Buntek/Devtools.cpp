@@ -18,40 +18,40 @@ _devTools& _devTools::Instance(void)
 
 GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos) {
     GameObject* temp = new GameObject();
-    temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
+    temp->AddComponent<SpriteRenderer>()->SetOpacity(1);
     SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();
     tempRenderer->SetLayer(0);
     tempRenderer->SetTexture(spriteName);
     tempRenderer->Size(xSize, ySize);
     tempRenderer->SetBlendMode((AEGfxBlendMode)blendMode);
     temp->transform->SetPosition(pos);
-    tempRenderer->SetTransparency(1.0f);
+    tempRenderer->SetOpacity(1.0f);
     return temp;
 }
 
 GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer) {
     GameObject* temp = new GameObject();
-    temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
+    temp->AddComponent<SpriteRenderer>()->SetOpacity(1);
     SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();
     tempRenderer->SetLayer(layer);
     tempRenderer->SetTexture(spriteName);
     tempRenderer->Size(xSize, ySize);
     tempRenderer->SetBlendMode((AEGfxBlendMode)blendMode);
     temp->transform->SetPosition(pos);
-    tempRenderer->SetTransparency(1.0f);
+    tempRenderer->SetOpacity(1.0f);
     return temp;
 }
 
 GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos, short layer, float opacity) {
     GameObject* temp = new GameObject();
-    temp->AddComponent<SpriteRenderer>()->SetTransparency(1);
+    temp->AddComponent<SpriteRenderer>()->SetOpacity(1);
     SpriteRenderer* tempRenderer = temp->GetComponent<SpriteRenderer>();
     tempRenderer->SetLayer(layer);
     tempRenderer->SetTexture(spriteName);
     tempRenderer->Size(xSize, ySize);
     tempRenderer->SetBlendMode((AEGfxBlendMode)blendMode);
     temp->transform->SetPosition(pos);
-    tempRenderer->SetTransparency(opacity);
+    tempRenderer->SetOpacity(opacity);
     return temp;
 }
 

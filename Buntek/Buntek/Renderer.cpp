@@ -108,7 +108,7 @@ void _renderer::Update(void)
 
 			AEGfxSetTransform(TransformMatrix);
 
-			AEGfxSetTintColor(spriteRenderer->R, spriteRenderer->G, spriteRenderer->B, spriteRenderer->GetTransparency());
+			AEGfxSetTintColor(spriteRenderer->R, spriteRenderer->G, spriteRenderer->B, spriteRenderer->GetOpacity());
 			//AEGfxSetTextureMode(AE_GFX_TM_PRECISE); //Different quality if using average
 			Vector2 temp = spriteRenderer->GetTextureOffset();
 			AEGfxTextureSet(AssetManager.GetTexture(spriteRenderer->GetTextureName()), temp.x, temp.y);

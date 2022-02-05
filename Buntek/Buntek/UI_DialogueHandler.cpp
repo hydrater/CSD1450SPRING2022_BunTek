@@ -337,7 +337,7 @@ void UI_DialogueHandler::CreateRewardSelection(string flag, short sortingLayer)
     // Background
     GameObject* tempBackground = devTools.CreateSpriteGameObject("Encounter.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0, 0));
     tempBackground->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-    tempBackground->GetComponent<SpriteRenderer>()->SetTransparency(0.75f);
+    tempBackground->GetComponent<SpriteRenderer>()->SetOpacity(0.75f);
     rewardSel->AddChild(tempBackground);
 
     // Header

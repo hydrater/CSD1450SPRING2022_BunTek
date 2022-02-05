@@ -14,8 +14,8 @@ public:
 	Transform* GetTransform(void);
 	string GetTextureName(void);
 	void SetTexture(string textureName);
-	float GetTransparency();
-	void SetTransparency(float value);
+	float GetOpacity();
+	void SetOpacity(float value);
 	short GetBlendMode();
 	void SetBlendMode(short value);
 	float GetColor(char color);

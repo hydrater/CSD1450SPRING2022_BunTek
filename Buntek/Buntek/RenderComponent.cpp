@@ -13,7 +13,6 @@ void RenderComponent::SetLayer(short _layer)
 {
 	layer = _layer;
 	Renderer.InsertionSort();
-	Renderer.InsertionSort();
 }
 
 short RenderComponent::GetLayer(void)

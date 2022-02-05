@@ -54,7 +54,7 @@ void UI_Shop::CreateShop(short sortingLayer, vector<string> artifacts, vector<st
         {
             GameObject* tempButtonObj = devTools.CreateSpriteGameObject("Encounter.png", buttonArtifactSize.x, buttonArtifactSize.y, AE_GFX_BM_BLEND, Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y));
             tempButtonObj->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-            tempButtonObj->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
+            tempButtonObj->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
 
             TextRenderer* tempButtonTxtRenderer = 0;
             tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
@@ -80,7 +80,7 @@ void UI_Shop::CreateShop(short sortingLayer, vector<string> artifacts, vector<st
     // Create Stats Holder
     GameObject* tempStatsHolder = devTools.CreateSpriteGameObject("Encounter.png", buttonArtifactSize.x * 2, buttonArtifactSize.y, AE_GFX_BM_BLEND, Vector2(0.f, -buttonArtifactSize.y / 2));
     tempStatsHolder->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-    tempStatsHolder->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
+    tempStatsHolder->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
 
     // Create Stats Button
     vector<Button*> tempbuttonStatsList;
@@ -89,7 +89,7 @@ void UI_Shop::CreateShop(short sortingLayer, vector<string> artifacts, vector<st
         {
             GameObject* tempButtonObj = devTools.CreateSpriteGameObject("Encounter.png", buttonStatsSize.x, buttonStatsSize.y, AE_GFX_BM_BLEND, Vector2(tempStatsHolder->transform->worldposition.x + buttonStatsPos[i].x, tempStatsHolder->transform->worldposition.y + buttonStatsPos[i].y));
             tempButtonObj->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-            tempButtonObj->GetComponent<SpriteRenderer>()->SetTransparency(0.5f);
+            tempButtonObj->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
 
             TextRenderer* tempButtonTxtRenderer = 0;
             tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
