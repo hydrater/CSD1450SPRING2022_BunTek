@@ -16,6 +16,7 @@ _assetManager::_assetManager()
 
     // UI
     LoadTexture("UI/Texture.png");
+    LoadTexture("UI/Button.png");
     LoadTexture("BgNebula1.png");
     LoadTexture("BgNebula2.png");
     LoadTexture("BgNebula3.png");
