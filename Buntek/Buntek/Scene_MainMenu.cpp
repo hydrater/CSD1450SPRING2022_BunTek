@@ -48,7 +48,7 @@ void Scene_MainMenu::Start(void)
 
 	background = new GameObject();
 	mainArtRenderer = background->AddComponent<SpriteRenderer>();
-	mainArtRenderer->Size(1920, 1080);
+	mainArtRenderer->Size(1958, 1101);
 	mainArtRenderer->SetTexture("Menu/MainMenuFull.png");
 	mainArtRenderer->SetLayer(-1);
 	background->AddComponent<Parallaxer>()->distance = 150.0f;
@@ -124,7 +124,7 @@ void Scene_MainMenu::Start(void)
 	button->HoverEffect = &BtnFuncHover_Quit;
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
-	mask = devTools.CreateSpriteGameObject("Concepts/Yggdrasil.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0), 0)->GetComponent<SpriteRenderer>();
+	mask = devTools.CreateSpriteGameObject("Concepts/Yggdrasil.png", 1958, 1101, AE_GFX_BM_BLEND, Vector2(0, 0), 0)->GetComponent<SpriteRenderer>();
 	mask->Owner()->AddComponent<Parallaxer>()->distance = 150.0f;
 	mask->SetOpacity(0);
 
