@@ -1,6 +1,5 @@
 #include "Scene_Navigation.h"
 #include "GameManager.h"
-#include "CursorCamera.h"
 #include "Component.h"
 #include "SpriteRenderer.h"
 #include "AssetManager.h"

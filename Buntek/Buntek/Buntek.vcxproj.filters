@@ -75,9 +75,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="CursorCamera.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="PaddleBehavior.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -216,9 +213,6 @@
       <Filter>Source Files\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CursorCamera.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="PaddleBehavior.h">

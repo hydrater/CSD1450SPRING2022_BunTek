@@ -104,7 +104,6 @@
     <ClCompile Include="CollisionManager2D.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Cursor.cpp" />
-    <ClCompile Include="CursorCamera.cpp" />
     <ClCompile Include="DebuggingTools.cpp" />
     <ClCompile Include="Devtools.cpp" />
     <ClCompile Include="DialogueDatabase.cpp" />
@@ -151,7 +150,6 @@
     <ClInclude Include="CollisionManager2D.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Cursor.h" />
-    <ClInclude Include="CursorCamera.h" />
     <ClInclude Include="DebuggingTools.h" />
     <ClInclude Include="Devtools.h" />
     <ClInclude Include="DialogueDatabase.h" />
