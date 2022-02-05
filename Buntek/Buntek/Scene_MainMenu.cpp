@@ -47,6 +47,7 @@ void Scene_MainMenu::Start(void)
 	AssetManager.LoadTexture("Concepts/Mask-CrystalCaves.png");
 
 	background = new GameObject();
+	background->transform->SetPosition(Vector2(20, 0));
 	mainArtRenderer = background->AddComponent<SpriteRenderer>();
 	mainArtRenderer->Size(1958, 1101);
 	mainArtRenderer->SetTexture("Menu/MainMenuFull.png");
@@ -124,7 +125,7 @@ void Scene_MainMenu::Start(void)
 	button->HoverEffect = &BtnFuncHover_Quit;
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
-	mask = devTools.CreateSpriteGameObject("Concepts/Yggdrasil.png", 1958, 1101, AE_GFX_BM_BLEND, Vector2(0, 0), 0)->GetComponent<SpriteRenderer>();
+	mask = devTools.CreateSpriteGameObject("Concepts/Yggdrasil.png", 1958, 1101, AE_GFX_BM_BLEND, Vector2(20, 0), 0)->GetComponent<SpriteRenderer>();
 	mask->Owner()->AddComponent<Parallaxer>()->distance = 150.0f;
 	mask->SetOpacity(0);
 
@@ -153,7 +154,7 @@ void Scene_MainMenu::Update(void)
 	if (artSwitchTimer > 3)
 	{
 		mask->SetOpacity(mask->GetOpacity() + DeltaTime);
-		mask->SetTextureOffset(Vector2(mask->GetTextureOffset().x + DeltaTime * 0.005f, 0.0f));
+		mask->SetTextureOffset(Vector2(mask->GetTextureOffset().x + DeltaTime * 0.01f, 0.0f));
 		switch (cycle)
 		{
 		case 0:
@@ -230,9 +231,6 @@ void Scene_MainMenu::Update(void)
 		border->Owner()->AddComponent<Parallaxer>()->distance = 150.0f;
 
 		background->GetComponent<SpriteRenderer>()->SetTexture("Menu/Mask_MainMenu.png");
-		background->transform->SetRotation(0);
-		background->transform->SetPosition(Vector2(0, 0));
-		background->transform->SetScale(Vector2(1, 1));
 
 		AssetManager.UnloadTexture("Menu/MainMenuFull.png");
 		AssetManager.UnloadTexture("Menu/Fake.png");
