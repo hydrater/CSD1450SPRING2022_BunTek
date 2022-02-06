@@ -267,20 +267,11 @@ void UI_DialogueHandler::WriteToDialogue(void)
         switch (dialogueList[dialogueNo][1])
         {
         case 'a':
-            if (selectedFlag == dialogueFlag)
-            {
-                //cout << "Actor Name: " << parameters << endl;
-                name = parameters;
-                actorTxt->SetText(name);
-                ++dialogueNo;
-                WriteToDialogue();
-            }
-            else if (selectedFlag == encounterFlag)
-            {
-                //cout << "Encounter Name: " << parameters << endl;
-                name = parameters;
-                actorTxt->SetText(name);
-            }
+            //cout << "Actor Name: " << parameters << endl;
+            name = parameters;
+            actorTxt->SetText(name);
+            ++dialogueNo;
+            WriteToDialogue();
             break;
 
         case 'b':
@@ -297,7 +288,13 @@ void UI_DialogueHandler::WriteToDialogue(void)
 
         case 'd':
             DialogueDatabase.InitDialogueScene(parameters);
+            break;
 
+        case 'e':
+            //cout << "Encounter Name: " << parameters << endl;
+            name = parameters;
+            actorTxt->SetText(name);
+            break;
         default:
             cout << "default line " << endl;
             break;
