@@ -10,6 +10,11 @@ public:
     void LateUpdate(void) override;
 private:
     ~Scene_Navigation(void) override;
-    GameObject* inputHandler = 0, *background = 0;
-    AEGfxVertexList* mesh = 0;
+    GameObject* splashimage1 = 0;
+    GameObject* splashimage2 = 0;
+    GameObject* splashimage3 = 0;
+    GameObject* splashimage4 = 0;
+    GameObject* splashimage5 = 0;
+    GameObject* splashimage6 = 0;
+    GameObject* spawner = 0;
 };

@@ -7,9 +7,13 @@
 #include "MapGenerator.h"
 #include "UI_Shop.h"
 #include "UI_DialogueHandler.h"
+#include "AlphaChanger.h"
+#include "ParticleSystem.h"
 
 void Scene_Navigation::Start(void)
 {
+	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+
 	if (MapData.nodeList.size() == 0)
 		MapData.GenerateMapData();
 
@@ -19,7 +23,6 @@ void Scene_Navigation::Start(void)
 		MapData.DisplayNodeHistory();
 
 	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
-	inputHandler = new GameObject();
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
 	AudioManager.SetMusicVolume(1.0f);
@@ -30,39 +33,33 @@ void Scene_Navigation::Start(void)
 	AssetManager.LoadTexture("UI/Rest.png");
 	AssetManager.LoadTexture("UI/Shop.png");
 	AssetManager.LoadTexture("UI/Boss.png");
+
+	splashimage1 = devTools.CreateSpriteGameObject("Static Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage1->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, 0);
+	splashimage2 = devTools.CreateSpriteGameObject("Static Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage2->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, PI);
+	splashimage3 = devTools.CreateSpriteGameObject("More Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage3->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, 3 * PI / 2);
+	splashimage4 = devTools.CreateSpriteGameObject("More Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage4->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, PI / 2);
+	splashimage5 = devTools.CreateSpriteGameObject("NebulaBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage5->AddComponent<AlphaChanger>()->SetOscillation(6.0f, 1.0f, 0.8f, PI / 2);
+
+	spawner = new GameObject();
+	spawner->transform->worldposition = Vector2(0, 0);
+	ParticleSystem* _spawnerPs = spawner->AddComponent<ParticleSystem>();
+
+	_spawnerPs->SetScrollingParticle(
+		Vector2(-1, 0), 60.0f,
+		3960, 1080, "NebulaCloudBig.png",
+		Vector2(-3960, 0), 1, (short)AE_GFX_BM_ADD);
 }
 
 // Draw all lines
 void Scene_Navigation::EarlyUpdate(void)
-{
-	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.3f);
-
-	if (mesh == 0)
-	{
-		AEGfxMeshStart();
-
-		AEGfxTriAdd(
-			-2160.0f, -3840.0f, 0x00FF00FF, 0.0f, 1.0f,
-			2160.0f, -3840.0f, 0x00FFFF00, 1.0f, 1.0f,
-			-2160.0f, 3840.0f, 0x0000FFFF, 0.0f, 0.0f);
-
-		AEGfxTriAdd(
-			2160.0f, -3840.0f, 0x00FFFFFF, 1.0f, 1.0f,
-			2160.0f, 3840.0f, 0x00FFFFFF, 1.0f, 0.0f,
-			-2160.0f, 3840.0f, 0x00FFFFFF, 0.0f, 0.0f);
-		mesh = AEGfxMeshEnd();
-	}
-
-	AEGfxSetRenderMode(AE_GFX_RM_TEXTURE);
-	AEGfxSetPosition(0.0f, 0.0f);
-	AEGfxSetTintColor(1, 1, 1, 1);
-	AEGfxTextureSet(AssetManager.GetTexture("BetterNebula.png"), 0, 0);
-	AEGfxMeshDraw(mesh, AE_GFX_MDM_TRIANGLES);
-
+{	
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	AEGfxSetPosition(0.0f, 0.0f);
-
-	
 	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
 
 	//Draw connected lines
@@ -102,5 +99,4 @@ Scene_Navigation::~Scene_Navigation(void)
 	AssetManager.UnloadTexture("UI/Shop.png");
 	AssetManager.UnloadTexture("UI/Boss.png");
 	AudioManager.UnloadMusic("NavigationBGM.mp3");
-	AEGfxMeshFree(mesh);
 }
