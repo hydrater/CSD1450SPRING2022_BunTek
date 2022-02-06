@@ -93,47 +93,49 @@ void UI_DialogueHandler::CreateDialoguePreset(string flag, short sortingLayer)
     }
 }
 
+// ---------------------------------------------------------NORMAL DIALOGUE---------------------------------------------------------
 void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
 
     //Create main dialogue box
     dialogueBox = new GameObject;
-    GameObject* tempdialogue = devTools.CreateSpriteGameObject("UI/Texture.png", 1800, 360,
-    AE_GFX_BM_BLEND, Vector2(0, -280), sortingLayer - 2);
+    GameObject* tempdialogue = devTools.CreateSpriteGameObject("UI/DialogueBox.png", 1900, 303,
+    AE_GFX_BM_BLEND, Vector2(0, -370), sortingLayer - 2);
     SpriteRenderer* tempRenderer = tempdialogue->GetComponent<SpriteRenderer>();
-    tempRenderer->SetColor(0.7f, 0.7f, 0.7f);
     TextRenderer* tempTextRenderer = tempdialogue->AddComponent<TextRenderer>();
-    tempTextRenderer->SetFont("Astral.ttf");
+    tempTextRenderer->SetFont("GothicA1.ttf");
+    tempTextRenderer->SetFontScale(0.6f);
     tempTextRenderer->SetTextColor(1, 1, 1);
     tempTextRenderer->SetLayer(sortingLayer);
     dialogueBox->AddChild(tempdialogue);
 
     // Create actor box
-    GameObject* tempGameObject = devTools.CreateSpriteGameObject("EncounterBox.png", tempRenderer->GetHalfWidth() * 2 / 4.5f, tempRenderer->GetHalfHeight() / 2,
+    GameObject* tempGameObject = devTools.CreateSpriteGameObject("UI/DialogueBox.png", tempRenderer->GetHalfWidth() * 2 / 4.5f, tempRenderer->GetHalfHeight() / 2,
         AE_GFX_BM_BLEND, Vector2(0.f, 0.f), sortingLayer - 1);
     SpriteRenderer* tempRenderer2 = tempGameObject->GetComponent<SpriteRenderer>();
+    tempRenderer2->SetOpacity(0);
     tempRenderer2->Owner()->transform->SetPosition(Vector2(
-        tempRenderer->GetTransform()->worldposition.x - tempRenderer->GetHalfWidth() + tempRenderer2->GetHalfWidth(),
-        tempRenderer->GetTransform()->worldposition.y + tempRenderer->GetHalfHeight() + tempRenderer2->GetHalfHeight())
+        0.0f,
+        tempRenderer->GetTransform()->worldposition.y +  tempRenderer2->GetHalfHeight() + 20)
     );
     dialogueBox->AddChild(tempGameObject);
 
     TextRenderer* tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();
-    tempTxtRenderer2->SetFont("Astral.ttf");
-    tempTxtRenderer2->SetTextColor(1, 1, 1);
+    tempTxtRenderer2->SetFont("Gabriola.ttf");
+    tempTxtRenderer2->SetTextColor(1.0f, 0.29f, 0.89f);
     tempTxtRenderer2->SetLayer(1);
     tempTxtRenderer2->SetLayer(sortingLayer);
 
     // Buttons (Max 3)
     vector<Button*> buttonList;
     for (int i = 0; i < 3; ++i) {
-        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("UI/Button.png", tempRenderer->GetHalfWidth() * 2, tempRenderer->GetHalfHeight() / 2,
-            2, Vector2(0.f, AEGfxGetWinMaxY() / 6 + (i * AEGfxGetWinMaxY() / 4)), sortingLayer - 1);
+        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("UI/Button.png", 785, 70,
+            AE_GFX_BM_BLEND, Vector2(0.f, AEGfxGetWinMaxY() / 3 - (i * AEGfxGetWinMaxY() / 4)), sortingLayer - 1);
         SpriteRenderer* tempButtonRenderer = tempButtonObj->GetComponent<SpriteRenderer>();
+        tempButtonRenderer->SetOpacity(0.8f);
 
         TextRenderer* tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
         tempButtonTxtRenderer->SetFont("Gabriola.ttf");
-        tempButtonTxtRenderer->SetTextColor(1, 1, 0);
-        tempButtonTxtRenderer->SetText("SCREM");
+        tempButtonTxtRenderer->SetTextColor(1, 1, 1);
         tempButtonTxtRenderer->SetFontScale(0.75f);
         tempButtonTxtRenderer->SetLayer(sortingLayer);
         tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
@@ -287,7 +289,8 @@ void UI_DialogueHandler::WriteToDialogue(void)
             break;
 
         case 'd':
-            DialogueDatabase.InitDialogueScene(parameters);
+            //cout << "Init scene " << parameters << endl;
+            //DialogueDatabase.InitDialogueScene(parameters);
             break;
 
         case 'e':
@@ -324,6 +327,7 @@ void UI_DialogueHandler::SetDialogueClickable(bool _canClick)
     }
 }
 
+// ---------------------------------------------------------REWARD SELECTION---------------------------------------------------------
 void UI_DialogueHandler::CreateRewardSelection(string flag, short sortingLayer)
 {
     Vector2 position = Vector2(0, 0);

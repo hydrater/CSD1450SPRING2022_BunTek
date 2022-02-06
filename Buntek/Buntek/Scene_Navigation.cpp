@@ -25,7 +25,7 @@ void Scene_Navigation::Start(void)
 	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
-	AudioManager.SetMusicVolume(1.0f);
+	AudioManager.SetMusicVolume(0.5f);
 
 	AssetManager.LoadTexture("UI/Enemy.png");
 	AssetManager.LoadTexture("UI/Elite.png");
