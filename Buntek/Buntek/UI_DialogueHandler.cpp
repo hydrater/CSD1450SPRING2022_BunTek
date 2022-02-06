@@ -290,7 +290,7 @@ void UI_DialogueHandler::WriteToDialogue(void)
 
         case 'd':
             //cout << "Init scene " << parameters << endl;
-            //DialogueDatabase.InitDialogueScene(parameters);
+            DialogueDatabase.InitDialogueScene(parameters);
             break;
 
         case 'e':

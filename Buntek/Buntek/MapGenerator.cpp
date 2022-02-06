@@ -80,6 +80,7 @@ void _mapData::GenerateMapObject(void)
         GameObject* temp = new GameObject;
         SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
         tempRenderer->Size(50, 50);
+        tempRenderer->SetLayer(-1);
 
         Button* tempButton = temp->AddComponent<Button>();
         tempButton->sr = tempRenderer;

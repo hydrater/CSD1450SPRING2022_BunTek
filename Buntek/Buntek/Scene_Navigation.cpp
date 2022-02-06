@@ -22,7 +22,6 @@ void Scene_Navigation::Start(void)
 	if (MapData.travelHistoryIDs.size() > 0)
 		MapData.DisplayNodeHistory();
 
-	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
 	AudioManager.SetMusicVolume(0.5f);
@@ -34,15 +33,15 @@ void Scene_Navigation::Start(void)
 	AssetManager.LoadTexture("UI/Shop.png");
 	AssetManager.LoadTexture("UI/Boss.png");
 
-	splashimage1 = devTools.CreateSpriteGameObject("Static Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage1 = devTools.CreateSpriteGameObject("Static Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0), -3);
 	splashimage1->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, 0);
-	splashimage2 = devTools.CreateSpriteGameObject("Static Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage2 = devTools.CreateSpriteGameObject("Static Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0), -3);
 	splashimage2->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, PI);
-	splashimage3 = devTools.CreateSpriteGameObject("More Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage3 = devTools.CreateSpriteGameObject("More Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0), -3);
 	splashimage3->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, 3 * PI / 2);
-	splashimage4 = devTools.CreateSpriteGameObject("More Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage4 = devTools.CreateSpriteGameObject("More Stars 2.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0), -3);
 	splashimage4->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, PI / 2);
-	splashimage5 = devTools.CreateSpriteGameObject("NebulaBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0));
+	splashimage5 = devTools.CreateSpriteGameObject("NebulaBig.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0), -3);
 	splashimage5->AddComponent<AlphaChanger>()->SetOscillation(6.0f, 1.0f, 0.8f, PI / 2);
 
 	spawner = new GameObject();
@@ -52,7 +51,7 @@ void Scene_Navigation::Start(void)
 	_spawnerPs->SetScrollingParticle(
 		Vector2(-1, 0), 60.0f,
 		3960, 1080, "NebulaCloudBig.png",
-		Vector2(-3960, 0), 1, (short)AE_GFX_BM_ADD);
+		Vector2(-3960, 0), -2, (short)AE_GFX_BM_ADD);
 }
 
 // Draw all lines
