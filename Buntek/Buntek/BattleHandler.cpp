@@ -164,7 +164,7 @@ void BattleHandler::Update(void) {
 			ballList->at(i)->timeScalar = timeScalar;
 			if (ballList->at(i)->causeHitPause) {
 				ballList->at(i)->causeHitPause = false;
-				hitPauseTimer = ballList->at(i)->hitPauseTimer;
+				hitPauseTimer = ballList->at(i)->hitPauseTimer > hitPauseTimer ? ballList->at(i)->hitPauseTimer : hitPauseTimer;
 			}
 		}
 		// AI and paddle timescale
