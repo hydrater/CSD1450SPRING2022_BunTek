@@ -46,8 +46,8 @@ void BallBehavior::Update(void)
 	}
 
 	// Update position and rotation
-	transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime);
-	transform->Rotate(rotSpeed * DeltaTime);
+	transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime * timeScalar);
+	transform->Rotate(rotSpeed * DeltaTime * timeScalar);
 }
 
 
@@ -63,6 +63,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
 			multiplier =  Clamp((float)pow(multiplier, 2) *sign, (float)-1, (float)1);
 			velocity.RotateC(multiplier * angRange);
+			causeHitPause = true;
 		}
 	}
 	else {
@@ -75,6 +76,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
 			multiplier = Clamp((float)pow(multiplier, 2) * sign, (float)-1, (float)1);
 			velocity.RotateAC(multiplier * angRange);
+			
 		}
 	}
 }

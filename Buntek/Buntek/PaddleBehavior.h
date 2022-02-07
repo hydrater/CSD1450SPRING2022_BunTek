@@ -23,6 +23,7 @@ public:
 	void setspeed(float _speed);
 	void setMaxspeed(float _Maxspeed);
 	void setMinMoveDist(float _MinMoveDist);
+	float timeScalar = 1.0f;
 
 private:
 	bool playerPaddle = false;

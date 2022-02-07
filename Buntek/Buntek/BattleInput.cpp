@@ -27,7 +27,10 @@ void BattleInput::Start(void)
 
 void BattleInput::Update(void)
 {
-	
+	//timescale update
+	playerpaddle->timeScalar = timeScalar;
+	AIPaddle->timeScalar = timeScalar;
+
 	if (LaunchLine != 0)
 	{
 		Vector2 temp = GameManager.GetCursorPosition();
@@ -74,11 +77,11 @@ void BattleInput::Update(void)
 	playerCursor->setplayerpossess(!PlayerAIEnabled);
 
 	if (PlayerAIEnabled || AIEnabled)
-		AIscalingTimer += DeltaTime;
+		AIscalingTimer += DeltaTime * timeScalar;
 
 	if (PlayerAIEnabled)
 	{
-		PlayerAITimer -= DeltaTime;
+		PlayerAITimer -= DeltaTime * timeScalar;
 		UpdateAIPosition(playerCursor, playerpaddle, &PlayerAITimer, true);
 	}
 	else
@@ -88,7 +91,7 @@ void BattleInput::Update(void)
 
 	if (AIEnabled)
 	{
-		AITimer -= DeltaTime;
+		AITimer -= DeltaTime * timeScalar;
 		UpdateAIPosition(AICursor, AIPaddle, &AITimer, false);
 	}
 }
@@ -151,7 +154,7 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 	}
 
 	// Move position towards the targetedPosition
-	*vecPosition = (*vecPosition).Lerp(*vecTargetPosition, AIspeed);
+	*vecPosition = (*vecPosition).Lerp(*vecTargetPosition, AIspeed * timeScalar);
 
 	vecPosition->x = AEClamp(vecPosition->x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
 	vecPosition->y = AEClamp(vecPosition->y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);

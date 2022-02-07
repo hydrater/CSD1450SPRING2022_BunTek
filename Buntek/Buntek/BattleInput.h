@@ -19,6 +19,7 @@ public:
 	PaddleBehavior* playerpaddle = 0, * AIPaddle = 0;
 	CursorBehaviour* playerCursor = 0, * AICursor = 0;
 	GameObject* LaunchBall = 0, *LaunchLine = 0;
+	float timeScalar = 1.0f;
 private:
 	bool AIEnabled = false;
 	Vector2 AIposition = Vector2(0, 0);

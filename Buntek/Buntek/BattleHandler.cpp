@@ -140,55 +140,47 @@ void BattleHandler::StartBattle(void) {
 	GameManager.friendlyAreaY = friendlyArea->transform->worldposition.y + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.hostileAreaY = hostileArea->transform->worldposition.y - hostileArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 
-	//hpBar = new GameObject();
-	//UI_Hp* ui_hpBar = hpBar->AddComponent<UI_Hp>();
-	//hpBar->transform->SetPosition(Vector2(-500, -400));
-	//ui_hpBar->GenerateHpBackground(true);
-
-	//enemyhpBar = new GameObject();
-	//UI_Hp* ui_EhpBar = enemyhpBar->AddComponent<UI_Hp>();
-	//enemyhpBar->transform->SetPosition(Vector2(500, -400));
-	//ui_EhpBar->GenerateHpBackground(false);
 
 	GameManager.InitBattle(100, 100); // Inits Player and Enemy HP
 }
 
 
 void BattleHandler::Update(void) {
-	if (battleStarted) {
-		if (timeScalar == 0.5f)
-		{
-			//cout << checkTimer << endl;
+	
 
-			checkTimer = true;
-			hitPauseTimer = 0.01f;
+	if (battleStarted) {
+		
+		if (hitPauseTimer > 0) {
+			hitPauseTimer -= DeltaTime;
+			timeScalar = 0;
 		}
-		if (checkTimer)
-		{
-			hitPauseTimer -= (float)AEFrameRateControllerGetFrameTime();
-			if (hitPauseTimer < 0)
-			{
-				timeScalar = 1;
-				checkTimer = false;
+		else {
+			timeScalar = mainTimeScalar;
+		}
+		
+		// Timescale setting
+		// Ball Timescale
+		for (int i = 0; i < ballList->size(); i++ ) {
+			ballList->at(i)->timeScalar = timeScalar;
+			if (ballList->at(i)->causeHitPause) {
+				ballList->at(i)->causeHitPause = false;
+				hitPauseTimer = ballList->at(i)->hitPauseTimer;
 			}
 		}
+		// AI and paddle timescale
+		BattleInput* _bInput = inputHandler->GetComponent<BattleInput>();
+		_bInput->timeScalar = timeScalar;
+		
+		
 		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-		ballSpawnTimer -= DeltaTime;
-		scalingTimer += DeltaTime;
+		ballSpawnTimer -= DeltaTime * timeScalar;
+		scalingTimer += DeltaTime * timeScalar;
 		if (ballSpawnTimer < 0)
 		{
 			SpriteRenderer* tempRenderer;
 			BallBehavior* tempBall;
 			CircleCollider* tempcol;
 
-			////Create Trail first (Render Trail before Ball)
-			//GameObject* tempballTrail = new GameObject();
-			//SpriteRenderer* tempballTrailRenderer;
-			//tempballTrailRenderer = tempballTrail->AddComponent<SpriteRenderer>();
-			//tempballTrailRenderer->Size(20, 20);
-			//tempballTrailRenderer->SetTexture("Trail.png");
-			//tempballTrailRenderer->SetColor(1, 1, 1);
-			//tempballTrailRenderer->SetTransparency(0.75f);
 
 			ball = new GameObject();
 			tempRenderer = ball->AddComponent<SpriteRenderer>();
@@ -198,10 +190,7 @@ void BattleHandler::Update(void) {
 			tempcol = ball->AddComponent<CircleCollider>();
 			tempBall = ball->AddComponent<BallBehavior>();
 			tempBall->battleInput = inputHandler->GetComponent<BattleInput>();
-			//tempBall->AssignListPointer(inputHandler->GetComponent<BattleInput>());
-			//tempBall->battleInput = cursorManager->GetComponent<BattleInput>();
-			/*tempBall->ballTrail = tempballTrail;
-			tempBall->srBallTrail = tempballTrailRenderer;*/
+			
 			bool dir = RandIntMinMax(0, 1);
 			tempBall->playerPossess = (dir ? true : false);
 			tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? -1 : 1));
@@ -216,11 +205,7 @@ void BattleHandler::Update(void) {
 
 			ballSpawnTimer = 2 - scalingTimer * 0.01f;
 		}
-		//cout << timeScalar << endl;
-	//set background color
-	//test->transform->SetPosition(Vector2(test->transform->worldposition.x+1, test->transform->worldposition.y));
-	//test2->transform->SetPosition(Vector2(test2->transform->worldposition.x + 1, test2->transform->worldposition.y));
-	//test->transform->Rotate(20*DeltaTime);
+		
 	}
 	
 }

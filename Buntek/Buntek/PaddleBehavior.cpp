@@ -47,11 +47,10 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 
 		if (mag != 0) {
 			velocity = Vector2(xDelta / mag, yDelta / mag);
-			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime, transform->worldposition.y + velocity.y * speed * DeltaTime));
+			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime * timeScalar, transform->worldposition.y + velocity.y * speed * DeltaTime * timeScalar));
 		}
 		
 		//Clamp paddle within boundary
-		
 		transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + sr->GetHalfWidth(), GameManager.areaRightBoundary - sr->GetHalfWidth());
 		transform->worldposition.y = AEClamp(transform->worldposition.y, GameManager.areaBottomBoundary + sr->GetHalfHeight(), GameManager.friendlyAreaY - sr->GetHalfHeight());
 
@@ -72,7 +71,7 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 
 		if (mag != 0) {
 			velocity = Vector2(xDelta / mag, yDelta / mag);
-			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * (float)AEFrameRateControllerGetFrameTime(), transform->worldposition.y + velocity.y * speed * (float)AEFrameRateControllerGetFrameTime()));
+			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime * timeScalar, transform->worldposition.y + velocity.y * speed * DeltaTime * timeScalar));
 		}
 
 		//Clamp paddle within boundary

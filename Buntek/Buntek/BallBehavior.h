@@ -30,8 +30,11 @@ public:
 
 	BattleInput* battleInput = 0;
 	GameObject* ballParticle = 0;
-	float hitPauseTimer = 0;
+	float hitPauseTimer = 0.04f;
+	bool causeHitPause = false;
 	bool checkTimer = false;
+	float timeScalar = 1.0f;
+
 
 private:
 	const float maxSpeed = 2000;
@@ -41,6 +44,7 @@ private:
 	float rotSpeed = 0;
 	float targetRotSpeed = 0;
 	float angRange = 30;
+	
 	Transform* transform = 0;
 
 	void BallHorizontalCheck(void);
