@@ -5,6 +5,7 @@
 #include "Scene_MainMenu.h"
 #include "Scene_Navigation.h"
 #include "Scene_Test.h"
+#include "UI_DialogueHandler.h"
 #include "CollisionManager2D.h"
 #include "AudioEngine.h"
 #include "GameManager.h"
@@ -72,6 +73,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		GameScriptManager.Update();
 		AudioManager.Update();
 		SceneManager.Update();
+		UIDialogueManager.Update();
 
 		// --------------------------------------------- Collision --------------------------------------------- //
 		CollisionManager2D.CollideAll();
