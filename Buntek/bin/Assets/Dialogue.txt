@@ -1,3 +1,19 @@
+========================= GUIDE =======================
+------------------------ FORMAT -----------------------
+/x0 yyyy
+- Put '/' at the front for calling certain commands
+- x is for calling legends to run commands (Refer)
+- 0 is the function called for the button/choice
+	effect (CAUTION!: WILL ONLY WORK FOR b and c!)
+- yyyy is the string displayed in the text renderer
+	[Exception: d, which finds the specific sprite]
+------------------------ LEGENDS ----------------------
+a: Actor Name
+b: Button for Encounter (Please don't mix with Choice)
+c: Choice for Rewards (Please don't mix with Encounter)
+d: Design for Background
+=======================================================
+
 1
 2
 3
@@ -5,25 +21,38 @@
 5
 
 asd
-/a Ding Xiang
+/a  Ding Xiang
 Wa Gerald I love you
-/a Gerald 
+/a  Gerald 
 Wo ai ni duo duo
-/a Super Idol
+/a  Super Idol
 super idol de xiao rong dou mei ni de tian
 
 aed
-/d 0
-/e Constellation of Mittens
+/d  0
+/a  Constellation of Mittens
 Don't look down on me because I'm a cat!
-/b Pet the constellation
-/b Offer some galaxy milk
-/b Leave
+/b1 Pet the constellation
+/b1 Offer some galaxy milk
+/b0 Leave
+/a  Next Trail
+YOU SHOULD NOT SEE THIS!
+/c  E
+/c  A
+/c  It's in the game
+/c  skip to win
 
 rsel
-/c E
-/c A
-/c It's in the game
+/a  Human #22
+Does it work?
+/a  Human #85
+It does
+/a  Human #22
+Choose your reward
+/c1 E
+/c1 A
+/c1 It's in the game
+/c0 Decline the absorption
 
 poo poo
 
