@@ -8,7 +8,6 @@
 void RemoveDialogue(Button* button);
 void BF_Sample1Button(Button* button);
 void CF_Sample1Button(Button* button);
-//void RemoveRewardSelection(Button* button);
 
 UI_DialogueHandler::UI_DialogueHandler(void)
 {
@@ -50,7 +49,6 @@ void UI_DialogueHandler::Update(void)
                 }
                 else
                     RemoveDialogue(nullptr);
-                    //CloseDialogueEvent();
             }
         }
 
@@ -58,6 +56,7 @@ void UI_DialogueHandler::Update(void)
         {
             dialogueTxt->SetText(dialogueFinalDisplayTxt);
             displayNo = dialogueFinalDisplayTxt.size();
+
             // Skip to next display if the next command is either a button or a reward selection
             int nextDialogueNo = dialogueNo + 1;
             if (CheckNextCommand('b') || CheckNextCommand('c'))
@@ -91,24 +90,12 @@ void UI_DialogueHandler::Update(void)
 void UI_DialogueHandler::CreateDialoguePreset(string flag, short sortingLayer)
 {
     selectedFlag = flag;
-    //DeleteRewardSelection();
     DialogueDatabase.ClearDialogueSceneObjs();
     DeleteDialogueEvent();
 
     UIOpen = true;
     UIDecision = false;
     CreateDialogue(selectedFlag, sortingLayer);
-
-    /*if (selectedFlag == dialogueFlag || selectedFlag == encounterFlag)
-    {
-        UIOpen = true;
-        CreateDialogue(selectedFlag, sortingLayer);
-    }
-    else if (selectedFlag == rewardFlag)
-    {
-        UIOpen = true;
-        CreateRewardSelection(selectedFlag, sortingLayer);
-    }*/
 }
 
 // ---------------------------------------------------------NORMAL DIALOGUE---------------------------------------------------------
@@ -179,14 +166,6 @@ void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
 
         TextRenderer* tempButtonTxtRenderer = devTools.AddTextToSpriteGameObject(tempButtonObj, "Gabriola.ttf", "I am a Reward", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 36.f, sortingLayer);
         tempButtonTxtRenderer->SetTextColor(0, 0, 0);
-        /*tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
-        tempButtonTxtRenderer->SetFont("Gabriola.ttf");
-        tempButtonTxtRenderer->SetTextColor(0, 0, 0);
-        tempButtonTxtRenderer->SetText("I am a Reward");
-        tempButtonTxtRenderer->SetFontScale(0.75f);
-        tempButtonTxtRenderer->SetLayer(sortingLayer);
-        tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
-        tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);*/
 
         Button* tempButton = tempButtonObj->AddComponent<Button>();
         tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
@@ -223,7 +202,6 @@ void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
     dialogueButtonList = buttonList;
     rewardButtonList = tempbuttonList;
 
-    //CloseDialogueEvent();
     if (actorTxt && dialogueTxt && dialogueButtonList[0])
     {
         actorTxt->Owner()->Deactivate();
@@ -257,19 +235,7 @@ void UI_DialogueHandler::StartDialogueEvent(string flag)
         rewardButtonList[i]->Owner()->GetComponent<Button>()->SetClickable(true);
     }
     WriteToDialogue();
-    //// Go through whole thing if it is an encounter
-    //if (flag == encounterFlag)
-    //{
-    //    for (dialogueNo = 0; dialogueNo < dialogueList.size(); ++dialogueNo)
-    //    {
-    //        WriteToDialogue();
-    //    }
-    //}
-    //// Go through once per click if it is a dialogue
-    //else if (flag == dialogueFlag)
-    //{
-    //    WriteToDialogue();
-    //}
+
     // Deactivate non-used buttons
     for (int i = dialogueButtonNo; i < dialogueButtonList.size(); ++i)
         dialogueButtonList[i]->Owner()->Deactivate();
@@ -278,19 +244,6 @@ void UI_DialogueHandler::StartDialogueEvent(string flag)
         rewardButtonList[i]->Owner()->Deactivate();
 
 }
-
-//void UI_DialogueHandler::CloseDialogueEvent(void)
-//{
-//    if (actorTxt && dialogueTxt && dialogueButtonList[0])
-//    {
-//        actorTxt->Owner()->Deactivate();
-//        dialogueTxt->Owner()->Deactivate();
-//        for (int i = 0; i < dialogueButtonList.size(); ++i) {
-//            dialogueButtonList[i]->Owner()->Deactivate();
-//            dialogueButtonList[i]->Owner()->GetComponent<Button>()->SetClickable(false);
-//        }
-//    }
-//}
 
 void UI_DialogueHandler::SkipDialogue(void)
 {
@@ -392,7 +345,7 @@ void UI_DialogueHandler::WriteToDialogue(void)
             break;
 
         case 'b':
-            cout << "Button: " << parameters << endl;
+            //cout << "Button: " << parameters << endl;
             if (dialogueButtonNo < dialogueButtonList.size())
             {
                 AssignButton(dialogueButtonList[dialogueButtonNo], 'b', dialogueList[dialogueNo][2]);
@@ -430,13 +383,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
             WriteToDialogue();
             break;
 
-        //case 'e':
-        //    //cout << "Encounter Name: " << parameters << endl;
-        //    name = parameters;
-        //    actorTxt->SetText(name);
-        //    ++dialogueNo;
-        //    WriteToDialogue();
-        //    break;
         default:
             cout << "default line " << endl;
             break;
@@ -447,30 +393,9 @@ void UI_DialogueHandler::WriteToDialogue(void)
         displayNo = 0;
         dialogueOutput = "";
         dialogueFinalDisplayTxt = dialogueList[dialogueNo];
-        cout << "Dialogue: " << dialogueFinalDisplayTxt << endl;
+        //cout << "Dialogue: " << dialogueFinalDisplayTxt << endl;
         doneDisplay = false;
-
-        //// Skip to next display if the next command is either a button or a reward selection
-        //int nextDialogueNo = dialogueNo + 1;
-        //if (nextDialogueNo < dialogueList.size() && (dialogueList[nextDialogueNo][0] == '/') /*&& (dialogueList[nextDialogueNo][1] == 'b' || dialogueList[nextDialogueNo][1] == 'c')*/)
-        //{
-        //    ++dialogueNo;
-        //    WriteToDialogue();
-        //}
     }
-    /*else if (selectedFlag == dialogueFlag)
-    {
-        displayNo = 0;
-        dialogueOutput = "";
-        dialogueFinalDisplayTxt = dialogueList[dialogueNo];
-        doneDisplay = false;
-        
-    }
-    else if (selectedFlag == encounterFlag)
-    {
-        dialogueTxt->SetText(dialogueList[dialogueNo]);
-        dialogueTxt->SetWarpAround(true);
-    }*/
 }
 
 void UI_DialogueHandler::SetDialogueClickable(bool _canClick)
@@ -547,129 +472,3 @@ void CF_Sample1Button(Button* button)
     // Sample 1 Go to Dialogue
     UIDialogueManager.CreateDialoguePreset("asd", 3);
 }
-
-//// ---------------------------------------------------------REWARD SELECTION---------------------------------------------------------
-//void UI_DialogueHandler::CreateRewardSelection(string flag, short sortingLayer)
-//{
-//    Vector2 position = Vector2(0, 0);
-//
-//    rewardSel = new GameObject;
-//    rewardSel->transform->SetPosition(position);
-//
-//    // Background
-//    GameObject* tempBackground = devTools.CreateSpriteGameObject("Encounter.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0, 0));
-//    tempBackground->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-//    tempBackground->GetComponent<SpriteRenderer>()->SetOpacity(0.75f);
-//    rewardSel->AddChild(tempBackground);
-//
-//    // Header
-//    GameObject* tempHeader = devTools.CreateSpriteGameObject("paddle.png", 800, 100, AE_GFX_BM_BLEND, Vector2(position.x, position.y + tempBackground->GetComponent<SpriteRenderer>()->GetHalfHeight() / 1.5f));
-//    tempHeader->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-//
-//    // HeaderText
-//    TextRenderer* tempHeaderTxtRenderer = 0;
-//    tempHeaderTxtRenderer = tempHeader->AddComponent<TextRenderer>();
-//    tempHeaderTxtRenderer->SetFont("Gabriola.ttf");
-//    tempHeaderTxtRenderer->SetTextColor(1, 0, 1);
-//    tempHeaderTxtRenderer->SetText("Choose Your Reward");
-//    tempHeaderTxtRenderer->SetLayer(sortingLayer);
-//    tempHeaderTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
-//    tempHeaderTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-//    tempHeaderTxtRenderer->SetXBuffer(50);
-//    rewardSel->AddChild(tempHeader);
-//
-//    // Buttons (3 selection and 1 skip)
-//    vector<Button*> tempbuttonList;
-//    for (int i = 0; i < 4; ++i) {
-//
-//        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("paddle.png", 350, 500, AE_GFX_BM_BLEND,
-//            Vector2(position.x, position.y - tempBackground->GetComponent<SpriteRenderer>()->GetHalfHeight() / 1.5f), sortingLayer - 1, 1.f);
-//
-//        TextRenderer* tempButtonTxtRenderer = 0;
-//        tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
-//        tempButtonTxtRenderer->SetFont("Gabriola.ttf");
-//        tempButtonTxtRenderer->SetTextColor(0, 0, 0);
-//        tempButtonTxtRenderer->SetText("I am a Reward");
-//        tempButtonTxtRenderer->SetFontScale(0.75f);
-//        tempButtonTxtRenderer->SetLayer(sortingLayer);
-//        tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
-//        tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-//
-//        Button* tempButton = tempButtonObj->AddComponent<Button>();
-//        tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
-//        tempButton->tr = tempButtonTxtRenderer;
-//        tempButton->affectedObject = rewardSel;
-//        tempButton->ButtonEffect = &RemoveRewardSelection;
-//
-//        rewardSel->AddChild(tempButtonObj);
-//        tempbuttonList.push_back(tempButton);
-//        switch (i)
-//        {
-//        case 0:
-//            tempButtonObj->transform->SetPosition(Vector2(position.x, position.y));
-//            break;
-//        case 1:
-//            tempButtonObj->transform->SetPosition(Vector2(position.x - tempButton->sr->GetHalfWidth() * 3, position.y));
-//            break;
-//        case 2:
-//            tempButtonObj->transform->SetPosition(Vector2(position.x + tempButton->sr->GetHalfWidth() * 3, position.y));
-//            break;
-//        case 3:
-//            tempButton->sr->SetTexture("Buttons.png");
-//            tempButtonTxtRenderer->SetText("Skip to get sum guud seedz");
-//            tempButtonTxtRenderer->SetTextColor(1, 1, 0);
-//            tempButton->sr->Size(500, 150);
-//            break;
-//        }
-//    }
-//    
-//    header = tempHeader->GetComponent<SpriteRenderer>();
-//    background = tempBackground->GetComponent<SpriteRenderer>();
-//    headerText = tempHeaderTxtRenderer;
-//    rewardButtonList = tempbuttonList;
-//
-//    CloseRewardSelection();
-//
-//    StartRewardSelection(selectedFlag);
-//}
-//
-//void UI_DialogueHandler::StartRewardSelection(string flag)
-//{
-//    LoadFromFile(flag);
-//    header->Owner()->Activate();
-//    background->Owner()->Activate();
-//    headerText->Owner()->Activate();
-//    rewardButtonNo = 0;
-//    for (int i = 0; i < rewardButtonList.size(); ++i)
-//        rewardButtonList[i]->Owner()->Activate();
-//    for (dialogueNo = 0; dialogueNo < dialogueList.size(); ++dialogueNo)
-//        WriteToDialogue();
-//    for (; rewardButtonNo < rewardButtonList.size() - 1; ++rewardButtonNo)
-//        rewardButtonList[rewardButtonNo]->Owner()->Deactivate();
-//}
-//
-//void UI_DialogueHandler::CloseRewardSelection(void)
-//{
-//    header->Owner()->Deactivate();
-//    background->Owner()->Deactivate();
-//    headerText->Owner()->Deactivate();
-//    for (int i = 0; i < rewardButtonList.size(); ++i)
-//        rewardButtonList[i]->Owner()->Deactivate();
-//}
-//
-//void UI_DialogueHandler::DeleteRewardSelection(void)
-//{
-//    if (rewardSel)
-//    {
-//        rewardSel->Delete();
-//        rewardSel = 0;
-//    }
-//
-//    rewardButtonList.clear();
-//}
-//
-//void RemoveRewardSelection(Button* button)
-//{
-//    UIDialogueManager.DeleteRewardSelection();
-//    UIDialogueManager.UIOpen = false;
-//}

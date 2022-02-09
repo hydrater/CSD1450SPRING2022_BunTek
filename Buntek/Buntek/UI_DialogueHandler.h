@@ -23,7 +23,6 @@ public:
 	void SetDialogueClickable(bool _canClick);
 	void SkipDialogue(void);
 	void DeleteDialogueEvent(void);
-	//void DeleteRewardSelection(void);
 
 	bool UIOpen = false, UIDecision = false;	// UIDecision: Prevents user from clicking to next dialogue 
 
@@ -34,17 +33,6 @@ private:
 	// Dialogue
 	void CreateDialogue(string flag, short sortingLayer);
 	void StartDialogueEvent(string flag);
-	//void CloseDialogueEvent(void);
-
-	/*=====WIP=====
-	* vector<string> rewards will be converted to
-	* vector<Artifact> so that the button rewards
-	* will reflect the image and description
-	*///===========
-
-	/*void CreateRewardSelection(string flag, short sortingLayer);
-	void StartRewardSelection(string flag);
-	void CloseRewardSelection(void);*/
 
 	void LoadFromFile(string flag);
 	bool CheckNextCommand(char command);
@@ -57,8 +45,6 @@ private:
 
 	// Dialogue
 	TextRenderer* actorTxt = 0, * dialogueTxt = 0;
-	/*string dialogueFlag = "asd";
-	string encounterFlag = "aed";*/
 	string name, dialogueOutput, dialogueFinalDisplayTxt;
 	vector<Button*> dialogueButtonList;
 	int dialogueButtonNo = 0;
@@ -69,11 +55,6 @@ private:
 	const float displaySpeed = 0.001f; // No of char per sec
 	int displayNo = 0;
 	float doneDisplay = true;
-
-	// Reward Selection
-	/*string rewardFlag = "rsel";
-	SpriteRenderer* header = 0, * background = 0;
-	TextRenderer* headerText = 0;*/
 
 	enum ButtonFunctionType {
 		BF_Leave = 0,
