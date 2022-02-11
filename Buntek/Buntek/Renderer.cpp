@@ -31,6 +31,17 @@ _renderer& _renderer::Instance(void)
 
 void _renderer::Update(void)
 {
+	/*for (int i = rendererList.size(); i > 0; --i)
+	{
+		if (rendererList[i]->remove || rendererList[i] == NULL)
+		{
+			delete rendererList[i];
+			rendererList.erase(rendererList.begin() + i);
+			--i;
+			continue;
+		}
+	}*/
+
     for (int i = 0; i < rendererList.size(); ++i)
     {
 		if (rendererList[i]->remove)

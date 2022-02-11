@@ -21,7 +21,7 @@ private:
     ChannelGroup* channelGroup = nullptr;
     map<string, Sound*> soundDatabase;
     map<string, Sound*> musicDatabase;
-    bool isActive;
+    bool isActive = true;
     
 public:
     static _audioManager& Instance(void);

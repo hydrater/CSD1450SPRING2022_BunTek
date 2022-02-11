@@ -55,7 +55,7 @@ void UI_DialogueHandler::Update(void)
         if (doneDisplay)
         {
             dialogueTxt->SetText(dialogueFinalDisplayTxt);
-            displayNo = dialogueFinalDisplayTxt.size();
+            displayNo = (int)dialogueFinalDisplayTxt.size();
 
             // Skip to next display if the next command is either a button or a reward selection
             int nextDialogueNo = dialogueNo + 1;
