@@ -8,6 +8,15 @@
 
 void EnactTravel(Button* button);
 
+_mapData::_mapData(void)
+{
+}
+
+_mapData::~_mapData(void)
+{
+    DeleteNodeList();
+}
+
 _mapData& _mapData::Instance(void)
 {
     static _mapData instance;
@@ -22,6 +31,7 @@ void _mapData::GenerateMapData(void)
     float StartYCoord = (float)(-AEGetWindowHeight() / 2) + buffer;
     float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
 
+    DeleteNodeList();
     for (int i = 0; i < numNodes; i++) 
     {
         Node* node = new Node();
@@ -287,6 +297,14 @@ _mapData::Node* _mapData::GetNode(GameObject* object)
             return node;
     }
     return NULL;
+}
+
+void _mapData::DeleteNodeList(void)
+{
+    for (int i = 0; i < nodeList.size(); ++i)
+        delete nodeList[i];
+
+    nodeList.clear();
 }
 
 void EnactTravel(Button* button)

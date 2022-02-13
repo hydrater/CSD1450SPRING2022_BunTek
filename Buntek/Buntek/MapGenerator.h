@@ -22,6 +22,8 @@ enum class NodeType {
 class _mapData
 {
 public:
+    _mapData(void);
+    ~_mapData(void);
     class Node
     {
     // Not all members are added to the sava manager as binary serialization is not pointer safe
@@ -64,5 +66,6 @@ private:
     float minDistance = 125;
     float maxDistance = 400;
     float buffer = 75;
+    void DeleteNodeList(void);
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };
