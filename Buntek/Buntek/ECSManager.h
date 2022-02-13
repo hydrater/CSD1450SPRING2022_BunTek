@@ -17,4 +17,5 @@ public:
     void AddGameObjectToList(GameObject* GO);
     void AddComponentToList(Component* component);
     void UpdateList(void);
+    void Free(void);
 };

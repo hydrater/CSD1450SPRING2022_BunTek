@@ -68,3 +68,12 @@ void _ECSManager::UpdateList(void)
             GOList.erase(GOList.begin() + i);
     }
 }
+
+void _ECSManager::Free(void)
+{
+    for (int i = 0; i < componentList.size(); ++i)
+        delete componentList[i];
+
+    for (int i = 0; i < GOList.size(); ++i)
+        delete GOList[i];
+}
