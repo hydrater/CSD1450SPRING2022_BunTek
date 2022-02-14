@@ -137,6 +137,4 @@ Scene_Splash::~Scene_Splash(void)
 	AssetManager.UnloadTexture("Logo/Digipen_Logo.png");
 	AssetManager.UnloadTexture("Logo/BuntekLogo.png");
 	AudioManager.UnloadSound("SplashLogo.mp3");
-	splash->Delete();
-	splash2->Delete();
 }
