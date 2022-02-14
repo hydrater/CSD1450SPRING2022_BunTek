@@ -31,26 +31,24 @@ _renderer& _renderer::Instance(void)
 
 void _renderer::Update(void)
 {
-	/*for (int i = rendererList.size(); i > 0; --i)
+	for (int i = (int)rendererList.size() - 1; i >= 0; --i)
 	{
-		if (rendererList[i]->remove || rendererList[i] == NULL)
+		if (rendererList[i]->remove)
 		{
-			delete rendererList[i];
 			rendererList.erase(rendererList.begin() + i);
 			--i;
-			continue;
 		}
-	}*/
+	}
 
     for (int i = 0; i < rendererList.size(); ++i)
     {
-		if (rendererList[i]->remove)
+		/*if (rendererList[i]->remove)
 		{
 			delete rendererList[i];
 			rendererList.erase(rendererList.begin() + i);
 			--i;
 			continue;
-		}
+		}*/
 
 		if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive() ||
 			(rendererList[i]->Owner()->GetParent() != NULL && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()))

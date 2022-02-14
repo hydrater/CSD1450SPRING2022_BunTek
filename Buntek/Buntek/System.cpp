@@ -209,15 +209,24 @@ void _gameScriptManager::AddToList(GameScript* gameScript)
 
 void _gameScriptManager::Update(void)
 {
-    for (int i = 0; i < gameScriptList.size(); ++i)
+    for (int i = (int)gameScriptList.size() - 1; i >= 0; --i)
     {
         if (gameScriptList[i]->remove)
+        {
+            gameScriptList.erase(gameScriptList.begin() + i);
+            --i;
+        }
+    }
+
+    for (int i = 0; i < gameScriptList.size(); ++i)
+    {
+        /*if (gameScriptList[i]->remove)
         {
             delete gameScriptList[i];
             gameScriptList.erase(gameScriptList.begin() + i);
             --i;
             continue;
-        }
+        }*/
 
         if (!gameScriptList[i]->IsActive() || !gameScriptList[i]->Owner()->IsActive())
             continue;
