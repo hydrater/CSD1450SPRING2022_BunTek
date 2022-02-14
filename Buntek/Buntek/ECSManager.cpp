@@ -74,6 +74,10 @@ void _ECSManager::Free(void)
     for (int i = 0; i < componentList.size(); ++i)
         delete componentList[i];
 
+    componentList.clear();
+
     for (int i = 0; i < GOList.size(); ++i)
         delete GOList[i];
+
+    GOList.clear();
 }

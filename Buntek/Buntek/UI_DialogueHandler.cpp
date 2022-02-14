@@ -23,11 +23,6 @@ UI_DialogueHandler& UI_DialogueHandler::Instance(void)
     return instance;
 }
 
-void UI_DialogueHandler::Start(void)
-{
-
-}
-
 void UI_DialogueHandler::Update(void)
 {
     // For dialogue only

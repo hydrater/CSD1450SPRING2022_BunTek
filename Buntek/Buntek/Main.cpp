@@ -97,6 +97,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			AssetManager.Free();
 			Renderer.FreeRenderComponents();
 			Renderer.FreeMesh();
+			ECSManager.Free();
 		}
 	}
 	//

@@ -153,9 +153,6 @@
     <ClCompile Include="BattleHandler.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="UI_DialogueHandler.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="DialogueDatabase.cpp">
       <Filter>Source Files\Custom</Filter>
     </ClCompile>
@@ -167,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="DebuggingTools.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_DialogueHandler.cpp">
+      <Filter>Source Files\Custom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,9 +290,6 @@
     <ClInclude Include="BattleHandler.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="UI_DialogueHandler.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="DialogueDatabase.h">
       <Filter>Source Files\Custom</Filter>
     </ClInclude>
@@ -304,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="DebuggingTools.h">
       <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_DialogueHandler.h">
+      <Filter>Source Files\Custom</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 #include "System.h"
 #include "Renderer.h"
 #include "GameManager.h"
+#include "ECSManager.h"
 
 void Scene::Start(void)
 {
@@ -111,6 +112,7 @@ void _sceneManager::LateUpdate(void)
             {
                 Renderer.FreeRenderComponents();
                 GameScriptManager.ClearList();
+                ECSManager.Free();
                 if (deleteScene)
                     delete scene;
                 scene = nextScene;
@@ -155,6 +157,7 @@ void _sceneManager::FadeTransition(void) {
         {
             Renderer.FreeRenderComponents();
             GameScriptManager.ClearList();
+            ECSManager.Free();
             if (deleteScene)
                 delete scene;
             AEGfxSetCamPosition(0, 0);
@@ -243,8 +246,8 @@ void _gameScriptManager::Update(void)
 
 void _gameScriptManager::ClearList(void)
 {
-    for (size_t i = 0; i < gameScriptList.size(); i++)
-        delete gameScriptList[i];
+    //for (size_t i = 0; i < gameScriptList.size(); i++)
+    //    delete gameScriptList[i];
 
     gameScriptList.clear();
 }

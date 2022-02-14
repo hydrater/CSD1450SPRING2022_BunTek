@@ -299,8 +299,9 @@ void _renderer::InsertionSort(void)
 
 void _renderer::FreeRenderComponents(void)
 {
-	for (int i = 0; i < rendererList.size(); ++i)
-		delete  rendererList[i];
+	/*for (int i = 0; i < rendererList.size(); ++i)
+		delete  rendererList[i];*/
+
 	rendererList.clear();
 }
 

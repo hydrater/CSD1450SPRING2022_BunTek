@@ -8,16 +8,14 @@
 
 #define UIDialogueManager UI_DialogueHandler::Instance()
 
-class UI_DialogueHandler : public GameScript
+class UI_DialogueHandler
 {
 public:
 	UI_DialogueHandler(void);
 	~UI_DialogueHandler(void);
 
 	static UI_DialogueHandler& Instance(void);
-
-	void Start(void) override;
-	void Update(void) override;
+	void Update(void);
 
 	void CreateDialoguePreset(string flag, short sortingLayer);
 	void SetDialogueClickable(bool _canClick);
