@@ -11,29 +11,14 @@ _saveManager::~_saveManager()
 {
 }
 
-void _saveManager::ArtifactListToHashtable(void)
-{
-    artifactSaveData.clear();
-
-    for (int i = 0; i < artifactInventory.behaviorList_Reflect.size(); ++i)
-    {
-        artifactSaveData.insert(pair<unsigned long, int>(artifactInventory.behaviorList_Reflect[i].ID, artifactInventory.behaviorList_Reflect[i].count));
-    }
-
-    for (int i = 0; i < artifactInventory.behaviorList_DealDamage.size(); ++i)
-    {
-        artifactSaveData.insert(pair<unsigned long, int>(artifactInventory.behaviorList_DealDamage[i].ID, artifactInventory.behaviorList_DealDamage[i].count));
-    }
-
-    for (int i = 0; i < artifactInventory.behaviorList_TakeDamage.size(); ++i)
-    {
-        artifactSaveData.insert(pair<unsigned long, int>(artifactInventory.behaviorList_TakeDamage[i].ID, artifactInventory.behaviorList_TakeDamage[i].count));
-    }
-}
-
 void _saveManager::HashtableToArtifactList(void)
 {
     // Switch based on event type
+}
+
+void _saveManager::AddToArtifactList(unsigned long id)
+{
+
 }
 
 _saveManager& _saveManager::Instance(void)
@@ -56,8 +41,8 @@ void _saveManager::SaveData(void)
     }
 
     // Serializing profile
-    wf.write((char*)&profile, sizeof(_gameManager::Profile));
-
+    wf.write((char*)&GameManager.playerProfile, sizeof(_gameManager::Profile));
+    
     // Serializing map data
     for (int i = 0; i < MapData.numNodes; ++i)
     {
@@ -75,7 +60,6 @@ void _saveManager::SaveData(void)
         wf.write((char*)&selID, sizeof(int));
 
     // Serializing artifacts 
-    ArtifactListToHashtable();
     _size = (int)artifactSaveData.size();
     int i = 0;
     for (map<unsigned long, int>::iterator it = artifactSaveData.begin(); it != artifactSaveData.end(); ++it)
@@ -102,7 +86,7 @@ void _saveManager::LoadData(void)
 	}
 
     // Deserializing profile
-    rf.read((char*)&profile, sizeof(_gameManager::Profile));
+    rf.read((char*)&GameManager.playerProfile, sizeof(_gameManager::Profile));
 
     // Deserializing map data
     MapData.nodeList.clear();

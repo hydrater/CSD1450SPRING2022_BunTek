@@ -14,28 +14,19 @@ private:
     _saveManager();
     ~_saveManager();
 
-    // Make sure to update the size if total artifact count goes above
+    // Make sure to update the size if total amount of artifacts created goes above the value
     int _size = 0;
     unsigned long _key[128] = {};
     int _value[128] = {};
 
-    void ArtifactListToHashtable(void);
     void HashtableToArtifactList(void);
+    void AddToArtifactList(unsigned long id);
 
 public:
     static _saveManager& Instance(void);
 
-    // Profile
-    _gameManager::Profile profile = {};
-
     // Arifact
     map<unsigned long, int> artifactSaveData;
-    struct ArtifactInventory
-    {
-        vector<Artifact> behaviorList_Reflect;
-        vector<Artifact> behaviorList_DealDamage;
-        vector<Artifact> behaviorList_TakeDamage;
-    }artifactInventory;
 
     void SaveData(void);
     void LoadData(void);

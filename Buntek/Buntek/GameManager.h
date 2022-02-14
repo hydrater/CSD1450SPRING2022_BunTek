@@ -2,6 +2,7 @@
 #include <typeinfo>
 #include <vector>
 #include "Vector2.h"
+#include "ArtifactDatabase.h"
 using namespace std;
 
 #define GameManager _gameManager::Instance()
@@ -25,17 +26,24 @@ public:
     // Profile
     struct Profile
     {
-        // Stats
-        int health;
-        int damage;
-        int paddleSpeed;
-        int ballSpeed;
-        int ballSpawnFreq;
-
         // Current
         float hp;
         int stardust;
         int mapSize;
+        short attackType;
+    }playerProfile;
+
+    struct BattleProfile
+    {
+        // Artifact list by events
+        vector<Artifact> behaviorList_Passive;
+        vector<Artifact> behaviorList_DealDamage;
+        vector<Artifact> behaviorList_TakeDamage;
+        vector<Artifact> behaviorList_WallBounce;
+        vector<Artifact> behaviorList_PaddleHit;
+        vector<Artifact> behaviorList_BallOnBallCollidision;
+
+        // Any additional variables for specific artifacts
     };
 
     // Camera info
@@ -55,5 +63,8 @@ public:
     // Battle
     void InitBattle(float _playerHp, float _enemyHp);
     void DealDamage(float damage, bool isPlayer);
+
+    // Battle metrics
     float playerHp = 0, enemyHp = 0;
+    BattleProfile playerBattleProfile = {}, enemyBattleProfile = {};
 };

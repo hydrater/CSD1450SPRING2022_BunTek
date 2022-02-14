@@ -42,6 +42,18 @@ void _debuggingTools::CheatsUpdate(void)
 		AEToogleFullScreen(fullScreen);
 		fullScreen = !fullScreen;
 	}
+	if (AEInputCheckTriggered(AEVK_F2))
+	{
+		SaveManager.SaveData();
+	}
+	if (AEInputCheckTriggered(AEVK_F3))
+	{
+		SaveManager.LoadData();
+	}
+	if (AEInputCheckTriggered(AEVK_F4))
+	{
+		MapData.GenerateMapData();
+	}
 	if (AEInputCheckTriggered(AEVK_F5))
 	{
 		SceneManager.LoadScene(new Scene_Splash, TransitionType::FadeTransition, true);
@@ -49,18 +61,5 @@ void _debuggingTools::CheatsUpdate(void)
 	if (AEInputCheckTriggered(AEVK_F6))
 	{
 		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
-	}
-
-	if (AEInputCheckTriggered(AEVK_F1))
-	{
-		SaveManager.SaveData();
-	}
-	if (AEInputCheckTriggered(AEVK_F2))
-	{
-		SaveManager.LoadData();
-	}
-	if (AEInputCheckTriggered(AEVK_F3))
-	{
-		MapData.GenerateMapData();
 	}
 }
