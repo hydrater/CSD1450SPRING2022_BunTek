@@ -24,6 +24,6 @@ public:
     float TextAlignmentY(TextRenderer* textRenderer);
     void WrapAround(TextRenderer* textRenderer);
     void InsertionSort(void);
-    void FreeRenderComponents(void);
+    void Clear(void);
     void FreeMesh(void);
 };

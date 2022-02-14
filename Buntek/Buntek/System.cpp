@@ -110,8 +110,8 @@ void _sceneManager::LateUpdate(void)
         case TransitionType::None:
             if (scene != NULL && nextScene != NULL)
             {
-                Renderer.FreeRenderComponents();
-                GameScriptManager.ClearList();
+                Renderer.Clear();
+                GameScriptManager.Clear();
                 ECSManager.Free();
                 if (deleteScene)
                     delete scene;
@@ -155,8 +155,8 @@ void _sceneManager::FadeTransition(void) {
     case TransitionStage::TransitionScene: //fade scene transition
         if (scene != NULL && nextScene != NULL)
         {
-            Renderer.FreeRenderComponents();
-            GameScriptManager.ClearList();
+            Renderer.Clear();
+            GameScriptManager.Clear();
             ECSManager.Free();
             if (deleteScene)
                 delete scene;
@@ -223,14 +223,6 @@ void _gameScriptManager::Update(void)
 
     for (int i = 0; i < gameScriptList.size(); ++i)
     {
-        /*if (gameScriptList[i]->remove)
-        {
-            delete gameScriptList[i];
-            gameScriptList.erase(gameScriptList.begin() + i);
-            --i;
-            continue;
-        }*/
-
         if (!gameScriptList[i]->IsActive() || !gameScriptList[i]->Owner()->IsActive())
             continue;
 
@@ -244,10 +236,7 @@ void _gameScriptManager::Update(void)
     }
 }
 
-void _gameScriptManager::ClearList(void)
+void _gameScriptManager::Clear(void)
 {
-    //for (size_t i = 0; i < gameScriptList.size(); i++)
-    //    delete gameScriptList[i];
-
     gameScriptList.clear();
 }

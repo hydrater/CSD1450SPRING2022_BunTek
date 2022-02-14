@@ -95,7 +95,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			gGameRunning = 0;
 			AudioManager.Free();
 			AssetManager.Free();
-			Renderer.FreeRenderComponents();
+			Renderer.Clear();
 			Renderer.FreeMesh();
 			ECSManager.Free();
 		}

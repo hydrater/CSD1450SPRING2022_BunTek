@@ -42,14 +42,6 @@ void _renderer::Update(void)
 
     for (int i = 0; i < rendererList.size(); ++i)
     {
-		/*if (rendererList[i]->remove)
-		{
-			delete rendererList[i];
-			rendererList.erase(rendererList.begin() + i);
-			--i;
-			continue;
-		}*/
-
 		if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive() ||
 			(rendererList[i]->Owner()->GetParent() != NULL && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()))
 			continue;
@@ -297,11 +289,8 @@ void _renderer::InsertionSort(void)
 	}
 }
 
-void _renderer::FreeRenderComponents(void)
+void _renderer::Clear(void)
 {
-	/*for (int i = 0; i < rendererList.size(); ++i)
-		delete  rendererList[i];*/
-
 	rendererList.clear();
 }
 
