@@ -37,7 +37,7 @@ void _ECSManager::UpdateList(void)
 
         if (componentList[i]->remove)
         {
-            //delete componentList[i];
+            delete componentList[i];
             componentList[i] = NULL;
         }
     }
@@ -56,7 +56,7 @@ void _ECSManager::UpdateList(void)
 
         if (GOList[i]->remove)
         {
-            //delete GOList[i];
+            delete GOList[i];
             GOList[i] = NULL;
         }
     }

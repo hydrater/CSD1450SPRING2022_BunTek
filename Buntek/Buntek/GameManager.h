@@ -31,9 +31,9 @@ public:
         int stardust;
         int mapSize;
         short attackType;
-    }playerProfile;
+    }playerProfile = {}, enemyProfile = {};
 
-    struct BattleProfile
+    struct BattleArtifactProfile
     {
         // Artifact list by events
         vector<Artifact> behaviorList_Passive;
@@ -44,7 +44,7 @@ public:
         vector<Artifact> behaviorList_BallOnBallCollidision;
 
         // Any additional variables for specific artifacts
-    };
+    }playerArtifactList = {}, enemyArtifactList{};
 
     // Camera info
     void CameraUpdate(void);
@@ -66,5 +66,4 @@ public:
 
     // Battle metrics
     float playerHp = 0, enemyHp = 0;
-    BattleProfile playerBattleProfile = {}, enemyBattleProfile = {};
 };

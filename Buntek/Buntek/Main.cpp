@@ -51,6 +51,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AudioManager;
 	MapData;
 	Renderer;
+	SaveManager;
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
@@ -84,7 +85,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneManager.LateUpdate();
 
 		// ------------------------------------------- End of Loop ------------------------------------------- //
-		//ECSManager.UpdateList();
+		ECSManager.UpdateList();
 		
 		// Informing the system about the loop's end
 		AESysFrameEnd();

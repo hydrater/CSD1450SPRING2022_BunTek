@@ -4,7 +4,6 @@
 #include "Devtools.h"
 #include "System.h"
 
-
 class ParticleSystem : public GameScript
 {
 public:
