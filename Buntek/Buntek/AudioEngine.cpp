@@ -95,6 +95,7 @@ void _audioManager::LoadSound(string name)
     Sound* sound = 0;
     fmodSystem->createSound(pathName, FMOD_DEFAULT, nullptr, &sound);
     soundDatabase[name] = sound;
+    delete[] pathName;
 }
 
 void _audioManager::LoadMusic(string name)
@@ -105,6 +106,7 @@ void _audioManager::LoadMusic(string name)
     Sound* music = 0;
     fmodSystem->createSound(pathName, FMOD_LOOP_NORMAL, nullptr, &music);
     musicDatabase[name] = music;
+    delete[] pathName;
 }
 
 void _audioManager::UnloadSound(string name)
@@ -129,9 +131,7 @@ Sound* _audioManager::GetSound(string name)
 {
     auto search = soundDatabase.find(name);
     if (search != soundDatabase.end())
-    {
         return search->second;
-    }
     return NULL;
 }
 
