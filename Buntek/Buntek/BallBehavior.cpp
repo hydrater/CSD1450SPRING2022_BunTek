@@ -72,6 +72,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			multiplier =  Clamp((float)pow(multiplier, 2) *sign, (float)-1, (float)1);
 			velocity.RotateC(multiplier * angRange);
 			causeHitPause = true;
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_PaddleHit, playerPossess, this->Owner());
 		}
 	}
 	else {
@@ -84,7 +85,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
 			multiplier = Clamp((float)pow(multiplier, 2) * sign, (float)-1, (float)1);
 			velocity.RotateAC(multiplier * angRange);
-			
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_PaddleHit, playerPossess, this->Owner());
 		}
 	}
 }

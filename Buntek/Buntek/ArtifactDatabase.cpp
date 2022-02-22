@@ -27,6 +27,10 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         tempBallBehavior = ball->GetComponent<BallBehavior>();
         tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10));
         break;
+    case 300:
+        tempBallBehavior = ball->GetComponent<BallBehavior>();
+        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10));
+        break;
     default:
         
         break;
