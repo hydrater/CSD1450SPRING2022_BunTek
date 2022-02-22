@@ -12,14 +12,23 @@ public:
 
 	UI_Hp(void);
 	~UI_Hp(void);
-	void GenerateHpBar(bool _isplayer);
+	void GenerateHpBar(bool _isplayer = true, float hpAmt = 100, float maxHpAmt = 100, int barCount = 2, int pixelWidth = 500, int pixelHeight = 50, int border = 10);
 	void Start(void) override;
 	void Update(void) override;
-	GameObject* hpForeground = 0,* hpBackground = 0, *hpBarCount = 0;
-	int hpBarNum = 0;
+	void SetHp(float hpAmt);
+	void Damage(float damageAmt);
+	void UpdateHpBar(float floatinghp);
+
+	float lerpSpeed = 4.0f;
+	float timer = 0;
+	GameObject* hpForeground = 0,* hpBackground = 0, * hpBackground2 = 0,*hpBarCount = 0;
+	int borderSize = 10;
+	int maxHpBarNum = 2;
+	int hpBarNum = maxHpBarNum;
 	bool isplayer = false;
-	float health = 1000;
-	float maxHealth = 1000;
+	float health = 100;
+	float floatinghealth = health;
+	float maxHealth = 100;
 private:
 
 

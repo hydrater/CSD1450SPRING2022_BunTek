@@ -8,9 +8,8 @@
 
 UI_Hp::UI_Hp(void)
 {
-	maxHealth = 1000;
+	maxHealth = 100;
 	health = maxHealth;
-	hpBarNum = 5;
 }
 
 UI_Hp::~UI_Hp(void)
@@ -18,27 +17,33 @@ UI_Hp::~UI_Hp(void)
 
 }
 
-void UI_Hp::GenerateHpBar(bool _isplayer)
+void UI_Hp::GenerateHpBar(bool _isplayer, float hpAmt, float maxHpAmt, int barCount, int pixelWidth , int pixelHeight, int border)
 {
+	health = hpAmt;
+	maxHealth = maxHpAmt;
+	maxHpBarNum = barCount;
+	borderSize = border;
 	//empty white bar
-	hpBackground = devTools.CreateSpriteGameObject("WhiteTexture.png", 600, 100, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 2), 1);
+	hpBackground = devTools.CreateSpriteGameObject("WhiteTexture.png", pixelWidth, pixelHeight, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 2), 1);
+	hpBackground2 = devTools.CreateSpriteGameObject("WhiteTexture.png", pixelWidth - borderSize, pixelHeight - borderSize, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 1), 1);
 	SpriteRenderer* hpBackgroundRenderer = hpBackground->GetComponent<SpriteRenderer>();
-	//bar to update
-	hpForeground = devTools.CreateSpriteGameObject("WhiteTexture.png", 600, 100, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 1), 1);
-
-	hpBarCount = devTools.CreateSpriteGameObject("WhiteTexture.png", 100, 100, AE_GFX_BM_NONE, Vector2(this->Owner()->transform->worldposition.x, + this->Owner()->transform->worldposition.y + hpBackgroundRenderer->GetHalfHeight()*2), (short)(5 - 1), 1);
+	//bars to update
+	hpForeground = devTools.CreateSpriteGameObject("WhiteTexture.png", pixelWidth- borderSize, pixelHeight - borderSize, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 0), 1);
+	
+	hpBarCount = devTools.CreateSpriteGameObject("WhiteTexture.png", 50, 50, AE_GFX_BM_NONE, Vector2(this->Owner()->transform->worldposition.x, + this->Owner()->transform->worldposition.y + hpBackgroundRenderer->GetHalfHeight()*2), (short)(5 - 1), 1);
+	
 	TextRenderer* pBarCountTextRenderer = hpBarCount->AddComponent<TextRenderer>();
-
+	hpBarNum = barCount;
 	pBarCountTextRenderer->SetFont("Gabriola.ttf");
 	pBarCountTextRenderer->SetTextColor(0, 0, 0);
-	pBarCountTextRenderer->SetText(std::to_string(hpBarNum));
+	pBarCountTextRenderer->SetText("x"+std::to_string(hpBarNum));
 	pBarCountTextRenderer->SetFontScale(1);
 	pBarCountTextRenderer->SetLayer(5);
 	pBarCountTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	pBarCountTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-
-	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
-	hpForegroundRenderer->SetColor(1, 0, 0);
+	
+	hpBackground2->GetComponent<SpriteRenderer>()->SetColor(0.5f, 0.5f, 0.5f);
+	hpForeground->GetComponent<SpriteRenderer>()->SetColor(1, 0, 0);
 	isplayer = _isplayer;
 }
 void UI_Hp::Start(void)
@@ -48,21 +53,49 @@ void UI_Hp::Start(void)
 
 void UI_Hp::Update(void)
 {
-	health -= 10;
+	timer += DeltaTime;
+	if (timer >= 1) {
+		Damage(3.0f);
+		timer--;
+	}
+	
+	floatinghealth = lerpF(floatinghealth, health, AEClamp(lerpSpeed * DeltaTime,0,1)); // "Floating" hp for the hp lerping
+	float remainderHp = fmodf(floatinghealth, maxHealth / maxHpBarNum);
+	if (remainderHp == 0 && floatinghealth != 0) {
+		remainderHp = (maxHealth / (float)maxHpBarNum);
+	}
+	UpdateHpBar(remainderHp);
+}
+
+
+void UI_Hp::SetHp(float hpAmt)
+{
+	health = hpAmt;
+	health = AEClamp(health, 0, maxHealth);
+
 	SpriteRenderer* hpBackgroundRenderer = hpBackground->GetComponent<SpriteRenderer>();
 	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
-	health = AEClamp(health, 0, maxHealth);
-	if (health == 0) {
-		if (hpBarNum > 0) {
-			TextRenderer* pBarCountTextRenderer = hpBarCount->GetComponent<TextRenderer>();
-			hpBarNum -= 1;
-			pBarCountTextRenderer->SetText(std::to_string(hpBarNum));
-			health = maxHealth;
-		}
+	int foregroundSize = ((hpBackgroundRenderer->GetHalfWidth() * 2) - borderSize);
+	float newHpBarNum = ceil(health / (maxHealth / maxHpBarNum));
+
+	
+	//Set text objects
+	hpBarNum = newHpBarNum;
+	if (hpBarNum > 1) {// Multiple bars left
+		hpBarCount->GetComponent<TextRenderer>()->SetText("x" + std::to_string(hpBarNum));
 	}
-	hpForegroundRenderer->Size(hpBackgroundRenderer->GetHalfWidth()*2/ maxHealth * health, hpForegroundRenderer->GetHalfHeight() * 2);
-	if(isplayer)
-		hpForeground->transform->SetPosition(Vector2(hpBackground->transform->worldposition.x - hpBackgroundRenderer->GetHalfWidth() + hpForegroundRenderer->GetHalfWidth(), hpBackground->transform->worldposition.y));
-	else
-		hpForeground->transform->SetPosition(Vector2(hpBackground->transform->worldposition.x + hpBackgroundRenderer->GetHalfWidth() - hpForegroundRenderer->GetHalfWidth(), hpBackground->transform->worldposition.y));
+	else { // Final Bar of help
+		hpBarCount->GetComponent<TextRenderer>()->SetText("");
+	}
+}
+
+void UI_Hp::UpdateHpBar(float remainderHp) { // remainder hp is the amount of remaining hp in the current bar;
+	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
+	int foregroundSize = ((hpBackground->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2) - borderSize);
+	hpForegroundRenderer->Size(foregroundSize * (remainderHp / (maxHealth / maxHpBarNum)), hpForegroundRenderer->GetHalfHeight() * 2);
+}
+
+void UI_Hp::Damage(float damageAmt)
+{
+	SetHp(health - damageAmt);
 }

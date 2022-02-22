@@ -15,7 +15,6 @@ public:
 	bool battleStarted = false;
 	float mainTimeScalar = 1.0f;
 	float timeScalar = mainTimeScalar;
-	
 
 	GameObject* inputHandler = 0;
 	GameObject* background = 0, * ball = 0, * friendlyArea = 0, * hostileArea = 0, * neutralArea = 0, * playerpaddle = 0, * playercursor = 0, * AIpaddle = 0, * AIcursor = 0, * hpBar = 0, * enemyhpBar = 0, * ballParticle = 0;
