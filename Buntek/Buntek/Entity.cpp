@@ -35,10 +35,10 @@ GameObject::~GameObject()
 	//}
 }
 
-const int GameObject::GetID(void)
-{
-	return id;
-}
+//const int GameObject::GetID(void)
+//{
+//	return id;
+//}
 
 bool GameObject::IsActive(void)
 {

@@ -26,6 +26,7 @@ void _debuggingTools::CheatsUpdate(void)
 {
 	if (AEInputCheckTriggered(AEVK_1))
 	{
+		GameManager.disableInteraction = false;
 		SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
 	}
 

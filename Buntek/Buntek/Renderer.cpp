@@ -36,7 +36,6 @@ void _renderer::Update(void)
 		if (rendererList[i]->remove)
 		{
 			rendererList.erase(rendererList.begin() + i);
-			--i;
 		}
 	}
 

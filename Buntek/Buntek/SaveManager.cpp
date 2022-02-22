@@ -136,7 +136,7 @@ void _saveManager::LoadData(void)
     rf.read((char*)&_value, sizeof(_value));
     for (int i = 0; i < _size; i++)
         artifactSaveData[_key[i]] = _value[i];
-    HashtableToArtifactList();
+    //HashtableToArtifactList();
 
     rf.close();
     cout << "Save loaded" << endl;
