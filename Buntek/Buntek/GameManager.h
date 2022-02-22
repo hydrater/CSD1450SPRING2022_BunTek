@@ -17,6 +17,7 @@ private:
     float cameraShakeTime = 0, maxCameraShakeTime = 0, maxShakeStrength = 0, shakeStrength = 0, lerpSpeed = 1.0f;
     Vector2 pos = Vector2(0, 0);
     Vector2 dir = Vector2(0, 0);
+    map<unsigned long, int> EnemyArtifactData;
 
 public:
     static _gameManager& Instance(void);
@@ -48,6 +49,7 @@ public:
         // Any additional variables for specific artifacts
     }playerArtifactList = {}, enemyArtifactList{};
     void InitBattleProfile(BattleArtifactProfile& battleProfile, map<unsigned long, int> artifactSaveData);
+    map<unsigned long, int> GenerateArtifactList(int maxAmtOfArtifacts, int totalCount);
 
     // Camera info
     void CameraUpdate(void);

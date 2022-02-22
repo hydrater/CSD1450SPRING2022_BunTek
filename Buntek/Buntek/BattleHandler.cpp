@@ -7,8 +7,7 @@
 #include "GameManager.h"
 #include "UI_Hp.h"
 #include "Scene_Battle.h"
-#include "Component.h"
-#include "Entity.h"
+#include "SaveManager.h"
 
 BattleHandler::BattleHandler(void) {
 	
@@ -140,6 +139,8 @@ void BattleHandler::StartBattle(float selfHp, float selfMaxHp, float enemyHp, fl
 	GameManager.friendlyAreaY = friendlyArea->transform->worldposition.y + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.hostileAreaY = hostileArea->transform->worldposition.y - hostileArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 
+	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
+	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(10, 10));
 
 	enemyhpBar = new GameObject();
 	enemyhpBar->transform->SetPosition(Vector2(660, 400));

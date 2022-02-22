@@ -71,6 +71,11 @@ void _gameManager::InitBattleProfile(BattleArtifactProfile& battleProfile, map<u
     }
 }
 
+map<unsigned long, int> _gameManager::GenerateArtifactList(int maxAmtOfArtifacts, int totalCount)
+{
+    return EnemyArtifactData;
+}
+
 void _gameManager::CameraUpdate(void)
 {
     if (cameraShakeTime > 0)
