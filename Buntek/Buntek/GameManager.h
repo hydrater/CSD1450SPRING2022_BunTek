@@ -3,6 +3,7 @@
 #include <vector>
 #include "Vector2.h"
 #include "ArtifactDatabase.h"
+#include <map>
 using namespace std;
 
 #define GameManager _gameManager::Instance()
@@ -41,10 +42,11 @@ public:
         vector<Artifact> behaviorList_TakeDamage;
         vector<Artifact> behaviorList_WallBounce;
         vector<Artifact> behaviorList_PaddleHit;
-        vector<Artifact> behaviorList_BallOnBallCollidision;
+        vector<Artifact> behaviorList_BallOnBallCollision;
 
         // Any additional variables for specific artifacts
     }playerArtifactList = {}, enemyArtifactList{};
+    void InitBattleProfile(BattleArtifactProfile& battleProfile, map<unsigned long, int> artifactSaveData);
 
     // Camera info
     void CameraUpdate(void);

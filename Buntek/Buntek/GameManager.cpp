@@ -28,6 +28,49 @@ Vector2 _gameManager::GetCursorPosition(void)
     return Vector2((float)x - (float)AEGetWindowWidth() / 2, -((float)y - (float)AEGetWindowHeight() / 2));
 }
 
+void _gameManager::InitBattleProfile(BattleArtifactProfile& battleProfile, map<unsigned long, int> artifactSaveData)
+{
+    battleProfile = BattleArtifactProfile();
+    for (map<unsigned long, int>::iterator it = artifactSaveData.begin(); it != artifactSaveData.end(); ++it)
+    {
+        Artifact newArtifact;
+        newArtifact.ID = it->first;
+        newArtifact.count = it->second;
+
+        unsigned long idType = it->first / 100;
+
+        switch (idType)
+        {
+        case 0:
+            battleProfile.behaviorList_Passive.push_back(newArtifact);
+            break;
+
+        case 1:
+            battleProfile.behaviorList_DealDamage.push_back(newArtifact);
+            break;
+
+        case 2:
+            battleProfile.behaviorList_TakeDamage.push_back(newArtifact);
+            break;
+
+        case 3:
+            battleProfile.behaviorList_WallBounce.push_back(newArtifact);
+            break;
+
+        case 4:
+            battleProfile.behaviorList_PaddleHit.push_back(newArtifact);
+            break;
+
+        case 5:
+            battleProfile.behaviorList_BallOnBallCollision.push_back(newArtifact);
+            break;
+
+        default:
+            break;
+        }
+    }
+}
+
 void _gameManager::CameraUpdate(void)
 {
     if (cameraShakeTime > 0)

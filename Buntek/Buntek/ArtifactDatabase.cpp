@@ -1,5 +1,6 @@
 #include "ArtifactDatabase.h"
 #include "SpriteRenderer.h"
+#include "GameManager.h"
 
 _artifactdatabase::_artifactdatabase()
 {
@@ -11,7 +12,7 @@ _artifactdatabase::~_artifactdatabase()
 
 }
 
-void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster)
+void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster, GameObject* ball)
 {
     // if (isPlayerTheCaster) means the player owns this artifact else it's the AI
 
@@ -58,10 +59,10 @@ string _artifactdatabase::GetDescription(unsigned long id)
     }
 }
 
-void _artifactdatabase::ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster)
+void _artifactdatabase::ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball)
 {
     for (size_t i = 0; i < artifactList.size(); ++i)
     {
-        ExecuteBehavior(artifactList[i], isPlayerTheCaster);
+        ExecuteBehavior(artifactList[i], isPlayerTheCaster, ball);
     }
 }

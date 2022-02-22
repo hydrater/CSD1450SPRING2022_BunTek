@@ -30,13 +30,13 @@ private:
     _artifactdatabase();
     ~_artifactdatabase();
     // Overload if necessary
-    void ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster);
+    void ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster, GameObject* ball);
 
 public:
     static _artifactdatabase& Instance(void);
     string GetName(unsigned long id);
     string GetDescription (unsigned long id);
-    void ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster);
+    void ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball = NULL);
     // Pass in all parameters that u need into these behavior such as object references
     //void Behavior_Reflect(int id, GameObject* gameObject);
     //void Behavior_DealDamage(int id, GameObject* gameObject);
