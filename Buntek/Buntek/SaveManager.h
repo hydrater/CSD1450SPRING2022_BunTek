@@ -19,13 +19,13 @@ private:
     unsigned long _key[128] = {};
     int _value[128] = {};
 
-    void HashtableToArtifactList(void);
-    void AddToArtifactList(unsigned long id);
 
 public:
     static _saveManager& Instance(void);
 
     // Arifact
+    void AddToArtifactList(unsigned long id);
+    void RemoveFromArtifactList(unsigned long id);
     map<unsigned long, int> artifactSaveData;
 
     void SaveData(void);

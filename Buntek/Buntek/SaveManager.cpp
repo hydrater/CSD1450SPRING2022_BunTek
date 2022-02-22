@@ -11,14 +11,28 @@ _saveManager::~_saveManager()
 {
 }
 
-void _saveManager::HashtableToArtifactList(void)
-{
-    // Switch based on event type
-}
-
 void _saveManager::AddToArtifactList(unsigned long id)
 {
+    map<unsigned long, int>::iterator it;
 
+    it = artifactSaveData.find(id);
+    if (it != artifactSaveData.end())
+        it->second++;
+    else
+        artifactSaveData[id] = 1;
+}
+
+void _saveManager::RemoveFromArtifactList(unsigned long id)
+{
+    map<unsigned long, int>::iterator it;
+
+    it = artifactSaveData.find(id);
+    if (it != artifactSaveData.end())
+    {
+        it->second--;
+        if (it->second <= 0)
+            artifactSaveData.erase(id);
+    }
 }
 
 _saveManager& _saveManager::Instance(void)
