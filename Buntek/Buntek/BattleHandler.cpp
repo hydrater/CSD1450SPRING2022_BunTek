@@ -24,7 +24,7 @@ void BattleHandler::Start(void) {
 
 }
 
-void BattleHandler::StartBattle(void) {
+void BattleHandler::StartBattle(float selfHp, float selfMaxHp, float enemyHp, float enemyMaxHp, int enemyHpBarCount) {
 	battleStarted = true;
 	if (RandIntMinMax(0, 1))
 	{
@@ -141,13 +141,20 @@ void BattleHandler::StartBattle(void) {
 	GameManager.hostileAreaY = hostileArea->transform->worldposition.y - hostileArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 
 
-	GameManager.InitBattle(100, 100); // Inits Player and Enemy HP
+	enemyhpBar = new GameObject();
+	enemyhpBar->transform->SetPosition(Vector2(660, 400));
+	enemyhpBar->AddComponent<UI_Hp>()->GenerateHpBar(false, enemyHp, enemyMaxHp, enemyHpBarCount);
+
+	hpBar = new GameObject();
+	hpBar->transform->SetPosition(Vector2(-660, -400));
+	hpBar->AddComponent<UI_Hp>()->GenerateHpBar(true, selfHp, selfMaxHp);
+
+	GameManager.InitBattle(selfHp, enemyHp); // Inits Player and Enemy HP
 }
 
 
 void BattleHandler::Update(void) {
 	
-
 	if (battleStarted) {
 		
 		if (hitPauseTimer > 0) {
@@ -204,6 +211,14 @@ void BattleHandler::Update(void) {
 			ballList->push_back(tempBall);
 
 			ballSpawnTimer = 2 - scalingTimer * 0.01f;
+		}
+
+		//HP Bar Logic
+		if (hpBar != 0) {
+			hpBar->GetComponent<UI_Hp>()->SetHp(GameManager.playerHp);
+		}
+		if (enemyhpBar != 0) {
+			enemyhpBar->GetComponent<UI_Hp>()->SetHp(GameManager.enemyHp);
 		}
 		
 	}

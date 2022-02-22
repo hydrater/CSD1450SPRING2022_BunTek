@@ -11,7 +11,7 @@ public:
 	~BattleHandler(void);
 	void Start(void) override;
 	void Update(void) override;
-	void StartBattle(void);
+	void StartBattle(float selfHp, float selfMaxHp, float enemyHp, float enemyMaxHp, int enemyHpBarCount);
 	bool battleStarted = false;
 	float mainTimeScalar = 1.0f;
 	float timeScalar = mainTimeScalar;

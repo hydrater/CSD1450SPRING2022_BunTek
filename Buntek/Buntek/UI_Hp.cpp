@@ -10,6 +10,7 @@ UI_Hp::UI_Hp(void)
 {
 	maxHealth = 100;
 	health = maxHealth;
+	floatinghealth = health;
 }
 
 UI_Hp::~UI_Hp(void)
@@ -36,7 +37,13 @@ void UI_Hp::GenerateHpBar(bool _isplayer, float hpAmt, float maxHpAmt, int barCo
 	hpBarNum = barCount;
 	pBarCountTextRenderer->SetFont("Gabriola.ttf");
 	pBarCountTextRenderer->SetTextColor(0, 0, 0);
-	pBarCountTextRenderer->SetText("x"+std::to_string(hpBarNum));
+	if (hpBarNum > 1) {
+		pBarCountTextRenderer->SetText("x" + std::to_string(hpBarNum));
+	}
+	else {
+		pBarCountTextRenderer->SetText(std::to_string(health));
+	}
+	
 	pBarCountTextRenderer->SetFontScale(1);
 	pBarCountTextRenderer->SetLayer(5);
 	pBarCountTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
@@ -53,23 +60,21 @@ void UI_Hp::Start(void)
 
 void UI_Hp::Update(void)
 {
-	timer += DeltaTime;
-	if (timer >= 1) {
-		Damage(3.0f);
-		timer--;
-	}
-	
 	floatinghealth = lerpF(floatinghealth, health, AEClamp(lerpSpeed * DeltaTime,0,1)); // "Floating" hp for the hp lerping
 	float remainderHp = fmodf(floatinghealth, maxHealth / maxHpBarNum);
-	if (remainderHp == 0 && floatinghealth != 0) {
+	if (remainderHp <= 0.1f && floatinghealth != 0) {
 		remainderHp = (maxHealth / (float)maxHpBarNum);
 	}
+	cout << remainderHp << endl;
 	UpdateHpBar(remainderHp);
 }
 
 
 void UI_Hp::SetHp(float hpAmt)
 {
+	if (health == hpAmt) {
+		return;
+	}
 	health = hpAmt;
 	health = AEClamp(health, 0, maxHealth);
 
@@ -85,14 +90,19 @@ void UI_Hp::SetHp(float hpAmt)
 		hpBarCount->GetComponent<TextRenderer>()->SetText("x" + std::to_string(hpBarNum));
 	}
 	else { // Final Bar of help
-		hpBarCount->GetComponent<TextRenderer>()->SetText("");
+		hpBarCount->GetComponent<TextRenderer>()->SetText(std::to_string(health));
 	}
+	
 }
 
 void UI_Hp::UpdateHpBar(float remainderHp) { // remainder hp is the amount of remaining hp in the current bar;
 	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
 	int foregroundSize = ((hpBackground->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2) - borderSize);
 	hpForegroundRenderer->Size(foregroundSize * (remainderHp / (maxHealth / maxHpBarNum)), hpForegroundRenderer->GetHalfHeight() * 2);
+
+	if (hpBarNum < 2) {
+		hpBarCount->GetComponent<TextRenderer>()->SetText(std::to_string((int)health));
+	}
 }
 
 void UI_Hp::Damage(float damageAmt)

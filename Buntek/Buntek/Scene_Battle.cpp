@@ -9,19 +9,9 @@ using namespace Math;
 void Scene_Battle::Start(void)
 {
 	BattleManager = new GameObject();
-	BattleManager->AddComponent<BattleHandler>()->StartBattle();
-	BattleHandler* _bh = BattleManager->GetComponent<BattleHandler>();
+	BattleHandler* _bh = BattleManager->AddComponent<BattleHandler>();
 
-	
-	
-	EnemyHPBar = new GameObject();
-	EnemyHPBar->transform->SetPosition(Vector2(0, 200));
-	EnemyHPBar->AddComponent<UI_Hp>()->GenerateHpBar(false,100,100,5);
-	
-	SelfHPBar = new GameObject();
-	SelfHPBar->transform->SetPosition(Vector2(0, -200));
-	SelfHPBar->AddComponent<UI_Hp>()->GenerateHpBar(true);
-	
+	_bh->StartBattle(100,100,100,100,3);
 }
 
 void Scene_Battle::Update(void)

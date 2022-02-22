@@ -29,6 +29,7 @@ public:
     {
         // Current
         float hp;
+        float maxhp = 100;
         int stardust;
         int mapSize;
         short attackType;
