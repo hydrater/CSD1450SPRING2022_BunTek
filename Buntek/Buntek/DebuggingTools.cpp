@@ -63,4 +63,8 @@ void _debuggingTools::CheatsUpdate(void)
 	{
 		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
 	}
+	if (AEInputCheckTriggered(AEVK_F9))
+	{
+		SaveManager.AddToArtifactList(0000);
+	}
 }
