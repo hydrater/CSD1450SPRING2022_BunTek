@@ -76,3 +76,30 @@ void _artifactdatabase::ApplyArtifactBehavior(vector<Artifact> artifactList, boo
         ExecuteBehavior(artifactList[i], isPlayerTheCaster, ball);
     }
 }
+
+unsigned long _artifactdatabase::DrawArtifact(void)
+{
+    int RNG = RandIntMinMax(0, 100);
+
+    if (RNG < commonRate)
+    {
+        RNG = RandIntMinMax(0, (sizeof(common) / sizeof(*common)));
+        return common[RNG];
+    }
+    else if (RNG < uncommonRate)
+    {
+        RNG = RandIntMinMax(0, (sizeof(uncommon) / sizeof(*uncommon)));
+        return uncommon[RNG];
+    }
+    else
+    {
+        RNG = RandIntMinMax(0, (sizeof(rare) / sizeof(*rare)));
+        return rare[RNG];
+    }
+}
+
+unsigned long _artifactdatabase::DrawLegendary(void)
+{
+    int RNG = RandIntMinMax(0, (sizeof(legendary) / sizeof(*legendary)));
+    return legendary[RNG];
+}

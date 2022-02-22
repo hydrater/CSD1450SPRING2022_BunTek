@@ -32,6 +32,9 @@ private:
     // Overload if necessary
     void ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster, GameObject* ball);
 
+    // Drop chance
+    const int commonRate = 60, uncommonRate = 90;
+
     // Store list of ID here
     const unsigned long common[9] = { 0, 1, 2, 3, 4, 300, 400, 401, 500};
     const unsigned long uncommon[6] = {120, 220, 221, 420, 520, 521};
@@ -43,4 +46,6 @@ public:
     string GetName(unsigned long id);
     string GetDescription (unsigned long id);
     void ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball = NULL);
+    unsigned long DrawArtifact(void);
+    unsigned long DrawLegendary(void);
 };
