@@ -11,13 +11,28 @@ _artifactdatabase::~_artifactdatabase()
 
 }
 
+void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster)
+{
+    // if (isPlayerTheCaster) means the player owns this artifact else it's the AI
+
+    switch (artifact.ID)
+    {
+    case 00000:
+        
+        break;
+    default:
+        
+        break;
+    }
+}
+
 _artifactdatabase& _artifactdatabase::Instance(void)
 {
     static _artifactdatabase instance;
     return instance;
 }
 
-string _artifactdatabase::GetName(int id)
+string _artifactdatabase::GetName(unsigned long id)
 {
     switch (id)
     {
@@ -30,7 +45,7 @@ string _artifactdatabase::GetName(int id)
     }
 }
 
-string _artifactdatabase::GetDescription(int id)
+string _artifactdatabase::GetDescription(unsigned long id)
 {
     switch (id)
     {
@@ -43,35 +58,10 @@ string _artifactdatabase::GetDescription(int id)
     }
 }
 
-void _artifactdatabase::Behavior_Reflect(int id, GameObject* gameObject)
+void _artifactdatabase::ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster)
 {
-    SpriteRenderer* tempRender = 0;
-    switch (id)
+    for (size_t i = 0; i < artifactList.size(); ++i)
     {
-    case 00000:
-        tempRender = gameObject->GetComponent<SpriteRenderer>();
-        tempRender->Size(tempRender->GetHalfWidth() * 2/100*101, tempRender->GetHalfHeight() * 2 / 100 * 101);
-        break;
-    default:
-        break;
+        ExecuteBehavior(artifactList[i], isPlayerTheCaster);
     }
 }
-
-void _artifactdatabase::Behavior_DealDamage(int id, GameObject* gameObject)
-{
-    switch (id)
-    {
-    default:
-        break;
-    }
-}
-
-void _artifactdatabase::Behavior_TakeDamage(int id, GameObject* gameObject)
-{
-    switch (id)
-    {
-    default:
-        break;
-    }
-}
-
