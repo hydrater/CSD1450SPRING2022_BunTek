@@ -32,13 +32,15 @@ private:
     // Overload if necessary
     void ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster, GameObject* ball);
 
+    // Store list of ID here
+    const unsigned long common[9] = { 0, 1, 2, 3, 4, 300, 400, 401, 500};
+    const unsigned long uncommon[6] = {120, 220, 221, 420, 520, 521};
+    const unsigned long rare[3] = {30, 630, 631};
+    const unsigned long legendary[4] = {140, 540, 541, 640};
+
 public:
     static _artifactdatabase& Instance(void);
     string GetName(unsigned long id);
     string GetDescription (unsigned long id);
     void ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball = NULL);
-    // Pass in all parameters that u need into these behavior such as object references
-    //void Behavior_Reflect(int id, GameObject* gameObject);
-    //void Behavior_DealDamage(int id, GameObject* gameObject);
-    //void Behavior_TakeDamage(int id, GameObject* gameObject);
 };
