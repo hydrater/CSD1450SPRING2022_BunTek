@@ -27,6 +27,14 @@ void BallBehavior::Update(void)
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		velocity.x = -velocity.x;
 		transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
+		ballPhase++;
+		if (playerPossess) {
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_WallBounce, playerPossess, this->Owner());
+		}
+		else {
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_WallBounce, playerPossess, this->Owner());
+		}
+		
 		BallHorizontalCheck();
 	}
 	//Collision check with top/bottom wall

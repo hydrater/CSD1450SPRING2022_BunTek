@@ -34,7 +34,7 @@ public:
 	bool causeHitPause = false;
 	bool checkTimer = false;
 	float timeScalar = 1.0f;
-
+	int ballPhase = 0;
 
 private:
 	const float maxSpeed = 2000;
@@ -44,7 +44,6 @@ private:
 	float rotSpeed = 0;
 	float targetRotSpeed = 0;
 	float angRange = 30;
-	
 	Transform* transform = 0;
 
 	void BallHorizontalCheck(void);

@@ -1,6 +1,7 @@
 #include "ArtifactDatabase.h"
 #include "SpriteRenderer.h"
 #include "GameManager.h"
+#include "BallBehavior.h"
 
 _artifactdatabase::_artifactdatabase()
 {
@@ -15,11 +16,16 @@ _artifactdatabase::~_artifactdatabase()
 void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster, GameObject* ball)
 {
     // if (isPlayerTheCaster) means the player owns this artifact else it's the AI
-
+    BallBehavior* tempBallBehavior;
     switch (artifact.ID)
     {
-    case 00000:
-        
+    case 220:
+        tempBallBehavior = ball->GetComponent<BallBehavior>();
+        tempBallBehavior->ballPhase += artifact.count;
+        break;
+    case 221:
+        tempBallBehavior = ball->GetComponent<BallBehavior>();
+        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10));
         break;
     default:
         
