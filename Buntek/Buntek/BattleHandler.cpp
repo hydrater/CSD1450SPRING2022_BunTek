@@ -188,7 +188,6 @@ void BattleHandler::Update(void) {
 			BallBehavior* tempBall;
 			CircleCollider* tempcol;
 
-
 			ball = new GameObject();
 			tempRenderer = ball->AddComponent<SpriteRenderer>();
 			tempRenderer->SetLayer(2);
@@ -208,9 +207,15 @@ void BattleHandler::Update(void) {
 			dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
 			tempBall->col = tempcol;
 
+			// Set ball spawn position
+			if (tempBall->playerPossess)
+				ball->transform->SetPosition(playerpaddle->transform->worldposition);
+			else
+				ball->transform->SetPosition(AIpaddle->transform->worldposition);
+
 			ballList->push_back(tempBall);
 
-			ballSpawnTimer = 2 - scalingTimer * 0.01f;
+			ballSpawnTimer = 3 - scalingTimer * 0.01f;
 		}
 
 		//HP Bar Logic

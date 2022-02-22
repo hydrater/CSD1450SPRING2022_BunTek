@@ -27,7 +27,6 @@ void BallBehavior::Update(void)
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		velocity.x = -velocity.x;
 		transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
-		ballPhase++;
 		if (playerPossess) {
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_WallBounce, playerPossess, this->Owner());
 		}
@@ -58,7 +57,6 @@ void BallBehavior::Update(void)
 	transform->Rotate(rotSpeed * DeltaTime * timeScalar);
 }
 
-
 void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 {
 	if (velocity.y < 0) { 
@@ -72,6 +70,13 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			multiplier =  Clamp((float)pow(multiplier, 2) *sign, (float)-1, (float)1);
 			velocity.RotateC(multiplier * angRange);
 			causeHitPause = true;
+
+			ballPhase++;
+			if (ballPhase > 8)
+				ballPhase = 8;
+			else
+				speed += ballPhaseSpeedIncrement;
+
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_PaddleHit, playerPossess, this->Owner());
 		}
 	}
@@ -85,6 +90,13 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
 			multiplier = Clamp((float)pow(multiplier, 2) * sign, (float)-1, (float)1);
 			velocity.RotateAC(multiplier * angRange);
+
+			ballPhase++;
+			if (ballPhase > 8)
+				ballPhase = 8;
+			else
+				speed += ballPhaseSpeedIncrement;
+
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_PaddleHit, playerPossess, this->Owner());
 		}
 	}

@@ -65,7 +65,7 @@ void UI_Hp::Update(void)
 	if (remainderHp <= 0.1f && floatinghealth != 0) {
 		remainderHp = (maxHealth / (float)maxHpBarNum);
 	}
-	cout << remainderHp << endl;
+	//cout << remainderHp << endl;
 	UpdateHpBar(remainderHp);
 }
 

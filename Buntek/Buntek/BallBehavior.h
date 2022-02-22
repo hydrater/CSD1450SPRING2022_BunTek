@@ -37,8 +37,12 @@ public:
 	int ballPhase = 0;
 
 private:
+	float speed = 200;
 	const float maxSpeed = 2000;
-	float speed = 400;
+
+	const int maxBallPhase = 8;
+	const float ballPhaseSpeedIncrement = 50;
+
 	float targetSpeed = speed;
 	const float maxRotSpeed = 3600;
 	float rotSpeed = 0;
