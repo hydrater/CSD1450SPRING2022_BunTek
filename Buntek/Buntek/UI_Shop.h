@@ -25,20 +25,14 @@ public:
 
 private:
 	Vector2 buttonArtifactSize = Vector2(175, 250);
-	vector<Vector2> buttonArtifactPos = { Vector2(-buttonArtifactSize.x * 3, buttonArtifactSize.y/1.25f), Vector2(-buttonArtifactSize.x, buttonArtifactSize.y / 1.25f),
-		Vector2(buttonArtifactSize.x, buttonArtifactSize.y / 1.25f), Vector2(buttonArtifactSize.x * 3, buttonArtifactSize.y / 1.25f),
-		Vector2(-buttonArtifactSize.x * 2, -buttonArtifactSize.y / 2), Vector2(buttonArtifactSize.x * 2, -buttonArtifactSize.y / 2)};
+	vector<Vector2> buttonArtifactPos = { Vector2(-buttonArtifactSize.x * 2, buttonArtifactSize.y/1.25f), Vector2(0.f, buttonArtifactSize.y / 1.25f),
+		Vector2(buttonArtifactSize.x * 2, buttonArtifactSize.y / 1.25f), Vector2(-buttonArtifactSize.x * 3, -buttonArtifactSize.y / 2),
+		Vector2(0.f, -buttonArtifactSize.y / 2), Vector2(buttonArtifactSize.x * 2, -buttonArtifactSize.y / 2)};
 
 	Vector2 stastHolderSize = Vector2(buttonArtifactSize.x * 2, buttonArtifactSize.y);
 
-	Vector2 buttonStatsSize = Vector2(stastHolderSize.x/3, stastHolderSize.y/2);
-	vector<Vector2> buttonStatsPos = { Vector2(-buttonStatsSize.x, buttonStatsSize.y / 2), Vector2(0.f, buttonStatsSize.y / 2),
-		Vector2(buttonStatsSize.x, buttonStatsSize.y / 2), Vector2(-buttonStatsSize.x, -buttonStatsSize.y / 2),
-		Vector2(0.f, -buttonStatsSize.y / 2), Vector2(buttonStatsSize.x, -buttonStatsSize.y / 2) };
-
-	SpriteRenderer* header = 0, *statsHolder = 0;
+	SpriteRenderer* header = 0;
 	TextRenderer* headerText = 0;
 	Button* leaveButton = 0;
 	vector<Button*> buttonArtifactList;
-	vector<Button*> buttonStatsList;
 };

@@ -77,47 +77,10 @@ void UI_Shop::CreateShop(short sortingLayer, vector<string> artifacts, vector<st
         }
     }
 
-    // Create Stats Holder
-    GameObject* tempStatsHolder = devTools.CreateSpriteGameObject("Encounter.png", buttonArtifactSize.x * 2, buttonArtifactSize.y, AE_GFX_BM_BLEND, Vector2(0.f, -buttonArtifactSize.y / 2));
-    tempStatsHolder->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-    tempStatsHolder->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
-
-    // Create Stats Button
-    vector<Button*> tempbuttonStatsList;
-    for (int i = 0; i < stats.size(); ++i) {
-        if (i < buttonStatsPos.size())
-        {
-            GameObject* tempButtonObj = devTools.CreateSpriteGameObject("Encounter.png", buttonStatsSize.x, buttonStatsSize.y, AE_GFX_BM_BLEND, Vector2(tempStatsHolder->transform->worldposition.x + buttonStatsPos[i].x, tempStatsHolder->transform->worldposition.y + buttonStatsPos[i].y));
-            tempButtonObj->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-            tempButtonObj->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
-
-            TextRenderer* tempButtonTxtRenderer = 0;
-            tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
-            tempButtonTxtRenderer->SetFont("Gabriola.ttf");
-            tempButtonTxtRenderer->SetTextColor(1, 1, 1);
-            tempButtonTxtRenderer->SetText("Stats");
-            tempButtonTxtRenderer->SetFontScale(0.75f);
-            tempButtonTxtRenderer->SetLayer(sortingLayer);
-            tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
-            tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-
-            Button* tempButton = tempButtonObj->AddComponent<Button>();
-            tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
-            tempButton->tr = tempButtonTxtRenderer;
-            tempButton->affectedObject = shopUI;
-            tempButton->ButtonEffect = &RemoveShop;
-
-            shopUI->AddChild(tempButtonObj);
-            tempbuttonStatsList.push_back(tempButton);
-        }
-    }
-
     header = tempHeader->GetComponent<SpriteRenderer>();
     headerText = tempHeaderTxtRenderer;
     leaveButton = tempLeaveButton;
     buttonArtifactList = tempbuttonArtifactList;
-    statsHolder = tempStatsHolder->GetComponent<SpriteRenderer>();
-    buttonStatsList = tempbuttonStatsList;
 
     CloseShop();
 
@@ -133,9 +96,6 @@ void UI_Shop::StartShop(void)
     leaveButton->Owner()->Activate();
     for (int i = 0; i < buttonArtifactList.size(); ++i)
         buttonArtifactList[i]->Owner()->Activate();
-    statsHolder->Owner()->Activate();
-    for (int i = 0; i < buttonStatsList.size(); ++i)
-        buttonStatsList[i]->Owner()->Activate();
 }
 
 void UI_Shop::CloseShop(void)
@@ -145,17 +105,12 @@ void UI_Shop::CloseShop(void)
     leaveButton->Owner()->Deactivate();
     for (int i = 0; i < buttonArtifactList.size(); ++i)
         buttonArtifactList[i]->Owner()->Deactivate();
-    statsHolder->Owner()->Deactivate();
-    for (int i = 0; i < buttonStatsList.size(); ++i)
-        buttonStatsList[i]->Owner()->Deactivate();
 }
 
 void UI_Shop::SetClickable(bool _canClick)
 {
     for (int i = 0; i < buttonArtifactList.size(); ++i)
         buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
-    for (int i = 0; i < buttonStatsList.size(); ++i)
-        buttonStatsList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
 }
 
 void RemoveShop(Button* button)

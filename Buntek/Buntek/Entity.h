@@ -76,7 +76,6 @@ public:
 	}
 	bool remove;
 private:
-	//int id;
 	bool active;
 	
 	vector<Component*> components;
