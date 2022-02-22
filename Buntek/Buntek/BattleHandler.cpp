@@ -79,7 +79,7 @@ void BattleHandler::StartBattle(float selfHp, float selfMaxHp, float enemyHp, fl
 	playerpaddle = new GameObject();
 	tempRenderer = playerpaddle->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(100, 20);
-	tempRenderer->SetTexture("paddle.png");
+	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0, 1);
 	tempRenderer->SetLayer(1);
 	playerpaddle->transform->SetPosition(Vector2(-590, 70));
@@ -96,7 +96,7 @@ void BattleHandler::StartBattle(float selfHp, float selfMaxHp, float enemyHp, fl
 	AIpaddle = new GameObject();
 	tempRenderer = AIpaddle->AddComponent<SpriteRenderer>();
 	tempRenderer->Size(100, 20);
-	tempRenderer->SetTexture("paddle.png");
+	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(1, 0, 0);
 	tempRenderer->SetLayer(1);
 	AIpaddle->transform->SetPosition(Vector2(590, 70));

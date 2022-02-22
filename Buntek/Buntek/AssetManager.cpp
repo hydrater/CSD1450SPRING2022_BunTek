@@ -5,12 +5,10 @@
 _assetManager::_assetManager()
 {
     LoadTexture("Steven.jpg");
-    LoadTexture("splash.png");
     LoadTexture("Background.jpg");
     LoadTexture("WhiteTexture.png");
     LoadTexture("ball.png");
     LoadTexture("Trail.png");
-    LoadTexture("paddle.png");
     LoadTexture("BetterNebula.png");
     LoadTexture("Buttons.png");
 
