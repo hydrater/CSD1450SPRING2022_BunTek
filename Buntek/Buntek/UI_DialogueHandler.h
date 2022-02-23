@@ -18,6 +18,8 @@ public:
 	void Update(void);
 
 	void CreateDialoguePreset(string flag, short sortingLayer);
+	// For only after battle (random loot), so it will only show the reward selection part without any dialogue
+	void CreateRewardSelPreset(vector<Artifact> artifact, short sortingLayer, bool canDecline);
 	void SetDialogueClickable(bool _canClick);
 	void SkipDialogue(void);
 	void DeleteDialogueEvent(void);
@@ -28,10 +30,15 @@ private:
 
 	void WriteToDialogue(void);
 
-	// Dialogue
+	// Normal Dialogue (From dialogue.txt / Preset Artifacts)
 	void CreateDialogue(string flag, short sortingLayer);
 	void StartDialogueEvent(string flag);
 
+	// Battle End Reward Selection (Normally called in-game / Random Artifacts)
+	void CreateRewardSel(vector<Artifact> artifact, short sortingLayer, bool canDecline);
+
+	// Dialogue Tools
+	void CreatePreset(short sortingLayer); // To create all the objects
 	void LoadFromFile(string flag);
 	bool CheckNextCommand(char command);
 	void AssignButton(Button* button, char buttonType, char selchar);
@@ -57,6 +64,7 @@ private:
 
 	enum ButtonFunctionType {
 		BF_Leave = 0,
+		BF_ChooseLoot,
 		BF_Sample1
 	};
 

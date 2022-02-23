@@ -38,7 +38,7 @@ aed
 /ap Constellation of Mittens
 Don't look down on me because I'm a cat!
 /b1 Pet the constellation
-/b1 Offer some galaxy milk
+/b2 Offer some galaxy milk
 /b0 Leave
 /aa Next Trail
 YOU SHOULD NOT SEE THIS!
