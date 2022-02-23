@@ -18,7 +18,7 @@ UI_Hp::~UI_Hp(void)
 
 }
 
-void UI_Hp::GenerateHpBar(bool _isplayer, float hpAmt, float maxHpAmt, int barCount, int pixelWidth , int pixelHeight, int border)
+void UI_Hp::GenerateHpBar(bool _isplayer, float hpAmt, float maxHpAmt, int barCount, float pixelWidth , float pixelHeight, int border)
 {
 	health = hpAmt;
 	maxHealth = maxHpAmt;
@@ -80,12 +80,12 @@ void UI_Hp::SetHp(float hpAmt)
 
 	SpriteRenderer* hpBackgroundRenderer = hpBackground->GetComponent<SpriteRenderer>();
 	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
-	int foregroundSize = ((hpBackgroundRenderer->GetHalfWidth() * 2) - borderSize);
+	int foregroundSize = (int)((hpBackgroundRenderer->GetHalfWidth() * 2) - borderSize);
 	float newHpBarNum = ceil(health / (maxHealth / maxHpBarNum));
 
 	
 	//Set text objects
-	hpBarNum = newHpBarNum;
+	hpBarNum = (int)newHpBarNum;
 	if (hpBarNum > 1) {// Multiple bars left
 		hpBarCount->GetComponent<TextRenderer>()->SetText("x" + std::to_string(hpBarNum));
 	}
@@ -97,7 +97,7 @@ void UI_Hp::SetHp(float hpAmt)
 
 void UI_Hp::UpdateHpBar(float remainderHp) { // remainder hp is the amount of remaining hp in the current bar;
 	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
-	int foregroundSize = ((hpBackground->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2) - borderSize);
+	int foregroundSize = (int)((hpBackground->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2) - borderSize);
 	hpForegroundRenderer->Size(foregroundSize * (remainderHp / (maxHealth / maxHpBarNum)), hpForegroundRenderer->GetHalfHeight() * 2);
 
 	if (hpBarNum < 2) {

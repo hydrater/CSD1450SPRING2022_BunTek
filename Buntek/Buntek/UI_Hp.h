@@ -12,7 +12,7 @@ public:
 
 	UI_Hp(void);
 	~UI_Hp(void);
-	void GenerateHpBar(bool _isplayer = true, float hpAmt = 100, float maxHpAmt = 100, int barCount = 1, int pixelWidth = 500, int pixelHeight = 40, int border = 10);
+	void GenerateHpBar(bool _isplayer = true, float hpAmt = 100, float maxHpAmt = 100, int barCount = 1, float pixelWidth = 500, float pixelHeight = 40, int border = 10);
 	void Start(void) override;
 	void Update(void) override;
 	void SetHp(float hpAmt);
@@ -30,6 +30,5 @@ public:
 	float floatinghealth = health;
 	float maxHealth = 100;
 private:
-
 
 };

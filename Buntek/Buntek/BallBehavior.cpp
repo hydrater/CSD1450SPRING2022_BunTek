@@ -49,7 +49,7 @@ void BallBehavior::Update(void)
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, !playerPossess, this->Owner());
 		}
-		GameManager.DealDamage(ballDamage, playerPossess);
+		GameManager.DealDamage((float)ballDamage, playerPossess);
 		this->Owner()->Delete();
 		return;
 	}
