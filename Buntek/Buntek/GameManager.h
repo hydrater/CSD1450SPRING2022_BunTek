@@ -32,7 +32,7 @@ public:
         float hp;
         float maxhp = 100;
         int stardust;
-        int mapSize;
+        int currLevel;
         short attackType;
     }playerProfile = {}, enemyProfile = {};
 
