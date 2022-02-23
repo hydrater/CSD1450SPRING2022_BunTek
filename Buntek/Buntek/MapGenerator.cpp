@@ -105,13 +105,13 @@ void _mapData::GenerateMapObject(void)
             break;
         case NodeType::Enemy:
             tempRenderer->SetTexture("UI/Enemy.png");
-            temp->AddComponent<UI_EnemyNodeBox>();
-            temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
+            //temp->AddComponent<UI_EnemyNodeBox>();
+            //temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
             break;
         case  NodeType::Elite:
             tempRenderer->SetTexture("UI/Elite.png");
-            temp->AddComponent<UI_EnemyNodeBox>();
-            temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
+            //temp->AddComponent<UI_EnemyNodeBox>();
+            //temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
             break;
         case NodeType::Shop:
             tempRenderer->SetTexture("UI/Shop.png");

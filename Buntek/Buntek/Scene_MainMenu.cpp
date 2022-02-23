@@ -28,8 +28,8 @@ void Scene_MainMenu::Start(void)
 	GameManager.disableInteraction = true;
 
 	AudioManager.LoadSound("ButtonHover.mp3");
-	AudioManager.LoadMusic("www.ogg");
-	AudioManager.PlayMusic("www.ogg");
+	AudioManager.LoadMusic("kidding.ogg");
+	AudioManager.PlayMusic("kidding.ogg");
 	AudioManager.SetMusicVolume(0.05f);
 
 	AssetManager.LoadTexture("Menu/Mask_MainMenu.png");
@@ -257,7 +257,7 @@ void Scene_MainMenu::Update(void)
 Scene_MainMenu::~Scene_MainMenu(void)
 {
 	AudioManager.UnloadSound("ButtonHover.mp3");
-	AudioManager.UnloadMusic("www.ogg");
+	AudioManager.UnloadMusic("kidding.ogg");
 	AssetManager.UnloadTexture("Menu/Mask_MainMenu.png");
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
 	AssetManager.UnloadTexture("Menu/Button.png");

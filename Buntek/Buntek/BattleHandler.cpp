@@ -15,7 +15,7 @@ BattleHandler::BattleHandler(void) {
 BattleHandler::~BattleHandler(void) {
 	CollisionManager2D.RemoveAll();
 	AudioManager.StopMusic();
-	AudioManager.UnloadMusic("Dream.ogg");
+	AudioManager.UnloadMusic("hysteric.ogg");
 	AudioManager.UnloadMusic("www.ogg");
 }
 void BattleHandler::Start(void) {
@@ -27,8 +27,8 @@ void BattleHandler::StartBattle(float selfHp, float selfMaxHp, float enemyHp, fl
 	battleStarted = true;
 	if (RandIntMinMax(0, 1))
 	{
-		AudioManager.LoadMusic("Dream.ogg");
-		AudioManager.PlayMusic("Dream.ogg");
+		AudioManager.LoadMusic("hysteric.ogg");
+		AudioManager.PlayMusic("hysteric.ogg");
 	}
 	else
 	{
