@@ -111,22 +111,22 @@ GameObject* _devTools::CreateArtifactUIGameObject(unsigned long ID, short blendM
     switch (ArtifactDatabase.GetRarity(ID))
     {
     case RarityTypes::Uncommon:
-        ArtifactBckgrd->SetColor(0, 1, 1);
+        ArtifactBckgrd->SetColor(0, 0.67f, 0.3f);
         NameText->SetTextColor(0, 0, 0);
         DescText->SetTextColor(0, 0, 0);
         break;
     case RarityTypes::Rare:
-        ArtifactBckgrd->SetColor(0, 0, 1);
+        ArtifactBckgrd->SetColor(0, 0.35f, 0.67f);
         NameText->SetTextColor(1, 1, 1);
         DescText->SetTextColor(1, 1, 1);
         break;
     case RarityTypes::Unique:
-        ArtifactBckgrd->SetColor(1, 0, 0);
+        ArtifactBckgrd->SetColor(0.92f, 0.57f, 0.31f);
         NameText->SetTextColor(1, 1, 1);
         DescText->SetTextColor(1, 1, 1);
         break;
     default:
-        ArtifactBckgrd->SetColor(1, 1, 1);
+        ArtifactBckgrd->SetColor(0.7f, 0.7f, 0.7f);
         NameText->SetTextColor(0, 0, 0);
         DescText->SetTextColor(0, 0, 0);
         break;

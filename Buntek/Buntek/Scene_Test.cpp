@@ -35,11 +35,12 @@ void Scene_Test::Start(void)
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 	vector<Artifact> artiList;
 	Artifact test, test2, test3;
-	test.ID = 0;
-	test2.ID = 1;
-	test3.ID = 2;
+	test.ID = 630;
+	test2.ID = 540;
+	test3.ID = 420;
 	artiList.push_back(test);
 	artiList.push_back(test2);
+	artiList.push_back(test3);
 	//artiList.push_back(test3);
 	UIDialogueManager.CreateRewardSelPreset(artiList, 1, true);
 }

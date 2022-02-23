@@ -89,12 +89,52 @@ string _artifactdatabase::GetName(unsigned long id)
 {
     switch (id)
     {
-    case 00000:
+    case 0:
         return "test";
-        break;
+    case 1:
+        return "test";
+    case 2:
+        return "test";
+    case 3:
+        return "test";
+    case 4:
+        return "test";
+    case 30:
+        return "test";
+    case 120:
+        return "test";
+    case 140:
+        return "test";
+    case 220:
+        return "test";
+    case 221:
+        return "test";
+    case 300:
+        return "test";
+    case 400:
+        return "test";
+    case 401:
+        return "test";
+    case 420:
+        return "test";
+    case 500:
+        return "test";
+    case 520:
+        return "test";
+    case 530:
+        return "test";
+    case 540:
+        return "test";
+    case 541:
+        return "test";
+    case 630:
+        return "test";
+    case 631:
+        return "test";
+    case 640:
+        return "test";
     default:
         return "Invalid ID";
-        break;
     }
 }
 
@@ -120,12 +160,52 @@ string _artifactdatabase::GetDescription(unsigned long id)
 {
     switch (id)
     {
-    case 00000:
-        return "test description";
-        break;
+    case 0:
+        return "Increase damage";
+    case 1:
+        return "Increase max hp";
+    case 2:
+        return "Increase paddle speed";
+    case 3:
+        return "Increase ball speed";
+    case 4:
+        return "Increase ball spawn frequency";
+    case 30:
+        return "Increases healing";
+    case 120:
+        return "Battle won: Increase hp by 2, up to a max of 10 per stack";
+    case 140:
+        return "Battle won: Restores 10% of max hp";
+    case 220:
+        return "Wall bounce: Increases ball phase";
+    case 221:
+        return "Wall bounce: Increases ball speed";
+    case 300:
+        return "Ball phase >= 2\nWhen dealing damage, increase ball speed";
+    case 400:
+        return "Ball phase >= 3\nWhen dealing damage, restores hp";
+    case 401:
+        return "Ball phase >= 3\nWhen dealing damage, deals extra damage";
+    case 420:
+        return "Ball phase >= 4\nWhen dealing damage, spawns X ball in a random direction forward from the middle";
+    case 500:
+        return "Ball phase >= 3:\nWhen taking damage, opponent takes damage";
+    case 520:
+        return "Ball phase >= 4:\nWhen taking damage, spawns a ball in a random direction forward from the middle";
+    case 530:
+        return "Ball phase >= 3:\nWhen taking damage, if hp is below 20%, unable to take damage for a while";
+    case 540:
+        return "Ball phase >= 2:\nWhen taking damage, negate next damage taken";
+    case 541:
+        return "On death, restores 50% hp, destroy this artifact";
+    case 630:
+        return "Ball phase >= 2:\nWhen colliding with hostile balls, freeze the collided ball";
+    case 631:
+        return "Ball phase >= 2:\nWhen colliding with hostile balls, occasionally reflect collided ball";
+    case 640:
+        return "Ball phase >= 5:\nWhen colliding with hostile balls, destroy the collided ball";
     default:
         return "Invalid ID";
-        break;
     }
 }
 
