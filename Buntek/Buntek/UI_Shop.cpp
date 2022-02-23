@@ -52,25 +52,12 @@ void UI_Shop::CreateShop(short sortingLayer, vector<Artifact> artifacts)
     for (int i = 0; i < artifacts.size(); ++i) {
         if (i < buttonArtifactPos.size())
         {
-            /*GameObject* tempButtonObj = devTools.CreateSpriteGameObject("Encounter.png", buttonArtifactSize.x, buttonArtifactSize.y, AE_GFX_BM_BLEND, Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y));
-            tempButtonObj->GetComponent<SpriteRenderer>()->SetLayer(sortingLayer - 1);
-            tempButtonObj->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
-
-            TextRenderer* tempButtonTxtRenderer = 0;
-            tempButtonTxtRenderer = tempButtonObj->AddComponent<TextRenderer>();
-            tempButtonTxtRenderer->SetFont("Gabriola.ttf");
-            tempButtonTxtRenderer->SetTextColor(1, 1, 1);
-            tempButtonTxtRenderer->SetText("Artifact");
-            tempButtonTxtRenderer->SetFontScale(0.75f);
-            tempButtonTxtRenderer->SetLayer(sortingLayer);
-            tempButtonTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
-            tempButtonTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);*/
             GameObject* tempButtonObj = devTools.CreateArtifactUIGameObject(artifacts[i], buttonArtifactSize.x, buttonArtifactSize.y, AE_GFX_BM_BLEND,
                 Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y), sortingLayer - 1);
 
             Button* tempButton = tempButtonObj->AddComponent<Button>();
             tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
-            tempButton->tr = tempButtonObj->GetComponent<TextRenderer>(); //tempButtonTxtRenderer;
+            tempButton->tr = tempButtonObj->GetComponent<TextRenderer>();
             tempButton->affectedObject = shopUI;
             tempButton->ButtonEffect = &RemoveShop;
 

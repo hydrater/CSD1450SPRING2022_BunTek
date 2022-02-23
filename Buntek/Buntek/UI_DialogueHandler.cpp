@@ -1,4 +1,5 @@
 #include "MapGenerator.h"
+#include "ArtifactDatabase.h"
 #include "UI_DialogueHandler.h"
 #include "DialogueDatabase.h"
 #include "System.h"
@@ -161,9 +162,6 @@ void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
 
         TextRenderer* tempButtonTxtRenderer = devTools.AddTextToSpriteGameObject(tempButtonObj, "Gabriola.ttf", "I am a Reward", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 36.f, sortingLayer);
         tempButtonTxtRenderer->SetTextColor(0, 0, 0);
-
-        /*GameObject* tempButtonObj = devTools.CreateArtifactUIGameObject(artifacts[i], buttonArtifactSize.x, buttonArtifactSize.y, AE_GFX_BM_BLEND,
-            Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y), sortingLayer - 1);*/
 
         Button* tempButton = tempButtonObj->AddComponent<Button>();
         tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
@@ -394,7 +392,11 @@ void UI_DialogueHandler::WriteToDialogue(void)
             if (rewardButtonNo < rewardButtonList.size())
             {
                 AssignButton(rewardButtonList[rewardButtonNo], 'c', dialogueList[dialogueNo][2]);
-                rewardButtonList[rewardButtonNo]->tr->SetText(parameters);
+                // If it is the last button [Decline choices]
+                if (rewardButtonNo < rewardButtonList.size() - 1)
+                    AssignArtifact(rewardButtonList[rewardButtonNo]->Owner(), parameters);
+                else
+                    rewardButtonList[rewardButtonNo]->tr->SetText(parameters);
                 rewardButtonList[rewardButtonNo++]->Owner()->Activate();
                 UIDecision = true;
                 if (CheckNextCommand('c'))
@@ -475,6 +477,14 @@ void UI_DialogueHandler::AssignButton(Button* button, char buttonType, char selc
             break;
         }
     }
+}
+
+void UI_DialogueHandler::AssignArtifact(GameObject* owner, string selArtifact)
+{
+    GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(ArtifactDatabase.GetArtifact(selArtifact), 350, 500, AE_GFX_BM_BLEND,
+            owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
+    owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
+    owner->AddChild(tempArtifact);
 }
 
 void RemoveDialogue(Button* button)

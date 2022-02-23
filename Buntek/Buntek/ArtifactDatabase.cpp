@@ -43,6 +43,37 @@ _artifactdatabase& _artifactdatabase::Instance(void)
     return instance;
 }
 
+Artifact _artifactdatabase::GetArtifact(string id)
+{
+    Artifact newArtifact;
+    if (id[0] >= '0' && id[0] <= '9' && id[1] >= '0' && id[1] <= '9' && id[2] >= '0' && id[2] <= '9')
+    {
+        newArtifact.ID = (unsigned long)((id[0] - '0')*100) + (unsigned long)((id[1] - '0') * 10) + (unsigned long)(id[1] - '0');
+        switch (id[1] - '0')
+        {
+        case 0:
+            newArtifact.rarity = RarityTypes::Common;
+            break;
+        case 1:
+            newArtifact.rarity = RarityTypes::Rare;
+            break;
+        case 2:
+            newArtifact.rarity = RarityTypes::Lunary;
+            break;
+        case 3:
+            newArtifact.rarity = RarityTypes::Astral;
+            break;
+        case 4:
+            newArtifact.rarity = RarityTypes::Universal;
+            break;
+        default:
+            newArtifact.rarity = RarityTypes::Common;
+            break;
+        }
+    }
+    return newArtifact;
+}
+
 string _artifactdatabase::GetName(unsigned long id)
 {
     switch (id)

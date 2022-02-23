@@ -35,6 +35,7 @@ private:
 	void LoadFromFile(string flag);
 	bool CheckNextCommand(char command);
 	void AssignButton(Button* button, char buttonType, char selchar);
+	void AssignArtifact(GameObject* owner, string selArtifact);
 
 	string selectedFlag = "";
 	vector<string> dialogueList;

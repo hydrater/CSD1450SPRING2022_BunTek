@@ -43,6 +43,7 @@ private:
 
 public:
     static _artifactdatabase& Instance(void);
+    Artifact GetArtifact(string id);
     string GetName(unsigned long id);
     string GetDescription (unsigned long id);
     string GetSpriteName(unsigned long id);
