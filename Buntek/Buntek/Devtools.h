@@ -2,6 +2,7 @@
 #include <vector>
 #include "Vector2.h"
 #include "Component.h"
+#include "ArtifactDatabase.h"
 #include <AEEngine.h>
 #include "SpriteRenderer.h"
 #include "TextRenderer.h"
@@ -35,4 +36,6 @@ public:
     //warp around option override
     TextRenderer* AddTextToSpriteGameObject(GameObject* gameObject, string fontName, string text, TextRenderer::xAlignmentTypes xAlignment, TextRenderer::yAlignmentTypes yAlignment, float fontsize, short layer, bool warparound);
 
+    //Artifact UI
+    GameObject* CreateArtifactUIGameObject(Artifact artifact, float xSize, float ySize, short blendMode, Vector2 pos, short layer);
 };

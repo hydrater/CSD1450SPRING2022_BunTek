@@ -7,7 +7,8 @@
 	effect (CAUTION!: WILL ONLY WORK FOR b and c!)
 - 0 is also the type of color for the actor's name (a)
 	{Possible colors: a(black), b(blue), g(green),}
-	{	c(cyan), r(red), p(purple), w(white)  }
+	{	c(cyan), r(red), p(purple), y(yellow),}
+	{	w(white)			      }
 - yyyy is the string displayed in the text renderer
 	[Exception: d, which finds the specific sprite]
 ------------------------ LEGENDS ----------------------

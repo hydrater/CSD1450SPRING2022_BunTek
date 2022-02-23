@@ -3,6 +3,7 @@
 #include "Component.h"
 #include "Button.h"
 #include "TextRenderer.h"
+#include "ArtifactDatabase.h"
 
 
 class UI_Shop : public GameScript
@@ -18,7 +19,7 @@ public:
 	* (Same with vector<strgin> stats)
 	*///===========
 
-	void CreateShop(short sortingLayer, vector<string> artifacts, vector<string> stats);
+	void CreateShop(short sortingLayer, vector<Artifact> artifacts);
 	void StartShop(void);
 	void CloseShop(void);
 	void SetClickable(bool _canClick);
@@ -26,7 +27,7 @@ public:
 private:
 	Vector2 buttonArtifactSize = Vector2(175, 250);
 	vector<Vector2> buttonArtifactPos = { Vector2(-buttonArtifactSize.x * 2, buttonArtifactSize.y/1.25f), Vector2(0.f, buttonArtifactSize.y / 1.25f),
-		Vector2(buttonArtifactSize.x * 2, buttonArtifactSize.y / 1.25f), Vector2(-buttonArtifactSize.x * 3, -buttonArtifactSize.y / 2),
+		Vector2(buttonArtifactSize.x * 2, buttonArtifactSize.y / 1.25f), Vector2(-buttonArtifactSize.x * 2, -buttonArtifactSize.y / 2),
 		Vector2(0.f, -buttonArtifactSize.y / 2), Vector2(buttonArtifactSize.x * 2, -buttonArtifactSize.y / 2)};
 
 	Vector2 stastHolderSize = Vector2(buttonArtifactSize.x * 2, buttonArtifactSize.y);

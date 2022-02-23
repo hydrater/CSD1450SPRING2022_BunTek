@@ -1,5 +1,6 @@
 #include "MapGenerator.h"
 #include "Scene_Battle.h"
+#include "ArtifactDatabase.h"
 #include "UI_EnemyNodeBox.h"
 #include "UI_DialogueHandler.h"
 #include "UI_Shop.h"
@@ -231,8 +232,8 @@ void _mapData::Travel(Node* destination)
     if (destinationNode != nullptr)
     {
         // Get Artifacts and Stats [TO BE CHANGED WHEN ARTIFACTS AND STATS IMPLEMENTED!]
-        vector<string> artifacts{ "E", "E", "A", "E", "E", "A" };
-        vector<string> stats{ "E", "A", "E", "E", "A" };
+        Artifact defarti;
+        vector<Artifact> artifacts{ defarti, defarti, defarti, defarti, defarti, defarti };
         // Enact dest node effects
         MapData.travelHistoryIDs.push_back(currentNode->ID);
         currentNode = destinationNode;
@@ -258,7 +259,7 @@ void _mapData::Travel(Node* destination)
             SetHoverable(false);
             MapData.shopUI = new GameObject();
             MapData.shopUI->AddComponent<UI_Shop>();;
-            MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, artifacts, stats);
+            MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, artifacts);
             break;
         case NodeType::Rest:
 

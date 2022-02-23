@@ -45,6 +45,7 @@ public:
     static _artifactdatabase& Instance(void);
     string GetName(unsigned long id);
     string GetDescription (unsigned long id);
+    string GetSpriteName(unsigned long id);
     void ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball = NULL);
     unsigned long DrawArtifact(void);
     unsigned long DrawLegendary(void);

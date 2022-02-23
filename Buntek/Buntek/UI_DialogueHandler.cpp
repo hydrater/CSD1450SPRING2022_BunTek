@@ -162,6 +162,9 @@ void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
         TextRenderer* tempButtonTxtRenderer = devTools.AddTextToSpriteGameObject(tempButtonObj, "Gabriola.ttf", "I am a Reward", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 36.f, sortingLayer);
         tempButtonTxtRenderer->SetTextColor(0, 0, 0);
 
+        /*GameObject* tempButtonObj = devTools.CreateArtifactUIGameObject(artifacts[i], buttonArtifactSize.x, buttonArtifactSize.y, AE_GFX_BM_BLEND,
+            Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y), sortingLayer - 1);*/
+
         Button* tempButton = tempButtonObj->AddComponent<Button>();
         tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
         tempButton->tr = tempButtonTxtRenderer;
@@ -355,6 +358,9 @@ void UI_DialogueHandler::WriteToDialogue(void)
                 break;
             case 'p': // Purple
                 actorTxt->SetTextColor(1, 0, 1);
+                break;
+            case 'y': // Yellow
+                actorTxt->SetTextColor(1, 1, 0);
                 break;
             case 'w': // White
                 actorTxt->SetTextColor(1, 1, 1);
