@@ -218,7 +218,6 @@ void BattleHandler::Update(void) {
 
 			ballSpawnTimer = 3 - scalingTimer * 0.01f;
 		}
-
 		//HP Bar Logic
 		if (hpBar != 0) {
 			hpBar->GetComponent<UI_Hp>()->SetHp(GameManager.playerHp);
@@ -229,4 +228,32 @@ void BattleHandler::Update(void) {
 		
 	}
 	
+}
+void BattleHandler::SpawnBall(bool isPlayerBall) {
+	SpriteRenderer* tempRenderer;
+	BallBehavior* tempBall;
+	CircleCollider* tempcol;
+
+	ball = new GameObject();
+	tempRenderer = ball->AddComponent<SpriteRenderer>();
+	tempRenderer->SetLayer(2);
+	tempRenderer->Size(20, 20);
+	tempRenderer->SetTexture("ball.png");
+	tempcol = ball->AddComponent<CircleCollider>();
+	tempBall = ball->AddComponent<BallBehavior>();
+	tempBall->battleInput = inputHandler->GetComponent<BattleInput>();
+
+	bool dir = isPlayerBall;
+	tempBall->playerPossess = !isPlayerBall;
+	tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? 1 : -1));
+	tempBall->velocity.Normalize();
+	tempBall->radius = 10;
+	tempBall->SetSpeed(tempBall->GetSpeed());
+	tempBall->sr = tempRenderer;
+	dir ? tempRenderer->SetColor(0, 0, 1) : tempRenderer->SetColor(1, 0, 0);
+	tempBall->col = tempcol;
+
+	// Set ball spawn position
+	ball->transform->SetPosition(neutralArea->transform->worldposition);
+	ballList->push_back(tempBall);
 }

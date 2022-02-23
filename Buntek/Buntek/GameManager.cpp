@@ -2,6 +2,7 @@
 #include "System.h"
 #include "SpriteRenderer.h"
 #include "Scene_Navigation.h"
+#include "SaveManager.h"
 
 using namespace Math;
 
@@ -45,23 +46,23 @@ void _gameManager::InitBattleProfile(BattleArtifactProfile& battleProfile, map<u
             battleProfile.behaviorList_Passive.push_back(newArtifact);
             break;
 
-        case 1:
-            battleProfile.behaviorList_DealDamage.push_back(newArtifact);
-            break;
-
         case 2:
-            battleProfile.behaviorList_TakeDamage.push_back(newArtifact);
-            break;
-
-        case 3:
             battleProfile.behaviorList_WallBounce.push_back(newArtifact);
             break;
 
-        case 4:
+        case 3:
             battleProfile.behaviorList_PaddleHit.push_back(newArtifact);
             break;
 
+        case 4:
+            battleProfile.behaviorList_DealDamage.push_back(newArtifact);
+            break;
+
         case 5:
+            battleProfile.behaviorList_TakeDamage.push_back(newArtifact);
+            break;
+
+        case 6:
             battleProfile.behaviorList_BallOnBallCollision.push_back(newArtifact);
             break;
 
@@ -164,6 +165,7 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
         playerHp -= damage;
         if (playerHp <= 0)
         {
+            GameManager.playerProfile.hp = GameManager.playerHp;
             SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
         }
     }
@@ -172,6 +174,19 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
         enemyHp -= damage;
         if (enemyHp <= 0)
         {
+            vector<Artifact> behaviorList_BattleWon;
+            for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
+            {
+                Artifact newArtifact;
+                newArtifact.ID = it->first;
+                newArtifact.count = it->second;
+                unsigned long idType = it->first / 100;
+                if (idType == 1) {
+                    behaviorList_BattleWon.push_back(newArtifact);
+                }
+            }
+            GameManager.playerProfile.hp = GameManager.playerHp;
+            ArtifactDatabase.ApplyArtifactBehavior(behaviorList_BattleWon, true);
             SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
         }
     }

@@ -4,6 +4,7 @@
 #include "Vector2.h"
 #include "ArtifactDatabase.h"
 #include <map>
+#include "BattleHandler.h"
 using namespace std;
 
 #define GameManager _gameManager::Instance()
@@ -29,7 +30,7 @@ public:
     struct Profile
     {
         // Current
-        float hp;
+        float hp = 100;
         float maxhp = 100;
         int stardust;
         int currLevel;
@@ -48,6 +49,7 @@ public:
 
         // Any additional variables for specific artifacts
     }playerArtifactList = {}, enemyArtifactList{};
+
     void InitBattleProfile(BattleArtifactProfile& battleProfile, map<unsigned long, int> artifactSaveData);
     map<unsigned long, int> GenerateArtifactList(int maxAmtOfArtifacts, int totalCount);
 
@@ -70,5 +72,6 @@ public:
     void DealDamage(float damage, bool isPlayer);
 
     // Battle metrics
-    float playerHp = 0, enemyHp = 0;
+    BattleHandler* bh = 0;
+    float playerHp = 0 , enemyHp = 0;
 };

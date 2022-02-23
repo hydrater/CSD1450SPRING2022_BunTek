@@ -27,11 +27,11 @@ void BallBehavior::Update(void)
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		velocity.x = -velocity.x;
 		transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
-		if (playerPossess) {
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_WallBounce, playerPossess, this->Owner());
+		if (playerPossess) {//enemy ball hits wall
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_WallBounce, !playerPossess, this->Owner());
 		}
 		else {
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_WallBounce, playerPossess, this->Owner());
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_WallBounce, !playerPossess, this->Owner());
 		}
 		
 		BallHorizontalCheck();
@@ -40,7 +40,16 @@ void BallBehavior::Update(void)
 	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
 	{
 		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
-		GameManager.DealDamage(10, playerPossess);
+		
+		if (playerPossess) {//enemy ball hits player goal
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_TakeDamage, !playerPossess, this->Owner());
+		}
+		else {
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, !playerPossess, this->Owner());
+		}
+		GameManager.DealDamage(ballDamage, playerPossess);
 		this->Owner()->Delete();
 		return;
 	}
@@ -77,7 +86,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			else
 				speed += ballPhaseSpeedIncrement;
 
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_PaddleHit, playerPossess, this->Owner());
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_PaddleHit, !playerPossess, this->Owner());
 		}
 	}
 	else {
@@ -97,7 +106,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			else
 				speed += ballPhaseSpeedIncrement;
 
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_PaddleHit, playerPossess, this->Owner());
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_PaddleHit, !playerPossess, this->Owner());
 		}
 	}
 }

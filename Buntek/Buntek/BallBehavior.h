@@ -35,6 +35,7 @@ public:
 	bool checkTimer = false;
 	float timeScalar = 1.0f;
 	int ballPhase = 0;
+	int ballDamage = 10;
 
 private:
 	float speed = 200;

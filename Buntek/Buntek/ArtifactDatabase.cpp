@@ -19,17 +19,59 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     BallBehavior* tempBallBehavior;
     switch (artifact.ID)
     {
-    case 220:
+    case 120://Increase hp by 2 per battle won, up to a max of X
+        GameManager.playerProfile.maxhp += 2 * artifact.count;
+        break;
+    case 140://Restores 10 hp of max hp
+        GameManager.playerHp += 10;
+        break;
+    case 220://Increases ball bounce gain by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
         tempBallBehavior->ballPhase += artifact.count;
         break;
-    case 221:
+    case 221://Increases ball speed by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
         tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10));
         break;
-    case 300:
+    case 300://B2: Increase ball speed by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
         tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10));
+        break;
+    case 400://B3: Restores X hp
+        if (isPlayerTheCaster) {
+            GameManager.playerHp += artifact.count;
+        }
+        else {
+            GameManager.enemyHp += artifact.count;
+        }
+        break;
+    case 401://B3: Deals extra X damage
+        tempBallBehavior = ball->GetComponent<BallBehavior>();
+        tempBallBehavior->ballDamage += artifact.count;
+        break;
+    case 420://B4: Spawns X ball in a random direction forward from the middle
+        if (GameManager.bh != NULL) {
+            GameManager.bh->SpawnBall(isPlayerTheCaster);
+        }
+        break;
+    case 500://B3: Opponent takes X damage
+        if (isPlayerTheCaster) {
+            GameManager.enemyHp -= artifact.count;
+        }
+        else {
+            GameManager.playerHp -= artifact.count;
+        }
+        break;
+    case 520://B4: Spawns X ball in a random direction forward from the middle
+        if (GameManager.bh != NULL) {
+            GameManager.bh->SpawnBall(isPlayerTheCaster);
+        }
+        break;
+    case 521://B0: If hp is below <20%, unable to take damage for X second,
+
+        break;
+    case 540://B2: Negate next damage
+
         break;
     default:
         

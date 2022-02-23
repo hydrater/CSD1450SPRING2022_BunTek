@@ -12,6 +12,7 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 	void StartBattle(float selfHp, float selfMaxHp, float enemyHp, float enemyMaxHp, int enemyHpBarCount);
+	void SpawnBall(bool isPlayerBall);
 	bool battleStarted = false;
 	float mainTimeScalar = 1.0f;
 	float timeScalar = mainTimeScalar;
