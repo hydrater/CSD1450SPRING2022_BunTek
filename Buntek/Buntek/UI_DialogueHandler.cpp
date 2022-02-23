@@ -156,18 +156,6 @@ void UI_DialogueHandler::SkipDialogue(void)
     }
 }
 
-void UI_DialogueHandler::DeleteDialogueEvent(void)
-{
-    if (dialogueBox)
-    {
-        dialogueBox->Delete();
-        dialogueBox = 0;
-    }
-
-    dialogueButtonList.clear();
-    rewardButtonList.clear();
-}
-
 void UI_DialogueHandler::LoadFromFile(string flag)
 {
     string path = "./Assets/Dialogue.txt";
@@ -348,7 +336,6 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
         }
         // Assign Button Effect [TODO! Change decision value to the one that gives the artifact to the player]
         AssignButton(rewardButtonList[i], 'c', 0);
-        rewardButtonList[i]->Owner()->GetComponent<Button>()->SetClickable(true);
     }
 
     // Auto activate decline choice [ALWAYS last choice]
@@ -356,11 +343,22 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
     {
         rewardButtonList[rewardButtonList.size() - 1]->Owner()->Activate();
         AssignButton(rewardButtonList[rewardButtonList.size() - 1], 'c', CF_Leave);
-        rewardButtonList[rewardButtonList.size() - 1]->Owner()->GetComponent<Button>()->SetClickable(true);
     }
 }
 
 // --------------------------------------------------------- DIALOGUE TOOL ---------------------------------------------------------
+void UI_DialogueHandler::DeleteDialogueEvent(void)
+{
+    if (dialogueBox)
+    {
+        dialogueBox->Delete();
+        dialogueBox = 0;
+    }
+
+    dialogueButtonList.clear();
+    rewardButtonList.clear();
+}
+
 void UI_DialogueHandler::CreatePreset(short sortingLayer)
 {
     //Create main dialogue box
@@ -498,6 +496,11 @@ void UI_DialogueHandler::SetDialogueClickable(bool _canClick)
     {
         if (dialogueButtonList[i]->Owner() && dialogueButtonList[i]->Owner()->GetComponent<Button>())
             dialogueButtonList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
+    }
+    for (int i = 0; i < rewardButtonList.size(); ++i)
+    {
+        if (rewardButtonList[i]->Owner() && rewardButtonList[i]->Owner()->GetComponent<Button>())
+            rewardButtonList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
     }
 }
 

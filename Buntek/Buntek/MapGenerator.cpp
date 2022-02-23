@@ -231,7 +231,7 @@ void _mapData::Travel(Node* destination)
 {
     if (destinationNode != nullptr)
     {
-        // Get Artifacts and Stats [TO BE CHANGED WHEN ARTIFACTS AND STATS IMPLEMENTED!]
+        // Get Artifacts [TODO! GET ARTIFACTS THAT CAN BE SOLD]
         Artifact defarti;
         vector<Artifact> artifacts{ defarti, defarti, defarti, defarti, defarti, defarti };
         // Enact dest node effects
