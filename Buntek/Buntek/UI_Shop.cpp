@@ -52,7 +52,7 @@ void UI_Shop::CreateShop(short sortingLayer, vector<Artifact> artifacts)
     for (int i = 0; i < artifacts.size(); ++i) {
         if (i < buttonArtifactPos.size())
         {
-            GameObject* tempButtonObj = devTools.CreateArtifactUIGameObject(artifacts[i], buttonArtifactSize.x, buttonArtifactSize.y, AE_GFX_BM_BLEND,
+            GameObject* tempButtonObj = devTools.CreateArtifactUIGameObject(artifacts[i].ID, AE_GFX_BM_BLEND,
                 Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y), sortingLayer - 1);
 
             Button* tempButton = tempButtonObj->AddComponent<Button>();

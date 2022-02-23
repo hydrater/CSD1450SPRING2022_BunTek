@@ -329,7 +329,7 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
         if (i <= artifact.size() - 1)
         {
             GameObject* owner = rewardButtonList[i]->Owner();
-            GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(artifact[i], 350, 500, AE_GFX_BM_BLEND,
+            GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(artifact[i].ID, AE_GFX_BM_BLEND,
                 owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
             owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
             owner->AddChild(tempArtifact);
@@ -550,7 +550,8 @@ void UI_DialogueHandler::AssignButton(Button* button, char buttonType, char selc
 
 void UI_DialogueHandler::AssignArtifact(GameObject* owner, string selArtifact)
 {
-    GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(ArtifactDatabase.GetArtifact(selArtifact), 350, 500, AE_GFX_BM_BLEND,
+    unsigned long test = 0;
+    GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(test, AE_GFX_BM_BLEND,
             owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
     owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
     owner->AddChild(tempArtifact);

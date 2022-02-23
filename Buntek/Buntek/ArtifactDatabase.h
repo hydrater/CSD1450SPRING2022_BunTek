@@ -9,10 +9,9 @@ using namespace std;
 enum class RarityTypes : short
 {
     Common = 0,
-    Rare = 1,
-    Lunary = 2,
-    Astral = 3,
-    Universal = 4
+    Uncommon = 1,
+    Rare = 2,
+    Unique = 3,
 };
 
 // Yo we can have a constellation based on rarity amounts
@@ -21,7 +20,6 @@ class Artifact
 {
 public:
     unsigned long ID = 0, count = 0;
-    RarityTypes rarity = RarityTypes::Common;
 };
 
 class _artifactdatabase
@@ -43,8 +41,8 @@ private:
 
 public:
     static _artifactdatabase& Instance(void);
-    Artifact GetArtifact(string id);
     string GetName(unsigned long id);
+    RarityTypes GetRarity(unsigned long id);
     string GetDescription (unsigned long id);
     string GetSpriteName(unsigned long id);
     void ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball = NULL);
