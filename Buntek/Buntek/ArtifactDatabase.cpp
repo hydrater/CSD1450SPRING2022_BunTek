@@ -93,9 +93,6 @@ Artifact _artifactdatabase::GetArtifact(string id)
         newArtifact.ID = (unsigned long)((id[0] - '0')*100) + (unsigned long)((id[1] - '0') * 10) + (unsigned long)(id[1] - '0');
         switch (id[1] - '0')
         {
-        case 0:
-            newArtifact.rarity = RarityTypes::Common;
-            break;
         case 1:
             newArtifact.rarity = RarityTypes::Rare;
             break;
@@ -150,7 +147,7 @@ string _artifactdatabase::GetSpriteName(unsigned long id)
         return "Steven.jpg";
         break;
     default:
-        return "Steven.jpg";//"Invalid ID";
+        return "Steven.jpg";
         break;
     }
 }

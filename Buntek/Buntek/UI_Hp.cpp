@@ -69,7 +69,6 @@ void UI_Hp::Update(void)
 	UpdateHpBar(remainderHp);
 }
 
-
 void UI_Hp::SetHp(float hpAmt)
 {
 	if (health == hpAmt) {
@@ -92,7 +91,6 @@ void UI_Hp::SetHp(float hpAmt)
 	else { // Final Bar of help
 		hpBarCount->GetComponent<TextRenderer>()->SetText(std::to_string(health));
 	}
-	
 }
 
 void UI_Hp::UpdateHpBar(float remainderHp) { // remainder hp is the amount of remaining hp in the current bar;
