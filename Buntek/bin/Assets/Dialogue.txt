@@ -5,6 +5,9 @@
 - x is for calling legends to run commands (Refer)
 - 0 is the function called for the button/choice
 	effect (CAUTION!: WILL ONLY WORK FOR b and c!)
+- 0 is also the type of color for the actor's name (a)
+	{Possible colors: a(black), b(blue), g(green),}
+	{	c(cyan), r(red), p(purple), w(white)  }
 - yyyy is the string displayed in the text renderer
 	[Exception: d, which finds the specific sprite]
 ------------------------ LEGENDS ----------------------
@@ -21,21 +24,21 @@ d: Design for Background
 5
 
 asd
-/a  Ding Xiang
+/ar Ding Xiang
 Wa Gerald I love you
-/a  Gerald 
+/ab Gerald 
 Wo ai ni duo duo
-/a  Super Idol
+/ac Super Idol
 super idol de xiao rong dou mei ni de tian
 
 aed
 /d  0
-/a  Constellation of Mittens
+/ap Constellation of Mittens
 Don't look down on me because I'm a cat!
 /b1 Pet the constellation
 /b1 Offer some galaxy milk
 /b0 Leave
-/a  Next Trail
+/aa Next Trail
 YOU SHOULD NOT SEE THIS!
 /c  E
 /c  A
@@ -43,11 +46,11 @@ YOU SHOULD NOT SEE THIS!
 /c  skip to win
 
 rsel
-/a  Human #22
+/aa Human #22
 Does it work?
-/a  Human #85
+/aw Human #85
 It does
-/a  Human #22
+/aa Human #22
 Choose your reward
 /c1 E
 /c1 A

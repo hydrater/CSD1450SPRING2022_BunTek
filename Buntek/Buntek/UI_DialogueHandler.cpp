@@ -335,6 +335,34 @@ void UI_DialogueHandler::WriteToDialogue(void)
             //cout << "Actor Name: " << parameters << endl;
             name = parameters;
             actorTxt->SetText(name);
+            // Assign color
+            switch (dialogueList[dialogueNo][2])
+            {
+            case 'a': // Abyss (black)
+                actorTxt->SetTextColor(0, 0, 0);
+                break;
+            case 'b': // Blue
+                actorTxt->SetTextColor(0, 0, 1);
+                break;
+            case 'g': // Green
+                actorTxt->SetTextColor(0, 1, 0);
+                break;
+            case 'c': // Cyan
+                actorTxt->SetTextColor(0, 1, 1);
+                break;
+            case 'r': // Red
+                actorTxt->SetTextColor(1, 0, 0);
+                break;
+            case 'p': // Purple
+                actorTxt->SetTextColor(1, 0, 1);
+                break;
+            case 'w': // White
+                actorTxt->SetTextColor(1, 1, 1);
+                break;
+            default:  // Purple
+                actorTxt->SetTextColor(1, 0, 1);
+                break;
+            }
             ++dialogueNo;
             WriteToDialogue();
             break;
