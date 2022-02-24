@@ -107,6 +107,10 @@ bool BoxCollider::Collide(Collider2D* col)
 		// Update dimensions of the width, height, angle and/or radius
 		SpriteRenderer* thissr = this->Owner()->GetComponent<SpriteRenderer>();
 		SpriteRenderer* othersr = CirCol->Owner()->GetComponent<SpriteRenderer>();
+
+		if (thissr == nullptr || othersr == nullptr)
+			return false;
+
 		width = thissr->GetHalfWidth() * 2;
 		height = thissr->GetHalfHeight() * 2;
 		angle = this->Owner()->transform->worldrotation;
