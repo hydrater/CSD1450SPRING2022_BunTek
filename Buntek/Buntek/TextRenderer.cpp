@@ -58,14 +58,21 @@ vector<float> TextRenderer::GetTextColor(void)
 	return vector<float>{textR, textG, textB};
 }
 
-void TextRenderer::SetTextWidth(float _TextWidth) {
-	textWidth = _TextWidth;
+void TextRenderer::SetTextWidth(float _TextWidth, int lineNum) {
+	if (lineNum >= textWidthList.size()) {
+		textWidthList.push_back(_TextWidth);
+	}
+	else
+	{
+		textWidthList[lineNum] = _TextWidth;
+	}
+	
 }
 void TextRenderer::SetTextHeight(float _TextHeight) {
 	textHeight = _TextHeight;
 }
-float TextRenderer::GetTextWidth(void) {
-	return textWidth;
+float TextRenderer::GetTextWidth(int lineNum) {
+	return textWidthList[lineNum];
 }
 float TextRenderer::GetTextHeight(void) {
 	return textHeight;
@@ -107,17 +114,25 @@ TextRenderer::yAlignmentTypes TextRenderer::GetYAlignment(void) {
 }
 
 void TextRenderer::CalculateTextSize(void) {
-	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, textWidth, textHeight);
-	textWidth = textWidth * (float)AEGetWindowWidth() / 2.0f;
-	textHeight = textHeight * (float)AEGetWindowHeight() / 2.0f;
+	if (textWidthList.size() == 1) {
+		AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, textWidthList[0], textHeight);
+		textWidthList[0] = textWidthList[0] * (float)AEGetWindowWidth() / 2.0f;
+		textHeight = textHeight * (float)AEGetWindowHeight() / 2.0f;
+	}
 }
 
 void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
 	CalculateTextSize();
 	float width = sr->GetHalfWidth();
 	float height = sr->GetHalfHeight();
-	if (textWidth / 2 > width) {
-		width = textWidth / 2 + xbuffer;
+	float maxTextWidth = 0;
+	for (size_t i = 0; i < textWidthList.size(); ++i) {
+		if (maxTextWidth < textWidthList[i]) {
+			maxTextWidth = textWidthList[i];
+		}
+	}
+	if (maxTextWidth / 2 > width) {
+		width = maxTextWidth / 2 + xbuffer;
 	}
 	if (textHeight / 2 > height) {
 		height = textHeight / 2 + ybuffer;

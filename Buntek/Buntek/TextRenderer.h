@@ -31,9 +31,9 @@ public:
 	float GetFontSize(void);
 	string GetText(void);
 	void SetText(string text);
-	void SetTextWidth(float _TextWidth);
+	void SetTextWidth(float _TextWidth, int lineNum);
 	void SetTextHeight(float _TextHeight);
-	float GetTextWidth(void);
+	float GetTextWidth(int lineNum);
 	float GetTextHeight(void);
 	void SetXBuffer(float _Buffer);
 	void SetYBuffer(float _Buffer);
@@ -57,7 +57,7 @@ private:
 	string fontString = "EquinoxB.otf";
 	float textScale = 1;
 	string text = "";
-	float textWidth = 0;
+	vector<float> textWidthList{0};
 	float textHeight = 0;
 	float xbuffer = 10;
 	float ybuffer = 10;

@@ -22,8 +22,8 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     case 120://Increase hp by 2 per battle won, up to a max of X
         GameManager.playerProfile.maxhp += 2 * artifact.count;
         break;
-    case 140://Restores 10 hp of max hp
-        GameManager.playerHp += 10;
+    case 140://Restores 10&% hp of max hp
+        GameManager.playerHp += GameManager.playerProfile.maxhp / 10;
         break;
     case 220://Increases ball bounce gain by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
@@ -67,10 +67,19 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             GameManager.bh->SpawnBall(isPlayerTheCaster);
         }
         break;
-    case 521://B0: If hp is below <20%, unable to take damage for X second,
+    case 530://B3: If hp is below <20%, unable to take damage for X second,
 
         break;
     case 540://B2: Negate next damage
+
+        break;
+    case 630:
+
+        break;
+    case 631:
+
+        break;
+    case 640:
 
         break;
     default:
@@ -181,29 +190,29 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 221:
         return "Wall bounce: Increases ball speed";
     case 300:
-        return "Ball phase >= 2 \nWhen dealing damage, increase ball speed";
+        return "Ball phase >= 2\nWhen dealing damage, increase ball speed";
     case 400:
-        return "Ball phase >= 3 \nWhen dealing damage, restores hp";
+        return "Ball phase >= 3\nWhen dealing damage, restores hp";
     case 401:
-        return "Ball phase >= 3 \nWhen dealing damage, deals extra damage";
+        return "Ball phase >= 3\nWhen dealing damage, deals extra damage";
     case 420:
-        return "Ball phase >= 4 \nWhen dealing damage, spawns X ball in a random direction forward from the middle";
+        return "Ball phase >= 4\nWhen dealing damage, spawns X ball in a random direction forward from the middle";
     case 500:
-        return "Ball phase >= 3: \nWhen taking damage, opponent takes damage";
+        return "Ball phase >= 3:\nWhen taking damage, opponent takes damage";
     case 520:
-        return "Ball phase >= 4: \nWhen taking damage, spawns a ball in a random direction forward from the middle";
+        return "Ball phase >= 4:\nWhen taking damage, spawns a ball in a random direction forward from the middle";
     case 530:
-        return "Ball phase >= 3: \nWhen taking damage, if hp is below 20%, unable to take damage for a while";
+        return "Ball phase >= 3:\nWhen taking damage, if hp is below 20%, unable to take damage for a while";
     case 540:
-        return "Ball phase >= 2: \nWhen taking damage, negate next damage taken";
+        return "Ball phase >= 2:\nWhen taking damage, negate next damage taken";
     case 541:
         return "On death, restores 50% hp, destroy this artifact";
     case 630:
-        return "Ball phase >= 2: \nWhen colliding with hostile balls, freeze the collided ball";
+        return "Ball phase >= 2:\nWhen colliding with hostile balls, freeze the collided ball";
     case 631:
-        return "Ball phase >= 2: \nWhen colliding with hostile balls, occasionally reflect collided ball";
+        return "Ball phase >= 2:\nWhen colliding with hostile balls, occasionally reflect collided ball";
     case 640:
-        return "Ball phase >= 5: \nWhen colliding with hostile balls, destroy the collided ball";
+        return "Ball phase >= 5:\nWhen colliding with hostile balls, destroy the collided ball";
     default:
         return "Invalid ID";
     }
