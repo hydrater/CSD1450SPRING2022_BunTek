@@ -311,23 +311,23 @@ unsigned long _artifactdatabase::DrawArtifact(void)
 
     if (RNG < commonRate)
     {
-        RNG = RandIntMinMax(0, common.size()-1);
+        RNG = RandIntMinMax(0, (int)common.size()-1);
         return common[RNG];
     }
     else if (RNG < uncommonRate)
     {
-        RNG = RandIntMinMax(0, uncommon.size() - 1);
+        RNG = RandIntMinMax(0, (int)uncommon.size() - 1);
         return uncommon[RNG];
     }
     else
     {
-        RNG = RandIntMinMax(0, rare.size() - 1);
+        RNG = RandIntMinMax(0, (int)rare.size() - 1);
         return rare[RNG];
     }
 }
 
 unsigned long _artifactdatabase::DrawLegendary(void)
 {
-    int RNG = RandIntMinMax(0, legendary.size() - 1);
+    int RNG = RandIntMinMax(0, (int)legendary.size() - 1);
     return legendary[RNG];
 }
