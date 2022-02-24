@@ -10,7 +10,6 @@ _assetManager::_assetManager()
     LoadTexture("ball.png");
     LoadTexture("BetterNebula.png");
     LoadTexture("Buttons.png");
-    LoadTexture("Artifacts/ArtifactSpriteSheet.png");
 
     // UI
     LoadTexture("UI/Texture.png");
@@ -39,27 +38,27 @@ _assetManager::_assetManager()
     LoadFont("GothicA1.ttf");
 
     //Artifacts
-    LoadTexture("Bouncy Necklace.png");
-    LoadTexture("Defiance.png");
-    LoadTexture("Dexterity.png");
-    LoadTexture("Dual Strike.png");
-    LoadTexture("Freezing Touch.png");
-    LoadTexture("Healing Fountain.png");
-    LoadTexture("Healthy Buddy.png");
-    LoadTexture("Health Thief.png");
-    LoadTexture("Last Stand.png");
-    LoadTexture("Lethal Cut.png");
-    LoadTexture("Life of Champion.png");
-    LoadTexture("Ninja Shoes.png");
-    LoadTexture("Power.png");
-    LoadTexture("Reflection.png");
-    LoadTexture("Shield.png");
-    LoadTexture("Smacker.png");
-    LoadTexture("Tree of Life.png");
-    LoadTexture("Trickery.png");
-    LoadTexture("Urgency.png");
-    LoadTexture("Vengeful Trickery.png");
-    LoadTexture("Zoomer Goggles.png");
+    LoadTexture("Artifacts/BouncyNecklace.png");
+    LoadTexture("Artifacts/Defiance.png");
+    LoadTexture("Artifacts/Dexterity.png");
+    LoadTexture("Artifacts/DualStrike.png");
+    LoadTexture("Artifacts/FreezingTouch.png");
+    LoadTexture("Artifacts/HealingFountain.png");
+    LoadTexture("Artifacts/HealthBuddy.png");
+    LoadTexture("Artifacts/HealthThief.png");
+    LoadTexture("Artifacts/LastStand.png");
+    LoadTexture("Artifacts/LethalCut.png");
+    LoadTexture("Artifacts/LifeofChampion.png");
+    LoadTexture("Artifacts/NinjaShoes.png");
+    LoadTexture("Artifacts/Power.png");
+    LoadTexture("Artifacts/Reflection.png");
+    LoadTexture("Artifacts/Shield.png");
+    LoadTexture("Artifacts/Smacker.png");
+    LoadTexture("Artifacts/TreeofLife.png");
+    LoadTexture("Artifacts/Trickery.png");
+    LoadTexture("Artifacts/Urgency.png");
+    LoadTexture("Artifacts/VengefulTrickery.png");
+    LoadTexture("Artifacts/ZoomerGoggles.png");
 }
 
 _assetManager::~_assetManager()
