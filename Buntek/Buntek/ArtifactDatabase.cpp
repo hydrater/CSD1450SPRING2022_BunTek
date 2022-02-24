@@ -99,47 +99,47 @@ string _artifactdatabase::GetName(unsigned long id)
     switch (id)
     {
     case 0:
-        return "test";
+        return "Power";
     case 1:
-        return "test";
+        return "Tree of Life";
     case 2:
-        return "test";
+        return "Dexterity";
     case 3:
-        return "test";
+        return "Zoomer Goggles";
     case 4:
-        return "test";
+        return "Urgency";
     case 30:
-        return "test";
+        return "Health Buddy";
     case 120:
-        return "test";
+        return "Life of Champion";
     case 140:
-        return "test";
+        return "Healing Fountain";
     case 220:
-        return "test";
+        return "Bouncy Necklace";
     case 221:
-        return "test";
+        return "Ninja Shoes";
     case 300:
-        return "test";
+        return "Smacker";
     case 400:
-        return "test";
+        return "Health Thief";
     case 401:
-        return "test";
+        return "Dual Strike";
     case 420:
-        return "test";
+        return "Trickery";
     case 500:
-        return "test";
+        return "Lethal Cut";
     case 520:
-        return "test";
+        return "Vengeful Trickery";
     case 530:
-        return "test";
+        return "Last Resort";
     case 540:
-        return "test";
+        return "Last Stand";
     case 541:
-        return "test";
+        return "Defiance";
     case 630:
-        return "test";
+        return "Freezing Touch";
     case 631:
-        return "test";
+        return "Reflection";
     case 640:
         return "test";
     default:
