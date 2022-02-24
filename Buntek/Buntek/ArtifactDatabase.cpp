@@ -22,10 +22,10 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     switch (artifact.ID)
     {
     case 000://Increase damage
-        GameManager.playerProfile.bonusdamage = artifact.count;
+        GameManager.playerProfile.bonusdamage = (float)artifact.count;
         break;
     case 001://Increase max hp
-        GameManager.playerProfile.bonushp = artifact.count;
+        GameManager.playerProfile.bonushp = (float)artifact.count;
         break;
     case 002://Increase paddle speed
         
