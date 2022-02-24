@@ -224,6 +224,9 @@ bool CircleCollider::Collide(Collider2D* col)
 {
 	//Circle-Circle collision
 	if (typeid(*col) == typeid(CircleCollider)) {
+		if (col->transform == NULL || transform == NULL)
+			return false;
+
 		CircleCollider* other = (CircleCollider*)col;
 		
 		// Update dimensions of the width, height and/or radius
@@ -244,11 +247,10 @@ bool CircleCollider::Collide(Collider2D* col)
 	}
 	//Circle-Box collision
 	else if (typeid(*col) == typeid(BoxCollider)) {
+		if (col->transform == NULL || transform == NULL)
+			return false;
 
 		BoxCollider* boxCol = (BoxCollider*)col;
-
-		if (boxCol->transform == NULL || transform == NULL)
-			return false;
 
 		// Update dimensions of the width, height and/or radius
 		SpriteRenderer* thissr = this->Owner()->GetComponent<SpriteRenderer>();
