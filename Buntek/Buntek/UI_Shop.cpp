@@ -36,6 +36,19 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     tempHeaderTxtRenderer->SetXBuffer(50);
     shopUI->AddChild(tempHeader);
 
+    // StarDust Display
+    GameObject* tempCurrencyDisplay = devTools.CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, Vector2(-AEGetWindowWidth()/ 2.5f, AEGetWindowHeight() / 2.25f), (short)(sortingLayer - 1), 1);
+    SpriteRenderer* tempCurrencySprite = tempCurrencyDisplay->GetComponent<SpriteRenderer>();
+    tempCurrencySprite->SetColor(0.85f, 0.5f, 0.5f);
+    GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("Steven.jpg", 80, 80, AE_GFX_BM_BLEND,
+        Vector2(tempCurrencyDisplay->transform->worldposition.x - 100, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer), 1);
+    GameObject* tempCurrencyTextObj = devTools.CreateSpriteGameObject("Steven.jpg", 180, 80, AE_GFX_BM_BLEND, Vector2(tempCurrencyDisplay->transform->worldposition.x + 50, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer)+1, 0);
+    TextRenderer* tempCurrencyText = devTools.AddTextToSpriteGameObject(tempCurrencyTextObj, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, (short)(sortingLayer)+1);
+    tempCurrencyText->SetTextColor(0, 0, 0);
+    shopUI->AddChild(tempCurrencyDisplay);
+    shopUI->AddChild(tempCurrencyIcon);
+    shopUI->AddChild(tempCurrencyTextObj);
+
     // Leave Button
     GameObject* tempLeave = devTools.CreateSpriteGameObject("Buttons.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 2.5f));
     TextRenderer* tempLeaveTxtRenderer = 0;
