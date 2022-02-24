@@ -125,7 +125,6 @@ void _renderer::Update(void)
 			int start = 0;
 			string tempTextString = textRenderer->GetText();
 			float textheight = textRenderer->GetTextHeight();
-			float textwidth = textRenderer->GetTextWidth();
 
 			if (textRenderer->GetWarpAround()) {
 				WrapAround(textRenderer);
@@ -137,7 +136,7 @@ void _renderer::Update(void)
 				if (c == '\n') {
 					tempTextString[x] = '\0';
 					AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
-						TextAlignmentX(textRenderer) / ((float)AEGetWindowWidth() / 2),
+						TextAlignmentX(textRenderer, linecount) / ((float)AEGetWindowWidth() / 2),
 						(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
 						textRenderer->GetFontScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
 					linecount++;
@@ -147,7 +146,7 @@ void _renderer::Update(void)
 			}
 			//Text Rendering
 			AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
-				TextAlignmentX(textRenderer) / ((float)AEGetWindowWidth() / 2),
+				TextAlignmentX(textRenderer, linecount) / ((float)AEGetWindowWidth() / 2),
 				(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
 				textRenderer->GetFontScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
 		}
@@ -165,7 +164,7 @@ void _renderer::Update(void)
 	}
 }
 
-float _renderer::TextAlignmentX(TextRenderer* textRenderer) {
+float _renderer::TextAlignmentX(TextRenderer* textRenderer, int lineNum) {
 	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
 	switch (textRenderer->GetXAlignment())
 	{
@@ -173,10 +172,10 @@ float _renderer::TextAlignmentX(TextRenderer* textRenderer) {
 		return (textRenderer->GetTransform()->worldposition.x - tempSR->GetHalfWidth() + textRenderer->GetXBuffer());
 		break;
 	case TextRenderer::xAlignmentTypes::Right:
-		return (textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth() - textRenderer->GetTextWidth() - textRenderer->GetXBuffer());
+		return (textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth() - textRenderer->GetTextWidth(lineNum) - textRenderer->GetXBuffer());
 		break;
 	case TextRenderer::xAlignmentTypes::Mid:
-		return (textRenderer->GetTransform()->worldposition.x - textRenderer->GetTextWidth() / 2);;
+		return (textRenderer->GetTransform()->worldposition.x - textRenderer->GetTextWidth(lineNum) / 2);;
 		break;
 	default:
 		return 0;
@@ -204,7 +203,7 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 
 void  _renderer::WrapAround(TextRenderer* textRenderer) {
 	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
-	float length = (textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth()) - TextAlignmentX(textRenderer) - textRenderer->GetXBuffer();
+	float length = tempSR->GetHalfWidth() * 2 - textRenderer->GetXBuffer()*2; //(textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth()) - TextAlignmentX(textRenderer) - textRenderer->GetXBuffer();
 	float textScale = textRenderer->GetFontScale();
 	float alteredStringLength = 0;
 	float wordWidth = 0;
@@ -213,28 +212,42 @@ void  _renderer::WrapAround(TextRenderer* textRenderer) {
 	string alteredString = "";
 	string word = "";
 	char tempChar = 0;
+	int linecount = 0;
 
 	for (string::iterator it = tempTextString.begin(); it != tempTextString.end(); ++it) {
 		tempChar = *it;
 		word.append(1, tempChar);
 		if (isspace(tempChar) || it == tempTextString.end()-1) {
 			if (tempChar == '\n') {
-				alteredString.replace(alteredString.end()-1, alteredString.end(), 1, tempChar);
+				alteredString.append(word);
+				alteredStringLength = ceilf(alteredStringLength);
+				textRenderer->SetTextWidth(alteredStringLength, linecount);
+				alteredStringLength = 0;
+				linecount++;
 			}
 			else{
 				AEGfxGetPrintSize(AssetManager.GetFont(textRenderer->GetFontName()), &word[0], textScale, wordWidth, wordHeight);
 				wordWidth = wordWidth * ((float)AEGetWindowWidth() / 2.0f);
-				if ((alteredStringLength + wordWidth) > length) {
+				if ((alteredStringLength + ceilf(wordWidth)) > length) {
 					alteredString.replace(alteredString.end()-1, alteredString.end(), 1,'\n');
 					alteredString.append(word);
+					alteredStringLength = ceilf(alteredStringLength);
+					textRenderer->SetTextWidth(alteredStringLength, linecount);
+					linecount++;
 					alteredStringLength = wordWidth;
+					textRenderer->SetTextWidth(alteredStringLength, linecount);
+					
 				}
 				else {
 					alteredString.append(word);
+					alteredStringLength += wordWidth;
+					textRenderer->SetTextWidth(alteredStringLength, linecount);
+					
+					
 				}
-				alteredStringLength = alteredStringLength + wordWidth;
-				word.clear();
+
 			}
+			word.clear();
 		}
 	}
 	textRenderer->SetText(alteredString);

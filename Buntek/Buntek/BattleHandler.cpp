@@ -9,6 +9,7 @@
 #include "Scene_Battle.h"
 #include "SaveManager.h"
 
+
 BattleHandler::BattleHandler(void) {
 	
 }

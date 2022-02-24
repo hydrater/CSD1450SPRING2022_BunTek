@@ -20,7 +20,7 @@ public:
     static _renderer& Instance(void);
     void Update(void);
     void AddToList(RenderComponent* entry);
-    float TextAlignmentX(TextRenderer* textRenderer);
+    float TextAlignmentX(TextRenderer* textRenderer, int lineNum);
     float TextAlignmentY(TextRenderer* textRenderer);
     void WrapAround(TextRenderer* textRenderer);
     void InsertionSort(void);
