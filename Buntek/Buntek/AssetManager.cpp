@@ -10,6 +10,7 @@ _assetManager::_assetManager()
     LoadTexture("ball.png");
     LoadTexture("BetterNebula.png");
     LoadTexture("Buttons.png");
+    LoadTexture("Artifacts/ArtifactSpriteSheet.png");
 
     // UI
     LoadTexture("UI/Texture.png");

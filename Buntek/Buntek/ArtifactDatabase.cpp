@@ -218,19 +218,6 @@ string _artifactdatabase::GetDescription(unsigned long id)
     }
 }
 
-string _artifactdatabase::GetSpriteName(unsigned long id)
-{
-    switch (id)
-    {
-    case 00000:
-        return "Steven.jpg";
-        break;
-    default:
-        return "Steven.jpg";
-        break;
-    }
-}
-
 void _artifactdatabase::ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball)
 {
     for (size_t i = 0; i < artifactList.size(); ++i)
