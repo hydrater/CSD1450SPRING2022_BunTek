@@ -133,3 +133,15 @@ GameObject* _devTools::CreateArtifactUIGameObject(unsigned long ID, short blendM
     }
     return ArtifactUI;
 }
+
+GameObject* _devTools::CreatePriceTagGameObject(int price, short blendMode, Vector2 pos, short layer) {
+    GameObject* PriceTag = CreateSpriteGameObject("WhiteTexture.png", 120, 50, blendMode, pos, layer);
+    SpriteRenderer* Tagsr = PriceTag->GetComponent<SpriteRenderer>();
+    Tagsr->SetColor(0.75f, 0.5f, 0.5f);
+    GameObject* PriceTextObj = CreateSpriteGameObject("WhiteTexture.png", 40, 50, blendMode, Vector2(pos.x + 10, pos.y), layer + 1, 0);
+    TextRenderer* PriceText = AddTextToSpriteGameObject(PriceTextObj, "Ayar.ttf", to_string(price), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 26.f, layer + 1);
+    PriceTag->AddChild(PriceTextObj);
+    GameObject* PriceIcon = CreateSpriteGameObject("Steven.jpg", 40, 40, blendMode, Vector2(pos.x - 30, pos.y), layer + 1);
+    PriceTag->AddChild(PriceIcon);
+    return PriceTag;
+}

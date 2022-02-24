@@ -1,9 +1,11 @@
 #include "MapGenerator.h"
+#include "SaveManager.h"
 #include "UI_Shop.h"
 #include "Devtools.h"
 #include "System.h"
 
 void RemoveShop(Button* button);
+void PurchaseArtifact(Button* button);
 
 UI_Shop::UI_Shop(void)
 {
@@ -13,12 +15,13 @@ UI_Shop::~UI_Shop(void)
 {
 }
 
-void UI_Shop::CreateShop(short sortingLayer, vector<Artifact> artifacts)
+void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
 {
     GameObject* shopUI = this->Owner();
+    DisplayedShop = shop;
 
     // Header
-    GameObject* tempHeader = devTools.CreateSpriteGameObject("Encounter.png", 600, 150, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.5f),(short)(sortingLayer - 1), 0.5f);
+    GameObject* tempHeader = devTools.CreateSpriteGameObject("Encounter.png", 600, 100, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.25f),(short)(sortingLayer - 1), 0.5f);
    
 
     // HeaderText
@@ -34,7 +37,7 @@ void UI_Shop::CreateShop(short sortingLayer, vector<Artifact> artifacts)
     shopUI->AddChild(tempHeader);
 
     // Leave Button
-    GameObject* tempLeave = devTools.CreateSpriteGameObject("Buttons.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 3.f));
+    GameObject* tempLeave = devTools.CreateSpriteGameObject("Buttons.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 2.5f));
     TextRenderer* tempLeaveTxtRenderer = 0;
     tempLeaveTxtRenderer = tempLeave->AddComponent<TextRenderer>();
     tempLeaveTxtRenderer->SetFont("Gabriola.ttf");
@@ -49,20 +52,51 @@ void UI_Shop::CreateShop(short sortingLayer, vector<Artifact> artifacts)
 
     // Shop Artifacts Buttons
     vector<Button*> tempbuttonArtifactList;
-    for (int i = 0; i < artifacts.size(); ++i) {
+    for (int i = 0; i < shop.ArtifactsOnDisplay.size(); ++i) {
         if (i < buttonArtifactPos.size())
         {
-            GameObject* tempButtonObj = devTools.CreateArtifactUIGameObject(artifacts[i].ID, AE_GFX_BM_BLEND,
+            GameObject* tempButtonObj = devTools.CreateArtifactUIGameObject(shop.ArtifactsOnDisplay[i], AE_GFX_BM_BLEND,
                 Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y), sortingLayer - 1);
 
             Button* tempButton = tempButtonObj->AddComponent<Button>();
             tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
             tempButton->tr = tempButtonObj->GetComponent<TextRenderer>();
             tempButton->affectedObject = shopUI;
-            tempButton->ButtonEffect = &RemoveShop;
+            tempButton->ButtonEffect = &PurchaseArtifact;
+            if (shop.ArtifactsPurchased[i] == true)
+            {
+                tempButton->sr->SetOpacity(0.5f);
+                tempButton->SetClickable(false);
+            }
+
+            // Get Price
+            int price = 0;
+            switch (ArtifactDatabase.GetRarity(shop.ArtifactsOnDisplay[i]))
+            {
+            case RarityTypes::Uncommon:
+                price = RP_Uncommon;
+                    break;
+            case RarityTypes::Rare:
+                price = RP_Rare;
+                    break;
+            default:
+                price = RP_Common;
+                break;
+            }
+            
+            GameObject* tempPriceObj = devTools.CreatePriceTagGameObject(price, AE_GFX_BM_BLEND,
+                Vector2(buttonArtifactPos[i].x + tempButton->sr->GetHalfWidth() * 1.1f, buttonArtifactPos[i].y + tempButton->sr->GetHalfHeight() / 2.f), sortingLayer);
+            tempButtonObj->AddChild(tempPriceObj);
 
             shopUI->AddChild(tempButtonObj);
             tempbuttonArtifactList.push_back(tempButton);
+
+            ArtifactGoods newGood;
+            newGood.DisplayArtifactOwner = tempButtonObj;
+            newGood.ArtifactID = shop.ArtifactsOnDisplay[i];
+            newGood.purchased = shop.ArtifactsPurchased[i];
+            newGood.price = price;
+            ArtifactOnSale.push_back(newGood);
         }
     }
 
@@ -99,7 +133,16 @@ void UI_Shop::CloseShop(void)
 void UI_Shop::SetClickable(bool _canClick)
 {
     for (int i = 0; i < buttonArtifactList.size(); ++i)
-        buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
+    {
+        if (ArtifactOnSale[i].purchased == true)
+        {
+            buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetClickable(false);
+        }
+        else
+        {
+            buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
+        }
+    }
 }
 
 void RemoveShop(Button* button)
@@ -110,6 +153,48 @@ void RemoveShop(Button* button)
     MapData.SetHoverable(true);
     MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
     if (MapData.shopUI)
+    {
+        MapData.shopUI->GetComponent<UI_Shop>()->ArtifactOnSale.clear();
         MapData.shopUI->Delete();
+    }
     MapData.shopUI = 0;
+}
+
+void PurchaseArtifact(Button* button)
+{
+    // Add artifact to the player's Artifact List
+    GameObject* owner = button->Owner();
+    UI_Shop::ArtifactGoods* selGood = 0;
+    unsigned long ID = 0;
+    int index = 0;
+    bool isPurchased = false;
+    int price = 0;
+    for (; index < MapData.shopUI->GetComponent<UI_Shop>()->ArtifactOnSale.size(); ++index)
+    {
+        selGood = &(MapData.shopUI->GetComponent<UI_Shop>()->ArtifactOnSale[index]);
+        if (owner == selGood->DisplayArtifactOwner)
+        {
+            ID = selGood->ArtifactID;
+            isPurchased = selGood->purchased;
+            price = selGood->price;
+            break;
+        }
+    }
+    // Assign to allocated vector
+    if (selGood && !isPurchased && GameManager.playerProfile.stardust >= price)
+    {
+        GameManager.playerProfile.stardust -= price;
+        selGood->purchased = true;
+        // Update Shop purchased
+        for (int i{ 0 }; i < MapData.Shops.size(); ++i)
+        {
+            if (MapData.shopUI->GetComponent<UI_Shop>()->DisplayedShop.ID == MapData.Shops[i].ID)
+            {
+                MapData.Shops[i].ArtifactsPurchased[index] = true;
+            }
+        }
+        selGood->DisplayArtifactOwner->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
+        selGood->DisplayArtifactOwner->GetComponent<Button>()->SetClickable(false);
+        SaveManager.AddToArtifactList(ID);
+    }
 }

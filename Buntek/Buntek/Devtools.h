@@ -38,4 +38,7 @@ public:
 
     //Artifact UI
     GameObject* CreateArtifactUIGameObject(unsigned long ID, short blendMode, Vector2 pos, short layer);
+
+    //Artifact Price Tag
+    GameObject* CreatePriceTagGameObject(int price, short blendMode, Vector2 pos, short layer);
 };

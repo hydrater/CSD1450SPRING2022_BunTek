@@ -60,6 +60,14 @@ public:
     vector<int> travelHistoryIDs;
     vector<AEGfxVertexList*> travelHistoryLines;
 
+    // Shop Artifacts
+    struct ShopArtifacts {
+        int ID = 0;
+        vector<unsigned long> ArtifactsOnDisplay;
+        vector<bool> ArtifactsPurchased;
+    };
+    vector<ShopArtifacts> Shops;
+
 private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
     bool canAccessFirstNode = true; // REMEMBER TO RESET THIS if using multiple start nodes

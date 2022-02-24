@@ -99,6 +99,9 @@ void _mapData::GenerateMapObject(void)
         tempButton->affectedObject = temp;
         tempButton->ButtonEffect = &EnactTravel;
 
+        // Create Shop Goods
+        ShopArtifacts newShop;
+
         switch (nodeList[i]->nodeType)
         {
         case NodeType::Encounter:
@@ -116,6 +119,13 @@ void _mapData::GenerateMapObject(void)
             break;
         case NodeType::Shop:
             tempRenderer->SetTexture("UI/Shop.png");
+            newShop.ID = nodeList[i]->ID;
+            for (int art{ 0 }; art < 6; ++art)
+            {
+                newShop.ArtifactsOnDisplay.push_back(ArtifactDatabase.DrawArtifact());
+                newShop.ArtifactsPurchased.push_back(false);
+            }
+            Shops.push_back(newShop);
             break;
         case NodeType::Rest:
             tempRenderer->SetTexture("UI/Rest.png");
@@ -232,8 +242,10 @@ void _mapData::Travel(Node* destination)
     if (destinationNode != nullptr)
     {
         // Get Artifacts [TODO! GET ARTIFACTS THAT CAN BE SOLD]
-        Artifact defarti;
-        vector<Artifact> artifacts{ defarti, defarti, defarti, defarti, defarti, defarti };
+        unsigned long defarti = 0;
+        vector<unsigned long> artifacts{ defarti, defarti, defarti, defarti, defarti, defarti };
+        vector<bool> boolartifacts{ false, false, false, false, true, true };
+        ShopArtifacts selShop;
         // Enact dest node effects
         MapData.travelHistoryIDs.push_back(currentNode->ID);
         currentNode = destinationNode;
@@ -258,8 +270,17 @@ void _mapData::Travel(Node* destination)
             SetClickable(false);
             SetHoverable(false);
             MapData.shopUI = new GameObject();
-            MapData.shopUI->AddComponent<UI_Shop>();;
-            MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, artifacts);
+            MapData.shopUI->AddComponent<UI_Shop>();
+            // Get Shop Goods
+            for (int i{ 0 }; i < Shops.size(); ++i)
+            {
+                if (Shops[i].ID == destination->ID)
+                {
+                    selShop = Shops[i];
+                    break;
+                }
+            }
+            MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, selShop);
             break;
         case NodeType::Rest:
 
@@ -306,6 +327,7 @@ void _mapData::DeleteNodeList(void)
         delete nodeList[i];
 
     nodeList.clear();
+    Shops.clear();
 }
 
 void EnactTravel(Button* button)
