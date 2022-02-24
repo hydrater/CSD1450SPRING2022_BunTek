@@ -35,10 +35,10 @@ private:
     const int commonRate = 60, uncommonRate = 90;
 
     // Store list of ID here
-    const unsigned long common[9] = { 0, 1, 2, 3, 4, 300, 400, 401, 500};
-    const unsigned long uncommon[5] = {120, 220, 221, 420, 520};
-    const unsigned long rare[4] = {30, 530, 630, 631};
-    const unsigned long legendary[4] = {140, 540, 541, 640};
+    const vector<unsigned long> common{ 0, 1, 2, 3, 4, 300, 400, 401, 500};
+    const vector<unsigned long> uncommon{120, 220, 221, 420, 520};
+    const vector<unsigned long> rare{30, 530, 630, 631};
+    const vector<unsigned long> legendary{140, 540, 541, 640};
 
 public:
     static _artifactdatabase& Instance(void);
