@@ -2,6 +2,7 @@
 #include "SpriteRenderer.h"
 #include "GameManager.h"
 #include "BallBehavior.h"
+#include <algorithm>
 
 _artifactdatabase::_artifactdatabase()
 {
@@ -216,6 +217,13 @@ string _artifactdatabase::GetDescription(unsigned long id)
     default:
         return "Invalid ID";
     }
+}
+
+string _artifactdatabase::GetSpriteName(unsigned long id)
+{
+    string spriteName = "Artifacts/" + GetName(id) + ".png";
+    spriteName.erase(remove(spriteName.begin(), spriteName.end(), ' '), spriteName.end());
+    return spriteName;
 }
 
 void _artifactdatabase::ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball)

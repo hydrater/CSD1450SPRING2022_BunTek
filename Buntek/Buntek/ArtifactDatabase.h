@@ -45,7 +45,7 @@ public:
     string GetName(unsigned long id);
     RarityTypes GetRarity(unsigned long id);
     string GetDescription (unsigned long id);
-    Vector2 GetSpriteOffset(unsigned long id);
+    string GetSpriteName(unsigned long id);
     void ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball = NULL);
     unsigned long DrawArtifact(void);
     unsigned long DrawLegendary(void);
