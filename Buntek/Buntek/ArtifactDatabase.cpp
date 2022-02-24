@@ -181,29 +181,29 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 221:
         return "Wall bounce: Increases ball speed";
     case 300:
-        return "Ball phase >= 2\nWhen dealing damage, increase ball speed";
+        return "Ball phase >= 2 \nWhen dealing damage, increase ball speed";
     case 400:
-        return "Ball phase >= 3\nWhen dealing damage, restores hp";
+        return "Ball phase >= 3 \nWhen dealing damage, restores hp";
     case 401:
-        return "Ball phase >= 3\nWhen dealing damage, deals extra damage";
+        return "Ball phase >= 3 \nWhen dealing damage, deals extra damage";
     case 420:
-        return "Ball phase >= 4\nWhen dealing damage, spawns X ball in a random direction forward from the middle";
+        return "Ball phase >= 4 \nWhen dealing damage, spawns X ball in a random direction forward from the middle";
     case 500:
-        return "Ball phase >= 3:\nWhen taking damage, opponent takes damage";
+        return "Ball phase >= 3: \nWhen taking damage, opponent takes damage";
     case 520:
-        return "Ball phase >= 4:\nWhen taking damage, spawns a ball in a random direction forward from the middle";
+        return "Ball phase >= 4: \nWhen taking damage, spawns a ball in a random direction forward from the middle";
     case 530:
-        return "Ball phase >= 3:\nWhen taking damage, if hp is below 20%, unable to take damage for a while";
+        return "Ball phase >= 3: \nWhen taking damage, if hp is below 20%, unable to take damage for a while";
     case 540:
-        return "Ball phase >= 2:\nWhen taking damage, negate next damage taken";
+        return "Ball phase >= 2: \nWhen taking damage, negate next damage taken";
     case 541:
         return "On death, restores 50% hp, destroy this artifact";
     case 630:
-        return "Ball phase >= 2:\nWhen colliding with hostile balls, freeze the collided ball";
+        return "Ball phase >= 2: \nWhen colliding with hostile balls, freeze the collided ball";
     case 631:
-        return "Ball phase >= 2:\nWhen colliding with hostile balls, occasionally reflect collided ball";
+        return "Ball phase >= 2: \nWhen colliding with hostile balls, occasionally reflect collided ball";
     case 640:
-        return "Ball phase >= 5:\nWhen colliding with hostile balls, destroy the collided ball";
+        return "Ball phase >= 5: \nWhen colliding with hostile balls, destroy the collided ball";
     default:
         return "Invalid ID";
     }
