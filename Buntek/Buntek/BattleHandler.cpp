@@ -24,7 +24,8 @@ void BattleHandler::Start(void) {
 
 }
 
-void BattleHandler::StartBattle(float selfHp, float selfMaxHp, float enemyHp, float enemyMaxHp, int enemyHpBarCount) {
+void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp, float _enemyMaxHp, int enemyHpBarCount) {
+
 	battleStarted = true;
 	if (RandIntMinMax(0, 1))
 	{
@@ -38,6 +39,17 @@ void BattleHandler::StartBattle(float selfHp, float selfMaxHp, float enemyHp, fl
 	}
 	
 	AudioManager.SetMusicVolume(0.1f);
+
+	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
+	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(10, 10));
+
+	ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_Passive, true);
+	ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_Passive, false);
+
+	int selfMaxHp = _selfMaxHp + GameManager.playerProfile.bonushp;
+	int selfHp = AEClamp(_selfHp, 0, selfMaxHp);
+	int enemyMaxHp = _enemyMaxHp + GameManager.enemyProfile.bonushp;
+	int enemyHp = enemyMaxHp;
 
 	// Setting up the scene
 	GameManager.cameraLerpBack = true;
@@ -140,16 +152,14 @@ void BattleHandler::StartBattle(float selfHp, float selfMaxHp, float enemyHp, fl
 	GameManager.friendlyAreaY = friendlyArea->transform->worldposition.y + friendlyArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 	GameManager.hostileAreaY = hostileArea->transform->worldposition.y - hostileArea->GetComponent<SpriteRenderer>()->GetHalfHeight();
 
-	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
-	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(10, 10));
-
 	enemyhpBar = new GameObject();
 	enemyhpBar->transform->SetPosition(Vector2(660, 400));
 	enemyhpBar->AddComponent<UI_Hp>()->GenerateHpBar(false, enemyHp, enemyMaxHp, enemyHpBarCount);
 
 	hpBar = new GameObject();
 	hpBar->transform->SetPosition(Vector2(-660, -400));
-	hpBar->AddComponent<UI_Hp>()->GenerateHpBar(true, selfHp, selfMaxHp);
+	hpBar->AddComponent<UI_Hp>()->GenerateHpBar(true, selfHp , selfMaxHp);
+
 
 	GameManager.InitBattle(selfHp, enemyHp); // Inits Player and Enemy HP
 }

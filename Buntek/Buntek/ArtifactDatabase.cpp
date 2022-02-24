@@ -21,6 +21,24 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     bool flag = false;
     switch (artifact.ID)
     {
+    case 000://Increase damage
+        GameManager.playerProfile.bonusdamage = artifact.count;
+        break;
+    case 001://Increase max hp
+        GameManager.playerProfile.bonushp = artifact.count;
+        break;
+    case 002://Increase paddle speed
+        
+        break;
+    case 003://Increase ball speed
+        
+        break;
+    case 004://Increase ball spawn frequency
+        
+        break;
+    case 030://Heals X times more
+       
+        break;
     case 120://Increase hp by 2 per battle won, up to a max of X
         GameManager.playerProfile.maxhp += 2 * artifact.count;
         break;
@@ -145,14 +163,18 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             }
         }
         break;
-    case 630:
+    case 630://B2: Balls colliding with hostile balls will freeze it for X second
 
         break;
-    case 631:
-
+    case 631://B2: Colliding with an hostile ball have a chance to reflect that ball
+        tempBallBehavior = ball->GetComponent<BallBehavior>();
+        tempBallBehavior->velocity = -tempBallBehavior->velocity;
+        tempBallBehavior->playerPossess = !tempBallBehavior->playerPossess;
         break;
-    case 640:
-
+    case 640://B5: Destroys hostile ball
+        tempBallBehavior = ball->GetComponent<BallBehavior>();
+        if(tempBallBehavior->otherCol != NULL)
+            tempBallBehavior->otherCol->Owner()->Delete();
         break;
     default:
         

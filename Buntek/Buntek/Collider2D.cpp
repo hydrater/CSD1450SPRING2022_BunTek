@@ -236,6 +236,10 @@ bool CircleCollider::Collide(Collider2D* col)
 		// Update dimensions of the width, height and/or radius
 		SpriteRenderer* thissr = this->Owner()->GetComponent<SpriteRenderer>();
 		SpriteRenderer* othersr = other->Owner()->GetComponent<SpriteRenderer>();
+
+		if (thissr == nullptr || othersr == nullptr)
+			return false;
+
 		radius = thissr->GetHalfWidth() * 2 + thissr->GetHalfHeight() * 2;
 		angle = this->Owner()->transform->worldrotation;
 		other->radius = othersr->GetHalfWidth() * 2 + othersr->GetHalfHeight() * 2;
@@ -259,6 +263,8 @@ bool CircleCollider::Collide(Collider2D* col)
 		// Update dimensions of the width, height and/or radius
 		SpriteRenderer* thissr = this->Owner()->GetComponent<SpriteRenderer>();
 		SpriteRenderer* othersr = boxCol->Owner()->GetComponent<SpriteRenderer>();
+		if (thissr == nullptr || othersr == nullptr)
+			return false;
 		radius = thissr->GetHalfWidth() * 2 + thissr->GetHalfHeight() * 2;
 		angle = this->Owner()->transform->worldrotation;
 		boxCol->width = othersr->GetHalfWidth() * 2;

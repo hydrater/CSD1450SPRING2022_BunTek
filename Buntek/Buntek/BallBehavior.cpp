@@ -61,15 +61,17 @@ void BallBehavior::Update(void)
 	{
 		ReflectBall(playerPossess, (othercol->Owner()));
 	}
-	if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())
-	{
-		if (playerPossess) {//enemy ball hits player ball
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
-		}
-		else {
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
-		}
-	}
+	//ball ball artifact collision check not working, null error
+	//if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())
+	//{
+	//	otherCol = othercol;
+	//	if (playerPossess) {//enemy ball hits player ball
+	//		ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
+	//	}
+	//	else {
+	//		ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
+	//	}
+	//}
 	// Update position and rotation
 	transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime * timeScalar);
 	transform->Rotate(rotSpeed * DeltaTime * timeScalar);

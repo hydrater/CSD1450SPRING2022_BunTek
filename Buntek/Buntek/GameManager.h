@@ -35,11 +35,14 @@ public:
         int stardust;
         int currLevel;
         short attackType;
+
+        float bonushp = 0;
+        float bonusdamage = 0;
     }playerProfile = {}, enemyProfile = {};
 
     struct Status
     {
-        int statusID;
+        int statusID = NULL;
         float statusTimer = 0;
         float statusCount = 0;
     };
