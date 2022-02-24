@@ -3,6 +3,7 @@
 #include "GameScript.h"
 #include "SpriteRenderer.h"
 #include "BallBehavior.h"
+#include "ParticleSystem.h"
 
 class BattleHandler : public GameScript
 {

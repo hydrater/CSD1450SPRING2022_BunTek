@@ -2,7 +2,7 @@
 #include "GameManager.h"
 #include "SpriteRenderer.h"
 #include "System.h"
-#include "ParticleSystem.h"
+
 
 BallBehavior::BallBehavior(void)
 {
@@ -13,6 +13,7 @@ BallBehavior::~BallBehavior(void)
 	CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
 	battleInput->RemoveFromList(this);
 	GameManager.CameraShake(0.5, 50, Vector2(0, 0));
+	ballParticle->GetComponent<ParticleSystem>()->DeleteParticleSystem();
 }
 
 void BallBehavior::Start(void)
@@ -23,6 +24,9 @@ void BallBehavior::Start(void)
 
 void BallBehavior::Update(void)
 {
+	ballParticle->transform->SetPosition(transform->worldposition);
+	ballParticleSystem->directionalVector2 = -velocity;
+
 	//Collision check with left/right wall
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		velocity.x = -velocity.x;
@@ -112,14 +116,39 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			velocity.RotateAC(multiplier * angRange);
 
 			ballPhase++;
-			if (ballPhase > 8)
-				ballPhase = 8;
+			if (ballPhase > maxBallPhase)
+				ballPhase = maxBallPhase;
 			else
 				speed += ballPhaseSpeedIncrement;
 
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_PaddleHit, !playerPossess, this->Owner());
 		}
 	}
+	switch (ballPhase) {
+	case -1:
+		ballParticleSystem->SetColor(1, 1, 1);
+		break;
+	case 0:
+		ballParticleSystem->SetColor(1, 1, 1);
+		break;
+	case 1:
+		ballParticleSystem->SetColor(1, 1, 0.5);
+		break;
+	case 2:
+		ballParticleSystem->SetColor(1, 1, 0);
+		break;
+	case 3:
+		ballParticleSystem->SetColor(1, 0.5, 0);
+		break;
+	case 4:
+		ballParticleSystem->SetColor(1, 0.25, 0);
+		break;
+	default:
+		ballParticleSystem->SetColor(1, 0, 0);
+		break;
+
+	}
+
 }
 
 float BallBehavior::GetSpeed(void)

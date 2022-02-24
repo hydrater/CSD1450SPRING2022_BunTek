@@ -234,6 +234,14 @@ void BattleHandler::Update(void) {
 			else
 				ball->transform->SetPosition(AIpaddle->transform->worldposition);
 
+			GameObject* newParticle = new GameObject();
+			ParticleSystem* newSystem = newParticle->AddComponent<ParticleSystem>();
+			newParticle->transform->SetPosition(ball->transform->worldposition);
+			newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "ball.png", ball->transform->worldposition, 5, (short)AE_GFX_BM_BLEND, true, true);
+
+			tempBall->ballParticle = newParticle;
+			tempBall->ballParticleSystem = newSystem;
+
 			ballList->push_back(tempBall);
 
 			ballSpawnTimer = 3 - scalingTimer * 0.01f;

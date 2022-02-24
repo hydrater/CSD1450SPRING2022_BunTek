@@ -5,6 +5,8 @@
 #include "Collider2D.h"
 #include "BattleInput.h"
 #include "CollisionManager2D.h"
+#include "ParticleSystem.h"
+
 using namespace Math;
 
 class BallBehavior : public GameScript
@@ -31,11 +33,12 @@ public:
 
 	BattleInput* battleInput = 0;
 	GameObject* ballParticle = 0;
+	ParticleSystem* ballParticleSystem = 0;
 	float hitPauseTimer = 0.04f;
 	bool causeHitPause = false;
 	bool checkTimer = false;
 	float timeScalar = 1.0f;
-	int ballPhase = 0;
+	int ballPhase = -1;
 	int ballDamage = 10;
 
 private:

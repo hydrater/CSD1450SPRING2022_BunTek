@@ -12,12 +12,51 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
+	// Directional Vector, will be turned into unit vector
+	Vector2 directionalVector2 = Vector2(0, 1);
+	
+	//Set color
+	void SetColor(float r, float g, float b);
+
+	//SpawnParticle
+	void SpawnParticle();
+	
+
+	void SetScrollingParticle(
+		Vector2 directionalVector, float scrollSpeed,
+		float xDimension, float yDimension,
+		string newTextureString, Vector2 newWorldPos, short newRenderLayer,
+		short newBlendMode, bool fade = false, bool shrink = false);
+
+	void SetEmittingParticle(
+		Vector2 directionalVector, float newSpawnRate,
+		float newAngleSpread, float powerMin, float powerMax,
+		float randRotMin, float randRotMax,
+		float xDimension, float yDimension,
+		string newTextureString, Vector2 newWorldPos,
+		short newRenderLayer, short newBlendMode,
+		bool fade = true, bool shrink = false);
+
+	void SetBurstingParticle(
+		Vector2 directionalVector, float newSpawnRate, float newNumBurst, bool newIsLoop,
+		float newAngleSpread, float powerMin, float powerMax,
+		float randRotMin, float randRotMax,
+		float xDimension, float yDimension,
+		string newTextureString, Vector2 newWorldPos,
+		short newRenderLayer, short newBlendMode,
+		bool fade = true, bool shrink = false);
+
+	//Stop particle system
+	void DeleteParticleSystem();
+
+private:
 	// ========    Lists    ========
 	vector<GameObject*> particleList;
 	vector<float> timerList;
 	vector<float> rotationVelList;
 	vector<Vector2> velocityList;
 	vector<float> lifespanList;
+	vector<Vector2> sizeList;
 
 	// ========    Spawner Attributes    ========
 	string textureString = "Steven.jpg";
@@ -25,9 +64,11 @@ public:
 	float xSize = 100;
 	float ySize = 100;
 	short renderLayer = 0;
-
-	// Directional Vector, will be turned into unit vector
-	Vector2 directionalVector2 = Vector2(0, 1);
+	bool isDeleting = false;
+	bool isFade = false;
+	bool isShrink = false;
+	float ColorR = 1, ColorG = 1, ColorB = 1;
+	
 	// Random launch angle spread
 	float angleSpread = 360.0f; //In degrees
 	// Random launch power range
@@ -45,7 +86,7 @@ public:
 	// ========    Particle Spawning Over Time settings     ========
 	float spawnRate = 5.0f; //particles per second
 	float internalTimer = 0.0f;
-	int maxParticles = 100;
+	int maxParticles = 1000;
 	
 	// ========    Particle Bursting Over Time settings    ======== 
 	bool isBurst = false; //if set to true, particles all spawn at once and burst
@@ -53,32 +94,4 @@ public:
 	int numBurst = 100;
 	bool isLoop = true;	//if true, keeps bursting over and over again. Else, deletes self after 1 burst
 
-	//SpawnParticle
-	void SpawnParticle();
-
-	void SetScrollingParticle(
-		Vector2 directionalVector, float scrollSpeed, 
-		float xDimension, float yDimension, 
-		string newTextureString, Vector2 newWorldPos, short newRenderLayer, 
-		short newBlendMode);
-
-	void SetEmittingParticle(
-		Vector2 directionalVector, float newSpawnRate,
-		float newAngleSpread, float powerMin, float powerMax,
-		float randRotMin, float randRotMax,
-		float xDimension, float yDimension,
-		string newTextureString, Vector2 newWorldPos,
-		short newRenderLayer, short newBlendMode);
-
-	void SetBurstingParticle(
-		Vector2 directionalVector, float newSpawnRate, float newNumBurst, bool newIsLoop,
-		float newAngleSpread, float powerMin, float powerMax,
-		float randRotMin, float randRotMax,
-		float xDimension, float yDimension,
-		string newTextureString, Vector2 newWorldPos,
-		short newRenderLayer, short newBlendMode);
-
-private:
-	
-	
 };

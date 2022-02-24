@@ -15,6 +15,7 @@ ParticleSystem::~ParticleSystem(void)
 	timerList.clear();
 	rotationVelList.clear();
 	lifespanList.clear();
+	sizeList.clear();
 }
 
 void ParticleSystem::Start(void)
@@ -25,58 +26,78 @@ void ParticleSystem::Start(void)
 void ParticleSystem::Update(void)
 {
 	
-	float MaxTime = (float)1 / spawnRate;
 
-	// If supposed to spawn over time
-	if (!isBurst) {
-		//Spawn a particle
-		if (internalTimer >= MaxTime) {
-			internalTimer -= MaxTime;
-			SpawnParticle();
-		}
-	}
-	else {
-		if (!hasSpawned) {//Has not spawned a burst
-			hasSpawned = true;
-			//Spawn a burst
-			for (int i = 0; i < numBurst; i++) {
+	if (!isDeleting) {
+		float MaxTime = (float)1 / spawnRate;
+
+		// If supposed to spawn over time
+		if (!isBurst) {
+			//Spawn a particle
+			if (internalTimer >= MaxTime) {
+				internalTimer -= MaxTime;
 				SpawnParticle();
 			}
 		}
-		//if supposed to keep looping burst
-		if (isLoop) {
-			if (internalTimer >= MaxTime) {
-				internalTimer -= MaxTime;
-				hasSpawned = false; //Burst again next frame
-				cout << "BurstAgain!" << endl;
-				cout << particleList.size() << endl;
-			}
-		}
 		else {
-			if (internalTimer >= maxLifespanMax) { //If all particles are dead
-				this->Owner()->Delete();
+			if (!hasSpawned) {//Has not spawned a burst
+				hasSpawned = true;
+				//Spawn a burst
+				for (int i = 0; i < numBurst; i++) {
+					SpawnParticle();
+				}
+			}
+			//if supposed to keep looping burst
+			if (isLoop) {
+				if (internalTimer >= MaxTime) {
+					internalTimer -= MaxTime;
+					hasSpawned = false; //Burst again next frame
+				}
+			}
+			else {
+				DeleteParticleSystem();
 			}
 		}
-		
 	}
-	
+	else {
+		if (internalTimer >= maxLifespanMax) {
+			this->Owner()->Delete();
+		}
+	}
 
-	for (int i = (int)particleList.size()-1; i >= 0; i--) {
+	// Particle management, physics+deletion
+	for (int i = (int)particleList.size() - 1; i >= 0; i--) {
 		//If lived long enough
 		if (timerList[i] > lifespanList[i]) {
 			//Delete particle
 			particleList[i]->Delete();
 			velocityList.erase(velocityList.begin() + i);
 			timerList.erase(timerList.begin() + i);
+			lifespanList.erase(lifespanList.begin()+i);
 			particleList.erase(particleList.begin() + i);
 			rotationVelList.erase(rotationVelList.begin() + i);
+			sizeList.erase(sizeList.begin() + i);
 		}
-		else {//Do particle physics
-			particleList[i]->transform->worldposition += velocityList[i]*DeltaTime;
+		else {//Do particle physics, shrink, and fade
+			particleList[i]->transform->worldposition += velocityList[i] * DeltaTime;
 			timerList[i] += DeltaTime;
-			particleList[i]->transform->Rotate(rotationVelList[i]*DeltaTime);
+			particleList[i]->transform->Rotate(rotationVelList[i] * DeltaTime);
+			if (isShrink||isFade) {
+				SpriteRenderer* temp = particleList[i]->GetComponent<SpriteRenderer>();
+				float Ratio = 1-(timerList[i] / lifespanList[i]);
+
+				if (isShrink) temp->Size(Ratio * sizeList[i].x, Ratio * sizeList[i].y);
+				if (isFade) temp->SetOpacity(Ratio);
+			}
 		}
 	}
+	
+	internalTimer += DeltaTime;
+}
+
+void ParticleSystem::SetColor(float r, float g, float b) {
+	ColorR = r;
+	ColorG = g;
+	ColorB = b;
 }
 
 void ParticleSystem::SpawnParticle(void) {
@@ -86,13 +107,15 @@ void ParticleSystem::SpawnParticle(void) {
 		velocityList.erase(velocityList.begin());
 		timerList.erase(timerList.begin());
 		rotationVelList.erase(rotationVelList.begin());
-		particleList[0]->Delete();
 		particleList.erase(particleList.begin());
 		lifespanList.erase(lifespanList.begin());
+		sizeList.erase(sizeList.begin());
+		particleList[0]->Delete();
 	}
 
 	//Creates particle objects and constituent
 	GameObject* temp = devTools.CreateSpriteGameObject(textureString, xSize, ySize, blendMode, this->Owner()->transform->worldposition,renderLayer);
+	temp->GetComponent<SpriteRenderer>()->SetColor(ColorR, ColorG, ColorB);
 	particleList.push_back(temp);
 	directionalVector2.Normalize();
 	Vector2 newVec = directionalVector2;
@@ -103,13 +126,15 @@ void ParticleSystem::SpawnParticle(void) {
 	timerList.push_back(0.0f);
 	rotationVelList.push_back(RandFloatMinMax(randRotRangeMin,randRotRangeMax));
 	lifespanList.push_back(RandFloatMinMax(maxLifespanMin, maxLifespanMax));
+	sizeList.push_back(Vector2(xSize,ySize));
 }
 
 void ParticleSystem::SetScrollingParticle(
 	Vector2 directionalVector, float scrollSpeed, 
 	float xDimension, float yDimension, 
 	string newTextureString, Vector2 newWorldPos, 
-	short newRenderLayer, short newBlendMode) {
+	short newRenderLayer, short newBlendMode,
+	bool fade, bool shrink) {
 	
 	directionalVector2 = directionalVector;
 	powerRangeMax = scrollSpeed;
@@ -126,6 +151,8 @@ void ParticleSystem::SetScrollingParticle(
 	textureString = newTextureString;
 	angleSpread = 0;
 	blendMode = newBlendMode;
+	isFade = fade;
+	isShrink = shrink;
 	SpawnParticle();
 	this->Owner()->transform->worldposition = newWorldPos;
 }
@@ -136,7 +163,8 @@ void ParticleSystem::SetEmittingParticle(
 	float randRotMin, float randRotMax,
 	float xDimension, float yDimension,
 	string newTextureString, Vector2 newWorldPos,
-	short newRenderLayer, short newBlendMode) {
+	short newRenderLayer, short newBlendMode,
+	bool fade, bool shrink) {
 
 	isBurst = false;
 	isLoop = true;
@@ -153,6 +181,8 @@ void ParticleSystem::SetEmittingParticle(
 	this->Owner()->transform->worldposition = newWorldPos;
 	blendMode = newBlendMode;
 	renderLayer = newRenderLayer;
+	isFade = fade;
+	isShrink = shrink;
 	SpawnParticle();
 }
 
@@ -162,7 +192,8 @@ void ParticleSystem::SetBurstingParticle(
 	float randRotMin, float randRotMax,
 	float xDimension, float yDimension,
 	string newTextureString, Vector2 newWorldPos,
-	short newRenderLayer, short newBlendMode) {
+	short newRenderLayer, short newBlendMode,
+	bool fade, bool shrink) {
 
 	isBurst = true;
 	isLoop = newIsLoop;
@@ -181,5 +212,13 @@ void ParticleSystem::SetBurstingParticle(
 	this->Owner()->transform->worldposition = newWorldPos;
 	blendMode = newBlendMode;
 	renderLayer = newRenderLayer;
+	isFade = fade;
+	isShrink = shrink;
+
 	SpawnParticle();
+}
+
+void ParticleSystem::DeleteParticleSystem(void) {
+	isDeleting = true;
+	internalTimer = 0;
 }

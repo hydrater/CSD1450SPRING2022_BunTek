@@ -32,6 +32,7 @@ void Scene_Test::Start(void)
 	//	Vector2(-3960, 0),1,(short)AE_GFX_BM_ADD);
 
 	//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	/*
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 	vector<Artifact> artiList;
 	Artifact test, test2, test3;
@@ -43,6 +44,9 @@ void Scene_Test::Start(void)
 	artiList.push_back(test3);
 	//artiList.push_back(test3);
 	UIDialogueManager.CreateRewardSelPreset(artiList, 1, true);
+	*/
+	spawner = new GameObject();
+	spawner->AddComponent<ParticleSystem>()->SetEmittingParticle(Vector2(0, 1), 10, 10, 30, 40, -10, 10, 10, 10, "ball.png", Vector2(0, 0), 5, (short)AE_GFX_BM_BLEND,true,true);
 }
 
 void Scene_Test::Update(void)
