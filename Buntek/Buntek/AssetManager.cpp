@@ -36,6 +36,29 @@ _assetManager::_assetManager()
     LoadFont("Gabriola.ttf");
     LoadFont("Metrolic.ttf");
     LoadFont("GothicA1.ttf");
+
+    //Artifacts
+    LoadTexture("Artifacts/BouncyNecklace.png");
+    LoadTexture("Artifacts/Defiance.png");
+    LoadTexture("Artifacts/Dexterity.png");
+    LoadTexture("Artifacts/DualStrike.png");
+    LoadTexture("Artifacts/FreezingTouch.png");
+    LoadTexture("Artifacts/HealingFountain.png");
+    LoadTexture("Artifacts/HealthBuddy.png");
+    LoadTexture("Artifacts/HealthThief.png");
+    LoadTexture("Artifacts/LastStand.png");
+    LoadTexture("Artifacts/LethalCut.png");
+    LoadTexture("Artifacts/LifeofChampion.png");
+    LoadTexture("Artifacts/NinjaShoes.png");
+    LoadTexture("Artifacts/Power.png");
+    LoadTexture("Artifacts/Reflection.png");
+    LoadTexture("Artifacts/Shield.png");
+    LoadTexture("Artifacts/Smacker.png");
+    LoadTexture("Artifacts/TreeofLife.png");
+    LoadTexture("Artifacts/Trickery.png");
+    LoadTexture("Artifacts/Urgency.png");
+    LoadTexture("Artifacts/VengefulTrickery.png");
+    LoadTexture("Artifacts/ZoomerGoggles.png");
 }
 
 _assetManager::~_assetManager()

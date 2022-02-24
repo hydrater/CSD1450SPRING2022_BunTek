@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "Entity.h"
+#include "Vector2.h"
 using namespace std;
 
 #define ArtifactDatabase _artifactdatabase::Instance()
@@ -35,8 +36,8 @@ private:
 
     // Store list of ID here
     const unsigned long common[9] = { 0, 1, 2, 3, 4, 300, 400, 401, 500};
-    const unsigned long uncommon[6] = {120, 220, 221, 420, 520, 521};
-    const unsigned long rare[3] = {30, 630, 631};
+    const unsigned long uncommon[5] = {120, 220, 221, 420, 520};
+    const unsigned long rare[4] = {30, 530, 630, 631};
     const unsigned long legendary[4] = {140, 540, 541, 640};
 
 public:
