@@ -26,6 +26,13 @@ public:
 
 	bool UIOpen = false, UIDecision = false;	// UIDecision: Prevents user from clicking to next dialogue 
 
+	struct ArtifactLoot {
+		GameObject* DisplayArtifactOwner = 0;
+		unsigned long ArtifactID = 0;
+	};
+
+	vector<ArtifactLoot> ArtifactChoices = {};
+
 private:
 
 	void WriteToDialogue(void);
@@ -70,6 +77,7 @@ private:
 
 	enum ChoiceFunctionType {
 		CF_Leave = 0,
+		CF_PickUpArtifact,
 		CF_Sample1
 	};
 };

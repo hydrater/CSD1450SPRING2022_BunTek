@@ -41,6 +41,7 @@ public:
     {
         // Artifact list by events
         vector<Artifact> behaviorList_Passive;
+        vector<Artifact> behaviorList_BattleWon;
         vector<Artifact> behaviorList_DealDamage;
         vector<Artifact> behaviorList_TakeDamage;
         vector<Artifact> behaviorList_WallBounce;

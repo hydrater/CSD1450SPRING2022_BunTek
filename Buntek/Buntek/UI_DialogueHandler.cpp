@@ -1,5 +1,6 @@
 #include "MapGenerator.h"
 #include "ArtifactDatabase.h"
+#include "GameManager.h"
 #include "UI_DialogueHandler.h"
 #include "DialogueDatabase.h"
 #include "System.h"
@@ -9,6 +10,7 @@
 void RemoveDialogue(Button* button);
 void BF_ChooseLootButton(Button* button);
 void BF_Sample1Button(Button* button);
+void CF_PickUpArtifactButton(Button* button);
 void CF_Sample1Button(Button* button);
 
 UI_DialogueHandler::UI_DialogueHandler(void)
@@ -333,16 +335,20 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
                 owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
             owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
             owner->AddChild(tempArtifact);
+            ArtifactLoot Artifact;
+            Artifact.DisplayArtifactOwner = owner;
+            Artifact.ArtifactID = artifact[i].ID;
+            ArtifactChoices.push_back(Artifact);
+            // Assign Button Effect
+            AssignButton(rewardButtonList[i], 'c', CF_PickUpArtifact + '0');
         }
-        // Assign Button Effect [TODO! Change decision value to the one that gives the artifact to the player]
-        AssignButton(rewardButtonList[i], 'c', 0);
     }
 
     // Auto activate decline choice [ALWAYS last choice]
     if (canDecline && rewardButtonList.size() > 0)
     {
         rewardButtonList[rewardButtonList.size() - 1]->Owner()->Activate();
-        AssignButton(rewardButtonList[rewardButtonList.size() - 1], 'c', CF_Leave);
+        AssignButton(rewardButtonList[rewardButtonList.size() - 1], 'c', CF_Leave + '0');
     }
 }
 
@@ -357,6 +363,7 @@ void UI_DialogueHandler::DeleteDialogueEvent(void)
 
     dialogueButtonList.clear();
     rewardButtonList.clear();
+    ArtifactChoices.clear();
 }
 
 void UI_DialogueHandler::CreatePreset(short sortingLayer)
@@ -538,6 +545,9 @@ void UI_DialogueHandler::AssignButton(Button* button, char buttonType, char selc
         case CF_Leave:
             button->ButtonEffect = &RemoveDialogue;
             break;
+        case CF_PickUpArtifact:
+            button->ButtonEffect = &CF_PickUpArtifactButton;
+            break;
         case CF_Sample1:
             button->ButtonEffect = &CF_Sample1Button;
             break;
@@ -555,6 +565,10 @@ void UI_DialogueHandler::AssignArtifact(GameObject* owner, string selArtifact)
             owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
     owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
     owner->AddChild(tempArtifact);
+    ArtifactLoot Artifact;
+    Artifact.DisplayArtifactOwner = owner;
+    Artifact.ArtifactID = test;
+    ArtifactChoices.push_back(Artifact);
 }
 
 void RemoveDialogue(Button* button)
@@ -584,6 +598,152 @@ void BF_Sample1Button(Button* button)
 }
 
 // ---------------------------------------------------------CHOICE FUNCTIONS---------------------------------------------------------
+void CF_PickUpArtifactButton(Button* button)
+{
+    // Add artifact to the player's Artifact List
+    GameObject* owner = button->Owner();
+    unsigned long ID = 0;
+    for (int i{ 0 }; i < UIDialogueManager.ArtifactChoices.size() ; ++i)
+    {
+        if (owner == UIDialogueManager.ArtifactChoices[i].DisplayArtifactOwner)
+        {
+            ID = UIDialogueManager.ArtifactChoices[i].ArtifactID;
+            break;
+        }
+    }
+    // Assign to allocated vector
+    bool exist = false;
+    switch (ID / 100)
+    {
+    case 1:
+        for (size_t i{ 0 }; i < GameManager.playerArtifactList.behaviorList_BattleWon.size(); ++i)
+        {
+            if (ID == GameManager.playerArtifactList.behaviorList_BattleWon[i].ID)
+            {
+                ++GameManager.playerArtifactList.behaviorList_BattleWon[i].count;
+                exist = true;
+                break;
+            }
+        }
+        if (!exist)
+        {
+            Artifact newArtifact;
+            newArtifact.ID = ID;
+            newArtifact.count = 1;
+            GameManager.playerArtifactList.behaviorList_BattleWon.push_back(newArtifact);
+        }
+        break;
+    case 2:
+        for (size_t i{ 0 }; i < GameManager.playerArtifactList.behaviorList_WallBounce.size(); ++i)
+        {
+            if (ID == GameManager.playerArtifactList.behaviorList_WallBounce[i].ID)
+            {
+                ++GameManager.playerArtifactList.behaviorList_WallBounce[i].count;
+                exist = true;
+                break;
+            }
+        }
+        if (!exist)
+        {
+            Artifact newArtifact;
+            newArtifact.ID = ID;
+            newArtifact.count = 1;
+            GameManager.playerArtifactList.behaviorList_WallBounce.push_back(newArtifact);
+        }
+        break;
+    case 3:
+        for (size_t i{ 0 }; i < GameManager.playerArtifactList.behaviorList_PaddleHit.size(); ++i)
+        {
+            if (ID == GameManager.playerArtifactList.behaviorList_PaddleHit[i].ID)
+            {
+                ++GameManager.playerArtifactList.behaviorList_PaddleHit[i].count;
+                exist = true;
+                break;
+            }
+        }
+        if (!exist)
+        {
+            Artifact newArtifact;
+            newArtifact.ID = ID;
+            newArtifact.count = 1;
+            GameManager.playerArtifactList.behaviorList_PaddleHit.push_back(newArtifact);
+        }
+        break;
+    case 4:
+        for (size_t i{ 0 }; i < GameManager.playerArtifactList.behaviorList_DealDamage.size(); ++i)
+        {
+            if (ID == GameManager.playerArtifactList.behaviorList_DealDamage[i].ID)
+            {
+                ++GameManager.playerArtifactList.behaviorList_DealDamage[i].count;
+                exist = true;
+                break;
+            }
+        }
+        if (!exist)
+        {
+            Artifact newArtifact;
+            newArtifact.ID = ID;
+            newArtifact.count = 1;
+            GameManager.playerArtifactList.behaviorList_DealDamage.push_back(newArtifact);
+        }
+        break;
+    case 5:
+        for (size_t i{ 0 }; i < GameManager.playerArtifactList.behaviorList_TakeDamage.size(); ++i)
+        {
+            if (ID == GameManager.playerArtifactList.behaviorList_TakeDamage[i].ID)
+            {
+                ++GameManager.playerArtifactList.behaviorList_TakeDamage[i].count;
+                exist = true;
+                break;
+            }
+        }
+        if (!exist)
+        {
+            Artifact newArtifact;
+            newArtifact.ID = ID;
+            newArtifact.count = 1;
+            GameManager.playerArtifactList.behaviorList_TakeDamage.push_back(newArtifact);
+        }
+        break;
+    case 6:
+        for (size_t i{ 0 }; i < GameManager.playerArtifactList.behaviorList_BallOnBallCollision.size(); ++i)
+        {
+            if (ID == GameManager.playerArtifactList.behaviorList_BallOnBallCollision[i].ID)
+            {
+                ++GameManager.playerArtifactList.behaviorList_BallOnBallCollision[i].count;
+                exist = true;
+                break;
+            }
+        }
+        if (!exist)
+        {
+            Artifact newArtifact;
+            newArtifact.ID = ID;
+            newArtifact.count = 1;
+            GameManager.playerArtifactList.behaviorList_BallOnBallCollision.push_back(newArtifact);
+        }
+        break;
+    default:
+        for (size_t i{ 0 }; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i)
+        {
+            if (ID == GameManager.playerArtifactList.behaviorList_Passive[i].ID)
+            {
+                ++GameManager.playerArtifactList.behaviorList_Passive[i].count;
+                exist = true;
+                break;
+            }
+        }
+        if (!exist)
+        {
+            Artifact newArtifact;
+            newArtifact.ID = ID;
+            newArtifact.count = 1;
+            GameManager.playerArtifactList.behaviorList_Passive.push_back(newArtifact);
+        }
+        break;
+    }
+    RemoveDialogue(button);
+}
 void CF_Sample1Button(Button* button)
 {
     // Sample 1 Go to Dialogue
