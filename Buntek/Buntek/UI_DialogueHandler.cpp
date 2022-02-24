@@ -561,14 +561,17 @@ void UI_DialogueHandler::AssignButton(Button* button, char buttonType, char selc
 
 void UI_DialogueHandler::AssignArtifact(GameObject* owner, string selArtifact)
 {
-    unsigned long test = 0;
-    GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(test, AE_GFX_BM_BLEND,
+    // Take first three letters from the string
+    unsigned long ID = 0;
+    if (selArtifact[0] >= '0' && selArtifact[0] <= '9' && selArtifact[1] >= '0' && selArtifact[1] <= '9' && selArtifact[2] >= '0' && selArtifact[2] <= '9')
+        ID = (selArtifact[0] - '0') * 100 + (selArtifact[1] - '0') * 10 + (selArtifact[2] - '0');
+    GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(ID, AE_GFX_BM_BLEND,
             owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
     owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
     owner->AddChild(tempArtifact);
     ArtifactLoot Artifact;
     Artifact.DisplayArtifactOwner = owner;
-    Artifact.ArtifactID = test;
+    Artifact.ArtifactID = ID;
     ArtifactChoices.push_back(Artifact);
 }
 
