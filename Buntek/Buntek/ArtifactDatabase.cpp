@@ -18,6 +18,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
 {
     // if (isPlayerTheCaster) means the player owns this artifact else it's the AI
     BallBehavior* tempBallBehavior;
+    bool flag = false;
     switch (artifact.ID)
     {
     case 120://Increase hp by 2 per battle won, up to a max of X
@@ -69,10 +70,80 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         }
         break;
     case 530://B3: If hp is below <20%, unable to take damage for X second,
+        if (isPlayerTheCaster) {
+            if (GameManager.playerHp < GameManager.playerProfile.maxhp / 5) {
+                for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
+                {
+                    if (GameManager.playerArtifactList.statusEffect[i].statusID == 00) {
+                        GameManager.playerArtifactList.statusEffect[i].statusTimer += artifact.count;
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    _gameManager::Status temp;
+                    temp.statusID = 00;
+                    temp.statusTimer = artifact.count;
+                    GameManager.playerArtifactList.statusEffect.push_back(temp);
+                }
 
+            }
+        }
+        else {
+            if (GameManager.playerHp < GameManager.enemyProfile.maxhp / 5) {
+                for (size_t i = 0; i < GameManager.enemyArtifactList.statusEffect.size(); ++i)
+                {
+                    if (GameManager.enemyArtifactList.statusEffect[i].statusID == 00) {
+                        GameManager.enemyArtifactList.statusEffect[i].statusTimer += artifact.count;
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    _gameManager::Status temp;
+                    temp.statusID = 00;
+                    temp.statusTimer = artifact.count;
+                    GameManager.enemyArtifactList.statusEffect.push_back(temp);
+                }
+
+            }
+        }
         break;
     case 540://B2: Negate next damage
-
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 2) {
+            if (isPlayerTheCaster) {
+                for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
+                {
+                    if (GameManager.playerArtifactList.statusEffect[i].statusID == 00) {
+                        GameManager.playerArtifactList.statusEffect[i].statusCount = 1;
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    _gameManager::Status temp;
+                    temp.statusID = 00;
+                    temp.statusCount = 1;
+                    GameManager.playerArtifactList.statusEffect.push_back(temp);
+                }
+            }
+            else {
+                for (size_t i = 0; i < GameManager.enemyArtifactList.statusEffect.size(); ++i)
+                {
+                    if (GameManager.enemyArtifactList.statusEffect[i].statusID == 00) {
+                        GameManager.enemyArtifactList.statusEffect[i].statusCount = 1;
+                        flag = true;
+                        break;
+                    }
+                }
+                if (!flag) {
+                    _gameManager::Status temp;
+                    temp.statusID = 00;
+                    temp.statusCount = 1;
+                    GameManager.enemyArtifactList.statusEffect.push_back(temp);
+                }
+            }
+        }
         break;
     case 630:
 

@@ -37,6 +37,13 @@ public:
         short attackType;
     }playerProfile = {}, enemyProfile = {};
 
+    struct Status
+    {
+        int statusID;
+        float statusTimer = 0;
+        float statusCount = 0;
+    };
+
     struct BattleArtifactProfile
     {
         // Artifact list by events
@@ -49,6 +56,7 @@ public:
         vector<Artifact> behaviorList_BallOnBallCollision;
 
         // Any additional variables for specific artifacts
+        vector<Status> statusEffect;
     }playerArtifactList = {}, enemyArtifactList{};
 
     void InitBattleProfile(BattleArtifactProfile& battleProfile, map<unsigned long, int> artifactSaveData);

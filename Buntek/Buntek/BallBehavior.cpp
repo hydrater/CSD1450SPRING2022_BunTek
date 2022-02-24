@@ -43,13 +43,14 @@ void BallBehavior::Update(void)
 		
 		if (playerPossess) {//enemy ball hits player goal
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
+			GameManager.DealDamage((float)ballDamage, playerPossess);
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_TakeDamage, playerPossess, this->Owner());
 		}
 		else {
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
+			GameManager.DealDamage((float)ballDamage, playerPossess);
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, playerPossess, this->Owner());
 		}
-		GameManager.DealDamage((float)ballDamage, playerPossess);
 		this->Owner()->Delete();
 		return;
 	}

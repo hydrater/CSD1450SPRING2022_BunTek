@@ -180,7 +180,16 @@ void BattleHandler::Update(void) {
 		BattleInput* _bInput = inputHandler->GetComponent<BattleInput>();
 		_bInput->timeScalar = timeScalar;
 		
-		
+		//status
+		for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
+		{
+			if (GameManager.playerArtifactList.statusEffect[i].statusTimer > 0) {
+				GameManager.playerArtifactList.statusEffect[i].statusTimer -= DeltaTime;
+			}
+			else if (GameManager.playerArtifactList.statusEffect[i].statusCount == 0) {
+				GameManager.playerArtifactList.statusEffect.erase(GameManager.playerArtifactList.statusEffect.begin() + i);
+			}
+		}
 		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 		ballSpawnTimer -= DeltaTime * timeScalar;
 		scalingTimer += DeltaTime * timeScalar;

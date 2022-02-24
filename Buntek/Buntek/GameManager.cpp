@@ -162,6 +162,18 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
 {
     if (isPlayer)
     {
+        for (size_t i = 0; i < playerArtifactList.statusEffect.size(); ++i)
+        {
+            if (playerArtifactList.statusEffect[i].statusID == 00) {
+                if (playerArtifactList.statusEffect[i].statusTimer > 0) {
+                    damage = 0;
+                }
+                else if (playerArtifactList.statusEffect[i].statusCount > 0) {
+                    playerArtifactList.statusEffect[i].statusCount--;
+                    damage = 0;;
+                }
+            }
+        }
         playerHp -= damage;
         if (playerHp <= 0)
         {
@@ -171,6 +183,18 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
     }
     else
     {
+        for (size_t i = 0; i < enemyArtifactList.statusEffect.size(); ++i)
+        {
+            if (enemyArtifactList.statusEffect[i].statusID == 00) {
+                if (enemyArtifactList.statusEffect[i].statusTimer > 0) {
+                    damage = 0;;
+                }
+                else if (enemyArtifactList.statusEffect[i].statusCount > 0) {
+                    enemyArtifactList.statusEffect[i].statusCount--;
+                    damage = 0;;
+                }
+            }
+        }
         enemyHp -= damage;
         if (enemyHp <= 0)
         {
