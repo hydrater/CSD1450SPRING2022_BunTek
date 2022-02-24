@@ -20,7 +20,8 @@ enum class RarityTypes : short
 class Artifact
 {
 public:
-    unsigned long ID = 0, count = 0;
+    unsigned long ID = 0;
+    int count = 0;
 };
 
 class _artifactdatabase

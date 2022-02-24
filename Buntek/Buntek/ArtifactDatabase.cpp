@@ -83,7 +83,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                 if (!flag) {
                     _gameManager::Status temp;
                     temp.statusID = 00;
-                    temp.statusTimer = artifact.count;
+                    temp.statusTimer = (float)artifact.count;
                     GameManager.playerArtifactList.statusEffect.push_back(temp);
                 }
 
@@ -102,7 +102,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                 if (!flag) {
                     _gameManager::Status temp;
                     temp.statusID = 00;
-                    temp.statusTimer = artifact.count;
+                    temp.statusTimer = (float)artifact.count;
                     GameManager.enemyArtifactList.statusEffect.push_back(temp);
                 }
 
@@ -311,23 +311,23 @@ unsigned long _artifactdatabase::DrawArtifact(void)
 
     if (RNG < commonRate)
     {
-        RNG = RandIntMinMax(0, (sizeof(common) / sizeof(*common)));
+        RNG = RandIntMinMax(0, common.size()-1);
         return common[RNG];
     }
     else if (RNG < uncommonRate)
     {
-        RNG = RandIntMinMax(0, (sizeof(uncommon) / sizeof(*uncommon)));
+        RNG = RandIntMinMax(0, uncommon.size() - 1);
         return uncommon[RNG];
     }
     else
     {
-        RNG = RandIntMinMax(0, (sizeof(rare) / sizeof(*rare)));
+        RNG = RandIntMinMax(0, rare.size() - 1);
         return rare[RNG];
     }
 }
 
 unsigned long _artifactdatabase::DrawLegendary(void)
 {
-    int RNG = RandIntMinMax(0, (sizeof(legendary) / sizeof(*legendary)));
+    int RNG = RandIntMinMax(0, legendary.size() - 1);
     return legendary[RNG];
 }
