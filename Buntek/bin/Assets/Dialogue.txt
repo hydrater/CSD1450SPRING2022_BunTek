@@ -1,6 +1,6 @@
 ========================= GUIDE =======================
 ------------------------ FORMAT -----------------------
-/x0 yyy
+/x0 yyyy
 - Put '/' at the front for calling certain commands
 - x is for calling legends to run commands (Refer)
 - 0 is the function called for the button/choice
@@ -9,7 +9,7 @@
 	{Possible colors: a(black), b(blue), g(green),}
 	{	c(cyan), r(red), p(purple), y(yellow),}
 	{	w(white)			      }
-- yyy is the string displayed in the text renderer
+- yyyy is the string displayed in the text renderer
 	[Exception: c, which finds the artifact type  ]
 	[Exception: d, which finds the specific sprite]
 ------------------------ LEGENDS ----------------------
@@ -54,9 +54,9 @@ Does it work?
 It does
 /aa Human #22
 Choose your reward
-/c1 110Text would be ignored here
-/c1 001911 Digits after the third one will be ignored
-/c1 Nonsense Text that should output default artifact
+/c1 0110Text would be ignored here [0110]
+/c1 0001911 Digits after the third one will be ignored (911 is ignored) [0001]
+/c1 Nonsense Text that should output default artifact [0000]
 /c0 Decline the absorption
 
 poo poo
