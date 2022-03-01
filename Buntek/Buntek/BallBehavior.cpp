@@ -63,19 +63,21 @@ void BallBehavior::Update(void)
 	Collider2D* othercol = CollisionManager2D.CheckCollision(col);
 	if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<PaddleBehavior>())
 	{
+		savedCol = othercol;
 		ReflectBall(playerPossess, (othercol->Owner()));
 	}
 	//ball ball artifact collision check not working, null error
-	//if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())
-	//{
-	//	otherCol = othercol;
-	//	if (playerPossess) {//enemy ball hits player ball
-	//		ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
-	//	}
-	//	else {
-	//		ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
-	//	}
-	//}
+	if (othercol != nullptr && savedCol != othercol && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())
+	{
+		savedCol = othercol;
+		if (playerPossess) {//enemy ball hits player ball
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
+		}
+		else {
+			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
+		}
+		cout << "swau\n";
+	}
 	// Update position and rotation
 	transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime * timeScalar);
 	transform->Rotate(rotSpeed * DeltaTime * timeScalar);

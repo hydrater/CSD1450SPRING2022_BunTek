@@ -173,8 +173,8 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 640://B5: Destroys hostile ball
         tempBallBehavior = ball->GetComponent<BallBehavior>();
-        if(tempBallBehavior->otherCol != NULL)
-            tempBallBehavior->otherCol->Owner()->Delete();
+        if(tempBallBehavior->savedCol != NULL)
+            tempBallBehavior->savedCol->Owner()->Delete();
         break;
     default:
         

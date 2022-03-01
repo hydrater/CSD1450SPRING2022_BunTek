@@ -29,7 +29,7 @@ public:
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
 	Collider2D* col = 0;
-	Collider2D* otherCol = 0;
+	Collider2D* savedCol = 0;	// Saved collider of another instance (For trigger on enter)
 
 	BattleInput* battleInput = 0;
 	GameObject* ballParticle = 0;
