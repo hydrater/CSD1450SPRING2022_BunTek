@@ -76,7 +76,6 @@ void BallBehavior::Update(void)
 		else {
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
 		}
-		cout << "swau\n";
 	}
 	// Update position and rotation
 	transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime * timeScalar);
