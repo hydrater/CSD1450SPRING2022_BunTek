@@ -27,6 +27,24 @@ void BallBehavior::Update(void)
 	ballParticle->transform->SetPosition(transform->worldposition);
 	ballParticleSystem->directionalVector2 = -velocity;
 
+	if (speed > targetSpeed) {
+		speed = lerpF(speed, targetSpeed, 0.05f);
+		float speedDiff = speed - targetSpeed;
+		if (speedDiff < 20) {
+			ballParticleSystem->isEmitting = false;
+			if (speedDiff < 1) {
+				speed = targetSpeed;
+			}
+		}
+		else {
+			ballParticleSystem->isEmitting = true;
+		}
+		
+	}
+	else {
+		ballParticleSystem->isEmitting = false;
+	}
+
 	//Collision check with left/right wall
 	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
 		velocity.x = -velocity.x;
@@ -97,10 +115,21 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			causeHitPause = true;
 
 			ballPhase++;
-			if (ballPhase > 8)
+			if (ballPhase > 8) {
 				ballPhase = 8;
-			else
-				speed += ballPhaseSpeedIncrement;
+			}
+			
+			else {
+				targetSpeed += ballPhaseSpeedIncrement;
+				speed = targetSpeed;
+				float addSpd = paddle->GetComponent<PaddleBehavior>()->velocity.y/DeltaTime;
+				if (addSpd > 0) {
+					speed += 10*addSpd;
+					//printf("Speed added to ball!\n");
+					cout << std::to_string(addSpd) << "added, total speed now: " << speed << " while target speed is " <<targetSpeed<<"\n";
+				}
+			}
+			
 
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_PaddleHit, !playerPossess, this->Owner());
 		}
@@ -160,6 +189,7 @@ float BallBehavior::GetSpeed(void)
 void BallBehavior::SetSpeed(float _speed)
 {
 	speed = _speed > maxSpeed? maxSpeed : _speed;
+	targetSpeed = _speed > maxSpeed ? maxSpeed : _speed;
 }
 
 void BallBehavior::SetTargetSpeed(float _targetSpeed)

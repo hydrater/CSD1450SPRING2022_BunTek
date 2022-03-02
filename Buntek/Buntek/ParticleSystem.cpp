@@ -25,43 +25,44 @@ void ParticleSystem::Start(void)
 
 void ParticleSystem::Update(void)
 {
-	
+	if (isEmitting) {
+		if (!isDeleting) {
+			float MaxTime = (float)1 / spawnRate;
 
-	if (!isDeleting) {
-		float MaxTime = (float)1 / spawnRate;
-
-		// If supposed to spawn over time
-		if (!isBurst) {
-			//Spawn a particle
-			if (internalTimer >= MaxTime) {
-				internalTimer -= MaxTime;
-				SpawnParticle();
-			}
-		}
-		else {
-			if (!hasSpawned) {//Has not spawned a burst
-				hasSpawned = true;
-				//Spawn a burst
-				for (int i = 0; i < numBurst; i++) {
+			// If supposed to spawn over time
+			if (!isBurst) {
+				//Spawn a particle
+				if (internalTimer >= MaxTime) {
+					internalTimer -= MaxTime;
 					SpawnParticle();
 				}
 			}
-			//if supposed to keep looping burst
-			if (isLoop) {
-				if (internalTimer >= MaxTime) {
-					internalTimer -= MaxTime;
-					hasSpawned = false; //Burst again next frame
+			else {
+				if (!hasSpawned) {//Has not spawned a burst
+					hasSpawned = true;
+					//Spawn a burst
+					for (int i = 0; i < numBurst; i++) {
+						SpawnParticle();
+					}
+				}
+				//if supposed to keep looping burst
+				if (isLoop) {
+					if (internalTimer >= MaxTime) {
+						internalTimer -= MaxTime;
+						hasSpawned = false; //Burst again next frame
+					}
+				}
+				else {
+					DeleteParticleSystem();
 				}
 			}
-			else {
-				DeleteParticleSystem();
+		}
+		else {
+			if (internalTimer >= maxLifespanMax) {
+				this->Owner()->Delete();
 			}
 		}
-	}
-	else {
-		if (internalTimer >= maxLifespanMax) {
-			this->Owner()->Delete();
-		}
+		internalTimer += DeltaTime;
 	}
 
 	// Particle management, physics+deletion
@@ -91,7 +92,7 @@ void ParticleSystem::Update(void)
 		}
 	}
 	
-	internalTimer += DeltaTime;
+	
 }
 
 void ParticleSystem::SetColor(float r, float g, float b) {

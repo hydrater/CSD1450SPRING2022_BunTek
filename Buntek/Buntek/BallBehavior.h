@@ -37,18 +37,19 @@ public:
 	float hitPauseTimer = 0.04f;
 	bool causeHitPause = false;
 	bool checkTimer = false;
+	bool isFaster = false;
 	float timeScalar = 1.0f;
 	int ballPhase = -1;
 	int ballDamage = 10;
 
 private:
 	float speed = 200;
-	const float maxSpeed = 2000;
+	float targetSpeed = speed;
+	const float maxSpeed = 200;
 
 	const int maxBallPhase = 8;
 	const float ballPhaseSpeedIncrement = 50;
 
-	float targetSpeed = speed;
 	const float maxRotSpeed = 3600;
 	float rotSpeed = 0;
 	float targetRotSpeed = 0;

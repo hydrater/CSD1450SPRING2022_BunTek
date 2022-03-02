@@ -14,7 +14,10 @@ public:
 
 	// Directional Vector, will be turned into unit vector
 	Vector2 directionalVector2 = Vector2(0, 1);
-	
+
+	//Is Emitting
+	bool isEmitting = true;
+
 	//Set color
 	void SetColor(float r, float g, float b);
 
@@ -67,6 +70,7 @@ private:
 	bool isDeleting = false;
 	bool isFade = false;
 	bool isShrink = false;
+	
 	float ColorR = 1, ColorG = 1, ColorB = 1;
 	
 	// Random launch angle spread
