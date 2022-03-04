@@ -283,7 +283,9 @@ void _mapData::Travel(Node* destination)
             MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, selShop);
             break;
         case NodeType::Rest:
-
+            SetClickable(false);
+            SetHoverable(false);
+            UIDialogueManager.CreateDialoguePreset("REST", 3);
             break;
         default:
             break;

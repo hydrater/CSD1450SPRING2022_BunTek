@@ -33,6 +33,8 @@ public:
 
 	vector<ArtifactLoot> ArtifactChoices = {};
 
+	float fullHealthCost = 10;		// Cost to heal to max hp
+
 private:
 
 	void WriteToDialogue(void);
@@ -72,6 +74,8 @@ private:
 	enum ButtonFunctionType {
 		BF_Leave = 0,
 		BF_ChooseLoot,
+		BF_HealHalf,
+		BF_HealFull,
 		BF_Sample1
 	};
 

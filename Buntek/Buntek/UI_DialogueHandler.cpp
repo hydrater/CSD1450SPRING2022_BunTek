@@ -11,6 +11,8 @@
 void RemoveDialogue(Button* button);
 void BF_ChooseLootButton(Button* button);
 void BF_Sample1Button(Button* button);
+void BF_HealHalfButton(Button* button);
+void BF_HealFullButton(Button* button);
 void CF_PickUpArtifactButton(Button* button);
 void CF_Sample1Button(Button* button);
 
@@ -133,7 +135,7 @@ void UI_DialogueHandler::StartDialogueEvent(string flag)
         rewardButtonList[i]->Owner()->GetComponent<Button>()->SetClickable(true);
     }
     WriteToDialogue();
-
+    
     // Deactivate non-used buttons
     for (int i = dialogueButtonNo; i < dialogueButtonList.size(); ++i)
         dialogueButtonList[i]->Owner()->Deactivate();
@@ -260,6 +262,14 @@ void UI_DialogueHandler::WriteToDialogue(void)
             if (dialogueButtonNo < dialogueButtonList.size())
             {
                 AssignButton(dialogueButtonList[dialogueButtonNo], 'b', dialogueList[dialogueNo][2]);
+
+                // Check if player can select this button (Can afford price)
+                if (dialogueButtonList[dialogueButtonNo]->ButtonEffect == &BF_HealFullButton && GameManager.playerProfile.stardust < fullHealthCost)
+                {
+                    dialogueButtonList[dialogueButtonNo]->Owner()->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
+                    dialogueButtonList[dialogueButtonNo]->Deactivate();
+                }
+
                 dialogueButtonList[dialogueButtonNo]->tr->SetText(parameters);
                 dialogueButtonList[dialogueButtonNo++]->Owner()->Activate();
                 UIDecision = true;
@@ -530,6 +540,12 @@ void UI_DialogueHandler::AssignButton(Button* button, char buttonType, char selc
         case BF_ChooseLoot:
             button->ButtonEffect = &BF_ChooseLootButton;
             break;
+        case BF_HealHalf:
+            button->ButtonEffect = &BF_HealHalfButton;
+            break;
+        case BF_HealFull:
+            button->ButtonEffect = &BF_HealFullButton;
+            break;
         case BF_Sample1:
             button->ButtonEffect = &BF_Sample1Button;
             break;
@@ -598,6 +614,22 @@ void BF_ChooseLootButton(Button* button)
     vector<Artifact> fakeArtifacts{ test1, test2, test3};
     // Creates a choose loot / rng loot
     UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
+}
+void BF_HealHalfButton(Button* button)
+{
+    // Heal player by 50%
+    GameManager.playerProfile.hp += GameManager.playerProfile.maxhp / 2;
+
+    if (GameManager.playerProfile.hp > GameManager.playerProfile.maxhp)
+        GameManager.playerProfile.hp = GameManager.playerProfile.maxhp;
+    RemoveDialogue(button);
+}
+void BF_HealFullButton(Button* button)
+{
+    // Heal player by Full by using stardust
+    GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
+    GameManager.playerProfile.hp = GameManager.playerProfile.maxhp;
+    RemoveDialogue(button);
 }
 void BF_Sample1Button(Button* button)
 {

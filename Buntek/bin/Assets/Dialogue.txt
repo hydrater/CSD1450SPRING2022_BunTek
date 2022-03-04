@@ -38,7 +38,7 @@ aed
 /ap Constellation of Mittens
 Don't look down on me because I'm a cat!
 /b1 Pet the constellation
-/b2 Offer some galaxy milk
+/b4 Offer some galaxy milk
 /b0 Leave
 /aa Next Trail
 YOU SHOULD NOT SEE THIS!
@@ -70,6 +70,14 @@ flavor name
 name1
 name2
 name3
+
+REST
+/d  0
+/aw A brief respite
+Alas a place to rest
+/b2 Take a rest [Heal 50% HP]
+/b3 Bribe the universe [Heal 100% HP] {-10 Stardust}
+/b0 Leave
 
 Events================================================================================================================
 
