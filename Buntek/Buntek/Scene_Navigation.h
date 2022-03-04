@@ -17,4 +17,5 @@ private:
     GameObject* splashimage5 = 0;
     GameObject* splashimage6 = 0;
     GameObject* spawner = 0;
+    GameObject* currentArea = 0;    //Game Object to show where the player is and the radius it can go to
 };

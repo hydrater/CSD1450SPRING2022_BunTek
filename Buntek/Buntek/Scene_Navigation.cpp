@@ -52,6 +52,8 @@ void Scene_Navigation::Start(void)
 		Vector2(-1, 0), 60.0f,
 		3960, 1080, "NebulaCloudBig.png",
 		Vector2(-3960, 0), -2, (short)AE_GFX_BM_ADD);
+
+	currentArea = devTools.CreateSpriteGameObject("ball.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -1, 0.25f);
 }
 
 // Draw all lines
@@ -79,6 +81,7 @@ void Scene_Navigation::Update(void)
 	{
 		MapData.isTravelling = false;
 		MapData.Travel(MapData.destinationNode);
+		currentArea->transform->SetPosition(MapData.currentNode->pos);
 	}
 }
 
