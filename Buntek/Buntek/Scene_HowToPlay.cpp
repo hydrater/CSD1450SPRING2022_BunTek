@@ -20,7 +20,7 @@ void Scene_HowToPlay::Start(void)
 {
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 
-	startBtn = new GameObject();
+	/*startBtn = new GameObject();
 	SpriteRenderer* tempRenderer;
 	tempRenderer = startBtn->AddComponent<SpriteRenderer>();
 	tempRenderer->SetLayer(2);
@@ -34,7 +34,7 @@ void Scene_HowToPlay::Start(void)
 	tempTextRenderer->SetText("Start");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-	startBtn->transform->SetPosition(Vector2(-670, 1000));
+	startBtn->transform->SetPosition(Vector2(-670, 1000));*/
 }
 
 void Scene_HowToPlay::Update(void)
