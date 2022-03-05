@@ -51,11 +51,11 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 221://Increases ball speed by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
-        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10));
+        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10.0f));
         break;
     case 300://B2: Increase ball speed by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
-        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10));
+        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10.0f));
         break;
     case 400://B3: Restores X hp
         if (isPlayerTheCaster) {
