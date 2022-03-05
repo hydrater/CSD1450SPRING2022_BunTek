@@ -17,6 +17,7 @@ public:
 	static string GetDescription(unsigned long id);
 
 	vector<GameObject*> dialogueSceneObjList;
+	vector<string> textureList;
 	void InitDialogueScene(string id);
 	void ClearDialogueSceneObjs(void);
 private:

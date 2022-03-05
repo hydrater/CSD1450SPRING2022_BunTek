@@ -82,7 +82,23 @@ Alas a place to rest
 Events================================================================================================================
 
 E000
+/d  1
+...
+.........
+/aw Unknown figure
+Greetings wanderer...
+I see you have some star dust
+/aw  
+....
+/aw Cave Explorer
+Fret not, I am a passing cave explorer harvesting some botany.
+I have chanced upon this peculiar magic mushroom.
+Would you like to buy it off of me?
+/b5 Buy the mushroom
+/b6 Refuse the offer
+/b7 Steal the mushroom
 
 
-C000
+E001
+/aw
 
