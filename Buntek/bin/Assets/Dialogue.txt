@@ -94,11 +94,17 @@ I see you have some star dust
 Fret not, I am a passing cave explorer harvesting some botany.
 I have chanced upon this peculiar magic mushroom.
 Would you like to buy it off of me?
-/b5 Buy the mushroom
-/b6 Refuse the offer
-/b7 Steal the mushroom
+/b0 Buy the mushroom
+/b1 Refuse the offer
+/b2 Steal the mushroom
 
 
 E001
-/aw
+/d  1
+......
+..........
+You're lost.....
 
+/b3 Take the left path
+/b4 Take the middle path
+/b5 Take the right path

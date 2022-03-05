@@ -256,11 +256,11 @@ void Scene_MainMenu::Update(void)
 		border->Translate(Vector2(0.0f, -1080 * DeltaTime));
 		border->Rotate(DeltaTime * -360.1f);
 
-		startBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1200));
-		howtoplayBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1300));
-		optionBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1400));
-		creditsBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1500));
-		quitBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1600));
+		startBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1000));
+		howtoplayBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1100));
+		optionBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1200));
+		creditsBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1300));
+		quitBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1400));
 
 		if (animTimer <= 0.8f)
 		{
