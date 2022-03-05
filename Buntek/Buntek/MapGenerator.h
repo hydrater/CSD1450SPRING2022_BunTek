@@ -34,6 +34,8 @@ public:
         NodeType nodeType = NodeType::Nothing;
         GameObject* nodeObject = nullptr;
     };
+    GameObject* penaltyZone = nullptr;
+    float penaltySpeed = 200;
     vector<AEGfxVertexList*> connectedLines;
 
     Node* currentNode = nullptr;
@@ -49,6 +51,7 @@ public:
     void Travel(Node* destination);
     void SetClickable(bool _canClick);
     void SetHoverable(bool _canHover);
+    void PenaltyZoneUpdate(void);
     Node* GetNode(GameObject* object);
     float playerTravelDistance = 400;
 

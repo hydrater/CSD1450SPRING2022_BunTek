@@ -53,7 +53,8 @@ void Scene_Navigation::Start(void)
 		3960, 1080, "NebulaCloudBig.png",
 		Vector2(-3960, 0), -2, (short)AE_GFX_BM_ADD);
 
-	currentArea = devTools.CreateSpriteGameObject("ball.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -1, 0.25f);
+	currentArea = devTools.CreateSpriteGameObject("hdCircle.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -2, 0.5f);
+	currentArea->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0.1f);
 }
 
 // Draw all lines

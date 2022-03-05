@@ -33,6 +33,11 @@ void _mapData::GenerateMapData(void)
     float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
 
     DeleteNodeList();
+    if (penaltyZone != nullptr) {
+        penaltyZone->Delete();
+        penaltyZone = nullptr;
+    }
+
     for (int i = 0; i < numNodes; i++) 
     {
         Node* node = new Node();
@@ -137,10 +142,21 @@ void _mapData::GenerateMapObject(void)
             tempRenderer->SetTexture("Steven.jpg");
             break;
         }
-
         temp->transform->worldposition = Vector2(nodeList[i]->pos);
         nodeList[i]->nodeObject = temp;
     }
+
+    GameObject* temp = new GameObject;
+    SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
+    tempRenderer->Size((float)AEGetWindowWidth(), (float)AEGetWindowWidth() * 2);
+    tempRenderer->SetLayer(-2);
+    tempRenderer->SetTexture("hdCircle.png");
+    tempRenderer->SetColor(1, 0, 0);
+    tempRenderer->SetOpacity(0.5);
+    float StartYCoord = (float)(-AEGetWindowHeight() / 2) + buffer;
+    float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
+    temp->transform->worldposition = Vector2(-tempRenderer->GetHalfWidth()*2, RandFloatMinMax(StartYCoord, EndYCoord));
+    penaltyZone = temp;
 }
 
 void _mapData::DisplayNodeRoutes(float travelDistance)
@@ -293,6 +309,7 @@ void _mapData::Travel(Node* destination)
 
         MapData.DisplayNodeHistory();
     }
+    PenaltyZoneUpdate();
 }
 
 void _mapData::SetClickable(bool _canClick)
@@ -312,7 +329,24 @@ void _mapData::SetHoverable(bool _canHover)
             nodeList[i]->nodeObject->GetComponent<Button>()->SetHoverable(_canHover);
     }
 }
-
+void _mapData::PenaltyZoneUpdate(void) {
+    if (penaltyZone->transform->worldposition.x < 0) {
+        penaltyZone->transform->worldposition.x += penaltySpeed;
+    }
+    for(int i = 0; i < nodeList.size(); ++i)
+    {
+        if (nodeList[i]->nodeType == NodeType::Boss) {
+            continue;
+        }
+        float xDelta = nodeList[i]->nodeObject->transform->worldposition.x - penaltyZone->transform->worldposition.x, 
+              yDelta = nodeList[i]->nodeObject->transform->worldposition.y - penaltyZone->transform->worldposition.y;
+        float dist = Vector2(xDelta, yDelta).Length();
+        if (dist < penaltyZone->GetComponent<SpriteRenderer>()->GetHalfWidth()) {
+            nodeList[i]->nodeType == NodeType::Elite;
+            nodeList[i]->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/Elite.png");
+        }
+    }
+}
 _mapData::Node* _mapData::GetNode(GameObject* object)
 {
     for (Node* node : nodeList)
