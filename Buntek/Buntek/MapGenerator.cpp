@@ -37,7 +37,7 @@ void _mapData::GenerateMapData(void)
         penaltyZone->Delete();
         penaltyZone = nullptr;
     }
-    penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.3), RandFloatMinMax(StartYCoord, EndYCoord));
+    penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.3f), RandFloatMinMax(StartYCoord, EndYCoord));
 
 
     for (int i = 0; i < numNodes; i++) 
@@ -150,7 +150,7 @@ void _mapData::GenerateMapObject(void)
 
     GameObject* temp = new GameObject;
     SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
-    tempRenderer->Size((float)AEGetWindowWidth() * 1.5, (float)AEGetWindowWidth() * 1.5);
+    tempRenderer->Size((float)AEGetWindowWidth() * 1.5f, (float)AEGetWindowWidth() * 1.5f);
     tempRenderer->SetLayer(-2);
     tempRenderer->SetTexture("hdCircle.png");
     tempRenderer->SetColor(1, 0, 0);
