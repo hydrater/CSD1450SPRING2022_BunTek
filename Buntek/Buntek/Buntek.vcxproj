@@ -109,6 +109,9 @@
     <ClCompile Include="DialogueDatabase.cpp" />
     <ClCompile Include="ECSManager.cpp" />
     <ClCompile Include="LineRenderer.cpp" />
+    <ClCompile Include="Scene_Credits.cpp" />
+    <ClCompile Include="Scene_HowToPlay.cpp" />
+    <ClCompile Include="Scene_Options.cpp" />
     <ClCompile Include="UI_DialogueHandler.cpp" />
     <ClCompile Include="EnemyDatabase.cpp" />
     <ClCompile Include="UI_EnemyNodeBox.cpp" />
@@ -155,6 +158,9 @@
     <ClInclude Include="DialogueDatabase.h" />
     <ClInclude Include="ECSManager.h" />
     <ClInclude Include="LineRenderer.h" />
+    <ClInclude Include="Scene_Credits.h" />
+    <ClInclude Include="Scene_HowToPlay.h" />
+    <ClInclude Include="Scene_Options.h" />
     <ClInclude Include="UI_DialogueHandler.h" />
     <ClInclude Include="EnemyDatabase.h" />
     <ClInclude Include="UI_EnemyNodeBox.h" />

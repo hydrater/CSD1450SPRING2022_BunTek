@@ -8,15 +8,26 @@
 #include "AudioEngine.h"
 #include "Parallaxer.h"
 #include "Devtools.h"
+#include "Scene_Options.h"
+#include "Scene_HowToPlay.h"
+#include "Scene_Credits.h"
 
 void BtnFunc_Start(Button* button);
+void BtnFunc_HowToPlay(Button* button);
 void BtnFunc_Options(Button* button);
+void BtnFunc_Credits(Button* button);
 void BtnFunc_Quit(Button* button);
+
 void BtnFuncHover_Start(Button* button);
+void BtnFuncHover_HowToPlay(Button* button);
 void BtnFuncHover_Options(Button* button);
+void BtnFuncHover_Credits(Button* button);
 void BtnFuncHover_Quit(Button* button);
+
 void BtnFuncUnhover_Start(Button* button);
+void BtnFuncUnhover_HowToPlay(Button* button);
 void BtnFuncUnHover_Options(Button* button);
+void BtnFuncUnhover_Credits(Button* button);
 void BtnFuncUnHover_Quit(Button* button);
 
 Scene_MainMenu* Scene_MainMenu::instance = 0;
@@ -85,6 +96,26 @@ void Scene_MainMenu::Start(void)
 	button->HoverEffect = &BtnFuncHover_Start;
 	button->NotHoverEffect = &BtnFuncUnhover_Start;
 
+	howtoplayBtn = new GameObject();
+	tempRenderer = howtoplayBtn->AddComponent<SpriteRenderer>();
+	tempRenderer->SetLayer(2);
+	tempRenderer->Size(471, 71);
+	tempRenderer->SetTexture("Menu/Button.png");
+	tempTextRenderer = howtoplayBtn->AddComponent<TextRenderer>();
+	tempTextRenderer->SetFont("Ayar.ttf");
+	tempTextRenderer->SetLayer(3);
+	tempTextRenderer->SetTextColor(0, 0, 0);
+	tempTextRenderer->SetText("How To Play");
+	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
+	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
+	howtoplayBtn->transform->SetPosition(Vector2(-670, 1000));
+	button = howtoplayBtn->AddComponent<Button>();
+	button->sr = tempRenderer;
+	button->tr = tempTextRenderer;
+	button->ButtonEffect = &BtnFunc_HowToPlay;
+	button->HoverEffect = &BtnFuncHover_HowToPlay;
+	button->NotHoverEffect = &BtnFuncUnhover_HowToPlay;
+
 	optionBtn = new GameObject();
 	tempRenderer = optionBtn->AddComponent<SpriteRenderer>();
 	tempRenderer->SetLayer(2);
@@ -104,6 +135,26 @@ void Scene_MainMenu::Start(void)
 	button->ButtonEffect = &BtnFunc_Options;
 	button->HoverEffect = &BtnFuncHover_Options;
 	button->NotHoverEffect = &BtnFuncUnHover_Options;
+
+	creditsBtn = new GameObject();
+	tempRenderer = creditsBtn->AddComponent<SpriteRenderer>();
+	tempRenderer->SetLayer(2);
+	tempRenderer->Size(471, 71);
+	tempRenderer->SetTexture("Menu/Button.png");
+	tempTextRenderer = creditsBtn->AddComponent<TextRenderer>();
+	tempTextRenderer->SetFont("Ayar.ttf");
+	tempTextRenderer->SetLayer(3);
+	tempTextRenderer->SetTextColor(0, 0, 0);
+	tempTextRenderer->SetText("Credits");
+	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
+	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
+	creditsBtn->transform->SetPosition(Vector2(-670, 1000));
+	button = creditsBtn->AddComponent<Button>();
+	button->sr = tempRenderer;
+	button->tr = tempTextRenderer;
+	button->ButtonEffect = &BtnFunc_Credits;
+	button->HoverEffect = &BtnFuncHover_Credits;
+	button->NotHoverEffect = &BtnFuncUnhover_Credits;
 
 	quitBtn = new GameObject();
 	tempRenderer = quitBtn->AddComponent<SpriteRenderer>();
@@ -206,8 +257,10 @@ void Scene_MainMenu::Update(void)
 		border->Rotate(DeltaTime * -360.1f);
 
 		startBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1200));
-		optionBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1300));
-		quitBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1400));
+		howtoplayBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1300));
+		optionBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1400));
+		creditsBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1500));
+		quitBtn->transform->Translate(Vector2(0.0f, DeltaTime * -1600));
 
 		if (animTimer <= 0.8f)
 		{
@@ -237,8 +290,10 @@ void Scene_MainMenu::Update(void)
 		disc->SetScale(Vector2(1, 1));
 		bottom->SetScale(Vector2(1, 1));
 
-		startBtn->transform->SetPosition(Vector2(-670, -200));
-		optionBtn->transform->SetPosition(Vector2(-670, -300));
+		startBtn->transform->SetPosition(Vector2(-670, 0));
+		howtoplayBtn->transform->SetPosition(Vector2(-670, -100));
+		optionBtn->transform->SetPosition(Vector2(-670, -200));
+		creditsBtn->transform->SetPosition(Vector2(-670, -300));
 		quitBtn->transform->SetPosition(Vector2(-670, -400));
 
 		displayTxt = bottom->Owner()->AddComponent<TextRenderer>();
@@ -279,7 +334,11 @@ GameObject* Scene_MainMenu::GetObjRef(short type)
 	else
 	{
 		if (type == 1)
+			return howtoplayBtn;
+		if (type == 2)
 			return optionBtn;
+		if (type == 3)
+			return creditsBtn;
 		else
 			return quitBtn;
 	}
@@ -290,9 +349,19 @@ void BtnFunc_Start(Button* button)
 	SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
 }
 
+void BtnFunc_HowToPlay(Button* button)
+{
+	SceneManager.LoadScene(new Scene_HowToPlay, TransitionType::FadeTransition, true);
+}
+
 void BtnFunc_Options(Button* button)
 {
-	
+	SceneManager.LoadScene(new Scene_Options, TransitionType::FadeTransition, true);
+}
+
+void BtnFunc_Credits(Button* button)
+{
+	SceneManager.LoadScene(new Scene_Credits, TransitionType::FadeTransition, true);
 }
 
 void BtnFunc_Quit(Button* button)
@@ -317,6 +386,21 @@ void BtnFuncHover_Start(Button* button)
 	menu->GetObjRef(0)->transform->SetPosition(temp);
 }
 
+void BtnFuncHover_HowToPlay(Button* button)
+{
+	if (menu->howtoPlay)
+	{
+		AudioManager.PlayClip("ButtonHover.mp3");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		menu->displayTxt->SetText("Tutorial");
+		menu->howtoPlay = false;
+	}
+
+	Vector2 temp = menu->howtoplayBtnPos;
+	temp.x = menu->GetObjRef(1)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(1)->transform->worldposition.x + DeltaTime * 150;
+	menu->GetObjRef(1)->transform->SetPosition(temp);
+}
+
 void BtnFuncHover_Options(Button* button)
 {
 	if (menu->optionPlay)
@@ -328,8 +412,23 @@ void BtnFuncHover_Options(Button* button)
 	}
 
 	Vector2 temp = menu->optionBtnPos;
-	temp.x = menu->GetObjRef(1)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(1)->transform->worldposition.x + DeltaTime * 150;
-	menu->GetObjRef(1)->transform->SetPosition(temp);
+	temp.x = menu->GetObjRef(2)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(2)->transform->worldposition.x + DeltaTime * 150;
+	menu->GetObjRef(2)->transform->SetPosition(temp);
+}
+
+void BtnFuncHover_Credits(Button* button)
+{
+	if (menu->creditsPlay)
+	{
+		AudioManager.PlayClip("ButtonHover.mp3");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		menu->displayTxt->SetText("Credits");
+		menu->creditsPlay = false;
+	}
+
+	Vector2 temp = menu->creditsBtnPos;
+	temp.x = menu->GetObjRef(3)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(3)->transform->worldposition.x + DeltaTime * 150;
+	menu->GetObjRef(3)->transform->SetPosition(temp);
 }
 
 void BtnFuncHover_Quit(Button* button)
@@ -343,8 +442,8 @@ void BtnFuncHover_Quit(Button* button)
 	}
 
 	Vector2 temp = menu->quitBtnPos;
-	temp.x = menu->GetObjRef(2)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(2)->transform->worldposition.x + DeltaTime * 150;
-	menu->GetObjRef(2)->transform->SetPosition(temp);
+	temp.x = menu->GetObjRef(4)->transform->worldposition.x >= -650 ? -650 : menu->GetObjRef(4)->transform->worldposition.x + DeltaTime * 150;
+	menu->GetObjRef(4)->transform->SetPosition(temp);
 }
 
 void BtnFuncUnhover_Start(Button* button)
@@ -362,6 +461,21 @@ void BtnFuncUnhover_Start(Button* button)
 	menu->GetObjRef(0)->transform->SetPosition(temp);
 }
 
+void BtnFuncUnhover_HowToPlay(Button* button)
+{
+	if (!menu->howtoPlay)
+	{
+		if (menu->displayTxt != NULL)
+			menu->displayTxt->SetText("");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		menu->howtoPlay = true;
+	}
+
+	Vector2 temp = menu->howtoplayBtnPos;
+	temp.x = menu->GetObjRef(1)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(1)->transform->worldposition.x - DeltaTime * 150;
+	menu->GetObjRef(1)->transform->SetPosition(temp);
+}
+
 void BtnFuncUnHover_Options(Button* button)
 {
 	if (!menu->optionPlay)
@@ -373,8 +487,23 @@ void BtnFuncUnHover_Options(Button* button)
 	}
 
 	Vector2 temp = menu->optionBtnPos;
-	temp.x = menu->GetObjRef(1)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(1)->transform->worldposition.x - DeltaTime * 150;
-	menu->GetObjRef(1)->transform->SetPosition(temp);
+	temp.x = menu->GetObjRef(2)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(2)->transform->worldposition.x - DeltaTime * 150;
+	menu->GetObjRef(2)->transform->SetPosition(temp);
+}
+
+void BtnFuncUnhover_Credits(Button* button)
+{
+	if (!menu->creditsPlay)
+	{
+		if (menu->displayTxt != NULL)
+			menu->displayTxt->SetText("");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		menu->creditsPlay = true;
+	}
+
+	Vector2 temp = menu->creditsBtnPos;
+	temp.x = menu->GetObjRef(3)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(3)->transform->worldposition.x - DeltaTime * 150;
+	menu->GetObjRef(3)->transform->SetPosition(temp);
 }
 
 void BtnFuncUnHover_Quit(Button* button)
@@ -388,6 +517,6 @@ void BtnFuncUnHover_Quit(Button* button)
 	}
 	
 	Vector2 temp = menu->quitBtnPos;
-	temp.x = menu->GetObjRef(2)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(2)->transform->worldposition.x - DeltaTime * 150;
-	menu->GetObjRef(2)->transform->SetPosition(temp);
+	temp.x = menu->GetObjRef(4)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(4)->transform->worldposition.x - DeltaTime * 150;
+	menu->GetObjRef(4)->transform->SetPosition(temp);
 }
