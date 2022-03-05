@@ -19,8 +19,8 @@ void Scene_Credits::Start(void)
 	tempTextRenderer = header->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("Ayar.ttf");
 	tempTextRenderer->SetLayer(3);
-	tempTextRenderer->SetTextColor(0, 0, 0);
-	tempTextRenderer->SetText("Credits\n123");
+	tempTextRenderer->SetTextColor(1, 0, 0);
+	tempTextRenderer->SetText("Credits\n123\n567");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 }
