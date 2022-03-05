@@ -22,8 +22,6 @@ void BtnFunc_increaseMusicVolume(Button* button);
 //void BtnFunc_decreaseBattleVolume(Button* button);
 //void BtnFuncHover_decreaseBattleVolume(Button* button);
 //void BtnFuncUnhover_decreaseBattleVolume(Button* button);
-
-//float MusicVolume = AudioManager.;
 void Scene_Options::Start(void)
 {
 
@@ -42,6 +40,6 @@ void BtnFunc_increaseMusicVolume(Button* button)
 {
 	if (button->CheckTriggered(Vector2(300, 300)))
 	{
-		//AudioManager.SetMusicVolume(MusicVolume + 10.0f);
+		AudioManager.SetMusicVolume( + 0.05f);
 	}
 }

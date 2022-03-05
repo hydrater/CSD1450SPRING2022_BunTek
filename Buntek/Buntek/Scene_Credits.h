@@ -9,13 +9,7 @@ public:
     //void LateUpdate(void) override;
 private:
     ~Scene_Credits(void) override;
-    GameObject* splashimage1 = 0;
-    GameObject* splashimage2 = 0;
-    GameObject* splashimage3 = 0;
-    GameObject* splashimage4 = 0;
-    GameObject* splashimage5 = 0;
-    GameObject* splashimage6 = 0;
-    GameObject* spawner = 0;
-    TextRenderer* displayTxt = 0;
+    GameObject* header = 0, * credits = 0, * bottom = 0;
+    //TextRenderer* displayTxt = 0;
 
 };
