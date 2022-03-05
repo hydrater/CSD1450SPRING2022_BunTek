@@ -2,11 +2,14 @@
 #include "GameScript.h"
 #include "Transform.h"
 #include "Component.h"
+#include "ArtifactDatabase.h"
 #include "SpriteRenderer.h"
 #include "TextRenderer.h"
 #include "Button.h"
 
 #define UIDialogueManager UI_DialogueHandler::Instance()
+
+void RemoveDialogue(Button* button);
 
 class UI_DialogueHandler
 {
@@ -36,6 +39,9 @@ public:
 
 	int fullHealthCost = 10;		// Cost to heal to max hp
 
+	vector<Button*> dialogueButtonList;
+	vector<string> dialogueButtonIDList;
+
 private:
 
 	void WriteToDialogue(void);
@@ -62,7 +68,6 @@ private:
 	// Dialogue
 	TextRenderer* actorTxt = 0, * dialogueTxt = 0;
 	string name, dialogueOutput, dialogueFinalDisplayTxt;
-	vector<Button*> dialogueButtonList;
 	int dialogueButtonNo = 0;
 	vector<Button*> rewardButtonList;
 	int rewardButtonNo = 0;

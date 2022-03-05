@@ -1,4 +1,5 @@
 #include "DialogueDatabase.h"
+#include "UI_DialogueHandler.h"
 #include "Parallaxer.h"
 #include "AlphaChanger.h"
 #include "ParticleSystem.h"
@@ -100,4 +101,54 @@ void _dialogueDatabase::ClearDialogueSceneObjs(void)
 		AssetManager.UnloadTexture(textureList[i]);
 
 	dialogueSceneObjList.clear();
+}
+
+void LaunchButtonEffect(Button* button)
+{
+	// Get ButtonID
+	string buttonID = "";
+	for (int i{ 0 }; i < UIDialogueManager.dialogueButtonList.size(); ++i)
+	{
+		if (UIDialogueManager.dialogueButtonList[i] == button && i < UIDialogueManager.dialogueButtonIDList.size())
+		{
+			buttonID = UIDialogueManager.dialogueButtonIDList[i];
+			break;
+		}
+	}
+
+	// -------------- Types of button effects ----------------
+	if (buttonID == "1")
+	{
+		// [TODO! Obtain the possible loot choice and assign it to the creation]
+		//Artifact test1, test2, test3;
+		//test1.ID = 400;
+		//test2.ID = 400;
+		//test3.ID = 400;
+		//vector<Artifact> fakeArtifacts{ test1, test2, test3 };
+		//// Creates a choose loot / rng loot
+		//UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
+	}
+	else if (buttonID == "2")
+	{
+		// Heal player by 50%
+		GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
+
+		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
+		if (GameManager.playerProfile.hp > truemaxhp)
+			GameManager.playerProfile.hp = truemaxhp;
+		RemoveDialogue(button);
+	}
+	else if (buttonID == "3")
+	{
+		// Heal player by Full by using stardust
+		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
+		GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
+		GameManager.playerProfile.hp = truemaxhp;
+		RemoveDialogue(button);
+	}
+	else if (buttonID == "4")
+	{
+		// Go to a specific dialogue/encounter
+
+	}
 }

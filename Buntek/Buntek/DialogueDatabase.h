@@ -1,10 +1,13 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Button.h"
 #include "Entity.h"
 using namespace std;
 
 #define DialogueDatabase _dialogueDatabase::Instance()
+
+void LaunchButtonEffect(Button* button);
 
 class _dialogueDatabase
 {

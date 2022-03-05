@@ -8,7 +8,6 @@
 #include <fstream>
 #include <sstream>
 
-void RemoveDialogue(Button* button);
 void BF_ChooseLootButton(Button* button);
 void BF_Sample1Button(Button* button);
 void BF_HealHalfButton(Button* button);
@@ -214,7 +213,10 @@ void UI_DialogueHandler::WriteToDialogue(void)
             return;
         }
 
-        string parameters = dialogueList[dialogueNo].substr(4, dialogueList[dialogueNo].length());
+        string command = dialogueList[dialogueNo].substr(2, dialogueList[dialogueNo].find(" ", 0));
+       // string path = dialogueList[dialogueNo].substr(dialogueList[dialogueNo].find("|"), dialogueList[dialogueNo].find(" ") - 2);
+
+        string parameters = dialogueList[dialogueNo].substr(dialogueList[dialogueNo].find(" "), dialogueList[dialogueNo].length());
 
         switch (dialogueList[dialogueNo][1])
         {
@@ -262,6 +264,8 @@ void UI_DialogueHandler::WriteToDialogue(void)
             if (dialogueButtonNo < dialogueButtonList.size())
             {
                 AssignButton(dialogueButtonList[dialogueButtonNo], 'b', dialogueList[dialogueNo][2]);
+
+                dialogueButtonIDList.push_back(command);
 
                 // Check if player can select this button (Can afford price)
                 if (dialogueButtonList[dialogueButtonNo]->ButtonEffect == &BF_HealFullButton && GameManager.playerProfile.stardust < fullHealthCost)
@@ -373,6 +377,7 @@ void UI_DialogueHandler::DeleteDialogueEvent(void)
     }
 
     dialogueButtonList.clear();
+    dialogueButtonIDList.clear();
     rewardButtonList.clear();
     ArtifactChoices.clear();
 }
@@ -476,6 +481,7 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
             tempButtonTxtRenderer->SetText("Skip to get sum guud seedz");
             tempButtonTxtRenderer->SetTextColor(1, 1, 0);
             tempButton->sr->Size(500, 150);
+            tempButton->ButtonEffect = &LaunchButtonEffect;
             break;
         }
     }
