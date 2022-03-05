@@ -31,13 +31,17 @@ public:
     {
         // Current
         float hp = 100;
-        float maxhp = 100;
+        float basemaxhp = 100;
         int stardust;
         int currLevel;
         short attackType;
 
-        float bonushp = 0;
-        float bonusdamage = 0;
+        float bonusHp = 0;
+        float bonusDamage = 0;
+        float bonusPaddleSpeed = 0;
+        float bonusBallSpeed = 0;
+        float bonusBallSpawnRate = 0;
+        float bonusHealing = 0;
     }playerProfile = {}, enemyProfile = {};
 
     struct Status

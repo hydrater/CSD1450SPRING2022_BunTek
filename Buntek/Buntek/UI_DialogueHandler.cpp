@@ -625,17 +625,17 @@ void BF_ChooseLootButton(Button* button)
 void BF_HealHalfButton(Button* button)
 {
     // Heal player by 50%
-    GameManager.playerProfile.hp += GameManager.playerProfile.maxhp / 2;
+    GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
 
-    if (GameManager.playerProfile.hp > GameManager.playerProfile.maxhp)
-        GameManager.playerProfile.hp = GameManager.playerProfile.maxhp;
+    if (GameManager.playerProfile.hp > GameManager.playerProfile.basemaxhp)
+        GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
     RemoveDialogue(button);
 }
 void BF_HealFullButton(Button* button)
 {
     // Heal player by Full by using stardust
     GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
-    GameManager.playerProfile.hp = GameManager.playerProfile.maxhp;
+    GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
     RemoveDialogue(button);
 }
 void BF_Sample1Button(Button* button)

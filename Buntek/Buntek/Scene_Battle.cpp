@@ -12,7 +12,7 @@ void Scene_Battle::Start(void)
 	BattleManager = new GameObject();
 	BattleHandler* _bh = BattleManager->AddComponent<BattleHandler>();
 	GameManager.bh = _bh;
-	_bh->StartBattle(GameManager.playerProfile.hp, GameManager.playerProfile.maxhp,GameManager.enemyProfile.hp, GameManager.enemyProfile.maxhp,3);
+	_bh->StartBattle(GameManager.playerProfile.hp, GameManager.playerProfile.basemaxhp,GameManager.enemyProfile.hp, GameManager.enemyProfile.basemaxhp,3);
 }
 
 void Scene_Battle::Update(void)

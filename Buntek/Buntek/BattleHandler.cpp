@@ -46,9 +46,9 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_Passive, true);
 	ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_Passive, false);
 
-	float selfMaxHp = (_selfMaxHp + GameManager.playerProfile.bonushp);
+	float selfMaxHp = (_selfMaxHp + GameManager.playerProfile.bonusHp);
 	float selfHp = (AEClamp(_selfHp, 0, selfMaxHp));
-	float enemyMaxHp = (_enemyMaxHp + GameManager.enemyProfile.bonushp);
+	float enemyMaxHp = (_enemyMaxHp + GameManager.enemyProfile.bonusHp);
 	float enemyHp = enemyMaxHp;
 
 	// Setting up the scene

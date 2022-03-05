@@ -22,28 +22,28 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     switch (artifact.ID)
     {
     case 000://Increase damage
-        GameManager.playerProfile.bonusdamage = (float)artifact.count;
+        GameManager.playerProfile.bonusDamage = (float)artifact.count;
         break;
     case 001://Increase max hp
-        GameManager.playerProfile.bonushp = (float)artifact.count;
+        GameManager.playerProfile.bonusHp = (float)artifact.count;
         break;
     case 002://Increase paddle speed
-        
+        GameManager.playerProfile.bonusPaddleSpeed = (float)artifact.count;
         break;
     case 003://Increase ball speed
-        
+        GameManager.playerProfile.bonusBallSpeed = (float)artifact.count;
         break;
     case 004://Increase ball spawn frequency
-        
+        GameManager.playerProfile.bonusBallSpawnRate = (float)artifact.count;
         break;
     case 030://Heals X times more
-       
+        GameManager.playerProfile.bonusHealing = (float)artifact.count;
         break;
     case 120://Increase hp by 2 per battle won, up to a max of X
-        GameManager.playerProfile.maxhp += 2 * artifact.count;
+        GameManager.playerProfile.basemaxhp += 2 * artifact.count;
         break;
     case 140://Restores 10&% hp of max hp
-        GameManager.playerHp += GameManager.playerProfile.maxhp / 10;
+        GameManager.playerHp += GameManager.playerProfile.basemaxhp / 10;
         break;
     case 220://Increases ball bounce gain by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
@@ -89,7 +89,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 530://B3: If hp is below <20%, unable to take damage for X second,
         if (isPlayerTheCaster) {
-            if (GameManager.playerHp < GameManager.playerProfile.maxhp / 5) {
+            if (GameManager.playerHp < GameManager.playerProfile.basemaxhp / 5) {
                 for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
                 {
                     if (GameManager.playerArtifactList.statusEffect[i].statusID == 00) {
@@ -108,7 +108,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             }
         }
         else {
-            if (GameManager.playerHp < GameManager.enemyProfile.maxhp / 5) {
+            if (GameManager.playerHp < GameManager.enemyProfile.basemaxhp / 5) {
                 for (size_t i = 0; i < GameManager.enemyArtifactList.statusEffect.size(); ++i)
                 {
                     if (GameManager.enemyArtifactList.statusEffect[i].statusID == 00) {
