@@ -7,14 +7,10 @@ public:
    // void EarlyUpdate(void) override;
     void Update(void) override;
   //  void LateUpdate(void) override;
+    const Vector2 backmainBtnPos = Vector2(-825, 400);
+
 private:
     ~Scene_HowToPlay(void) override;
-    GameObject* splashimage1 = 0;
-    GameObject* splashimage2 = 0;
-    GameObject* splashimage3 = 0;
-    GameObject* splashimage4 = 0;
-    GameObject* splashimage5 = 0;
-    GameObject* splashimage6 = 0;
-    GameObject* spawner = 0;
+    GameObject* playerGuide = 0, * backmainBtn = 0;
 };
 #pragma once
