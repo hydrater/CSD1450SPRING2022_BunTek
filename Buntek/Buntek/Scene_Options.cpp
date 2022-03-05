@@ -6,7 +6,6 @@
 #include "UI_DialogueHandler.h"
 #include "ArtifactDatabase.h"
 #include "Scene_Options.h"
-
 void BtnFunc_increaseMusicVolume(Button* button);
 //void BtnFuncHover_increaseMusicVolume(Button* button);
 //void BtnFuncUnhover_increaseVolume(Button* button);
