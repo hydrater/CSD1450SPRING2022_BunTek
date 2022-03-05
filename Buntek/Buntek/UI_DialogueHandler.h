@@ -37,6 +37,7 @@ public:
 
 	vector<ArtifactLoot> ArtifactChoices = {};
 
+	// Set to public for DialogueDatabase to get the button ID
 	vector<Button*> dialogueButtonList;
 	vector<string> dialogueButtonIDList;
 
@@ -55,7 +56,6 @@ private:
 	void CreatePreset(short sortingLayer); // To create all the objects
 	void LoadFromFile(string flag);
 	bool CheckNextCommand(char command);
-	void AssignButton(Button* button, char buttonType, char selchar);
 	void AssignArtifact(GameObject* owner, string selArtifact);
 
 	string selectedFlag = "";
@@ -74,18 +74,4 @@ private:
 	const float displaySpeed = 0.001f; // No of char per sec
 	int displayNo = 0;
 	float doneDisplay = true;
-
-	enum ButtonFunctionType {
-		BF_Leave = 0,
-		BF_ChooseLoot,
-		BF_HealHalf,
-		BF_HealFull,
-		BF_Sample1
-	};
-
-	enum ChoiceFunctionType {
-		CF_Leave = 0,
-		CF_PickUpArtifact,
-		CF_Sample1
-	};
 };

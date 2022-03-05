@@ -8,12 +8,7 @@
 #include <fstream>
 #include <sstream>
 
-//void BF_ChooseLootButton(Button* button);
-//void BF_Sample1Button(Button* button);
-//void BF_HealHalfButton(Button* button);
-//void BF_HealFullButton(Button* button);
 void CF_PickUpArtifactButton(Button* button);
-void CF_Sample1Button(Button* button);
 
 UI_DialogueHandler::UI_DialogueHandler(void)
 {
@@ -125,7 +120,10 @@ void UI_DialogueHandler::StartDialogueEvent(string flag)
     
     // Close the dialogue if there is nothing in dialogueList
     if (dialogueList.size() == 0)
+    {
+        cout << "[UI_DialogueHandler] WARNING! [" << flag << "] can't be found! Closing Dialogue...\n";
         RemoveDialogue(dialogueButtonList[0]);
+    }
 
     doneDisplay = false;
     actorTxt->Owner()->Activate();
@@ -266,8 +264,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
             //cout << "Button: " << parameters << endl;
             if (dialogueButtonNo < dialogueButtonList.size())
             {
-                //AssignButton(dialogueButtonList[dialogueButtonNo], 'b', dialogueList[dialogueNo][2]);
-
                 dialogueButtonIDList.push_back(command);
 
                 dialogueButtonList[dialogueButtonNo]->tr->SetText(parameters);
@@ -285,7 +281,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
             //cout << "Choice: " << parameters << endl;
             if (rewardButtonNo < rewardButtonList.size())
             {
-                AssignButton(rewardButtonList[rewardButtonNo], 'c', dialogueList[dialogueNo][2]);
                 // If it is the last button [Decline choices]
                 if (rewardButtonNo < rewardButtonList.size() - 1)
                     AssignArtifact(rewardButtonList[rewardButtonNo]->Owner(), parameters);
@@ -350,17 +345,12 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
             Artifact.DisplayArtifactOwner = owner;
             Artifact.ArtifactID = artifact[i].ID;
             ArtifactChoices.push_back(Artifact);
-            // Assign Button Effect
-            AssignButton(rewardButtonList[i], 'c', CF_PickUpArtifact + '0');
         }
     }
 
     // Auto activate decline choice [ALWAYS last choice]
     if (canDecline && rewardButtonList.size() > 0)
-    {
         rewardButtonList[rewardButtonList.size() - 1]->Owner()->Activate();
-        AssignButton(rewardButtonList[rewardButtonList.size() - 1], 'c', CF_Leave + '0');
-    }
 }
 
 // --------------------------------------------------------- DIALOGUE TOOL ---------------------------------------------------------
@@ -436,7 +426,6 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
         tempButton->sr = tempButtonRenderer;
         tempButton->tr = tempButtonTxtRenderer;
         tempButton->affectedObject = dialogueBox;
-        //tempButton->ButtonEffect = &RemoveDialogue;
         tempButton->ButtonEffect = &LaunchButtonEffect;
 
         dialogueBox->AddChild(tempButtonObj);
@@ -462,6 +451,7 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
 
         dialogueBox->AddChild(tempButtonObj);
         tempbuttonList.push_back(tempButton);
+        tempButton->ButtonEffect = &CF_PickUpArtifactButton;
         switch (i)
         {
         case 0:
@@ -478,6 +468,7 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
             tempButtonTxtRenderer->SetText("Skip to get sum guud seedz");
             tempButtonTxtRenderer->SetTextColor(1, 1, 0);
             tempButton->sr->Size(500, 150);
+            tempButton->ButtonEffect = &RemoveDialogue;
             break;
         }
     }
@@ -531,59 +522,6 @@ void UI_DialogueHandler::SetDialogueClickable(bool _canClick)
     }
 }
 
-void UI_DialogueHandler::AssignButton(Button* button, char buttonType, char selchar)
-{
-    if (!isdigit(selchar))
-        return;
-    int decision = (int)(selchar - '0');
-
-    // Decide result based on buttonType and decision
-    // Encounter Button
-    if (buttonType == 'b')
-    {
-        /*switch (decision)
-        {
-        case BF_Leave:
-            button->ButtonEffect = &RemoveDialogue;
-            break;
-        case BF_ChooseLoot:
-            button->ButtonEffect = &BF_ChooseLootButton;
-            break;
-        case BF_HealHalf:
-            button->ButtonEffect = &BF_HealHalfButton;
-            break;
-        case BF_HealFull:
-            button->ButtonEffect = &BF_HealFullButton;
-            break;
-        case BF_Sample1:
-            button->ButtonEffect = &BF_Sample1Button;
-            break;
-        default:
-            button->ButtonEffect = &RemoveDialogue;
-            break;
-        }*/
-    }
-    // Reward Choice
-    else if (buttonType == 'c')
-    {
-        switch (decision)
-        {
-        case CF_Leave:
-            button->ButtonEffect = &RemoveDialogue;
-            break;
-        case CF_PickUpArtifact:
-            button->ButtonEffect = &CF_PickUpArtifactButton;
-            break;
-        case CF_Sample1:
-            button->ButtonEffect = &CF_Sample1Button;
-            break;
-        default:
-            button->ButtonEffect = &RemoveDialogue;
-            break;
-        }
-    }
-}
-
 void UI_DialogueHandler::AssignArtifact(GameObject* owner, string selArtifact)
 {
     // Take first three letters from the string
@@ -612,40 +550,6 @@ void RemoveDialogue(Button* button)
     DialogueDatabase.ClearDialogueSceneObjs();
 }
 
-// ---------------------------------------------------------BUTTON FUNCTIONS---------------------------------------------------------
-//void BF_ChooseLootButton(Button* button)
-//{
-//    // [TODO! Obtain the possible loot choice and assign it to the creation]
-//    Artifact test1, test2, test3;
-//    test1.ID = 400;
-//    test2.ID = 400;
-//    test3.ID = 400;
-//    vector<Artifact> fakeArtifacts{ test1, test2, test3};
-//    // Creates a choose loot / rng loot
-//    UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
-//}
-//void BF_HealHalfButton(Button* button)
-//{
-//    // Heal player by 50%
-//    GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
-//
-//    if (GameManager.playerProfile.hp > GameManager.playerProfile.basemaxhp)
-//        GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
-//    RemoveDialogue(button);
-//}
-//void BF_HealFullButton(Button* button)
-//{
-//    // Heal player by Full by using stardust
-//    //GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
-//    GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
-//    RemoveDialogue(button);
-//}
-//void BF_Sample1Button(Button* button)
-//{
-//    // Sample 1 Go to Reward Selection
-//    UIDialogueManager.CreateDialoguePreset("rsel", 3);
-//}
-
 // ---------------------------------------------------------CHOICE FUNCTIONS---------------------------------------------------------
 void CF_PickUpArtifactButton(Button* button)
 {
@@ -663,9 +567,4 @@ void CF_PickUpArtifactButton(Button* button)
     // Assign to allocated vector
     SaveManager.AddToArtifactList(ID);
     RemoveDialogue(button);
-}
-void CF_Sample1Button(Button* button)
-{
-    // Sample 1 Go to Dialogue
-    UIDialogueManager.CreateDialoguePreset("asd", 3);
 }
