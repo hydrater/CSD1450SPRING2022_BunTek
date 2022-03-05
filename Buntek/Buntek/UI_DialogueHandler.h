@@ -23,6 +23,7 @@ public:
 	void SetDialogueClickable(bool _canClick);
 	void SkipDialogue(void);
 	void DeleteDialogueEvent(void);
+	string GenerateRandomDialogueID(void);
 
 	bool UIOpen = false, UIDecision = false;	// UIDecision: Prevents user from clicking to next dialogue 
 

@@ -271,7 +271,7 @@ void _mapData::Travel(Node* destination)
         case NodeType::Encounter:
             SetClickable(false);
             SetHoverable(false);
-            UIDialogueManager.CreateDialoguePreset("E000", 3);
+            UIDialogueManager.CreateDialoguePreset(UIDialogueManager.GenerateRandomDialogueID(), 3);
             break;
         case NodeType::Enemy:
             SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);

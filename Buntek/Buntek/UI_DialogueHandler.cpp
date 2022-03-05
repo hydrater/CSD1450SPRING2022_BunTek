@@ -377,6 +377,13 @@ void UI_DialogueHandler::DeleteDialogueEvent(void)
     ArtifactChoices.clear();
 }
 
+string UI_DialogueHandler::GenerateRandomDialogueID(void)
+{
+    string id = "E";
+    id += "00" + to_string(RandIntMinMax(0, 1));
+    return id;
+}
+
 void UI_DialogueHandler::CreatePreset(short sortingLayer)
 {
     //Create main dialogue box

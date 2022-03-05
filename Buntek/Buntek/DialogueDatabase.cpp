@@ -18,20 +18,6 @@ _dialogueDatabase& _dialogueDatabase::Instance(void)
     return instance;
 }
 
-void _dialogueDatabase::SpawnEncounterObject(unsigned long id)
-{
-}
-
-string _dialogueDatabase::GetName(unsigned long id)
-{
-	return string();
-}
-
-string _dialogueDatabase::GetDescription(unsigned long id)
-{
-	return string();
-}
-
 void _dialogueDatabase::InitDialogueScene(string id)
 {
 	switch (stoi(id))
@@ -42,7 +28,7 @@ void _dialogueDatabase::InitDialogueScene(string id)
 
 		dialogueSceneObjList.push_back(splashimage1);
 	}
-		break;
+	break;
 	case 1:
 	{
 		AssetManager.LoadTexture("Concepts/Full-Cave.png");
@@ -51,6 +37,52 @@ void _dialogueDatabase::InitDialogueScene(string id)
 		GameObject* splashimage1 = devTools.CreateSpriteGameObject("Concepts/Full-Cave.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0));
 		dialogueSceneObjList.push_back(splashimage1);
 	}
+	break;
+	case 2:
+	{
+		AssetManager.LoadTexture("Concepts/Full-ArticMounts.png");
+		textureList.push_back("Concepts/Full-ArticMounts.png");
+
+		GameObject* splashimage1 = devTools.CreateSpriteGameObject("Concepts/Full-ArticMounts.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0));
+		dialogueSceneObjList.push_back(splashimage1);
+	}
+	break;
+	case 3:
+	{
+		AssetManager.LoadTexture("Concepts/Full-CrystalCaves.png");
+		textureList.push_back("Concepts/Full-CrystalCaves.png");
+
+		GameObject* splashimage1 = devTools.CreateSpriteGameObject("Concepts/Full-CrystalCaves.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0));
+		dialogueSceneObjList.push_back(splashimage1);
+	}
+	break;
+	case 4:
+	{
+		AssetManager.LoadTexture("Concepts/Full-Rainforest.png");
+		textureList.push_back("Concepts/Full-Rainforest.png");
+
+		GameObject* splashimage1 = devTools.CreateSpriteGameObject("Concepts/Full-Rainforest.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0));
+		dialogueSceneObjList.push_back(splashimage1);
+	}
+	break;
+	case 5:
+	{
+		AssetManager.LoadTexture("Concepts/Full-Volcano.png");
+		textureList.push_back("Concepts/Full-Volcano.png");
+
+		GameObject* splashimage1 = devTools.CreateSpriteGameObject("Concepts/Full-Volcano.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0));
+		dialogueSceneObjList.push_back(splashimage1);
+	}
+	break;
+	case 6:
+	{
+		AssetManager.LoadTexture("Concepts/Full-Yggdrasil.png");
+		textureList.push_back("Concepts/Full-Yggdrasil.png");
+
+		GameObject* splashimage1 = devTools.CreateSpriteGameObject("Concepts/Full-Yggdrasil", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0));
+		dialogueSceneObjList.push_back(splashimage1);
+	}
+	break;
 	default:
 		break;
 	}
