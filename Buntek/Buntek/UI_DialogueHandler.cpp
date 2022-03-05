@@ -8,10 +8,10 @@
 #include <fstream>
 #include <sstream>
 
-void BF_ChooseLootButton(Button* button);
-void BF_Sample1Button(Button* button);
-void BF_HealHalfButton(Button* button);
-void BF_HealFullButton(Button* button);
+//void BF_ChooseLootButton(Button* button);
+//void BF_Sample1Button(Button* button);
+//void BF_HealHalfButton(Button* button);
+//void BF_HealFullButton(Button* button);
 void CF_PickUpArtifactButton(Button* button);
 void CF_Sample1Button(Button* button);
 
@@ -330,10 +330,10 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
 
     // Create Reward Selection Actor and Description
     actorTxt->Owner()->Activate();
-    actorTxt->SetText("Battle End");
+    actorTxt->SetText("Choose your loot");
     dialogueTxt->Owner()->Activate();
-    dialogueTxt->SetText("Choose your loot");
-    dialogueFinalDisplayTxt = "Choose your loot";
+    dialogueTxt->SetText("...");
+    dialogueFinalDisplayTxt = "...";
 
     // Assign artifacts [Max: 3]
     for (int i = 0; i < rewardButtonList.size() - 1; ++i) {
@@ -541,7 +541,7 @@ void UI_DialogueHandler::AssignButton(Button* button, char buttonType, char selc
     // Encounter Button
     if (buttonType == 'b')
     {
-        switch (decision)
+        /*switch (decision)
         {
         case BF_Leave:
             button->ButtonEffect = &RemoveDialogue;
@@ -561,7 +561,7 @@ void UI_DialogueHandler::AssignButton(Button* button, char buttonType, char selc
         default:
             button->ButtonEffect = &RemoveDialogue;
             break;
-        }
+        }*/
     }
     // Reward Choice
     else if (buttonType == 'c')
@@ -613,38 +613,38 @@ void RemoveDialogue(Button* button)
 }
 
 // ---------------------------------------------------------BUTTON FUNCTIONS---------------------------------------------------------
-void BF_ChooseLootButton(Button* button)
-{
-    // [TODO! Obtain the possible loot choice and assign it to the creation]
-    Artifact test1, test2, test3;
-    test1.ID = 400;
-    test2.ID = 400;
-    test3.ID = 400;
-    vector<Artifact> fakeArtifacts{ test1, test2, test3};
-    // Creates a choose loot / rng loot
-    UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
-}
-void BF_HealHalfButton(Button* button)
-{
-    // Heal player by 50%
-    GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
-
-    if (GameManager.playerProfile.hp > GameManager.playerProfile.basemaxhp)
-        GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
-    RemoveDialogue(button);
-}
-void BF_HealFullButton(Button* button)
-{
-    // Heal player by Full by using stardust
-    //GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
-    GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
-    RemoveDialogue(button);
-}
-void BF_Sample1Button(Button* button)
-{
-    // Sample 1 Go to Reward Selection
-    UIDialogueManager.CreateDialoguePreset("rsel", 3);
-}
+//void BF_ChooseLootButton(Button* button)
+//{
+//    // [TODO! Obtain the possible loot choice and assign it to the creation]
+//    Artifact test1, test2, test3;
+//    test1.ID = 400;
+//    test2.ID = 400;
+//    test3.ID = 400;
+//    vector<Artifact> fakeArtifacts{ test1, test2, test3};
+//    // Creates a choose loot / rng loot
+//    UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
+//}
+//void BF_HealHalfButton(Button* button)
+//{
+//    // Heal player by 50%
+//    GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
+//
+//    if (GameManager.playerProfile.hp > GameManager.playerProfile.basemaxhp)
+//        GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
+//    RemoveDialogue(button);
+//}
+//void BF_HealFullButton(Button* button)
+//{
+//    // Heal player by Full by using stardust
+//    //GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
+//    GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
+//    RemoveDialogue(button);
+//}
+//void BF_Sample1Button(Button* button)
+//{
+//    // Sample 1 Go to Reward Selection
+//    UIDialogueManager.CreateDialoguePreset("rsel", 3);
+//}
 
 // ---------------------------------------------------------CHOICE FUNCTIONS---------------------------------------------------------
 void CF_PickUpArtifactButton(Button* button)

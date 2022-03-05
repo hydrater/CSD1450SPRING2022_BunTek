@@ -1,5 +1,6 @@
 #include "DialogueDatabase.h"
 #include "UI_DialogueHandler.h"
+#include "ArtifactDatabase.h"
 #include "Parallaxer.h"
 #include "AlphaChanger.h"
 #include "ParticleSystem.h"
@@ -129,11 +130,11 @@ void LaunchButtonEffect(Button* button)
 		buttonPath = buttonCommand.substr(buttonCommand.find("|") + 1, buttonCommand.length());
 	}
 
-	// [TODO! Obtain the possible loot choice and assign it to the creation]
+	// Create a random set of artifact to draw
 	Artifact test1, test2, test3;
-	test1.ID = 400;
-	test2.ID = 400;
-	test3.ID = 400;
+	test1.ID = ArtifactDatabase.DrawArtifact();
+	test2.ID = ArtifactDatabase.DrawArtifact();
+	test3.ID = ArtifactDatabase.DrawArtifact();
 	vector<Artifact> fakeArtifacts{ test1, test2, test3 };
 
 
