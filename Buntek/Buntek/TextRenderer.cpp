@@ -114,13 +114,6 @@ TextRenderer::yAlignmentTypes TextRenderer::GetYAlignment(void) {
 }
 
 void TextRenderer::CalculateTextSize(void) {
-	if (textWidthList.size() == 1) {
-		AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, textWidthList[0], textHeight);
-		textWidthList[0] = textWidthList[0] * (float)AEGetWindowWidth() / 2.0f;
-		textHeight = textHeight * (float)AEGetWindowHeight() / 2.0f;
-		return;
-	}
-
 	float wordWidth = 0;
 	float wordHeight = 0;
 	string word = "";
@@ -131,14 +124,21 @@ void TextRenderer::CalculateTextSize(void) {
 		word.append(1, tempChar);
 		if (tempChar == '\n') {
 			AEGfxGetPrintSize(AssetManager.GetFont(fontString), &word[0], textScale, wordWidth, wordHeight);
-			this->SetTextWidth(wordWidth, linecount);
+			this->SetTextWidth(wordWidth * (float)AEGetWindowWidth() / 2.0f, linecount);
 			if (wordHeight != textHeight) {
-				textHeight = wordHeight;
+				textHeight = wordHeight * (float)AEGetWindowHeight() / 2.0f;
 			}
 			linecount++;
 			word.clear();
 		}
 	}
+	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &word[0], textScale, wordWidth, wordHeight);
+	this->SetTextWidth(wordWidth * (float)AEGetWindowWidth() / 2.0f, linecount);
+	if (wordHeight != textHeight) {
+		textHeight = wordHeight * (float)AEGetWindowHeight() / 2.0f;
+	}
+	linecount++;
+	word.clear();
 }
 
 void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
