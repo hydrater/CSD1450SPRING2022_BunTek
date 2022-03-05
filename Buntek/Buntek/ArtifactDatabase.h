@@ -7,6 +7,13 @@ using namespace std;
 
 #define ArtifactDatabase _artifactdatabase::Instance()
 
+struct Status
+{
+    int statusID = NULL;
+    float statusTimer = 0;
+    float statusCount = 0;
+};
+
 enum class RarityTypes : short
 {
     Common = 0,

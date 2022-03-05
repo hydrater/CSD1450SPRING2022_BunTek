@@ -99,7 +99,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                     }
                 }
                 if (!flag) {
-                    _gameManager::Status temp;
+                    Status temp;
                     temp.statusID = 00;
                     temp.statusTimer = (float)artifact.count;
                     GameManager.playerArtifactList.statusEffect.push_back(temp);
@@ -118,7 +118,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                     }
                 }
                 if (!flag) {
-                    _gameManager::Status temp;
+                    Status temp;
                     temp.statusID = 00;
                     temp.statusTimer = (float)artifact.count;
                     GameManager.enemyArtifactList.statusEffect.push_back(temp);
@@ -139,7 +139,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                     }
                 }
                 if (!flag) {
-                    _gameManager::Status temp;
+                    Status temp;
                     temp.statusID = 00;
                     temp.statusCount = 1;
                     GameManager.playerArtifactList.statusEffect.push_back(temp);
@@ -155,7 +155,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                     }
                 }
                 if (!flag) {
-                    _gameManager::Status temp;
+                    Status temp;
                     temp.statusID = 00;
                     temp.statusCount = 1;
                     GameManager.enemyArtifactList.statusEffect.push_back(temp);
@@ -164,12 +164,29 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         }
         break;
     case 630://B2: Balls colliding with hostile balls will freeze it for X second
-
+        tempBallBehavior = ball->GetComponent<BallBehavior>();
+        for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
+        {
+            if (tempBallBehavior->statusEffect[i].statusID == 01) {
+                tempBallBehavior->statusEffect[i].statusTimer += artifact.count;;
+                flag = true;
+                break;
+            }
+        }
+        if (!flag) {
+            Status temp;
+            temp.statusID = 01;
+            temp.statusTimer = (float)artifact.count;
+            tempBallBehavior->statusEffect.push_back(temp);
+        }
         break;
     case 631://B2: Colliding with an hostile ball have a chance to reflect that ball
         tempBallBehavior = ball->GetComponent<BallBehavior>();
-        tempBallBehavior->velocity = -tempBallBehavior->velocity;
-        tempBallBehavior->playerPossess = !tempBallBehavior->playerPossess;
+        if (tempBallBehavior->savedCol != NULL) {
+            tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
+            tempBallBehavior->velocity = -tempBallBehavior->velocity;
+            tempBallBehavior->playerPossess = !tempBallBehavior->playerPossess;
+        }
         break;
     case 640://B5: Destroys hostile ball
         tempBallBehavior = ball->GetComponent<BallBehavior>();

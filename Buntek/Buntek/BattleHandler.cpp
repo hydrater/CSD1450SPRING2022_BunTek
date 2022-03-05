@@ -200,6 +200,16 @@ void BattleHandler::Update(void) {
 				GameManager.playerArtifactList.statusEffect.erase(GameManager.playerArtifactList.statusEffect.begin() + i);
 			}
 		}
+		for (size_t i = 0; i < GameManager.enemyArtifactList.statusEffect.size(); ++i)
+		{
+			if (GameManager.enemyArtifactList.statusEffect[i].statusTimer > 0) {
+				GameManager.enemyArtifactList.statusEffect[i].statusTimer -= DeltaTime;
+			}
+			else if (GameManager.enemyArtifactList.statusEffect[i].statusCount == 0) {
+				GameManager.enemyArtifactList.statusEffect.erase(GameManager.enemyArtifactList.statusEffect.begin() + i);
+			}
+		}
+
 		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 		ballSpawnTimer -= DeltaTime * timeScalar;
 		scalingTimer += DeltaTime * timeScalar;

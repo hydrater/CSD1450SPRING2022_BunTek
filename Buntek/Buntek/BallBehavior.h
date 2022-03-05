@@ -31,6 +31,8 @@ public:
 	Collider2D* col = 0;
 	Collider2D* savedCol = 0;	// Saved collider of another instance (For trigger on enter)
 
+	vector<Status> statusEffect;
+
 	BattleInput* battleInput = 0;
 	GameObject* ballParticle = 0;
 	ParticleSystem* ballParticleSystem = 0;

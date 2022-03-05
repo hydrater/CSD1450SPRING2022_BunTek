@@ -37,6 +37,8 @@ void _mapData::GenerateMapData(void)
         penaltyZone->Delete();
         penaltyZone = nullptr;
     }
+    penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.3), RandFloatMinMax(StartYCoord, EndYCoord));
+
 
     for (int i = 0; i < numNodes; i++) 
     {
@@ -148,14 +150,12 @@ void _mapData::GenerateMapObject(void)
 
     GameObject* temp = new GameObject;
     SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
-    tempRenderer->Size((float)AEGetWindowWidth(), (float)AEGetWindowWidth() * 2);
+    tempRenderer->Size((float)AEGetWindowWidth() * 1.5, (float)AEGetWindowWidth() * 1.5);
     tempRenderer->SetLayer(-2);
     tempRenderer->SetTexture("hdCircle.png");
     tempRenderer->SetColor(1, 0, 0);
     tempRenderer->SetOpacity(0.5);
-    float StartYCoord = (float)(-AEGetWindowHeight() / 2) + buffer;
-    float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
-    temp->transform->worldposition = Vector2(-tempRenderer->GetHalfWidth()*2, RandFloatMinMax(StartYCoord, EndYCoord));
+    temp->transform->worldposition = penaltyPos;
     penaltyZone = temp;
 }
 
@@ -332,6 +332,7 @@ void _mapData::SetHoverable(bool _canHover)
 void _mapData::PenaltyZoneUpdate(void) {
     if (penaltyZone->transform->worldposition.x < 0) {
         penaltyZone->transform->worldposition.x += penaltySpeed;
+        penaltyPos = penaltyZone->transform->worldposition;
     }
     for(int i = 0; i < nodeList.size(); ++i)
     {

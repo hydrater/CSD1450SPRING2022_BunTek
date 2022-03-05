@@ -36,6 +36,7 @@ public:
     };
     GameObject* penaltyZone = nullptr;
     float penaltySpeed = 200;
+    Vector2 penaltyPos;
     vector<AEGfxVertexList*> connectedLines;
 
     Node* currentNode = nullptr;

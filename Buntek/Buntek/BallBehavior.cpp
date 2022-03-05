@@ -25,6 +25,16 @@ void BallBehavior::Start(void)
 void BallBehavior::Update(void)
 {
 	if (timeScalar != 0) {
+		for (size_t i = 0; i < statusEffect.size(); ++i)
+		{
+			if (statusEffect[i].statusTimer > 0) {
+				statusEffect[i].statusTimer -= DeltaTime;
+			}
+			else if (statusEffect[i].statusCount == 0) {
+				statusEffect.erase(statusEffect.begin() + i);
+			}
+		}
+
 		ballParticle->transform->SetPosition(transform->worldposition);
 		ballParticleSystem->directionalVector2 = -velocity;
 
@@ -121,8 +131,21 @@ void BallBehavior::Update(void)
 			}
 		}
 		// Update position and rotation
-		transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime * timeScalar);
-		transform->Rotate(rotSpeed * DeltaTime * timeScalar);
+		//check frozen
+		bool frozen = false;
+		for (size_t i = 0; i < statusEffect.size(); ++i)
+		{
+			if (statusEffect[i].statusID == 01) {
+				if (statusEffect[i].statusTimer > 0) {
+					frozen = true;
+				}
+
+			}
+		}
+		if (!frozen) {
+			transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime * timeScalar);
+			transform->Rotate(rotSpeed* DeltaTime* timeScalar);
+		}
 	}
 	
 }

@@ -44,12 +44,7 @@ public:
         float bonusHealing = 0;
     }playerProfile = {}, enemyProfile = {};
 
-    struct Status
-    {
-        int statusID = NULL;
-        float statusTimer = 0;
-        float statusCount = 0;
-    };
+
 
     struct BattleArtifactProfile
     {
