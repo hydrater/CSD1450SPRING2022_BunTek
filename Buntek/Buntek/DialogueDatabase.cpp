@@ -130,11 +130,7 @@ void LaunchButtonEffect(Button* button)
 	}
 
 	// -------------- Types of button effects ----------------
-	if (buttonID == "0")
-	{
-		RemoveDialogue(button);
-	}
-	else if (buttonID == "1")
+	if (buttonID == "1")
 	{
 		// [TODO! Obtain the possible loot choice and assign it to the creation]
 		Artifact test1, test2, test3;
@@ -166,6 +162,11 @@ void LaunchButtonEffect(Button* button)
 		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 		GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
 		GameManager.playerProfile.hp = truemaxhp;
+		RemoveDialogue(button);
+	}
+	else
+	{
+		// Force close if nothing can happen
 		RemoveDialogue(button);
 	}
 }

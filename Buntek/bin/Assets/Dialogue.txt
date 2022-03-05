@@ -12,7 +12,7 @@ aed
 /ap Constellation of Mittens
 Don't look down on me because I'm a cat!
 /b1 Pet the constellation
-/b4 Offer some galaxy milk
+/b2|E006 Offer some galaxy milk
 /b0 Leave
 /aa Next Trail
 YOU SHOULD NOT SEE THIS!
@@ -37,8 +37,8 @@ REST
 /d  0
 /aw A brief respite
 Alas a place to rest
-/b2 Take a rest [Heal 50% HP]
-/b3 Bribe the universe [Heal 100% HP] {-10 Stardust}
+/b3 Take a rest [Heal 50% HP]
+/b4 Bribe the universe [Heal 100% HP] {-10 Stardust}
 /b0 Leave
 
 Events================================================================================================================
@@ -58,7 +58,7 @@ I have chanced upon this peculiar magic mushroom.
 Would you like to buy it off of me?
 /b1 Buy the mushroom
 /b0 Refuse the offer
-/b2 Steal the mushroom
+/b2|aed Steal the mushroom
 
 E001
 /d  1
@@ -66,15 +66,15 @@ E001
 ..........
 You are lost in a cave.....
 You see 3 paths ahead of you....
-/b3 Take the left path
-/b4 Take the middle path
+/b2 Take the left path
+/b2 Take the middle path
 /b0 Take the right path
 
 E002
 /d  2
 You made it to the top of the mountains
 Take a rest?
-/b6 Rest
+/b3 Rest
 /b0 Continue
 
 E003

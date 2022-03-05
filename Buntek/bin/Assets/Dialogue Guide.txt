@@ -1,6 +1,6 @@
 ========================= GUIDE =======================
 ------------------------ FORMAT -----------------------
-/x0 yyyy
+/x0|W yyyy
 - Put '/' at the front for calling certain commands
 - x is for calling legends to run commands (Refer)
 - 0 is the function called for the button/choice
@@ -9,6 +9,9 @@
 	{Possible colors: a(black), b(blue), g(green),}
 	{	c(cyan), r(red), p(purple), y(yellow),}
 	{	w(white)			      }
+- |W is optional to be added in
+	It is responsible to decide which Encounter it
+	can go to (Currently only can be used with /b2)
 - yyyy is the string displayed in the text renderer
 	[Exception: c, which finds the artifact type  ]
 	[Exception: d, which finds the specific sprite]
