@@ -145,12 +145,10 @@ void _renderer::Update(void)
 
 			}
 			//Text Rendering
-			if (tempTextString[start] != '\0') {
-				AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
-					TextAlignmentX(textRenderer, linecount) / ((float)AEGetWindowWidth() / 2),
-					(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
-					textRenderer->GetFontScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
-			}
+			AEGfxPrint(AssetManager.GetFont(textRenderer->GetFontName()), &tempTextString[start],
+				TextAlignmentX(textRenderer, linecount) / ((float)AEGetWindowWidth() / 2),
+				(TextAlignmentY(textRenderer) - linecount * (textheight + textRenderer->GetLineBuffer())) / ((float)AEGetWindowHeight() / 2),
+				textRenderer->GetFontScale(), textRenderer->textR, textRenderer->textG, textRenderer->textB);
 		}
 			break;
 		case RenderType::Line:
