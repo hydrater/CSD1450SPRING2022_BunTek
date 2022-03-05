@@ -17,13 +17,14 @@ a: Actor Name
 b: Button for Encounter (Please don't mix with Choice)
 c: Choice for Rewards (Please don't mix with Encounter)
 d: Design for Background
+0 - space
+1 - cave
+2 - artic mounts
+3 - crystal caves
+4 - rainforest
+5 - volcano
+6 - yggdrasil
 =======================================================
-
-1
-2
-3
-4
-5
 
 asd
 /ar Ding Xiang
@@ -59,18 +60,6 @@ Choose your reward
 /c1 Nonsense Text that should output default artifact [0000]
 /c0 Decline the absorption
 
-poo poo
-
-flavor text
-text1
-text2
-text3
-
-flavor name
-name1
-name2
-name3
-
 REST
 /d  0
 /aw A brief respite
@@ -98,7 +87,6 @@ Would you like to buy it off of me?
 /b1 Refuse the offer
 /b2 Steal the mushroom
 
-
 E001
 /d  1
 ......
@@ -108,3 +96,5 @@ You see 3 paths ahead of you....
 /b3 Take the left path
 /b4 Take the middle path
 /b5 Take the right path
+
+E002

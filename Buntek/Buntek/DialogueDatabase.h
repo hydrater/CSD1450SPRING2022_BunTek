@@ -12,9 +12,6 @@ public:
 	_dialogueDatabase();
 	~_dialogueDatabase();
 	static _dialogueDatabase& Instance(void);
-	static void SpawnEncounterObject(unsigned long id);
-	static string GetName(unsigned long id);
-	static string GetDescription(unsigned long id);
 
 	vector<GameObject*> dialogueSceneObjList;
 	vector<string> textureList;
