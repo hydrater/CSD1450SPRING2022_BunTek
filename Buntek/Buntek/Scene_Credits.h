@@ -7,7 +7,7 @@ public:
     //void EarlyUpdate(void) override;
     void Update(void) override;
     //void LateUpdate(void) override;
-    GameObject* GetObjRef(short type);
+    //GameObject* GetObjRef(short type);
     const Vector2 backBtnPos = Vector2(-670, 400);
 private:
     ~Scene_Credits(void) override;

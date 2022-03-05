@@ -270,7 +270,7 @@ Scene_Credits::~Scene_Credits(void)
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 }
 
-GameObject* Scene_Credits::GetObjRef(short type)
+/*GameObject* Scene_Credits::GetObjRef(short type)
 {
 	if (type == 0)
 		return backBtn;
@@ -278,7 +278,7 @@ GameObject* Scene_Credits::GetObjRef(short type)
 	{
 
 	}
-}
+}*/
 
 
 void BtnFunc_Back(Button* button)
