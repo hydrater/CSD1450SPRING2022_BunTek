@@ -37,8 +37,6 @@ public:
 
 	vector<ArtifactLoot> ArtifactChoices = {};
 
-	int fullHealthCost = 10;		// Cost to heal to max hp
-
 	vector<Button*> dialogueButtonList;
 	vector<string> dialogueButtonIDList;
 

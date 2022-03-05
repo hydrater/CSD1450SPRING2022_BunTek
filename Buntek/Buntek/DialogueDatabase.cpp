@@ -129,44 +129,53 @@ void LaunchButtonEffect(Button* button)
 		buttonPath = buttonCommand.substr(buttonCommand.find("|") + 1, buttonCommand.length());
 	}
 
-	// -------------- Types of button effects ----------------
-	if (buttonID == "1")
-	{
-		// [TODO! Obtain the possible loot choice and assign it to the creation]
-		Artifact test1, test2, test3;
-		test1.ID = 400;
-		test2.ID = 400;
-		test3.ID = 400;
-		vector<Artifact> fakeArtifacts{ test1, test2, test3 };
-		// Creates a choose loot / rng loot
-		UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
-	}
-	else if (buttonID == "2")
-	{
-		// Go to a specific dialogue/encounter
-		UIDialogueManager.CreateDialoguePreset(buttonPath, 3);
-	}
-	else if (buttonID == "3")
-	{
-		// Heal player by 50%
-		GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
+	// [TODO! Obtain the possible loot choice and assign it to the creation]
+	Artifact test1, test2, test3;
+	test1.ID = 400;
+	test2.ID = 400;
+	test3.ID = 400;
+	vector<Artifact> fakeArtifacts{ test1, test2, test3 };
 
-		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
-		if (GameManager.playerProfile.hp > truemaxhp)
+
+	float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
+
+	// -------------- Types of button effects ----------------
+	switch (stoi(buttonID))
+	{
+	case 1:
+			// Creates a choose loot / rng loot
+			UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
+			break;
+	case 2:
+			// Go to a specific dialogue/encounter
+			UIDialogueManager.CreateDialoguePreset(buttonPath, 3);
+			break;
+	case 3:
+			// Heal player by 50%
+			GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
+
+			if (GameManager.playerProfile.hp > truemaxhp)
+				GameManager.playerProfile.hp = truemaxhp;
+			RemoveDialogue(button);
+			break;
+	case 4:
+			// Check if player can select this button (Can afford price)
+			if (GameManager.playerProfile.stardust < DialogueDatabase.fullHealthCost)
+			{
+				button->SetClickable(false);
+				button->Owner()->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
+				button->Owner()->GetComponent<TextRenderer>()->SetTextColor(1.0f, 0.f, 0.f);
+				break;
+			}
+
+			// Heal player by Full by using stardust
+			GameManager.playerProfile.stardust -= DialogueDatabase.fullHealthCost;
 			GameManager.playerProfile.hp = truemaxhp;
-		RemoveDialogue(button);
-	}
-	else if (buttonID == "4")
-	{
-		// Heal player by Full by using stardust
-		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
-		GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
-		GameManager.playerProfile.hp = truemaxhp;
-		RemoveDialogue(button);
-	}
-	else
-	{
-		// Force close if nothing can happen
-		RemoveDialogue(button);
+			RemoveDialogue(button);
+			break;
+	default:
+			// Force close if nothing can happen
+			RemoveDialogue(button);
+			break;
 	}
 }

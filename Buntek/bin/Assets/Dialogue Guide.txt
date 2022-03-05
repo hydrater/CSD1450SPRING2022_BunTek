@@ -12,12 +12,20 @@
 - |W is optional to be added in
 	It is responsible to decide which Encounter it
 	can go to (Currently only can be used with /b2)
+
+	Adding it to any other commands does nothing
+
 - yyyy is the string displayed in the text renderer
 	[Exception: c, which finds the artifact type  ]
 	[Exception: d, which finds the specific sprite]
 ------------------------ LEGENDS ----------------------
 a: Actor Name
 b: Button for Encounter (Please don't mix with Choice)
+0 - Leave
+1 - Create Reward Selection
+2 - Go to new dialogue
+3 - Heal player by half
+4 - Heal player to full [Removes X stardust]
 c: Choice for Rewards (Please don't mix with Encounter)
 d: Design for Background
 0 - space

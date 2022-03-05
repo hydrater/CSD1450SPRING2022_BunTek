@@ -270,13 +270,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
 
                 dialogueButtonIDList.push_back(command);
 
-                // Check if player can select this button (Can afford price)
-                if (dialogueButtonList[dialogueButtonNo]->ButtonEffect == &BF_HealFullButton && GameManager.playerProfile.stardust < fullHealthCost)
-                {
-                    dialogueButtonList[dialogueButtonNo]->Owner()->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
-                    dialogueButtonList[dialogueButtonNo]->Deactivate();
-                }
-
                 dialogueButtonList[dialogueButtonNo]->tr->SetText(parameters);
                 dialogueButtonList[dialogueButtonNo++]->Owner()->Activate();
                 UIDecision = true;
@@ -643,7 +636,7 @@ void BF_HealHalfButton(Button* button)
 void BF_HealFullButton(Button* button)
 {
     // Heal player by Full by using stardust
-    GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
+    //GameManager.playerProfile.stardust -= UIDialogueManager.fullHealthCost;
     GameManager.playerProfile.hp = GameManager.playerProfile.basemaxhp;
     RemoveDialogue(button);
 }

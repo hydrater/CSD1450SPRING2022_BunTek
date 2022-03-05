@@ -20,5 +20,7 @@ public:
 	vector<string> textureList;
 	void InitDialogueScene(string id);
 	void ClearDialogueSceneObjs(void);
+
+	int fullHealthCost = 10;		// Cost to heal to max hp
 private:
 };
