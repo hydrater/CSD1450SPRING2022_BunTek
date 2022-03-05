@@ -47,7 +47,10 @@ void BallBehavior::Update(void)
 		}
 
 		//Collision check with left/right wall
-		if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
+		bool leftWall = fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius;
+		bool rightWall = fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius;
+
+		if (leftWall || rightWall) {
 			velocity.x = -velocity.x;
 			transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
 			if (playerPossess) {//enemy ball hits wall
@@ -56,9 +59,17 @@ void BallBehavior::Update(void)
 			else {
 				ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_WallBounce, !playerPossess, this->Owner());
 			}
+			GameObject* spawner = new GameObject();
+			if (leftWall) {
+				spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(1, 0), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(GameManager.areaLeftBoundary, transform->worldposition.y), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+			}
+			else {
+				spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(-1, 0), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(GameManager.areaRightBoundary, transform->worldposition.y), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+			}
 
 			BallHorizontalCheck();
 		}
+		
 		//Collision check with top/bottom wall
 		else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
 		{
@@ -82,8 +93,21 @@ void BallBehavior::Update(void)
 		Collider2D* othercol = CollisionManager2D.CheckCollision(col);
 		if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<PaddleBehavior>())
 		{
+			PaddleBehavior* tempPaddle = othercol->Owner()->GetComponent<PaddleBehavior>();
 			savedCol = othercol;
-			ReflectBall(playerPossess, (othercol->Owner()));
+			bool hasBounced = ReflectBall(playerPossess, (othercol->Owner()));
+			if (hasBounced) {
+				GameObject* spawner = new GameObject();
+				if (playerPossess) {
+					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, -1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(transform->worldposition.x , transform->worldposition.y+radius/2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+				}
+				else
+				{
+					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, 1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(transform->worldposition.x, transform->worldposition.y - radius / 2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+				}
+			}
+			
+
 		}
 		//ball ball artifact collision check not working, null error
 		if (othercol != nullptr && savedCol != othercol && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())
@@ -103,8 +127,9 @@ void BallBehavior::Update(void)
 	
 }
 
-void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
+bool BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 {
+	bool hasbounced = false;
 	if (velocity.y < 0) { 
 		if (hasPossession && transform->worldposition.y < GameManager.friendlyAreaY) { //player bounce
 			velocity = Vector2(0, 1);
@@ -117,8 +142,8 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			velocity.RotateC(multiplier * angRange);
 
 			ballPhase++;
-			if (ballPhase > 8) {
-				ballPhase = 8;
+			if (ballPhase > maxBallPhase) {
+				ballPhase = maxBallPhase;
 			}
 			else {
 				targetSpeed += ballPhaseSpeedIncrement;
@@ -131,10 +156,11 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 				speed += paddleBounceMultiplier * addSpd;
 			}
 			if (ballPhase > 3) {
-				causeHitPause = true;
+				//causeHitPause = true;
 			}
 
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_PaddleHit, !playerPossess, this->Owner());
+			hasbounced = true;
 		}
 	}
 	else {
@@ -155,6 +181,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 				speed += ballPhaseSpeedIncrement;
 
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_PaddleHit, !playerPossess, this->Owner());
+			hasbounced = true;
 		}
 	}
 	switch (ballPhase) {
@@ -181,7 +208,7 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 		break;
 
 	}
-
+	return hasbounced;
 }
 
 float BallBehavior::GetSpeed(void)

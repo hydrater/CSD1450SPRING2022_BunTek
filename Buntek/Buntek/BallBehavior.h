@@ -24,7 +24,7 @@ public:
 	float GetSpeed(void);
 	void SetSpeed(float _speed);
 	void SetTargetSpeed(float _targetSpeed);
-	void ReflectBall( bool hasPossession, GameObject* paddle);
+	bool ReflectBall( bool hasPossession, GameObject* paddle);
 	void HitBall(Vector2 mousePos, bool isPlayer);
 	bool playerPossess = false;
 	SpriteRenderer* sr = 0;
