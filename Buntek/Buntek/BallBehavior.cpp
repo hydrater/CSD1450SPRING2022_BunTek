@@ -54,8 +54,7 @@ void BallBehavior::Update(void)
 		}
 		else {
 			ballParticleSystem->isEmitting = false;
-		}
-
+		};
 		//Collision check with left/right wall
 		bool leftWall = fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius;
 		bool rightWall = fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius;
@@ -98,12 +97,12 @@ void BallBehavior::Update(void)
 			this->Owner()->Delete();
 			return;
 		}
-
 		// Collision Check with paddle
-		Collider2D* othercol = CollisionManager2D.CheckCollision(col);
+		Collider2D* othercol = CollisionManager2D.CheckCollision(col); //null error here when ball ball artifact delete ball
 		if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<PaddleBehavior>())
 		{
 			PaddleBehavior* tempPaddle = othercol->Owner()->GetComponent<PaddleBehavior>();
+			
 			savedCol = othercol;
 			bool hasBounced = ReflectBall(playerPossess, (othercol->Owner()));
 			if (hasBounced) {
@@ -119,7 +118,7 @@ void BallBehavior::Update(void)
 			
 
 		}
-		//ball ball artifact collision check not working, null error
+		//ball ball artifact collision check 
 		if (othercol != nullptr && savedCol != othercol && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())
 		{
 			savedCol = othercol;

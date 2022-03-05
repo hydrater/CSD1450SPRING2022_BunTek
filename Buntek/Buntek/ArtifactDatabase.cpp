@@ -165,6 +165,9 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 630://B2: Balls colliding with hostile balls will freeze it for X second
         tempBallBehavior = ball->GetComponent<BallBehavior>();
+        if (tempBallBehavior->savedCol != NULL) {
+            tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
+        }
         for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
         {
             if (tempBallBehavior->statusEffect[i].statusID == 01) {
@@ -190,8 +193,11 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 640://B5: Destroys hostile ball
         tempBallBehavior = ball->GetComponent<BallBehavior>();
-        if(tempBallBehavior->savedCol != NULL)
-            tempBallBehavior->savedCol->Owner()->Delete();
+        if(tempBallBehavior != NULL && !tempBallBehavior->savedCol->Owner()->remove){
+            tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();
+            //tempBallBehavior->Owner()->Delete();
+            return;
+        }
         break;
     default:
         
