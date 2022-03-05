@@ -118,6 +118,26 @@ void TextRenderer::CalculateTextSize(void) {
 		AEGfxGetPrintSize(AssetManager.GetFont(fontString), &text[0], textScale, textWidthList[0], textHeight);
 		textWidthList[0] = textWidthList[0] * (float)AEGetWindowWidth() / 2.0f;
 		textHeight = textHeight * (float)AEGetWindowHeight() / 2.0f;
+		return;
+	}
+
+	float wordWidth = 0;
+	float wordHeight = 0;
+	string word = "";
+	char tempChar = 0;
+	int linecount = 0;
+	for (string::iterator it = text.begin(); it != text.end(); ++it) {
+		tempChar = *it;
+		word.append(1, tempChar);
+		if (tempChar == '\n') {
+			AEGfxGetPrintSize(AssetManager.GetFont(fontString), &word[0], textScale, wordWidth, wordHeight);
+			this->SetTextWidth(wordWidth, linecount);
+			if (wordHeight != textHeight) {
+				textHeight = wordHeight;
+			}
+			linecount++;
+			word.clear();
+		}
 	}
 }
 
@@ -135,7 +155,7 @@ void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
 		width = maxTextWidth / 2 + xbuffer;
 	}
 	if (textHeight / 2 > height) {
-		height = textHeight / 2 + ybuffer;
+		height = textHeight * textWidthList.size() / 2 + ybuffer;
 	}
 	sr->Size(width*2, height*2);
 }
