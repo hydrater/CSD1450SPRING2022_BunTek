@@ -122,6 +122,11 @@ void UI_DialogueHandler::CreateDialogue(string flag, short sortingLayer) {
 void UI_DialogueHandler::StartDialogueEvent(string flag)
 {
     LoadFromFile(flag);
+    
+    // Close the dialogue if there is nothing in dialogueList
+    if (dialogueList.size() == 0)
+        RemoveDialogue(dialogueButtonList[0]);
+
     doneDisplay = false;
     actorTxt->Owner()->Activate();
     dialogueTxt->Owner()->Activate();
@@ -213,10 +218,8 @@ void UI_DialogueHandler::WriteToDialogue(void)
             return;
         }
 
-        string command = dialogueList[dialogueNo].substr(2, dialogueList[dialogueNo].find(" ", 0));
-       // string path = dialogueList[dialogueNo].substr(dialogueList[dialogueNo].find("|"), dialogueList[dialogueNo].find(" ") - 2);
-
-        string parameters = dialogueList[dialogueNo].substr(dialogueList[dialogueNo].find(" "), dialogueList[dialogueNo].length());
+        string command = dialogueList[dialogueNo].substr(2, dialogueList[dialogueNo].find(" ") - 2);
+        string parameters = dialogueList[dialogueNo].substr(dialogueList[dialogueNo].find(" ") + 1, dialogueList[dialogueNo].length());
 
         switch (dialogueList[dialogueNo][1])
         {
@@ -263,7 +266,7 @@ void UI_DialogueHandler::WriteToDialogue(void)
             //cout << "Button: " << parameters << endl;
             if (dialogueButtonNo < dialogueButtonList.size())
             {
-                AssignButton(dialogueButtonList[dialogueButtonNo], 'b', dialogueList[dialogueNo][2]);
+                //AssignButton(dialogueButtonList[dialogueButtonNo], 'b', dialogueList[dialogueNo][2]);
 
                 dialogueButtonIDList.push_back(command);
 
@@ -440,7 +443,8 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
         tempButton->sr = tempButtonRenderer;
         tempButton->tr = tempButtonTxtRenderer;
         tempButton->affectedObject = dialogueBox;
-        tempButton->ButtonEffect = &RemoveDialogue;
+        //tempButton->ButtonEffect = &RemoveDialogue;
+        tempButton->ButtonEffect = &LaunchButtonEffect;
 
         dialogueBox->AddChild(tempButtonObj);
         buttonList.push_back(tempButton);
@@ -481,7 +485,6 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
             tempButtonTxtRenderer->SetText("Skip to get sum guud seedz");
             tempButtonTxtRenderer->SetTextColor(1, 1, 0);
             tempButton->sr->Size(500, 150);
-            tempButton->ButtonEffect = &LaunchButtonEffect;
             break;
         }
     }
