@@ -12,7 +12,7 @@ public:
     ~Scene_MainMenu(void) override;
     GameObject* GetObjRef(short type);
     static Scene_MainMenu * instance;
-    const Vector2 battleBtnPos = Vector2(-670, -200), howtoplayBtnPos = Vector2(-670,-300) ,optionBtnPos = Vector2(-670, -400), creditsBtnPos = Vector2(-670, -500), quitBtnPos = Vector2(-670, -600);
+    const Vector2 battleBtnPos = Vector2(-670, 0), howtoplayBtnPos = Vector2(-670, -100) ,optionBtnPos = Vector2(-670, -200), creditsBtnPos = Vector2(-670, -300), quitBtnPos = Vector2(-670, -400);
     bool startPlay = true, optionPlay = true, quitPlay = true, howtoPlay = true, creditsPlay = true;
     TextRenderer* displayTxt = 0;
 

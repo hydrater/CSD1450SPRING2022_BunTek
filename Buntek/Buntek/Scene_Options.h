@@ -3,6 +3,8 @@
 class Scene_Options : public Scene
 {
 public:
+    float musicVolume = 0.05f;
+
     void Start(void) override;
     // void EarlyUpdate(void) override;
     void Update(void) override;

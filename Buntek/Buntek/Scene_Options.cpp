@@ -7,7 +7,7 @@
 #include "ArtifactDatabase.h"
 #include "Scene_Options.h"
 
-//void BtnFunc_increaseMusicVolume(Button* button);
+void BtnFunc_increaseMusicVolume(Button* button);
 //void BtnFuncHover_increaseMusicVolume(Button* button);
 //void BtnFuncUnhover_increaseVolume(Button* button);
 
@@ -38,10 +38,10 @@ Scene_Options::~Scene_Options(void)
 
 }
 
-/*void BtnFunc_increaseMusicVolume(Button* button)
+void BtnFunc_increaseMusicVolume(Button* button)
 {
 	if (button->CheckTriggered(Vector2(300, 300)))
 	{
-		AudioManager.SetMusicVolume(MusicVolume + 10.0f);
+		//AudioManager.SetMusicVolume(MusicVolume + 10.0f);
 	}
-}*/
+}
