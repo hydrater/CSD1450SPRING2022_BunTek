@@ -1,30 +1,3 @@
-========================= GUIDE =======================
------------------------- FORMAT -----------------------
-/x0 yyyy
-- Put '/' at the front for calling certain commands
-- x is for calling legends to run commands (Refer)
-- 0 is the function called for the button/choice
-	effect (CAUTION!: WILL ONLY WORK FOR b and c!)
-- 0 is also the type of color for the actor's name (a)
-	{Possible colors: a(black), b(blue), g(green),}
-	{	c(cyan), r(red), p(purple), y(yellow),}
-	{	w(white)			      }
-- yyyy is the string displayed in the text renderer
-	[Exception: c, which finds the artifact type  ]
-	[Exception: d, which finds the specific sprite]
------------------------- LEGENDS ----------------------
-a: Actor Name
-b: Button for Encounter (Please don't mix with Choice)
-c: Choice for Rewards (Please don't mix with Encounter)
-d: Design for Background
-0 - space
-1 - cave
-2 - artic mounts
-3 - crystal caves
-4 - rainforest
-5 - volcano
-6 - yggdrasil
-=======================================================
 
 asd
 /ar Ding Xiang
@@ -83,8 +56,8 @@ I see you have some star dust
 Fret not, I am a passing cave explorer harvesting some botany.
 I have chanced upon this peculiar magic mushroom.
 Would you like to buy it off of me?
-/b0 Buy the mushroom
-/b1 Refuse the offer
+/b1 Buy the mushroom
+/b0 Refuse the offer
 /b2 Steal the mushroom
 
 E001
@@ -95,6 +68,49 @@ You are lost in a cave.....
 You see 3 paths ahead of you....
 /b3 Take the left path
 /b4 Take the middle path
-/b5 Take the right path
+/b0 Take the right path
 
 E002
+/d  2
+You made it to the top of the mountains
+Take a rest?
+/b6 Rest
+/b0 Continue
+
+E003
+/d  2
+...
+.....
+You see a silhouette in a distance....
+/ab Ranni of the blue moon
+This way wanderer
+May I have a word?
+/aw  
+.....
+/ab Ranni of the blue moon
+A pleasure to meet thee, wanderer.
+I am the witch Ranni
+I'd heard tell of a wanderer hurtling about atop these mountains
+And upon looking into the matter,
+the talk I surmise, is of thee.
+I was entrusted this, for thee.
+/b8 Accept
+/b0 Leave
+
+E004
+/d  3
+...
+.....
+You see a figure in a distance scurrying in a rush....
+/aw Suspicious figure
+RUNNNNNNNNNNNNNNNNNNNNN!
+/b0 Run
+/b8 Investigate the source
+
+E005
+/d  3
+...
+.....
+
+
+
