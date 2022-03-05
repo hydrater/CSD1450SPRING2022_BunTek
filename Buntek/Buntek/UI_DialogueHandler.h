@@ -33,7 +33,7 @@ public:
 
 	vector<ArtifactLoot> ArtifactChoices = {};
 
-	float fullHealthCost = 10;		// Cost to heal to max hp
+	int fullHealthCost = 10;		// Cost to heal to max hp
 
 private:
 

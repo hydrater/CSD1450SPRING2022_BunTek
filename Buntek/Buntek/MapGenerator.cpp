@@ -342,7 +342,7 @@ void _mapData::PenaltyZoneUpdate(void) {
               yDelta = nodeList[i]->nodeObject->transform->worldposition.y - penaltyZone->transform->worldposition.y;
         float dist = Vector2(xDelta, yDelta).Length();
         if (dist < penaltyZone->GetComponent<SpriteRenderer>()->GetHalfWidth()) {
-            nodeList[i]->nodeType == NodeType::Elite;
+            nodeList[i]->nodeType = NodeType::Elite;
             nodeList[i]->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/Elite.png");
         }
     }
