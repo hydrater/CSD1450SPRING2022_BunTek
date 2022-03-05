@@ -38,16 +38,18 @@ public:
 		float xDimension, float yDimension,
 		string newTextureString, Vector2 newWorldPos,
 		short newRenderLayer, short newBlendMode,
-		bool fade = true, bool shrink = false);
+		bool fade = true, bool shrink = false,
+		float newLifespanMin = 2.0f, float newLifespanMax = 3.0f);
 
 	void SetBurstingParticle(
-		Vector2 directionalVector, float newSpawnRate, float newNumBurst, bool newIsLoop,
+		Vector2 directionalVector, float newSpawnRate, int newNumBurst, bool newIsLoop,
 		float newAngleSpread, float powerMin, float powerMax,
 		float randRotMin, float randRotMax,
 		float xDimension, float yDimension,
 		string newTextureString, Vector2 newWorldPos,
 		short newRenderLayer, short newBlendMode,
-		bool fade = true, bool shrink = false);
+		bool fade = true, bool shrink = false,
+		float newLifespanMin = 2.0f, float newLifespanMax = 3.0f);
 
 	//Stop particle system
 	void DeleteParticleSystem();

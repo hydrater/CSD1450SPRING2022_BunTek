@@ -165,7 +165,7 @@ void ParticleSystem::SetEmittingParticle(
 	float xDimension, float yDimension,
 	string newTextureString, Vector2 newWorldPos,
 	short newRenderLayer, short newBlendMode,
-	bool fade, bool shrink) {
+	bool fade, bool shrink, float newLifespanMin, float newLifespanMax) {
 
 	isBurst = false;
 	isLoop = true;
@@ -184,17 +184,19 @@ void ParticleSystem::SetEmittingParticle(
 	renderLayer = newRenderLayer;
 	isFade = fade;
 	isShrink = shrink;
+	maxLifespanMin = newLifespanMin;
+	maxLifespanMax = newLifespanMax;
 	SpawnParticle();
 }
 
 void ParticleSystem::SetBurstingParticle(
-	Vector2 directionalVector, float newSpawnRate, float newNumBurst, bool newIsLoop,
+	Vector2 directionalVector, float newSpawnRate, int newNumBurst, bool newIsLoop,
 	float newAngleSpread, float powerMin, float powerMax,
 	float randRotMin, float randRotMax,
 	float xDimension, float yDimension,
 	string newTextureString, Vector2 newWorldPos,
 	short newRenderLayer, short newBlendMode,
-	bool fade, bool shrink) {
+	bool fade, bool shrink, float newLifespanMin, float newLifespanMax) {
 
 	isBurst = true;
 	isLoop = newIsLoop;
@@ -215,8 +217,9 @@ void ParticleSystem::SetBurstingParticle(
 	renderLayer = newRenderLayer;
 	isFade = fade;
 	isShrink = shrink;
-
-	SpawnParticle();
+	maxLifespanMin = newLifespanMin;
+	maxLifespanMax = newLifespanMax;
+	//SpawnParticle();
 }
 
 void ParticleSystem::DeleteParticleSystem(void) {

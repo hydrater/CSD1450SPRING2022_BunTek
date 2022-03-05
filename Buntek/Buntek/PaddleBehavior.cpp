@@ -46,7 +46,7 @@ void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 		}
 
 		if (mag != 0) {
-			velocity = Vector2(xDelta / mag, yDelta / mag);
+			velocity = Vector2(xDelta / mag, yDelta / mag).Normalize();
 			transform->SetPosition(Vector2(transform->worldposition.x + velocity.x * speed * DeltaTime * timeScalar, transform->worldposition.y + velocity.y * speed * DeltaTime * timeScalar));
 		}
 		
