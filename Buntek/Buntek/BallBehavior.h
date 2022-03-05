@@ -39,6 +39,7 @@ public:
 	bool checkTimer = false;
 	bool isFaster = false;
 	float timeScalar = 1.0f;
+	float paddleBounceMultiplier = 2;
 	int ballPhase = -1;
 	int ballDamage = 10;
 

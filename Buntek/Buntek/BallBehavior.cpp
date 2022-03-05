@@ -24,80 +24,83 @@ void BallBehavior::Start(void)
 
 void BallBehavior::Update(void)
 {
-	ballParticle->transform->SetPosition(transform->worldposition);
-	ballParticleSystem->directionalVector2 = -velocity;
+	if (timeScalar != 0) {
+		ballParticle->transform->SetPosition(transform->worldposition);
+		ballParticleSystem->directionalVector2 = -velocity;
 
-	if (speed > targetSpeed) {
-		speed = lerpF(speed, targetSpeed, 0.05f);
-		float speedDiff = speed - targetSpeed;
-		if (speedDiff < 20) {
+		if (speed > targetSpeed) {
+			speed = lerpF(speed, targetSpeed, 5.0f * DeltaTime);
+			float speedDiff = speed - targetSpeed;
+			if (speedDiff < 20) {
+				ballParticleSystem->isEmitting = false;
+				if (speedDiff < 1) {
+					speed = targetSpeed;
+				}
+			}
+			else {
+				ballParticleSystem->isEmitting = true;
+			}
+
+		}
+		else {
 			ballParticleSystem->isEmitting = false;
-			if (speedDiff < 1) {
-				speed = targetSpeed;
+		}
+
+		//Collision check with left/right wall
+		if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
+			velocity.x = -velocity.x;
+			transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
+			if (playerPossess) {//enemy ball hits wall
+				ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_WallBounce, !playerPossess, this->Owner());
+			}
+			else {
+				ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_WallBounce, !playerPossess, this->Owner());
+			}
+
+			BallHorizontalCheck();
+		}
+		//Collision check with top/bottom wall
+		else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
+		{
+			CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
+
+			if (playerPossess) {//enemy ball hits player goal
+				ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
+				GameManager.DealDamage((float)ballDamage, playerPossess);
+				ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_TakeDamage, playerPossess, this->Owner());
+			}
+			else {
+				ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
+				GameManager.DealDamage((float)ballDamage, playerPossess);
+				ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, playerPossess, this->Owner());
+			}
+			this->Owner()->Delete();
+			return;
+		}
+
+		// Collision Check with paddle
+		Collider2D* othercol = CollisionManager2D.CheckCollision(col);
+		if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<PaddleBehavior>())
+		{
+			savedCol = othercol;
+			ReflectBall(playerPossess, (othercol->Owner()));
+		}
+		//ball ball artifact collision check not working, null error
+		if (othercol != nullptr && savedCol != othercol && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())
+		{
+			savedCol = othercol;
+			if (playerPossess) {//enemy ball hits player ball
+				ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
+			}
+			else {
+				ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
 			}
 		}
-		else {
-			ballParticleSystem->isEmitting = true;
-		}
-		
+		// Update position and rotation
+		transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime * timeScalar);
+		transform->Rotate(rotSpeed * DeltaTime * timeScalar);
 	}
-	else {
-		ballParticleSystem->isEmitting = false;
-	}
-
-	//Collision check with left/right wall
-	if (fabs(transform->worldposition.x - GameManager.areaLeftBoundary) <= radius || fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius) {
-		velocity.x = -velocity.x;
-		transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
-		if (playerPossess) {//enemy ball hits wall
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_WallBounce, !playerPossess, this->Owner());
-		}
-		else {
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_WallBounce, !playerPossess, this->Owner());
-		}
-		
-		BallHorizontalCheck();
-	}
-	//Collision check with top/bottom wall
-	else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
-	{
-		CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
-		
-		if (playerPossess) {//enemy ball hits player goal
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
-			GameManager.DealDamage((float)ballDamage, playerPossess);
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_TakeDamage, playerPossess, this->Owner());
-		}
-		else {
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_DealDamage, !playerPossess, this->Owner());
-			GameManager.DealDamage((float)ballDamage, playerPossess);
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, playerPossess, this->Owner());
-		}
-		this->Owner()->Delete();
-		return;
-	}
-
-	// Collision Check with paddle
-	Collider2D* othercol = CollisionManager2D.CheckCollision(col);
-	if (othercol != nullptr && othercol->Owner() && othercol->Owner()->GetComponent<PaddleBehavior>())
-	{
-		savedCol = othercol;
-		ReflectBall(playerPossess, (othercol->Owner()));
-	}
-	//ball ball artifact collision check not working, null error
-	if (othercol != nullptr && savedCol != othercol && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())
-	{
-		savedCol = othercol;
-		if (playerPossess) {//enemy ball hits player ball
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
-		}
-		else {
-			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_BallOnBallCollision, !playerPossess, this->Owner());
-		}
-	}
-	// Update position and rotation
-	transform->SetPosition(transform->worldposition + velocity * speed * DeltaTime * timeScalar);
-	transform->Rotate(rotSpeed * DeltaTime * timeScalar);
+	
 }
 
 void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
@@ -112,24 +115,24 @@ void BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 			float multiplier = xdiff / (paddle->GetComponent<BoxCollider>()->width / 2);
 			multiplier =  Clamp((float)pow(multiplier, 2) *sign, (float)-1, (float)1);
 			velocity.RotateC(multiplier * angRange);
-			causeHitPause = true;
 
 			ballPhase++;
 			if (ballPhase > 8) {
 				ballPhase = 8;
 			}
-			
 			else {
 				targetSpeed += ballPhaseSpeedIncrement;
 				speed = targetSpeed;
-				float addSpd = paddle->GetComponent<PaddleBehavior>()->velocity.y/DeltaTime;
-				if (addSpd > 0) {
-					speed += 10*addSpd;
-					//printf("Speed added to ball!\n");
-					cout << std::to_string(addSpd) << "added, total speed now: " << speed << " while target speed is " <<targetSpeed<<"\n";
-				}
 			}
-			
+
+			float addSpd = paddle->GetComponent<PaddleBehavior>()->velocity.y / DeltaTime;
+
+			if (addSpd > 0) {
+				speed += paddleBounceMultiplier * addSpd;
+			}
+			if (ballPhase > 3) {
+				causeHitPause = true;
+			}
 
 			ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_PaddleHit, !playerPossess, this->Owner());
 		}

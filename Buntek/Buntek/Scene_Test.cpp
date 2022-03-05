@@ -46,7 +46,8 @@ void Scene_Test::Start(void)
 	UIDialogueManager.CreateRewardSelPreset(artiList, 1, true);
 	*/
 	spawner = new GameObject();
-	spawner->AddComponent<ParticleSystem>()->SetEmittingParticle(Vector2(0, 1), 10, 10, 30, 40, -10, 10, 10, 10, "ball.png", Vector2(0, 0), 5, (short)AE_GFX_BM_BLEND,true,true);
+	//spawner->AddComponent<ParticleSystem>()->SetEmittingParticle(Vector2(0, 1), 100, 360, 30, 40, -10, 10, 10, 10, "ball.png", Vector2(0, 0), 5, (short)AE_GFX_BM_BLEND,true,true);
+	spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(-1, 0), 1, 30, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(0, 0), 6, (short)AE_GFX_BM_BLEND, true, true,0.5f,1.5f);
 }
 
 void Scene_Test::Update(void)
