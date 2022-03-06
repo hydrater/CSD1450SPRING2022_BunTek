@@ -541,6 +541,7 @@ void UI_DialogueHandler::AssignArtifact(GameObject* owner, string selArtifact)
 
 void RemoveDialogue(Button* button)
 {
+    SaveManager.SaveData();
     UIDialogueManager.DeleteDialogueEvent();
     MapData.SetClickable(true);
     MapData.SetHoverable(true);
