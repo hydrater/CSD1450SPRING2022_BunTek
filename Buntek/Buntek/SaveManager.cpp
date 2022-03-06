@@ -68,6 +68,7 @@ void _saveManager::SaveData(void)
     wf.write((char*)&MapData.penaltyPos.x, sizeof(float));
     wf.write((char*)&MapData.penaltyPos.y, sizeof(float));
     wf.write((char*)&MapData.currentNode->ID, sizeof(int));
+    wf.write((char*)&GameManager.level, sizeof(int));
 
     size_t historySize = MapData.travelHistoryIDs.size();
     wf.write((char*)&historySize, sizeof(size_t));
@@ -123,6 +124,7 @@ void _saveManager::LoadData(void)
     int currNodeID = 0;
     rf.read((char*)&currNodeID, sizeof(int));
     MapData.currentNode = MapData.nodeList[currNodeID];
+    rf.read((char*)&GameManager.level, sizeof(int));
 
     MapData.travelHistoryIDs.clear();
     size_t historySize = 0;
