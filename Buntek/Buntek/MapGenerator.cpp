@@ -288,12 +288,15 @@ void _mapData::Travel(Node* destination)
             UIDialogueManager.CreateDialoguePreset(UIDialogueManager.GenerateRandomDialogueID(), 3);
             break;
         case NodeType::Enemy:
+            GameManager.currentEnemy = 1;
             SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
             break;
         case NodeType::Elite:
+            GameManager.currentEnemy = 2;
             SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
             break;
         case NodeType::Boss:
+            GameManager.currentEnemy = 3;
             SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
             break;
         case NodeType::Shop:

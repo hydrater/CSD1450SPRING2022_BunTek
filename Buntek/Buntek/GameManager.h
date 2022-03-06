@@ -79,7 +79,11 @@ public:
     float friendlyAreaY = 0;
     float hostileAreaY = 0;
 
+    // Exploration
+    int level = 0;
+
     // Battle
+    short currentEnemy = 1;
     void InitBattle(float _playerHp, float _enemyHp);
     void DealDamage(float damage, bool isPlayer);
 
