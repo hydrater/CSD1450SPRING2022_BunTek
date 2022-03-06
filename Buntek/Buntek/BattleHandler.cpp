@@ -159,10 +159,8 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	hpBar->transform->SetPosition(Vector2(-660, -400));
 	hpBar->AddComponent<UI_Hp>()->GenerateHpBar(true, selfHp , selfMaxHp);
 
-
 	GameManager.InitBattle(selfHp, enemyHp); // Inits Player and Enemy HP
 }
-
 
 void BattleHandler::Update(void) {
 	

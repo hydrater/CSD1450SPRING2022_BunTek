@@ -3,6 +3,7 @@
 #include "SpriteRenderer.h"
 #include "Scene_Navigation.h"
 #include "SaveManager.h"
+#include "MapGenerator.h"
 
 using namespace Math;
 
@@ -227,8 +228,8 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
         if (playerHp <= 0)
         {
             GameManager.playerProfile.hp = GameManager.playerHp;
-            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
             SaveManager.SaveData();
+            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
         }
     }
     else
@@ -264,6 +265,11 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
             }
             GameManager.playerProfile.hp = GameManager.playerHp;
             ArtifactDatabase.ApplyArtifactBehavior(behaviorList_BattleWon, true);
+            if (currentEnemy == 3)
+            {
+                ++level;
+                MapData.GenerateMapData();
+            }
             SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
         }
     }
