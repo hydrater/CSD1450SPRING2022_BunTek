@@ -8,7 +8,7 @@ Don't look down on me because I'm a cat!
 /b2|E006 Offer some galaxy milk
 /b0 Leave
 /aa Next Trail
-REEEEE
+sdasdsa
 /c  E
 /c  A
 /c  It's in the game
@@ -148,8 +148,11 @@ Apologise!
 
 E008
 /d  5
-Not implemented yet
-
+...
+.....
+You chance upon a pool of seemingly hot lava...
+/b11 Jump in
+/b0 Leave
 
 E009
 /d  5
