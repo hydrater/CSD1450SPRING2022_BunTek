@@ -103,6 +103,9 @@ void _audioManager::CleanPlaying()
 
 void _audioManager::LoadSound(string name)
 {
+    if (soundDatabase.count(name))
+        return;
+
     string pathString = "./Assets/Sound/" + name + '\0';
     char* pathName = new char[pathString.length()];
     copy(pathString.begin(), pathString.end(), pathName);
@@ -114,6 +117,9 @@ void _audioManager::LoadSound(string name)
 
 void _audioManager::LoadMusic(string name)
 {
+    if (musicDatabase.count(name))
+        return;
+
     string pathString = "./Assets/Music/" + name + '\0';
     char* pathName = new char[pathString.length()];
     copy(pathString.begin(), pathString.end(), pathName);
