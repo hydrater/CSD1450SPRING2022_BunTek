@@ -1,7 +1,5 @@
 #pragma warning(disable:26812)
 #include <iostream>
-#include <chrono>
-#include <thread>
 #include <fmod.hpp>
 #include <fmod_errors.h>
 #include <map>
