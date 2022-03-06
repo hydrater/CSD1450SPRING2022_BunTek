@@ -11,6 +11,7 @@ _audioManager::_audioManager(void)
     // Create the channel group.
     fmodSystem->createChannelGroup("inGameSoundEffects", &channelGroup);
 
+    channel->setChannelGroup(channelGroup);
     musicChannel->setChannelGroup(channelGroup);
 
     // Set a callback on the channel.
