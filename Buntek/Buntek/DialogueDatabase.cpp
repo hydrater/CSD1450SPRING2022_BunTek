@@ -131,59 +131,72 @@ void LaunchButtonEffect(Button* button)
 		buttonPath = buttonCommand.substr(buttonCommand.find("|") + 1, buttonCommand.length());
 	}
 
-	// Create a random set of artifact to draw
-	Artifact test1, test2, test3;
-	test1.ID = ArtifactDatabase.DrawArtifact();
-	test2.ID = ArtifactDatabase.DrawArtifact();
-	test3.ID = ArtifactDatabase.DrawArtifact();
-	vector<Artifact> fakeArtifacts{ test1, test2, test3 };
-
-	// Gets max hp (Case 3 - 4)
-	float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
-
-	// Draws random artifact (Case 5)
-	unsigned long randoID = ArtifactDatabase.DrawArtifact();
-
 	// -------------- Types of button effects ----------------
 	switch (stoi(buttonID))
 	{
 	case 1:
-			// Creates a choose loot / rng loot
-			UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
-			break;
+	{
+		// Create a random set of artifact to draw
+		Artifact test1, test2, test3;
+		test1.ID = ArtifactDatabase.DrawArtifact();
+		test2.ID = ArtifactDatabase.DrawArtifact();
+		test3.ID = ArtifactDatabase.DrawArtifact();
+		vector<Artifact> fakeArtifacts{ test1, test2, test3 };
+
+		// Creates a choose loot / rng loot
+		UIDialogueManager.CreateRewardSelPreset(fakeArtifacts, 3, true);
+		break;
+	}
 	case 2:
-			// Go to a specific dialogue/encounter
-			UIDialogueManager.CreateDialoguePreset(buttonPath, 3);
-			break;
+	{
+		// Go to a specific dialogue/encounter
+		UIDialogueManager.CreateDialoguePreset(buttonPath, 3);
+		break;
+	}
 	case 3:
-			// Heal player by 50%
-			GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
+	{
+		// Gets max hp (Case 3 - 4)
+		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 
-			if (GameManager.playerProfile.hp > truemaxhp)
-				GameManager.playerProfile.hp = truemaxhp;
-			RemoveDialogue(button);
-			break;
-	case 4:
-			// Check if player can select this button (Can afford price)
-			if (GameManager.playerProfile.stardust < DialogueDatabase.fullHealthCost)
-			{
-				button->SetClickable(false);
-				button->Owner()->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
-				button->Owner()->GetComponent<TextRenderer>()->SetTextColor(1.0f, 0.f, 0.f);
-				break;
-			}
+		// Heal player by 50%
+		GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
 
-			// Heal player by Full by using stardust
-			GameManager.playerProfile.stardust -= DialogueDatabase.fullHealthCost;
+		if (GameManager.playerProfile.hp > truemaxhp)
 			GameManager.playerProfile.hp = truemaxhp;
-			RemoveDialogue(button);
-			break;
-	case 5:
-			// Assign to allocated vector
-			SaveManager.AddToArtifactList(randoID);
+		RemoveDialogue(button);
+		break;
+	}
+	case 4:
+	{
+		// Gets max hp (Case 3 - 4)
+		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 
-			UIDialogueManager.DF_DisplayArtifact(button, randoID);
+		// Check if player can select this button (Can afford price)
+		if (GameManager.playerProfile.stardust < DialogueDatabase.fullHealthCost)
+		{
+			button->SetClickable(false);
+			button->Owner()->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
+			button->Owner()->GetComponent<TextRenderer>()->SetTextColor(1.0f, 0.f, 0.f);
 			break;
+		}
+
+		// Heal player by Full by using stardust
+		GameManager.playerProfile.stardust -= DialogueDatabase.fullHealthCost;
+		GameManager.playerProfile.hp = truemaxhp;
+		RemoveDialogue(button);
+		break;
+	}
+	case 5:
+	{
+		// Draws random artifact (Case 5)
+		unsigned long randoID = ArtifactDatabase.DrawArtifact();
+
+		// Assign to allocated vector
+		SaveManager.AddToArtifactList(randoID);
+
+		UIDialogueManager.DF_DisplayArtifact(button, randoID);
+		break;
+	}
 	default:
 			// Force close if nothing can happen
 			RemoveDialogue(button);
