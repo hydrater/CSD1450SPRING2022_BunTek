@@ -8,9 +8,6 @@
 #include <fstream>
 #include <sstream>
 
-// Encounter_Function
-void EF_PickUpArtifactButton(Button* button);
-
 // Choice_Function
 void CF_PickUpArtifactButton(Button* button);
 
@@ -567,22 +564,11 @@ void UI_DialogueHandler::DF_DisplayArtifact(Button* button, unsigned long ID)
     UIOpen = true;
     UIDecision = false;
     actorTxt->Owner()->Activate();
-    actorTxt->SetText(ArtifactDatabase.GetName(ID));
+    actorTxt->SetText("Obtained Artifact");
     dialogueTxt->Owner()->Activate();
     string displayText = "You have picked up " + ArtifactDatabase.GetName(ID);
     dialogueTxt->SetText(displayText);
     dialogueFinalDisplayTxt = displayText;
-}
-
-// ---------------------------------------------------------CHOICE FUNCTIONS---------------------------------------------------------
-void EF_PickUpArtifactButton(Button* button)
-{
-    // Draws random artifact
-    unsigned long ID = ArtifactDatabase.DrawArtifact();
-    // Assign to allocated vector
-    SaveManager.AddToArtifactList(ID);
-
-    UIDialogueManager.DF_DisplayArtifact(button, ID);
 }
 
 // ---------------------------------------------------------CHOICE FUNCTIONS---------------------------------------------------------

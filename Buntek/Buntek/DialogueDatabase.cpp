@@ -1,6 +1,7 @@
 #include "DialogueDatabase.h"
 #include "UI_DialogueHandler.h"
 #include "ArtifactDatabase.h"
+#include "SaveManager.h"
 #include "Parallaxer.h"
 #include "AlphaChanger.h"
 #include "ParticleSystem.h"
@@ -137,8 +138,11 @@ void LaunchButtonEffect(Button* button)
 	test3.ID = ArtifactDatabase.DrawArtifact();
 	vector<Artifact> fakeArtifacts{ test1, test2, test3 };
 
-
+	// Gets max hp (Case 3 - 4)
 	float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
+
+	// Draws random artifact (Case 5)
+	unsigned long randoID = ArtifactDatabase.DrawArtifact();
 
 	// -------------- Types of button effects ----------------
 	switch (stoi(buttonID))
@@ -173,6 +177,12 @@ void LaunchButtonEffect(Button* button)
 			GameManager.playerProfile.stardust -= DialogueDatabase.fullHealthCost;
 			GameManager.playerProfile.hp = truemaxhp;
 			RemoveDialogue(button);
+			break;
+	case 5:
+			// Assign to allocated vector
+			SaveManager.AddToArtifactList(randoID);
+
+			UIDialogueManager.DF_DisplayArtifact(button, randoID);
 			break;
 	default:
 			// Force close if nothing can happen

@@ -26,6 +26,7 @@ b: Button for Encounter (Please don't mix with Choice)
 2 - Go to new dialogue
 3 - Heal player by half
 4 - Heal player to full [Removes X stardust]
+5 - Pick Up random artifact
 c: Choice for Rewards (Please don't mix with Encounter)
 d: Design for Background
 0 - space

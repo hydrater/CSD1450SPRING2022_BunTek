@@ -31,8 +31,8 @@ REST
 /aw A brief respite
 Alas a place to rest
 /b3 Take a rest [Heal 50% HP]
-/b4 Bribe the universe [Heal 100% HP] {-10 Stardust}
-/b0 Leave
+/b5 Bribe the universe [Heal 100% HP] {-10 Stardust}
+/b2|rsel Leave
 
 Events================================================================================================================
 
