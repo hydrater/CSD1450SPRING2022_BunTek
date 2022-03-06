@@ -6,6 +6,7 @@
 #include "UI_Shop.h"
 #include "Button.h"
 #include "GameManager.h"
+#include "SaveManager.h"
 
 void EnactTravel(Button* button);
 
@@ -100,6 +101,8 @@ void _mapData::GenerateMapData(void)
 
     currentNode->nodeType = NodeType::Nothing;
     exitNode->nodeType = NodeType::Boss;
+
+    SaveManager.SaveData();
 }
 
 void _mapData::GenerateMapObject(void)

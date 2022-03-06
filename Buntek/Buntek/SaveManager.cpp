@@ -65,6 +65,8 @@ void _saveManager::SaveData(void)
         wf.write((char*)&MapData.nodeList[i]->nodeState, sizeof(short));
         wf.write((char*)&MapData.nodeList[i]->nodeType, sizeof(int));
     }
+    wf.write((char*)&MapData.penaltyPos.x, sizeof(float));
+    wf.write((char*)&MapData.penaltyPos.y, sizeof(float));
     wf.write((char*)&MapData.currentNode->ID, sizeof(int));
 
     size_t historySize = MapData.travelHistoryIDs.size();
@@ -116,6 +118,8 @@ void _saveManager::LoadData(void)
 
         MapData.nodeList.push_back(node);
     }
+    rf.read((char*)&MapData.penaltyPos.x, sizeof(float));
+    rf.read((char*)&MapData.penaltyPos.y, sizeof(float));
     int currNodeID = 0;
     rf.read((char*)&currNodeID, sizeof(int));
     MapData.currentNode = MapData.nodeList[currNodeID];
