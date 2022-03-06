@@ -26,7 +26,7 @@ public:
 	void SetDialogueClickable(bool _canClick);
 	void SkipDialogue(void);
 	void DeleteDialogueEvent(void);
-	string GenerateRandomDialogueID(void);
+	string GenerateRandomDialogueID(void);		// REMEMBER TO UPDATE THIS WHEN YOU ADD MORE ARTIFACTS
 
 	// Dialogue_Function
 	void DF_DisplayArtifact(Button* button, unsigned long ID);

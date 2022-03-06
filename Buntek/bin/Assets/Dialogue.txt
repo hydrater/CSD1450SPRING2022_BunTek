@@ -146,5 +146,20 @@ Apologise!
 /b9 Apologise
 /b10 Stare at her like a weirdo
 
+E008
+/d  5
+Not implemented yet
 
 
+E009
+/d  5
+Not implemented yet
+
+
+E0010
+/d  6
+Not implemented yet
+
+E0011
+/d  6
+Not implemented yet
