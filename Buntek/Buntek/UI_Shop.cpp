@@ -160,6 +160,7 @@ void UI_Shop::SetClickable(bool _canClick)
 
 void RemoveShop(Button* button)
 {
+    SaveManager.SaveData();
     GameObject* tmp = button->affectedObject;
     tmp->GetComponent<UI_Shop>()->CloseShop();
     MapData.SetClickable(true);
