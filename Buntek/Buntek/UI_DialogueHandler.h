@@ -28,6 +28,9 @@ public:
 	void DeleteDialogueEvent(void);
 	string GenerateRandomDialogueID(void);
 
+	// Dialogue_Function
+	void DF_DisplayArtifact(Button* button, unsigned long ID);
+
 	bool UIOpen = false, UIDecision = false;	// UIDecision: Prevents user from clicking to next dialogue 
 
 	struct ArtifactLoot {
@@ -70,6 +73,7 @@ private:
 	vector<Button*> rewardButtonList;
 	int rewardButtonNo = 0;
 
+	short dialogueSortingLayer = 0;
 	float displayTimer = 0;
 	const float displaySpeed = 0.001f; // No of char per sec
 	int displayNo = 0;

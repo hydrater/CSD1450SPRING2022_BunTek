@@ -8,6 +8,10 @@
 #include <fstream>
 #include <sstream>
 
+// Encounter_Function
+void EF_PickUpArtifactButton(Button* button);
+
+// Choice_Function
 void CF_PickUpArtifactButton(Button* button);
 
 UI_DialogueHandler::UI_DialogueHandler(void)
@@ -377,6 +381,8 @@ string UI_DialogueHandler::GenerateRandomDialogueID(void)
 
 void UI_DialogueHandler::CreatePreset(short sortingLayer)
 {
+    dialogueSortingLayer = sortingLayer;
+
     //Create main dialogue box
     dialogueBox = new GameObject;
     GameObject* tempdialogue = devTools.CreateSpriteGameObject("UI/DialogueBox.png", 1900, 303,
@@ -551,6 +557,34 @@ void RemoveDialogue(Button* button)
     DialogueDatabase.ClearDialogueSceneObjs();
 }
 
+// --------------------------------------------------------DISPLAY FUNCTIONS---------------------------------------------------------
+void UI_DialogueHandler::DF_DisplayArtifact(Button* button, unsigned long ID)
+{
+    RemoveDialogue(button);
+
+    CreatePreset(dialogueSortingLayer);
+    // Set text
+    UIOpen = true;
+    UIDecision = false;
+    actorTxt->Owner()->Activate();
+    actorTxt->SetText(ArtifactDatabase.GetName(ID));
+    dialogueTxt->Owner()->Activate();
+    string displayText = "You have picked up " + ArtifactDatabase.GetName(ID);
+    dialogueTxt->SetText(displayText);
+    dialogueFinalDisplayTxt = displayText;
+}
+
+// ---------------------------------------------------------CHOICE FUNCTIONS---------------------------------------------------------
+void EF_PickUpArtifactButton(Button* button)
+{
+    // Draws random artifact
+    unsigned long ID = ArtifactDatabase.DrawArtifact();
+    // Assign to allocated vector
+    SaveManager.AddToArtifactList(ID);
+
+    UIDialogueManager.DF_DisplayArtifact(button, ID);
+}
+
 // ---------------------------------------------------------CHOICE FUNCTIONS---------------------------------------------------------
 void CF_PickUpArtifactButton(Button* button)
 {
@@ -567,5 +601,6 @@ void CF_PickUpArtifactButton(Button* button)
     }
     // Assign to allocated vector
     SaveManager.AddToArtifactList(ID);
-    RemoveDialogue(button);
+
+    UIDialogueManager.DF_DisplayArtifact(button, ID);
 }
