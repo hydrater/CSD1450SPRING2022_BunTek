@@ -185,10 +185,19 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 631://B2: Colliding with an hostile ball have a chance to reflect that ball
         tempBallBehavior = ball->GetComponent<BallBehavior>();
+        flag = tempBallBehavior->playerPossess;
         if (tempBallBehavior->savedCol != NULL) {
             tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
-            tempBallBehavior->velocity = -tempBallBehavior->velocity;
-            tempBallBehavior->playerPossess = !tempBallBehavior->playerPossess;
+            if (tempBallBehavior->playerPossess != flag) {
+                tempBallBehavior->velocity = -tempBallBehavior->velocity;
+                tempBallBehavior->playerPossess = !tempBallBehavior->playerPossess;
+                if (tempBallBehavior->playerPossess) {
+                    tempBallBehavior->sr->SetColor(1, 0, 0);
+                }
+                else {
+                    tempBallBehavior->sr->SetColor(0, 0, 1);
+                }
+            }
         }
         break;
     case 640://B5: Destroys hostile ball
