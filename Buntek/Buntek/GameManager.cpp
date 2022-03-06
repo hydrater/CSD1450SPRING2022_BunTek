@@ -175,10 +175,13 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
             }
         }
         playerHp -= damage;
+
+        // Player game over
         if (playerHp <= 0)
         {
             GameManager.playerProfile.hp = GameManager.playerHp;
             SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
+            SaveManager.SaveData();
         }
     }
     else
@@ -196,8 +199,11 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
             }
         }
         enemyHp -= damage;
+
+        // Enemy game over
         if (enemyHp <= 0)
         {
+            SaveManager.SaveData();
             vector<Artifact> behaviorList_BattleWon;
             for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
             {
@@ -214,6 +220,4 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
             SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
         }
     }
-
-    cout << "player hp: " << playerHp << " enemy hp: " << enemyHp << endl;
 }

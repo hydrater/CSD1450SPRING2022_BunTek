@@ -263,7 +263,6 @@ void BattleHandler::Update(void) {
 		if (enemyhpBar != 0) {
 			enemyhpBar->GetComponent<UI_Hp>()->SetHp(GameManager.enemyHp);
 		}
-		
 	}
 	
 }

@@ -69,7 +69,7 @@ void _debuggingTools::CheatsUpdate(void)
 	}
 	if (AEInputCheckTriggered(AEVK_O))
 	{
-		SaveManager.AddToArtifactList(0000);
+		SaveManager.AddToArtifactList(640);
 	}
 	
 }

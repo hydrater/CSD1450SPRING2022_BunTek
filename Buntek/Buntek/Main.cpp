@@ -51,7 +51,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AudioManager;
 	MapData;
 	Renderer;
-	SaveManager;
+	SaveManager.LoadData();
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
 	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
 	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
