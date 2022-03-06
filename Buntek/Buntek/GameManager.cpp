@@ -16,10 +16,6 @@ _gameManager::~_gameManager()
 
 }
 
-void _gameManager::GenerateArtifactListUI(void)
-{
-}
-
 _gameManager& _gameManager::Instance(void)
 {
     static _gameManager instance;
@@ -76,8 +72,22 @@ void _gameManager::InitBattleProfile(BattleArtifactProfile& battleProfile, map<u
     }
 }
 
-map<unsigned long, int> _gameManager::GenerateArtifactList(int maxAmtOfArtifacts, int totalCount)
+map<unsigned long, int> _gameManager::GenerateArtifactList(int maxAmtOfArtifacts)
 {
+    map<unsigned long, int> EnemyArtifactData;
+
+    for (size_t i = 0; i < maxAmtOfArtifacts; ++i)
+    {
+        unsigned long id = ArtifactDatabase.DrawArtifact();
+        map<unsigned long, int>::iterator it;
+
+        it = EnemyArtifactData.find(id);
+        if (it != EnemyArtifactData.end())
+            it->second++;
+        else
+            EnemyArtifactData[id] = 1;
+    }
+
     return EnemyArtifactData;
 }
 

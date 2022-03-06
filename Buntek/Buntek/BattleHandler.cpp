@@ -41,7 +41,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	AudioManager.SetMusicVolume(0.1f);
 
 	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
-	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(10, 10));
+	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(10));
 
 	ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_Passive, true);
 	ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_Passive, false);

@@ -19,8 +19,6 @@ private:
     Vector2 pos = Vector2(0, 0);
     Vector2 dir = Vector2(0, 0);
     map<unsigned long, int> EnemyArtifactData;
-    void GenerateArtifactListUI(void);
-
 
 public:
     static _gameManager& Instance(void);
@@ -62,7 +60,7 @@ public:
     }playerArtifactList = {}, enemyArtifactList{};
 
     void InitBattleProfile(BattleArtifactProfile& battleProfile, map<unsigned long, int> artifactSaveData);
-    map<unsigned long, int> GenerateArtifactList(int maxAmtOfArtifacts, int totalCount);
+    map<unsigned long, int> GenerateArtifactList(int maxAmtOfArtifacts);
 
     // Camera info
     void Update(void);
