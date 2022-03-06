@@ -258,7 +258,7 @@ string _artifactdatabase::GetName(unsigned long id)
     case 631:
         return "Reflection";
     case 640:
-        return "test";
+        return "Power Overwhelm";
     default:
         return "Invalid ID";
     }

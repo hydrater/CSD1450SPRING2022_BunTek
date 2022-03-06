@@ -16,6 +16,10 @@ _gameManager::~_gameManager()
 
 }
 
+void _gameManager::GenerateArtifactListUI(void)
+{
+}
+
 _gameManager& _gameManager::Instance(void)
 {
     static _gameManager instance;
@@ -77,7 +81,7 @@ map<unsigned long, int> _gameManager::GenerateArtifactList(int maxAmtOfArtifacts
     return EnemyArtifactData;
 }
 
-void _gameManager::CameraUpdate(void)
+void _gameManager::Update(void)
 {
     if (cameraShakeTime > 0)
     {
@@ -95,6 +99,19 @@ void _gameManager::CameraUpdate(void)
         {
             pos = pos.Lerp(Vector2(0, 0), 0.1f);
             AEGfxSetCamPosition(pos.x, pos.y);
+        }
+    }
+
+    // Artifact List
+    if (AEInputCheckTriggered(AEVK_I))
+    {
+        int x = -800, y = 350;
+        for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
+        {
+            devTools.CreateArtifactUIGameObject(it->first, Vector2(x, y), 6);
+            //_key[i] = it->first;
+            
+            //_value[i] = it->second;
         }
     }
 }

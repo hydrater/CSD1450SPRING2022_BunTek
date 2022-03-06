@@ -37,7 +37,7 @@ public:
     TextRenderer* AddTextToSpriteGameObject(GameObject* gameObject, string fontName, string text, TextRenderer::xAlignmentTypes xAlignment, TextRenderer::yAlignmentTypes yAlignment, float fontsize, short layer, bool warparound);
 
     //Artifact UI
-    GameObject* CreateArtifactUIGameObject(unsigned long ID, short blendMode, Vector2 pos, short layer);
+    GameObject* CreateArtifactUIGameObject(unsigned long ID, Vector2 pos, short layer);
 
     //Artifact Price Tag
     GameObject* CreatePriceTagGameObject(int price, short blendMode, Vector2 pos, short layer);

@@ -63,13 +63,8 @@ void _debuggingTools::CheatsUpdate(void)
 	{
 		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
 	}
-	if (AEInputCheckTriggered(AEVK_I))
-	{
-		cout << ArtifactDatabase.DrawArtifact() << endl;
-	}
 	if (AEInputCheckTriggered(AEVK_O))
 	{
-		SaveManager.AddToArtifactList(640);
+		SaveManager.AddToArtifactList(420);
 	}
-	
 }

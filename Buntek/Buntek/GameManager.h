@@ -19,6 +19,7 @@ private:
     Vector2 pos = Vector2(0, 0);
     Vector2 dir = Vector2(0, 0);
     map<unsigned long, int> EnemyArtifactData;
+    void GenerateArtifactListUI(void);
 
 public:
     static _gameManager& Instance(void);
@@ -44,8 +45,6 @@ public:
         float bonusHealing = 0;
     }playerProfile = {}, enemyProfile = {};
 
-
-
     struct BattleArtifactProfile
     {
         // Artifact list by events
@@ -65,7 +64,7 @@ public:
     map<unsigned long, int> GenerateArtifactList(int maxAmtOfArtifacts, int totalCount);
 
     // Camera info
-    void CameraUpdate(void);
+    void Update(void);
     void CameraShake(float period, float cameraStrength, Vector2 direction);
     void CameraEndShake(void);
     bool cameraLerpBack = false;

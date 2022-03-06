@@ -1,13 +1,6 @@
 
-asd
-/ar Ding Xiang
-Wa Gerald I love you
-/ab Gerald 
-Wo ai ni duo duo
-/ac Super Idol
-super idol de xiao rong dou mei ni de tian
-
 aed
+If you're seeing this dialogue, this is a bug, report to Hyde
 /d  0
 /ap Constellation of Mittens
 Don't look down on me because I'm a cat!

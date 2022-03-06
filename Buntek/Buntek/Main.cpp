@@ -80,7 +80,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		CollisionManager2D.CollideAll();
 
 		// --------------------------------------------- Render --------------------------------------------- //
-		GameManager.CameraUpdate();
+		GameManager.Update();
 		Renderer.Update();
 		SceneManager.LateUpdate();
 
