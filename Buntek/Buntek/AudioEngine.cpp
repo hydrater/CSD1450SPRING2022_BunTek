@@ -1,4 +1,5 @@
 #include "AudioEngine.h"
+#include "SaveManager.h"
 
 _audioManager::_audioManager(void)
 {
@@ -9,20 +10,14 @@ _audioManager::_audioManager(void)
     fmodSystem->init(512, FMOD_INIT_NORMAL, nullptr);
 
     // Create the channel group.
-    fmodSystem->createChannelGroup("inGameSoundEffects", &channelGroup);
+    //fmodSystem->createChannelGroup("inGameSoundEffects", &channelGroup);
 
-    channel->setChannelGroup(channelGroup);
-    musicChannel->setChannelGroup(channelGroup);
+    /*audioChannel->setChannelGroup(channelGroup);
+    musicChannel->setChannelGroup(channelGroup);*/
 
     // Set a callback on the channel.
-    musicChannel->setCallback(&channelGroupCallback);
-
-    // Load sounds here
-    //LoadSound("splash.mp3");
-
-    // Load Music here
-    //LoadMusic("Summer.mp3");
-    //LoadMusic("GhostFinal.mp3");
+    /*musicChannel->setCallback(&channelGroupCallback);
+    audioChannel->setCallback(&channelGroupCallback);*/
 }
 
 _audioManager::~_audioManager(void)
@@ -38,7 +33,10 @@ void _audioManager::PlayClip(string clipName)
         audioClip = search->second;
 
     // Play the sound.
-    fmodSystem->playSound(audioClip, nullptr, false, &channel);
+    fmodSystem->playSound(audioClip, nullptr, true, &soundChannel);
+    cout << soundVol << endl;
+    soundChannel->setVolume(soundVol);
+    soundChannel->setPaused(false);
 }
 
 void _audioManager::PlayMusic(string musicTrack)
@@ -51,7 +49,9 @@ void _audioManager::PlayMusic(string musicTrack)
 
     // Play the music.
     musicChannel->stop();
-    fmodSystem->playSound(audioClip, nullptr, false, &musicChannel);
+    fmodSystem->playSound(audioClip, nullptr, true, &musicChannel);
+    musicChannel->setVolume(musicVol * musicVolOffset);
+    musicChannel->setPaused(false);
 }
 
 void _audioManager::StopMusic(void)
@@ -62,12 +62,25 @@ void _audioManager::StopMusic(void)
 
 void _audioManager::SetAudioVolume(float volume)
 {
-    channel->setVolume(volume);
+    soundVol = volume;
+    SaveManager.SaveData();
+}
+
+float* _audioManager::GetAudioVolume(void)
+{
+    return &soundVol;
 }
 
 void _audioManager::SetMusicVolume(float volume)
 {
-    musicChannel->setVolume(volume);
+    musicVol = volume;
+    musicChannel->setVolume(volume * musicVolOffset);
+    SaveManager.SaveData();
+}
+
+float* _audioManager::GetMusicVolume(void)
+{
+    return &musicVol;
 }
 
 void _audioManager::Update()
@@ -91,7 +104,7 @@ void _audioManager::CleanPlaying()
 void _audioManager::LoadSound(string name)
 {
     string pathString = "./Assets/Sound/" + name + '\0';
-    char* pathName = new char[pathString.length() + 1];
+    char* pathName = new char[pathString.length()];
     copy(pathString.begin(), pathString.end(), pathName);
     Sound* sound = 0;
     fmodSystem->createSound(pathName, FMOD_DEFAULT, nullptr, &sound);
@@ -102,7 +115,7 @@ void _audioManager::LoadSound(string name)
 void _audioManager::LoadMusic(string name)
 {
     string pathString = "./Assets/Music/" + name + '\0';
-    char* pathName = new char[pathString.length() + 1];
+    char* pathName = new char[pathString.length()];
     copy(pathString.begin(), pathString.end(), pathName);
     Sound* music = 0;
     fmodSystem->createSound(pathName, FMOD_LOOP_NORMAL, nullptr, &music);
@@ -156,16 +169,16 @@ Channel* _audioManager::GetMusicChannel(void)
     return musicChannel;
 }
 
-FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
-    FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
-    void* commandData1, void* commandData2)
-{
-    if (controlType == FMOD_CHANNELCONTROL_CHANNEL 
-        && AudioManager.GetMusicChannel() == (Channel*)channelControl 
-        && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END)
-    {
-        // music ended
-    }
-
-    return FMOD_OK;
-}
+//FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
+//    FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
+//    void* commandData1, void* commandData2)
+//{
+//    if (controlType == FMOD_CHANNELCONTROL_CHANNEL 
+//        && AudioManager.GetMusicChannel() == (Channel*)channelControl 
+//        && callbackType == FMOD_CHANNELCONTROL_CALLBACK_END)
+//    {
+//        // music ended
+//    }
+//
+//    return FMOD_OK;
+//}

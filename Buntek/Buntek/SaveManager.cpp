@@ -1,5 +1,6 @@
 #include "SaveManager.h"
 #include "MapGenerator.h"
+#include "AudioEngine.h"
 #include <fstream>
 #include <iostream>
 
@@ -56,6 +57,8 @@ void _saveManager::SaveData(void)
 
     // Serializing profile
     wf.write((char*)&GameManager.playerProfile, sizeof(_gameManager::Profile));
+    wf.write((char*)AudioManager.GetAudioVolume(), sizeof(float));
+    wf.write((char*)AudioManager.GetMusicVolume(), sizeof(float));
     
     // Serializing map data
     for (int i = 0; i < MapData.numNodes; ++i)
@@ -104,6 +107,12 @@ void _saveManager::LoadData(void)
 
     // Deserializing profile
     rf.read((char*)&GameManager.playerProfile, sizeof(_gameManager::Profile));
+    
+    float temp = 0;
+    rf.read((char*)&temp, sizeof(float));
+    AudioManager.SetAudioVolume(temp);
+    rf.read((char*)&temp, sizeof(float));
+    AudioManager.SetMusicVolume(temp);
 
     // Deserializing map data
     MapData.nodeList.clear();

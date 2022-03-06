@@ -7,6 +7,7 @@
 #include "Scene_Navigation.h"
 #include "Scene_Test.h"
 #include "MapGenerator.h"
+#include "AudioEngine.h"
 
 _debuggingTools::_debuggingTools()
 {
@@ -37,6 +38,14 @@ void _debuggingTools::CheatsUpdate(void)
 	if (AEInputCheckTriggered(AEVK_3))
 	{
 		SceneManager.LoadScene(new Scene_Test, TransitionType::FadeTransition, true);
+	}
+	if (AEInputCheckTriggered(AEVK_4))
+	{
+		AudioManager.SetMusicVolume(0);
+	}
+	if (AEInputCheckTriggered(AEVK_5))
+	{
+		AudioManager.SetMusicVolume(1.0f);
 	}
 	if (AEInputCheckTriggered(AEVK_F1))
 	{

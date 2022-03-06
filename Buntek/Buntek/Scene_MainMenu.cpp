@@ -41,7 +41,6 @@ void Scene_MainMenu::Start(void)
 	AudioManager.LoadSound("ButtonHover.mp3");
 	AudioManager.LoadMusic("kidding.ogg");
 	AudioManager.PlayMusic("kidding.ogg");
-	AudioManager.SetMusicVolume(0.05f);
 
 	AssetManager.LoadTexture("Menu/Mask_MainMenu.png");
 	AssetManager.LoadTexture("Menu/MainMenuFull.png");

@@ -14,12 +14,14 @@ private:
     _audioManager(void);
     ~_audioManager(void);
     System* fmodSystem = NULL;
-    Channel* channel = nullptr;
+    Channel* soundChannel = nullptr;
     Channel* musicChannel = nullptr;
     ChannelGroup* channelGroup = nullptr;
     map<string, Sound*> soundDatabase;
     map<string, Sound*> musicDatabase;
     bool isActive = true;
+    float soundVol = 1, musicVol = 1;
+    const float  musicVolOffset = 0.1f;
     
 public:
     static _audioManager& Instance(void);
@@ -30,7 +32,9 @@ public:
     void PlayMusic(string musicTrack);
     void StopMusic(void);
     void SetAudioVolume(float volume);
+    float* GetAudioVolume(void);
     void SetMusicVolume(float volume);
+    float* GetMusicVolume(void);
     void Update(void);
     void LoadSound(string name);
     void LoadMusic(string name);
@@ -39,9 +43,9 @@ public:
     void Free(void);
     Sound* GetSound(string name);
 };
-
-FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
-    FMOD_CHANNELCONTROL_TYPE controlType,
-    FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
-    void* commandData1,
-    void* commandData2);
+//
+//FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
+//    FMOD_CHANNELCONTROL_TYPE controlType,
+//    FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
+//    void* commandData1,
+//    void* commandData2);
