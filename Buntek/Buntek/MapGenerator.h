@@ -10,11 +10,11 @@
 #define MapData _mapData::Instance()
 
 enum class NodeType {
-    Enemy,
-    Elite,
-    Shop,
-    Encounter,
-    Rest,
+    Enemy = 0,
+    Encounter = 1,
+    Shop = 2,
+    Elite = 3,
+    Rest = 4,
     Boss,
     Nothing
 };

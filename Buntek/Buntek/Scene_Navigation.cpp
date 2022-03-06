@@ -26,6 +26,7 @@ void Scene_Navigation::Start(void)
 	AudioManager.PlayMusic("NavigationBGM.mp3");
 	AudioManager.SetMusicVolume(0.5f);
 
+	AssetManager.LoadTexture("UI/Start.png");
 	AssetManager.LoadTexture("UI/Enemy.png");
 	AssetManager.LoadTexture("UI/Elite.png");
 	AssetManager.LoadTexture("UI/Encounter.png");
@@ -95,6 +96,7 @@ void Scene_Navigation::LateUpdate(void)
 
 Scene_Navigation::~Scene_Navigation(void)
 {
+	AssetManager.UnloadTexture("UI/Start.png");
 	AssetManager.UnloadTexture("UI/Enemy.png");
 	AssetManager.UnloadTexture("UI/Elite.png");
 	AssetManager.UnloadTexture("UI/Encounter.png");

@@ -77,7 +77,18 @@ void _mapData::GenerateMapData(void)
                 }
             }
         }
-        node->nodeType = (NodeType)RandIntMinMax(0, 4);
+        int RNG = RandIntMinMax(0, 2);
+
+        if (RNG == 2)
+        {
+            RNG = RandIntMinMax(2, 4);
+            node->nodeType = (NodeType)RNG;
+        }
+        else
+        {
+            node->nodeType = (NodeType)RNG;
+        }
+
         nodeList.push_back(node);
 
         if (nodeList[i]->pos.x < (*currentNode).pos.x)
@@ -141,7 +152,7 @@ void _mapData::GenerateMapObject(void)
             tempRenderer->SetTexture("UI/Boss.png");
             break;
         default:
-            tempRenderer->SetTexture("Steven.jpg");
+            tempRenderer->SetTexture("UI/Start.png");
             break;
         }
         temp->transform->worldposition = Vector2(nodeList[i]->pos);
