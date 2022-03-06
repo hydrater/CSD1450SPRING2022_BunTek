@@ -113,6 +113,7 @@ void _sceneManager::LateUpdate(void)
                 Renderer.Clear();
                 GameScriptManager.Clear();
                 ECSManager.Free();
+                GameManager.artifactListUI = NULL;
                 if (deleteScene)
                     delete scene;
                 scene = nextScene;
@@ -158,6 +159,7 @@ void _sceneManager::FadeTransition(void) {
             Renderer.Clear();
             GameScriptManager.Clear();
             ECSManager.Free();
+            GameManager.artifactListUI = NULL;
             if (deleteScene)
                 delete scene;
             AEGfxSetCamPosition(0, 0);

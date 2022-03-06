@@ -105,13 +105,33 @@ void _gameManager::Update(void)
     // Artifact List
     if (AEInputCheckTriggered(AEVK_I))
     {
-        int x = -800, y = 350;
-        for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
+        if (artifactListUI)
         {
-            devTools.CreateArtifactUIGameObject(it->first, Vector2(x, y), 6);
-            //_key[i] = it->first;
-            
-            //_value[i] = it->second;
+            artifactListUI->Delete();
+            artifactListUI = NULL;
+        }
+        else
+        {
+            artifactListUI = new GameObject;
+
+            int x = -780, y = 360;
+            for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
+            {
+                GameObject* newArtifactUI = devTools.CreateArtifactUIGameObject(it->first, Vector2(x, y), 10);
+                GameObject* textObj = new GameObject;
+                textObj->transform->SetPosition(Vector2(x + 100, y + 50));
+                devTools.AddTextToSpriteGameObject(textObj, "GothicA1.ttf", "x" + to_string(it->second), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 60.f, 11);
+
+                newArtifactUI->AddChild(textObj);
+                artifactListUI->AddChild(newArtifactUI);
+
+                x += 310;
+                if (x > 800)
+                {
+                    x = -780;
+                    y -= 320;
+                }
+            }
         }
     }
 }

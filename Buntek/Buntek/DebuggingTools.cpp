@@ -66,5 +66,19 @@ void _debuggingTools::CheatsUpdate(void)
 	if (AEInputCheckTriggered(AEVK_O))
 	{
 		SaveManager.AddToArtifactList(420);
+		SaveManager.AddToArtifactList(420);
+		SaveManager.AddToArtifactList(0);
+		SaveManager.AddToArtifactList(1);
+		SaveManager.AddToArtifactList(2);
+		SaveManager.AddToArtifactList(3);
+		SaveManager.AddToArtifactList(4);
+		SaveManager.AddToArtifactList(30);
+		SaveManager.AddToArtifactList(120);
+		SaveManager.AddToArtifactList(140);
+		SaveManager.AddToArtifactList(220);
+		SaveManager.AddToArtifactList(221);
+		SaveManager.AddToArtifactList(500);
+		SaveManager.AddToArtifactList(520);
+		SaveManager.AddToArtifactList(540);
 	}
 }

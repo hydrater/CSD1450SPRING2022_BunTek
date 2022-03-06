@@ -21,6 +21,7 @@ private:
     map<unsigned long, int> EnemyArtifactData;
     void GenerateArtifactListUI(void);
 
+
 public:
     static _gameManager& Instance(void);
     bool exit = false;
@@ -68,6 +69,9 @@ public:
     void CameraShake(float period, float cameraStrength, Vector2 direction);
     void CameraEndShake(void);
     bool cameraLerpBack = false;
+
+    // Artifact list UI
+    GameObject* artifactListUI = NULL;
 
     // Battle arena info
     float areaTopBoundary = 0;
