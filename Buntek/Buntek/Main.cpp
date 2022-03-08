@@ -71,6 +71,24 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		Debugger.CheatsUpdate();
 		#endif
 
+		// Place holder code
+		if (AEInputCheckTriggered(AEVK_UP))
+		{
+			AudioManager.SetAudioVolume(*(AudioManager.GetAudioVolume()) + 0.1f);
+		}
+		if (AEInputCheckTriggered(AEVK_DOWN))
+		{
+			AudioManager.SetAudioVolume(*(AudioManager.GetAudioVolume()) - 0.1f);
+		}
+		if (AEInputCheckTriggered(AEVK_LEFT))
+		{
+			AudioManager.SetMusicVolume(*(AudioManager.GetMusicVolume()) - 0.1f);
+		}
+		if (AEInputCheckTriggered(AEVK_RIGHT))
+		{
+			AudioManager.SetMusicVolume(*(AudioManager.GetMusicVolume()) + 0.1f);
+		}
+
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();
 		GameScriptManager.Update();
