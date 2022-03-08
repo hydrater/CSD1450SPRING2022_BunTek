@@ -40,7 +40,6 @@ void Scene_HowToPlay::Start(void)
 	tempTextRenderer->SetText("Back");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-	//backmainBtn->transform->SetPosition(Vector2(-670, 1000));
 	Button* button;
 	button = backmainBtn->AddComponent<Button>();
 	button->sr = tempRenderer;

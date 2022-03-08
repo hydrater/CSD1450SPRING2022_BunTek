@@ -67,7 +67,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEInputUpdate();
 
 		// Debugging tools
+		#if _DEBUG
 		Debugger.CheatsUpdate();
+		#endif
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();
