@@ -20,7 +20,8 @@ public:
 
 	GameObject* inputHandler = 0;
 	GameObject* background = 0, * ball = 0, * friendlyArea = 0, * hostileArea = 0, * neutralArea = 0, * playerpaddle = 0, * playercursor = 0, * AIpaddle = 0, * AIcursor = 0, * hpBar = 0, * enemyhpBar = 0, * ballParticle = 0;
-	float ballSpawnTimer = 3, scalingTimer = 0;
+	float playerBallSpawnTimerMax = 3, AIBallSpawnTimerMax = 3;
+	float playerBallSpawnTimer = 3, AIBallSpawnTimer = 3;
 	vector<BallBehavior*>* ballList = 0;
 	bool checkTimer = false;
 

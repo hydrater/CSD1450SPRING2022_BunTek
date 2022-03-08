@@ -157,6 +157,9 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	hpBar->transform->SetPosition(Vector2(-660, -400));
 	hpBar->AddComponent<UI_Hp>()->GenerateHpBar(true, selfHp , selfMaxHp);
 
+	playerBallSpawnTimer = playerBallSpawnTimerMax;
+	AIBallSpawnTimer = AIBallSpawnTimerMax;
+
 	GameManager.InitBattle(selfHp, enemyHp); // Inits Player and Enemy HP
 }
 
@@ -185,7 +188,7 @@ void BattleHandler::Update(void) {
 		BattleInput* _bInput = inputHandler->GetComponent<BattleInput>();
 		_bInput->timeScalar = timeScalar;
 		
-		//status
+		// Status
 		for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
 		{
 			if (GameManager.playerArtifactList.statusEffect[i].statusTimer > 0) {
@@ -206,51 +209,21 @@ void BattleHandler::Update(void) {
 		}
 
 		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-		ballSpawnTimer -= DeltaTime * timeScalar;
-		scalingTimer += DeltaTime * timeScalar;
-		if (ballSpawnTimer < 0)
+		playerBallSpawnTimer -= DeltaTime * timeScalar;
+		AIBallSpawnTimer -= DeltaTime * timeScalar;
+
+		if (playerBallSpawnTimer <= 0)
 		{
-			SpriteRenderer* tempRenderer;
-			BallBehavior* tempBall;
-			CircleCollider* tempcol;
-
-			ball = new GameObject();
-			tempRenderer = ball->AddComponent<SpriteRenderer>();
-			tempRenderer->SetLayer(2);
-			tempRenderer->Size(20, 20);
-			tempRenderer->SetTexture("ball.png");
-			tempcol = ball->AddComponent<CircleCollider>();
-			tempBall = ball->AddComponent<BallBehavior>();
-			tempBall->battleInput = inputHandler->GetComponent<BattleInput>();
-			
-			bool dir = RandIntMinMax(0, 1);
-			tempBall->playerPossess = (dir ? true : false);
-			tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? -1 : 1));
-			tempBall->velocity.Normalize();
-			tempBall->radius = 10;
-			tempBall->SetSpeed(tempBall->GetSpeed());
-			tempBall->sr = tempRenderer;
-			dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
-			tempBall->col = tempcol;
-
-			// Set ball spawn position
-			if (tempBall->playerPossess)
-				ball->transform->SetPosition(playerpaddle->transform->worldposition);
-			else
-				ball->transform->SetPosition(AIpaddle->transform->worldposition);
-
-			GameObject* newParticle = new GameObject();
-			ParticleSystem* newSystem = newParticle->AddComponent<ParticleSystem>();
-			newParticle->transform->SetPosition(ball->transform->worldposition);
-			newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "ball.png", ball->transform->worldposition, 5, (short)AE_GFX_BM_BLEND, true, true);
-
-			tempBall->ballParticle = newParticle;
-			tempBall->ballParticleSystem = newSystem;
-
-			ballList->push_back(tempBall);
-
-			ballSpawnTimer = 3 - scalingTimer * 0.01f;
+			SpawnBall(true);
+			playerBallSpawnTimer = playerBallSpawnTimerMax;
 		}
+
+		if (AIBallSpawnTimer <= 0)
+		{
+			SpawnBall(false);
+			AIBallSpawnTimer = AIBallSpawnTimerMax;
+		}
+
 		//HP Bar Logic
 		if (hpBar != 0) {
 			hpBar->GetComponent<UI_Hp>()->SetHp(GameManager.playerHp);
@@ -275,17 +248,29 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	tempBall = ball->AddComponent<BallBehavior>();
 	tempBall->battleInput = inputHandler->GetComponent<BattleInput>();
 
-	bool dir = isPlayerBall;
-	tempBall->playerPossess = !isPlayerBall;
-	tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? 1 : -1));
+	bool dir = RandIntMinMax(0, 1);
+	tempBall->playerPossess = (dir ? true : false);
+	tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? -1 : 1));
 	tempBall->velocity.Normalize();
 	tempBall->radius = 10;
 	tempBall->SetSpeed(tempBall->GetSpeed());
 	tempBall->sr = tempRenderer;
-	dir ? tempRenderer->SetColor(0, 0, 1) : tempRenderer->SetColor(1, 0, 0);
+	dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
 	tempBall->col = tempcol;
 
 	// Set ball spawn position
-	ball->transform->SetPosition(neutralArea->transform->worldposition);
+	if (tempBall->playerPossess)
+		ball->transform->SetPosition(playerpaddle->transform->worldposition);
+	else
+		ball->transform->SetPosition(AIpaddle->transform->worldposition);
+
+	GameObject* newParticle = new GameObject();
+	ParticleSystem* newSystem = newParticle->AddComponent<ParticleSystem>();
+	newParticle->transform->SetPosition(ball->transform->worldposition);
+	newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "ball.png", ball->transform->worldposition, 5, (short)AE_GFX_BM_BLEND, true, true);
+
+	tempBall->ballParticle = newParticle;
+	tempBall->ballParticleSystem = newSystem;
+
 	ballList->push_back(tempBall);
 }
