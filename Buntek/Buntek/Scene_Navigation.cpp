@@ -24,7 +24,6 @@ void Scene_Navigation::Start(void)
 
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
-	AudioManager.SetMusicVolume(0.5f);
 
 	AssetManager.LoadTexture("UI/Start.png");
 	AssetManager.LoadTexture("UI/Enemy.png");

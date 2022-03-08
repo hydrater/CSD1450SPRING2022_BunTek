@@ -15,7 +15,6 @@ void Scene_HowToPlay::Start(void)
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 	AssetManager.LoadTexture("PlayGuide.png");
 	AudioManager.LoadSound("ButtonHover.mp3");
-	AudioManager.SetMusicVolume(0.05f);
 
 	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");

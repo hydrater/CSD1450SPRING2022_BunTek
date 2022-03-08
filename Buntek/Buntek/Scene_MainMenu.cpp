@@ -124,7 +124,7 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer->SetFont("Ayar.ttf");
 	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(0, 0, 0);
-	tempTextRenderer->SetText("Options");
+	tempTextRenderer->SetText("Alpha Survey");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 	optionBtn->transform->SetPosition(Vector2(-670, 1000));
@@ -355,7 +355,10 @@ void BtnFunc_HowToPlay(Button* button)
 
 void BtnFunc_Options(Button* button)
 {
-	SceneManager.LoadScene(new Scene_Options, TransitionType::FadeTransition, true);
+	//SceneManager.LoadScene(new Scene_Options, TransitionType::FadeTransition, true);
+	#include <windows.h>
+	#include <shellapi.h>
+	ShellExecute(0, 0, "https://docs.google.com/forms/d/e/1FAIpQLScuD-oyTXlUahcOZD3rJlF_7knbTXFmxq-3cLLfjQDjpKagKA/viewform?usp=sf_link", 0, 0, SW_SHOW);
 }
 
 void BtnFunc_Credits(Button* button)
@@ -406,7 +409,7 @@ void BtnFuncHover_Options(Button* button)
 	{
 		AudioManager.PlayClip("ButtonHover.mp3");
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
-		menu->displayTxt->SetText("Edit the game's settings");
+		menu->displayTxt->SetText("Opens the survey in your preferred browser");
 		menu->optionPlay = false;
 	}
 

@@ -11,6 +11,9 @@ It's a pong game with roguelike elemements.
 You navigate through a randomly generated map and run into random encounters,
 picking up artifacts that will upgrade your performance.
 Beware, staying too long in a level will give you can be fatal.
+
+You can find the survey link in the main menu or through this link here:
+https://docs.google.com/forms/d/e/1FAIpQLScuD-oyTXlUahcOZD3rJlF_7knbTXFmxq-3cLLfjQDjpKagKA/viewform?usp=sf_link
  _   _       _            
 | \ | |     | |           
 |  \| | ___ | |_ ___  ___ 
@@ -28,6 +31,9 @@ There are no telegraphs or feedback yet and it will be implemented soon
 3. Aesthetics, visuals and audio
 Some of it are placeholders to get the vibe check,  but we will be improving it, 
 see you guys in beta with a more polished version!
+
+4. Some encounters are incomplete
+You will see "Not implemented yet"
 
 Why aren't the above mentioned things implemented yet?
 That's because......

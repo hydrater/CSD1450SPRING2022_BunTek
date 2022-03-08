@@ -14,8 +14,6 @@ void BtnFuncUnhover_Back(Button* button);
 void Scene_Credits::Start(void)
 {
 	AudioManager.LoadSound("ButtonHover.mp3");
-	AudioManager.SetMusicVolume(0.05f);
-
 	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
 
