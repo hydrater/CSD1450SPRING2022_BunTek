@@ -36,4 +36,5 @@ d: Design for Background
 4 - rainforest
 5 - volcano
 6 - yggdrasil
+e: Encounter Action (Exactly the same as button)
 =======================================================

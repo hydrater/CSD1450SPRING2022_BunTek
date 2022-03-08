@@ -24,7 +24,7 @@ void BallBehavior::Start(void)
 
 void BallBehavior::Update(void)
 {
-	if (timeScalar != 0) {
+	if (timeScalar != 0 && !this->Owner()->remove) {
 		for (size_t i = 0; i < statusEffect.size(); ++i)
 		{
 			if (statusEffect[i].statusTimer > 0) {

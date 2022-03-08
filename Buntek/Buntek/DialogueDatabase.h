@@ -21,6 +21,7 @@ public:
 	void InitDialogueScene(string id);
 	void ClearDialogueSceneObjs(void);
 
+	string forceCommand = "";		// Use this to call a function in LaunchButtonEffect if button is a nullptr
 	int fullHealthCost = 10;		// Cost to heal to max hp
 private:
 };

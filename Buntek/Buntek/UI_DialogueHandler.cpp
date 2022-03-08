@@ -304,6 +304,11 @@ void UI_DialogueHandler::WriteToDialogue(void)
             WriteToDialogue();
             break;
 
+        case 'e':
+            DialogueDatabase.forceCommand = command;
+            LaunchButtonEffect(nullptr);
+            break;
+
         default:
             cout << "default line " << endl;
             break;
@@ -555,9 +560,9 @@ void RemoveDialogue(Button* button)
 }
 
 // --------------------------------------------------------DISPLAY FUNCTIONS---------------------------------------------------------
-void UI_DialogueHandler::DF_DisplayArtifact(Button* button, unsigned long ID)
+void UI_DialogueHandler::DF_DisplayArtifact(unsigned long ID)
 {
-    RemoveDialogue(button);
+    RemoveDialogue(nullptr);
 
     CreatePreset(dialogueSortingLayer);
     // Set text
@@ -588,5 +593,5 @@ void CF_PickUpArtifactButton(Button* button)
     // Assign to allocated vector
     SaveManager.AddToArtifactList(ID);
 
-    UIDialogueManager.DF_DisplayArtifact(button, ID);
+    UIDialogueManager.DF_DisplayArtifact(ID);
 }
