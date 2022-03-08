@@ -155,3 +155,8 @@ void _saveManager::LoadData(void)
     rf.close();
     cout << "Save loaded" << endl;
 }
+
+void _saveManager::DeleteSave(void)
+{
+    remove("./Save/sav.dat");
+}

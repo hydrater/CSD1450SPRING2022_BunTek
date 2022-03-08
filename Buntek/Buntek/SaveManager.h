@@ -30,4 +30,5 @@ public:
 
     void SaveData(void);
     void LoadData(void);
+    void DeleteSave(void);
 };

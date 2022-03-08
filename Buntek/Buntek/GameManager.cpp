@@ -229,7 +229,6 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
         if (playerHp <= 0)
         {
             GameManager.playerProfile.hp = GameManager.playerHp;
-            SaveManager.SaveData();
             GameOver();
         }
     }
@@ -278,5 +277,6 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
 
 void _gameManager::GameOver(void)
 {
+    SaveManager.DeleteSave();
     SceneManager.LoadScene(new Scene_MainMenu , TransitionType::FadeTransition, true);
 }
