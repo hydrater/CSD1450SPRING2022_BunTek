@@ -49,9 +49,9 @@ I see you have some star dust
 Fret not, I am a passing cave explorer harvesting some botany.
 I have chanced upon this peculiar magic mushroom.
 Would you like to buy it off of me?
-/b1 Buy the mushroom
+/b2 Buy the mushroom
 /b0 Refuse the offer
-/b2|aed Steal the mushroom
+/b5|aed Steal the mushroom
 
 E001
 /d  1
@@ -59,15 +59,15 @@ E001
 ..........
 You are lost in a cave.....
 You see 3 paths ahead of you....
-/b2 Take the left path
-/b2 Take the middle path
+/b5 Take the left path
+/b3 Take the middle path
 /b0 Take the right path
 
 E002
 /d  2
 You made it to the top of the mountains
 Take a rest?
-/b3 Rest
+/b4 Rest
 /b0 Continue
 
 E003
@@ -87,7 +87,7 @@ I'd heard tell of a wanderer hurtling about atop these mountains
 And upon looking into the matter,
 the talk I surmise, is of thee.
 I was entrusted this, for thee.
-/b8 Accept
+/b5 Accept
 /b0 Leave
 
 E004
@@ -109,7 +109,7 @@ You entered a crystal cave....
 .....
 ........
 You found an a glowing object
-/b9 Pick it up
+/b6 Pick it up
 /b0 Leave
 
 E006
@@ -125,7 +125,7 @@ The figure scurries pass you
 WHY ARE YOU STANDING THERE?
 RUNNNNNNNNNNNNNNNNNNNNN!
 /b0 Run
-/b8 Investigate the source
+/b6 Investigate the source
 
 E007
 /d  4
@@ -143,8 +143,8 @@ Too bad you will never see the image of this cat girl because the team's artist 
 /ap A catgirl?
 Nyaaa!
 Apologise!
-/b9 Apologise
-/b10 Stare at her like a weirdo
+/b0 Apologise
+/b8 Stare at her like a weirdo
 
 E008
 /d  5
@@ -166,3 +166,6 @@ Not implemented yet
 E0011
 /d  6
 Not implemented yet
+
+Responses================================================================================================================
+

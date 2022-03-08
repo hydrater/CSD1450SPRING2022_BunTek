@@ -197,9 +197,45 @@ void LaunchButtonEffect(Button* button)
 		UIDialogueManager.DF_DisplayArtifact(button, randoID);
 		break;
 	}
+	case 6:
+	{
+		// Draws random legendary artifact (Case 6)
+		unsigned long randoID = ArtifactDatabase.DrawLegendary();
+
+		// Assign to allocated vector
+		SaveManager.AddToArtifactList(randoID);
+
+		UIDialogueManager.DF_DisplayArtifact(button, randoID);
+		break;
+	}
+	case 7:
+	{
+		// Max healing
+		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
+
+		// Heal player to max
+		GameManager.playerProfile.hp = truemaxhp;
+		break;
+	}
+	case 8:
+	{
+		// Take damage
+		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
+
+		// 20%
+		GameManager.playerProfile.hp -= GameManager.playerProfile.basemaxhp / 5;
+
+		if (GameManager.playerProfile.hp < 0)
+		{
+			// Game over
+			GameManager.GameOver();
+		}
+	}
 	default:
-			// Force close if nothing can happen
-			RemoveDialogue(button);
-			break;
+	{
+		// Force close if nothing can happen
+		RemoveDialogue(button);
+		break;
+	}
 	}
 }

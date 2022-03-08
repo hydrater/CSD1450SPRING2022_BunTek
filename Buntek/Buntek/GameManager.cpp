@@ -4,6 +4,7 @@
 #include "Scene_Navigation.h"
 #include "SaveManager.h"
 #include "MapGenerator.h"
+#include "Scene_MainMenu.h"
 
 using namespace Math;
 
@@ -229,7 +230,7 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
         {
             GameManager.playerProfile.hp = GameManager.playerHp;
             SaveManager.SaveData();
-            SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
+            GameOver();
         }
     }
     else
@@ -273,4 +274,9 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
             SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
         }
     }
+}
+
+void _gameManager::GameOver(void)
+{
+    SceneManager.LoadScene(new Scene_MainMenu , TransitionType::FadeTransition, true);
 }
