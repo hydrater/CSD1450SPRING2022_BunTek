@@ -204,7 +204,9 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         tempBallBehavior = ball->GetComponent<BallBehavior>();
         if(tempBallBehavior != NULL && !tempBallBehavior->savedCol->Owner()->remove){
             tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();
-            //tempBallBehavior->Owner()->Delete();
+            // MUST RemoveFromList before deleting anything with a collider
+            CollisionManager2D.RemoveFromList(tempBallBehavior->Owner()->GetComponent<CircleCollider>());
+            tempBallBehavior->Owner()->Delete();
             return;
         }
         break;
