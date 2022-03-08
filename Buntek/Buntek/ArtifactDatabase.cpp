@@ -22,28 +22,58 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     switch (artifact.ID)
     {
     case 000://Increase damage
-        GameManager.playerProfile.bonusDamage = (float)artifact.count;
+        if (isPlayerTheCaster) {
+            GameManager.playerProfile.bonusDamage = (float)artifact.count;
+        }
+        else {
+            GameManager.enemyProfile.bonusDamage = (float)artifact.count;
+        }
         break;
     case 001://Increase max hp
-        GameManager.playerProfile.bonusHp = (float)artifact.count;
+        if (isPlayerTheCaster) {
+            GameManager.playerProfile.bonusHp = (float)artifact.count;
+        }
+        else {
+            GameManager.enemyProfile.bonusHp = (float)artifact.count;
+        }
         break;
     case 002://Increase paddle speed
-        GameManager.playerProfile.bonusPaddleSpeed = (float)artifact.count;
+        if (isPlayerTheCaster) {
+            GameManager.playerProfile.bonusPaddleSpeed = 1 + (float)artifact.count / 100.0f;
+        }
+        else {
+            GameManager.enemyProfile.bonusPaddleSpeed = 1 + (float)artifact.count / 100.0f;
+        }
         break;
     case 003://Increase ball speed
-        GameManager.playerProfile.bonusBallSpeed = (float)artifact.count;
+        if (isPlayerTheCaster) {
+            GameManager.playerProfile.bonusBallSpeed = 1 + (float)artifact.count / 100.0f;
+        }
+        else {
+            GameManager.enemyProfile.bonusBallSpeed = 1 + (float)artifact.count / 100.0f;
+        }
         break;
     case 004://Increase ball spawn frequency
-        GameManager.playerProfile.bonusBallSpawnRate = (float)artifact.count;
+        if (isPlayerTheCaster) {
+            GameManager.playerProfile.bonusBallSpawnRate = 1 + (float)artifact.count / 100.0f;
+        }
+        else {
+            GameManager.enemyProfile.bonusBallSpawnRate = 1 + (float)artifact.count / 100.0f;
+        }
         break;
     case 030://Heals X times more
-        GameManager.playerProfile.bonusHealing = (float)artifact.count;
+        if (isPlayerTheCaster) {
+            GameManager.playerProfile.bonusHealing = 1 + (float)artifact.count / 100.0f;
+        }
+        else {
+            GameManager.enemyProfile.bonusHealing = 1 + (float)artifact.count / 100.0f;
+        }
         break;
     case 120://Increase hp by 2 per battle won, up to a max of X
         GameManager.playerProfile.basemaxhp += 2 * artifact.count;
         break;
     case 140://Restores 10&% hp of max hp
-        GameManager.playerHp += GameManager.playerProfile.basemaxhp / 10;
+        GameManager.playerHp += GameManager.playerProfile.basemaxhp / 10 * GameManager.playerProfile.bonusHealing;
         break;
     case 220://Increases ball bounce gain by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
@@ -54,76 +84,90 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10.0f));
         break;
     case 300://B2: Increase ball speed by X
-        tempBallBehavior = ball->GetComponent<BallBehavior>();
-        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10.0f));
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 2) {
+            tempBallBehavior = ball->GetComponent<BallBehavior>();
+            tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10.0f));
+        }
         break;
     case 400://B3: Restores X hp
-        if (isPlayerTheCaster) {
-            GameManager.playerHp += artifact.count;
-        }
-        else {
-            GameManager.enemyHp += artifact.count;
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
+            if (isPlayerTheCaster) {
+                GameManager.playerHp += artifact.count * GameManager.playerProfile.bonusHealing;
+            }
+            else {
+                GameManager.enemyHp += artifact.count * GameManager.enemyProfile.bonusHealing;
+            }
         }
         break;
     case 401://B3: Deals extra X damage
-        tempBallBehavior = ball->GetComponent<BallBehavior>();
-        tempBallBehavior->ballDamage += artifact.count;
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
+            tempBallBehavior = ball->GetComponent<BallBehavior>();
+            tempBallBehavior->ballDamage += artifact.count;
+        }
         break;
     case 420://B4: Spawns X ball in a random direction forward from the middle
-        if (GameManager.bh != NULL) {
-            GameManager.bh->SpawnBall(isPlayerTheCaster);
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 4) {
+            if (GameManager.bh != NULL) {
+                GameManager.bh->SpawnBall(isPlayerTheCaster);
+            }
         }
         break;
     case 500://B3: Opponent takes X damage
-        if (isPlayerTheCaster) {
-            GameManager.enemyHp -= artifact.count;
-        }
-        else {
-            GameManager.playerHp -= artifact.count;
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
+            if (isPlayerTheCaster) {
+                GameManager.enemyHp -= artifact.count;
+            }
+            else {
+                GameManager.playerHp -= artifact.count;
+            }
         }
         break;
     case 520://B4: Spawns X ball in a random direction forward from the middle
-        if (GameManager.bh != NULL) {
-            GameManager.bh->SpawnBall(isPlayerTheCaster);
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 4) {
+            if (GameManager.bh != NULL) {
+                GameManager.bh->SpawnBall(isPlayerTheCaster);
+            }
         }
         break;
     case 530://B3: If hp is below <20%, unable to take damage for X second,
-        if (isPlayerTheCaster) {
-            if (GameManager.playerHp < GameManager.playerProfile.basemaxhp / 5) {
-                for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
-                {
-                    if (GameManager.playerArtifactList.statusEffect[i].statusID == 00) {
-                        GameManager.playerArtifactList.statusEffect[i].statusTimer += artifact.count;
-                        flag = true;
-                        break;
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
+            if (isPlayerTheCaster) {
+                if (GameManager.playerHp < GameManager.playerProfile.basemaxhp / 5) {
+                    for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
+                    {
+                        if (GameManager.playerArtifactList.statusEffect[i].statusID == 00) {
+                            GameManager.playerArtifactList.statusEffect[i].statusTimer += artifact.count;
+                            flag = true;
+                            break;
+                        }
                     }
-                }
-                if (!flag) {
-                    Status temp;
-                    temp.statusID = 00;
-                    temp.statusTimer = (float)artifact.count;
-                    GameManager.playerArtifactList.statusEffect.push_back(temp);
-                }
+                    if (!flag) {
+                        Status temp;
+                        temp.statusID = 00;
+                        temp.statusTimer = (float)artifact.count;
+                        GameManager.playerArtifactList.statusEffect.push_back(temp);
+                    }
 
+                }
             }
-        }
-        else {
-            if (GameManager.playerHp < GameManager.enemyProfile.basemaxhp / 5) {
-                for (size_t i = 0; i < GameManager.enemyArtifactList.statusEffect.size(); ++i)
-                {
-                    if (GameManager.enemyArtifactList.statusEffect[i].statusID == 00) {
-                        GameManager.enemyArtifactList.statusEffect[i].statusTimer += artifact.count;
-                        flag = true;
-                        break;
+            else {
+                if (GameManager.enemyHp < GameManager.enemyProfile.basemaxhp / 5) {
+                    for (size_t i = 0; i < GameManager.enemyArtifactList.statusEffect.size(); ++i)
+                    {
+                        if (GameManager.enemyArtifactList.statusEffect[i].statusID == 00) {
+                            GameManager.enemyArtifactList.statusEffect[i].statusTimer += artifact.count;
+                            flag = true;
+                            break;
+                        }
                     }
-                }
-                if (!flag) {
-                    Status temp;
-                    temp.statusID = 00;
-                    temp.statusTimer = (float)artifact.count;
-                    GameManager.enemyArtifactList.statusEffect.push_back(temp);
-                }
+                    if (!flag) {
+                        Status temp;
+                        temp.statusID = 00;
+                        temp.statusTimer = (float)artifact.count;
+                        GameManager.enemyArtifactList.statusEffect.push_back(temp);
+                    }
 
+                }
             }
         }
         break;
@@ -164,50 +208,56 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         }
         break;
     case 630://B2: Balls colliding with hostile balls will freeze it for X second
-        tempBallBehavior = ball->GetComponent<BallBehavior>();
-        if (tempBallBehavior->savedCol != NULL) {
-            tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
-        }
-        for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
-        {
-            if (tempBallBehavior->statusEffect[i].statusID == 01) {
-                tempBallBehavior->statusEffect[i].statusTimer += artifact.count;;
-                flag = true;
-                break;
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 2) {
+            tempBallBehavior = ball->GetComponent<BallBehavior>();
+            if (tempBallBehavior->savedCol != NULL) {
+                tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
             }
-        }
-        if (!flag) {
-            Status temp;
-            temp.statusID = 01;
-            temp.statusTimer = (float)artifact.count;
-            tempBallBehavior->statusEffect.push_back(temp);
+            for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
+            {
+                if (tempBallBehavior->statusEffect[i].statusID == 01) {
+                    tempBallBehavior->statusEffect[i].statusTimer += artifact.count;;
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                Status temp;
+                temp.statusID = 01;
+                temp.statusTimer = (float)artifact.count;
+                tempBallBehavior->statusEffect.push_back(temp);
+            }
         }
         break;
     case 631://B2: Colliding with an hostile ball have a chance to reflect that ball
-        tempBallBehavior = ball->GetComponent<BallBehavior>();
-        flag = tempBallBehavior->playerPossess;
-        if (tempBallBehavior->savedCol != NULL) {
-            tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
-            if (tempBallBehavior->playerPossess != flag) {
-                tempBallBehavior->velocity = -tempBallBehavior->velocity;
-                tempBallBehavior->playerPossess = !tempBallBehavior->playerPossess;
-                if (tempBallBehavior->playerPossess) {
-                    tempBallBehavior->sr->SetColor(1, 0, 0);
-                }
-                else {
-                    tempBallBehavior->sr->SetColor(0, 0, 1);
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 2) {
+            tempBallBehavior = ball->GetComponent<BallBehavior>();
+            flag = tempBallBehavior->playerPossess;
+            if (tempBallBehavior->savedCol != NULL) {
+                tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
+                if (tempBallBehavior->playerPossess != flag) {
+                    tempBallBehavior->velocity = -tempBallBehavior->velocity;
+                    tempBallBehavior->playerPossess = !tempBallBehavior->playerPossess;
+                    if (tempBallBehavior->playerPossess) {
+                        tempBallBehavior->sr->SetColor(1, 0, 0);
+                    }
+                    else {
+                        tempBallBehavior->sr->SetColor(0, 0, 1);
+                    }
                 }
             }
         }
         break;
     case 640://B5: Destroys hostile ball
-        tempBallBehavior = ball->GetComponent<BallBehavior>();
-        if(tempBallBehavior != NULL && !tempBallBehavior->savedCol->Owner()->remove){
-            tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();
-            // MUST RemoveFromList before deleting anything with a collider
-            CollisionManager2D.RemoveFromList(tempBallBehavior->Owner()->GetComponent<CircleCollider>());
-            tempBallBehavior->Owner()->Delete();
-            return;
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 5) {
+            tempBallBehavior = ball->GetComponent<BallBehavior>();
+            if (tempBallBehavior != NULL && !tempBallBehavior->savedCol->Owner()->remove) {
+                tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();
+                // MUST RemoveFromList before deleting anything with a collider
+                CollisionManager2D.RemoveFromList(tempBallBehavior->Owner()->GetComponent<CircleCollider>());
+                tempBallBehavior->Owner()->Delete();
+                return;
+            }
         }
         break;
     default:

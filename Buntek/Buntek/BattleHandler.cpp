@@ -96,7 +96,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	playerpaddle->transform->Rotate(0);
 	PaddleBehavior* temppaddle = playerpaddle->AddComponent<PaddleBehavior>();
 	temppaddle->setplayerpaddle(true);
-	temppaddle->setMaxspeed(500);
+	temppaddle->setMaxspeed(500 * GameManager.playerProfile.bonusPaddleSpeed);
 	temppaddle->sr = tempRenderer;
 	BoxCollider* tempcol;
 	tempcol = playerpaddle->AddComponent<BoxCollider>();
@@ -113,7 +113,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	AIpaddle->transform->Rotate(0);
 	temppaddle = AIpaddle->AddComponent<PaddleBehavior>();
 	temppaddle->setplayerpaddle(false);
-	temppaddle->setMaxspeed(500);
+	temppaddle->setMaxspeed(500 * GameManager.enemyProfile.bonusPaddleSpeed);
 	temppaddle->sr = tempRenderer;
 	tempcol = AIpaddle->AddComponent<BoxCollider>();
 
@@ -209,8 +209,8 @@ void BattleHandler::Update(void) {
 		}
 
 		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-		playerBallSpawnTimer -= DeltaTime * timeScalar;
-		AIBallSpawnTimer -= DeltaTime * timeScalar;
+		playerBallSpawnTimer -= DeltaTime * timeScalar * GameManager.playerProfile.bonusBallSpawnRate;
+		AIBallSpawnTimer -= DeltaTime * timeScalar * GameManager.enemyProfile.bonusBallSpawnRate;
 
 		if (playerBallSpawnTimer <= 0)
 		{
@@ -248,21 +248,27 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	tempBall = ball->AddComponent<BallBehavior>();
 	tempBall->battleInput = inputHandler->GetComponent<BattleInput>();
 
-	bool dir = RandIntMinMax(0, 1);
-	tempBall->playerPossess = (dir ? true : false);
-	tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? -1 : 1));
+	bool dir = isPlayerBall;
+	tempBall->playerPossess = !isPlayerBall;
+	tempBall->velocity = Vector2(RandFloatMinMax(-1, 1), (float)(dir ? 1 : -1));
 	tempBall->velocity.Normalize();
 	tempBall->radius = 10;
-	tempBall->SetSpeed(tempBall->GetSpeed());
+
 	tempBall->sr = tempRenderer;
-	dir ? tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
+	dir ? tempRenderer->SetColor(0, 0, 1) : tempRenderer->SetColor(1, 0, 0);
 	tempBall->col = tempcol;
 
 	// Set ball spawn position
-	if (tempBall->playerPossess)
+	if (tempBall->playerPossess) {
 		ball->transform->SetPosition(playerpaddle->transform->worldposition);
-	else
+		tempBall->ballDamage += GameManager.playerProfile.bonusDamage;
+		tempBall->SetSpeed(tempBall->GetSpeed() * GameManager.playerProfile.bonusBallSpeed);
+	}
+	else {
 		ball->transform->SetPosition(AIpaddle->transform->worldposition);
+		tempBall->ballDamage += GameManager.enemyProfile.bonusDamage;
+		tempBall->SetSpeed(tempBall->GetSpeed() * GameManager.enemyProfile.bonusBallSpeed);
+	}
 
 	GameObject* newParticle = new GameObject();
 	ParticleSystem* newSystem = newParticle->AddComponent<ParticleSystem>();

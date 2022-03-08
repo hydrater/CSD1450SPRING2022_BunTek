@@ -38,10 +38,10 @@ public:
 
         float bonusHp = 0;
         float bonusDamage = 0;
-        float bonusPaddleSpeed = 0;
-        float bonusBallSpeed = 0;
-        float bonusBallSpawnRate = 0;
-        float bonusHealing = 0;
+        float bonusPaddleSpeed = 1;
+        float bonusBallSpeed = 1;
+        float bonusBallSpawnRate = 1;
+        float bonusHealing = 1;
     }playerProfile = {}, enemyProfile = {};
 
     struct BattleArtifactProfile
