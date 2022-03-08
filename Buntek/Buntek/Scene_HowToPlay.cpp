@@ -31,12 +31,13 @@ void Scene_HowToPlay::Start(void)
 	tempRenderer->SetLayer(3);
 	tempRenderer->Size(200, 71);
 	tempRenderer->SetTexture("Menu/Button.png");
+	backmainBtn->transform->SetPosition(Vector2(-820, 480));
 	TextRenderer* tempTextRenderer;
 	tempTextRenderer = backmainBtn->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("Ayar.ttf");
 	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(0, 0, 0);
-	tempTextRenderer->SetText("Main Menu");
+	tempTextRenderer->SetText("Back");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 	//backmainBtn->transform->SetPosition(Vector2(-670, 1000));
@@ -51,7 +52,7 @@ void Scene_HowToPlay::Start(void)
 
 void Scene_HowToPlay::Update(void)
 {
-	backmainBtn->transform->SetPosition(Vector2(-825, 400));
+	
 }
 Scene_HowToPlay::~Scene_HowToPlay(void)
 {

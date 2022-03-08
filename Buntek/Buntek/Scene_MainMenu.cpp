@@ -379,7 +379,6 @@ void BtnFuncHover_Start(Button* button)
 		AudioManager.PlayClip("ButtonHover.mp3");
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
 		menu->displayTxt->SetText("Start the game");
-		cout << menu->displayTxt << endl;
 		menu->startPlay = false;
 	}
 

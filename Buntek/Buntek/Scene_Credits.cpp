@@ -23,17 +23,17 @@ void Scene_Credits::Start(void)
 	SpriteRenderer* tempRenderer;
 	tempRenderer = backBtn->AddComponent<SpriteRenderer>();
 	tempRenderer->SetLayer(2);
-	tempRenderer->Size(471, 71);
+	tempRenderer->Size(200, 71);
 	tempRenderer->SetTexture("Menu/Button.png");
+	backBtn->transform->SetPosition(Vector2(-820, 480));
 	TextRenderer* tempTextRenderer;
 	tempTextRenderer = backBtn->AddComponent<TextRenderer>();
 	tempTextRenderer->SetFont("Ayar.ttf");
 	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(0, 0, 0);
-	tempTextRenderer->SetText("Main Menu");
+	tempTextRenderer->SetText("Back");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
-	backBtn->transform->SetPosition(Vector2(-670, 1000));
 	Button* button;
 	button = backBtn->AddComponent<Button>();
 	button->sr = tempRenderer;
@@ -259,7 +259,6 @@ void Scene_Credits::Start(void)
 
 void Scene_Credits::Update(void)
 {
-	backBtn->transform->SetPosition(Vector2(-670, 400));
 }
 Scene_Credits::~Scene_Credits(void)
 {

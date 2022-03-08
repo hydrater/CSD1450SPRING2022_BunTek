@@ -12,7 +12,7 @@ _audioManager::_audioManager(void)
     // Create the channel group.
     fmodSystem->createChannelGroup("inGameSoundEffects", &channelGroup);
 
-    soundChannel->setChannelGroup(channelGroup);
+    audioClipChannel->setChannelGroup(channelGroup);
     musicChannel->setChannelGroup(channelGroup);
 
     // Set a callback on the channel.
@@ -33,10 +33,9 @@ void _audioManager::PlayClip(string clipName)
         audioClip = search->second;
 
     // Play the sound.
-    fmodSystem->playSound(audioClip, nullptr, true, &soundChannel);
-    cout << soundVol << endl;
-    soundChannel->setVolume(soundVol);
-    soundChannel->setPaused(false);
+    fmodSystem->playSound(audioClip, channelGroup, true, &audioClipChannel);
+    audioClipChannel->setVolume(soundVol);
+    audioClipChannel->setPaused(false);
 }
 
 void _audioManager::PlayMusic(string musicTrack)
@@ -49,9 +48,10 @@ void _audioManager::PlayMusic(string musicTrack)
 
     // Play the music.
     musicChannel->stop();
-    fmodSystem->playSound(audioClip, nullptr, true, &musicChannel);
+    FMOD_RESULT result;
+    result = fmodSystem->playSound(audioClip, channelGroup, false, &musicChannel);
     musicChannel->setVolume(musicVol * musicVolOffset);
-    musicChannel->setPaused(false);
+    //musicChannel->setPaused(false);
 }
 
 void _audioManager::StopMusic(void)
@@ -88,7 +88,7 @@ void _audioManager::Update()
     fmodSystem->update();
 }
 
-void _audioManager::CleanPlaying()
+void _audioManager::Clean()
 {
     // Clean up.
     map<string, Sound*>::iterator start;
@@ -133,12 +133,14 @@ void _audioManager::UnloadSound(string name)
 {
     if (isActive && soundDatabase.find(name) != soundDatabase.end())
         soundDatabase[name]->release();
+    soundDatabase.erase(name);
 }
 
 void _audioManager::UnloadMusic(string name)
 {
     if (isActive && musicDatabase.find(name) != musicDatabase.end())
         musicDatabase[name]->release();
+    musicDatabase.erase(name);
 }
 
 void _audioManager::Free(void)
@@ -170,10 +172,10 @@ _audioManager& _audioManager::Instance(void)
     return instance;
 }
 
-Channel* _audioManager::GetMusicChannel(void)
-{
-    return musicChannel;
-}
+//Channel* _audioManager::GetMusicChannel(void)
+//{
+//    return musicChannel;
+//}
 
 //FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,
 //    FMOD_CHANNELCONTROL_TYPE controlType, FMOD_CHANNELCONTROL_CALLBACK_TYPE callbackType,
