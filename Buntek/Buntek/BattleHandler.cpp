@@ -157,8 +157,8 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	hpBar->transform->SetPosition(Vector2(-660, -400));
 	hpBar->AddComponent<UI_Hp>()->GenerateHpBar(true, selfHp , selfMaxHp);
 
-	playerBallSpawnTimer = playerBallSpawnTimerMax;
-	AIBallSpawnTimer = AIBallSpawnTimerMax;
+	playerBallSpawnTimer = playerBallSpawnTimerMax * GameManager.playerProfile.bonusBallSpawnRate;
+	AIBallSpawnTimer = AIBallSpawnTimerMax * GameManager.enemyProfile.bonusBallSpawnRate;
 
 	GameManager.InitBattle(selfHp, enemyHp); // Inits Player and Enemy HP
 }
@@ -209,19 +209,19 @@ void BattleHandler::Update(void) {
 		}
 
 		AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-		playerBallSpawnTimer -= DeltaTime * timeScalar * GameManager.playerProfile.bonusBallSpawnRate;
-		AIBallSpawnTimer -= DeltaTime * timeScalar * GameManager.enemyProfile.bonusBallSpawnRate;
+		playerBallSpawnTimer -= DeltaTime * timeScalar ;
+		AIBallSpawnTimer -= DeltaTime * timeScalar;
 
 		if (playerBallSpawnTimer <= 0)
 		{
 			SpawnBall(true);
-			playerBallSpawnTimer = playerBallSpawnTimerMax;
+			playerBallSpawnTimer = playerBallSpawnTimerMax * GameManager.playerProfile.bonusBallSpawnRate;
 		}
 
 		if (AIBallSpawnTimer <= 0)
 		{
 			SpawnBall(false);
-			AIBallSpawnTimer = AIBallSpawnTimerMax;
+			AIBallSpawnTimer = AIBallSpawnTimerMax * GameManager.enemyProfile.bonusBallSpawnRate;
 		}
 
 		//HP Bar Logic

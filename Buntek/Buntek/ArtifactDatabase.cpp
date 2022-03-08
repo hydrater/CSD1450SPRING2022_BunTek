@@ -55,10 +55,12 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 004://Increase ball spawn frequency
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusBallSpawnRate = 1 + (float)artifact.count / 100.0f;
+            GameManager.playerProfile.bonusBallSpawnRate = 1 - (float)artifact.count / 100.0f;
+            AEClamp(GameManager.playerProfile.bonusBallSpawnRate, 0.01f, 1);
         }
         else {
-            GameManager.enemyProfile.bonusBallSpawnRate = 1 + (float)artifact.count / 100.0f;
+            GameManager.enemyProfile.bonusBallSpawnRate = 1 - (float)artifact.count / 100.0f;
+            AEClamp(GameManager.enemyProfile.bonusBallSpawnRate, 0.01f, 1);
         }
         break;
     case 030://Heals X times more
