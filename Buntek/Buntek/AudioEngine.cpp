@@ -88,18 +88,18 @@ void _audioManager::Update()
     fmodSystem->update();
 }
 
-void _audioManager::Clean()
-{
-    // Clean up.
-    map<string, Sound*>::iterator start;
-    for (start = soundDatabase.begin(); start != soundDatabase.end(); start++)
-        start->second->release();
-
-    for (start = musicDatabase.begin(); start != musicDatabase.end(); start++)
-        start->second->release();
-    //channelGroup->release();
-    fmodSystem->release();
-}
+//void _audioManager::Clean()
+//{
+//    // Clean up.
+//    map<string, Sound*>::iterator start;
+//    for (start = soundDatabase.begin(); start != soundDatabase.end(); start++)
+//        start->second->release();
+//
+//    for (start = musicDatabase.begin(); start != musicDatabase.end(); start++)
+//        start->second->release();
+//    //channelGroup->release();
+//    fmodSystem->release();
+//}
 
 void _audioManager::LoadSound(string name)
 {
@@ -149,13 +149,13 @@ void _audioManager::Free(void)
     isActive = false;
 }
 
-Sound* _audioManager::GetSound(string name)
-{
-    auto search = soundDatabase.find(name);
-    if (search != soundDatabase.end())
-        return search->second;
-    return NULL;
-}
+//Sound* _audioManager::GetSound(string name)
+//{
+//    auto search = soundDatabase.find(name);
+//    if (search != soundDatabase.end())
+//        return search->second;
+//    return NULL;
+//}
 
 //bool _audioManager::succeededOrWarn(const std::string& message, FMOD_RESULT result)
 //{

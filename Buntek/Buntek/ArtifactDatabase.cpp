@@ -23,10 +23,10 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     {
     case 000://Increase damage
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusDamage = (float)artifact.count;
+            GameManager.playerProfile.bonusDamage = artifact.count;
         }
         else {
-            GameManager.enemyProfile.bonusDamage = (float)artifact.count;
+            GameManager.enemyProfile.bonusDamage = artifact.count;
         }
         break;
     case 001://Increase max hp

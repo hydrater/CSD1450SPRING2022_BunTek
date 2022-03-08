@@ -27,7 +27,7 @@ public:
     static _audioManager& Instance(void);
     //bool succeededOrWarn(const std::string& message, FMOD_RESULT result);
     //Channel* GetMusicChannel(void);
-    void Clean(void);
+    //void Clean(void);
     void PlayClip(string audiClip);
     void PlayMusic(string musicTrack);
     void StopMusic(void);
@@ -41,7 +41,7 @@ public:
     void UnloadSound(string name);
     void UnloadMusic(string name);
     void Free(void);
-    Sound* GetSound(string name);
+    //Sound* GetSound(string name);
 };
 //
 //FMOD_RESULT F_CALLBACK channelGroupCallback(FMOD_CHANNELCONTROL* channelControl,

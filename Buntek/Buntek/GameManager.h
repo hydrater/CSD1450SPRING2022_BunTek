@@ -37,7 +37,7 @@ public:
         short attackType;
 
         float bonusHp = 0;
-        float bonusDamage = 0;
+        int bonusDamage = 0;
         float bonusPaddleSpeed = 1;
         float bonusBallSpeed = 1;
         float bonusBallSpawnRate = 1;
