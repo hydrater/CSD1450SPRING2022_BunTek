@@ -29,7 +29,7 @@ public:
 	string GenerateRandomDialogueID(void);		// REMEMBER TO UPDATE THIS WHEN YOU ADD MORE ARTIFACTS
 
 	// Dialogue_Function
-	void DF_DisplayArtifact(Button* button, unsigned long ID);
+	void DF_DisplayArtifact(unsigned long ID);
 
 	bool UIOpen = false, UIDecision = false;	// UIDecision: Prevents user from clicking to next dialogue 
 

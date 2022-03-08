@@ -109,14 +109,22 @@ void LaunchButtonEffect(Button* button)
 {
 	// Get ButtonID and pathID
 	string buttonCommand = "";
-	for (int i{ 0 }; i < UIDialogueManager.dialogueButtonList.size(); ++i)
+	if (button != nullptr)
 	{
-		if (UIDialogueManager.dialogueButtonList[i] == button && i < UIDialogueManager.dialogueButtonIDList.size())
+		for (int i{ 0 }; i < UIDialogueManager.dialogueButtonList.size(); ++i)
 		{
-			buttonCommand = UIDialogueManager.dialogueButtonIDList[i];
-			break;
+			if (UIDialogueManager.dialogueButtonList[i] == button && i < UIDialogueManager.dialogueButtonIDList.size())
+			{
+				buttonCommand = UIDialogueManager.dialogueButtonIDList[i];
+				break;
+			}
 		}
 	}
+	else
+	{
+		buttonCommand = DialogueDatabase.forceCommand;
+	}
+	
 
 	if (buttonCommand == "")
 		return;
@@ -163,7 +171,8 @@ void LaunchButtonEffect(Button* button)
 
 		if (GameManager.playerProfile.hp > truemaxhp)
 			GameManager.playerProfile.hp = truemaxhp;
-		RemoveDialogue(button);
+		UIDialogueManager.UIDecision = false;
+		UIDialogueManager.SkipDialogue();
 		break;
 	}
 	case 4:
@@ -174,16 +183,20 @@ void LaunchButtonEffect(Button* button)
 		// Check if player can select this button (Can afford price)
 		if (GameManager.playerProfile.stardust < DialogueDatabase.fullHealthCost)
 		{
-			button->SetClickable(false);
-			button->Owner()->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
-			button->Owner()->GetComponent<TextRenderer>()->SetTextColor(1.0f, 0.f, 0.f);
-			break;
-		}
+			if (button != nullptr)
+			{
+				button->SetClickable(false);
+				button->Owner()->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
+				button->Owner()->GetComponent<TextRenderer>()->SetTextColor(1.0f, 0.f, 0.f);
+				break;
+			}
 
-		// Heal player by Full by using stardust
-		GameManager.playerProfile.stardust -= DialogueDatabase.fullHealthCost;
-		GameManager.playerProfile.hp = truemaxhp;
-		RemoveDialogue(button);
+			// Heal player by Full by using stardust
+			GameManager.playerProfile.stardust -= DialogueDatabase.fullHealthCost;
+			GameManager.playerProfile.hp = truemaxhp;
+			UIDialogueManager.UIDecision = false;
+			UIDialogueManager.SkipDialogue();
+		}
 		break;
 	}
 	case 5:
@@ -194,7 +207,7 @@ void LaunchButtonEffect(Button* button)
 		// Assign to allocated vector
 		SaveManager.AddToArtifactList(randoID);
 
-		UIDialogueManager.DF_DisplayArtifact(button, randoID);
+		UIDialogueManager.DF_DisplayArtifact(randoID);
 		break;
 	}
 	case 6:
@@ -205,7 +218,7 @@ void LaunchButtonEffect(Button* button)
 		// Assign to allocated vector
 		SaveManager.AddToArtifactList(randoID);
 
-		UIDialogueManager.DF_DisplayArtifact(button, randoID);
+		UIDialogueManager.DF_DisplayArtifact(randoID);
 		break;
 	}
 	case 7:
@@ -234,8 +247,12 @@ void LaunchButtonEffect(Button* button)
 	default:
 	{
 		// Force close if nothing can happen
-		RemoveDialogue(button);
+		UIDialogueManager.UIDecision = false;
+		UIDialogueManager.SkipDialogue();
 		break;
 	}
 	}
+
+	// Reset forceCommand
+	DialogueDatabase.forceCommand = "";
 }
