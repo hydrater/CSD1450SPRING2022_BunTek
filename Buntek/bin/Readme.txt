@@ -33,7 +33,13 @@ Some of it are placeholders to get the vibe check,  but we will be improving it,
 see you guys in beta with a more polished version!
 
 4. Some encounters are incomplete
-You will see "Not implemented yet"
+You will see "Not implemented yet", you just get nothing lmao get rekt by RNG
+
+5. You can edit the game volume with arrow keys, it will be accessible
+through the option button in beta.
+Left and right arrow for editing music volume
+Up and down arrow for editing sound fx volume
+BE CAREFUL, THE VOLUME IS UNCAPPED
 
 Why aren't the above mentioned things implemented yet?
 That's because......

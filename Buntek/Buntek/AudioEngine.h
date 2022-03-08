@@ -14,20 +14,20 @@ private:
     _audioManager(void);
     ~_audioManager(void);
     System* fmodSystem = NULL;
-    Channel* soundChannel = nullptr;
+    Channel* audioClipChannel = nullptr;
     Channel* musicChannel = nullptr;
     ChannelGroup* channelGroup = nullptr;
     map<string, Sound*> soundDatabase;
     map<string, Sound*> musicDatabase;
     bool isActive = true;
-    float soundVol = 1, musicVol = 1;
-    const float  musicVolOffset = 0.6f;
+    float soundVol = .5f, musicVol = .5f;
+    const float  musicVolOffset = 0.3f;
     
 public:
     static _audioManager& Instance(void);
     //bool succeededOrWarn(const std::string& message, FMOD_RESULT result);
-    Channel* GetMusicChannel(void);
-    void CleanPlaying(void);
+    //Channel* GetMusicChannel(void);
+    void Clean(void);
     void PlayClip(string audiClip);
     void PlayMusic(string musicTrack);
     void StopMusic(void);
