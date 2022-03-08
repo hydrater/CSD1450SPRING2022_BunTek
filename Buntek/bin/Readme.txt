@@ -24,22 +24,24 @@ https://docs.google.com/forms/d/e/1FAIpQLScuD-oyTXlUahcOZD3rJlF_7knbTXFmxq-3cLLf
 Notes and outstanding things:
 1. Currently, you can press "I" to look at what artifacts you have
 It will be accessible from buttons later on.
+Enemies will also have a list of artifacts but they are unviewable
+at the moment.
 
 2. When you die, you load to the main menu
-There are no telegraphs or feedback yet and it will be implemented soon
+There are no telegraphs or feedback yet but it will be implemented soon
 
-3. Aesthetics, visuals and audio
-Some of it are placeholders to get the vibe check,  but we will be improving it, 
-see you guys in beta with a more polished version!
+3. Some encounters are incomplete
+You will see "Not implemented yet" and you just get nothing.
 
-4. Some encounters are incomplete
-You will see "Not implemented yet", you just get nothing lmao get rekt by RNG
-
-5. You can edit the game volume with arrow keys, it will be accessible
-through the option button in beta.
+4. You can edit the game volume with arrow keys, it will be accessible
+through a menu in beta with interactive sliders but for now:
 Left and right arrow for editing music volume
 Up and down arrow for editing sound fx volume
 BE CAREFUL, THE VOLUME IS UNCAPPED
+
+5. Aesthetics, visuals and audio
+Some of it are placeholders to get the vibe check,  but we will be improving it, 
+see you guys in beta with a more polished version!
 
 Why aren't the above mentioned things implemented yet?
 That's because......
