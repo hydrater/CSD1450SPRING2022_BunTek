@@ -247,11 +247,13 @@ void LaunchButtonEffect(Button* button)
 			// Game over
 			GameManager.GameOver();
 		}
+		break;
 	}
 	case 9:
 	{
 		// Start Battle
 		GameManager.StartBattle(2);
+		break;
 	}
 	case 10:
 	{
@@ -266,15 +268,13 @@ void LaunchButtonEffect(Button* button)
 			GameManager.playerProfile.stardust -= 20;
 			UIDialogueManager.CreateDialoguePreset("R002", 3);
 		}
+		break;
 	}
 	case 11:
 	{
 		// Obtain 20 stardust
 		GameManager.playerProfile.stardust += 20;
-	}
-	case 12:
-	{
-
+		break;
 	}
 	default:
 	{

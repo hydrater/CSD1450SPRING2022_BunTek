@@ -100,6 +100,7 @@ void _mapData::GenerateMapData(void)
     }
 
     currentNode->nodeType = NodeType::Nothing;
+
     exitNode->nodeType = NodeType::Boss;
 
     SaveManager.SaveData();
@@ -162,6 +163,8 @@ void _mapData::GenerateMapObject(void)
         nodeList[i]->nodeObject = temp;
     }
 
+    currentNode->nodeObject->GetComponent<SpriteRenderer>()->SetColor(0.4f, 0.8f, 1.f);
+
     GameObject* temp = new GameObject;
     SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
     tempRenderer->Size((float)AEGetWindowWidth() * 1.5f, (float)AEGetWindowWidth() * 1.5f);
@@ -186,11 +189,7 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
     for (AEGfxVertexList* ver : MapData.connectedLines)
         AEGfxMeshFree(ver);
 
-    for (AEGfxVertexList* ver : MapData.travelHistoryLines)
-        AEGfxMeshFree(ver);
-
     MapData.connectedLines.clear();
-    MapData.travelHistoryLines.clear();
     MapData.SetClickable(false);
     MapData.SetHoverable(false);
     for (int k = 0; k < nodeList.size(); k++)
@@ -252,12 +251,12 @@ void _mapData::DisplayNodeHistory(void)
         // Draw Line
         if (prevNode != nullptr && currNode != nullptr && prevNode != currNode)
         {
-            /*AEGfxVertexList* newLine;
+            AEGfxVertexList* newLine;
             AEGfxMeshStart();
-            AEGfxVertexAdd(prevNode->pos.x, prevNode->pos.y, 0xFFFF0000, 0.0f, 0.0f);
-            AEGfxVertexAdd(currNode->pos.x, currNode->pos.y, 0xFFFF0000, 0.0f, 0.0f);
+            AEGfxVertexAdd(prevNode->pos.x, prevNode->pos.y, 0xFF3000FF, 0.0f, 0.0f);
+            AEGfxVertexAdd(currNode->pos.x, currNode->pos.y, 0xFF3000FF, 0.0f, 0.0f);
             newLine = AEGfxMeshEnd();
-            MapData.travelHistoryLines.push_back(newLine);*/
+            MapData.travelHistoryLines.push_back(newLine);
         }
         prevNode = currNode;
     }
@@ -280,6 +279,8 @@ void _mapData::Travel(Node* destination)
     {
         // Enact dest node effects
         MapData.travelHistoryIDs.push_back(currentNode->ID);
+        currentNode->nodeObject->GetComponent<SpriteRenderer>()->SetColor(1.f, 1.f, 1.f);
+        destinationNode->nodeObject->GetComponent<SpriteRenderer>()->SetColor(0.4f, 0.8f, 1.f);
         currentNode = destinationNode;
         DisplayNodeRoutes(playerTravelDistance);
         switch (destinationNode->nodeType)
