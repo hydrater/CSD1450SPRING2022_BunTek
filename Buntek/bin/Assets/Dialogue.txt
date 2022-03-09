@@ -51,7 +51,7 @@ I have chanced upon this peculiar magic mushroom.
 Would you like to buy it off of me?
 /b2 Buy the mushroom
 /b0 Refuse the offer
-/b5|aed Steal the mushroom
+/b2|R000 Steal the mushroom
 
 E001
 /d  1
@@ -168,4 +168,7 @@ E0011
 Not implemented yet
 
 Responses================================================================================================================
-
+R000
+/d  6
+/aw asd
+STOP YOU THIEF

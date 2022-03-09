@@ -376,8 +376,9 @@ void UI_DialogueHandler::DeleteDialogueEvent(void)
 
 string UI_DialogueHandler::GenerateRandomDialogueID(void)
 {
-    string id = "E";
-    id += "00" + to_string(RandIntMinMax(0, 11));
+    /*string id = "E00";
+    id += to_string(RandIntMinMax(0, 11));*/
+    string id = "E000";
     return id;
 }
 

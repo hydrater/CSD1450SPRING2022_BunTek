@@ -158,6 +158,8 @@ void LaunchButtonEffect(Button* button)
 	case 2:
 	{
 		// Go to a specific dialogue/encounter
+		cout << "called" << endl;
+		cout << buttonPath << endl;
 		UIDialogueManager.CreateDialoguePreset(buttonPath, 3);
 		break;
 	}
