@@ -21,4 +21,5 @@ private:
     GameObject* playerHp = 0;
     GameObject* playerCurrency = 0;
     GameObject* playerCurrencyText = 0;
+    GameObject* playerArtifactsBtn = 0;
 };
