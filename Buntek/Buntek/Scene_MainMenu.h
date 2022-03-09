@@ -17,9 +17,9 @@ public:
     TextRenderer* displayTxt = 0;
 
 private:
-    GameObject* background = 0, *MainMenu = 0;
+    GameObject* background = 0, *mainMenu = 0;
     GameObject* startBtn = 0, * optionBtn = 0, * quitBtn = 0, * howtoplayBtn = 0, * creditsBtn = 0;
-    SpriteRenderer* polkaDotter = 0, *mask = 0, *mainArtRenderer = 0;
+    SpriteRenderer* polkaDotter = 0, *mask = 0, *mainArtRenderer = 0, * title = 0;
     Transform* disc = 0, *fake = 0, *bottom = 0, *border = 0;
     float animTimer = 0, artSwitchTimer = 0;
     bool finishedSetup = false;

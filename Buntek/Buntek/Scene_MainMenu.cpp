@@ -42,8 +42,6 @@ void Scene_MainMenu::Start(void)
 	AudioManager.LoadMusic("kidding.ogg");
 	AudioManager.PlayMusic("kidding.ogg");
 
-	AssetManager.LoadTexture("Menu/Mask_MainMenu.png");
-	AssetManager.LoadTexture("Menu/MainMenuFull.png");
 	AssetManager.LoadTexture("Menu/PolkaSquare.png");
 	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
@@ -51,6 +49,8 @@ void Scene_MainMenu::Start(void)
 	AssetManager.LoadTexture("Menu/Fake.png");
 	AssetManager.LoadTexture("Menu/Bottom.png");
 	AssetManager.LoadTexture("Menu/Border.png");
+	AssetManager.LoadTexture("Menu/Title.png");
+	AssetManager.LoadTexture("Concepts/Full-Yggdrasil.png");
 	AssetManager.LoadTexture("Concepts/Mask-Yggdrasil.png");
 	AssetManager.LoadTexture("Concepts/Mask-Volcano.png");
 	AssetManager.LoadTexture("Concepts/Mask-Rainforest.png");
@@ -60,13 +60,13 @@ void Scene_MainMenu::Start(void)
 	background->transform->SetPosition(Vector2(20, 0));
 	mainArtRenderer = background->AddComponent<SpriteRenderer>();
 	mainArtRenderer->Size(1958, 1101);
-	mainArtRenderer->SetTexture("Menu/MainMenuFull.png");
+	mainArtRenderer->SetTexture("Concepts/Full-Yggdrasil.png");
 	mainArtRenderer->SetLayer(-1);
 	background->AddComponent<Parallaxer>()->distance = 150.0f;
 
-	MainMenu = new GameObject();
-	MainMenu->transform->SetPosition(Vector2(-100, 0));
-	polkaDotter = MainMenu->AddComponent<SpriteRenderer>();
+	mainMenu = new GameObject();
+	mainMenu->transform->SetPosition(Vector2(-100, 0));
+	polkaDotter = mainMenu->AddComponent<SpriteRenderer>();
 	polkaDotter->Size(1900, 1100);
 	polkaDotter->SetTexture("Menu/PolkaSquare.png");
 	polkaDotter->SetLayer(-2);
@@ -175,7 +175,9 @@ void Scene_MainMenu::Start(void)
 	button->HoverEffect = &BtnFuncHover_Quit;
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
-	mask = devTools.CreateSpriteGameObject("Concepts/Yggdrasil.png", 1958, 1101, AE_GFX_BM_BLEND, Vector2(20, 0), 0)->GetComponent<SpriteRenderer>();
+	title = devTools.CreateSpriteGameObject("Menu/Title.png", 1008, 116, AE_GFX_BM_BLEND, Vector2(-400, 400), 6)->GetComponent<SpriteRenderer>();
+
+	mask = devTools.CreateSpriteGameObject("Concepts/Full-Yggdrasil.png", 1958, 1101, AE_GFX_BM_BLEND, Vector2(20, 0), 0)->GetComponent<SpriteRenderer>();
 	mask->Owner()->AddComponent<Parallaxer>()->distance = 150.0f;
 	mask->SetOpacity(0);
 
@@ -208,7 +210,7 @@ void Scene_MainMenu::Update(void)
 		switch (cycle)
 		{
 		case 0:
-			mask->SetTexture("Concepts/Mask-Yggdrasil.png");
+			mask->SetTexture("Concepts/Mask-CrystalCaves.png");
 			break;
 
 		case 1:
@@ -220,8 +222,9 @@ void Scene_MainMenu::Update(void)
 			break;
 
 		case 3:
-			mask->SetTexture("Concepts/Mask-CrystalCaves.png");
+			mask->SetTexture("Concepts/Mask-Yggdrasil.png");
 			break;
+
 		default:
 			break;
 		}
@@ -282,9 +285,9 @@ void Scene_MainMenu::Update(void)
 		border->SetRotation(0);
 		border->Owner()->AddComponent<Parallaxer>()->distance = 150.0f;
 
-		background->GetComponent<SpriteRenderer>()->SetTexture("Menu/Mask_MainMenu.png");
+		background->GetComponent<SpriteRenderer>()->SetTexture("Concepts/Mask-Yggdrasil.png");
 
-		AssetManager.UnloadTexture("Menu/MainMenuFull.png");
+		AssetManager.UnloadTexture("Concepts/Full-Yggdrasil.png");
 		AssetManager.UnloadTexture("Menu/Fake.png");
 		disc->SetScale(Vector2(1, 1));
 		bottom->SetScale(Vector2(1, 1));
@@ -312,13 +315,13 @@ Scene_MainMenu::~Scene_MainMenu(void)
 {
 	AudioManager.UnloadSound("ButtonHover.mp3");
 	AudioManager.UnloadMusic("kidding.ogg");
-	AssetManager.UnloadTexture("Menu/Mask_MainMenu.png");
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
 	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 	AssetManager.UnloadTexture("Menu/Disc.png");
 	AssetManager.UnloadTexture("Menu/Bottom.png");
 	AssetManager.UnloadTexture("Menu/Border.png");
+	AssetManager.UnloadTexture("Menu/Title.png");
 	AssetManager.UnloadTexture("Concepts/Mask-Yggdrasil.png");
 	AssetManager.UnloadTexture("Concepts/Mask-Volcano.png");
 	AssetManager.UnloadTexture("Concepts/Mask-Rainforest.png");
