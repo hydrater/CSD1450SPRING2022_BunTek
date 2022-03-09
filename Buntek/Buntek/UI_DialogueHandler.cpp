@@ -123,7 +123,7 @@ void UI_DialogueHandler::StartDialogueEvent(string flag)
     if (dialogueList.size() == 0)
     {
         cout << "[UI_DialogueHandler] WARNING! [" << flag << "] can't be found! Closing Dialogue...\n";
-        RemoveDialogue(dialogueButtonList[0]);
+        RemoveDialogue(nullptr);
     }
 
     doneDisplay = false;
@@ -182,6 +182,7 @@ void UI_DialogueHandler::LoadFromFile(string flag)
     bool canAdd = false;
 
     dialogueList.clear();
+    dialogueNo = 0;
 
     for (string line; getline(ss, line, '\n');)
         inputList.push_back(line);
