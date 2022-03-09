@@ -3,6 +3,7 @@
 #include "GameManager.h"
 #include "BallBehavior.h"
 #include <algorithm>
+#include "SaveManager.h"
 
 _artifactdatabase::_artifactdatabase()
 {
@@ -174,7 +175,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         }
         break;
     case 540://B2: Negate next damage
-        if (ball->GetComponent<BallBehavior>()->ballPhase >= 2) {
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 4) {
             if (isPlayerTheCaster) {
                 for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
                 {
@@ -209,18 +210,29 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             }
         }
         break;
-    case 541://B2: Negate next damage
-        if (ball->GetComponent<BallBehavior>()->ballPhase >= 2) {
-            if (isPlayerTheCaster) {
-                if (artifact.count > 1) {
-                    GameManager.playerHp = (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) / 2;
-                    artifact.count = 0;
+    case 541://On death, restores 50 % hp, destroy this artifact
+        if (isPlayerTheCaster) {
+            if (artifact.count >= 1 && GameManager.playerHp <= 0) {
+                GameManager.playerHp = (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) / 2;
+                for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_TakeDamage.size(); ++i)
+                {
+                    if (GameManager.playerArtifactList.behaviorList_TakeDamage[i].ID == 541) {
+                        GameManager.playerArtifactList.behaviorList_TakeDamage[i].count--;
+                        SaveManager.RemoveFromArtifactList(541);
+                    }
                 }
+                
             }
-            else {
-                if (artifact.count > 1) {
-                    GameManager.enemyHp = (GameManager.enemyProfile.basemaxhp + GameManager.enemyProfile.bonusHp) / 2;
-                    artifact.count = 0;
+        }
+        else {
+            if (artifact.count >= 1 && GameManager.enemyHp <= 0) {
+                GameManager.enemyHp = (GameManager.enemyProfile.basemaxhp + GameManager.enemyProfile.bonusHp) / 2;
+                for (size_t i = 0; i < GameManager.enemyArtifactList.behaviorList_TakeDamage.size(); ++i)
+                {
+                    if (GameManager.enemyArtifactList.behaviorList_TakeDamage[i].ID == 541) {
+                        GameManager.enemyArtifactList.behaviorList_TakeDamage[i].count--;
+                        SaveManager.RemoveFromArtifactList(541);
+                    }
                 }
             }
         }
@@ -400,7 +412,7 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 530:
         return "Ball phase >= 3:\nWhen taking damage, if hp is below 20%, unable to take damage for a while";
     case 540:
-        return "Ball phase >= 2:\nWhen taking damage, negate next damage taken";
+        return "Ball phase >= 4:\nWhen taking damage, negate next damage taken";
     case 541:
         return "On death, restores 50% hp, destroy this artifact";
     case 630:
