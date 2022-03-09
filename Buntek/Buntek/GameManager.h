@@ -87,6 +87,7 @@ public:
     // Battle
     void InitBattle(float _playerHp, float _enemyHp);
     void DealDamage(float damage, bool isPlayer);
+    void HealthCheck(bool isPlayer);
     short GetEnemyType(void);
 
     // Battle metrics

@@ -231,13 +231,6 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
             }
         }
         playerHp -= damage;
-
-        // Player game over
-        if (playerHp <= 0)
-        {
-            GameManager.playerProfile.hp = GameManager.playerHp;
-            GameOver();
-        }
     }
     else
     {
@@ -254,7 +247,21 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
             }
         }
         enemyHp -= damage;
+    }
+}
 
+void _gameManager::HealthCheck(bool isPlayer) {
+    if (isPlayer)
+    {
+        // Player game over
+        if (playerHp <= 0)
+        {
+            GameManager.playerProfile.hp = GameManager.playerHp;
+            GameOver();
+        }
+    }
+    else
+    {
         // Enemy game over
         if (enemyHp <= 0)
         {

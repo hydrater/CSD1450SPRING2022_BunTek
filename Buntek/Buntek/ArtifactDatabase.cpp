@@ -134,7 +134,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     case 530://B3: If hp is below <20%, unable to take damage for X second,
         if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
             if (isPlayerTheCaster) {
-                if (GameManager.playerHp < GameManager.playerProfile.basemaxhp / 5) {
+                if (GameManager.playerHp < (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp )/ 5) {
                     for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
                     {
                         if (GameManager.playerArtifactList.statusEffect[i].statusID == 00) {
@@ -153,7 +153,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                 }
             }
             else {
-                if (GameManager.enemyHp < GameManager.enemyProfile.basemaxhp / 5) {
+                if (GameManager.enemyHp < (GameManager.enemyProfile.basemaxhp + GameManager .enemyProfile.bonusHp )/ 5) {
                     for (size_t i = 0; i < GameManager.enemyArtifactList.statusEffect.size(); ++i)
                     {
                         if (GameManager.enemyArtifactList.statusEffect[i].statusID == 00) {
@@ -205,6 +205,22 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                     temp.statusID = 00;
                     temp.statusCount = 1;
                     GameManager.enemyArtifactList.statusEffect.push_back(temp);
+                }
+            }
+        }
+        break;
+    case 541://B2: Negate next damage
+        if (ball->GetComponent<BallBehavior>()->ballPhase >= 2) {
+            if (isPlayerTheCaster) {
+                if (artifact.count > 1) {
+                    GameManager.playerHp = (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) / 2;
+                    artifact.count = 0;
+                }
+            }
+            else {
+                if (artifact.count > 1) {
+                    GameManager.enemyHp = (GameManager.enemyProfile.basemaxhp + GameManager.enemyProfile.bonusHp) / 2;
+                    artifact.count = 0;
                 }
             }
         }
