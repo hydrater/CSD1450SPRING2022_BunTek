@@ -53,6 +53,7 @@ public:
     void SetClickable(bool _canClick);
     void SetHoverable(bool _canHover);
     void PenaltyZoneUpdate(void);
+    void DeleteMapData(void);
     Node* GetNode(GameObject* object);
     float playerTravelDistance = 400;
 
@@ -78,6 +79,5 @@ private:
     float minDistance = 125;
     float maxDistance = 400;
     float buffer = 75;
-    void DeleteNodeList(void);
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };

@@ -289,6 +289,7 @@ short _gameManager::GetEnemyType(void)
 
 void _gameManager::GameOver(void)
 {
+    MapData.DeleteMapData();
     SaveManager.DeleteSave();
     SceneManager.LoadScene(new Scene_MainMenu , TransitionType::FadeTransition, true);
 }

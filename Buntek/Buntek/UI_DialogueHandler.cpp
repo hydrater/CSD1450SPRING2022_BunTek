@@ -378,7 +378,7 @@ string UI_DialogueHandler::GenerateRandomDialogueID(void)
 {
     string id = "E00";
     id += to_string(RandIntMinMax(0, 7));
-    //string id = "E006";
+    //id = "E001";
     return id;
 }
 

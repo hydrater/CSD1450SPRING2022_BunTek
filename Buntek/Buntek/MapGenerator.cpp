@@ -16,7 +16,7 @@ _mapData::_mapData(void)
 
 _mapData::~_mapData(void)
 {
-    DeleteNodeList();
+    DeleteMapData();
 }
 
 _mapData& _mapData::Instance(void)
@@ -27,17 +27,13 @@ _mapData& _mapData::Instance(void)
 
 void _mapData::GenerateMapData(void)
 {
-    nodeList.clear();
+    DeleteMapData();
+
     float StartXCoord = (float)(-AEGetWindowWidth() / 2) + buffer;
     float EndXCoord = (float)(AEGetWindowWidth() / 2) - buffer;
     float StartYCoord = (float)(-AEGetWindowHeight() / 2) + buffer;
     float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
 
-    DeleteNodeList();
-    if (penaltyZone != nullptr) {
-        penaltyZone->Delete();
-        penaltyZone = nullptr;
-    }
     penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.3f), RandFloatMinMax(StartYCoord, EndYCoord));
 
 
@@ -390,8 +386,11 @@ _mapData::Node* _mapData::GetNode(GameObject* object)
     return NULL;
 }
 
-void _mapData::DeleteNodeList(void)
+void _mapData::DeleteMapData(void)
 {
+    if (nodeList.empty())
+        return;
+
     for (int i = 0; i < nodeList.size(); ++i)
         delete nodeList[i];
 
@@ -400,6 +399,12 @@ void _mapData::DeleteNodeList(void)
 
     for (AEGfxVertexList* ver : MapData.travelHistoryLines)
         AEGfxMeshFree(ver);
+
+    if (penaltyZone != nullptr)
+    {
+        penaltyZone->Delete();
+        penaltyZone = nullptr;
+    }
 
     connectedLines.clear();
     travelHistoryLines.clear();
