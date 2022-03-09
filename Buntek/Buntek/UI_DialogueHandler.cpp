@@ -35,7 +35,6 @@ void UI_DialogueHandler::Update(void)
 
         if (AEInputCheckTriggered(AEVK_LBUTTON) && !UIDecision)
         {
-            cout << "EE: " << displayNo << "|" << dialogueFinalDisplayTxt.size() << "[]" << UINotification << endl;
             if (displayNo < dialogueFinalDisplayTxt.size())
                 doneDisplay = true;
             else
