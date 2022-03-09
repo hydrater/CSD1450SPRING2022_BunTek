@@ -20,8 +20,12 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     GameObject* shopUI = this->Owner();
     DisplayedShop = shop;
 
+    // Background
+    GameObject* tempBckgrnd = devTools.CreateSpriteGameObject("ShopBackground.png", AEGetWindowWidth(), AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.f);
+    shopUI->AddChild(tempBckgrnd);
+
     // Header
-    GameObject* tempHeader = devTools.CreateSpriteGameObject("Encounter.png", 600, 100, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.25f),(short)(sortingLayer - 1), 0.5f);
+    GameObject* tempHeader = devTools.CreateSpriteGameObject("Encounter.png", 600, 100, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.25f),(short)(sortingLayer + 1), 0.5f);
    
 
     // HeaderText
@@ -37,25 +41,26 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     shopUI->AddChild(tempHeader);
 
     // StarDust Display
-    GameObject* tempCurrencyDisplay = devTools.CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, Vector2(-AEGetWindowWidth()/ 2.5f, AEGetWindowHeight() / 2.25f), (short)(sortingLayer - 1), 1);
+    GameObject* tempCurrencyDisplay = devTools.CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, Vector2(-AEGetWindowWidth()/ 2.5f, AEGetWindowHeight() / 2.25f), (short)(sortingLayer + 1), 1);
     SpriteRenderer* tempCurrencySprite = tempCurrencyDisplay->GetComponent<SpriteRenderer>();
     tempCurrencySprite->SetColor(0.85f, 0.5f, 0.5f);
-    GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("Steven.jpg", 80, 80, AE_GFX_BM_BLEND,
-        Vector2(tempCurrencyDisplay->transform->worldposition.x - 100, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer), 1);
-    GameObject* tempCurrencyTextObj = devTools.CreateSpriteGameObject("Steven.jpg", 180, 80, AE_GFX_BM_BLEND, Vector2(tempCurrencyDisplay->transform->worldposition.x + 50, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer)+1, 0);
-    TextRenderer* tempCurrencyText = devTools.AddTextToSpriteGameObject(tempCurrencyTextObj, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, (short)(sortingLayer)+1);
+    GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("UI/Stardust.png", 80, 80, AE_GFX_BM_BLEND,
+        Vector2(tempCurrencyDisplay->transform->worldposition.x - 100, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer + 2), 1);
+    GameObject* tempCurrencyTextObj = devTools.CreateSpriteGameObject("UI/Stardust.png", 180, 80, AE_GFX_BM_BLEND, Vector2(tempCurrencyDisplay->transform->worldposition.x + 50, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer) + 3, 0);
+    TextRenderer* tempCurrencyText = devTools.AddTextToSpriteGameObject(tempCurrencyTextObj, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, (short)(sortingLayer) + 3);
     tempCurrencyText->SetTextColor(0, 0, 0);
     shopUI->AddChild(tempCurrencyDisplay);
     shopUI->AddChild(tempCurrencyIcon);
     shopUI->AddChild(tempCurrencyTextObj);
 
     // Leave Button
-    GameObject* tempLeave = devTools.CreateSpriteGameObject("Buttons.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 2.5f));
+    GameObject* tempLeave = devTools.CreateSpriteGameObject("Buttons.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 2.5f), (short)(sortingLayer + 2));
     TextRenderer* tempLeaveTxtRenderer = 0;
     tempLeaveTxtRenderer = tempLeave->AddComponent<TextRenderer>();
     tempLeaveTxtRenderer->SetFont("Gabriola.ttf");
     tempLeaveTxtRenderer->SetTextColor(1, 1, 1);
     tempLeaveTxtRenderer->SetText("Leave");
+    tempLeaveTxtRenderer->SetLayer((short)(sortingLayer + 2));
     Button* tempLeaveButton = tempLeave->AddComponent<Button>();
     tempLeaveButton->sr = tempLeave->GetComponent<SpriteRenderer>();
     tempLeaveButton->tr = tempLeaveTxtRenderer;
@@ -69,7 +74,7 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
         if (i < buttonArtifactPos.size())
         {
             GameObject* tempButtonObj = devTools.CreateArtifactUIGameObject(shop.ArtifactsOnDisplay[i],
-                Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y), sortingLayer - 1);
+                Vector2(buttonArtifactPos[i].x, buttonArtifactPos[i].y), sortingLayer + 2);
 
             Button* tempButton = tempButtonObj->AddComponent<Button>();
             tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
@@ -98,7 +103,7 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
             }
             
             GameObject* tempPriceObj = devTools.CreatePriceTagGameObject(price, AE_GFX_BM_BLEND,
-                Vector2(buttonArtifactPos[i].x + tempButton->sr->GetHalfWidth() * 1.1f, buttonArtifactPos[i].y + tempButton->sr->GetHalfHeight() / 2.f), sortingLayer);
+                Vector2(buttonArtifactPos[i].x + tempButton->sr->GetHalfWidth() * 1.1f, buttonArtifactPos[i].y + tempButton->sr->GetHalfHeight() / 2.f), sortingLayer + 2);
             tempButtonObj->AddChild(tempPriceObj);
 
             shopUI->AddChild(tempButtonObj);

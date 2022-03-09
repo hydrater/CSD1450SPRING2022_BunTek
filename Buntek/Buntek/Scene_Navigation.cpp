@@ -32,6 +32,8 @@ void Scene_Navigation::Start(void)
 	AssetManager.LoadTexture("UI/Rest.png");
 	AssetManager.LoadTexture("UI/Shop.png");
 	AssetManager.LoadTexture("UI/Boss.png");
+	AssetManager.LoadTexture("UI/Stardust.png");
+	AssetManager.LoadTexture("ShopBackground.png");
 
 	splashimage1 = devTools.CreateSpriteGameObject("Static Stars 1.png", 3960, 1080, AE_GFX_BM_ADD, Vector2(0, 0), -3);
 	splashimage1->AddComponent<AlphaChanger>()->SetOscillation(5.0f, 1.0f, 0.5f, 0);
@@ -102,6 +104,8 @@ Scene_Navigation::~Scene_Navigation(void)
 	AssetManager.UnloadTexture("UI/Rest.png");
 	AssetManager.UnloadTexture("UI/Shop.png");
 	AssetManager.UnloadTexture("UI/Boss.png");
+	AssetManager.UnloadTexture("UI/Stardust.png");
+	AssetManager.UnloadTexture("ShopBackground.png");
 	AudioManager.UnloadMusic("NavigationBGM.mp3");
 	MapData.penaltyZone = nullptr;
 }
