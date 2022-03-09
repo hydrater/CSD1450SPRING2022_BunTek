@@ -71,6 +71,7 @@ public:
 
     // Artifact list UI
     GameObject* artifactListUI = NULL;
+    void DisplayArtifactList(void);
 
     // Battle arena info
     float areaTopBoundary = 0;
