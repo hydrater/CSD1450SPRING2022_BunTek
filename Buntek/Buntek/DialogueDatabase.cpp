@@ -246,6 +246,11 @@ void LaunchButtonEffect(Button* button)
 			GameManager.GameOver();
 		}
 	}
+	case 9:
+	{
+		// Start Battle
+		GameManager.StartBattle(1);
+	}
 	default:
 	{
 		// Force close if nothing can happen

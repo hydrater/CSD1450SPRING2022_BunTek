@@ -6,7 +6,6 @@
 #include "AudioEngine.h"
 #include "GameManager.h"
 #include "UI_Hp.h"
-#include "Scene_Battle.h"
 #include "SaveManager.h"
 
 BattleHandler::BattleHandler(void) {
@@ -38,7 +37,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	}
 
 	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
-	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(GameManager.level * 5 * GameManager.currentEnemy));
+	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(GameManager.level * 5 * GameManager.GetEnemyType()));
 
 	ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_Passive, true);
 	ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_Passive, false);
