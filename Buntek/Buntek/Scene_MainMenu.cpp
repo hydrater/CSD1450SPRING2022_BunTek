@@ -176,6 +176,7 @@ void Scene_MainMenu::Start(void)
 	button->NotHoverEffect = &BtnFuncUnHover_Quit;
 
 	title = devTools.CreateSpriteGameObject("Menu/Title.png", 1008, 116, AE_GFX_BM_BLEND, Vector2(-400, 400), 6)->GetComponent<SpriteRenderer>();
+	title->SetOpacity(0);
 
 	mask = devTools.CreateSpriteGameObject("Concepts/Full-Yggdrasil.png", 1958, 1101, AE_GFX_BM_BLEND, Vector2(20, 0), 0)->GetComponent<SpriteRenderer>();
 	mask->Owner()->AddComponent<Parallaxer>()->distance = 150.0f;
@@ -202,6 +203,16 @@ void Scene_MainMenu::Update(void)
 {
 	animTimer += DeltaTime;
 	artSwitchTimer += DeltaTime;
+
+	if (animTimer > 1)
+	{
+		float tempOpacity = title->GetOpacity();
+		tempOpacity += DeltaTime;
+		if (tempOpacity > 1)
+			tempOpacity = 1;
+
+		title->SetOpacity(tempOpacity);
+	}
 
 	if (artSwitchTimer > 3)
 	{

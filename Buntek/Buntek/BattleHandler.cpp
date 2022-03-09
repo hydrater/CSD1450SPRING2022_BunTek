@@ -170,6 +170,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	AIBallSpawnTimer = AIBallSpawnTimerMax * GameManager.enemyProfile.bonusBallSpawnRate;
 
 	GameManager.InitBattle(selfHp, enemyHp); // Inits Player and Enemy HP
+	GameManager.battleOver = false;
 }
 
 void BattleHandler::Update(void) {
