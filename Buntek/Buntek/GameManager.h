@@ -34,7 +34,7 @@ public:
         float hp = 100;
         float basemaxhp = 100;
         int stardust;
-        int currLevel;
+        int currLevel = 1;
         short attackType;
 
         float bonusHp = 0;

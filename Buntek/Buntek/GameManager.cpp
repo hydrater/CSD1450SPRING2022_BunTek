@@ -292,5 +292,6 @@ void _gameManager::GameOver(void)
     SaveManager.artifactSaveData.clear();
     SaveManager.DeleteSave();
     MapData.DeleteMapData();
+    GameManager.playerProfile = {};
     SceneManager.LoadScene(new Scene_MainMenu , TransitionType::FadeTransition, true);
 }
