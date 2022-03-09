@@ -319,7 +319,7 @@ void _mapData::Travel(Node* destination)
                     break;
                 }
             }
-            MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, selShop);
+            MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(5, selShop);
             break;
         }
         case NodeType::Rest:
