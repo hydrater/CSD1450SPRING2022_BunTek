@@ -112,7 +112,6 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	AIpaddle->transform->Rotate(0);
 	temppaddle = AIpaddle->AddComponent<PaddleBehavior>();
 	temppaddle->setplayerpaddle(false);
-	temppaddle->setMaxspeed(500 * GameManager.enemyProfile.bonusPaddleSpeed);
 	temppaddle->sr = tempRenderer;
 	tempcol = AIpaddle->AddComponent<BoxCollider>();
 
@@ -154,9 +153,11 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	//Set boss to multiple bars
 	if (GameManager.GetEnemyType() == 3) {
 		enemyHpBarCount = GameManager.level + 1;
+		temppaddle->setMaxspeed((250+100* GameManager.level) * GameManager.enemyProfile.bonusPaddleSpeed);
 	}
 	else {
 		enemyHpBarCount = 1;
+		temppaddle->setMaxspeed((200 + 50 * GameManager.level) * GameManager.enemyProfile.bonusPaddleSpeed);
 	}
 
 	enemyhpBar->AddComponent<UI_Hp>()->GenerateHpBar(false, enemyHp, enemyMaxHp, enemyHpBarCount);
