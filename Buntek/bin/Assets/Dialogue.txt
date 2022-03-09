@@ -135,8 +135,9 @@ I'd heard tell of a wanderer hurtling about atop these mountains
 And upon looking into the matter,
 the talk I surmise, is of thee.
 I was entrusted this, for thee.
-/b6|T004 Accept
+/b6 Accept
 /b2|T005 Leave
+
 
 T004
 /d 2
@@ -169,7 +170,7 @@ You entered a crystal cave....
 .....
 ........
 You found an a glowing object
-/b6|3 Pick it up
+/b6 Pick it up
 /b0 Leave
 
 E006
@@ -210,7 +211,8 @@ R007
 !!!!
 The object explodes...
 An artifact rolled towards you...
-/e6|4
+/d 4
+/e6
 End of dialogue
 
 E007
@@ -241,7 +243,8 @@ That's much better
 You noticed that the catgirl may not be female...
 /ap A cat....boy?
 It's dangerous to go alone! Take this!
-/e6|4
+/d 4
+/e6
 /aw
 You received an artifact....  
 You left....

@@ -225,7 +225,6 @@ void LaunchButtonEffect(Button* button)
 		SaveManager.AddToArtifactList(randoID);
 		
 		UIDialogueManager.DF_DisplayArtifact(randoID);
-		DialogueDatabase.InitDialogueScene(buttonPath);
 		break;
 	}
 	case 7:
