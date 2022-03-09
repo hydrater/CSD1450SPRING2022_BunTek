@@ -48,10 +48,26 @@ I see you have some star dust
 /aw Cave Explorer
 Fret not, I am a passing cave explorer harvesting some botany.
 I have chanced upon this peculiar magic mushroom.
-Would you like to buy it off of me?
-/b2 Buy the mushroom
+Would you like to buy it off of me for 20 stardusts?
+/b10 Buy the mushroom
 /b0 Refuse the offer
 /b2|R000 Steal the mushroom
+
+R000
+/d  1
+/aw Cave Explorer
+STOP YOU THIEF!
+/e9
+
+R001
+/d  2
+/aw Cave Explorer
+LOL
+
+/R002
+/d 1
+/aw Cave Explorer
+wtf lol
 
 E001
 /d  1
@@ -158,7 +174,6 @@ E009
 /d  5
 Not implemented yet
 
-
 E0010
 /d  6
 Not implemented yet
@@ -167,8 +182,5 @@ E0011
 /d  6
 Not implemented yet
 
-Responses================================================================================================================
-R000
-/d  6
-/aw asd
-STOP YOU THIEF
+
+

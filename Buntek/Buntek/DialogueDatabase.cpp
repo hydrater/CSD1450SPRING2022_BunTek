@@ -158,8 +158,6 @@ void LaunchButtonEffect(Button* button)
 	case 2:
 	{
 		// Go to a specific dialogue/encounter
-		cout << "called" << endl;
-		cout << buttonPath << endl;
 		UIDialogueManager.CreateDialoguePreset(buttonPath, 3);
 		break;
 	}
@@ -249,7 +247,21 @@ void LaunchButtonEffect(Button* button)
 	case 9:
 	{
 		// Start Battle
-		GameManager.StartBattle(1);
+		GameManager.StartBattle(2);
+	}
+	case 10:
+	{
+		// Buy random artifact
+		if (GameManager.playerProfile.stardust >= 20)
+		{
+			GameManager.playerProfile.stardust -= 20;
+			UIDialogueManager.CreateDialoguePreset("R001", 3);
+		}
+		else
+		{
+			GameManager.playerProfile.stardust -= 20;
+			UIDialogueManager.CreateDialoguePreset("R002", 3);
+		}
 	}
 	default:
 	{
