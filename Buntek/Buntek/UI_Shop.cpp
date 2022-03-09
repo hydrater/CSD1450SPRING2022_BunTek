@@ -21,7 +21,7 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     DisplayedShop = shop;
 
     // Background
-    GameObject* tempBckgrnd = devTools.CreateSpriteGameObject("ShopBackground.png", AEGetWindowWidth(), AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.f);
+    GameObject* tempBckgrnd = devTools.CreateSpriteGameObject("ShopBackground.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.f);
     shopUI->AddChild(tempBckgrnd);
 
     // Header

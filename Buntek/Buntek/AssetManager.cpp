@@ -9,8 +9,6 @@ _assetManager::_assetManager()
     LoadTexture("WhiteTexture.png");
     LoadTexture("ball.png");
     LoadTexture("hdCircle.png");
-    LoadTexture("BetterNebula.png");
-    LoadTexture("Buttons.png");
 
     // UI
     LoadTexture("UI/Texture.png");
