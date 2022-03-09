@@ -48,7 +48,7 @@ void _saveManager::SaveData(void)
     if (MapData.nodeList.size() == 0)
         return;
 
-    ofstream wf("./Save/sav.dat", ios::out | ios::binary);
+    ofstream wf("./save.dat", ios::out | ios::binary);
     if (!wf)
     {
         cout << "Cannot save file!" << endl;
@@ -98,7 +98,7 @@ void _saveManager::SaveData(void)
 
 void _saveManager::LoadData(void)
 {
-    ifstream rf("./Save/sav.dat", ios::out | ios::binary);
+    ifstream rf("./save.dat", ios::out | ios::binary);
 	if (!rf)
     {
 		cout << "No save file detected!" << endl;
@@ -158,5 +158,5 @@ void _saveManager::LoadData(void)
 
 void _saveManager::DeleteSave(void)
 {
-    remove("./Save/sav.dat");
+    remove("./save.dat");
 }
