@@ -57,12 +57,12 @@ R000
 /d 1
 /aw Cave Explorer
 STOP YOU CRIMINAL SCUM!
-/e9
+/e9  
 
 R001
 /d 1
 You bought the artifact with 20 stardust
-/e5
+/e5|1
 
 R002
 /d 1
@@ -79,9 +79,36 @@ E001
 ..........
 You are lost in a cave.....
 You see 3 paths ahead of you....
-/b5 Take the left path
-/b3 Take the middle path
-/b0 Take the right path
+/b2|T000 Take the left path
+/b2|T001 Take the middle path
+/b2|T002 Take the right path
+
+T000
+/d 1
+You took the left path....
+You seem to have gotten lost...
+!!!
+You found an artifact inside a chamber..
+/e6  
+
+T001
+/d 1
+You took the middle path....
+After walking for a while....
+!!!
+A loud rumble shakes the ground!!
+In the distance, you saw a giant object making its way towards you...
+It's....
+A GIANT BOULDER
+/e8  
+You took some damage...
+
+T002
+/d 1
+You took the right path....
+!!!
+/e11 
+You found some stardust crystals in the corner of the cave
 
 E002
 /d 2
@@ -121,9 +148,9 @@ You entered a crystal cave....
 ........
 !!!
 A crystal chunk fell on you...
-/e8
+/e8  
 You took some damage
-/e11
+/e11  
 You harvested it for some stardust....
 
 E005
@@ -169,14 +196,15 @@ R006
 !!!!
 The object explodes!
 You took some damage....
-/e8
+/e8  
 
 R007
 /d 4
 !!!!
 The object explodes...
 An artifact rolled towards you...
-/e6
+/e6|4
+End of dialogue
 
 E007
 /d 4
@@ -206,7 +234,7 @@ That's much better
 You noticed that the catgirl may not be female...
 /ap A cat....boy?
 It's dangerous to go alone! Take this!
-/b6
+/e6|4
 /aw
 You received an artifact....  
 You left....
@@ -219,7 +247,7 @@ R009
 !!!!
 Nyaaaa!!!!
 /aw  
-/e8
+/e8  
 You took a slap
 
 E008

@@ -299,7 +299,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
             break;
 
         case 'd':
-            //cout << "Init scene " << parameters << endl;
             DialogueDatabase.InitDialogueScene(parameters);
             ++dialogueNo;
             WriteToDialogue();
@@ -377,9 +376,9 @@ void UI_DialogueHandler::DeleteDialogueEvent(void)
 
 string UI_DialogueHandler::GenerateRandomDialogueID(void)
 {
-    /*string id = "E00";
-    id += to_string(RandIntMinMax(0, 11));*/
-    string id = "E006";
+    string id = "E00";
+    id += to_string(RandIntMinMax(0, 7));
+    //string id = "E006";
     return id;
 }
 
@@ -571,7 +570,7 @@ void UI_DialogueHandler::DF_DisplayArtifact(unsigned long ID)
     UIOpen = true;
     UIDecision = false;
     actorTxt->Owner()->Activate();
-    actorTxt->SetText("Obtained Artifact");
+    actorTxt->SetText("");
     dialogueTxt->Owner()->Activate();
     string displayText = "You have picked up " + ArtifactDatabase.GetName(ID);
     dialogueTxt->SetText(displayText);

@@ -124,7 +124,6 @@ void LaunchButtonEffect(Button* button)
 	{
 		buttonCommand = DialogueDatabase.forceCommand;
 	}
-	
 
 	if (buttonCommand == "")
 		return;
@@ -208,6 +207,7 @@ void LaunchButtonEffect(Button* button)
 		SaveManager.AddToArtifactList(randoID);
 
 		UIDialogueManager.DF_DisplayArtifact(randoID);
+		DialogueDatabase.InitDialogueScene(buttonPath);
 		break;
 	}
 	case 6:
@@ -219,6 +219,7 @@ void LaunchButtonEffect(Button* button)
 		SaveManager.AddToArtifactList(randoID);
 
 		UIDialogueManager.DF_DisplayArtifact(randoID);
+		DialogueDatabase.InitDialogueScene(buttonPath);
 		break;
 	}
 	case 7:
