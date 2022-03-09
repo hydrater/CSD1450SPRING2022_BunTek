@@ -183,7 +183,14 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
         return;
     }
 
+    for (AEGfxVertexList* ver : MapData.connectedLines)
+        AEGfxMeshFree(ver);
+
+    for (AEGfxVertexList* ver : MapData.travelHistoryLines)
+        AEGfxMeshFree(ver);
+
     MapData.connectedLines.clear();
+    MapData.travelHistoryLines.clear();
     MapData.SetClickable(false);
     MapData.SetHoverable(false);
     for (int k = 0; k < nodeList.size(); k++)
@@ -245,12 +252,12 @@ void _mapData::DisplayNodeHistory(void)
         // Draw Line
         if (prevNode != nullptr && currNode != nullptr && prevNode != currNode)
         {
-            AEGfxVertexList* newLine;
+            /*AEGfxVertexList* newLine;
             AEGfxMeshStart();
             AEGfxVertexAdd(prevNode->pos.x, prevNode->pos.y, 0xFFFF0000, 0.0f, 0.0f);
             AEGfxVertexAdd(currNode->pos.x, currNode->pos.y, 0xFFFF0000, 0.0f, 0.0f);
             newLine = AEGfxMeshEnd();
-            MapData.travelHistoryLines.push_back(newLine);
+            MapData.travelHistoryLines.push_back(newLine);*/
         }
         prevNode = currNode;
     }
@@ -271,11 +278,6 @@ void _mapData::Travel(Node* destination)
 {
     if (destinationNode != nullptr)
     {
-        // Get Artifacts [TODO! GET ARTIFACTS THAT CAN BE SOLD]
-        unsigned long defarti = 0;
-        vector<unsigned long> artifacts{ defarti, defarti, defarti, defarti, defarti, defarti };
-        vector<bool> boolartifacts{ false, false, false, false, true, true };
-        ShopArtifacts selShop;
         // Enact dest node effects
         MapData.travelHistoryIDs.push_back(currentNode->ID);
         currentNode = destinationNode;
@@ -283,25 +285,35 @@ void _mapData::Travel(Node* destination)
         switch (destinationNode->nodeType)
         {
         case NodeType::Encounter:
+        {
             SetClickable(false);
             SetHoverable(false);
             UIDialogueManager.CreateDialoguePreset(UIDialogueManager.GenerateRandomDialogueID(), 3);
             break;
+        }
         case NodeType::Enemy:
+        {
             GameManager.StartBattle(1);
             break;
+        }
         case NodeType::Elite:
+        {
             GameManager.StartBattle(2);
             break;
+        }
         case NodeType::Boss:
+        {
             GameManager.StartBattle(3);
             break;
+        }
         case NodeType::Shop:
+        {
             SetClickable(false);
             SetHoverable(false);
             MapData.shopUI = new GameObject();
             MapData.shopUI->AddComponent<UI_Shop>();
             // Get Shop Goods
+            ShopArtifacts selShop;
             for (int i{ 0 }; i < Shops.size(); ++i)
             {
                 if (Shops[i].ID == destination->ID)
@@ -312,13 +324,18 @@ void _mapData::Travel(Node* destination)
             }
             MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(3, selShop);
             break;
+        }
         case NodeType::Rest:
+        {
             SetClickable(false);
             SetHoverable(false);
             UIDialogueManager.CreateDialoguePreset("REST", 3);
             break;
+        }
         default:
+        {
             break;
+        }
         }
 
         MapData.DisplayNodeHistory();
@@ -377,6 +394,14 @@ void _mapData::DeleteNodeList(void)
     for (int i = 0; i < nodeList.size(); ++i)
         delete nodeList[i];
 
+    for (AEGfxVertexList* ver : MapData.connectedLines)
+        AEGfxMeshFree(ver);
+
+    for (AEGfxVertexList* ver : MapData.travelHistoryLines)
+        AEGfxMeshFree(ver);
+
+    connectedLines.clear();
+    travelHistoryLines.clear();
     nodeList.clear();
     Shops.clear();
 }
