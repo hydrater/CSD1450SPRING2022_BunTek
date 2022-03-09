@@ -135,8 +135,15 @@ I'd heard tell of a wanderer hurtling about atop these mountains
 And upon looking into the matter,
 the talk I surmise, is of thee.
 I was entrusted this, for thee.
-/b6 Accept
-/b2|R003 Leave
+/b6|T004 Accept
+/b2|T005 Leave
+
+T004
+/d 2
+
+T005
+/d 2
+You left as you felt that the figure was too suspicious....
 
 E004
 /d 3

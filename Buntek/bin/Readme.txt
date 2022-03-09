@@ -30,19 +30,16 @@ at the moment.
 2. When you die, you load to the main menu
 There are no telegraphs or feedback yet but it will be implemented soon
 
-3. Some encounters are incomplete
-You will see "Not implemented yet" and you just get nothing.
+3. Missing hp and stardust telegraphs
+Not yet implemented but values *should be* working on the backend.
 
-4. Missing hp and stardust telegraphs
-Not yet implemented but values are working on the backend.
-
-5. You can edit the game volume with arrow keys, it will be accessible
+4. You can edit the game volume with arrow keys, it will be accessible
 through a menu in beta with interactive sliders but for now:
 Left and right arrow for editing music volume
 Up and down arrow for editing sound fx volume
 BE CAREFUL, THE VOLUME IS UNCAPPED
 
-6. Aesthetics, visuals and audio
+5. Aesthetics, visuals and audio
 Some of it are placeholders to get the vibe check,  but we will be improving it, 
 see you guys in beta with a more polished version!
 
