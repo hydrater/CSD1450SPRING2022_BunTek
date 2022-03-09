@@ -11,6 +11,8 @@
 #include "ParticleSystem.h"
 #include "UI_Hp.h"
 
+void BtnFuncHover_Artifacts(Button* button);
+
 void Scene_Navigation::Start(void)
 {
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
@@ -69,9 +71,16 @@ void Scene_Navigation::Start(void)
 	GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("UI/Stardust.png", 80, 80, AE_GFX_BM_BLEND,
 		Vector2(playerCurrency->transform->worldposition.x - 100, playerCurrency->transform->worldposition.y), 3, 1);
 	playerCurrencyText = devTools.CreateSpriteGameObject("UI/Stardust.png", 180, 80, AE_GFX_BM_BLEND, Vector2(playerCurrency->transform->worldposition.x + 50, playerCurrency->transform->worldposition.y), 3, 0);
-	TextRenderer* tempCurrencyText = devTools.AddTextToSpriteGameObject(playerCurrencyText, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, 3);
+	devTools.AddTextToSpriteGameObject(playerCurrencyText, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, 3);
 	playerCurrency->AddChild(tempCurrencyIcon);
 	playerCurrency->AddChild(playerCurrencyText);
+
+	playerArtifactsBtn = devTools.CreateSpriteGameObject("UI/Button.png", 200, 100, AE_GFX_BM_BLEND, Vector2(-AEGetWindowWidth() / 3.5f, -AEGetWindowHeight() / 2.25f), 2, 1);
+	TextRenderer* tempText = devTools.AddTextToSpriteGameObject(playerArtifactsBtn, "Gabriola.ttf", "Artifacts", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 72.f, 3);
+	Button* button = playerArtifactsBtn->AddComponent<Button>();
+	button->sr = playerArtifactsBtn->GetComponent<SpriteRenderer>();
+	button->tr = tempText;
+	button->ButtonEffect = &BtnFuncHover_Artifacts;
 }
 
 // Draw all lines
@@ -115,10 +124,12 @@ void Scene_Navigation::Update(void)
 	if (UIDialogueManager.UIOpen) {
 		playerHp->Deactivate();
 		playerCurrency->Deactivate();
+		playerArtifactsBtn->Deactivate();
 	}
 	else {
 		playerHp->Activate();
 		playerCurrency->Activate();
+		playerArtifactsBtn->Activate();
 	}
 	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
 	playerHp->GetComponent<UI_Hp>()->health = GameManager.playerProfile.hp;
@@ -144,4 +155,9 @@ Scene_Navigation::~Scene_Navigation(void)
 	AssetManager.UnloadTexture("ShopBackground.png");
 	AudioManager.UnloadMusic("NavigationBGM.mp3");
 	MapData.penaltyZone = nullptr;
+}
+
+void BtnFuncHover_Artifacts(Button* button) {
+	button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+	GameManager.DisplayArtifactList();
 }
