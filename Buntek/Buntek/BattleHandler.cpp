@@ -90,7 +90,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	tempRenderer->Size(100, 20);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(0, 0, 1);
-	tempRenderer->SetLayer(1);
+	tempRenderer->SetLayer(2);
 	playerpaddle->transform->SetPosition(Vector2(-590, 70));
 	playerpaddle->transform->Rotate(0);
 	PaddleBehavior* temppaddle = playerpaddle->AddComponent<PaddleBehavior>();
@@ -107,7 +107,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	tempRenderer->Size(100, 20);
 	tempRenderer->SetTexture("WhiteTexture.png");
 	tempRenderer->SetColor(1, 0, 0);
-	tempRenderer->SetLayer(1);
+	tempRenderer->SetLayer(2);
 	AIpaddle->transform->SetPosition(Vector2(590, 70));
 	AIpaddle->transform->Rotate(0);
 	temppaddle = AIpaddle->AddComponent<PaddleBehavior>();
@@ -150,6 +150,15 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 
 	enemyhpBar = new GameObject();
 	enemyhpBar->transform->SetPosition(Vector2(660, 400));
+
+	//Set boss to multiple bars
+	if (GameManager.GetEnemyType() == 3) {
+		enemyHpBarCount = GameManager.level + 1;
+	}
+	else {
+		enemyHpBarCount = 1;
+	}
+
 	enemyhpBar->AddComponent<UI_Hp>()->GenerateHpBar(false, enemyHp, enemyMaxHp, enemyHpBarCount);
 
 	hpBar = new GameObject();
@@ -272,7 +281,7 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	GameObject* newParticle = new GameObject();
 	ParticleSystem* newSystem = newParticle->AddComponent<ParticleSystem>();
 	newParticle->transform->SetPosition(ball->transform->worldposition);
-	newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "ball.png", ball->transform->worldposition, 5, (short)AE_GFX_BM_BLEND, true, true);
+	newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "ball.png", ball->transform->worldposition, 6, (short)AE_GFX_BM_BLEND, true, true);
 
 	tempBall->ballParticle = newParticle;
 	tempBall->ballParticleSystem = newSystem;
