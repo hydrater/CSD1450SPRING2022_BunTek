@@ -9,28 +9,18 @@ _assetManager::_assetManager()
     LoadTexture("WhiteTexture.png");
     LoadTexture("ball.png");
     LoadTexture("hdCircle.png");
-    LoadTexture("BetterNebula.png");
-    LoadTexture("Buttons.png");
 
     // UI
-    LoadTexture("UI/Texture.png");
     LoadTexture("UI/Button.png");
     LoadTexture("UI/DialogueBox.png");
 
-    LoadTexture("BgNebula1.png");
-    LoadTexture("BgNebula2.png");
-    LoadTexture("BgNebula3.png");
-
-    LoadTexture("Stars2.png");
-    LoadTexture("Stars3.png");
-    LoadTexture("star123.png");
     LoadTexture("Static Stars 1.png");
     LoadTexture("Static Stars 2.png");
     LoadTexture("More Stars 1.png");
     LoadTexture("More Stars 2.png");
     LoadTexture("NebulaBig.png");
     LoadTexture("NebulaCloudBig.png");
-    LoadTexture("HoverTexture.png");
+
     //font
     LoadFont("Ayar.ttf");
     LoadFont("Astral.ttf");
