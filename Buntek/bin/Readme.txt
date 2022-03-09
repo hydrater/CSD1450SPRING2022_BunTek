@@ -40,5 +40,6 @@ Up and down arrow for editing sound fx volume
 BE CAREFUL, THE VOLUME IS UNCAPPED
 
 5. Aesthetics, visuals and audio
-The art is all self made. Music is currently placeholder.
+Other than the battle background placeholder, the art is all self made.
+The music tracks are currently all placeholder as we will be making our own music.
 We will be improving, see you guys in beta with a more polished version!
