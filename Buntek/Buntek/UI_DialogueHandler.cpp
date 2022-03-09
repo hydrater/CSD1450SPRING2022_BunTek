@@ -340,6 +340,8 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
 {
     CreatePreset(sortingLayer);
 
+    DialogueDatabase.InitDialogueScene("1");
+
     // Create Reward Selection Actor and Description
     actorTxt->Owner()->Activate();
     actorTxt->SetText("Choose your loot");
@@ -482,7 +484,7 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
             tempButtonObj->transform->SetPosition(Vector2(tempButton->sr->GetHalfWidth() * 3, tempButton->sr->GetHalfHeight() / 1.5f));
             break;
         case 3:
-            tempButton->sr->SetTexture("Buttons.png");
+            tempButton->sr->SetTexture("UI/Button.png");
             tempButtonTxtRenderer->SetText("Skip to get sum guud seedz");
             tempButtonTxtRenderer->SetTextColor(1, 1, 0);
             tempButton->sr->Size(500, 150);

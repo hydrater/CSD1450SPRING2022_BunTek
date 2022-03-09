@@ -54,13 +54,13 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     shopUI->AddChild(tempCurrencyTextObj);
 
     // Leave Button
-    GameObject* tempLeave = devTools.CreateSpriteGameObject("Buttons.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 2.5f), (short)(sortingLayer + 2));
+    GameObject* tempLeave = devTools.CreateSpriteGameObject("UI/Button.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 2.5f), (short)(sortingLayer + 2));
     TextRenderer* tempLeaveTxtRenderer = 0;
     tempLeaveTxtRenderer = tempLeave->AddComponent<TextRenderer>();
     tempLeaveTxtRenderer->SetFont("Gabriola.ttf");
     tempLeaveTxtRenderer->SetTextColor(1, 1, 1);
     tempLeaveTxtRenderer->SetText("Leave");
-    tempLeaveTxtRenderer->SetLayer((short)(sortingLayer + 2));
+    tempLeaveTxtRenderer->SetLayer((short)(sortingLayer + 3));
     Button* tempLeaveButton = tempLeave->AddComponent<Button>();
     tempLeaveButton->sr = tempLeave->GetComponent<SpriteRenderer>();
     tempLeaveButton->tr = tempLeaveTxtRenderer;
