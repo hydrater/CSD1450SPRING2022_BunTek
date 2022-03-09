@@ -30,8 +30,8 @@ at the moment.
 2. When you die, you load to the main menu
 There are no telegraphs or feedback yet but it will be implemented soon
 
-3. Missing hp and stardust telegraphs
-Not yet implemented but values *should be* working on the backend.
+3. If you have resolution issues, 
+u can full screen with F1
 
 4. You can edit the game volume with arrow keys, it will be accessible
 through a menu in beta with interactive sliders but for now:
@@ -42,16 +42,3 @@ BE CAREFUL, THE VOLUME IS UNCAPPED
 5. Aesthetics, visuals and audio
 Some of it are placeholders to get the vibe check,  but we will be improving it, 
 see you guys in beta with a more polished version!
-
-Why aren't the above mentioned things implemented yet?
-That's because......
- _______  _        ______   _______  _          _______ _________ _        _______ 
-(  ____ \( \      (  __  \ (  ____ \( (    /|  (  ____ )\__   __/( (    /|(  ____ \
-| (    \/| (      | (  \  )| (    \/|  \  ( |  | (    )|   ) (   |  \  ( || (    \/
-| (__    | |      | |   ) || (__    |   \ | |  | (____)|   | |   |   \ | || |      
-|  __)   | |      | |   | ||  __)   | (\ \) |  |     __)   | |   | (\ \) || | ____ 
-| (      | |      | |   ) || (      | | \   |  | (\ (      | |   | | \   || | \_  )
-| (____/\| (____/\| (__/  )| (____/\| )  \  |  | ) \ \_____) (___| )  \  || (___) |
-(_______/(_______/(______/ (_______/|/    )_)  |/   \__/\_______/|/    )_)(_______)
-                                                                                   
-gr8 game m8, I r8 10/10 

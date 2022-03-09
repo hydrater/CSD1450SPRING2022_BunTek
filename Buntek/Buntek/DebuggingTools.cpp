@@ -25,6 +25,16 @@ _debuggingTools& _debuggingTools::Instance(void)
 
 void _debuggingTools::CheatsUpdate(void)
 {
+	if (AEInputCheckTriggered(AEVK_F1))
+	{
+		AEToogleFullScreen(fullScreen);
+		fullScreen = !fullScreen;
+	}
+
+	#if NDEBUG
+	return;
+	#endif
+
 	if (AEInputCheckTriggered(AEVK_1))
 	{
 		GameManager.disableInteraction = false;
@@ -47,11 +57,7 @@ void _debuggingTools::CheatsUpdate(void)
 	{
 		AudioManager.SetMusicVolume(1.0f);
 	}
-	if (AEInputCheckTriggered(AEVK_F1))
-	{
-		AEToogleFullScreen(fullScreen);
-		fullScreen = !fullScreen;
-	}
+	
 	if (AEInputCheckTriggered(AEVK_F2))
 	{
 		SaveManager.SaveData();

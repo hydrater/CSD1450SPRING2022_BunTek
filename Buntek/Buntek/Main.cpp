@@ -67,9 +67,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		AEInputUpdate();
 
 		// Debugging tools
-		#if _DEBUG
 		Debugger.CheatsUpdate();
-		#endif
 
 		// Place holder code
 		if (AEInputCheckTriggered(AEVK_UP))
