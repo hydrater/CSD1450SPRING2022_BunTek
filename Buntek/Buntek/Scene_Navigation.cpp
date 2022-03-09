@@ -103,4 +103,5 @@ Scene_Navigation::~Scene_Navigation(void)
 	AssetManager.UnloadTexture("UI/Shop.png");
 	AssetManager.UnloadTexture("UI/Boss.png");
 	AudioManager.UnloadMusic("NavigationBGM.mp3");
+	MapData.penaltyZone = nullptr;
 }
