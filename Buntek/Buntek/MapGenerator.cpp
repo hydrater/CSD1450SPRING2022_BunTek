@@ -34,7 +34,7 @@ void _mapData::GenerateMapData(void)
     float StartYCoord = (float)(-AEGetWindowHeight() / 2) + buffer;
     float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
 
-    penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.3f), RandFloatMinMax(StartYCoord, EndYCoord));
+    penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.5f), RandFloatMinMax(StartYCoord, EndYCoord));
 
 
     for (int i = 0; i < numNodes; i++) 
@@ -370,7 +370,7 @@ void _mapData::PenaltyZoneUpdate(void) {
         float xDelta = nodeList[i]->nodeObject->transform->worldposition.x - penaltyZone->transform->worldposition.x, 
               yDelta = nodeList[i]->nodeObject->transform->worldposition.y - penaltyZone->transform->worldposition.y;
         float dist = Vector2(xDelta, yDelta).Length();
-        if (dist < penaltyZone->GetComponent<SpriteRenderer>()->GetHalfWidth()) {
+        if (dist + nodeList[i]->nodeObject->GetComponent<SpriteRenderer>()->GetHalfWidth() < penaltyZone->GetComponent<SpriteRenderer>()->GetHalfWidth()) {
             nodeList[i]->nodeType = NodeType::Elite;
             nodeList[i]->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/Elite.png");
         }
