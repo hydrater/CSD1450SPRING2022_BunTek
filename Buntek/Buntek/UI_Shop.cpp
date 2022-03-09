@@ -3,6 +3,7 @@
 #include "UI_Shop.h"
 #include "Devtools.h"
 #include "System.h"
+#include "UI_DialogueHandler.h"
 
 void RemoveShop(Button* button);
 void PurchaseArtifact(Button* button);
@@ -33,7 +34,6 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     tempHeaderTxtRenderer->SetFont("Gabriola.ttf");
     tempHeaderTxtRenderer->SetTextColor(1, 1, 1);
     tempHeaderTxtRenderer->SetText("Shop");
-    tempHeaderTxtRenderer->SetLayer(sortingLayer);
     tempHeaderTxtRenderer->SetLayer(sortingLayer + 2);
     tempHeaderTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
     tempHeaderTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
@@ -47,8 +47,8 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("UI/Stardust.png", 80, 80, AE_GFX_BM_BLEND,
         Vector2(tempCurrencyDisplay->transform->worldposition.x - 100, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer + 2), 1);
     GameObject* tempCurrencyTextObj = devTools.CreateSpriteGameObject("UI/Stardust.png", 180, 80, AE_GFX_BM_BLEND, Vector2(tempCurrencyDisplay->transform->worldposition.x + 50, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer) + 3, 0);
-    TextRenderer* tempCurrencyText = devTools.AddTextToSpriteGameObject(tempCurrencyTextObj, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, (short)(sortingLayer) + 3);
-    tempCurrencyText->SetTextColor(0, 0, 0);
+    UIDialogueManager.currencyTxt = devTools.AddTextToSpriteGameObject(tempCurrencyTextObj, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, (short)(sortingLayer) + 3);
+    UIDialogueManager.currencyTxt->SetTextColor(0, 0, 0);
     shopUI->AddChild(tempCurrencyDisplay);
     shopUI->AddChild(tempCurrencyIcon);
     shopUI->AddChild(tempCurrencyTextObj);
@@ -81,7 +81,7 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
             tempButton->tr = tempButtonObj->GetComponent<TextRenderer>();
             tempButton->affectedObject = shopUI;
             tempButton->ButtonEffect = &PurchaseArtifact;
-            if (shop.ArtifactsPurchased[i] == true)
+            if (shop.ArtifactsPurchased[i])
             {
                 tempButton->sr->SetOpacity(0.5f);
                 tempButton->SetClickable(false);
@@ -212,6 +212,7 @@ void PurchaseArtifact(Button* button)
                 MapData.Shops[i].ArtifactsPurchased[index] = true;
             }
         }
+        UIDialogueManager.currencyTxt->SetText(to_string(GameManager.playerProfile.stardust));
         selGood->DisplayArtifactOwner->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
         selGood->DisplayArtifactOwner->GetComponent<Button>()->SetClickable(false);
         SaveManager.AddToArtifactList(ID);
