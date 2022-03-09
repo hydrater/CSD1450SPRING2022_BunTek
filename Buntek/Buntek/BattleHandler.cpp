@@ -282,7 +282,7 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	GameObject* newParticle = new GameObject();
 	ParticleSystem* newSystem = newParticle->AddComponent<ParticleSystem>();
 	newParticle->transform->SetPosition(ball->transform->worldposition);
-	newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "ball.png", ball->transform->worldposition, 6, (short)AE_GFX_BM_BLEND, true, true);
+	newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "ball.png", ball->transform->worldposition, 6, (short)AE_GFX_BM_BLEND, false, true);
 
 	tempBall->ballParticle = newParticle;
 	tempBall->ballParticleSystem = newSystem;

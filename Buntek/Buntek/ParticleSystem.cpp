@@ -87,7 +87,7 @@ void ParticleSystem::Update(void)
 				float Ratio = 1-(timerList[i] / lifespanList[i]);
 
 				if (isShrink) temp->Size(Ratio * sizeList[i].x, Ratio * sizeList[i].y);
-				if (isFade) temp->SetOpacity(Ratio);
+				if (isFade) temp->SetOpacity(opacity*Ratio);
 			}
 		}
 	}
@@ -99,6 +99,9 @@ void ParticleSystem::SetColor(float r, float g, float b) {
 	ColorR = r;
 	ColorG = g;
 	ColorB = b;
+}
+void ParticleSystem::SetOpacity(float newOpacity) {
+	opacity = newOpacity;
 }
 
 void ParticleSystem::SpawnParticle(void) {
@@ -117,6 +120,7 @@ void ParticleSystem::SpawnParticle(void) {
 	//Creates particle objects and constituent
 	GameObject* temp = devTools.CreateSpriteGameObject(textureString, xSize, ySize, blendMode, this->Owner()->transform->worldposition,renderLayer);
 	temp->GetComponent<SpriteRenderer>()->SetColor(ColorR, ColorG, ColorB);
+	temp->GetComponent<SpriteRenderer>()->SetOpacity(opacity);
 	particleList.push_back(temp);
 	directionalVector2.Normalize();
 	Vector2 newVec = directionalVector2;

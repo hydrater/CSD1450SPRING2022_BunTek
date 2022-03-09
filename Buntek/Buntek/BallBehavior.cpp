@@ -208,25 +208,31 @@ bool BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 	}
 	switch (ballPhase) {
 	case -1:
-		ballParticleSystem->SetColor(1, 1, 1);
+		ballParticleSystem->SetOpacity(0.05f);
 		break;
 	case 0:
-		ballParticleSystem->SetColor(1, 1, 1);
+		ballParticleSystem->SetOpacity(0.05f);
 		break;
 	case 1:
-		ballParticleSystem->SetColor(1, 1, 0.5);
+		ballParticleSystem->SetOpacity(0.1f);
 		break;
 	case 2:
-		ballParticleSystem->SetColor(1, 1, 0);
+		ballParticleSystem->SetOpacity(0.2f);
 		break;
 	case 3:
-		ballParticleSystem->SetColor(1, 0.5, 0);
+		ballParticleSystem->SetOpacity(0.4f);
 		break;
 	case 4:
-		ballParticleSystem->SetColor(1, 0.25, 0);
+		ballParticleSystem->SetOpacity(0.6f);
+		break;
+	case 5:
+		ballParticleSystem->SetOpacity(0.7f);
+		break;
+	case 6:
+		ballParticleSystem->SetOpacity(0.85f);
 		break;
 	default:
-		ballParticleSystem->SetColor(1, 0, 0);
+		ballParticleSystem->SetOpacity(1.0f);
 		break;
 
 	}

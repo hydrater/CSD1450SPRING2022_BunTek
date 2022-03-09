@@ -18,8 +18,9 @@ public:
 	//Is Emitting
 	bool isEmitting = true;
 
-	//Set color
+	//Set color and opacity
 	void SetColor(float r, float g, float b);
+	void SetOpacity(float newOpacity);
 
 	//SpawnParticle
 	void SpawnParticle();
@@ -74,6 +75,7 @@ private:
 	bool isShrink = false;
 	
 	float ColorR = 1, ColorG = 1, ColorB = 1;
+	float opacity = 1;
 	
 	// Random launch angle spread
 	float angleSpread = 360.0f; //In degrees
