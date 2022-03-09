@@ -10,6 +10,7 @@
 
 // Choice_Function
 void CF_PickUpArtifactButton(Button* button);
+void CF_SkipArtifactButton(Button* button);
 
 UI_DialogueHandler::UI_DialogueHandler(void)
 {
@@ -488,7 +489,7 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
             tempButtonTxtRenderer->SetText("Skip to get 10 star dust");
             tempButtonTxtRenderer->SetTextColor(1, 1, 0);
             tempButton->sr->Size(785, 70);
-            tempButton->ButtonEffect = &RemoveDialogue;
+            tempButton->ButtonEffect = &CF_SkipArtifactButton;
             break;
         }
     }
@@ -608,4 +609,12 @@ void CF_PickUpArtifactButton(Button* button)
     SaveManager.AddToArtifactList(ID);
 
     UIDialogueManager.DF_DisplayArtifact(ID);
+}
+
+void CF_SkipArtifactButton(Button* button)
+{
+    // Add 10 to stardust
+    GameManager.playerProfile.stardust += 10;
+
+    RemoveDialogue(nullptr);
 }
