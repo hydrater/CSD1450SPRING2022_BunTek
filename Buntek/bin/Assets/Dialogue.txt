@@ -205,7 +205,6 @@ R007
 The object explodes...
 An artifact rolled towards you...
 /e6|4
-End of dialogue
 
 E007
 /d 4
