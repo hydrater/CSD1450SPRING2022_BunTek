@@ -26,7 +26,13 @@ b: Button for Encounter (Please don't mix with Choice)
 2 - Go to new dialogue
 3 - Heal player by half
 4 - Heal player to full [Removes X stardust]
-5 - Pick Up random artifact
+5 - Pick Up random non-legendary artifact
+6 - Pick Up random Legendary artifact
+7 - Heal player to full [No cost]
+8 - Take player damage
+9 - Start battle
+10 - Buy random artifact
+11 - Obtain X stardust
 c: Choice for Rewards (Please don't mix with Encounter)
 d: Design for Background
 0 - space

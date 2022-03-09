@@ -23,6 +23,12 @@ _dialogueDatabase& _dialogueDatabase::Instance(void)
 
 void _dialogueDatabase::InitDialogueScene(string id)
 {
+	if (id == "")
+	{
+		cout << "[DialogueDatabase] WARNING! [" << id << "] is not a number! Not Loading Dialogue Image...\n";
+		return;
+	}
+
 	switch (stoi(id))
 	{
 	case 0:
@@ -137,7 +143,7 @@ void LaunchButtonEffect(Button* button)
 		buttonID = buttonCommand.substr(0, buttonCommand.find("|"));
 		buttonPath = buttonCommand.substr(buttonCommand.find("|") + 1, buttonCommand.length());
 	}
-
+	
 	// -------------- Types of button effects ----------------
 	switch (stoi(buttonID))
 	{
@@ -205,7 +211,7 @@ void LaunchButtonEffect(Button* button)
 
 		// Assign to allocated vector
 		SaveManager.AddToArtifactList(randoID);
-
+		
 		UIDialogueManager.DF_DisplayArtifact(randoID);
 		DialogueDatabase.InitDialogueScene(buttonPath);
 		break;
@@ -217,7 +223,7 @@ void LaunchButtonEffect(Button* button)
 
 		// Assign to allocated vector
 		SaveManager.AddToArtifactList(randoID);
-
+		
 		UIDialogueManager.DF_DisplayArtifact(randoID);
 		DialogueDatabase.InitDialogueScene(buttonPath);
 		break;
@@ -274,6 +280,8 @@ void LaunchButtonEffect(Button* button)
 	{
 		// Obtain 20 stardust
 		GameManager.playerProfile.stardust += 20;
+		UIDialogueManager.UIDecision = false;
+		UIDialogueManager.SkipDialogue();
 		break;
 	}
 	default:
