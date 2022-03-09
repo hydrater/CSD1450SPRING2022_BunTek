@@ -254,8 +254,9 @@ void _gameManager::HealthCheck(bool isPlayer) {
     if (isPlayer)
     {
         // Player game over
-        if (playerHp <= 0)
+        if (playerHp <= 0 && !battleOver)
         {
+            battleOver = true;
             GameManager.playerProfile.hp = GameManager.playerHp;
             GameOver();
         }
@@ -263,8 +264,9 @@ void _gameManager::HealthCheck(bool isPlayer) {
     else
     {
         // Enemy game over
-        if (enemyHp <= 0)
+        if (enemyHp <= 0 && !battleOver)
         {
+            battleOver = true;
             SaveManager.SaveData();
             vector<Artifact> behaviorList_BattleWon;
             for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
