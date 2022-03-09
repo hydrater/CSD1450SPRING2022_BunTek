@@ -30,7 +30,7 @@ void UI_DialogueHandler::Update(void)
     // For dialogue only
     if (UIOpen)
     {
-        if (dialogueNo >= dialogueList.size())
+        if (dialogueNo >= dialogueList.size() && !UINotification)
             return;
 
         if (AEInputCheckTriggered(AEVK_LBUTTON) && !UIDecision)
@@ -47,8 +47,13 @@ void UI_DialogueHandler::Update(void)
                 else if (dialogueNo < dialogueList.size() - 1 && UINotification)
                 {
                     UINotification = false;
-                    ++dialogueNo;
-                    WriteToDialogue();
+                    if (dialogueNo < dialogueList.size())
+                    {
+                        ++dialogueNo;
+                        WriteToDialogue();
+                    }
+                    else
+                        RemoveDialogue(nullptr);
                 }
                 else
                     RemoveDialogue(nullptr);
@@ -462,11 +467,10 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
         tempButton->sr = tempButtonObj->GetComponent<SpriteRenderer>();
         tempButton->tr = tempButtonTxtRenderer;
         tempButton->affectedObject = dialogueBox;
-        tempButton->ButtonEffect = &RemoveDialogue;
+        tempButton->ButtonEffect = &CF_PickUpArtifactButton;
 
         dialogueBox->AddChild(tempButtonObj);
         tempbuttonList.push_back(tempButton);
-        tempButton->ButtonEffect = &CF_PickUpArtifactButton;
         switch (i)
         {
         case 0:
@@ -588,6 +592,7 @@ void UI_DialogueHandler::DF_DisplayArtifact(unsigned long ID)
 void CF_PickUpArtifactButton(Button* button)
 {
     // Add artifact to the player's Artifact List
+    UIDialogueManager.UIDecision = false;
     GameObject* owner = button->Owner();
     unsigned long ID = 0;
     for (int i{ 0 }; i < UIDialogueManager.ArtifactChoices.size() ; ++i)

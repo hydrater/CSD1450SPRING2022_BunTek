@@ -4,6 +4,7 @@
 #include "Scene_Navigation.h"
 #include "SaveManager.h"
 #include "MapGenerator.h"
+#include "UI_DialogueHandler.h"
 #include "Scene_MainMenu.h"
 #include "Scene_Battle.h"
 
@@ -286,6 +287,7 @@ void _gameManager::HealthCheck(bool isPlayer) {
                 ++level;
                 MapData.GenerateMapData();
             }
+            battleRewardPending = true;
             SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
         }
     }

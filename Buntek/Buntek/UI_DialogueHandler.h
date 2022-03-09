@@ -43,6 +43,8 @@ public:
 	// Set to public for DialogueDatabase to get the button ID
 	vector<Button*> dialogueButtonList;
 	vector<string> dialogueButtonIDList;
+	// Set to public for gameManager to handle rewardButton
+	vector<Button*> rewardButtonList;
 
 private:
 
@@ -70,7 +72,6 @@ private:
 	TextRenderer* actorTxt = 0, * dialogueTxt = 0;
 	string name, dialogueOutput, dialogueFinalDisplayTxt;
 	int dialogueButtonNo = 0;
-	vector<Button*> rewardButtonList;
 	int rewardButtonNo = 0;
 
 	short dialogueSortingLayer = 0;

@@ -93,7 +93,7 @@ public:
     // Battle metrics
     BattleHandler* bh = 0;
     float playerHp = 0 , enemyHp = 0;
-    bool battleOver = false;
+    bool battleOver = false, battleRewardPending = false;
 
     // Game over
     void GameOver(void);

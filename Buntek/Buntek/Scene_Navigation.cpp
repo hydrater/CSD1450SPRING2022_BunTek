@@ -75,6 +75,17 @@ void Scene_Navigation::EarlyUpdate(void)
 	{
 		AEGfxMeshDraw(MapData.travelHistoryLines[i], AE_GFX_MDM_LINES_STRIP);
 	}
+
+	if (GameManager.battleRewardPending)
+	{
+		GameManager.battleRewardPending = false;
+		Artifact rew1, rew2, rew3;
+		rew1.ID = ArtifactDatabase.DrawArtifact();
+		rew2.ID = ArtifactDatabase.DrawArtifact();
+		rew3.ID = ArtifactDatabase.DrawArtifact();
+		vector<Artifact> reward_Artifact{ rew1, rew2, rew3 };
+		UIDialogueManager.CreateRewardSelPreset(reward_Artifact, 3, true);
+	}
 }
 
 void Scene_Navigation::Update(void)
