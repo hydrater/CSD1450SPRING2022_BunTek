@@ -112,17 +112,22 @@ I was entrusted this, for thee.
 /b2|R003 Leave
 
 E004
-/d  3
+/d 3
 ...
 .....
 You entered a crystal cave....
 ...
 .....
 ........
-You left, nothing happens
+!!!
+A crystal chunk fell on you...
+/e8
+You took some damage
+/e11
+You harvested it for some stardust....
 
 E005
-/d  3
+/d 3
 ...
 .....
 You entered a crystal cave....
@@ -145,11 +150,36 @@ The figure scurries pass you
 /aw Suspicious figure
 WHY ARE YOU STANDING THERE?
 RUNNNNNNNNNNNNNNNNNNNNN!
-/b0 Run
-/b6 Investigate the source
+/b2|R004 Run
+/b2|R005 Investigate the source
+
+R004
+/d 4
+You took off and managed to get far away from the unknown source...
+
+R005
+/d 4
+You decided to investigate the source and found object....
+The object glows as though it is calling you....
+/b2|R006 Pick it up
+/b2|R007 Walk away..
+
+R006
+/d 4
+!!!!
+The object explodes!
+You took some damage....
+/e8
+
+R007
+/d 4
+!!!!
+The object explodes...
+An artifact rolled towards you...
+/e6
 
 E007
-/d  4
+/d 4
 ...
 .....
 /ap ???
@@ -164,8 +194,33 @@ Too bad you will never see the image of this cat girl because the team's artist 
 /ap A catgirl?
 Nyaaa!
 Apologise!
-/b0 Apologise
-/b8 Stare at her like a weirdo
+/b2|R008 Apologise
+/b2|R009 Stare at her like a weirdo
+
+R008
+/d 4
+/ap A catgirl (probably)
+Nyaaa!!
+That's much better
+/aw  
+You noticed that the catgirl may not be female...
+/ap A cat....boy?
+It's dangerous to go alone! Take this!
+/b6
+/aw
+You received an artifact....  
+You left....
+/ap A cat....person?
+Have a safe trip wanderer!
+
+R009
+/d 4
+/ap A catgirl (probably)
+!!!!
+Nyaaaa!!!!
+/aw  
+/e8
+You took a slap
 
 E008
 /d  5

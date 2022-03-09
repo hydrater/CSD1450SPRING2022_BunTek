@@ -238,6 +238,9 @@ void LaunchButtonEffect(Button* button)
 		// 20%
 		GameManager.playerProfile.hp -= GameManager.playerProfile.basemaxhp / 5;
 
+		// Shake camera for effect
+		GameManager.CameraShake(1, 50, Vector2(0, 0));
+
 		if (GameManager.playerProfile.hp < 0)
 		{
 			// Game over
@@ -267,6 +270,10 @@ void LaunchButtonEffect(Button* button)
 	{
 		// Obtain 20 stardust
 		GameManager.playerProfile.stardust += 20;
+	}
+	case 12:
+	{
+
 	}
 	default:
 	{
