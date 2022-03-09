@@ -407,6 +407,7 @@ void _mapData::DeleteMapData(void)
     }
 
     connectedLines.clear();
+    travelHistoryIDs.clear();
     travelHistoryLines.clear();
     nodeList.clear();
     Shops.clear();

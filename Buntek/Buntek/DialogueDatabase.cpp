@@ -235,6 +235,9 @@ void LaunchButtonEffect(Button* button)
 
 		// Heal player to max
 		GameManager.playerProfile.hp = truemaxhp;
+
+		UIDialogueManager.UIDecision = false;
+		UIDialogueManager.SkipDialogue();
 		break;
 	}
 	case 8:
