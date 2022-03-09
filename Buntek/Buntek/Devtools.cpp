@@ -141,7 +141,7 @@ GameObject* _devTools::CreatePriceTagGameObject(int price, short blendMode, Vect
     GameObject* PriceTextObj = CreateSpriteGameObject("WhiteTexture.png", 40, 50, blendMode, Vector2(pos.x + 10, pos.y), layer + 1, 0);
     TextRenderer* PriceText = AddTextToSpriteGameObject(PriceTextObj, "Ayar.ttf", to_string(price), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 26.f, layer + 1);
     PriceTag->AddChild(PriceTextObj);
-    GameObject* PriceIcon = CreateSpriteGameObject("Steven.jpg", 40, 40, blendMode, Vector2(pos.x - 30, pos.y), layer + 1);
+    GameObject* PriceIcon = CreateSpriteGameObject("UI/Stardust.png", 40, 40, blendMode, Vector2(pos.x - 30, pos.y), layer + 1);
     PriceTag->AddChild(PriceIcon);
     return PriceTag;
 }

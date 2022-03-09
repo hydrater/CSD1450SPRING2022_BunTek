@@ -25,8 +25,7 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     shopUI->AddChild(tempBckgrnd);
 
     // Header
-    GameObject* tempHeader = devTools.CreateSpriteGameObject("Encounter.png", 600, 100, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.25f),(short)(sortingLayer + 1), 0.5f);
-   
+    GameObject* tempHeader = devTools.CreateSpriteGameObject("UI/Button.png", 700, 100, AE_GFX_BM_BLEND, Vector2(0.f, AEGetWindowHeight() / 2.25f),(short)(sortingLayer + 1));
 
     // HeaderText
     TextRenderer* tempHeaderTxtRenderer = 0;
@@ -35,6 +34,7 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     tempHeaderTxtRenderer->SetTextColor(1, 1, 1);
     tempHeaderTxtRenderer->SetText("Shop");
     tempHeaderTxtRenderer->SetLayer(sortingLayer);
+    tempHeaderTxtRenderer->SetLayer(sortingLayer + 2);
     tempHeaderTxtRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
     tempHeaderTxtRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
     tempHeaderTxtRenderer->SetXBuffer(50);
@@ -54,12 +54,12 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     shopUI->AddChild(tempCurrencyTextObj);
 
     // Leave Button
-    GameObject* tempLeave = devTools.CreateSpriteGameObject("UI/Button.png", 500, 100, AE_GFX_BM_BLEND, Vector2(0.f, -AEGetWindowHeight() / 2.5f), (short)(sortingLayer + 2));
+    GameObject* tempLeave = devTools.CreateSpriteGameObject("UI/Button.png", 785, 70, AE_GFX_BM_BLEND, Vector2(0.f, -450.f), (short)(sortingLayer + 2));
     TextRenderer* tempLeaveTxtRenderer = 0;
     tempLeaveTxtRenderer = tempLeave->AddComponent<TextRenderer>();
     tempLeaveTxtRenderer->SetFont("Gabriola.ttf");
     tempLeaveTxtRenderer->SetTextColor(1, 1, 1);
-    tempLeaveTxtRenderer->SetText("Leave");
+    tempLeaveTxtRenderer->SetText("Exit");
     tempLeaveTxtRenderer->SetLayer((short)(sortingLayer + 3));
     Button* tempLeaveButton = tempLeave->AddComponent<Button>();
     tempLeaveButton->sr = tempLeave->GetComponent<SpriteRenderer>();
