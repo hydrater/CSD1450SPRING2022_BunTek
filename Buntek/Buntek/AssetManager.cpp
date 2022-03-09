@@ -29,6 +29,11 @@ _assetManager::_assetManager()
     LoadFont("GothicA1.ttf");
 
     //Artifacts
+    LoadTexture("Artifacts/Common.png");
+    LoadTexture("Artifacts/Uncommon.png");
+    LoadTexture("Artifacts/Rare.png");
+    LoadTexture("Artifacts/Unique.png");
+
     LoadTexture("Artifacts/BouncyNecklace.png");
     LoadTexture("Artifacts/Defiance.png");
     LoadTexture("Artifacts/Dexterity.png");
