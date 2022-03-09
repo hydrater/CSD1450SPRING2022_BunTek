@@ -31,7 +31,7 @@ at the moment.
 There are no telegraphs or feedback yet but it will be implemented soon
 
 3. If you have resolution issues, 
-u can full screen with F1
+you can full screen with F1
 
 4. You can edit the game volume with arrow keys, it will be accessible
 through a menu in beta with interactive sliders but for now:
@@ -40,5 +40,5 @@ Up and down arrow for editing sound fx volume
 BE CAREFUL, THE VOLUME IS UNCAPPED
 
 5. Aesthetics, visuals and audio
-Some of it are placeholders to get the vibe check,  but we will be improving it, 
-see you guys in beta with a more polished version!
+The art is all self made. Music is currently placeholder.
+We will be improving, see you guys in beta with a more polished version!
