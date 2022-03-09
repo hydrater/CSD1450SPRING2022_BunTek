@@ -37,7 +37,7 @@ Alas a place to rest
 Events================================================================================================================
 
 E000
-/d  1
+/d 1
 ...
 .........
 /aw Unknown figure
@@ -50,27 +50,31 @@ Fret not, I am a passing cave explorer harvesting some botany.
 I have chanced upon this peculiar magic mushroom.
 Would you like to buy it off of me for 20 stardusts?
 /b10 Buy the mushroom
-/b0 Refuse the offer
+/b2|R003 Refuse the offer
 /b2|R000 Steal the mushroom
 
 R000
-/d  1
+/d 1
 /aw Cave Explorer
-STOP YOU THIEF!
+STOP YOU CRIMINAL SCUM!
 /e9
 
 R001
-/d  2
-/aw Cave Explorer
-LOL
-
-/R002
 /d 1
-/aw Cave Explorer
-wtf lol
+You bought the artifact with 20 stardust
+/e5
+
+R002
+/d 1
+You were not able to afford it
+You left...
+
+R003
+/d 1
+You left as you felt that the figure was too suspicious....
 
 E001
-/d  1
+/d 1
 ......
 ..........
 You are lost in a cave.....
@@ -80,14 +84,15 @@ You see 3 paths ahead of you....
 /b0 Take the right path
 
 E002
-/d  2
+/d 2
 You made it to the top of the mountains
+You found a bonfire
 Take a rest?
-/b4 Rest
-/b0 Continue
+/b7 Rest
+/b11 Harvest for stardust
 
 E003
-/d  2
+/d 2
 ...
 .....
 You see a silhouette in a distance....
@@ -103,8 +108,8 @@ I'd heard tell of a wanderer hurtling about atop these mountains
 And upon looking into the matter,
 the talk I surmise, is of thee.
 I was entrusted this, for thee.
-/b5 Accept
-/b0 Leave
+/b6 Accept
+/b2|R003 Leave
 
 E004
 /d  3

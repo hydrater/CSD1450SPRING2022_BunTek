@@ -263,6 +263,11 @@ void LaunchButtonEffect(Button* button)
 			UIDialogueManager.CreateDialoguePreset("R002", 3);
 		}
 	}
+	case 11:
+	{
+		// Obtain 20 stardust
+		GameManager.playerProfile.stardust += 20;
+	}
 	default:
 	{
 		// Force close if nothing can happen
