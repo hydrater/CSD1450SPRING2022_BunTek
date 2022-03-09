@@ -5,6 +5,7 @@
 #include "SaveManager.h"
 #include "MapGenerator.h"
 #include "Scene_MainMenu.h"
+#include "Scene_Battle.h"
 
 using namespace Math;
 
@@ -201,6 +202,12 @@ void _gameManager::CameraEndShake(void)
     cameraLerpBack = false;
 }
 
+void _gameManager::StartBattle(short enemyType)
+{
+    currentEnemy = enemyType;
+    SceneManager.LoadScene(new Scene_Battle, TransitionType::FadeTransition, true);
+}
+
 void _gameManager::InitBattle(float _playerHp, float _enemyHp)
 {
     playerHp = _playerHp;
@@ -273,6 +280,11 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
             SceneManager.LoadScene(new Scene_Navigation, TransitionType::FadeTransition, true);
         }
     }
+}
+
+short _gameManager::GetEnemyType(void)
+{
+    return currentEnemy;
 }
 
 void _gameManager::GameOver(void)

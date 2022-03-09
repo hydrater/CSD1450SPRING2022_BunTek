@@ -19,6 +19,7 @@ private:
     Vector2 pos = Vector2(0, 0);
     Vector2 dir = Vector2(0, 0);
     map<unsigned long, int> EnemyArtifactData;
+    short currentEnemy = 1;
 
 public:
     static _gameManager& Instance(void);
@@ -81,11 +82,12 @@ public:
 
     // Exploration
     int level = 0;
+    void StartBattle(short enemyType);
 
     // Battle
-    short currentEnemy = 1;
     void InitBattle(float _playerHp, float _enemyHp);
     void DealDamage(float damage, bool isPlayer);
+    short GetEnemyType(void);
 
     // Battle metrics
     BattleHandler* bh = 0;
