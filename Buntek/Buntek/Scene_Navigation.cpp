@@ -9,6 +9,7 @@
 #include "UI_DialogueHandler.h"
 #include "AlphaChanger.h"
 #include "ParticleSystem.h"
+#include "UI_Hp.h"
 
 void Scene_Navigation::Start(void)
 {
@@ -57,6 +58,20 @@ void Scene_Navigation::Start(void)
 
 	currentArea = devTools.CreateSpriteGameObject("hdCircle.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -2, 0.5f);
 	currentArea->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0.1f);
+
+	playerHp = new GameObject();
+	playerHp->transform->SetPosition(Vector2(-660, -400));
+	playerHp->AddComponent<UI_Hp>()->GenerateHpBar(true, GameManager.playerProfile.hp, GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp);
+
+	playerCurrency = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(-AEGetWindowWidth() / 2.5f, -AEGetWindowHeight() / 2.25f), 2, 1);
+	SpriteRenderer* tempCurrencySprite = playerCurrency->GetComponent<SpriteRenderer>();
+	tempCurrencySprite->SetColor(0.85f, 0.5f, 0.5f);
+	GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("UI/Stardust.png", 80, 80, AE_GFX_BM_BLEND,
+		Vector2(playerCurrency->transform->worldposition.x - 100, playerCurrency->transform->worldposition.y), 3, 1);
+	playerCurrencyText = devTools.CreateSpriteGameObject("UI/Stardust.png", 180, 80, AE_GFX_BM_BLEND, Vector2(playerCurrency->transform->worldposition.x + 50, playerCurrency->transform->worldposition.y), 3, 0);
+	TextRenderer* tempCurrencyText = devTools.AddTextToSpriteGameObject(playerCurrencyText, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, 3);
+	playerCurrency->AddChild(tempCurrencyIcon);
+	playerCurrency->AddChild(playerCurrencyText);
 }
 
 // Draw all lines
@@ -97,6 +112,15 @@ void Scene_Navigation::Update(void)
 		MapData.Travel(MapData.destinationNode);
 		currentArea->transform->SetPosition(MapData.currentNode->pos);
 	}
+	if (UIDialogueManager.UIOpen) {
+		playerHp->Deactivate();
+		playerCurrency->Deactivate();
+	}
+	else {
+		playerHp->Activate();
+		playerCurrency->Activate();
+	}
+	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
 }
 
 void Scene_Navigation::LateUpdate(void)

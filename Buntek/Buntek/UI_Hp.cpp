@@ -52,6 +52,10 @@ void UI_Hp::GenerateHpBar(bool _isplayer, float hpAmt, float maxHpAmt, int barCo
 	hpBackground2->GetComponent<SpriteRenderer>()->SetColor(0.5f, 0.5f, 0.5f);
 	hpForeground->GetComponent<SpriteRenderer>()->SetColor(1, 0, 0);
 	isplayer = _isplayer;
+	this->Owner()->AddChild(hpBackground);
+	this->Owner()->AddChild(hpBackground2);
+	this->Owner()->AddChild(hpForeground);
+	this->Owner()->AddChild(hpBarCount);
 }
 void UI_Hp::Start(void)
 {
