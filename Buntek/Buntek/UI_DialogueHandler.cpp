@@ -345,9 +345,9 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
 
     // Create Reward Selection Actor and Description
     actorTxt->Owner()->Activate();
-    actorTxt->SetText("Choose your loot");
+    actorTxt->SetText("Congratulations!");
     dialogueTxt->Owner()->Activate();
-    dialogueTxt->SetText("...");
+    dialogueTxt->SetText("You won! Choose your reward");
     dialogueFinalDisplayTxt = "...";
 
     // Assign artifacts [Max: 3]
