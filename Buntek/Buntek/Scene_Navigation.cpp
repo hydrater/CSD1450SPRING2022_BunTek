@@ -121,6 +121,7 @@ void Scene_Navigation::Update(void)
 		playerCurrency->Activate();
 	}
 	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
+	playerHp->GetComponent<UI_Hp>()->health = GameManager.playerProfile.hp;
 }
 
 void Scene_Navigation::LateUpdate(void)
