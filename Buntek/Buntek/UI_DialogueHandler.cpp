@@ -35,12 +35,19 @@ void UI_DialogueHandler::Update(void)
 
         if (AEInputCheckTriggered(AEVK_LBUTTON) && !UIDecision)
         {
+            cout << "EE: " << displayNo << "|" << dialogueFinalDisplayTxt.size() << "[]" << UINotification << endl;
             if (displayNo < dialogueFinalDisplayTxt.size())
                 doneDisplay = true;
             else
             {
-                if (dialogueNo < dialogueList.size() - 1)
+                if (dialogueNo < dialogueList.size() - 1 && !UINotification)
                 {
+                    ++dialogueNo;
+                    WriteToDialogue();
+                }
+                else if (dialogueNo < dialogueList.size() - 1 && UINotification)
+                {
+                    UINotification = false;
                     ++dialogueNo;
                     WriteToDialogue();
                 }
@@ -569,6 +576,7 @@ void UI_DialogueHandler::DF_DisplayArtifact(unsigned long ID)
     // Set text
     UIOpen = true;
     UIDecision = false;
+    UINotification = true;
     actorTxt->Owner()->Activate();
     actorTxt->SetText("");
     dialogueTxt->Owner()->Activate();

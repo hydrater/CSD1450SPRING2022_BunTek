@@ -32,7 +32,7 @@ public:
 	void DF_DisplayArtifact(unsigned long ID);
 
 	bool UIOpen = false, UIDecision = false;	// UIDecision: Prevents user from clicking to next dialogue 
-
+	bool UINotification = false;				// UINotification: Pause Dialogue to display to next command
 	struct ArtifactLoot {
 		GameObject* DisplayArtifactOwner = 0;
 		unsigned long ArtifactID = 0;

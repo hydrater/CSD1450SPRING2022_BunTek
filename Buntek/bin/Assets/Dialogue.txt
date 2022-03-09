@@ -136,15 +136,8 @@ And upon looking into the matter,
 the talk I surmise, is of thee.
 I was entrusted this, for thee.
 /b6 Accept
-/b2|T005 Leave
-
-
-T004
-/d 2
-
-T005
-/d 2
-You left as you felt that the figure was too suspicious....
+/b2|R003 Leave
+/e2|T002
 
 E004
 /d 3
@@ -170,7 +163,7 @@ You entered a crystal cave....
 .....
 ........
 You found an a glowing object
-/b6 Pick it up
+/b6|3 Pick it up
 /b0 Leave
 
 E006
@@ -211,8 +204,7 @@ R007
 !!!!
 The object explodes...
 An artifact rolled towards you...
-/d 4
-/e6
+/e6|4
 End of dialogue
 
 E007
@@ -243,8 +235,7 @@ That's much better
 You noticed that the catgirl may not be female...
 /ap A cat....boy?
 It's dangerous to go alone! Take this!
-/d 4
-/e6
+/e6|4
 /aw
 You received an artifact....  
 You left....
