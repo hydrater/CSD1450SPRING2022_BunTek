@@ -11,7 +11,6 @@ _assetManager::_assetManager()
     LoadTexture("hdCircle.png");
 
     // UI
-    LoadTexture("UI/Texture.png");
     LoadTexture("UI/Button.png");
     LoadTexture("UI/DialogueBox.png");
 
