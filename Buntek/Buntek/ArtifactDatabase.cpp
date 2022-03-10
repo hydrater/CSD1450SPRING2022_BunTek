@@ -398,21 +398,21 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 221:
         return "Wall bounce: Increases ball speed";
     case 300:
-        return "Ball phase >= 2\nWhen reflected by your paddle, increase ball speed";
+        return "After 2 reflects, when reflected by your paddle, increase ball speed";
     case 400:
-        return "Ball phase >= 3\nWhen dealing damage, restores hp";
+        return "After 3 reflects, when dealing damage, restores hp";
     case 401:
-        return "Ball phase >= 3\nWhen dealing damage, deals extra damage";
+        return "After 3 reflects, when dealing damage, deals extra damage";
     case 420:
-        return "Ball phase >= 4\nWhen dealing damage, spawns a ball in a random direction forward from the middle";
+        return "After 4 reflects, when dealing damage, spawns a ball in a random direction forward from the middle";
     case 500:
-        return "Ball phase >= 3:\nWhen taking damage, opponent takes damage";
+        return "After 3 reflects, when taking damage, opponent takes damage";
     case 520:
-        return "Ball phase >= 4:\nWhen taking damage, spawns a ball in a random direction forward from the middle";
+        return "After 4 reflects, when taking damage, spawns a ball in a random direction forward from the middle";
     case 530:
-        return "Ball phase >= 3:\nWhen taking damage, if hp is below 20%, unable to take damage for a while";
+        return "After 3 bounces, when taking damage, if hp is below 20%, unable to take damage for a while";
     case 540:
-        return "Ball phase >= 4:\nWhen taking damage, negate next damage taken";
+        return "After 4 reflects, when taking damage, negate next damage taken";
     case 541:
         return "On death, restores 50% hp, destroy this artifact";
     case 630:

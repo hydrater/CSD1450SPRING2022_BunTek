@@ -105,8 +105,8 @@ GameObject* _devTools::CreateArtifactUIGameObject(unsigned long ID, Vector2 pos,
     GameObject* ArtifactIcon = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(ID), 100.f, 100.f, AE_GFX_BM_BLEND, Vector2(pos.x + 47, pos.y + 100), layer + 1);
     ArtifactUI->AddChild(ArtifactIcon);
     // Artifact Description
-    GameObject* ArtifactDesc = CreateSpriteGameObject("WhiteTexture.png", 250.f, 200.f, AE_GFX_BM_BLEND, Vector2(pos.x + 10, pos.y - 34), layer, 0);
-    TextRenderer* DescText = AddTextToSpriteGameObject(ArtifactDesc, "Ayar.ttf", ArtifactDatabase.GetDescription(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 20.f, layer, true);
+    GameObject* ArtifactDesc = CreateSpriteGameObject("WhiteTexture.png", 250.f, 200.f, AE_GFX_BM_BLEND, Vector2(pos.x + 10, pos.y - 50), layer, 0);
+    TextRenderer* DescText = AddTextToSpriteGameObject(ArtifactDesc, "Ayar.ttf", ArtifactDatabase.GetDescription(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 16.f, layer, true);
     ArtifactUI->AddChild(ArtifactDesc);
     // Set Background, Name and Description color
     switch (ArtifactDatabase.GetRarity(ID))
