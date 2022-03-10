@@ -185,7 +185,8 @@ void _gameManager::DisplayArtifactList(void)
     }
     else
     {
-        artifactListUI = new GameObject;
+        artifactListUI = devTools.CreateSpriteGameObject("WhiteTexture.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0), 9, 0.2f);
+        artifactListUI->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
 
         int x = -780, y = 360;
         for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
@@ -193,7 +194,7 @@ void _gameManager::DisplayArtifactList(void)
             GameObject* newArtifactUI = devTools.CreateArtifactUIGameObject(it->first, Vector2(x, y), 10);
             GameObject* textObj = new GameObject;
             textObj->transform->SetPosition(Vector2(x - 80, y + 50));
-            devTools.AddTextToSpriteGameObject(textObj, "GothicA1.ttf", to_string(it->second), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 50.f, 11);
+            devTools.AddTextToSpriteGameObject(textObj, "GothicA1.ttf", to_string(it->second), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 50.f, 12);
 
             newArtifactUI->AddChild(textObj);
             artifactListUI->AddChild(newArtifactUI);
