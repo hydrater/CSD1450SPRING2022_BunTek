@@ -31,7 +31,7 @@ at the moment.
 There are no telegraphs or feedback yet but it will be implemented soon
 
 3. If you have resolution issues, 
-you can full screen with F1
+You can full screen with F1
 
 4. You can edit the game volume with arrow keys, it will be accessible
 through a menu in beta with interactive sliders but for now:
@@ -42,4 +42,6 @@ BE CAREFUL, THE VOLUME IS UNCAPPED
 5. Aesthetics, visuals and audio
 Other than the battle background placeholder, the art is all self made.
 The music tracks are currently all placeholder as we will be making our own music.
-We will be improving, see you guys in beta with a more polished version!
+Our artifact cards will be replaced with a pleasant looking ones too.
+
+We will be improving many things, see you guys in beta with a more polished version!
