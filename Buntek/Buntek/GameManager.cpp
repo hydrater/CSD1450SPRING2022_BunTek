@@ -202,7 +202,7 @@ void _gameManager::DisplayArtifactList(void)
             if (x > 800)
             {
                 x = -780;
-                y -= 320;
+                y -= 340;
             }
         }
     }
