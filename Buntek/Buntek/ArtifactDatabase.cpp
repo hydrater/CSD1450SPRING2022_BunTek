@@ -24,59 +24,59 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     {
     case 000://Increase damage
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusDamage = artifact.count;
+            GameManager.playerProfile.bonusDamage = artifact.count * 5;
         }
         else {
-            GameManager.enemyProfile.bonusDamage = artifact.count;
+            GameManager.enemyProfile.bonusDamage = artifact.count * 5;
         }
         break;
     case 001://Increase max hp
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusHp = (float)artifact.count;
+            GameManager.playerProfile.bonusHp = (float)artifact.count * 10;
         }
         else {
-            GameManager.enemyProfile.bonusHp = (float)artifact.count;
+            GameManager.enemyProfile.bonusHp = (float)artifact.count * 10;
         }
         break;
     case 002://Increase paddle speed
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusPaddleSpeed = 1 + (float)artifact.count / 100.0f;
+            GameManager.playerProfile.bonusPaddleSpeed = 1 + (float)artifact.count / 10.0f;
         }
         else {
-            GameManager.enemyProfile.bonusPaddleSpeed = 1 + (float)artifact.count / 100.0f;
+            GameManager.enemyProfile.bonusPaddleSpeed = 1 + (float)artifact.count / 10.0f;
         }
         break;
     case 003://Increase ball speed
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusBallSpeed = 1 + (float)artifact.count / 100.0f;
+            GameManager.playerProfile.bonusBallSpeed = 1 + (float)artifact.count / 10.0f;
         }
         else {
-            GameManager.enemyProfile.bonusBallSpeed = 1 + (float)artifact.count / 100.0f;
+            GameManager.enemyProfile.bonusBallSpeed = 1 + (float)artifact.count / 10.0f;
         }
         break;
     case 004://Increase ball spawn frequency
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusBallSpawnRate = 1 - (float)artifact.count / 100.0f;
-            AEClamp(GameManager.playerProfile.bonusBallSpawnRate, 0.01f, 1);
+            GameManager.playerProfile.bonusBallSpawnRate = 1 - (float)artifact.count / 10.0f;
+            AEClamp(GameManager.playerProfile.bonusBallSpawnRate, 0.1f, 1);
         }
         else {
-            GameManager.enemyProfile.bonusBallSpawnRate = 1 - (float)artifact.count / 100.0f;
-            AEClamp(GameManager.enemyProfile.bonusBallSpawnRate, 0.01f, 1);
+            GameManager.enemyProfile.bonusBallSpawnRate = 1 - (float)artifact.count / 10.0f;
+            AEClamp(GameManager.enemyProfile.bonusBallSpawnRate, 0.1f, 1);
         }
         break;
     case 030://Heals X times more
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusHealing = 1 + (float)artifact.count / 100.0f;
+            GameManager.playerProfile.bonusHealing = 1 + (float)artifact.count / 10.0f;
         }
         else {
-            GameManager.enemyProfile.bonusHealing = 1 + (float)artifact.count / 100.0f;
+            GameManager.enemyProfile.bonusHealing = 1 + (float)artifact.count / 10.0f;
         }
         break;
     case 120://Increase hp by 2 per battle won, up to a max of X
         GameManager.playerProfile.basemaxhp += 2 * artifact.count;
         break;
     case 140://Restores 10&% hp of max hp
-        GameManager.playerHp += GameManager.playerProfile.basemaxhp / 10 * GameManager.playerProfile.bonusHealing;
+        GameManager.playerHp += (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp)/ 10 * GameManager.playerProfile.bonusHealing;
         break;
     case 220://Increases ball bounce gain by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();

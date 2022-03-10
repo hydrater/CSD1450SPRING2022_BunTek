@@ -62,10 +62,10 @@ void Scene_Navigation::Start(void)
 	currentArea->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0.1f);
 
 	playerHp = new GameObject();
-	playerHp->transform->SetPosition(Vector2(-660, -400));
+	playerHp->transform->SetPosition(Vector2(-660.0f, (-AEGetWindowHeight() / 2.25f)));
 	playerHp->AddComponent<UI_Hp>()->GenerateHpBar(true, GameManager.playerProfile.hp, GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp);
 
-	playerCurrency = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(-AEGetWindowWidth() / 2.5f, -AEGetWindowHeight() / 2.25f), 2, 1);
+	playerCurrency = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(AEGetWindowWidth() / 2.5f, -AEGetWindowHeight() / 2.25f), 2, 1);
 	SpriteRenderer* tempCurrencySprite = playerCurrency->GetComponent<SpriteRenderer>();
 	tempCurrencySprite->SetColor(0.85f, 0.5f, 0.5f);
 	GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("UI/Stardust.png", 80, 80, AE_GFX_BM_BLEND,
@@ -75,7 +75,7 @@ void Scene_Navigation::Start(void)
 	playerCurrency->AddChild(tempCurrencyIcon);
 	playerCurrency->AddChild(playerCurrencyText);
 
-	playerArtifactsBtn = devTools.CreateSpriteGameObject("UI/Button.png", 200, 100, AE_GFX_BM_BLEND, Vector2(-AEGetWindowWidth() / 3.5f, -AEGetWindowHeight() / 2.25f), 2, 1);
+	playerArtifactsBtn = devTools.CreateSpriteGameObject("UI/Button.png", 200, 100, AE_GFX_BM_BLEND, Vector2(AEGetWindowWidth() / 3.5f, -AEGetWindowHeight() / 2.25f), 2, 1);
 	TextRenderer* tempText = devTools.AddTextToSpriteGameObject(playerArtifactsBtn, "Gabriola.ttf", "Artifacts", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 72.f, 3);
 	Button* button = playerArtifactsBtn->AddComponent<Button>();
 	button->sr = playerArtifactsBtn->GetComponent<SpriteRenderer>();
