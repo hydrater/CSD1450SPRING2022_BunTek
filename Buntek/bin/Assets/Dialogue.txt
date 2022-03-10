@@ -136,8 +136,11 @@ And upon looking into the matter,
 the talk I surmise, is of thee.
 I was entrusted this, for thee.
 /b6 Accept
-/b2|R003 Leave
-/e2|T002
+/b2|T003 Leave
+
+T003
+/d 1
+You left as you felt that the figure was too suspicious....
 
 E004
 /d 3
