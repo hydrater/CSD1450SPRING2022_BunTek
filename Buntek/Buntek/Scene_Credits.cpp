@@ -69,7 +69,7 @@ void Scene_Credits::Start(void)
 	tempTextRenderer->SetTextColor(255, 230, 255);
 	tempTextRenderer->SetFontSize(25);
 	tempTextRenderer->SetWarpAround(true);
-	tempTextRenderer->SetText("Created By Buntek");
+	tempTextRenderer->SetText("Created By Buntek\n");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);	
 	
@@ -85,7 +85,7 @@ void Scene_Credits::Start(void)
 	tempTextRenderer->SetTextColor(255, 230, 255);
 	tempTextRenderer->SetFontSize(20);
 	tempTextRenderer->SetWarpAround(true);
-	tempTextRenderer->SetText("Steven Koe \nBryan Boh \nAlgene Tan Chuan Hong \nGoh Kiat Beng \n Isaiah Lim Ji Rong");
+	tempTextRenderer->SetText("\nSteven Koe \nBryan Boh \nAlgene Tan Chuan Hong \nGoh Kiat Beng \n Isaiah Lim Ji Rong");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 
@@ -191,7 +191,7 @@ void Scene_Credits::Start(void)
 	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(255, 230, 255);
 	tempTextRenderer->SetFontSize(25);
-	tempTextRenderer->SetText("Executives");
+	tempTextRenderer->SetText("Executives\n");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 	
@@ -206,7 +206,7 @@ void Scene_Credits::Start(void)
 	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(255, 230, 255);
 	tempTextRenderer->SetFontSize(20);
-	tempTextRenderer->SetText("Jason Chu  Samir Abou Samra  Michele Comair\nChristopher Comair  Michal Gats  Raymond Yan\nPrasanna Ghali  John Bauer  Dr.Erik Mohrmann\nDr.Charles Duba  Angela Kugler  Johnny Deek\nBenjamin Elinger  Mevin Gonsavlez");
+	tempTextRenderer->SetText("\nJason Chu  Samir Abou Samra  Michele Comair\nChristopher Comair  Michal Gats  Raymond Yan\nPrasanna Ghali  John Bauer  Dr.Erik Mohrmann\nDr.Charles Duba  Angela Kugler  Johnny Deek\nBenjamin Elinger  Mevin Gonsavlez");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);	
 	
