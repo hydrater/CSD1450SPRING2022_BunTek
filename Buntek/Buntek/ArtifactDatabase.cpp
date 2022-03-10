@@ -416,11 +416,11 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 541:
         return "On death, restores 50% hp, destroy this artifact";
     case 630:
-        return "Ball phase >= 2:\nWhen colliding with hostile balls, freeze the collided ball";
+        return "After 2 reflects, when colliding with hostile balls, freeze the collided ball";
     case 631:
-        return "Ball phase >= 2:\nWhen colliding with hostile balls, occasionally reflect collided ball";
+        return "After 2 reflects, when colliding with hostile balls, occasionally reflect collided ball";
     case 640:
-        return "Ball phase >= 5:\nWhen colliding with hostile balls, destroy the collided ball";
+        return "After 5 reflects, when colliding with hostile balls, destroy the collided ball";
     default:
         return "Invalid ID";
     }

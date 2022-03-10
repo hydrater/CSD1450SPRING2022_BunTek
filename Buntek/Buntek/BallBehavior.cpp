@@ -70,10 +70,10 @@ void BallBehavior::Update(void)
 			}
 			GameObject* spawner = new GameObject();
 			if (leftWall) {
-				spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(1, 0), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(GameManager.areaLeftBoundary, transform->worldposition.y), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+				spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(1, 0), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "hdCircle.png", Vector2(GameManager.areaLeftBoundary, transform->worldposition.y), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
 			}
 			else {
-				spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(-1, 0), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(GameManager.areaRightBoundary, transform->worldposition.y), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+				spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(-1, 0), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "hdCircle.png", Vector2(GameManager.areaRightBoundary, transform->worldposition.y), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
 			}
 
 			BallHorizontalCheck();
@@ -110,11 +110,11 @@ void BallBehavior::Update(void)
 			if (hasBounced) {
 				GameObject* spawner = new GameObject();
 				if (playerPossess) {
-					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, -1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(transform->worldposition.x , transform->worldposition.y+radius/2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, -1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "hdCircle.png", Vector2(transform->worldposition.x , transform->worldposition.y+radius/2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
 				}
 				else
 				{
-					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, 1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(transform->worldposition.x, transform->worldposition.y - radius / 2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, 1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "hdCircle.png", Vector2(transform->worldposition.x, transform->worldposition.y - radius / 2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
 				}
 			}
 			
