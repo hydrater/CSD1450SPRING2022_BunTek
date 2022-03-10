@@ -76,8 +76,9 @@ public:
 private:
     //void AssignLines(vector<Node> *largerList, vector<Node> *smallerList);
     bool canAccessFirstNode = true; // REMEMBER TO RESET THIS if using multiple start nodes
-    float minDistance = 125;
-    float maxDistance = 400;
-    float buffer = 75;
+    const float minDistance = 125;
+    const float maxDistance = 400;
+    const float xBuffer = 75;
+    const float yBuffer = 150;
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };

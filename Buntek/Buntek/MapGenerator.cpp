@@ -29,10 +29,10 @@ void _mapData::GenerateMapData(void)
 {
     DeleteMapData();
 
-    float StartXCoord = (float)(-AEGetWindowWidth() / 2) + buffer;
-    float EndXCoord = (float)(AEGetWindowWidth() / 2) - buffer;
-    float StartYCoord = (float)(-AEGetWindowHeight() / 2) + buffer;
-    float EndYCoord = (float)(AEGetWindowHeight() / 2) - buffer;
+    float StartXCoord = (float)(-AEGetWindowWidth() / 2) + xBuffer;
+    float EndXCoord = (float)(AEGetWindowWidth() / 2) - xBuffer;
+    float StartYCoord = (float)(-AEGetWindowHeight() / 2) + yBuffer;
+    float EndYCoord = (float)(AEGetWindowHeight() / 2) - yBuffer;
 
     penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.5f), RandFloatMinMax(StartYCoord, EndYCoord));
 
