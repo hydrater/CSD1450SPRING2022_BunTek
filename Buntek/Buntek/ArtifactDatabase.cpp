@@ -404,7 +404,7 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 401:
         return "Ball phase >= 3\nWhen dealing damage, deals extra damage";
     case 420:
-        return "Ball phase >= 4\nWhen dealing damage, spawns X ball in a random direction forward from the middle";
+        return "Ball phase >= 4\nWhen dealing damage, spawns a ball in a random direction forward from the middle";
     case 500:
         return "Ball phase >= 3:\nWhen taking damage, opponent takes damage";
     case 520:
