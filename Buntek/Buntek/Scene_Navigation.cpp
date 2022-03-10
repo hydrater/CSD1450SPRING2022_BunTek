@@ -69,8 +69,8 @@ void Scene_Navigation::Start(void)
 	SpriteRenderer* tempCurrencySprite = playerCurrency->GetComponent<SpriteRenderer>();
 	tempCurrencySprite->SetColor(0.85f, 0.5f, 0.5f);
 	GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("UI/Stardust.png", 80, 80, AE_GFX_BM_BLEND,
-		Vector2(playerCurrency->transform->worldposition.x - 100, playerCurrency->transform->worldposition.y), 3, 1);
-	playerCurrencyText = devTools.CreateSpriteGameObject("UI/Stardust.png", 180, 80, AE_GFX_BM_BLEND, Vector2(playerCurrency->transform->worldposition.x + 50, playerCurrency->transform->worldposition.y), 3, 0);
+		Vector2(playerCurrency->transform->worldposition.x - 50, playerCurrency->transform->worldposition.y), 3, 1);
+	playerCurrencyText = devTools.CreateSpriteGameObject("UI/Stardust.png", 180, 80, AE_GFX_BM_BLEND, Vector2(playerCurrency->transform->worldposition.x + 80, playerCurrency->transform->worldposition.y), 3, 0);
 	devTools.AddTextToSpriteGameObject(playerCurrencyText, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, 3);
 	playerCurrency->AddChild(tempCurrencyIcon);
 	playerCurrency->AddChild(playerCurrencyText);
@@ -100,6 +100,17 @@ void Scene_Navigation::EarlyUpdate(void)
 		AEGfxMeshDraw(MapData.travelHistoryLines[i], AE_GFX_MDM_LINES_STRIP);
 	}
 
+	if (UIDialogueManager.UIOpen || UIDialogueManager.UIDecision || GameManager.battleRewardPending) {
+		playerHp->Deactivate();
+		playerCurrency->Deactivate();
+		playerArtifactsBtn->Deactivate();
+	}
+	else {
+		playerHp->Activate();
+		playerCurrency->Activate();
+		playerArtifactsBtn->Activate();
+	}
+
 	if (GameManager.battleRewardPending)
 	{
 		GameManager.battleRewardPending = false;
@@ -108,7 +119,7 @@ void Scene_Navigation::EarlyUpdate(void)
 		rew2.ID = ArtifactDatabase.DrawArtifact();
 		rew3.ID = ArtifactDatabase.DrawArtifact();
 		vector<Artifact> reward_Artifact{ rew1, rew2, rew3 };
-		UIDialogueManager.CreateRewardSelPreset(reward_Artifact, 3, true);
+		UIDialogueManager.CreateRewardSelPreset(reward_Artifact, 5, true);
 	}
 }
 
@@ -121,16 +132,7 @@ void Scene_Navigation::Update(void)
 		MapData.Travel(MapData.destinationNode);
 		currentArea->transform->SetPosition(MapData.currentNode->pos);
 	}
-	if (UIDialogueManager.UIOpen) {
-		playerHp->Deactivate();
-		playerCurrency->Deactivate();
-		playerArtifactsBtn->Deactivate();
-	}
-	else {
-		playerHp->Activate();
-		playerCurrency->Activate();
-		playerArtifactsBtn->Activate();
-	}
+
 	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
 	playerHp->GetComponent<UI_Hp>()->health = GameManager.playerProfile.hp;
 }
