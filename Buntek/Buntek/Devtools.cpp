@@ -94,17 +94,18 @@ TextRenderer* _devTools::AddTextToSpriteGameObject(GameObject* gameObject, strin
 GameObject* _devTools::CreateArtifactUIGameObject(unsigned long ID, Vector2 pos, short layer) {
     
     // Artifact Background
-    GameObject* ArtifactUI = CreateSpriteGameObject("WhiteTexture.png", 290, 300, AE_GFX_BM_BLEND, pos, layer - 1);
+    GameObject* ArtifactUI = CreateSpriteGameObject("WhiteTexture.png", 260, 310, AE_GFX_BM_BLEND, pos, layer - 1);
     SpriteRenderer* ArtifactBckgrd = ArtifactUI->GetComponent<SpriteRenderer>();
     // Artifact Name
-    GameObject* ArtifactName = CreateSpriteGameObject("WhiteTexture.png", 200.f, 100.f, AE_GFX_BM_BLEND, Vector2(pos.x, pos.y + 130.f), layer, 0);
-    TextRenderer* NameText = AddTextToSpriteGameObject(ArtifactName, "Gabriola.ttf", ArtifactDatabase.GetName(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 36.f, layer);
+    GameObject* ArtifactName = CreateSpriteGameObject("WhiteTexture.png", 100.f, 100.f, AE_GFX_BM_BLEND, Vector2(pos.x + 46, pos.y + 22.f), layer, 0);
+    TextRenderer* NameText = AddTextToSpriteGameObject(ArtifactName, "Gabriola.ttf", ArtifactDatabase.GetName(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 29.f, layer);
+    NameText->SetTextColor(1, 1, 1);
     ArtifactUI->AddChild(ArtifactName);
     // Artifact Icon
-    GameObject* ArtifactIcon = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(ID), 100.f, 100.f, AE_GFX_BM_BLEND, Vector2(pos.x, pos.y + 50.f), layer + 1);
+    GameObject* ArtifactIcon = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(ID), 100.f, 100.f, AE_GFX_BM_BLEND, Vector2(pos.x + 47, pos.y + 100), layer + 1);
     ArtifactUI->AddChild(ArtifactIcon);
     // Artifact Description
-    GameObject* ArtifactDesc = CreateSpriteGameObject("WhiteTexture.png", 290.f, 180.f, AE_GFX_BM_BLEND, Vector2(pos.x, pos.y - 20), layer, 0);
+    GameObject* ArtifactDesc = CreateSpriteGameObject("WhiteTexture.png", 250.f, 200.f, AE_GFX_BM_BLEND, Vector2(pos.x + 10, pos.y - 34), layer, 0);
     TextRenderer* DescText = AddTextToSpriteGameObject(ArtifactDesc, "Ayar.ttf", ArtifactDatabase.GetDescription(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 20.f, layer, true);
     ArtifactUI->AddChild(ArtifactDesc);
     // Set Background, Name and Description color
@@ -112,23 +113,15 @@ GameObject* _devTools::CreateArtifactUIGameObject(unsigned long ID, Vector2 pos,
     {
     case RarityTypes::Uncommon:
         ArtifactBckgrd->SetTexture("Artifacts/Uncommon.png");
-        NameText->SetTextColor(0, 0, 0);
-        DescText->SetTextColor(0, 0, 0);
         break;
     case RarityTypes::Rare:
         ArtifactBckgrd->SetTexture("Artifacts/Rare.png");
-        NameText->SetTextColor(1, 1, 1);
-        DescText->SetTextColor(1, 1, 1);
         break;
     case RarityTypes::Unique:
         ArtifactBckgrd->SetTexture("Artifacts/Unique.png");
-        NameText->SetTextColor(1, 1, 1);
-        DescText->SetTextColor(1, 1, 1);
         break;
     default:
         ArtifactBckgrd->SetTexture("Artifacts/Common.png");
-        NameText->SetTextColor(0, 0, 0);
-        DescText->SetTextColor(0, 0, 0);
         break;
     }
     return ArtifactUI;

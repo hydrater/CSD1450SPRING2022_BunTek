@@ -398,7 +398,7 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 221:
         return "Wall bounce: Increases ball speed";
     case 300:
-        return "Ball phase >= 2\nWhen dealing damage, increase ball speed";
+        return "Ball phase >= 2\nWhen reflected by your paddle, increase ball speed";
     case 400:
         return "Ball phase >= 3\nWhen dealing damage, restores hp";
     case 401:
