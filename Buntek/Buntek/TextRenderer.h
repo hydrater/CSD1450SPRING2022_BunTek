@@ -53,6 +53,7 @@ public:
 	
 	void SetWarpAround(bool _warparound);
 	bool GetWarpAround(void);
+	int lineCount = 1;
 private:
 	string fontString = "EquinoxB.otf";
 	float textScale = 1;

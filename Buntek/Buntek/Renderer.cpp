@@ -193,7 +193,7 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 		return (textRenderer->GetTransform()->worldposition.y - tempSR->GetHalfHeight() + textRenderer->GetYBuffer());
 		break;
 	case TextRenderer::yAlignmentTypes::Mid:
-		return (textRenderer->GetTransform()->worldposition.y - textRenderer->GetTextHeight() / 2);
+		return (textRenderer->GetTransform()->worldposition.y + textRenderer->lineCount * textRenderer->GetTextHeight() / 2.0f - textRenderer->GetTextHeight());
 		break;
 	default:
 		return 0;
@@ -251,6 +251,7 @@ void  _renderer::WrapAround(TextRenderer* textRenderer) {
 		}
 	}
 	textRenderer->SetText(alteredString);
+	textRenderer->lineCount = linecount;
 }
 
 void _renderer::AddToList(RenderComponent* entry)

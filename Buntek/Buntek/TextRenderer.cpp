@@ -118,26 +118,26 @@ void TextRenderer::CalculateTextSize(void) {
 	float wordHeight = 0;
 	string word = "";
 	char tempChar = 0;
-	int linecount = 0;
+	lineCount = 0;
 	for (string::iterator it = text.begin(); it != text.end(); ++it) {
 		tempChar = *it;
 		word.append(1, tempChar);
 		if (tempChar == '\n') {
 			AEGfxGetPrintSize(AssetManager.GetFont(fontString), &word[0], textScale, wordWidth, wordHeight);
-			this->SetTextWidth(wordWidth * (float)AEGetWindowWidth() / 2.0f, linecount);
+			this->SetTextWidth(wordWidth * (float)AEGetWindowWidth() / 2.0f, lineCount);
 			if (wordHeight != textHeight) {
 				textHeight = wordHeight * (float)AEGetWindowHeight() / 2.0f;
 			}
-			linecount++;
+			lineCount++;
 			word.clear();
 		}
 	}
 	AEGfxGetPrintSize(AssetManager.GetFont(fontString), &word[0], textScale, wordWidth, wordHeight);
-	this->SetTextWidth(wordWidth * (float)AEGetWindowWidth() / 2.0f, linecount);
+	this->SetTextWidth(wordWidth * (float)AEGetWindowWidth() / 2.0f, lineCount);
 	if (wordHeight != textHeight) {
 		textHeight = wordHeight * (float)AEGetWindowHeight() / 2.0f;
 	}
-	linecount++;
+	lineCount++;
 	word.clear();
 }
 
