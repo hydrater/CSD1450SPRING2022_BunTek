@@ -253,7 +253,7 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	tempRenderer = ball->AddComponent<SpriteRenderer>();
 	tempRenderer->SetLayer(2);
 	tempRenderer->Size(20, 20);
-	tempRenderer->SetTexture("ball.png");
+	tempRenderer->SetTexture("hdCircle.png");
 	tempcol = ball->AddComponent<CircleCollider>();
 	tempBall = ball->AddComponent<BallBehavior>();
 	tempBall->battleInput = inputHandler->GetComponent<BattleInput>();
@@ -283,7 +283,7 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	GameObject* newParticle = new GameObject();
 	ParticleSystem* newSystem = newParticle->AddComponent<ParticleSystem>();
 	newParticle->transform->SetPosition(ball->transform->worldposition);
-	newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "ball.png", ball->transform->worldposition, 6, (short)AE_GFX_BM_BLEND, false, true);
+	newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "hdCircle.png", ball->transform->worldposition, 6, (short)AE_GFX_BM_BLEND, false, true);
 
 	tempBall->ballParticle = newParticle;
 	tempBall->ballParticleSystem = newSystem;

@@ -192,8 +192,8 @@ void _gameManager::DisplayArtifactList(void)
         {
             GameObject* newArtifactUI = devTools.CreateArtifactUIGameObject(it->first, Vector2(x, y), 10);
             GameObject* textObj = new GameObject;
-            textObj->transform->SetPosition(Vector2(x + 100, y + 50));
-            devTools.AddTextToSpriteGameObject(textObj, "GothicA1.ttf", "x" + to_string(it->second), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 60.f, 11);
+            textObj->transform->SetPosition(Vector2(x - 80, y + 50));
+            devTools.AddTextToSpriteGameObject(textObj, "GothicA1.ttf", to_string(it->second), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 50.f, 11);
 
             newArtifactUI->AddChild(textObj);
             artifactListUI->AddChild(newArtifactUI);
@@ -202,7 +202,7 @@ void _gameManager::DisplayArtifactList(void)
             if (x > 800)
             {
                 x = -780;
-                y -= 320;
+                y -= 340;
             }
         }
     }

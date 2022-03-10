@@ -7,7 +7,6 @@ _assetManager::_assetManager()
     LoadTexture("Steven.jpg");
     LoadTexture("Background.jpg");
     LoadTexture("WhiteTexture.png");
-    LoadTexture("ball.png");
     LoadTexture("hdCircle.png");
 
     // UI
