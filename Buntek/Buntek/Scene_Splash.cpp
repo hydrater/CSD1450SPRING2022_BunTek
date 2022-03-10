@@ -71,18 +71,18 @@ void Scene_Splash::Update(void)
 		{
 		case 0:
 			//AEGfxSetBackgroundColor(1.0f, 0.93f, 0.24f);
-			AEGfxSetBackgroundColor(0.5f, 0.0f, 0.0f);
+			AEGfxSetBackgroundColor(0.2f, 0.0f, 0.0f);
 			break;
 
 		case 1:
 			//AEGfxSetBackgroundColor(0.14f, 0.65f, 1.0f);
-			AEGfxSetBackgroundColor(0.0f, 0.0f, 0.5f);
+			AEGfxSetBackgroundColor(0.0f, 0.0f, 0.2f);
 			break;
 
-		case 2:
-			//AEGfxSetBackgroundColor(1.0f, 0.29f, 0.89f);
-			AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-			break;
+		//case 2:
+		//	//AEGfxSetBackgroundColor(1.0f, 0.29f, 0.89f);
+		//	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+		//	break;
 
 		//case 3:
 		//	AEGfxSetBackgroundColor(0.1f, 0.8f, 5.5f);
