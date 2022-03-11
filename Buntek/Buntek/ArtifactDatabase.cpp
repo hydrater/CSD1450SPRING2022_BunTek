@@ -243,7 +243,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             if (tempBallBehavior->savedCol != NULL) {
                 tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
             }
-            for (size_t i = 0; i < GameManager.playerArtifactList.statusEffect.size(); ++i)
+            for (size_t i = 0; i < tempBallBehavior->statusEffect.size(); ++i)
             {
                 if (tempBallBehavior->statusEffect[i].statusID == 01) {
                     tempBallBehavior->statusEffect[i].statusTimer += artifact.count;;
