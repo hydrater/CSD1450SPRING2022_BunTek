@@ -172,7 +172,7 @@ void LaunchButtonEffect(Button* button)
 		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 
 		// Heal player by 50%
-		GameManager.playerProfile.hp += GameManager.playerProfile.basemaxhp / 2;
+		GameManager.playerProfile.hp += truemaxhp / 2;
 
 		if (GameManager.playerProfile.hp > truemaxhp)
 			GameManager.playerProfile.hp = truemaxhp;
