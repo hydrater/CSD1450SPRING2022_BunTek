@@ -256,12 +256,16 @@ void LaunchButtonEffect(Button* button)
 			// Game over
 			GameManager.GameOver();
 		}
+		UIDialogueManager.UIDecision = false;
+		UIDialogueManager.SkipDialogue();
 		break;
 	}
 	case 9:
 	{
 		// Start Battle
 		GameManager.StartBattle(2);
+		UIDialogueManager.UIDecision = false;
+		UIDialogueManager.SkipDialogue();
 		break;
 	}
 	case 10:

@@ -447,7 +447,7 @@ unsigned long _artifactdatabase::DrawArtifact(void)
 
     if (RNG < commonRate)
     {
-        RNG = RandIntMinMax(0, (int)common.size()-1);
+        RNG = RandIntMinMax(0, (int)common.size() - 1);
         return common[RNG];
     }
     else if (RNG < uncommonRate)

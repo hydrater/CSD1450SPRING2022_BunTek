@@ -98,7 +98,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		CollisionManager2D.CollideAll();
 
 		// --------------------------------------------- Render --------------------------------------------- //
+		cout << "GM start" << endl;
 		GameManager.Update();
+		cout << "GM end" << endl;
+
 		Renderer.Update();
 		SceneManager.LateUpdate();
 
