@@ -169,6 +169,11 @@ void LaunchButtonEffect(Button* button)
 	case 3:
 	{
 		// Gets max hp (Case 3 - 4)
+		for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
+			if (GameManager.playerArtifactList.behaviorList_Passive[i].ID == 001) {
+				GameManager.playerProfile.bonusHp = (float)GameManager.playerArtifactList.behaviorList_Passive[i].count * 10;
+			}
+		}
 		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 
 		// Heal player by 50%
@@ -183,6 +188,11 @@ void LaunchButtonEffect(Button* button)
 	case 4:
 	{
 		// Gets max hp (Case 3 - 4)
+		for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
+			if (GameManager.playerArtifactList.behaviorList_Passive[i].ID == 001) {
+				GameManager.playerProfile.bonusHp = (float)GameManager.playerArtifactList.behaviorList_Passive[i].count * 10;
+			}
+		}
 		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 
 		// Check if player can select this button (Can afford price)
@@ -231,6 +241,11 @@ void LaunchButtonEffect(Button* button)
 	case 7:
 	{
 		// Max healing
+		for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
+			if (GameManager.playerArtifactList.behaviorList_Passive[i].ID == 001) {
+				GameManager.playerProfile.bonusHp = (float)GameManager.playerArtifactList.behaviorList_Passive[i].count * 10;
+			}
+		}
 		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 
 		// Heal player to max
@@ -243,6 +258,11 @@ void LaunchButtonEffect(Button* button)
 	case 8:
 	{
 		// Take damage
+		for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
+			if (GameManager.playerArtifactList.behaviorList_Passive[i].ID == 001) {
+				GameManager.playerProfile.bonusHp = (float)GameManager.playerArtifactList.behaviorList_Passive[i].count * 10;
+			}
+		}
 		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 
 		// 20%

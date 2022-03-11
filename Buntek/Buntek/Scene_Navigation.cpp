@@ -63,6 +63,11 @@ void Scene_Navigation::Start(void)
 
 	playerHp = new GameObject();
 	playerHp->transform->SetPosition(Vector2(-660.0f, (-AEGetWindowHeight() / 2.25f)));
+	for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
+		if (GameManager.playerArtifactList.behaviorList_Passive[i].ID == 001) {
+			GameManager.playerProfile.bonusHp = (float)GameManager.playerArtifactList.behaviorList_Passive[i].count * 10;
+		}
+	}
 	playerHp->AddComponent<UI_Hp>()->GenerateHpBar(true, GameManager.playerProfile.hp, GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp);
 
 	playerCurrency = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(AEGetWindowWidth() / 2.5f, -AEGetWindowHeight() / 2.25f), 2, 1);
@@ -135,6 +140,12 @@ void Scene_Navigation::Update(void)
 
 	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
 	playerHp->GetComponent<UI_Hp>()->health = GameManager.playerProfile.hp;
+	for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
+		if (GameManager.playerArtifactList.behaviorList_Passive[i].ID == 001) {
+			GameManager.playerProfile.bonusHp = (float)GameManager.playerArtifactList.behaviorList_Passive[i].count * 10;
+		}
+	}
+	playerHp->GetComponent<UI_Hp>()->maxHealth = (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp);
 }
 
 void Scene_Navigation::LateUpdate(void)
