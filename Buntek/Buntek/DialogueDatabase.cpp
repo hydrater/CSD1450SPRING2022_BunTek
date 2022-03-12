@@ -205,13 +205,12 @@ void LaunchButtonEffect(Button* button)
 				button->Owner()->GetComponent<TextRenderer>()->SetTextColor(1.0f, 0.f, 0.f);
 				break;
 			}
-
-			// Heal player by Full by using stardust
-			GameManager.playerProfile.stardust -= DialogueDatabase.fullHealthCost;
-			GameManager.playerProfile.hp = truemaxhp;
-			UIDialogueManager.UIDecision = false;
-			UIDialogueManager.SkipDialogue();
 		}
+		// Heal player by Full by using stardust
+		GameManager.playerProfile.stardust -= DialogueDatabase.fullHealthCost;
+		GameManager.playerProfile.hp = truemaxhp;
+		UIDialogueManager.UIDecision = false;
+		UIDialogueManager.SkipDialogue();
 		break;
 	}
 	case 5:
