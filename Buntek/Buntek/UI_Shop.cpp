@@ -148,6 +148,26 @@ void UI_Shop::CloseShop(void)
         buttonArtifactList[i]->Owner()->Deactivate();
 }
 
+void UI_Shop::DeleteShop(void)
+{
+    // Delete ArtifactOnSale
+    for (ArtifactGoods selArtifact : ArtifactOnSale)
+        selArtifact.DisplayArtifactOwner->Delete();
+    ArtifactOnSale.clear();
+
+    header->Owner()->Delete();
+    headerText->Owner()->Delete();
+    leaveButton->Owner()->Delete();
+    for (int i = 0; i < buttonArtifactList.size(); ++i)
+        buttonArtifactList[i]->Owner()->Delete();
+    buttonArtifactList.clear();
+
+    header = 0;
+    headerText = 0;
+    leaveButton = 0;
+    cout << "Delete successfully" << endl;
+}
+
 void UI_Shop::SetClickable(bool _canClick)
 {
     for (int i = 0; i < buttonArtifactList.size(); ++i)
@@ -173,10 +193,10 @@ void RemoveShop(Button* button)
     MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
     if (MapData.shopUI)
     {
-        MapData.shopUI->GetComponent<UI_Shop>()->ArtifactOnSale.clear();
+        MapData.shopUI->GetComponent<UI_Shop>()->DeleteShop();
         MapData.shopUI->Delete();
+        MapData.shopUI = 0;
     }
-    MapData.shopUI = 0;
 }
 
 void PurchaseArtifact(Button* button)

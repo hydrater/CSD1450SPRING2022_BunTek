@@ -16,6 +16,7 @@ public:
 	void CreateShop(short sortingLayer, _mapData::ShopArtifacts shop);
 	void StartShop(void);
 	void CloseShop(void);
+	void DeleteShop(void);
 	void SetClickable(bool _canClick);
 
 	struct ArtifactGoods {
