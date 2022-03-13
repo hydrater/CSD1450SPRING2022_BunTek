@@ -222,18 +222,25 @@ void _gameScriptManager::Update(void)
         }
     }
 
-    for (int i = 0; i < gameScriptList.size(); ++i)
+    try
     {
-        if (!gameScriptList[i]->IsActive() || !gameScriptList[i]->Owner()->IsActive())
-            continue;
-
-        if (!gameScriptList[i]->getStarted())
+        for (int i = 0; i < gameScriptList.size(); ++i)
         {
-            gameScriptList[i]->Start();
-            gameScriptList[i]->setStarted(true);
-        }
+            if (!gameScriptList[i]->IsActive() || !gameScriptList[i]->Owner()->IsActive())
+                continue;
 
-        gameScriptList[i]->Update();
+            if (!gameScriptList[i]->getStarted())
+            {
+                gameScriptList[i]->Start();
+                gameScriptList[i]->setStarted(true);
+            }
+
+            gameScriptList[i]->Update();
+        }
+    }
+    catch (const std::exception& e)
+    {
+        cout << e.what();
     }
 }
 
