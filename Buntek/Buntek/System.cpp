@@ -216,7 +216,7 @@ void _gameScriptManager::Update(void)
 {
     for (int i = (int)gameScriptList.size() - 1; i >= 0; --i)
     {
-        if (gameScriptList[i]->remove)
+        if (gameScriptList[i]->remove || gameScriptList[i] == NULL)
         {
             gameScriptList.erase(gameScriptList.begin() + i);
         }
