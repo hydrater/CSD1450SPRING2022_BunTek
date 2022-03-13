@@ -273,7 +273,7 @@ void _mapData::Travel(Node* destination)
 {
     try
     {
-        if (destinationNode != nullptr)
+        if (destinationNode != nullptr && currentNode->nodeObject->GetComponent<SpriteRenderer>() && destinationNode->nodeObject->GetComponent<SpriteRenderer>())
         {
             // Enact dest node effects
             MapData.travelHistoryIDs.push_back(currentNode->ID);

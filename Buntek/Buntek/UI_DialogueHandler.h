@@ -45,7 +45,6 @@ public:
 	vector<string> dialogueButtonIDList;
 	// Set to public for gameManager to handle rewardButton
 	vector<Button*> rewardButtonList;
-	TextRenderer* currencyTxt = 0;
 
 private:
 

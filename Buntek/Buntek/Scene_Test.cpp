@@ -45,9 +45,20 @@ void Scene_Test::Start(void)
 	//artiList.push_back(test3);
 	UIDialogueManager.CreateRewardSelPreset(artiList, 1, true);
 	*/
-	spawner = new GameObject();
+	//spawner = new GameObject();
 	//spawner->AddComponent<ParticleSystem>()->SetEmittingParticle(Vector2(0, 1), 100, 360, 30, 40, -10, 10, 10, 10, "ball.png", Vector2(0, 0), 5, (short)AE_GFX_BM_BLEND,true,true);
-	spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(-1, 0), 1, 30, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(0, 0), 6, (short)AE_GFX_BM_BLEND, true, true,0.5f,1.5f);
+	//spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(-1, 0), 1, 30, false, 120, 50, 80, 0, 360, 20, 20, "ball.png", Vector2(0, 0), 6, (short)AE_GFX_BM_BLEND, true, true,0.5f,1.5f);
+
+	GameObject* IMNEW = new GameObject();
+	GameObject* IMCHILD = devTools.CreateSpriteGameObject("WhiteTexture.png", 180, 80, AE_GFX_BM_BLEND, Vector2(0, 0), 3, 1.f);
+	cout << "IMNEW EXIST: " << IMNEW << endl;
+	cout << "IMCHILD EXIST: " << IMCHILD << endl;
+	IMNEW->AddChild(IMCHILD);
+	IMNEW->Delete();
+	IMNEW = 0;
+	IMCHILD = 0;
+	cout << "IMNEW SHOULD BE GONE: " << IMNEW << endl;
+	cout << "IMCHILD SHOULD BE GONE: " << IMCHILD << endl;
 }
 
 void Scene_Test::Update(void)

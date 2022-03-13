@@ -29,6 +29,8 @@ public:
 	vector<ArtifactGoods> ArtifactOnSale = {};
 	_mapData::ShopArtifacts DisplayedShop;
 
+	TextRenderer* currencyTxt = 0;
+
 private:
 	Vector2 buttonArtifactSize = Vector2(175, 250);
 	vector<Vector2> buttonArtifactPos = { Vector2(-buttonArtifactSize.x * 3, buttonArtifactSize.y/ 1.15f), Vector2(0.f, buttonArtifactSize.y / 1.15f),

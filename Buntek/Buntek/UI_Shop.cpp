@@ -47,8 +47,8 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
     GameObject* tempCurrencyIcon = devTools.CreateSpriteGameObject("UI/Stardust.png", 80, 80, AE_GFX_BM_BLEND,
         Vector2(tempCurrencyDisplay->transform->worldposition.x - 100, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer + 2), 1);
     GameObject* tempCurrencyTextObj = devTools.CreateSpriteGameObject("UI/Stardust.png", 180, 80, AE_GFX_BM_BLEND, Vector2(tempCurrencyDisplay->transform->worldposition.x + 50, tempCurrencyDisplay->transform->worldposition.y), (short)(sortingLayer) + 3, 0);
-    UIDialogueManager.currencyTxt = devTools.AddTextToSpriteGameObject(tempCurrencyTextObj, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, (short)(sortingLayer) + 3);
-    UIDialogueManager.currencyTxt->SetTextColor(0, 0, 0);
+    currencyTxt = devTools.AddTextToSpriteGameObject(tempCurrencyTextObj, "Gabriola.ttf", to_string(GameManager.playerProfile.stardust), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 72.f, (short)(sortingLayer) + 3);
+    currencyTxt->SetTextColor(0, 0, 0);
     shopUI->AddChild(tempCurrencyDisplay);
     shopUI->AddChild(tempCurrencyIcon);
     shopUI->AddChild(tempCurrencyTextObj);
@@ -158,6 +158,7 @@ void UI_Shop::DeleteShop(void)
     header->Owner()->Delete();
     headerText->Owner()->Delete();
     leaveButton->Owner()->Delete();
+    currencyTxt->Owner()->Delete();
     for (int i = 0; i < buttonArtifactList.size(); ++i)
         buttonArtifactList[i]->Owner()->Delete();
     buttonArtifactList.clear();
@@ -165,7 +166,7 @@ void UI_Shop::DeleteShop(void)
     header = 0;
     headerText = 0;
     leaveButton = 0;
-    cout << "Delete successfully" << endl;
+    currencyTxt = 0;
 }
 
 void UI_Shop::SetClickable(bool _canClick)
@@ -232,7 +233,7 @@ void PurchaseArtifact(Button* button)
                 MapData.Shops[i].ArtifactsPurchased[index] = true;
             }
         }
-        UIDialogueManager.currencyTxt->SetText(to_string(GameManager.playerProfile.stardust));
+        MapData.shopUI->GetComponent<UI_Shop>()->currencyTxt->SetText(to_string(GameManager.playerProfile.stardust));
         selGood->DisplayArtifactOwner->GetComponent<SpriteRenderer>()->SetOpacity(0.5f);
         selGood->DisplayArtifactOwner->GetComponent<Button>()->SetClickable(false);
         SaveManager.AddToArtifactList(ID);
