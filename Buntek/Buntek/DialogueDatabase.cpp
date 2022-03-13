@@ -297,7 +297,6 @@ void LaunchButtonEffect(Button* button)
 		}
 		else
 		{
-			GameManager.playerProfile.stardust -= 20;
 			UIDialogueManager.CreateDialoguePreset("R002", 3);
 		}
 		break;
