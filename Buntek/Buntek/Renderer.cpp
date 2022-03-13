@@ -41,8 +41,8 @@ void _renderer::Update(void)
 
     for (int i = 0; i < rendererList.size(); ++i)
     {
-		if (!rendererList[i]->IsActive() || !rendererList[i]->Owner()->IsActive() ||
-			(rendererList[i]->Owner()->GetParent() != NULL && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()))
+		if (!rendererList[i]->IsActive() || (rendererList[i]->Owner() != NULL && !rendererList[i]->Owner()->IsActive()) ||
+			(rendererList[i]->Owner()->GetParent() != NULL /* && !rendererList[i]->Owner()->GetParent()->Owner()->IsActive()*/))
 			continue;
 
 		switch (rendererList[i]->GetType())

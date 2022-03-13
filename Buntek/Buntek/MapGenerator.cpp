@@ -167,7 +167,7 @@ void _mapData::GenerateMapObject(void)
     tempRenderer->SetLayer(-2);
     tempRenderer->SetTexture("hdCircle.png");
     tempRenderer->SetColor(1, 0, 0);
-    tempRenderer->SetOpacity(0.5);
+    tempRenderer->SetOpacity(0.4f);
     temp->transform->worldposition = penaltyPos;
     penaltyZone = temp;
 }
