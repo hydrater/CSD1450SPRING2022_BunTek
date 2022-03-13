@@ -27,7 +27,7 @@ Choose your reward
 /c0 Decline the absorption
 
 REST
-/d  0
+/d 0
 /aw A brief respite
 Alas a place to rest
 /b3 Take a rest [Heal 50% HP]
@@ -89,7 +89,7 @@ You took the left path....
 You seem to have gotten lost...
 !!!
 You found an artifact inside a chamber..
-/e6  
+/e6|1  
 
 T001
 /d 1
@@ -135,7 +135,7 @@ I'd heard tell of a wanderer hurtling about atop these mountains
 And upon looking into the matter,
 the talk I surmise, is of thee.
 I was entrusted this, for thee.
-/b6 Accept
+/b6|2 Accept
 /b2|T003 Leave
 
 T003
@@ -238,7 +238,7 @@ You noticed that the catgirl may not be female...
 /ap A cat....boy?
 It's dangerous to go alone! Take this!
 /e6|4
-/aw
+/aw  
 You received an artifact....  
 You left....
 /ap A cat....person?
@@ -254,7 +254,7 @@ Nyaaaa!!!!
 You took a slap
 
 E008
-/d  5
+/d 5
 ...
 .....
 You chance upon a pool of seemingly hot lava...
@@ -262,15 +262,15 @@ You chance upon a pool of seemingly hot lava...
 /b0 Leave
 
 E009
-/d  5
+/d 5
 Not implemented yet
 
 E0010
-/d  6
+/d 6
 Not implemented yet
 
 E0011
-/d  6
+/d 6
 Not implemented yet
 
 

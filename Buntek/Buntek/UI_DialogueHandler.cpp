@@ -54,13 +54,22 @@ void UI_DialogueHandler::Update(void)
                         WriteToDialogue();
                     }
                     else
+                    {
                         RemoveDialogue(nullptr);
+                        return;
+                    }
                 }
                 else
+                {
                     RemoveDialogue(nullptr);
+                    return;
+                }
             }
         }
+    }
 
+    if (UIOpen)
+    {
         if (doneDisplay)
         {
             dialogueTxt->SetText(dialogueFinalDisplayTxt);
@@ -224,15 +233,20 @@ void UI_DialogueHandler::WriteToDialogue(void)
 
     if (dialogueList[dialogueNo].rfind("/", 0) == 0)
     {
-        if (dialogueList[dialogueNo].length() < 4)
+        if (dialogueList[dialogueNo].length() < 3)
         {
             cout << "Error: Comamnd has no parameters" << endl;
             return;
         }
 
-        string command = dialogueList[dialogueNo].substr(2, dialogueList[dialogueNo].find(" ") - 2);
-        string parameters = dialogueList[dialogueNo].substr(dialogueList[dialogueNo].find(" ") + 1, dialogueList[dialogueNo].length());
+        string command = "";
+        string parameters = "";
 
+        if (dialogueList[dialogueNo].find(" "))
+        {
+            command = dialogueList[dialogueNo].substr(2, dialogueList[dialogueNo].find(" ") - 2);
+            parameters = dialogueList[dialogueNo].substr(dialogueList[dialogueNo].find(" ") + 1, dialogueList[dialogueNo].length());
+        }
         switch (dialogueList[dialogueNo][1])
         {
         case 'a':
@@ -376,16 +390,37 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
 // --------------------------------------------------------- DIALOGUE TOOL ---------------------------------------------------------
 void UI_DialogueHandler::DeleteDialogueEvent(void)
 {
+    if (actorTxt && actorTxt->Owner())
+    {
+        actorTxt->Owner()->Delete();
+        actorTxt = 0;
+    }
+
+    if (dialogueTxt && dialogueTxt->Owner())
+    {
+        dialogueTxt->Owner()->Delete();
+        dialogueTxt = 0;
+    }
     if (dialogueBox)
     {
         dialogueBox->Delete();
         dialogueBox = 0;
     }
 
+    for (Button* selButton : dialogueButtonList)
+        selButton->Owner()->Delete();
     dialogueButtonList.clear();
     dialogueButtonIDList.clear();
+
+    for (Button* selButton : rewardButtonList)
+        selButton->Owner()->Delete();
     rewardButtonList.clear();
+
+    for (ArtifactLoot selLoot : ArtifactChoices)
+        selLoot.DisplayArtifactOwner->Delete();
     ArtifactChoices.clear();
+
+    UIOpen = false;
 }
 
 string UI_DialogueHandler::GenerateRandomDialogueID(void)
