@@ -79,11 +79,18 @@ void _assetManager::AddToTextList(TextRenderer* textRenderer)
 
 void _assetManager::UnloadTexture(string name)
 {
+    if (!textureDatabase.count(name) || textureDatabase.empty())
+        return;
+
+    AEGfxTextureUnload(textureDatabase[name]);
     textureDatabase.erase(name);
 }
 
 void _assetManager::LoadTexture(string name)
 {
+    if (textureDatabase.count(name))
+        return;
+
     string pathname = "./Assets/" + name;
     AEGfxTexture* texture = AEGfxTextureLoad(&pathname.front());
     textureDatabase[name] = texture;
@@ -100,16 +107,19 @@ AEGfxTexture* _assetManager::GetTexture(string name)
 
 void _assetManager::LoadFont(string name)
 {
+    if (fontDatabase.count(name))
+        return;
+
     string pathname = "./Assets/Font/" + name;
     char font = AEGfxCreateFont(&pathname.front(), defaultFontSize);
-    FontDatabase[name] = font;
+    fontDatabase[name] = font;
     AE_ASSERT_MESG(font, "Failed to create Font1!!");
 }
 
 char _assetManager::GetFont(string name)
 {
-    auto search = FontDatabase.find(name);
-    if (search != FontDatabase.end())
+    auto search = fontDatabase.find(name);
+    if (search != fontDatabase.end())
         return search->second;
     return NULL;
 }
@@ -125,4 +135,10 @@ void _assetManager::Free(void)
     {
         AEGfxTextureUnload(it->second);
     }
+    for (map<string, char>::iterator it = fontDatabase.begin(); it != fontDatabase.end(); ++it)
+    {
+        AEGfxDestroyFont(it->second);
+    }
+    textureDatabase.clear();
+    fontDatabase.clear();
 }

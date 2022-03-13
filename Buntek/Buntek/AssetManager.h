@@ -15,7 +15,7 @@ private:
     vector<SpriteRenderer*> rendererList;
     vector<TextRenderer*> rendererTextList;
     map<string, AEGfxTexture*> textureDatabase;
-    map<string, char> FontDatabase;
+    map<string, char> fontDatabase;
 
     void LoadFont(string name);
     int defaultFontSize = 48;
