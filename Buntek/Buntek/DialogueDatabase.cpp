@@ -273,6 +273,7 @@ void LaunchButtonEffect(Button* button)
 		if (GameManager.playerProfile.hp < 0)
 		{
 			// Game over
+			RemoveDialogue(nullptr);
 			GameManager.GameOver();
 		}
 		UIDialogueManager.UIDecision = false;
