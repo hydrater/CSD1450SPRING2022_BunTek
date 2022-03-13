@@ -271,73 +271,80 @@ bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
 
 void _mapData::Travel(Node* destination)
 {
-    if (destinationNode != nullptr)
+    try
     {
-        // Enact dest node effects
-        MapData.travelHistoryIDs.push_back(currentNode->ID);
-        currentNode->nodeObject->GetComponent<SpriteRenderer>()->SetColor(1.f, 1.f, 1.f);
-        destinationNode->nodeObject->GetComponent<SpriteRenderer>()->SetColor(0.4f, 0.8f, 1.f);
-        currentNode = destinationNode;
-        DisplayNodeRoutes(playerTravelDistance);
-        switch (destinationNode->nodeType)
+        if (destinationNode != nullptr)
         {
-        case NodeType::Encounter:
-        {
-            SetClickable(false);
-            SetHoverable(false);
-            UIDialogueManager.CreateDialoguePreset(UIDialogueManager.GenerateRandomDialogueID(), 3);
-            break;
-        }
-        case NodeType::Enemy:
-        {
-            GameManager.StartBattle(1);
-            break;
-        }
-        case NodeType::Elite:
-        {
-            GameManager.StartBattle(2);
-            break;
-        }
-        case NodeType::Boss:
-        {
-            GameManager.StartBattle(3);
-            break;
-        }
-        case NodeType::Shop:
-        {
-            SetClickable(false);
-            SetHoverable(false);
-            MapData.shopUI = new GameObject();
-            MapData.shopUI->AddComponent<UI_Shop>();
-            // Get Shop Goods
-            ShopArtifacts selShop;
-            for (int i{ 0 }; i < Shops.size(); ++i)
+            // Enact dest node effects
+            MapData.travelHistoryIDs.push_back(currentNode->ID);
+            currentNode->nodeObject->GetComponent<SpriteRenderer>()->SetColor(1.f, 1.f, 1.f);
+            destinationNode->nodeObject->GetComponent<SpriteRenderer>()->SetColor(0.4f, 0.8f, 1.f);
+            currentNode = destinationNode;
+            DisplayNodeRoutes(playerTravelDistance);
+            switch (destinationNode->nodeType)
             {
-                if (Shops[i].ID == destination->ID)
-                {
-                    selShop = Shops[i];
-                    break;
-                }
+            case NodeType::Encounter:
+            {
+                SetClickable(false);
+                SetHoverable(false);
+                UIDialogueManager.CreateDialoguePreset(UIDialogueManager.GenerateRandomDialogueID(), 3);
+                break;
             }
-            MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(5, selShop);
-            break;
-        }
-        case NodeType::Rest:
-        {
-            SetClickable(false);
-            SetHoverable(false);
-            UIDialogueManager.CreateDialoguePreset("REST", 3);
-            break;
-        }
-        default:
-        {
-            break;
-        }
-        }
+            case NodeType::Enemy:
+            {
+                GameManager.StartBattle(1);
+                break;
+            }
+            case NodeType::Elite:
+            {
+                GameManager.StartBattle(2);
+                break;
+            }
+            case NodeType::Boss:
+            {
+                GameManager.StartBattle(3);
+                break;
+            }
+            case NodeType::Shop:
+            {
+                SetClickable(false);
+                SetHoverable(false);
+                MapData.shopUI = new GameObject();
+                MapData.shopUI->AddComponent<UI_Shop>();
+                // Get Shop Goods
+                ShopArtifacts selShop;
+                for (int i{ 0 }; i < Shops.size(); ++i)
+                {
+                    if (Shops[i].ID == destination->ID)
+                    {
+                        selShop = Shops[i];
+                        break;
+                    }
+                }
+                MapData.shopUI->GetComponent<UI_Shop>()->CreateShop(5, selShop);
+                break;
+            }
+            case NodeType::Rest:
+            {
+                SetClickable(false);
+                SetHoverable(false);
+                UIDialogueManager.CreateDialoguePreset("REST", 3);
+                break;
+            }
+            default:
+            {
+                break;
+            }
+            }
 
-        MapData.DisplayNodeHistory();
+            MapData.DisplayNodeHistory();
+        }
+        PenaltyZoneUpdate();
     }
-    PenaltyZoneUpdate();
+    catch (const std::exception& e)
+    {
+        cout << e.what();
+    }
 }
 
 void _mapData::SetClickable(bool _canClick)

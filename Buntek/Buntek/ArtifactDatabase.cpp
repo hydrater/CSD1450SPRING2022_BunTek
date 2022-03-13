@@ -299,6 +299,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     catch (const std::exception& e)
     {
         cout << "Error caused by artifact <" << artifact.ID << ">" << endl;
+        cout << e.what() << endl;
     }
 }
 
