@@ -420,6 +420,8 @@ void UI_DialogueHandler::DeleteDialogueEvent(void)
         selLoot.DisplayArtifactOwner->Delete();
     ArtifactChoices.clear();
 
+    dialogueList.clear();
+
     UIOpen = false;
 }
 

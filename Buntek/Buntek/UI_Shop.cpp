@@ -103,7 +103,7 @@ void UI_Shop::CreateShop(short sortingLayer, _mapData::ShopArtifacts shop)
             }
             
             GameObject* tempPriceObj = devTools.CreatePriceTagGameObject(price, AE_GFX_BM_BLEND,
-                Vector2(buttonArtifactPos[i].x + tempButton->sr->GetHalfWidth() * 1.1f, buttonArtifactPos[i].y + tempButton->sr->GetHalfHeight() / 2.f), sortingLayer + 2);
+                Vector2(buttonArtifactPos[i].x + tempButton->sr->GetHalfWidth() * 1.1f, buttonArtifactPos[i].y + tempButton->sr->GetHalfHeight() / 2.f), sortingLayer + 3);
             tempButtonObj->AddChild(tempPriceObj);
 
             shopUI->AddChild(tempButtonObj);
@@ -162,6 +162,8 @@ void UI_Shop::DeleteShop(void)
     for (int i = 0; i < buttonArtifactList.size(); ++i)
         buttonArtifactList[i]->Owner()->Delete();
     buttonArtifactList.clear();
+
+    buttonArtifactPos.clear();
 
     header = 0;
     headerText = 0;

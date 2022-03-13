@@ -54,9 +54,9 @@ void Scene_Test::Start(void)
 	cout << "IMNEW EXIST: " << IMNEW << endl;
 	cout << "IMCHILD EXIST: " << IMCHILD << endl;
 	IMNEW->AddChild(IMCHILD);
-	IMNEW->Delete();
-	IMNEW = 0;
-	IMCHILD = 0;
+	//IMCHILD->Deactivate();
+	/*IMNEW = 0;
+	IMCHILD = 0;*/
 	cout << "IMNEW SHOULD BE GONE: " << IMNEW << endl;
 	cout << "IMCHILD SHOULD BE GONE: " << IMCHILD << endl;
 }

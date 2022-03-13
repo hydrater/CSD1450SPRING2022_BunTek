@@ -105,7 +105,7 @@ void Scene_Navigation::EarlyUpdate(void)
 		AEGfxMeshDraw(MapData.travelHistoryLines[i], AE_GFX_MDM_LINES_STRIP);
 	}
 
-	if (UIDialogueManager.UIOpen || UIDialogueManager.UIDecision || GameManager.battleRewardPending) {
+	/*if (UIDialogueManager.UIOpen || UIDialogueManager.UIDecision || GameManager.battleRewardPending) {
 		playerHp->Deactivate();
 		playerCurrency->Deactivate();
 		playerArtifactsBtn->Deactivate();
@@ -114,7 +114,7 @@ void Scene_Navigation::EarlyUpdate(void)
 		playerHp->Activate();
 		playerCurrency->Activate();
 		playerArtifactsBtn->Activate();
-	}
+	}*/
 
 	if (GameManager.battleRewardPending)
 	{
