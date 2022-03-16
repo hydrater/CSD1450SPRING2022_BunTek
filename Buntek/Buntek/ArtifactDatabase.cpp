@@ -17,6 +17,7 @@ _artifactdatabase::~_artifactdatabase()
 
 void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaster, GameObject* ball)
 {
+    cout << "<<<<<<<<<<<<<<Running artifact: " << artifact.ID << endl;
     // if (isPlayerTheCaster) means the player owns this artifact else it's the AI
     BallBehavior* tempBallBehavior;
     bool flag = false;
@@ -302,6 +303,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
 
         break;
     }
+    cout << "<<<<<<<<<<<<<<End" << artifact.ID << endl;
 }
 
 _artifactdatabase& _artifactdatabase::Instance(void)
