@@ -175,7 +175,7 @@ void _mapData::GenerateMapObject(void)
 void _mapData::DisplayNodeRoutes(float travelDistance)
 {
     // Don't run if UI or shop is open
-    if (UIDialogueManager.UIOpen || MapData.shopUI)
+    if (UIDialogueManager.UIOpen || MapData.shopUI || MapData.isTravelling)
     {
         MapData.SetClickable(false);
         MapData.SetHoverable(false);

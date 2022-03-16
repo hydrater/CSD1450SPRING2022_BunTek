@@ -58,7 +58,7 @@ void Scene_Navigation::Start(void)
 		3960, 1080, "NebulaCloudBig.png",
 		Vector2(-3960, 0), -2, (short)AE_GFX_BM_ADD);
 
-	currentArea = devTools.CreateSpriteGameObject("hdCircle.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -2, 0.5f);
+	currentArea = devTools.CreateSpriteGameObject("hdCircle.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -3, 0.5f);
 	currentArea->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0.1f);
 
 	playerHp = new GameObject();
@@ -86,6 +86,9 @@ void Scene_Navigation::Start(void)
 	button->sr = playerArtifactsBtn->GetComponent<SpriteRenderer>();
 	button->tr = tempText;
 	button->ButtonEffect = &BtnFuncHover_Artifacts;
+
+	playerLocation = devTools.CreateSpriteGameObject("hdCircle.png", 100, 100, AE_GFX_BM_BLEND, MapData.currentNode->pos, -2, 0.5f);
+	playerLocation->AddComponent<AlphaChanger>()->SetOscillation(6.f, 0.5f, 0.25f, PI/1.75f);
 }
 
 // Draw all lines
@@ -116,6 +119,7 @@ void Scene_Navigation::EarlyUpdate(void)
 		playerArtifactsBtn->Activate();
 	}*/
 
+	// Needs to be in early update to ensure a smooth transition
 	if (GameManager.battleRewardPending)
 	{
 		GameManager.battleRewardPending = false;
@@ -124,18 +128,54 @@ void Scene_Navigation::EarlyUpdate(void)
 		rew2.ID = ArtifactDatabase.DrawArtifact();
 		rew3.ID = ArtifactDatabase.DrawArtifact();
 		vector<Artifact> reward_Artifact{ rew1, rew2, rew3 };
-		UIDialogueManager.CreateRewardSelPreset(reward_Artifact, 5, true);
+		UIDialogueManager.CreateRewardSelPreset(reward_Artifact, (short)10, true);
 	}
 }
 
 void Scene_Navigation::Update(void)
 {
+	// Create a Glow Effect
+	float scalesign = (playerLocTargetScale == playerLocMaxScale) ? -1.f : 1.f;
+	playerLocScale += scalesign * playerLocScaleSpeed;
+
+	if (playerLocScale >= playerLocMaxScale + 0.01f || playerLocScale <= playerLocMinScale - 0.01f)
+		playerLocTargetScale = (playerLocTargetScale == playerLocMaxScale) ? playerLocMinScale : playerLocMaxScale;
+
+	playerLocation->transform->SetScale(Vector2(playerLocScale, playerLocScale));
+
 	// [To ADD: Node travelling Animation]
-	while (MapData.isTravelling)
+	if (MapData.isTravelling)
 	{
-		MapData.isTravelling = false;
-		MapData.Travel(MapData.destinationNode);
-		currentArea->transform->SetPosition(MapData.currentNode->pos);
+		Vector2 playerPos = playerLocation->transform->worldposition;
+		Vector2 targetPos = MapData.destinationNode->nodeObject->transform->worldposition;
+
+		if (!(playerPos.x >= targetPos.x - 0.01f && playerPos.x <= targetPos.x + 0.01f && playerPos.y >= targetPos.y - 0.01f && playerPos.y <= targetPos.y + 0.01f))
+		{
+			float xDelta = targetPos.x - playerPos.x, yDelta = targetPos.y - playerPos.y;
+
+			float mag = Vector2(xDelta, yDelta).Length();
+
+			if (mag >= playerLocMinMoveDist) {
+				playerLocSpeed = playerLocMaxSpeed;
+			}
+			else {
+				playerLocSpeed = (mag / playerLocMinMoveDist) * playerLocMaxSpeed; //(mag)*5;
+				mag = mag < playerLocMaxSpeed ? mag : playerLocMaxSpeed;
+			}
+
+			if (mag != 0) {
+				velocity = Vector2(xDelta / mag, yDelta / mag).Normalize();
+				playerLocation->transform->SetPosition(Vector2(playerPos.x + velocity.x * playerLocSpeed * DeltaTime * playerLocTimeScalar, playerPos.y + velocity.y * playerLocSpeed * DeltaTime * playerLocTimeScalar));
+				currentArea->transform->SetPosition(playerLocation->transform->worldposition);
+			}
+		}
+		else
+		{
+			MapData.isTravelling = false;
+			MapData.Travel(MapData.destinationNode);
+			playerLocation->transform->SetPosition(MapData.currentNode->pos);
+			currentArea->transform->SetPosition(MapData.currentNode->pos);
+		}
 	}
 
 	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
