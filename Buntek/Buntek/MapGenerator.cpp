@@ -27,6 +27,7 @@ _mapData& _mapData::Instance(void)
 
 void _mapData::GenerateMapData(void)
 {
+    cout << "[GenerateMapData START]\n";
     DeleteMapData();
 
     float StartXCoord = (float)(-AEGetWindowWidth() / 2) + xBuffer;
@@ -100,6 +101,7 @@ void _mapData::GenerateMapData(void)
     exitNode->nodeType = NodeType::Boss;
 
     SaveManager.SaveData();
+    cout << "[GenerateMapData END]\n";
 }
 
 void _mapData::GenerateMapObject(void)
@@ -176,6 +178,7 @@ void _mapData::GenerateMapObject(void)
 
 void _mapData::DisplayNodeRoutes(float travelDistance)
 {
+    cout << "[DisplayNodeRoutes START]\n";
     // Don't run if UI or shop is open
     if (UIDialogueManager.UIOpen || MapData.shopUI || MapData.isTravelling)
     {
@@ -229,10 +232,12 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
             }
         }
     }
+    cout << "[DisplayNodeRoutes END]\n";
 }
 
 void _mapData::DisplayNodeHistory(void)
 {
+    cout << "[DisplayNodeHistory START]\n";
     Node* prevNode = nullptr;
     Node* currNode = nullptr;
     for (int selectedID : MapData.travelHistoryIDs)
@@ -258,6 +263,7 @@ void _mapData::DisplayNodeHistory(void)
         }
         prevNode = currNode;
     }
+    cout << "[DisplayNodeHistory END]\n";
 }
 
 bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
@@ -273,6 +279,7 @@ bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
 
 void _mapData::Travel(Node* destination)
 {
+    cout << "[Travel START]\n";
 	if (destinationNode != nullptr && currentNode->nodeObject->GetComponent<SpriteRenderer>() && destinationNode->nodeObject->GetComponent<SpriteRenderer>())
 	{
 		// Enact dest node effects
@@ -340,6 +347,7 @@ void _mapData::Travel(Node* destination)
 		MapData.DisplayNodeHistory();
 	}
 	PenaltyZoneUpdate();
+    cout << "[Travel END]\n";
 }
 
 void _mapData::SetClickable(bool _canClick)
@@ -360,6 +368,7 @@ void _mapData::SetHoverable(bool _canHover)
     }
 }
 void _mapData::PenaltyZoneUpdate(void) {
+    cout << "[PenaltyZoneUpdate START]\n";
     if (penaltyZone->transform->worldposition.x < 0) {
         penaltyZone->transform->worldposition.x += penaltySpeed;
         penaltyPos = penaltyZone->transform->worldposition;
@@ -377,6 +386,7 @@ void _mapData::PenaltyZoneUpdate(void) {
             nodeList[i]->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/Elite.png");
         }
     }
+    cout << "[PenaltyZoneUpdate END]\n";
 }
 _mapData::Node* _mapData::GetNode(GameObject* object)
 {
@@ -390,6 +400,7 @@ _mapData::Node* _mapData::GetNode(GameObject* object)
 
 void _mapData::DeleteMapData(void)
 {
+    cout << "[DeleteMapData START]\n";
     if (nodeList.empty())
         return;
 
@@ -413,10 +424,13 @@ void _mapData::DeleteMapData(void)
     travelHistoryLines.clear();
     nodeList.clear();
     Shops.clear();
+
+    cout << "[DeleteMapData END]\n";
 }
 
 void EnactTravel(Button* button)
 {
+    cout << "[EnactTravel START]\n";
     MapData.destinationNode = MapData.GetNode(button->Owner());
     if (MapData.destinationNode == NULL)
     {
@@ -426,4 +440,5 @@ void EnactTravel(Button* button)
     {
         MapData.isTravelling = true;
     }
+    cout << "[EnactTravel END]\n";
 }

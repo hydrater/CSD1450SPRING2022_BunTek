@@ -87,8 +87,8 @@ void Scene_Navigation::Start(void)
 	button->tr = tempText;
 	button->ButtonEffect = &BtnFuncHover_Artifacts;
 
-	playerLocation = devTools.CreateSpriteGameObject("hdCircle.png", 100, 100, AE_GFX_BM_BLEND, MapData.currentNode->pos, -2, 0.5f);
-	playerLocation->AddComponent<AlphaChanger>()->SetOscillation(6.f, 0.5f, 0.25f, PI/1.75f);
+	playerLocation = devTools.CreateSpriteGameObject("hdCircle.png", 50, 50, AE_GFX_BM_BLEND, MapData.currentNode->pos, -2, 0.5f);
+	playerLocation->AddComponent<AlphaChanger>()->SetOscillation(6.f, 0.5f, 0.25f, PI/2.f);
 }
 
 // Draw all lines
@@ -134,18 +134,14 @@ void Scene_Navigation::EarlyUpdate(void)
 
 void Scene_Navigation::Update(void)
 {
-	// Create a Glow Effect
-	float scalesign = (playerLocTargetScale == playerLocMaxScale) ? -1.f : 1.f;
-	playerLocScale += scalesign * playerLocScaleSpeed * DeltaTime;
-
-	if (playerLocScale >= playerLocMaxScale + 0.01f || playerLocScale <= playerLocMinScale - 0.01f)
-		playerLocTargetScale = (playerLocTargetScale == playerLocMaxScale) ? playerLocMinScale : playerLocMaxScale;
-
-	playerLocation->transform->SetScale(Vector2(playerLocScale, playerLocScale));
-
-	// [To ADD: Node travelling Animation]
 	if (MapData.isTravelling)
 	{
+		playerLocScale -= playerLocScaleSpeed * (4 * playerLocMaxScale * playerLocScale) * DeltaTime;
+		if (playerLocScale < 0.25f)
+			playerLocScale = 0.25f;
+
+		playerLocation->transform->SetScale(Vector2(playerLocScale, playerLocScale));
+
 		Vector2 playerPos = playerLocation->transform->worldposition;
 		Vector2 targetPos = MapData.destinationNode->nodeObject->transform->worldposition;
 
@@ -176,6 +172,17 @@ void Scene_Navigation::Update(void)
 			playerLocation->transform->SetPosition(MapData.currentNode->pos);
 			currentArea->transform->SetPosition(MapData.currentNode->pos);
 		}
+	}
+	else
+	{
+		// Create a Glow Effect
+		float scalesign = (playerLocTargetScale == playerLocMaxScale) ? -1.f : 1.f;
+		playerLocScale += scalesign * playerLocScaleSpeed * DeltaTime;
+
+		if (playerLocScale >= playerLocMaxScale + 0.01f || playerLocScale <= playerLocMinScale - 0.01f)
+			playerLocTargetScale = (playerLocTargetScale == playerLocMaxScale) ? playerLocMinScale : playerLocMaxScale;
+
+		playerLocation->transform->SetScale(Vector2(playerLocScale, playerLocScale));
 	}
 
 	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
