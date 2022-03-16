@@ -89,7 +89,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();
+		cout << "GSM start" << endl;
 		GameScriptManager.Update();
+		cout << "GSM end" << endl;
 		AudioManager.Update();
 		SceneManager.Update();
 		UIDialogueManager.Update();
@@ -103,7 +105,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		SceneManager.LateUpdate();
 
 		// ------------------------------------------- End of Loop ------------------------------------------- //
+		cout << "ECS start" << endl;
 		ECSManager.UpdateList();
+		cout << "ECS end" << endl;
 		
 		// Informing the system about the loop's end
 		AESysFrameEnd();
