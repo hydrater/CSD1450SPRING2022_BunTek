@@ -234,8 +234,10 @@ void _gameScriptManager::Update(void)
             gameScriptList[i]->Start();
             gameScriptList[i]->setStarted(true);
         }
-
-        gameScriptList[i]->Update();
+        else
+        {
+            gameScriptList[i]->Update();
+        }
     }
 }
 
