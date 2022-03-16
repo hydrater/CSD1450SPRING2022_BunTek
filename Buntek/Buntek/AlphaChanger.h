@@ -13,7 +13,7 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 	void SetOscillation(float newPeriod, float alphaMax, float alphaMin, float newOffset);
-
+	void ToggleOscillation(bool isOn);
 
 private:
 	SpriteRenderer* _sr = 0;
@@ -22,6 +22,6 @@ private:
 	float alphaRangeMin = 0.70f;
 	float internalTimer = 0;
 	float offset = 0;
-
+	bool on = true;
 };
 #endif

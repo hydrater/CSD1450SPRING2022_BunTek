@@ -139,6 +139,7 @@ void Scene_Navigation::Update(void)
 		playerLocScale -= playerLocScaleSpeed * (4 * playerLocMaxScale * playerLocScale) * DeltaTime;
 		if (playerLocScale < 0.25f)
 			playerLocScale = 0.25f;
+		//scale = lerpF(scale, targetScale, scaleSpeed);
 
 		playerLocation->transform->SetScale(Vector2(playerLocScale, playerLocScale));
 
