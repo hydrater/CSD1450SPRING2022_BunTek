@@ -69,11 +69,12 @@ private:
     _gameScriptManager(void);
     ~_gameScriptManager(void);
     vector<GameScript*> gameScriptList;
+    vector<void*> predeleteList;
 
 public:
     static _gameScriptManager& Instance(void);
     void AddToList(GameScript* gameScript);
     void Update(void);
     void Clear(void);
-    void ForceDelete(void* pointer);
+    void AddToPredelete(void* pointer);
 };

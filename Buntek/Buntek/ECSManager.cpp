@@ -38,7 +38,7 @@ void _ECSManager::UpdateList(void)
 
         if (componentList[i]->remove)
         {
-            GameScriptManager.ForceDelete(componentList[i]);
+            GameScriptManager.AddToPredelete(componentList[i]);
             delete componentList[i];
             componentList[i] = NULL;
         }

@@ -35,6 +35,8 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 		AudioManager.PlayMusic("www.ogg");
 	}
 
+	//Ball sounds
+
 	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
 	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(GameManager.level * 5 * GameManager.GetEnemyType()));
 

@@ -213,6 +213,19 @@ void _gameScriptManager::AddToList(GameScript* gameScript)
 
 void _gameScriptManager::Update(void)
 {
+    for (int i = 0; i < predeleteList.size(); ++i)
+    {
+        for (int j = 0; j < gameScriptList.size(); ++j)
+        {
+            if (predeleteList[i] == gameScriptList[i])
+            {
+                gameScriptList.erase(gameScriptList.begin() + i);
+                j += (int)gameScriptList.size();
+            }
+        }
+    }
+    predeleteList.clear();
+
     for (int i = (int)gameScriptList.size() - 1; i >= 0; --i)
     {
         if (gameScriptList[i]->remove || gameScriptList[i] == NULL)
@@ -243,14 +256,7 @@ void _gameScriptManager::Clear(void)
     gameScriptList.clear();
 }
 
-void _gameScriptManager::ForceDelete(void* pointer)
+void _gameScriptManager::AddToPredelete(void* pointer)
 {
-    for (int i = (int)gameScriptList.size() - 1; i >= 0; --i)
-    {
-        if (gameScriptList[i] == pointer)
-        {
-            gameScriptList.erase(gameScriptList.begin() + i);
-            return;
-        }
-    }
+    predeleteList.push_back(pointer);
 }
