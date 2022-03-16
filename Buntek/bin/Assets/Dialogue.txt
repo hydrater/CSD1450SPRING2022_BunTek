@@ -169,7 +169,7 @@ You see the trees rustling in the distance...
 You see a suspicious figure emerges out of the trees, running away from the source of the rumbling...
 The figure is in a full sprint, shouting at you as he passes by.
 /aw Suspicious figure
-WHY ARE YOU STANDING THERE LIKE AN IDIOT? RUN, FOOL!
+WHY ARE YOU STANDING THERE? RUN, FOOL!
 /b2|R004 Run
 /b2|R005 Investigate the source
 
