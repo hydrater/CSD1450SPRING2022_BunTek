@@ -29,10 +29,10 @@ Choose your reward
 REST
 /d 0
 /aw A brief respite
-Alas a place to rest
-/b3 Take a rest [Heal 50% HP]
+A place to rest your weary soul
+/b3 Kneel and rest [Heal 50% HP]
 /b4 Bribe the universe [Heal 100% HP] {-10 Stardust}
-/b11 Harvest for stardust
+/b11 Harvest stardust
 
 Events================================================================================================================
 
@@ -41,79 +41,79 @@ E000
 ...
 .........
 /aw Unknown figure
-Greetings wanderer...
-I see you have some star dust
+Greetings wanderer.
+I see the shimmerings of stardust on your person.
 /aw  
 ....
 /aw Cave Explorer
-Fret not, I am a passing cave explorer harvesting some botany.
-I have chanced upon this peculiar magic mushroom.
-Would you like to buy it off of me for 20 stardusts?
-/b10 Buy the mushroom
+Fret not, I am merely a passing wanderer harvesting the local flora.
+Though in my travels, I've come across a peculiar glowing lump of clay.
+Would you like to buy it off of me for 20 stardust?
+/b10 Buy the clay
 /b2|R003 Refuse the offer
-/b2|R000 Steal the mushroom
+/b2|R000 Steal the clay
 
 R000
 /d 1
 /aw Cave Explorer
-STOP YOU CRIMINAL SCUM!
+YOU'LL REGRET THAT, CRIMINAL SCUM!
 /e9  
 
 R001
 /d 1
-You bought the artifact with 20 stardust
+You buy the clay for 20 stardust.
+It seems to melt in your hand, leaving something behind...
 /e5|1
 
 R002
 /d 1
-You were not able to afford it
-You left...
+You are not able to afford it.
+You leave in overwhelming shame.
 
 R003
 /d 1
-You left as you felt that the figure was too suspicious....
+You left, leaving the suspicious figure to their own devices.
 
 E001
 /d 1
-......
-..........
-You are lost in a cave.....
-You see 3 paths ahead of you....
+...
+You lose yourself in a winding cave, twists and turns disorienting you.
+Stumbling forward, you come across 3 paths.
 /b2|T000 Take the left path
 /b2|T001 Take the middle path
 /b2|T002 Take the right path
 
 T000
 /d 1
-You took the left path....
-You seem to have gotten lost...
+Taking a left turn, the cave narrows around the sharp bend, requiring an awkward shuffle to move through.
+Barely an hour beyond the turn, the air begins to grow foul. Pressing on, you see a glint of white in the distance.
 !!!
-You found an artifact inside a chamber..
+You found an artifact in the crack of the wall.
 /e5|1  
 
 T001
 /d 1
-You took the middle path....
-After walking for a while....
+The middle path seems to go on forever, stretching for hundreds of metres forward.
+The wide corridor seems oddly straight, carved with some sort of purpose.
 !!!
-A loud rumble shakes the ground!!
-In the distance, you saw a giant object making its way towards you...
+You hear the rumbling of rock against stone, gradually getting louder...
+In the distance, you see a large round figure approach you.
 It's....
 A GIANT BOULDER
 /e8  
-You took some damage...
+You take some damage...
 
 T002
 /d 1
-You took the right path....
+The right path leads to strange bookshelves embedded in the granite walls of the cave. They seem to be covered in some sort of...
 !!!
 /e11 
-You found some stardust crystals in the corner of the cave
+You collect the stardust scattered over the mystical books.
 
 E002
 /d 2
-You made it to the top of the mountains
-You found a bonfire
+You make it to the top of some rocky mountains.
+Near the sheer drop sits the remains of a bonfire, embers glowing and the ashes still warm.
 Take a rest?
 /b7 Rest
 /b11 Harvest for stardust
@@ -122,144 +122,145 @@ E003
 /d 2
 ...
 .....
-You see a silhouette in a distance....
-/ab Ranni of the blue moon
-This way wanderer
-May I have a word?
+You see a silhouette in a distance, approaching you slowly
+/ac Ranni of the Blue Moon
+This way, wanderer. May I have a word?
 /aw  
-.....
-/ab Ranni of the blue moon
+...
+/ac Ranni of the Blue Moon
 A pleasure to meet thee, wanderer.
-I am the witch Ranni
-I'd heard tell of a wanderer hurtling about atop these mountains
-And upon looking into the matter,
-the talk I surmise, is of thee.
-I was entrusted this, for thee.
+I am the witch Ranni, princess of the Blue Moon.
+I have heard tell of a wanderer hurtling through the peaks of these very mountains.
+And upon looking into the matter, the talk I surmise, is of thee.
+Brave wanderer, to help thee with thy goal, I shall entrust this relic to you.
 /b5|2 Accept
 /b2|T003 Leave
 
 T003
 /d 2
-You left as you felt that the figure was too suspicious....
+You leave, swearing to yourself that simping for royalty is beyond even you.
 
 E004
 /d 3
+You enter a crystal cave, crystalline spikes hanging precariously overhead.
 ...
-.....
-You entered a crystal cave....
-...
-.....
-........
+As if this event was scripted, a singular stalagtite shakes itself loose...
 !!!
-A crystal chunk fell on you...
+It fell on you...
 /e8  
-You took some damage
+You take some damage.
 /e11  
-You harvested it for some stardust....
+You harvest it for some stardust, since there's nothing else you can do with it.
 
 E005
 /d 3
+You enter a crystal cave, crystalline spikes hanging precariously overhead.
 ...
-.....
-You entered a crystal cave....
-...
-.....
-........
-You found an a glowing object
+You find a glowing object embedded in a crystal stalagmite.
 /b5|3 Pick it up
 /b0 Leave
 
 E006
 /d 4
 ...
-.....
 You feel tremors on the floor...
 You hear rumbling in the distance....
 You see the trees rustling in the distance...
 You see a suspicious figure emerges out of the trees, running away from the source of the rumbling...
-The figure scurries pass you
+The figure is in a full sprint, shouting at you as he passes by.
 /aw Suspicious figure
-WHY ARE YOU STANDING THERE?
-RUNNNNNNNNNNNNNNNNNNNNN!
+WHY ARE YOU STANDING THERE LIKE AN IDIOT? RUN, FOOL!
 /b2|R004 Run
 /b2|R005 Investigate the source
 
 R004
 /d 4
-You took off and managed to get far away from the unknown source...
+Heeding the advice, you turn heel and bolt away before whatever it is manages to catch up.
 
 R005
 /d 4
-You decided to investigate the source and found object....
-The object glows as though it is calling you....
+You decide to ignore the advice and head towards the source of the disturbance.
+You encounter a strange spherical object, glowing in a pulsating pattern. It slows as you approach.
 /b2|R006 Pick it up
-/b2|R007 Walk away..
+/b2|R007 Walk away
 
 R006
 /d 4
 !!!!
-The object explodes!
-You took some damage....
+The object swells with energy and explodes!
+You take some damage.
 /e8  
 
 R007
 /d 4
 !!!!
-The object explodes...
-An artifact rolled towards you...
+The object swells with energy and explodes... but you're safely out of it's radius.
+An artifact rolls towards you, somehow surviving the explosion.
 /e6|4
 
 E007
 /d 4
 ...
-.....
 /ap ???
 Nyaaaa!
 Watch where you're going!
 /aw  
 ...
 Wait...
-Could this be...
-...a cat girl?
-Too bad you will never see the image of this cat girl because the team's artist is busy playing Elden Ring instead of doing work
+Could this be... a cat girl?
+Her form seems to be slightly obscured by the shadows of the forest, and you can't tell exactly what she looks like.
 /ap A catgirl?
-Nyaaa!
-Apologise!
+Nyaaa! Apologise right now!
 /b2|R008 Apologise
-/b2|R009 Stare at her like a weirdo
+/b2|R009 Stare at her like she's a weirdo
 
 R008
 /d 4
-/ap A catgirl (probably)
+/ap A catgirl.
 Nyaaa!!
 That's much better
 /aw  
-You noticed that the catgirl may not be female...
-/ap A cat....boy?
+You notice that the catgirl may not exactly be a girl...
+/ap A cat...boy?
 It's dangerous to go alone! Take this!
-/e5|4
 /aw  
-You received an artifact....  
-You left....
-/ap A cat....person?
+You receive an artifact.  
+You leave, more confused than when you started.
+/ap A cat......person?
 Have a safe trip wanderer!
+/e5|4
 
 R009
 /d 4
 /ap A catgirl (probably)
-!!!!
-Nyaaaa!!!!
+!!!
+Nyaaaa!!!
 /aw  
 /e8  
-You took a slap
+She slaps you.
 
 E008
 /d 5
 ...
-.....
-You chance upon a pool of seemingly hot lava...
-/b11 Jump in
-/b0 Leave
+You chance upon a pool of bubbling lava...
+/b2|R010 Jump in
+/b2|R011 Leave
+
+R010
+/d 5
+The seemingly hot lava is warm to the touch, but still thick enough to impede free movement.
+Leaving the pool, you notice remnants of stardust adhering to your body as the lava cools.
+/e11
+You gain some stardust.
+
+R011
+/d 5
+You leave the pool, thinking it stupid to do something as self-destructive as to jump into a pool of searing hot lava.
+...
+/e8
+You trip over something as you turn around, and upon further inspection, it's a strange relic of ancient past.
+You gain a powerful artifact.
+/e6
 
 E009
 /d 5
