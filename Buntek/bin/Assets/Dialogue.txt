@@ -89,7 +89,7 @@ You took the left path....
 You seem to have gotten lost...
 !!!
 You found an artifact inside a chamber..
-/e6|1  
+/e5|1  
 
 T001
 /d 1
@@ -135,7 +135,7 @@ I'd heard tell of a wanderer hurtling about atop these mountains
 And upon looking into the matter,
 the talk I surmise, is of thee.
 I was entrusted this, for thee.
-/b6|2 Accept
+/b5|2 Accept
 /b2|T003 Leave
 
 T003
@@ -166,7 +166,7 @@ You entered a crystal cave....
 .....
 ........
 You found an a glowing object
-/b6|3 Pick it up
+/b5|3 Pick it up
 /b0 Leave
 
 E006
@@ -237,7 +237,7 @@ That's much better
 You noticed that the catgirl may not be female...
 /ap A cat....boy?
 It's dangerous to go alone! Take this!
-/e6|4
+/e5|4
 /aw  
 You received an artifact....  
 You left....
@@ -272,6 +272,3 @@ Not implemented yet
 E0011
 /d 6
 Not implemented yet
-
-
-
