@@ -139,7 +139,9 @@ void Scene_Navigation::Update(void)
 		playerLocScale -= playerLocScaleSpeed * (4 * playerLocMaxScale * playerLocScale) * DeltaTime;
 		if (playerLocScale < 0.25f)
 			playerLocScale = 0.25f;
-		//scale = lerpF(scale, targetScale, scaleSpeed);
+
+		playerLocation->GetComponent<SpriteRenderer>()->SetOpacity(lerpF(playerLocation->GetComponent<SpriteRenderer>()->GetOpacity(), 1.f, 0.25f));
+		playerLocation->GetComponent<AlphaChanger>()->ToggleOscillation(false);
 
 		playerLocation->transform->SetScale(Vector2(playerLocScale, playerLocScale));
 
@@ -168,6 +170,7 @@ void Scene_Navigation::Update(void)
 		}
 		else
 		{
+			playerLocation->GetComponent<AlphaChanger>()->ToggleOscillation(true);
 			MapData.isTravelling = false;
 			MapData.Travel(MapData.destinationNode);
 			playerLocation->transform->SetPosition(MapData.currentNode->pos);

@@ -37,5 +37,5 @@ void AlphaChanger::SetOscillation(float newPeriod, float alphaMax, float alphaMi
 
 void AlphaChanger::ToggleOscillation(bool isOn)
 {
-
+	on = isOn;
 }

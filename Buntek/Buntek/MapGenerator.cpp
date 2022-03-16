@@ -222,6 +222,7 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
         cout << "[nodeObject " << k << " Hover]\n";
         // if node is being hovered over
         if (CheckHovered(nodeList[k], GameManager.GetCursorPosition())) {
+            cout << "[CheckHovered for nodeList[" << k << "]\n";
             for (int i = 0; i < MapData.nodeList.size(); i++)
             {
                 cout << "[Second For loop: " << i << " out of " << MapData.nodeList.size() << "]\n";
@@ -277,13 +278,18 @@ void _mapData::DisplayNodeHistory(void)
 }
 
 bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
+    cout << "[CheckHovered START]\n";
     SpriteRenderer* sr = thisNode->nodeObject->GetComponent<SpriteRenderer>();
+    cout << "[Check IF WIDTH]\n";
     if (thisNode->pos.x - sr->GetHalfWidth() < mousePos.x && thisNode->pos.x + sr->GetHalfWidth() > mousePos.x) {
 
+        cout << "[Check IF HEIGHT]\n";
         if (thisNode->pos.y - sr->GetHalfHeight() < mousePos.y && thisNode->pos.y + sr->GetHalfHeight() > mousePos.y) {
+            cout << "[RETURN TRUE]\n";
             return true;
         }
     }
+    cout << "[RETURN FALSE]\n";
     return false;
 }
 
