@@ -19,8 +19,11 @@ private:
     GameObject* spawner = 0;
     GameObject* currentArea = 0;        //Game Object to show the radius the player can go to
     GameObject* playerLocation = 0;     //Game Object to show where the player is
-    float playerLocScaleSpeed = 0.25f, playerLocTargetScale = 1.f;
-    float playerLocScale = 1, playerLocMinScale = 0.5f, playerLocMaxScale = 1.f;
+    float playerLocScaleSpeed = 0.2125f, playerLocTargetScale = 1.f;
+    float playerLocScale = 1;           //Scale for player location
+    float playerLocTravelScale = 0.25f; //Scale set for travelling
+    float playerLocMinScale = 1.f;      //Min scale for idle player location
+    float playerLocMaxScale = 2.f;      //Max scale for idle player location
     float playerLocTransSpeed = 0.025f;
     Vector2 velocity = Vector2(0, 0);
     float playerLocSpeed = 0;

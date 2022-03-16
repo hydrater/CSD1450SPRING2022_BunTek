@@ -40,43 +40,43 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 002://Increase paddle speed
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusPaddleSpeed = 1 + (float)artifact.count / 10.0f;
+            GameManager.playerProfile.bonusPaddleSpeed = 1 + (float)artifact.count * 0.1f;
         }
         else {
-            GameManager.enemyProfile.bonusPaddleSpeed = 1 + (float)artifact.count / 10.0f;
+            GameManager.enemyProfile.bonusPaddleSpeed = 1 + (float)artifact.count * 0.1f;
         }
         break;
     case 003://Increase ball speed
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusBallSpeed = 1 + (float)artifact.count / 10.0f;
+            GameManager.playerProfile.bonusBallSpeed = 1 + (float)artifact.count * 0.1f;
         }
         else {
-            GameManager.enemyProfile.bonusBallSpeed = 1 + (float)artifact.count / 10.0f;
+            GameManager.enemyProfile.bonusBallSpeed = 1 + (float)artifact.count * 0.1f;
         }
         break;
     case 004://Increase ball spawn frequency
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusBallSpawnRate = 1 - (float)artifact.count / 10.0f;
+            GameManager.playerProfile.bonusBallSpawnRate = pow(0.9f, artifact.count); // adjust the left float for spawn rate adjustment
             AEClamp(GameManager.playerProfile.bonusBallSpawnRate, 0.1f, 1);
         }
         else {
-            GameManager.enemyProfile.bonusBallSpawnRate = 1 - (float)artifact.count / 10.0f;
+            GameManager.enemyProfile.bonusBallSpawnRate = pow(0.9f, artifact.count);
             AEClamp(GameManager.enemyProfile.bonusBallSpawnRate, 0.1f, 1);
         }
         break;
     case 030://Heals X times more
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusHealing = 1 + (float)artifact.count / 5.0f;
+            GameManager.playerProfile.bonusHealing = 1 + (float)artifact.count * 0.2f;
         }
         else {
-            GameManager.enemyProfile.bonusHealing = 1 + (float)artifact.count / 5.0f;
+            GameManager.enemyProfile.bonusHealing = 1 + (float)artifact.count * 0.2f;
         }
         break;
-    case 120://Increase hp by 2 per battle won, up to a max of X
-        GameManager.playerProfile.basemaxhp += 2 * artifact.count;
+    case 120://Increase hp by 10 per battle won, up to a max of X
+        GameManager.playerProfile.basemaxhp += 10 * artifact.count;
         break;
-    case 140://Restores 10% hp of max hp
-        GameManager.playerHp += (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) / 5 * GameManager.playerProfile.bonusHealing;
+    case 140://Restores 20% hp of max hp
+        GameManager.playerHp += (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) * 0.2f * GameManager.playerProfile.bonusHealing;
         break;
     case 220://Increases ball bounce gain by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
@@ -84,12 +84,12 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 221://Increases ball speed by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
-        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10.0f));
+        tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count * 0.1f));
         break;
     case 300://B2: Increase ball speed by X
         if (ball->GetComponent<BallBehavior>()->ballPhase >= 2) {
             tempBallBehavior = ball->GetComponent<BallBehavior>();
-            tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count / 10.0f));
+            tempBallBehavior->SetTargetSpeed(tempBallBehavior->GetSpeed() * (1 + artifact.count * 0.1f));
         }
         break;
     case 400://B3: Restores X hp
@@ -105,7 +105,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     case 401://B3: Deals extra X damage
         if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
             tempBallBehavior = ball->GetComponent<BallBehavior>();
-            tempBallBehavior->ballDamage += artifact.count;
+            tempBallBehavior->ballDamage += artifact.count * 7;
         }
         break;
     case 420://B4: Spawns X ball in a random direction forward from the middle
@@ -118,10 +118,10 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
     case 500://B3: Opponent takes X damage
         if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
             if (isPlayerTheCaster) {
-                GameManager.enemyHp -= artifact.count;
+                GameManager.enemyHp -= 5 * artifact.count;
             }
             else {
-                GameManager.playerHp -= artifact.count;
+                GameManager.playerHp -= 5 * artifact.count;
             }
         }
         break;
@@ -389,7 +389,7 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 30:
         return "Increases healing received by 20%";
     case 120:
-        return "On battle won: Increases max hp by 5";
+        return "On battle won: Increases max hp by 10";
     case 140:
         return "On battle won: Restores 20% of max hp";
     case 220:
@@ -399,13 +399,13 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 300:
         return "After 2 reflects, when reflected by your paddle, increase ball speed";
     case 400:
-        return "After 3 reflects, when dealing damage, restores hp";
+        return "After 3 reflects, when dealing damage, restores 1 hp";
     case 401:
-        return "After 3 reflects, when dealing damage, deals extra damage";
+        return "After 3 reflects, when dealing damage, deals 7 extra damage";
     case 420:
         return "After 4 reflects, when dealing damage, spawns a ball in a random direction forward from the middle";
     case 500:
-        return "After 3 reflects, when taking damage, opponent takes damage";
+        return "After 3 reflects, when taking damage, opponent takes 5 damage";
     case 520:
         return "After 4 reflects, when taking damage, spawns a ball in a random direction forward from the middle";
     case 530:
