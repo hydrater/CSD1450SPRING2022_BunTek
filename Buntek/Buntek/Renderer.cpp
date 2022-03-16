@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include "LineRenderer.h"
+#include "GameManager.h"
 
 _renderer::_renderer()
 {
@@ -169,13 +170,13 @@ float _renderer::TextAlignmentX(TextRenderer* textRenderer, int lineNum) {
 	switch (textRenderer->GetXAlignment())
 	{
 	case TextRenderer::xAlignmentTypes::Left:
-		return (textRenderer->GetTransform()->worldposition.x - tempSR->GetHalfWidth() + textRenderer->GetXBuffer());
+		return (textRenderer->GetTransform()->worldposition.x - tempSR->GetHalfWidth() + textRenderer->GetXBuffer() - GameManager.pos.x);
 		break;
 	case TextRenderer::xAlignmentTypes::Right:
-		return (textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth() - textRenderer->GetTextWidth(lineNum) - textRenderer->GetXBuffer());
+		return (textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth() - textRenderer->GetTextWidth(lineNum) - textRenderer->GetXBuffer() - GameManager.pos.x);
 		break;
 	case TextRenderer::xAlignmentTypes::Mid:
-		return (textRenderer->GetTransform()->worldposition.x - textRenderer->GetTextWidth(lineNum) / 2);;
+		return (textRenderer->GetTransform()->worldposition.x - textRenderer->GetTextWidth(lineNum) / 2 - GameManager.pos.x);;
 		break;
 	default:
 		return 0;
@@ -187,13 +188,13 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 	switch (textRenderer->GetYAlignment())
 	{
 	case TextRenderer::yAlignmentTypes::Top:
-		return (textRenderer->GetTransform()->worldposition.y + tempSR->GetHalfHeight() - textRenderer->GetTextHeight() - textRenderer->GetYBuffer());
+		return (textRenderer->GetTransform()->worldposition.y + tempSR->GetHalfHeight() - textRenderer->GetTextHeight() - textRenderer->GetYBuffer() - GameManager.pos.y);
 		break;
 	case TextRenderer::yAlignmentTypes::Bottom:
-		return (textRenderer->GetTransform()->worldposition.y - tempSR->GetHalfHeight() + textRenderer->GetYBuffer());
+		return (textRenderer->GetTransform()->worldposition.y - tempSR->GetHalfHeight() + textRenderer->GetYBuffer() - GameManager.pos.y);
 		break;
 	case TextRenderer::yAlignmentTypes::Mid:
-		return (textRenderer->GetTransform()->worldposition.y + textRenderer->lineCount * textRenderer->GetTextHeight() / 2.0f - textRenderer->GetTextHeight());
+		return (textRenderer->GetTransform()->worldposition.y + textRenderer->lineCount * textRenderer->GetTextHeight() / 2.0f - textRenderer->GetTextHeight() - GameManager.pos.y);
 		break;
 	default:
 		return 0;

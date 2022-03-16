@@ -177,6 +177,9 @@
     <ClCompile Include="SaveManager.cpp">
       <Filter>Source Files\Custom</Filter>
     </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene_Battle.h">
@@ -322,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="SaveManager.h">
       <Filter>Source Files\Custom</Filter>
+    </ClInclude>
+    <ClInclude Include="Slider.h">
+      <Filter>Source Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

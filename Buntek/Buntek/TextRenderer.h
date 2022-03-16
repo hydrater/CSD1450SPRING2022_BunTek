@@ -42,6 +42,7 @@ public:
 	float GetYBuffer(void);
 	float GetLineBuffer(void);
 	vector<float> GetTextColor(void);
+	// 0.0f to 1.0f 
 	void SetTextColor(float _R, float _G, float _B);
 	void ScaleTexture(SpriteRenderer* sr);
 	float textR = 1, textG = 1, textB = 1;

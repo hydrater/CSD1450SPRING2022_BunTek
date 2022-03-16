@@ -112,6 +112,7 @@
     <ClCompile Include="Scene_Credits.cpp" />
     <ClCompile Include="Scene_HowToPlay.cpp" />
     <ClCompile Include="Scene_Options.cpp" />
+    <ClCompile Include="Slider.cpp" />
     <ClCompile Include="UI_DialogueHandler.cpp" />
     <ClCompile Include="EnemyDatabase.cpp" />
     <ClCompile Include="UI_EnemyNodeBox.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Scene_Credits.h" />
     <ClInclude Include="Scene_HowToPlay.h" />
     <ClInclude Include="Scene_Options.h" />
+    <ClInclude Include="Slider.h" />
     <ClInclude Include="UI_DialogueHandler.h" />
     <ClInclude Include="EnemyDatabase.h" />
     <ClInclude Include="UI_EnemyNodeBox.h" />
