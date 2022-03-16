@@ -124,7 +124,6 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             else {
                 GameManager.playerHp -= 5 * artifact.count;
             }*/
-
             GameManager.DealDamage(5 * artifact.count, !isPlayerTheCaster);
             if (isPlayerTheCaster) {
                 ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, !isPlayerTheCaster);
