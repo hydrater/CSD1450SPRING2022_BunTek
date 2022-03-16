@@ -90,9 +90,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();
 		UIDialogueManager.Update();
-		GameScriptManager.Update();
 		AudioManager.Update();
 		SceneManager.Update();
+		GameScriptManager.Update();
 
 		// --------------------------------------------- Collision --------------------------------------------- //
 		CollisionManager2D.CollideAll();
