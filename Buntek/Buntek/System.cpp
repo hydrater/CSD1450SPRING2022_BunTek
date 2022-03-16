@@ -110,6 +110,7 @@ void _sceneManager::LateUpdate(void)
         case TransitionType::None:
             if (scene != NULL && nextScene != NULL)
             {
+                cout << "Scene change" << endl;
                 Renderer.Clear();
                 GameScriptManager.Clear();
                 ECSManager.Free();
@@ -159,6 +160,7 @@ void _sceneManager::FadeTransition(void) {
             Renderer.Clear();
             GameScriptManager.Clear();
             ECSManager.Free();
+            cout << "Scene change" << endl;
             GameManager.artifactListUI = NULL;
             if (deleteScene)
                 delete scene;
