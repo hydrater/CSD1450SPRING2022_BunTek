@@ -125,6 +125,13 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             }*/
 
             GameManager.DealDamage(5 * artifact.count, !isPlayerTheCaster);
+            if (isPlayerTheCaster) {
+                ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, !isPlayerTheCaster);
+            }
+            else {
+                ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_TakeDamage, !isPlayerTheCaster);
+            }
+            GameManager.HealthCheck(!isPlayerTheCaster);
         }
         break;
     case 520://B4: Spawns X ball in a random direction forward from the middle
