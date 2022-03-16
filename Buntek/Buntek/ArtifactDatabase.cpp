@@ -117,12 +117,14 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 500://B3: Opponent takes X damage
         if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
-            if (isPlayerTheCaster) {
+            /*if (isPlayerTheCaster) {
                 GameManager.enemyHp -= 5 * artifact.count;
             }
             else {
                 GameManager.playerHp -= 5 * artifact.count;
-            }
+            }*/
+
+            GameManager.DealDamage(5 * artifact.count, !isPlayerTheCaster);
         }
         break;
     case 520://B4: Spawns X ball in a random direction forward from the middle

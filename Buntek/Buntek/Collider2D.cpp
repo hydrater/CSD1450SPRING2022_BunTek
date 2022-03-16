@@ -265,7 +265,7 @@ bool CircleCollider::Collide(Collider2D* col)
 		SpriteRenderer* othersr = boxCol->Owner()->GetComponent<SpriteRenderer>();
 		if (thissr == nullptr || othersr == nullptr)
 			return false;
-		radius = thissr->GetHalfWidth() * 2 + thissr->GetHalfHeight() * 2;
+		radius = thissr->GetHalfWidth() + thissr->GetHalfHeight();
 		angle = this->Owner()->transform->worldrotation;
 		boxCol->width = othersr->GetHalfWidth() * 2;
 		boxCol->height = othersr->GetHalfHeight() * 2;
