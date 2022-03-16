@@ -3,6 +3,7 @@
 
 Button::Button(void)
 {
+	ID = "Button";
 }
 
 Button::~Button(void)

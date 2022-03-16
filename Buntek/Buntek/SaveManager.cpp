@@ -93,7 +93,6 @@ void _saveManager::SaveData(void)
     wf.write((char*)&_value, sizeof(_value));
 
     wf.close();
-    cout << "Saved" << endl;
 }
 
 void _saveManager::LoadData(void)

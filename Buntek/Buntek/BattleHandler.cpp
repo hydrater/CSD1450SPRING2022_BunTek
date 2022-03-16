@@ -9,7 +9,7 @@
 #include "SaveManager.h"
 
 BattleHandler::BattleHandler(void) {
-	
+	ID = "Battle handler";
 }
 BattleHandler::~BattleHandler(void) {
 	CollisionManager2D.RemoveAll();

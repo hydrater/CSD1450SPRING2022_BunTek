@@ -104,6 +104,7 @@ void _mapData::GenerateMapData(void)
 
 void _mapData::GenerateMapObject(void)
 {
+    cout << "navigation objs created" << endl;
     for (int i = 0; i < nodeList.size(); ++i)
     {
         GameObject* temp = new GameObject;
@@ -170,12 +171,13 @@ void _mapData::GenerateMapObject(void)
     tempRenderer->SetOpacity(0.4f);
     temp->transform->worldposition = penaltyPos;
     penaltyZone = temp;
+    cout << "navigation objs end" << endl;
 }
 
 void _mapData::DisplayNodeRoutes(float travelDistance)
 {
     // Don't run if UI or shop is open
-    if (UIDialogueManager.UIOpen || MapData.shopUI)
+    if (UIDialogueManager.UIOpen || MapData.shopUI || MapData.isTravelling)
     {
         MapData.SetClickable(false);
         MapData.SetHoverable(false);
@@ -416,5 +418,12 @@ void _mapData::DeleteMapData(void)
 void EnactTravel(Button* button)
 {
     MapData.destinationNode = MapData.GetNode(button->Owner());
-    MapData.isTravelling = true;
+    if (MapData.destinationNode == NULL)
+    {
+        cout << "ERROR! destinationNode is NULL!\n";
+    }
+    else
+    {
+        MapData.isTravelling = true;
+    }
 }

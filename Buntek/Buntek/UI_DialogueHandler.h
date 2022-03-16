@@ -46,6 +46,8 @@ public:
 	// Set to public for gameManager to handle rewardButton
 	vector<Button*> rewardButtonList;
 
+	short dialogueSortingLayer = 0;
+
 private:
 
 	void WriteToDialogue(void);
@@ -74,7 +76,6 @@ private:
 	int dialogueButtonNo = 0;
 	int rewardButtonNo = 0;
 
-	short dialogueSortingLayer = 0;
 	float displayTimer = 0;
 	const float displaySpeed = 0.001f; // No of char per sec
 	int displayNo = 0;
