@@ -14,7 +14,6 @@ public:
 	virtual void Update(void);
 	void setStarted(bool setValue);
 	bool getStarted(void);
-	string ID = "";
 private:
 	bool hasStarted;
 };

@@ -11,7 +11,6 @@ using namespace Math;
 
 BattleInput::BattleInput(void)
 {
-	ID = "Battle input";
 	AIEnabled = true;
 }
 
