@@ -35,7 +35,7 @@ void _mapData::GenerateMapData(void)
     float StartYCoord = (float)(-AEGetWindowHeight() / 2) + yBuffer;
     float EndYCoord = (float)(AEGetWindowHeight() / 2) - yBuffer;
 
-    penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.5f), RandFloatMinMax(StartYCoord, EndYCoord));
+    //penaltyPos = Vector2(-((float)AEGetWindowWidth() * 1.5f), RandFloatMinMax(StartYCoord, EndYCoord));
 
 
     for (int i = 0; i < numNodes; i++) 
@@ -164,7 +164,7 @@ void _mapData::GenerateMapObject(void)
 
     currentNode->nodeObject->GetComponent<SpriteRenderer>()->SetColor(0.4f, 0.8f, 1.f);
 
-    GameObject* temp = new GameObject;
+    /*GameObject* temp = new GameObject;
     SpriteRenderer* tempRenderer = temp->AddComponent<SpriteRenderer>();
     tempRenderer->Size((float)AEGetWindowWidth() * 1.5f, (float)AEGetWindowWidth() * 1.5f);
     tempRenderer->SetLayer(-2);
@@ -172,7 +172,7 @@ void _mapData::GenerateMapObject(void)
     tempRenderer->SetColor(1, 0, 0);
     tempRenderer->SetOpacity(0.4f);
     temp->transform->worldposition = penaltyPos;
-    penaltyZone = temp;
+    penaltyZone = temp;*/
     cout << "navigation objs end" << endl;
 }
 
@@ -385,7 +385,7 @@ void _mapData::SetHoverable(bool _canHover)
 }
 void _mapData::PenaltyZoneUpdate(void) {
     cout << "[PenaltyZoneUpdate START]\n";
-    if (penaltyZone->transform->worldposition.x < 0) {
+    /*if (penaltyZone->transform->worldposition.x < 0) {
         penaltyZone->transform->worldposition.x += penaltySpeed;
         penaltyPos = penaltyZone->transform->worldposition;
     }
@@ -401,7 +401,7 @@ void _mapData::PenaltyZoneUpdate(void) {
             nodeList[i]->nodeType = NodeType::Elite;
             nodeList[i]->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/Elite.png");
         }
-    }
+    }*/
     cout << "[PenaltyZoneUpdate END]\n";
 }
 _mapData::Node* _mapData::GetNode(GameObject* object)
