@@ -218,7 +218,8 @@ void _gameScriptManager::Update(void)
 {
     for (int i = (int)gameScriptList.size() - 1; i >= 0; --i)
     {
-        if (gameScriptList[i]->remove || gameScriptList[i] == NULL)
+        cout << (unsigned long)gameScriptList[i] << endl;
+        if (gameScriptList[i]->remove || gameScriptList[i] == NULL || (unsigned long)gameScriptList[i] < 30)
         {
             gameScriptList.erase(gameScriptList.begin() + i);
         }
