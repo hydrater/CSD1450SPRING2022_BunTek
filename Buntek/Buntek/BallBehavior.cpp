@@ -11,7 +11,6 @@
 #include "SpriteRenderer.h"
 #include "System.h"
 
-
 BallBehavior::BallBehavior(void)
 {
 }
@@ -68,6 +67,7 @@ void BallBehavior::Update(void)
 		bool rightWall = fabs(transform->worldposition.x - GameManager.areaRightBoundary) <= radius;
 
 		if (leftWall || rightWall) {
+			GameManager.PlayRandomBallSound();
 			velocity.x = -velocity.x;
 			transform->worldposition.x = AEClamp(transform->worldposition.x, GameManager.areaLeftBoundary + radius, GameManager.areaRightBoundary - radius);
 			if (playerPossess) {//enemy ball hits wall
@@ -90,6 +90,7 @@ void BallBehavior::Update(void)
 		//Collision check with top/bottom wall
 		else if (fabs(transform->worldposition.y - GameManager.areaBottomBoundary) <= radius || fabs(transform->worldposition.y - GameManager.areaTopBoundary) <= radius)
 		{
+			GameManager.PlayRandomBallSound();
 			CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
 
 			if (playerPossess) {//enemy ball hits player goal
@@ -119,10 +120,12 @@ void BallBehavior::Update(void)
 				GameObject* spawner = new GameObject();
 				if (playerPossess) {
 					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, -1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "hdCircle.png", Vector2(transform->worldposition.x , transform->worldposition.y+radius/2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+					GameManager.PlayRandomBallSound();
 				}
 				else
 				{
 					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, 1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "hdCircle.png", Vector2(transform->worldposition.x, transform->worldposition.y - radius / 2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+					GameManager.PlayRandomBallSound();
 				}
 			}
 			

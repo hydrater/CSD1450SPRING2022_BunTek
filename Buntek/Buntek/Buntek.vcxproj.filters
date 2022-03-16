@@ -93,9 +93,6 @@
     <ClCompile Include="BattleInput.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Skills.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="TextRenderer.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -128,9 +125,6 @@
     </ClCompile>
     <ClCompile Include="AlphaChanger.cpp">
       <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyDatabase.cpp">
-      <Filter>Source Files\Custom</Filter>
     </ClCompile>
     <ClCompile Include="ArtifactDatabase.cpp">
       <Filter>Source Files\Custom</Filter>
@@ -245,9 +239,6 @@
     <ClInclude Include="BattleInput.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Skills.h">
-      <Filter>Source Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="TextRenderer.h">
       <Filter>Source Files\Components</Filter>
     </ClInclude>
@@ -277,9 +268,6 @@
     </ClInclude>
     <ClInclude Include="AlphaChanger.h">
       <Filter>Source Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyDatabase.h">
-      <Filter>Source Files\Custom</Filter>
     </ClInclude>
     <ClInclude Include="ArtifactDatabase.h">
       <Filter>Source Files\Custom</Filter>

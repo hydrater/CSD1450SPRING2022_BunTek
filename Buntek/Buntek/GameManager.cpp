@@ -15,6 +15,7 @@
 #include "UI_DialogueHandler.h"
 #include "Scene_MainMenu.h"
 #include "Scene_Battle.h"
+#include "AudioEngine.h"
 
 using namespace Math;
 
@@ -310,6 +311,12 @@ void _gameManager::HealthCheck(bool isPlayer) {
 short _gameManager::GetEnemyType(void)
 {
     return currentEnemy;
+}
+
+void _gameManager::PlayRandomBallSound(void)
+{
+    string ballSound = "Reflect" + to_string(RandIntMinMax(0, 2)) + ".wav";
+    AudioManager.PlayClip(ballSound);
 }
 
 void _gameManager::GameOver(void)
