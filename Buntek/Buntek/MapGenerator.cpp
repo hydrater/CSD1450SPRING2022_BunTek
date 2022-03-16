@@ -418,5 +418,12 @@ void _mapData::DeleteMapData(void)
 void EnactTravel(Button* button)
 {
     MapData.destinationNode = MapData.GetNode(button->Owner());
-    MapData.isTravelling = true;
+    if (MapData.destinationNode == NULL)
+    {
+        cout << "ERROR! destinationNode is NULL!\n";
+    }
+    else
+    {
+        MapData.isTravelling = true;
+    }
 }

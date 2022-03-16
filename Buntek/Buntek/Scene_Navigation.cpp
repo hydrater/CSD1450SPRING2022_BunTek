@@ -136,7 +136,7 @@ void Scene_Navigation::Update(void)
 {
 	// Create a Glow Effect
 	float scalesign = (playerLocTargetScale == playerLocMaxScale) ? -1.f : 1.f;
-	playerLocScale += scalesign * playerLocScaleSpeed;
+	playerLocScale += scalesign * playerLocScaleSpeed * DeltaTime;
 
 	if (playerLocScale >= playerLocMaxScale + 0.01f || playerLocScale <= playerLocMinScale - 0.01f)
 		playerLocTargetScale = (playerLocTargetScale == playerLocMaxScale) ? playerLocMinScale : playerLocMaxScale;
