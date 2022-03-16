@@ -178,7 +178,7 @@ void _mapData::GenerateMapObject(void)
 
 void _mapData::DisplayNodeRoutes(float travelDistance)
 {
-    cout << "[DisplayNodeRoutes START]\n";
+    cout << "[=================================DisplayNodeRoutes START========================================]\n";
     // Don't run if UI or shop is open
     if (UIDialogueManager.UIOpen || MapData.shopUI || MapData.isTravelling)
     {
@@ -187,18 +187,24 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
         return;
     }
 
+    cout << "[AEGfxMeshFree connectedLines]\n";
+
     for (AEGfxVertexList* ver : MapData.connectedLines)
         AEGfxMeshFree(ver);
-
     MapData.connectedLines.clear();
+
+    cout << "[Check if close enough]\n";
+
     MapData.SetClickable(false);
     MapData.SetHoverable(false);
     for (int k = 0; k < nodeList.size(); k++)
     {
+        cout << "[For loop: "<< k << " out of " << nodeList.size() << "]\n";
         bool closeEnough = false;
         float distBetSq = (nodeList[k]->pos - currentNode->pos).LengthSquared();
         closeEnough = distBetSq <= travelDistance * travelDistance;
 
+        cout << "[nodeObject " << k << " CloseEnough]\n";
         if (nodeList[k] != currentNode && closeEnough)
         {
             AEGfxVertexList* newLine;
@@ -208,18 +214,22 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
             newLine = AEGfxMeshEnd();
             MapData.connectedLines.push_back(newLine);
 
+            cout << "[nodeObject " << k << " Clickable and Hoverable]\n";
             nodeList[k]->nodeObject->GetComponent<Button>()->SetClickable(true);
             nodeList[k]->nodeObject->GetComponent<Button>()->SetHoverable(true);
         }
-        
+
+        cout << "[nodeObject " << k << " Hover]\n";
         // if node is being hovered over
         if (CheckHovered(nodeList[k], GameManager.GetCursorPosition())) {
             for (int i = 0; i < MapData.nodeList.size(); i++)
             {
+                cout << "[Second For loop: " << i << " out of " << MapData.nodeList.size() << "]\n";
                 bool closeEnough = false;
                 float distBetSq = (nodeList[i]->pos - nodeList[k]->pos).LengthSquared();
                 closeEnough = distBetSq <= travelDistance * travelDistance;
 
+                cout << "[nodeList " << i << " CloseEnough]\n";
                 if (closeEnough && nodeList[i] != currentNode && nodeList[k] != currentNode && nodeList[i] != nodeList[k])
                 {
                     AEGfxVertexList* newLine;
@@ -232,7 +242,7 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
             }
         }
     }
-    cout << "[DisplayNodeRoutes END]\n";
+    cout << "[=================================DisplayNodeRoutes END========================================]\n";
 }
 
 void _mapData::DisplayNodeHistory(void)
