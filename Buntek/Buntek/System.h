@@ -75,4 +75,5 @@ public:
     void AddToList(GameScript* gameScript);
     void Update(void);
     void Clear(void);
+    void ForceDelete(void* pointer);
 };
