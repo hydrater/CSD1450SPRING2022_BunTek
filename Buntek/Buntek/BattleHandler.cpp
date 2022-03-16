@@ -12,6 +12,7 @@
 #include "System.h"
 #include "BattleInput.h"
 #include "AudioEngine.h"
+#include "AssetManager.h"
 #include "GameManager.h"
 #include "UI_Hp.h"
 #include "SaveManager.h"
@@ -23,6 +24,22 @@ BattleHandler::~BattleHandler(void) {
 	AudioManager.StopMusic();
 	AudioManager.UnloadMusic("hysteric.ogg");
 	AudioManager.UnloadMusic("www.ogg");
+	AudioManager.UnloadSound("Reflect0.wav");
+	AudioManager.UnloadSound("Reflect1.wav");
+	AudioManager.UnloadSound("Reflect2.wav");
+
+	if (GameManager.GetEnemyType() == 3)
+	{
+		AssetManager.UnloadTexture("Anim/Face.png");
+		AssetManager.UnloadTexture("Anim/FaceShading.png");
+		AssetManager.UnloadTexture("Anim/Hand0.png");
+		AssetManager.UnloadTexture("Anim/Hand1.png");
+		AssetManager.UnloadTexture("Anim/Hand2.png");
+		AssetManager.UnloadTexture("Anim/Hand3.png");
+		AssetManager.UnloadTexture("Anim/Hand4.png");
+		AssetManager.UnloadTexture("Anim/Hand5.png");
+		AssetManager.UnloadTexture("Anim/Hand6.png");
+	}
 }
 void BattleHandler::Start(void) {
 	
@@ -43,7 +60,24 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 		AudioManager.PlayMusic("www.ogg");
 	}
 
-	//Ball sounds
+	// Ball sounds
+	AudioManager.LoadSound("Reflect0.wav");
+	AudioManager.LoadSound("Reflect1.wav");
+	AudioManager.LoadSound("Reflect2.wav");
+
+	// Boss info
+	if (GameManager.GetEnemyType() == 3)
+	{
+		AssetManager.LoadTexture("Anim/Face.png");
+		AssetManager.LoadTexture("Anim/FaceShading.png");
+		AssetManager.LoadTexture("Anim/Hand0.png");
+		AssetManager.LoadTexture("Anim/Hand1.png");
+		AssetManager.LoadTexture("Anim/Hand2.png");
+		AssetManager.LoadTexture("Anim/Hand3.png");
+		AssetManager.LoadTexture("Anim/Hand4.png");
+		AssetManager.LoadTexture("Anim/Hand5.png");
+		AssetManager.LoadTexture("Anim/Hand6.png");
+	}
 
 	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
 	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(GameManager.level * 5 * GameManager.GetEnemyType()));

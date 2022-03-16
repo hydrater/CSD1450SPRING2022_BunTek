@@ -114,7 +114,6 @@
     <ClCompile Include="Scene_Options.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="UI_DialogueHandler.cpp" />
-    <ClCompile Include="EnemyDatabase.cpp" />
     <ClCompile Include="UI_EnemyNodeBox.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameManager.cpp" />
@@ -130,7 +129,6 @@
     <ClCompile Include="Scene_MainMenu.cpp" />
     <ClCompile Include="Scene_Navigation.cpp" />
     <ClCompile Include="Scene_Test.cpp" />
-    <ClCompile Include="Skills.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="Scene_Battle.cpp" />
@@ -164,7 +162,6 @@
     <ClInclude Include="Scene_Options.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="UI_DialogueHandler.h" />
-    <ClInclude Include="EnemyDatabase.h" />
     <ClInclude Include="UI_EnemyNodeBox.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameManager.h" />
@@ -181,7 +178,6 @@
     <ClInclude Include="Scene_MainMenu.h" />
     <ClInclude Include="Scene_Navigation.h" />
     <ClInclude Include="Scene_Test.h" />
-    <ClInclude Include="Skills.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="Scene_Battle.h" />
     <ClInclude Include="Scene_Splash.h" />

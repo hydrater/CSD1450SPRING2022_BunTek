@@ -99,6 +99,7 @@ public:
     void DealDamage(float damage, bool isPlayer);
     void HealthCheck(bool isPlayer);
     short GetEnemyType(void);
+    void PlayRandomBallSound(void);
 
     // Battle metrics
     BattleHandler* bh = 0;
