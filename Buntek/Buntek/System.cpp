@@ -247,6 +247,7 @@ void _gameScriptManager::ForceDelete(void* pointer)
 {
     for (int i = (int)gameScriptList.size() - 1; i >= 0; --i)
     {
+        cout << "Attemptign to delete" << endl;
         if (gameScriptList[i] == pointer)
         {
             cout << "deleted via force deletion" << endl;
