@@ -35,7 +35,7 @@ void UI_Hp::GenerateHpBar(bool _isplayer, float hpAmt, float maxHpAmt, int barCo
 	
 	TextRenderer* pBarCountTextRenderer = hpBarCount->AddComponent<TextRenderer>();
 	hpBarNum = barCount;
-	pBarCountTextRenderer->SetFont("Gabriola.ttf");
+	pBarCountTextRenderer->SetFont("Ayar.ttf");
 	pBarCountTextRenderer->SetTextColor(0, 0, 0);
 	if (hpBarNum > 1) {
 		pBarCountTextRenderer->SetText("x" + std::to_string(hpBarNum));
@@ -44,7 +44,7 @@ void UI_Hp::GenerateHpBar(bool _isplayer, float hpAmt, float maxHpAmt, int barCo
 		pBarCountTextRenderer->SetText(std::to_string(health));
 	}
 	
-	pBarCountTextRenderer->SetFontScale(1);
+	pBarCountTextRenderer->SetFontSize(24);
 	pBarCountTextRenderer->SetLayer(5);
 	pBarCountTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	pBarCountTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
