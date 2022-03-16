@@ -105,6 +105,7 @@ Transform* GameObject::GetParent(void)
 
 void GameObject::Delete(void)
 {
+	cout << "Deleting GO" << endl;
 	remove = true;
 	for (int i = 0; i < transform->children.size(); ++i)
 	{
