@@ -226,7 +226,7 @@ void _gameScriptManager::Update(void)
 
     for (int i = 0; i < gameScriptList.size(); ++i)
     {
-        if (!gameScriptList[i]->IsActive() || (gameScriptList[i]->Owner() != NULL && !gameScriptList[i]->Owner()->IsActive()))
+        if (gameScriptList[i] == NULL || !gameScriptList[i]->IsActive() || (gameScriptList[i]->Owner() != NULL && !gameScriptList[i]->Owner()->IsActive()))
             continue;
 
         if (!gameScriptList[i]->getStarted())
