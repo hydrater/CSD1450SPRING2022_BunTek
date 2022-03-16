@@ -120,7 +120,7 @@ void Scene_Navigation::EarlyUpdate(void)
 	}*/
 
 	// Needs to be in early update to ensure a smooth transition
-	if (GameManager.battleRewardPending)
+	/*if (GameManager.battleRewardPending)
 	{
 		GameManager.battleRewardPending = false;
 		Artifact rew1, rew2, rew3;
@@ -129,7 +129,7 @@ void Scene_Navigation::EarlyUpdate(void)
 		rew3.ID = ArtifactDatabase.DrawArtifact();
 		vector<Artifact> reward_Artifact{ rew1, rew2, rew3 };
 		UIDialogueManager.CreateRewardSelPreset(reward_Artifact, (short)10, true);
-	}
+	}*/
 }
 
 void Scene_Navigation::Update(void)
