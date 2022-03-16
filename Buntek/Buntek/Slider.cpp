@@ -1,3 +1,11 @@
+/*!*****************************************************************************
+\file Slider.cpp
+\author: <to be inserted>
+\co-authors: Algene Tan Chuan Hong, Isaiah Lim Ji Rong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
+\brief: Handles Slider
+*******************************************************************************/
+
 #include "Slider.h"
 #include "GameManager.h"
 

@@ -1,3 +1,10 @@
+/*!*****************************************************************************
+\file Main.cpp
+\author: <to be inserted>
+\co-authors: Algene Tan Chuan Hong, Isaiah Lim Ji Rong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
+\brief: Main logic
+*******************************************************************************/
 // ---------------------------------------------------------------------------
 // includes
 #include "Scene_Battle.h"
@@ -89,13 +96,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();
-		GameScriptManager.Update();
+		UIDialogueManager.Update();
 		AudioManager.Update();
 		SceneManager.Update();
-		UIDialogueManager.Update();
+		GameScriptManager.Update();
 
 		// --------------------------------------------- Collision --------------------------------------------- //
-		CollisionManager2D.CollideAll();
+		//CollisionManager2D.CollideAll();
 
 		// --------------------------------------------- Render --------------------------------------------- //
 		GameManager.Update();
