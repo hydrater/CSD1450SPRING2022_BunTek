@@ -39,7 +39,7 @@ void BallBehavior::Update(void)
 		ballParticleSystem->directionalVector2 = -velocity;
 
 		if (speed > targetSpeed) {
-			speed = lerpF(speed, targetSpeed, 5.0f * DeltaTime);
+			speed = lerpF(speed, targetSpeed, 4.0f * DeltaTime);
 			float speedDiff = speed - targetSpeed;
 			if (speedDiff < 20) {
 				ballParticleSystem->isEmitting = false;
@@ -174,7 +174,7 @@ bool BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 				speed = targetSpeed;
 			}
 
-			float addSpd = paddle->GetComponent<PaddleBehavior>()->velocity.y*300 ;
+			float addSpd = paddle->GetComponent<PaddleBehavior>()->velocity.y*350 ;
 
 			if (addSpd > 0) {
 				speed += paddleBounceMultiplier * addSpd;
