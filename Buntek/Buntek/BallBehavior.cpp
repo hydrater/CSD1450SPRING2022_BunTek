@@ -174,7 +174,7 @@ bool BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 				speed = targetSpeed;
 			}
 
-			float addSpd = paddle->GetComponent<PaddleBehavior>()->velocity.y / DeltaTime;
+			float addSpd = paddle->GetComponent<PaddleBehavior>()->velocity.y*300 ;
 
 			if (addSpd > 0) {
 				speed += paddleBounceMultiplier * addSpd;
