@@ -411,7 +411,7 @@ _mapData::Node* _mapData::GetNode(GameObject* object)
         if (node->nodeObject == object)
             return node;
     }
-    return NULL;
+    return nullptr;
 }
 
 void _mapData::DeleteMapData(void)
@@ -448,9 +448,9 @@ void EnactTravel(Button* button)
 {
     cout << "[EnactTravel START]\n";
     MapData.destinationNode = MapData.GetNode(button->Owner());
-    if (MapData.destinationNode == NULL)
+    if (MapData.destinationNode == nullptr)
     {
-        cout << "ERROR! destinationNode is NULL!\n";
+        cout << "ERROR! destinationNode is nullptr!\n";
     }
     else
     {

@@ -134,7 +134,7 @@ void Scene_Navigation::EarlyUpdate(void)
 
 void Scene_Navigation::Update(void)
 {
-	if (MapData.isTravelling)
+	if (MapData.isTravelling && MapData.destinationNode != nullptr)
 	{
 		playerLocScale -= playerLocScaleSpeed * 10 * (playerLocMaxScale / playerLocScale) * DeltaTime;
 		if (playerLocScale < 0.25f)
