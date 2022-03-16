@@ -104,6 +104,7 @@ void _mapData::GenerateMapData(void)
 
 void _mapData::GenerateMapObject(void)
 {
+    cout << "navigation objs created" << endl;
     for (int i = 0; i < nodeList.size(); ++i)
     {
         GameObject* temp = new GameObject;
@@ -170,6 +171,7 @@ void _mapData::GenerateMapObject(void)
     tempRenderer->SetOpacity(0.4f);
     temp->transform->worldposition = penaltyPos;
     penaltyZone = temp;
+    cout << "navigation objs end" << endl;
 }
 
 void _mapData::DisplayNodeRoutes(float travelDistance)
