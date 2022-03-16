@@ -108,17 +108,6 @@ void Scene_Navigation::EarlyUpdate(void)
 		AEGfxMeshDraw(MapData.travelHistoryLines[i], AE_GFX_MDM_LINES_STRIP);
 	}
 
-	/*if (UIDialogueManager.UIOpen || UIDialogueManager.UIDecision || GameManager.battleRewardPending) {
-		playerHp->Deactivate();
-		playerCurrency->Deactivate();
-		playerArtifactsBtn->Deactivate();
-	}
-	else {
-		playerHp->Activate();
-		playerCurrency->Activate();
-		playerArtifactsBtn->Activate();
-	}*/
-
 	// Needs to be in early update to ensure a smooth transition
 	if (GameManager.battleRewardPending)
 	{
