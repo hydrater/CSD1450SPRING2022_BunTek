@@ -242,3 +242,15 @@ void _gameScriptManager::Clear(void)
 {
     gameScriptList.clear();
 }
+
+void _gameScriptManager::ForceDelete(void* pointer)
+{
+    for (int i = (int)gameScriptList.size() - 1; i >= 0; --i)
+    {
+        if (gameScriptList[i] == pointer)
+        {
+            cout << "deleted via force deletion" << endl;
+            gameScriptList.erase(gameScriptList.begin() + i);
+        }
+    }
+}
