@@ -33,27 +33,28 @@ _assetManager::_assetManager()
     LoadTexture("Artifacts/Rare.png");
     LoadTexture("Artifacts/Unique.png");
 
-    LoadTexture("Artifacts/BouncyNecklace.png");
-    LoadTexture("Artifacts/Defiance.png");
-    LoadTexture("Artifacts/Dexterity.png");
-    LoadTexture("Artifacts/DualStrike.png");
-    LoadTexture("Artifacts/FreezingTouch.png");
-    LoadTexture("Artifacts/HealingFountain.png");
-    LoadTexture("Artifacts/HealthBuddy.png");
-    LoadTexture("Artifacts/HealthThief.png");
-    LoadTexture("Artifacts/LastStand.png");
-    LoadTexture("Artifacts/LethalCut.png");
-    LoadTexture("Artifacts/LifeofChampion.png");
-    LoadTexture("Artifacts/NinjaShoes.png");
-    LoadTexture("Artifacts/Power.png");
-    LoadTexture("Artifacts/Reflection.png");
-    LoadTexture("Artifacts/Shield.png");
-    LoadTexture("Artifacts/Smacker.png");
-    LoadTexture("Artifacts/TreeofLife.png");
-    LoadTexture("Artifacts/Trickery.png");
-    LoadTexture("Artifacts/Urgency.png");
-    LoadTexture("Artifacts/VengefulTrickery.png");
-    LoadTexture("Artifacts/ZoomerGoggles.png");
+    LoadTexture("Artifacts/AntimatterDice.png");
+    LoadTexture("Artifacts/BatterUp.png");
+    LoadTexture("Artifacts/BonyCaltrops.png");
+    LoadTexture("Artifacts/BrokenClock.png");
+    LoadTexture("Artifacts/ChickenSoup.png");
+    LoadTexture("Artifacts/ChippedDagger.png");
+    LoadTexture("Artifacts/CoolSock.png");
+    LoadTexture("Artifacts/Duna.png");
+    LoadTexture("Artifacts/GalaxialGourd.png");
+    LoadTexture("Artifacts/Hilo.png");
+    LoadTexture("Artifacts/LeechMedic.png");
+    LoadTexture("Artifacts/MiniBlackHole.png");
+    LoadTexture("Artifacts/MochaLatte.png");
+    LoadTexture("Artifacts/MolecularAssembler.png");
+    LoadTexture("Artifacts/NebulousNeedle.png");
+    LoadTexture("Artifacts/OnionCandy.png");
+    LoadTexture("Artifacts/OrangeJuice.png");
+    LoadTexture("Artifacts/PhotonicBanana.png");
+    LoadTexture("Artifacts/PlasticFangs.png");
+    LoadTexture("Artifacts/StarryTrampoline.png");
+    LoadTexture("Artifacts/TitaniumFan.png");
+    LoadTexture("Artifacts/UwUGlu.png");
 }
 
 _assetManager::~_assetManager()

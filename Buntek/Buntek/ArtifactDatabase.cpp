@@ -66,17 +66,17 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 030://Heals X times more
         if (isPlayerTheCaster) {
-            GameManager.playerProfile.bonusHealing = 1 + (float)artifact.count / 10.0f;
+            GameManager.playerProfile.bonusHealing = 1 + (float)artifact.count / 5.0f;
         }
         else {
-            GameManager.enemyProfile.bonusHealing = 1 + (float)artifact.count / 10.0f;
+            GameManager.enemyProfile.bonusHealing = 1 + (float)artifact.count / 5.0f;
         }
         break;
     case 120://Increase hp by 2 per battle won, up to a max of X
         GameManager.playerProfile.basemaxhp += 2 * artifact.count;
         break;
-    case 140://Restores 10&% hp of max hp
-        GameManager.playerHp += (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) / 10 * GameManager.playerProfile.bonusHealing;
+    case 140://Restores 10% hp of max hp
+        GameManager.playerHp += (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) / 5 * GameManager.playerProfile.bonusHealing;
         break;
     case 220://Increases ball bounce gain by X
         tempBallBehavior = ball->GetComponent<BallBehavior>();
@@ -253,7 +253,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             if (!flag) {
                 Status temp;
                 temp.statusID = 01;
-                temp.statusTimer = (float)artifact.count;
+                temp.statusTimer = (float)artifact.count*0.25f; //0.25 second freeze
                 tempBallBehavior->statusEffect.push_back(temp);
             }
         }
@@ -306,49 +306,49 @@ string _artifactdatabase::GetName(unsigned long id)
     switch (id)
     {
     case 0:
-        return "Power";
+        return "Duna";
     case 1:
-        return "Tree of Life";
+        return "Orange Juice";
     case 2:
-        return "Dexterity";
+        return "Onion Candy";
     case 3:
-        return "Zoomer Goggles";
+        return "Hilo";
     case 4:
-        return "Urgency";
+        return "Broken Clock";
     case 30:
-        return "Health Buddy";
+        return "Leech Medic";
     case 120:
-        return "Life of Champion";
+        return "Cool Sock";
     case 140:
-        return "Healing Fountain";
+        return "Chipped Dagger";
     case 220:
-        return "Bouncy Necklace";
+        return "Mocha Latte";
     case 221:
-        return "Ninja Shoes";
+        return "Batter Up";
     case 300:
-        return "Smacker";
+        return "Galaxial Gourd";
     case 400:
-        return "Health Thief";
+        return "Plastic Fangs";
     case 401:
-        return "Dual Strike";
+        return "Bony Caltrops";
     case 420:
-        return "Trickery";
+        return "Molecular Assembler";
     case 500:
-        return "Lethal Cut";
+        return "Chicken Soup";
     case 520:
-        return "Vengeful Trickery";
+        return "Photonic Banana";
     case 530:
-        return "Last Resort";
+        return "Titanium Fan";
     case 540:
-        return "Last Stand";
+        return "Antimatter Dice";
     case 541:
-        return "Defiance";
+        return "Nebulous Needle";
     case 630:
-        return "Freezing Touch";
+        return "Mini Black Hole";
     case 631:
-        return "Reflection";
+        return "Starry Trampoline";
     case 640:
-        return "Power Overwhelm";
+        return "UwU Glu";
     default:
         return "Invalid ID";
     }
@@ -377,25 +377,25 @@ string _artifactdatabase::GetDescription(unsigned long id)
     switch (id)
     {
     case 0:
-        return "Increase damage";
+        return "Increases damage by 5";
     case 1:
-        return "Increase max hp";
+        return "Increases max hp by 10";
     case 2:
-        return "Increase paddle speed";
+        return "Increases paddle speed by 10%";
     case 3:
-        return "Increase ball speed";
+        return "Increases ball speed by 10%";
     case 4:
-        return "Increase ball spawn frequency";
+        return "Increases ball spawn frequency by 10%";
     case 30:
-        return "Increases healing";
+        return "Increases healing received by 20%";
     case 120:
-        return "Battle won: Increase hp by 2, up to a max of 10 per stack";
+        return "On battle won: Increases max hp by 5";
     case 140:
-        return "Battle won: Restores 10% of max hp";
+        return "On battle won: Restores 20% of max hp";
     case 220:
-        return "Wall bounce: Increases ball phase";
+        return "On wall bounce: Ball phase +1";
     case 221:
-        return "Wall bounce: Increases ball speed";
+        return "On wall bounce: Increases ball speed by 10%";
     case 300:
         return "After 2 reflects, when reflected by your paddle, increase ball speed";
     case 400:
@@ -415,7 +415,7 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 541:
         return "On death, restores 50% hp, destroy this artifact";
     case 630:
-        return "After 2 reflects, when colliding with hostile balls, freeze the collided ball";
+        return "After 2 reflects, when colliding with hostile balls, freeze the collided ball for 0.25 seconds";
     case 631:
         return "After 2 reflects, when colliding with hostile balls, occasionally reflect collided ball";
     case 640:
