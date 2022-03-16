@@ -1,4 +1,5 @@
 #include "ECSManager.h"
+#include "System.h"
 #include <iostream>
 using namespace std;
 
@@ -37,6 +38,7 @@ void _ECSManager::UpdateList(void)
 
         if (componentList[i]->remove)
         {
+            GameScriptManager.ForceDelete(componentList[i]);
             delete componentList[i];
             componentList[i] = NULL;
         }

@@ -27,7 +27,6 @@ _mapData& _mapData::Instance(void)
 
 void _mapData::GenerateMapData(void)
 {
-    cout << "[GenerateMapData START]\n";
     DeleteMapData();
 
     float StartXCoord = (float)(-AEGetWindowWidth() / 2) + xBuffer;
@@ -101,12 +100,10 @@ void _mapData::GenerateMapData(void)
     exitNode->nodeType = NodeType::Boss;
 
     SaveManager.SaveData();
-    cout << "[GenerateMapData END]\n";
 }
 
 void _mapData::GenerateMapObject(void)
 {
-    cout << "navigation objs created" << endl;
     for (int i = 0; i < nodeList.size(); ++i)
     {
         GameObject* temp = new GameObject;
@@ -173,12 +170,10 @@ void _mapData::GenerateMapObject(void)
     tempRenderer->SetOpacity(0.4f);
     temp->transform->worldposition = penaltyPos;
     penaltyZone = temp;
-    cout << "navigation objs end" << endl;
 }
 
 void _mapData::DisplayNodeRoutes(float travelDistance)
 {
-    cout << "[=================================DisplayNodeRoutes START========================================]\n";
     // Don't run if UI or shop is open
     if (UIDialogueManager.UIOpen || MapData.shopUI || MapData.isTravelling)
     {
@@ -187,24 +182,18 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
         return;
     }
 
-    cout << "[AEGfxMeshFree connectedLines]\n";
-
     for (AEGfxVertexList* ver : MapData.connectedLines)
         AEGfxMeshFree(ver);
     MapData.connectedLines.clear();
-
-    cout << "[Check if close enough]\n";
 
     MapData.SetClickable(false);
     MapData.SetHoverable(false);
     for (int k = 0; k < nodeList.size(); k++)
     {
-        cout << "[For loop: "<< k << " out of " << nodeList.size() << "]\n";
         bool closeEnough = false;
         float distBetSq = (nodeList[k]->pos - currentNode->pos).LengthSquared();
         closeEnough = distBetSq <= travelDistance * travelDistance;
 
-        cout << "[nodeObject " << k << " CloseEnough]\n";
         if (nodeList[k] != currentNode && closeEnough)
         {
             AEGfxVertexList* newLine;
@@ -214,23 +203,18 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
             newLine = AEGfxMeshEnd();
             MapData.connectedLines.push_back(newLine);
 
-            cout << "[nodeObject " << k << " Clickable and Hoverable]\n";
             nodeList[k]->nodeObject->GetComponent<Button>()->SetClickable(true);
             nodeList[k]->nodeObject->GetComponent<Button>()->SetHoverable(true);
         }
 
-        cout << "[nodeObject " << k << " Hover]\n";
         // if node is being hovered over
         if (CheckHovered(nodeList[k], GameManager.GetCursorPosition())) {
-            cout << "[CheckHovered for nodeList[" << k << "]\n";
             for (int i = 0; i < MapData.nodeList.size(); i++)
             {
-                cout << "[Second For loop: " << i << " out of " << MapData.nodeList.size() << "]\n";
                 bool closeEnough = false;
                 float distBetSq = (nodeList[i]->pos - nodeList[k]->pos).LengthSquared();
                 closeEnough = distBetSq <= travelDistance * travelDistance;
 
-                cout << "[nodeList " << i << " CloseEnough]\n";
                 if (closeEnough && nodeList[i] != currentNode && nodeList[k] != currentNode && nodeList[i] != nodeList[k])
                 {
                     AEGfxVertexList* newLine;
@@ -243,12 +227,10 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
             }
         }
     }
-    cout << "[=================================DisplayNodeRoutes END========================================]\n";
 }
 
 void _mapData::DisplayNodeHistory(void)
 {
-    cout << "[DisplayNodeHistory START]\n";
     Node* prevNode = nullptr;
     Node* currNode = nullptr;
     for (int selectedID : MapData.travelHistoryIDs)
@@ -274,28 +256,20 @@ void _mapData::DisplayNodeHistory(void)
         }
         prevNode = currNode;
     }
-    cout << "[DisplayNodeHistory END]\n";
 }
 
 bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
-    cout << "[CheckHovered START]\n";
     SpriteRenderer* sr = thisNode->nodeObject->GetComponent<SpriteRenderer>();
-    cout << "[Check IF WIDTH]\n";
     if (thisNode->pos.x - sr->GetHalfWidth() < mousePos.x && thisNode->pos.x + sr->GetHalfWidth() > mousePos.x) {
-
-        cout << "[Check IF HEIGHT]\n";
         if (thisNode->pos.y - sr->GetHalfHeight() < mousePos.y && thisNode->pos.y + sr->GetHalfHeight() > mousePos.y) {
-            cout << "[RETURN TRUE]\n";
             return true;
         }
     }
-    cout << "[RETURN FALSE]\n";
     return false;
 }
 
 void _mapData::Travel(Node* destination)
 {
-    cout << "[Travel START]\n";
 	if (destinationNode != nullptr && currentNode->nodeObject->GetComponent<SpriteRenderer>() && destinationNode->nodeObject->GetComponent<SpriteRenderer>())
 	{
 		// Enact dest node effects
@@ -363,7 +337,6 @@ void _mapData::Travel(Node* destination)
 		MapData.DisplayNodeHistory();
 	}
 	PenaltyZoneUpdate();
-    cout << "[Travel END]\n";
 }
 
 void _mapData::SetClickable(bool _canClick)
@@ -384,7 +357,6 @@ void _mapData::SetHoverable(bool _canHover)
     }
 }
 void _mapData::PenaltyZoneUpdate(void) {
-    cout << "[PenaltyZoneUpdate START]\n";
     if (penaltyZone->transform->worldposition.x < 0) {
         penaltyZone->transform->worldposition.x += penaltySpeed;
         penaltyPos = penaltyZone->transform->worldposition;
@@ -402,7 +374,6 @@ void _mapData::PenaltyZoneUpdate(void) {
             nodeList[i]->nodeObject->GetComponent<SpriteRenderer>()->SetTexture("UI/Elite.png");
         }
     }
-    cout << "[PenaltyZoneUpdate END]\n";
 }
 _mapData::Node* _mapData::GetNode(GameObject* object)
 {
@@ -416,7 +387,6 @@ _mapData::Node* _mapData::GetNode(GameObject* object)
 
 void _mapData::DeleteMapData(void)
 {
-    cout << "[DeleteMapData START]\n";
     if (nodeList.empty())
         return;
 
@@ -440,13 +410,10 @@ void _mapData::DeleteMapData(void)
     travelHistoryLines.clear();
     nodeList.clear();
     Shops.clear();
-
-    cout << "[DeleteMapData END]\n";
 }
 
 void EnactTravel(Button* button)
 {
-    cout << "[EnactTravel START]\n";
     MapData.destinationNode = MapData.GetNode(button->Owner());
     if (MapData.destinationNode == nullptr)
     {
@@ -456,5 +423,4 @@ void EnactTravel(Button* button)
     {
         MapData.isTravelling = true;
     }
-    cout << "[EnactTravel END]\n";
 }
