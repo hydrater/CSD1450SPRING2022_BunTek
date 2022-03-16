@@ -219,7 +219,7 @@ void _gameScriptManager::Update(void)
         {
             if (predeleteList[i] == gameScriptList[i])
             {
-                gameScriptList.erase(gameScriptList.begin() + i);
+                gameScriptList.erase(gameScriptList.begin() + j);
                 j += (int)gameScriptList.size();
             }
         }
