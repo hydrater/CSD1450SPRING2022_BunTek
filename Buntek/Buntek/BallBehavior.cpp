@@ -6,6 +6,7 @@
 
 BallBehavior::BallBehavior(void)
 {
+	ID = "Ball behavior";
 }
 
 BallBehavior::~BallBehavior(void)

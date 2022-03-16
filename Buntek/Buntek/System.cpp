@@ -224,6 +224,7 @@ void _gameScriptManager::Update(void)
 
     for (int i = 0; i < gameScriptList.size(); ++i)
     {
+        cout << gameScriptList[i]->ID << endl;
         if (!gameScriptList[i]->IsActive() || (gameScriptList[i]->Owner() != NULL && !gameScriptList[i]->Owner()->IsActive()))
             continue;
 
@@ -234,6 +235,7 @@ void _gameScriptManager::Update(void)
         }
 
         gameScriptList[i]->Update();
+        cout << "ended" << endl;
     }
 }
 

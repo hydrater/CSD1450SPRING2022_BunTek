@@ -271,8 +271,6 @@ bool _mapData::CheckHovered(Node* thisNode, Vector2 mousePos) {
 
 void _mapData::Travel(Node* destination)
 {
-    cout << "travel start" << endl;
-
 	if (destinationNode != nullptr && currentNode->nodeObject->GetComponent<SpriteRenderer>() && destinationNode->nodeObject->GetComponent<SpriteRenderer>())
 	{
 		// Enact dest node effects
@@ -339,10 +337,7 @@ void _mapData::Travel(Node* destination)
 
 		MapData.DisplayNodeHistory();
 	}
-    cout << "travel end" << endl;
-    cout << "Penalty start" << endl;
 	PenaltyZoneUpdate();
-    cout << "Penalty end" << endl;
 }
 
 void _mapData::SetClickable(bool _canClick)

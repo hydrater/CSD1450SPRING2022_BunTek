@@ -4,7 +4,7 @@ using namespace Math;
 
 AlphaChanger::AlphaChanger(void)
 {
-
+	ID = "alpha changer";
 }
 
 AlphaChanger::~AlphaChanger(void)
