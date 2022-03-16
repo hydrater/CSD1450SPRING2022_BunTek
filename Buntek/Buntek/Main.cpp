@@ -95,7 +95,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		GameScriptManager.Update();
 
 		// --------------------------------------------- Collision --------------------------------------------- //
-		CollisionManager2D.CollideAll();
+		//CollisionManager2D.CollideAll();
 
 		// --------------------------------------------- Render --------------------------------------------- //
 		GameManager.Update();
