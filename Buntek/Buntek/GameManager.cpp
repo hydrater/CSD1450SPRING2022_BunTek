@@ -310,5 +310,6 @@ void _gameManager::GameOver(void)
     SaveManager.DeleteSave();
     MapData.DeleteMapData();
     GameManager.playerProfile = {};
+    GameManager.level = 0;
     SceneManager.LoadScene(new Scene_MainMenu , TransitionType::FadeTransition, true);
 }
