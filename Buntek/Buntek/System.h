@@ -51,6 +51,7 @@ private:
     float transitionTransparency;
     bool deleteScene = true;
     bool ResetScene(void);
+    void SceneReset(void);
 
 public:
     static _sceneManager& Instance(void);

@@ -31,6 +31,21 @@ bool _sceneManager::ResetScene(void)
     return notStarted;
 }
 
+void _sceneManager::SceneReset(void)
+{
+    Renderer.Clear();
+    GameScriptManager.Clear();
+    ECSManager.Free();
+    cout << "Scene change" << endl;
+    GameManager.artifactListUI = NULL;
+    if (deleteScene)
+        delete scene;
+    AEGfxSetCamPosition(0, 0);
+    GameManager.pos = Vector2(0, 0);
+    scene = nextScene;
+    nextScene = 0;
+}
+
 _sceneManager& _sceneManager::Instance(void)
 {
     static _sceneManager instance;
@@ -110,15 +125,7 @@ void _sceneManager::LateUpdate(void)
         case TransitionType::None:
             if (scene != NULL && nextScene != NULL)
             {
-                cout << "Scene change" << endl;
-                Renderer.Clear();
-                GameScriptManager.Clear();
-                ECSManager.Free();
-                GameManager.artifactListUI = NULL;
-                if (deleteScene)
-                    delete scene;
-                scene = nextScene;
-                nextScene = 0;
+                SceneReset();
             }
             ResetScene();
             transitioning = false;
@@ -157,16 +164,7 @@ void _sceneManager::FadeTransition(void) {
     case TransitionStage::TransitionScene: //fade scene transition
         if (scene != NULL && nextScene != NULL)
         {
-            Renderer.Clear();
-            GameScriptManager.Clear();
-            ECSManager.Free();
-            cout << "Scene change" << endl;
-            GameManager.artifactListUI = NULL;
-            if (deleteScene)
-                delete scene;
-            AEGfxSetCamPosition(0, 0);
-            scene = nextScene;
-            nextScene = 0;
+            SceneReset();
         }
         if (!ResetScene())
         { //wait for next frame
