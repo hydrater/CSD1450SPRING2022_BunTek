@@ -1,3 +1,10 @@
+/*!*****************************************************************************
+\file Scene_Battle.cpp
+\author: <to be inserted>
+\co-authors: Algene Tan Chuan Hong, Isaiah Lim Ji Rong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
+\brief: Scene Battle Screen
+*******************************************************************************/
 #include "Scene_Battle.h"
 #include "Component.h"
 #include "Entity.h"
