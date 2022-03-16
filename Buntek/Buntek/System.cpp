@@ -19,7 +19,7 @@ void Scene::LateUpdate(void)
 {
 }
 
-bool _sceneManager::ResetScene(void)
+bool _sceneManager::SceneStart(void)
 {
     if (notStarted)
     {
@@ -36,7 +36,6 @@ void _sceneManager::SceneReset(void)
     Renderer.Clear();
     GameScriptManager.Clear();
     ECSManager.Free();
-    cout << "Scene change" << endl;
     GameManager.artifactListUI = NULL;
     if (deleteScene)
         delete scene;
@@ -98,7 +97,7 @@ void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bo
     }
     else {
         scene = newScene;
-        ResetScene();
+        SceneStart();
     }
     deleteScene = deleteCurrScene;
 }
@@ -127,7 +126,7 @@ void _sceneManager::LateUpdate(void)
             {
                 SceneReset();
             }
-            ResetScene();
+            SceneStart();
             transitioning = false;
             break;
         case TransitionType::FadeTransition:
@@ -166,7 +165,7 @@ void _sceneManager::FadeTransition(void) {
         {
             SceneReset();
         }
-        if (!ResetScene())
+        if (!SceneStart())
         { //wait for next frame
             currentTransitionStage = TransitionStage::TransitionOut;
         }
@@ -216,8 +215,7 @@ void _gameScriptManager::Update(void)
 {
     for (int i = (int)gameScriptList.size() - 1; i >= 0; --i)
     {
-        cout << (unsigned long)gameScriptList[i] << endl;
-        if (gameScriptList[i]->remove || gameScriptList[i] == NULL || (unsigned long)gameScriptList[i] < 30)
+        if (gameScriptList[i]->remove || gameScriptList[i] == NULL)
         {
             gameScriptList.erase(gameScriptList.begin() + i);
         }
