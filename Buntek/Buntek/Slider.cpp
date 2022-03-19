@@ -8,6 +8,7 @@
 
 #include "Slider.h"
 #include "GameManager.h"
+#include "AudioEngine.h"
 
 Slider::Slider(void)
 {
@@ -26,43 +27,66 @@ void Slider::Update(void)
 {
 	if (GameManager.disableInteraction)
 		return;
-
+	if (AEInputCheckReleased(AEVK_LBUTTON)) {
+		triggered = false;
+	}
 	if (CheckSliderTriggered(GameManager.GetCursorPosition())) {
 		sliderCircle->transform->worldposition.x = currentAmount / maxAmount * xRange + xMin;
 		
-		sliderBar->GetComponent<SpriteRenderer>()->Size((sliderBackground->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2 - borderSize) * (currentAmount / maxAmount)
+		sliderBar->GetComponent<SpriteRenderer>()->Size((sr->GetHalfWidth() * 2 - sr->GetHalfHeight() * 2) * (currentAmount / maxAmount)
 			, sliderBar->GetComponent<SpriteRenderer>()->GetHalfHeight()*2);
 		sliderBar->transform->worldposition.x = currentAmount / maxAmount * xRange + xMin - sliderBar->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	}
-
 }
-void Slider::GenerateSlider(float maxAmt, float pixelWidth, float pixelHeight, int border) {
+
+void Slider::GenerateSlider(float curAmt, short sortingLayer, float maxAmt, float pixelWidth, float pixelHeight, int border) {
 	borderSize = border;
 	maxAmount = maxAmt;
-	currentAmount = maxAmount / 2;
+	currentAmount = curAmt;
 
-	sliderBackground = devTools.CreateSpriteGameObject("WhiteTexture.png", pixelWidth, pixelHeight, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 2), 1);
+	sliderBackground = devTools.CreateSpriteGameObject("WhiteTexture.png", pixelWidth, pixelHeight, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(sortingLayer), 1);
 	sr = sliderBackground->GetComponent<SpriteRenderer>();
+	this->Owner()->AddChild(sliderBackground);
 
-	sliderBar = devTools.CreateSpriteGameObject("WhiteTexture.png", pixelWidth - borderSize, pixelHeight - borderSize, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 1), 1);
+	xMin = sliderBackground->transform->worldposition.x - sr->GetHalfWidth() + sr->GetHalfHeight();
+	xMax = sliderBackground->transform->worldposition.x + sr->GetHalfWidth() - sr->GetHalfHeight();
+	xRange = xMax - xMin;
+
+	sliderBar = devTools.CreateSpriteGameObject("WhiteTexture.png", pixelWidth - sr->GetHalfHeight()*2, pixelHeight - borderSize, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(sortingLayer + 1), 1);
 	sliderBar->GetComponent<SpriteRenderer>()->SetColor(0, 0, 1);
+	sliderBar->GetComponent<SpriteRenderer>()->Size((sr->GetHalfWidth() * 2 - sr->GetHalfHeight() * 2) * (currentAmount / maxAmount)
+		, sliderBar->GetComponent<SpriteRenderer>()->GetHalfHeight() * 2);
+	sliderBar->transform->worldposition.x = currentAmount / maxAmount * xRange + xMin - sliderBar->GetComponent<SpriteRenderer>()->GetHalfWidth();
+	this->Owner()->AddChild(sliderBar);
 
-	sliderCircle = devTools.CreateSpriteGameObject("WhiteTexture.png", pixelWidth - borderSize, pixelHeight - borderSize, AE_GFX_BM_NONE, this->Owner()->transform->worldposition, (short)(5 - 0), 1);
-	sliderCircle->GetComponent<SpriteRenderer>()->SetColor(0, 1, 1);
+	sliderCircle = devTools.CreateSpriteGameObject("hdCircle.png", pixelHeight, pixelHeight, AE_GFX_BM_BLEND, this->Owner()->transform->worldposition, (short)(sortingLayer + 2), 1);
+	sliderCircle->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
+	sliderCircle->transform->worldposition.x = currentAmount / maxAmount * xRange + xMin;
+	this->Owner()->AddChild(sliderCircle);
 }
+
 bool Slider::CheckSliderTriggered(Vector2 mousePos) {
-	xMin = sliderBackground->transform->worldposition.x - sr->GetHalfWidth() + borderSize / 2.0f;
-	xMax = sliderBackground->transform->worldposition.x + sr->GetHalfWidth() - borderSize / 2.0f;
 
-	if (xMin < mousePos.x && xMax > mousePos.x) {
 
-		if (sliderBackground->transform->worldposition.y - sr->GetHalfHeight() + borderSize / 2.0f < mousePos.y && sliderBackground->transform->worldposition.y + sr->GetHalfHeight() - borderSize / 2.0f > mousePos.y) {
-			xRange = xMax - xMin;
-			currentAmount = (mousePos.x - xMin) / xRange * maxAmount;
-			AEClamp(currentAmount, 0, maxAmount);
-			return true;
+	if ((xMin <= mousePos.x && xMax >= mousePos.x) && !triggered) {
+
+		if (sliderBackground->transform->worldposition.y - sr->GetHalfHeight() + borderSize / 2.0f < mousePos.y 
+			&& sliderBackground->transform->worldposition.y + sr->GetHalfHeight() - borderSize / 2.0f > mousePos.y) {
+			if (AEInputCheckTriggered(AEVK_LBUTTON)) {
+				triggered = true;
+			}
 		}
+
+	}
+	if (triggered) {
+		float tempX = mousePos.x;
+		tempX = AEClamp(tempX, xMin, xMax);
+		currentAmount = (tempX - xMin) / xRange * maxAmount;
+		currentAmount = AEClamp(currentAmount, 0, maxAmount);
+		if (SliderEffect != NULL) {
+			SliderEffect(this);
+		}
+		return true;
 	}
 	return false;
-	//add check for rotated button???
 }

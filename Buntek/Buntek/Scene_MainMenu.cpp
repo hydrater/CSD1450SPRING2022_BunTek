@@ -18,6 +18,7 @@
 #include "Scene_Options.h"
 #include "Scene_HowToPlay.h"
 #include "Scene_Credits.h"
+#include "UI_Menu.h"
 
 void BtnFunc_Start(Button* button);
 void BtnFunc_HowToPlay(Button* button);
@@ -131,7 +132,7 @@ void Scene_MainMenu::Start(void)
 	tempTextRenderer->SetFont("Ayar.ttf");
 	tempTextRenderer->SetLayer(3);
 	tempTextRenderer->SetTextColor(0, 0, 0);
-	tempTextRenderer->SetText("Alpha Survey");
+	tempTextRenderer->SetText("Options");
 	tempTextRenderer->SetXAlignment(TextRenderer::xAlignmentTypes::Mid);
 	tempTextRenderer->SetYAlignment(TextRenderer::yAlignmentTypes::Mid);
 	optionBtn->transform->SetPosition(Vector2(-670, 1000));
@@ -204,6 +205,7 @@ void Scene_MainMenu::Start(void)
 
 	// Load save data
 	//SaveManager.LoadData();
+
 }
 
 void Scene_MainMenu::Update(void)
@@ -327,6 +329,32 @@ void Scene_MainMenu::Update(void)
 		GameManager.disableInteraction = false;
 		finishedSetup = true;
 	}
+	if (GameManager.optionMenuOpen) {
+		startBtn->GetComponent<Button>()->SetHoverable(false);
+		howtoplayBtn->GetComponent<Button>()->SetHoverable(false);
+		optionBtn->GetComponent<Button>()->SetHoverable(false);
+		creditsBtn->GetComponent<Button>()->SetHoverable(false);
+		quitBtn->GetComponent<Button>()->SetHoverable(false);
+
+		startBtn->GetComponent<Button>()->SetClickable(false);
+		howtoplayBtn->GetComponent<Button>()->SetClickable(false);
+		optionBtn->GetComponent<Button>()->SetClickable(false);
+		creditsBtn->GetComponent<Button>()->SetClickable(false);
+		quitBtn->GetComponent<Button>()->SetClickable(false);
+	}
+	else {
+		startBtn->GetComponent<Button>()->SetHoverable(true);
+		howtoplayBtn->GetComponent<Button>()->SetHoverable(true);
+		optionBtn->GetComponent<Button>()->SetHoverable(true);
+		creditsBtn->GetComponent<Button>()->SetHoverable(true);
+		quitBtn->GetComponent<Button>()->SetHoverable(true);
+
+		startBtn->GetComponent<Button>()->SetClickable(true);
+		howtoplayBtn->GetComponent<Button>()->SetClickable(true);
+		optionBtn->GetComponent<Button>()->SetClickable(true);
+		creditsBtn->GetComponent<Button>()->SetClickable(true);
+		quitBtn->GetComponent<Button>()->SetClickable(true);
+	}
 }
 
 Scene_MainMenu::~Scene_MainMenu(void)
@@ -376,10 +404,11 @@ void BtnFunc_HowToPlay(Button* button)
 
 void BtnFunc_Options(Button* button)
 {
-	//SceneManager.LoadScene(new Scene_Options, TransitionType::FadeTransition, true);
-	#include <windows.h>
-	#include <shellapi.h>
-	ShellExecute(0, 0, "https://docs.google.com/forms/d/e/1FAIpQLScuD-oyTXlUahcOZD3rJlF_7knbTXFmxq-3cLLfjQDjpKagKA/viewform?usp=sf_link", 0, 0, SW_SHOW);
+	GameManager.DisplayOptionMenu();
+	////SceneManager.LoadScene(new Scene_Options, TransitionType::FadeTransition, true);
+	//#include <windows.h>
+	//#include <shellapi.h>
+	//ShellExecute(0, 0, "https://docs.google.com/forms/d/e/1FAIpQLScuD-oyTXlUahcOZD3rJlF_7knbTXFmxq-3cLLfjQDjpKagKA/viewform?usp=sf_link", 0, 0, SW_SHOW);
 }
 
 void BtnFunc_Credits(Button* button)
@@ -429,7 +458,7 @@ void BtnFuncHover_Options(Button* button)
 	{
 		AudioManager.PlayClip("ButtonHover.mp3");
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
-		menu->displayTxt->SetText("Opens the survey in your preferred browser");
+		menu->displayTxt->SetText("Options");
 		menu->optionPlay = false;
 	}
 

@@ -19,15 +19,18 @@ public:
 	void Start(void) override;
 	void Update(void) override;
 
-	void GenerateSlider(float maxAmt = 100, float pixelWidth = 500, float pixelHeight = 40, int border = 10);
+	void GenerateSlider(float curAmt, short sortingLayer, float maxAmt = 100, float pixelWidth = 500, float pixelHeight = 40, int border = 10);
 	bool CheckSliderTriggered(Vector2 mousePos);
 
 	GameObject* sliderCircle = 0, * sliderBar = 0, * sliderBackground = 0;
+
+	void(*SliderEffect)(Slider*) = NULL;
 
 	int borderSize = 10;
 	float maxAmount = 100;
 	float currentAmount = 100;
 	float xMin = 0, xMax = 0, xRange = 0;
+	bool triggered = false;
 	SpriteRenderer* sr = 0;
 
 private:

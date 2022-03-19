@@ -16,6 +16,7 @@
 #include "Scene_MainMenu.h"
 #include "Scene_Battle.h"
 #include "AudioEngine.h"
+#include "UI_Menu.h"
 
 using namespace Math;
 
@@ -327,4 +328,20 @@ void _gameManager::GameOver(void)
     GameManager.playerProfile = {};
     GameManager.level = 0;
     SceneManager.LoadScene(new Scene_MainMenu , TransitionType::FadeTransition, true);
+}
+
+void _gameManager::DisplayOptionMenu(void)
+{
+    optionMenuOpen = !optionMenuOpen;
+    if (optionMenuUI)
+    {
+        optionMenuUI->Delete();
+        
+        optionMenuUI = NULL;
+    }
+    else
+    {
+        optionMenuUI = new GameObject();
+        optionMenuUI->AddComponent<UI_OptionMenu>()->CreateOptionMenu(7);
+    }
 }

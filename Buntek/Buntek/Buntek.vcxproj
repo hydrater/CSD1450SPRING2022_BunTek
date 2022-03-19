@@ -136,6 +136,7 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UI_Hp.cpp" />
+    <ClCompile Include="UI_Menu.cpp" />
     <ClCompile Include="UI_Shop.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>
@@ -184,6 +185,7 @@
     <ClInclude Include="System.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UI_Hp.h" />
+    <ClInclude Include="UI_Menu.h" />
     <ClInclude Include="UI_Shop.h" />
     <ClInclude Include="Vector2.h" />
   </ItemGroup>

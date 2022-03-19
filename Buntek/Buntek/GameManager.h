@@ -77,6 +77,7 @@ public:
     void CameraEndShake(void);
     bool cameraLerpBack = false;
     Vector2 pos = Vector2(0, 0);
+    bool fullScreen = false;
 
     // Artifact list UI
     GameObject* artifactListUI = NULL;
@@ -106,6 +107,10 @@ public:
     float playerHp = 0 , enemyHp = 0;
     bool battleOver = false, battleRewardPending = false;
 
+    // Menu UI
+    GameObject* optionMenuUI = NULL;
+    bool optionMenuOpen = false;
+    void DisplayOptionMenu(void);
     // Game over
     void GameOver(void);
 };
