@@ -131,6 +131,12 @@ void _gameManager::Update(void)
     {
         DisplayArtifactList();
     }
+
+    // pause
+    if (!optionMenuOpen && AEInputCheckTriggered(AEVK_ESCAPE))
+    {
+        DisplayPauseMenu();
+    }
 }
 
 //void _gameManager::CameraUpdate(void)
@@ -344,4 +350,24 @@ void _gameManager::DisplayOptionMenu(void)
         optionMenuUI = new GameObject();
         optionMenuUI->AddComponent<UI_OptionMenu>()->CreateOptionMenu(7);
     }
+}
+void _gameManager::DisplayPauseMenu(void)
+{
+    pauseMenuOpen = !pauseMenuOpen;
+    if (pauseMenuUI)
+    {
+        pauseMenuUI->Delete();
+
+        pauseMenuUI = NULL;
+    }
+    else
+    {
+        pauseMenuUI = new GameObject();
+        pauseMenuUI->AddComponent<UI_PauseMenu>()->CreatePauseMenu(7);
+    }
+}
+void _gameManager::DisplayPauseOptionMenu(void) {
+    DisplayOptionMenu();
+    DisplayPauseMenu();
+
 }

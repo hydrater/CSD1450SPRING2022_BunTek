@@ -31,12 +31,10 @@ public:
 
     GameObject* tempBckgrnd = 0;
     GameObject* Header = 0;
-    GameObject* musicSliderHeader = 0;
-    GameObject* musicSlider = 0;
-    GameObject* soundSliderHeader = 0;
-    GameObject* soundSlider = 0;
-    GameObject* fullScreenBtn = 0;
-    GameObject* LeaveBtn = 0;
+    GameObject* resumeBtn = 0;
+    GameObject* optionBtn = 0;
+    GameObject* surrenderBtn = 0;
+    GameObject* quitBtn = 0;
 private:
 
 };
