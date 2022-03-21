@@ -106,16 +106,6 @@ void Scene_Navigation::EarlyUpdate(void)
 	AEGfxSetPosition(0.0f, 0.0f);
 	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);
 
-	//Draw connected lines
-	for (int i = 0; i < MapData.connectedLines.size(); i++)
-	{
-		AEGfxMeshDraw(MapData.connectedLines[i], AE_GFX_MDM_LINES_STRIP);
-	}
-	for (int i = 0; i < MapData.travelHistoryLines.size(); i++)
-	{
-		AEGfxMeshDraw(MapData.travelHistoryLines[i], AE_GFX_MDM_LINES_STRIP);
-	}
-
 	// Needs to be in early update to ensure a smooth transition
 	if (GameManager.battleRewardPending)
 	{

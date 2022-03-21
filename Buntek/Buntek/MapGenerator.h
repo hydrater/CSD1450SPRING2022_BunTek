@@ -45,7 +45,9 @@ public:
     GameObject* penaltyZone = nullptr;
     float penaltySpeed = 200;
     Vector2 penaltyPos;
-    vector<AEGfxVertexList*> connectedLines;
+
+    vector<Node*> connectedLinesNodes;
+    vector<vector<GameObject*>> connectedLinesObj;
 
     Node* currentNode = nullptr;
     Node* destinationNode = nullptr;
@@ -71,7 +73,7 @@ public:
     vector<Node*> nodeList;
     int historyIDSize = 0;
     vector<int> travelHistoryIDs;
-    vector<AEGfxVertexList*> travelHistoryLines;
+    vector<GameObject*> travelHistoryLinesObj;
 
     // Shop Artifacts
     struct ShopArtifacts {

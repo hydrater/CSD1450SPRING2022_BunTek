@@ -48,4 +48,7 @@ public:
 
     //Artifact Price Tag
     GameObject* CreatePriceTagGameObject(int price, short blendMode, Vector2 pos, short layer);
+
+    //Line
+    GameObject* CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R, float G, float B, float thickness, short layer, float opacity);
 };

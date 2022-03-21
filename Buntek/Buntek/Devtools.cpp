@@ -146,3 +146,17 @@ GameObject* _devTools::CreatePriceTagGameObject(int price, short blendMode, Vect
     PriceTag->AddChild(PriceIcon);
     return PriceTag;
 }
+
+GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R, float G, float B, float thickness, short layer, float opacity) {
+    // Get Angle
+    float angle = atan2(pos1.y - pos2.y, pos1.x - pos2.x) * 180.f / PI;
+    // Get Length
+    float length = sqrt(pow(pos1.x - pos2.x, 2) + pow(pos1.y - pos2.y, 2));
+    // Get Midpoint Value
+    Vector2 midpos = Vector2(pos2.x + (pos1.x - pos2.x)/2.f, pos2.y + (pos1.y - pos2.y) / 2.f);
+    // "Draw" Line
+    GameObject* lineObj = CreateSpriteGameObject("WhiteTexture.png", length, thickness, AE_GFX_BM_BLEND, midpos, layer, opacity);
+    lineObj->transform->SetRotation(-angle);
+    lineObj->GetComponent<SpriteRenderer>()->SetColor(R, G, B);
+    return lineObj;
+}

@@ -178,6 +178,31 @@ void _mapData::GenerateMapObject(void)
     tempRenderer->SetOpacity(0.4f);
     temp->transform->worldposition = penaltyPos;
     penaltyZone = temp;
+
+    for (vector<GameObject*> vecObj : MapData.connectedLinesObj)
+        vecObj.clear();
+    MapData.connectedLinesObj.clear();
+    MapData.connectedLinesNodes.clear();
+
+    for (int i = 0; i < MapData.nodeList.size(); i++)
+    {
+        vector<GameObject*> linkedLinesObj;
+        for (int k = 0; k < nodeList.size(); k++)
+        {
+            bool closeEnough = false;
+            float distBetSq = (nodeList[k]->pos - nodeList[i]->pos).LengthSquared();
+            closeEnough = distBetSq <= MapData.playerTravelDistance * MapData.playerTravelDistance;
+
+            if (nodeList[k] != nodeList[i] && closeEnough)
+            {
+                GameObject* newLine = devTools.CreateLineGameObject(nodeList[i]->pos, nodeList[k]->pos, 1.f, 1.f, 1.f, 5, -3, 0.8f);
+                linkedLinesObj.push_back(newLine);
+                connectedLinesNodes.push_back(nodeList[i]);
+                connectedLinesObj.push_back(linkedLinesObj);
+                newLine->Deactivate();
+            }
+        }
+    }
 }
 
 void _mapData::DisplayNodeRoutes(float travelDistance)
@@ -190,9 +215,9 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
         return;
     }
 
-    for (AEGfxVertexList* ver : MapData.connectedLines)
-        AEGfxMeshFree(ver);
-    MapData.connectedLines.clear();
+    for (vector<GameObject*> selVector : connectedLinesObj)
+        for (GameObject* lines : selVector)
+            lines->Deactivate();
 
     MapData.SetClickable(false);
     MapData.SetHoverable(false);
@@ -202,14 +227,15 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
         float distBetSq = (nodeList[k]->pos - currentNode->pos).LengthSquared();
         closeEnough = distBetSq <= travelDistance * travelDistance;
 
-        if (nodeList[k] != currentNode && closeEnough)
+        if (nodeList[k] != currentNode && closeEnough && currentNode != nullptr)
         {
-            AEGfxVertexList* newLine;
-            AEGfxMeshStart();
-            AEGfxVertexAdd((*currentNode).pos.x, (*currentNode).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-            AEGfxVertexAdd((*nodeList[k]).pos.x, (*nodeList[k]).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-            newLine = AEGfxMeshEnd();
-            MapData.connectedLines.push_back(newLine);
+            int selID{ 0 };
+            for (int i{ 0 }; i < connectedLinesNodes.size(); ++i)
+                if (connectedLinesNodes[i] == currentNode)
+                    selID = i;
+
+            for (GameObject* lines : connectedLinesObj[selID])
+                lines->Activate();
 
             nodeList[k]->nodeObject->GetComponent<Button>()->SetClickable(true);
             nodeList[k]->nodeObject->GetComponent<Button>()->SetHoverable(true);
@@ -217,28 +243,21 @@ void _mapData::DisplayNodeRoutes(float travelDistance)
 
         // if node is being hovered over
         if (CheckHovered(nodeList[k], GameManager.GetCursorPosition())) {
-            for (int i = 0; i < MapData.nodeList.size(); i++)
-            {
-                bool closeEnough = false;
-                float distBetSq = (nodeList[i]->pos - nodeList[k]->pos).LengthSquared();
-                closeEnough = distBetSq <= travelDistance * travelDistance;
+            int selID{ 0 };
+            for (int i{ 0 }; i < connectedLinesNodes.size(); ++i)
+                if (connectedLinesNodes[i] == nodeList[k])
+                    selID = i;
 
-                if (closeEnough && nodeList[i] != currentNode && nodeList[k] != currentNode && nodeList[i] != nodeList[k])
-                {
-                    AEGfxVertexList* newLine;
-                    AEGfxMeshStart();
-                    AEGfxVertexAdd((*nodeList[k]).pos.x, (*nodeList[k]).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-                    AEGfxVertexAdd((*nodeList[i]).pos.x, (*nodeList[i]).pos.y, 0xFFFFFFFF, 0.0f, 0.0f);
-                    newLine = AEGfxMeshEnd();
-                    MapData.connectedLines.push_back(newLine);
-                }
-            }
+            for (GameObject* lines : connectedLinesObj[selID])
+                lines->Activate();
         }
     }
 }
 
 void _mapData::DisplayNodeHistory(void)
 {
+    travelHistoryLinesObj.clear();
+
     Node* prevNode = nullptr;
     Node* currNode = nullptr;
     for (int selectedID : MapData.travelHistoryIDs)
@@ -255,12 +274,14 @@ void _mapData::DisplayNodeHistory(void)
         // Draw Line
         if (prevNode != nullptr && currNode != nullptr && prevNode != currNode)
         {
-            AEGfxVertexList* newLine;
+            /*AEGfxVertexList* newLine;
             AEGfxMeshStart();
             AEGfxVertexAdd(prevNode->pos.x, prevNode->pos.y, 0xFF3000FF, 0.0f, 0.0f);
             AEGfxVertexAdd(currNode->pos.x, currNode->pos.y, 0xFF3000FF, 0.0f, 0.0f);
             newLine = AEGfxMeshEnd();
-            MapData.travelHistoryLines.push_back(newLine);
+            MapData.travelHistoryLines.push_back(newLine);*/
+            GameObject* newLine = devTools.CreateLineGameObject(prevNode->pos, currNode->pos, 0.f, 0.f, 0.8f, 2.5f, -4, 1.f);
+            travelHistoryLinesObj.push_back(newLine);
         }
         prevNode = currNode;
     }
@@ -401,21 +422,13 @@ void _mapData::DeleteMapData(void)
     for (int i = 0; i < nodeList.size(); ++i)
         delete nodeList[i];
 
-    for (AEGfxVertexList* ver : MapData.connectedLines)
-        AEGfxMeshFree(ver);
-
-    for (AEGfxVertexList* ver : MapData.travelHistoryLines)
-        AEGfxMeshFree(ver);
-
     if (penaltyZone != nullptr)
     {
         penaltyZone->Delete();
         penaltyZone = nullptr;
     }
 
-    connectedLines.clear();
     travelHistoryIDs.clear();
-    travelHistoryLines.clear();
     nodeList.clear();
     Shops.clear();
 }
