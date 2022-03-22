@@ -74,15 +74,15 @@ bool Button::CheckTriggered(Vector2 mousePos) {
 
 void DefaultHoverEffect(Button* button) {
 	if (button->hoverplay) {
-		AudioManager.LoadSound("ButtonHover.mp3");
-		AudioManager.PlayClip("ButtonHover.mp3");
+		AudioManager.LoadSound("ButtonHover.wav");
+		AudioManager.PlayClip("ButtonHover.wav");
 		button->hoverplay = false;
 	}
 
 }
 void DefaultNotHoverEffect(Button* button) {
 	if (!button->hoverplay) {
-		AudioManager.UnloadSound("ButtonHover.mp3");
+		AudioManager.UnloadSound("ButtonHover.wav");
 		button->hoverplay = true;
 	}
 }
