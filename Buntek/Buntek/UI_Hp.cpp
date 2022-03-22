@@ -108,7 +108,7 @@ void UI_Hp::UpdateHpBar(float remainderHp) { // remainder hp is the amount of re
 	SpriteRenderer* hpForegroundRenderer = hpForeground->GetComponent<SpriteRenderer>();
 	int foregroundSize = (int)((hpBackground->GetComponent<SpriteRenderer>()->GetHalfWidth() * 2) - borderSize);
 	hpForegroundRenderer->Size(foregroundSize * (remainderHp / (maxHealth / maxHpBarNum)), hpForegroundRenderer->GetHalfHeight() * 2);
-
+	hpForeground->transform->SetPosition(Vector2(hpBackground2->transform->worldposition.x - hpBackground2->GetComponent<SpriteRenderer>()->GetHalfWidth() + hpForegroundRenderer->GetHalfWidth(), hpBackground2->transform->worldposition.y));
 	if (hpBarNum < 2) {
 		hpBarCount->GetComponent<TextRenderer>()->SetText(std::to_string((int)health));
 	}
