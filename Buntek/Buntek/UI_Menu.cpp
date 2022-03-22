@@ -30,18 +30,18 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     GameObject* OptionMenu = this->Owner();
 
     // Background
-    tempBckgrnd = devTools.CreateSpriteGameObject("Background.jpg", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.f);
-    tempBckgrnd->GetComponent<SpriteRenderer>()->SetOpacity(0.4f);
+    tempBckgrnd = devTools.CreateSpriteGameObject("WhiteTexture.png", (float)AEGetWindowWidth() / 3, (float)AEGetWindowHeight() / 1.5f, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer), 0.8f);
+    tempBckgrnd->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
     OptionMenu->AddChild(tempBckgrnd);
 
-    Header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1));
-    TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(Header, "Gabriola.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 48.f, (short)(sortingLayer)+2);
-    tempHeadertxtRenderer->SetTextColor(0, 0, 0);
-    OptionMenu->AddChild(Header);
+    header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1));
+    header->GetComponent<SpriteRenderer>()->SetOpacity(0);
+    TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(header, "Ayar.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 48.f, (short)(sortingLayer)+2);
+    tempHeadertxtRenderer->SetTextColor(1, 1, 1);
+    OptionMenu->AddChild(header);
 
-    musicSliderHeader = devTools.CreateSpriteGameObject("WhiteTexture.png", 100, 40, AE_GFX_BM_BLEND, Vector2(0.f, 250.f), (short)(sortingLayer + 1));
-    TextRenderer* tempmusicSliderHeaderRenderer = devTools.AddTextToSpriteGameObject(musicSliderHeader, "Gabriola.ttf", "Music", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
-    tempmusicSliderHeaderRenderer->SetTextColor(0, 0, 0);
+    musicSliderHeader = devTools.CreateSpriteGameObject("WhiteTexture.png", 100, 60, AE_GFX_BM_BLEND, Vector2(0.f, 250.f), (short)(sortingLayer + 1), 0);
+    TextRenderer* tempmusicSliderHeaderRenderer = devTools.AddTextToSpriteGameObject(musicSliderHeader, "Ayar.ttf", "Music", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 28.f, (short)(sortingLayer)+2);
     OptionMenu->AddChild(musicSliderHeader);
 
     musicSlider = new GameObject();
@@ -50,9 +50,8 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     musicSlider->GetComponent<Slider>()->SliderEffect = &MusicSlider;
     OptionMenu->AddChild(musicSlider);
 
-    soundSliderHeader = devTools.CreateSpriteGameObject("WhiteTexture.png", 100, 40, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer + 1));
-    TextRenderer* tempsoundSliderHeadertxtRenderer = devTools.AddTextToSpriteGameObject(soundSliderHeader, "Gabriola.ttf", "Sound", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
-    tempsoundSliderHeadertxtRenderer->SetTextColor(0, 0, 0);
+    soundSliderHeader = devTools.CreateSpriteGameObject("WhiteTexture.png", 100, 60, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer + 1), 0);
+    TextRenderer* tempsoundSliderHeadertxtRenderer = devTools.AddTextToSpriteGameObject(soundSliderHeader, "Ayar.ttf", "Sound", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 28, (short)(sortingLayer)+2);
     OptionMenu->AddChild(soundSliderHeader);
 
     soundSlider = new GameObject();
@@ -61,8 +60,9 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     soundSlider->GetComponent<Slider>()->SliderEffect = &SoundSlider;
     OptionMenu->AddChild(soundSlider);
 
-    fullScreenBtn = devTools.CreateSpriteGameObject("UI/Button.png", 500, 40, AE_GFX_BM_BLEND, Vector2(0.f, -50.f), (short)(sortingLayer + 1));
-    TextRenderer* tempfullScreentxtRenderer = devTools.AddTextToSpriteGameObject(fullScreenBtn, "Gabriola.ttf", "Fullscreen", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    fullScreenBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -50.f), (short)(sortingLayer + 1));
+    TextRenderer* tempfullScreentxtRenderer = devTools.AddTextToSpriteGameObject(fullScreenBtn, "Ayar.ttf", "Fullscreen", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    tempfullScreentxtRenderer->SetTextColor(0, 0, 0);
     Button* tempfullScreenBtn = fullScreenBtn->AddComponent<Button>();
     tempfullScreenBtn->sr = fullScreenBtn->GetComponent<SpriteRenderer>();
     tempfullScreenBtn->tr = tempfullScreentxtRenderer;
@@ -70,8 +70,9 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     tempfullScreenBtn->ButtonEffect = &FullScreen;
     OptionMenu->AddChild(fullScreenBtn);
 
-    LeaveBtn = devTools.CreateSpriteGameObject("UI/Button.png", 500, 40, AE_GFX_BM_BLEND, Vector2(0.f, -150.f), (short)(sortingLayer + 1));
-    TextRenderer* tempLeavetxtRenderer = devTools.AddTextToSpriteGameObject(LeaveBtn, "Gabriola.ttf", "Leave", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    LeaveBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -150.f), (short)(sortingLayer + 1));
+    TextRenderer* tempLeavetxtRenderer = devTools.AddTextToSpriteGameObject(LeaveBtn, "Ayar.ttf", "Back", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    tempLeavetxtRenderer->SetTextColor(0, 0, 0);
     Button* tempLeaveBtn = LeaveBtn->AddComponent<Button>();
     tempLeaveBtn->sr = LeaveBtn->GetComponent<SpriteRenderer>();
     tempLeaveBtn->tr = tempLeavetxtRenderer;

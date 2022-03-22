@@ -60,7 +60,6 @@ void Slider::GenerateSlider(float curAmt, short sortingLayer, float maxAmt, floa
 	this->Owner()->AddChild(sliderBar);
 
 	sliderCircle = devTools.CreateSpriteGameObject("hdCircle.png", pixelHeight, pixelHeight, AE_GFX_BM_BLEND, this->Owner()->transform->worldposition, (short)(sortingLayer + 2), 1);
-	sliderCircle->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
 	sliderCircle->transform->worldposition.x = currentAmount / maxAmount * xRange + xMin;
 	this->Owner()->AddChild(sliderCircle);
 }

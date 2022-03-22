@@ -11,7 +11,7 @@ public:
 	void CreateOptionMenu(short sortingLayer);
 
 	GameObject* tempBckgrnd =0;
-    GameObject* Header = 0;
+    GameObject* header = 0;
     GameObject* musicSliderHeader = 0;
     GameObject* musicSlider = 0;
     GameObject* soundSliderHeader = 0;
