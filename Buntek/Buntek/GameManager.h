@@ -111,12 +111,11 @@ public:
     GameObject* optionMenuUI = NULL;
     bool optionMenuOpen = false;
     void DisplayOptionMenu(void);
-
     GameObject* pauseMenuUI = NULL;
     bool pauseMenuOpen = false;
     void DisplayPauseMenu(void);
-
     void DisplayPauseOptionMenu(void);
+
     // Game over
     void GameOver(void);
 };

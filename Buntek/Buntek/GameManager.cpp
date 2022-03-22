@@ -307,8 +307,17 @@ void _gameManager::HealthCheck(bool isPlayer) {
             }
             GameManager.playerProfile.hp = GameManager.playerHp;
             ArtifactDatabase.ApplyArtifactBehavior(behaviorList_BattleWon, true);
+            if (currentEnemy == 1)
+            {
+                playerProfile.stardust += 5;
+            }
+            if (currentEnemy == 2)
+            {
+                playerProfile.stardust += 10;
+            }
             if (currentEnemy == 3)
             {
+                playerProfile.stardust += 20;
                 ++level;
                 MapData.GenerateMapData();
             }
