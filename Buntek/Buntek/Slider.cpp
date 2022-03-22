@@ -67,8 +67,8 @@ void Slider::GenerateSlider(float curAmt, short sortingLayer, float maxAmt, floa
 bool Slider::CheckSliderTriggered(Vector2 mousePos) {
 	if ((xMin <= mousePos.x && xMax >= mousePos.x) && !triggered) {
 
-		if (sliderBackground->transform->worldposition.y - sr->GetHalfHeight() + borderSize / 2.0f < mousePos.y 
-			&& sliderBackground->transform->worldposition.y + sr->GetHalfHeight() - borderSize / 2.0f > mousePos.y) {
+		if (sliderCircle->transform->worldposition.y - sliderCircle->GetComponent<SpriteRenderer>()->GetHalfHeight() < mousePos.y
+			&& sliderCircle->transform->worldposition.y + sliderCircle->GetComponent<SpriteRenderer>()->GetHalfHeight() > mousePos.y) {
 			if (AEInputCheckTriggered(AEVK_LBUTTON)) {
 				triggered = true;
 			}

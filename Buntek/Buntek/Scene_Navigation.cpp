@@ -66,8 +66,8 @@ void Scene_Navigation::Start(void)
 		3960, 1080, "NebulaCloudBig.png",
 		Vector2(-3960, 0), -2, (short)AE_GFX_BM_ADD);
 
-	currentArea = devTools.CreateSpriteGameObject("hdCircle.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -3, 0.5f);
-	currentArea->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0.1f);
+	currentArea = devTools.CreateSpriteGameObject("hdCircle.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -5, 0.5f);
+	currentArea->GetComponent<SpriteRenderer>()->SetColor(0.2f, 0, 0.2f);
 
 	playerHp = new GameObject();
 	playerHp->transform->SetPosition(Vector2(-660.0f, (-AEGetWindowHeight() / 2.25f)));
@@ -111,9 +111,10 @@ void Scene_Navigation::EarlyUpdate(void)
 	{
 		GameManager.battleRewardPending = false;
 		Artifact rew1, rew2, rew3;
-		rew1.ID = ArtifactDatabase.DrawArtifact();
-		rew2.ID = ArtifactDatabase.DrawArtifact();
-		rew3.ID = ArtifactDatabase.DrawArtifact();
+		vector<unsigned long> drawList = ArtifactDatabase.DrawThreeArtifacts();
+		rew1.ID = drawList[0];
+		rew2.ID = drawList[1];
+		rew3.ID = drawList[2];
 		vector<Artifact> reward_Artifact{ rew1, rew2, rew3 };
 		UIDialogueManager.CreateRewardSelPreset(reward_Artifact, (short)10, true);
 	}

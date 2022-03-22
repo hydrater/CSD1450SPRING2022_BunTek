@@ -17,6 +17,7 @@
 #include "Scene_Battle.h"
 #include "AudioEngine.h"
 #include "UI_Menu.h"
+#include "Scene_Splash.h"
 
 using namespace Math;
 
@@ -133,7 +134,9 @@ void _gameManager::Update(void)
     }
 
     // pause
-    if (!optionMenuOpen && AEInputCheckTriggered(AEVK_ESCAPE))
+    if (!SceneManager.transitioning && !optionMenuOpen && AEInputCheckTriggered(AEVK_ESCAPE)
+        && !UIDialogueManager.UIDecision && !UIDialogueManager.UIOpen
+        && typeid(*SceneManager.GetScene()) != typeid(Scene_MainMenu) && typeid(*SceneManager.GetScene()) != typeid(Scene_Splash))
     {
         DisplayPauseMenu();
     }
