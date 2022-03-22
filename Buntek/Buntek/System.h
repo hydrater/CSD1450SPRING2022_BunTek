@@ -48,7 +48,7 @@ private:
     _sceneManager(void);
     ~_sceneManager(void);
     Scene* scene, *nextScene;
-    bool notStarted, notAwake, transitioning;
+    bool notStarted, notAwake;
     float transitionTimer = 0, loadingTimer = 0;
     const float transitionStageDuration = 0.5f;
     const float loadingTimerDuration = 1.0f;
@@ -68,6 +68,7 @@ public:
     void Update(void);
     void LateUpdate(void);
     void FadeTransition(void);
+    bool transitioning;
 };
 
 class _gameScriptManager
