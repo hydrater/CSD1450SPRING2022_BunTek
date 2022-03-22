@@ -33,15 +33,14 @@ _debuggingTools& _debuggingTools::Instance(void)
 
 void _debuggingTools::CheatsUpdate(void)
 {
-	if (AEInputCheckTriggered(AEVK_F1))
-	{
-		AEToogleFullScreen(fullScreen);
-		fullScreen = !fullScreen;
-	}
-
 	#if NDEBUG
 	return;
 	#endif
+	if (AEInputCheckTriggered(AEVK_F1))
+	{
+		AEToogleFullScreen(GameManager.fullScreen);
+		GameManager.fullScreen = !GameManager.fullScreen;
+	}
 
 	if (AEInputCheckTriggered(AEVK_1))
 	{

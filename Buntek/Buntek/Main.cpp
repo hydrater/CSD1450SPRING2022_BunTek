@@ -64,8 +64,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		#include "wtypes.h"
 		RECT desktop;
 		GetWindowRect(GetDesktopWindow(), &desktop);
-		cout << "Screen width is: " << desktop.right << endl;
-		cout << "Screen height is: " << desktop.bottom << endl;
+		if (desktop.right < 1900 || desktop.bottom < 1050)
+		{
+			cout << "Small screen detected, automatically applying full screen...";
+			AEToogleFullScreen(GameManager.fullScreen);
+			GameManager.fullScreen = !GameManager.fullScreen;
+		}
 	}
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
@@ -79,24 +83,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 		// Debugging tools
 		Debugger.CheatsUpdate();
-
-		// Place holder code
-		if (AEInputCheckTriggered(AEVK_UP))
-		{
-			AudioManager.SetAudioVolume(*(AudioManager.GetAudioVolume()) + 0.1f);
-		}
-		if (AEInputCheckTriggered(AEVK_DOWN))
-		{
-			AudioManager.SetAudioVolume(*(AudioManager.GetAudioVolume()) - 0.1f);
-		}
-		if (AEInputCheckTriggered(AEVK_LEFT))
-		{
-			AudioManager.SetMusicVolume(*(AudioManager.GetMusicVolume()) - 0.1f);
-		}
-		if (AEInputCheckTriggered(AEVK_RIGHT))
-		{
-			AudioManager.SetMusicVolume(*(AudioManager.GetMusicVolume()) + 0.1f);
-		}
 
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();
