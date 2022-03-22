@@ -482,3 +482,37 @@ unsigned long _artifactdatabase::DrawLegendary(void)
     int RNG = RandIntMinMax(0, (int)legendary.size() - 1);
     return legendary[RNG];
 }
+
+vector<unsigned long> _artifactdatabase::DrawThreeArtifacts(void)
+{
+    vector<unsigned long> result;
+    vector<unsigned long> _common = common;
+    vector<unsigned long> _uncommon = uncommon;
+    vector<unsigned long> _rare = rare;
+    
+    for (int i = 0; i < 3; ++i)
+    {
+        int RNG = RandIntMinMax(0, 100);
+
+        if (RNG < commonRate)
+        {
+            RNG = RandIntMinMax(0, (int)_common.size() - 1);
+            result.push_back(_common[RNG]);
+            _common.erase(_common.begin() + RNG);
+        }
+        else if (RNG < uncommonRate)
+        {
+            RNG = RandIntMinMax(0, (int)_uncommon.size() - 1);
+            result.push_back(_uncommon[RNG]);
+            _uncommon.erase(_uncommon.begin() + RNG);
+        }
+        else
+        {
+            RNG = RandIntMinMax(0, (int)_rare.size() - 1);
+            result.push_back(_rare[RNG]);
+            _rare.erase(_rare.begin() + RNG);
+        }
+    }
+
+    return result;
+}

@@ -111,9 +111,12 @@ void Scene_Navigation::EarlyUpdate(void)
 	{
 		GameManager.battleRewardPending = false;
 		Artifact rew1, rew2, rew3;
-		rew1.ID = ArtifactDatabase.DrawArtifact();
-		rew2.ID = ArtifactDatabase.DrawArtifact();
-		rew3.ID = ArtifactDatabase.DrawArtifact();
+
+		vector<unsigned long> drawList = ArtifactDatabase.DrawThreeArtifacts();
+
+		rew1.ID = drawList[0];
+		rew2.ID = drawList[1];
+		rew3.ID = drawList[2];
 		vector<Artifact> reward_Artifact{ rew1, rew2, rew3 };
 		UIDialogueManager.CreateRewardSelPreset(reward_Artifact, (short)10, true);
 	}
