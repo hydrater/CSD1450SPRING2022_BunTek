@@ -67,8 +67,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		if (desktop.right < 1900 || desktop.bottom < 1050)
 		{
 			cout << "Small screen detected, automatically applying full screen...";
-			AEToogleFullScreen(GameManager.fullScreen);
 			GameManager.fullScreen = !GameManager.fullScreen;
+			AEToogleFullScreen(GameManager.fullScreen);
 		}
 	}
 	// --------------------------------------------- Game Loop --------------------------------------------- //
