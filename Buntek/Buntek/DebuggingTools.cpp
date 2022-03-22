@@ -38,8 +38,8 @@ void _debuggingTools::CheatsUpdate(void)
 	#endif
 	if (AEInputCheckTriggered(AEVK_F1))
 	{
-		AEToogleFullScreen(GameManager.fullScreen);
-		GameManager.fullScreen = !GameManager.fullScreen;
+		AEToogleFullScreen(GameManager.isFullScreen);
+		GameManager.isFullScreen = !GameManager.isFullScreen;
 	}
 
 	if (AEInputCheckTriggered(AEVK_1))

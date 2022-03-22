@@ -60,15 +60,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Renderer;
 	SaveManager.LoadData();
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
+
+	#if defined _DEBUG
+	GameManager.isFullScreen = !GameManager.isFullScreen;
+	AEToogleFullScreen(GameManager.isFullScreen);
+	#endif
+
+	// Check if screen res is ultra wide for alpha testing
 	{
-		#include "wtypes.h"
+	#include "wtypes.h"
 		RECT desktop;
 		GetWindowRect(GetDesktopWindow(), &desktop);
-		if (desktop.right < 1900 || desktop.bottom < 1050)
+		if (desktop.right > 2500)
 		{
-			cout << "Small screen detected, automatically applying full screen...";
-			GameManager.fullScreen = !GameManager.fullScreen;
-			AEToogleFullScreen(GameManager.fullScreen);
+			cout << "Ultra wide monitor detected, disabling full screen...";
+			GameManager.isFullScreen = !GameManager.isFullScreen;
+			AEToogleFullScreen(GameManager.isFullScreen);
 		}
 	}
 	// --------------------------------------------- Game Loop --------------------------------------------- //

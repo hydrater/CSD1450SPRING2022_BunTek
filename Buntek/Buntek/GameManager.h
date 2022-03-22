@@ -77,7 +77,7 @@ public:
     void CameraEndShake(void);
     bool cameraLerpBack = false;
     Vector2 pos = Vector2(0, 0);
-    bool fullScreen = false;
+    bool isFullScreen = true;
 
     // Artifact list UI
     GameObject* artifactListUI = NULL;

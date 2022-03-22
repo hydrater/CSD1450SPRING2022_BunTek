@@ -87,8 +87,8 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
 
 }
 void FullScreen(Button* button) {
-    GameManager.fullScreen = !GameManager.fullScreen;
-    AEToogleFullScreen(GameManager.fullScreen);
+    GameManager.isFullScreen = !GameManager.isFullScreen;
+    AEToogleFullScreen(GameManager.isFullScreen);
 }
 void MusicSlider(Slider* slider) {
     AudioManager.SetMusicVolume(slider->currentAmount);
