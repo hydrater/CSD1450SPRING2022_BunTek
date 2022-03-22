@@ -12,7 +12,6 @@
 _assetManager::_assetManager()
 {
     LoadTexture("Steven.jpg");
-    LoadTexture("Background.jpg");
     LoadTexture("WhiteTexture.png");
     LoadTexture("hdCircle.png");
 

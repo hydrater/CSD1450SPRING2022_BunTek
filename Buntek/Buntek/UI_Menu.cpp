@@ -114,7 +114,7 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     GameObject* PauseMenu = this->Owner();
 
     // Background
-    tempBckgrnd = devTools.CreateSpriteGameObject("Background.jpg", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.f);
+    tempBckgrnd = devTools.CreateSpriteGameObject("More Stars 1.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.f);
     PauseMenu->AddChild(tempBckgrnd);
 
     Header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1));

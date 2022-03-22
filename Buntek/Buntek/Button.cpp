@@ -8,9 +8,15 @@
 
 #include "Button.h"
 #include "GameManager.h"
+#include "AudioEngine.h"
+
+void DefaultHoverEffect(Button*);
+void DefaultNotHoverEffect(Button*);
 
 Button::Button(void)
 {
+	HoverEffect = &DefaultHoverEffect;
+	NotHoverEffect = &DefaultNotHoverEffect;
 }
 
 Button::~Button(void)
@@ -66,3 +72,17 @@ bool Button::CheckTriggered(Vector2 mousePos) {
 	//add check for rotated button???
 }
 
+void DefaultHoverEffect(Button* button) {
+	if (button->hoverplay) {
+		AudioManager.LoadSound("ButtonHover.mp3");
+		AudioManager.PlayClip("ButtonHover.mp3");
+		button->hoverplay = false;
+	}
+
+}
+void DefaultNotHoverEffect(Button* button) {
+	if (!button->hoverplay) {
+		AudioManager.UnloadSound("ButtonHover.mp3");
+		button->hoverplay = true;
+	}
+}
