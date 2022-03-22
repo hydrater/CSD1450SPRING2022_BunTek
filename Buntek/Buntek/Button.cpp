@@ -78,8 +78,8 @@ void DefaultHoverEffect(Button* button) {
 		AudioManager.PlayClip("ButtonHover.wav");
 		button->hoverplay = false;
 	}
-
 }
+
 void DefaultNotHoverEffect(Button* button) {
 	if (!button->hoverplay) {
 		AudioManager.UnloadSound("ButtonHover.wav");

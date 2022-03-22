@@ -1,6 +1,8 @@
 
 aed
 If you're seeing this dialogue, this is a bug, report to Hyde
+/ab Hyde
+Oi why me
 /d  0
 /ap Constellation of Mittens
 Don't look down on me because I'm a cat!
@@ -27,12 +29,12 @@ Choose your reward
 /c0 Decline the absorption
 
 REST
-/d 0
-/aw A brief respite
+/d 2
+/ar Small Bonfire
 A place to rest your weary soul
 /b3 Kneel and rest [Heal 50% HP]
-/b4 Bribe the universe [Heal 100% HP] {-10 Stardust}
-/b11 Harvest stardust
+/b4 Kindle the bonfire [Heal 100% HP] {-10 Stardust}
+/b11|20 Harvest stardust
 
 Events================================================================================================================
 
@@ -107,16 +109,16 @@ T002
 /d 1
 The right path leads to strange bookshelves embedded in the granite walls of the cave. They seem to be covered in some sort of...
 !!!
-/e11 
+/e11|20
 You collect the stardust scattered over the mystical books.
 
 E002
 /d 2
 You make it to the top of some rocky mountains.
-Near the sheer drop sits the remains of a bonfire, embers glowing and the ashes still warm.
+Near the sheer drop sits a well lit bonfire, fire blazing and soul soothing.
 Take a rest?
 /b7 Rest
-/b11 Harvest for stardust
+/b11|40 Harvest for stardust
 
 E003
 /d 2
@@ -149,7 +151,7 @@ As if this event was scripted, a singular stalagtite shakes itself loose...
 It fell on you...
 /e8  
 You take some damage.
-/e11  
+/e11|20
 You harvest it for some stardust, since there's nothing else you can do with it.
 
 E005
@@ -250,7 +252,7 @@ R010
 /d 5
 The seemingly hot lava is warm to the touch, but still thick enough to impede free movement.
 Leaving the pool, you notice remnants of stardust adhering to your body as the lava cools.
-/e11
+/e11|40
 You gain some stardust.
 
 R011
