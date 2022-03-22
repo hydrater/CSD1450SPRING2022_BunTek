@@ -99,13 +99,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		UIDialogueManager.Update();
 		AudioManager.Update();
 		SceneManager.Update();
+		GameManager.Update();
 		GameScriptManager.Update();
 
 		// --------------------------------------------- Collision --------------------------------------------- //
 		//CollisionManager2D.CollideAll();
 
 		// --------------------------------------------- Render --------------------------------------------- //
-		GameManager.Update();
 		Renderer.Update();
 		SceneManager.LateUpdate();
 
