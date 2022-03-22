@@ -369,7 +369,20 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
     actorTxt->Owner()->Activate();
     actorTxt->SetText("Congratulations!");
     dialogueTxt->Owner()->Activate();
-    dialogueTxt->SetText("You won! Choose your reward");
+    string rewardStardust;
+    if (GameManager.GetEnemyType() == 1)
+    {
+        rewardStardust = "5";
+    }
+    if (GameManager.GetEnemyType() == 2)
+    {
+        rewardStardust = "10";
+    }
+    if (GameManager.GetEnemyType() == 3)
+    {
+        rewardStardust = "20";
+    }
+    dialogueTxt->SetText("You won! You earned " + rewardStardust + " stardusts!\nChoose an artifact!");
     dialogueFinalDisplayTxt = "...";
 
     // Assign artifacts [Max: 3]
