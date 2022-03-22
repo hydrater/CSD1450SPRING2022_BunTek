@@ -31,6 +31,7 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
 
     // Background
     tempBckgrnd = devTools.CreateSpriteGameObject("Background.jpg", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.f);
+    tempBckgrnd->GetComponent<SpriteRenderer>()->SetOpacity(0.4f);
     OptionMenu->AddChild(tempBckgrnd);
 
     Header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1));
@@ -139,7 +140,7 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     PauseMenu->AddChild(optionBtn);
 
     surrenderBtn = devTools.CreateSpriteGameObject("UI/Button.png", 500, 40, AE_GFX_BM_BLEND, Vector2(0.f, -50.f), (short)(sortingLayer + 1));
-    TextRenderer* tempSurrendertxtRenderer = devTools.AddTextToSpriteGameObject(surrenderBtn, "Gabriola.ttf", "Surrender", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    TextRenderer* tempSurrendertxtRenderer = devTools.AddTextToSpriteGameObject(surrenderBtn, "Gabriola.ttf", "Abandon run", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     Button* tempSurrenderBtn = surrenderBtn->AddComponent<Button>();
     tempSurrenderBtn->sr = surrenderBtn->GetComponent<SpriteRenderer>();
     tempSurrenderBtn->tr = tempSurrendertxtRenderer;

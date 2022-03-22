@@ -50,6 +50,7 @@ void _sceneManager::SceneReset(void)
     GameManager.pos = Vector2(0, 0);
     scene = nextScene;
     nextScene = 0;
+    GameManager.disableInteraction = false;
 }
 
 _sceneManager& _sceneManager::Instance(void)
@@ -95,6 +96,7 @@ _sceneManager::~_sceneManager(void)
 
 void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bool deleteCurrScene)
 {
+    GameManager.disableInteraction = true;
     if (scene != NULL) {
         nextScene = newScene;
         notStarted = true;
