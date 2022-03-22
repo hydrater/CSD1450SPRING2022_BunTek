@@ -28,7 +28,7 @@ private:
     map<string, Sound*> musicDatabase;
     bool isActive = true;
     float soundVol = .5f, musicVol = .5f;
-    const float  musicVolOffset = 0.3f;
+    const float  musicVolOffset = 0.1f;
     
 public:
     static _audioManager& Instance(void);
