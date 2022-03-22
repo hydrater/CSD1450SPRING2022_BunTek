@@ -60,9 +60,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Renderer;
 	SaveManager.LoadData();
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
-	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
-	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
-	//SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::None);
+	{
+		#include "wtypes.h"
+		RECT desktop;
+		GetWindowRect(GetDesktopWindow(), &desktop);
+		cout << "Screen width is: " << desktop.right << endl;
+		cout << "Screen height is: " << desktop.bottom << endl;
+	}
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
