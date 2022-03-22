@@ -545,7 +545,7 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
             break;
         case 3:
             tempButton->sr->SetTexture("UI/Button.png");
-            tempButtonTxtRenderer->SetText("Skip to get 10 star dust");
+            tempButtonTxtRenderer->SetText("Skip to get 10 stardusts");
             tempButtonTxtRenderer->SetTextColor(1, 1, 0);
             tempButton->sr->Size(785, 70);
             tempButton->ButtonEffect = &CF_SkipArtifactButton;

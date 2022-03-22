@@ -1,33 +1,3 @@
-
-aed
-If you're seeing this dialogue, this is a bug, report to Hyde
-/ab Hyde
-Oi why me
-/d  0
-/ap Constellation of Mittens
-Don't look down on me because I'm a cat!
-/b1 Pet the constellation
-/b2|E006 Offer some galaxy milk
-/b0 Leave
-/aa Next Trail
-sdasdsa
-/c  E
-/c  A
-/c  It's in the game
-/c  skip to win
-
-rsel
-/aa Human #22
-Does it work?
-/aw Human #85
-It does
-/aa Human #22
-Choose your reward
-/c1 0110Text would be ignored here [0110]
-/c1 0001911 Digits after the third one will be ignored (911 is ignored) [0001]
-/c1 Nonsense Text that should output default artifact [0000]
-/c0 Decline the absorption
-
 REST
 /d 2
 /ar Small Bonfire
@@ -275,3 +245,29 @@ Not implemented yet
 E0011
 /d 6
 Not implemented yet
+
+Unused==========================================
+/d  0
+/ap Constellation of Mittens
+Don't look down on me because I'm a cat!
+/b1 Pet the constellation
+/b2|E006 Offer some galaxy milk
+/b0 Leave
+/aa Next Trail
+sdasdsa
+/c  E
+/c  A
+/c  It's in the game
+/c  skip to win
+
+rsel
+/aa Human #22
+Does it work?
+/aw Human #85
+It does
+/aa Human #22
+Choose your reward
+/c1 0110Text would be ignored here [0110]
+/c1 0001911 Digits after the third one will be ignored (911 is ignored) [0001]
+/c1 Nonsense Text that should output default artifact [0000]
+/c0 Decline the absorption
