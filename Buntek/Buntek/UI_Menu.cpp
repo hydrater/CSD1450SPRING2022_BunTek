@@ -61,7 +61,7 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     OptionMenu->AddChild(soundSlider);
 
     fullScreenBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -50.f), (short)(sortingLayer + 1));
-    TextRenderer* tempfullScreentxtRenderer = devTools.AddTextToSpriteGameObject(fullScreenBtn, "Ayar.ttf", "Fullscreen", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    TextRenderer* tempfullScreentxtRenderer = devTools.AddTextToSpriteGameObject(fullScreenBtn, "Ayar.ttf", "Toggle fullscreen", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempfullScreentxtRenderer->SetTextColor(0, 0, 0);
     Button* tempfullScreenBtn = fullScreenBtn->AddComponent<Button>();
     tempfullScreenBtn->sr = fullScreenBtn->GetComponent<SpriteRenderer>();
