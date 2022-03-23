@@ -17,6 +17,8 @@
 #include "SaveManager.h"
 
 void EnactTravel(Button* button);
+void EnableEmission(Button* button);
+void DisableEmission(Button* button);
 
 _mapData::_mapData(void)
 {
@@ -75,10 +77,7 @@ void _mapData::GenerateMapData(void)
                     break;
                 }
                 else if (distSq <= maxsq) {
-                    //cout << distSq << "\tis close enough to \t" << maxsq << endl;
                     hasNoConnection = false;
-                    /* node->linkedTo.push_back(nodeList[j]);
-                     nodeList[j]->linkedTo.push_back(node);*/
                 }
             }
         }
@@ -119,11 +118,19 @@ void _mapData::GenerateMapObject(void)
         tempRenderer->Size(50, 50);
         tempRenderer->SetLayer(-1);
 
+        GameObject* particle = new GameObject();
+        ParticleSystem* newSystem = particle->AddComponent<ParticleSystem>();
+        newSystem->SetBurstingParticle(Vector2(0, 0), 1, 10, true, 360, 50, 80, 0, 360, 20, 20, "hdCircle.png", nodeList[i]->pos, -2, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+        newSystem->isEmitting = false;
+
         Button* tempButton = temp->AddComponent<Button>();
         tempButton->sr = tempRenderer;
         tempButton->tr = NULL;
         tempButton->affectedObject = temp;
         tempButton->ButtonEffect = &EnactTravel;
+        tempButton->affectedHoverObject = particle;
+        tempButton->HoverEffect = &EnableEmission;
+        tempButton->NotHoverEffect = &DisableEmission;
 
         // Create Shop Goods
         ShopArtifacts newShop;
@@ -132,19 +139,19 @@ void _mapData::GenerateMapObject(void)
         {
         case NodeType::Encounter:
             tempRenderer->SetTexture("UI/Encounter.png");
+            newSystem->SetColor(1.f, 0.64f, 0.f);
             break;
         case NodeType::Enemy:
             tempRenderer->SetTexture("UI/Enemy.png");
-            //temp->AddComponent<UI_EnemyNodeBox>();
-            //temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
+            newSystem->SetColor(0.f, 0.f, 0.6f);
             break;
         case  NodeType::Elite:
             tempRenderer->SetTexture("UI/Elite.png");
-            //temp->AddComponent<UI_EnemyNodeBox>();
-            //temp->GetComponent<UI_EnemyNodeBox>()->CreateEnemyNode(temp, 3, 10);
+            newSystem->SetColor(0.6f, 0.f, 0.f);
             break;
         case NodeType::Shop:
             tempRenderer->SetTexture("UI/Shop.png");
+            newSystem->SetColor(0.f, 0.8f, 0.f);
             newShop.ID = nodeList[i]->ID;
             for (int art{ 0 }; art < 6; ++art)
             {
@@ -155,15 +162,17 @@ void _mapData::GenerateMapObject(void)
             break;
         case NodeType::Rest:
             tempRenderer->SetTexture("UI/Rest.png");
+            newSystem->SetColor(0.8f, 0.2f, 0.f);
             break;
         case NodeType::Boss:
             tempRenderer->SetTexture("UI/Boss.png");
+            newSystem->SetColor(0.8f, 0.2f, 0.8f);
             break;
         default:
             tempRenderer->SetTexture("UI/Start.png");
             break;
         }
-        temp->transform->worldposition = Vector2(nodeList[i]->pos);
+        temp->transform->worldposition = nodeList[i]->pos;
         nodeList[i]->nodeObject = temp;
     }
 
@@ -195,7 +204,7 @@ void _mapData::GenerateMapObject(void)
 
             if (nodeList[k] != nodeList[i] && closeEnough)
             {
-                GameObject* newLine = devTools.CreateLineGameObject(nodeList[i]->pos, nodeList[k]->pos, 1.f, 1.f, 1.f, 5, -3, 0.8f);
+                GameObject* newLine = devTools.CreateLineGameObject(nodeList[i]->pos, nodeList[k]->pos, 1.f, 1.f, 1.f, 5, -3, 0.4f);
                 linkedLinesObj.push_back(newLine);
                 connectedLinesNodes.push_back(nodeList[i]);
                 connectedLinesObj.push_back(linkedLinesObj);
@@ -274,12 +283,6 @@ void _mapData::DisplayNodeHistory(void)
         // Draw Line
         if (prevNode != nullptr && currNode != nullptr && prevNode != currNode)
         {
-            /*AEGfxVertexList* newLine;
-            AEGfxMeshStart();
-            AEGfxVertexAdd(prevNode->pos.x, prevNode->pos.y, 0xFF3000FF, 0.0f, 0.0f);
-            AEGfxVertexAdd(currNode->pos.x, currNode->pos.y, 0xFF3000FF, 0.0f, 0.0f);
-            newLine = AEGfxMeshEnd();
-            MapData.travelHistoryLines.push_back(newLine);*/
             GameObject* newLine = devTools.CreateLineGameObject(prevNode->pos, currNode->pos, 0.f, 0.f, 0.8f, 2.5f, -4, 1.f);
             travelHistoryLinesObj.push_back(newLine);
         }
@@ -443,5 +446,21 @@ void EnactTravel(Button* button)
     else
     {
         MapData.isTravelling = true;
+    }
+}
+
+void EnableEmission(Button* button)
+{
+    if (button->affectedHoverObject != nullptr)
+    {
+        button->affectedHoverObject->GetComponent<ParticleSystem>()->isEmitting = true;
+    }
+}
+
+void DisableEmission(Button* button)
+{
+    if (button->affectedHoverObject != nullptr)
+    {
+        button->affectedHoverObject->GetComponent<ParticleSystem>()->isEmitting = false;
     }
 }
