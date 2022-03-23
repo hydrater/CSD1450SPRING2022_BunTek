@@ -38,6 +38,7 @@ public:
     //void Clean(void);
     void PlayClip(string audiClip);
     void PlayMusic(string musicTrack);
+    void PauseMusic(bool playMusic);
     void StopMusic(void);
     void SetAudioVolume(float volume);
     float* GetAudioVolume(void);
