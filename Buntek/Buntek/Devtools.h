@@ -40,15 +40,18 @@ public:
     //Layer option override
     TextRenderer* AddTextToSpriteGameObject(GameObject* gameObject, string fontName, string text, TextRenderer::xAlignmentTypes xAlignment, TextRenderer::yAlignmentTypes yAlignment, float fontsize, short layer);
 
-    //warp around option override
+    //Warp around option override
     TextRenderer* AddTextToSpriteGameObject(GameObject* gameObject, string fontName, string text, TextRenderer::xAlignmentTypes xAlignment, TextRenderer::yAlignmentTypes yAlignment, float fontsize, short layer, bool warparound);
 
     //Artifact UI
-    GameObject* CreateArtifactUIGameObject(unsigned long ID, Vector2 pos, short layer);
+    GameObject* CreateArtifactRewardCard(unsigned long ID, Vector2 pos, short layer);
 
     //Artifact Price Tag
     GameObject* CreatePriceTagGameObject(int price, short blendMode, Vector2 pos, short layer);
 
     //Line
     GameObject* CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R, float G, float B, float thickness, short layer, float opacity);
+
+    //Create artifact object
+    GameObject* CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, short layer);
 };

@@ -102,6 +102,17 @@ map<unsigned long, int> _gameManager::GenerateArtifactList(int maxAmtOfArtifacts
         else
             EnemyArtifactData[id] = 1;
     }
+    if (GameManager.GetEnemyType() == 3)
+    {
+        unsigned long id = ArtifactDatabase.DrawLegendary();
+        map<unsigned long, int>::iterator it;
+
+        it = EnemyArtifactData.find(id);
+        if (it != EnemyArtifactData.end())
+            it->second++;
+        else
+            EnemyArtifactData[id] = 1;
+    }
 
     return EnemyArtifactData;
 }
@@ -138,6 +149,7 @@ void _gameManager::Update(void)
         && !UIDialogueManager.UIDecision && !UIDialogueManager.UIOpen
         && typeid(*SceneManager.GetScene()) != typeid(Scene_MainMenu) && typeid(*SceneManager.GetScene()) != typeid(Scene_Splash))
     {
+        //DisplayOptionMenu();
         DisplayPauseMenu();
     }
 }
@@ -210,7 +222,7 @@ void _gameManager::DisplayArtifactList(void)
         int x = -780, y = 360;
         for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
         {
-            GameObject* newArtifactUI = devTools.CreateArtifactUIGameObject(it->first, Vector2(x, y), 10);
+            GameObject* newArtifactUI = devTools.CreateArtifactRewardCard(it->first, Vector2(x, y), 10);
             GameObject* textObj = new GameObject;
             textObj->transform->SetPosition(Vector2(x - 80, y + 50));
             devTools.AddTextToSpriteGameObject(textObj, "GothicA1.ttf", to_string(it->second), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 50.f, 12);
@@ -242,38 +254,41 @@ void _gameManager::InitBattle(float _playerHp, float _enemyHp)
 
 void _gameManager::DealDamage(float damage, bool isPlayer)
 {
-    if (isPlayer)
-    {
-        for (size_t i = 0; i < playerArtifactList.statusEffect.size(); ++i)
+    if (!battleOver) {
+        if (isPlayer)
         {
-            if (playerArtifactList.statusEffect[i].statusID == 00) {
-                if (playerArtifactList.statusEffect[i].statusTimer > 0) {
-                    damage = 0;
-                }
-                else if (playerArtifactList.statusEffect[i].statusCount > 0) {
-                    playerArtifactList.statusEffect[i].statusCount--;
-                    damage = 0;;
+            for (size_t i = 0; i < playerArtifactList.statusEffect.size(); ++i)
+            {
+                if (playerArtifactList.statusEffect[i].statusID == 00) {
+                    if (playerArtifactList.statusEffect[i].statusTimer > 0) {
+                        damage = 0;
+                    }
+                    else if (playerArtifactList.statusEffect[i].statusCount > 0) {
+                        playerArtifactList.statusEffect[i].statusCount--;
+                        damage = 0;;
+                    }
                 }
             }
+            playerHp -= damage;
         }
-        playerHp -= damage;
-    }
-    else
-    {
-        for (size_t i = 0; i < enemyArtifactList.statusEffect.size(); ++i)
+        else
         {
-            if (enemyArtifactList.statusEffect[i].statusID == 00) {
-                if (enemyArtifactList.statusEffect[i].statusTimer > 0) {
-                    damage = 0;;
-                }
-                else if (enemyArtifactList.statusEffect[i].statusCount > 0) {
-                    enemyArtifactList.statusEffect[i].statusCount--;
-                    damage = 0;;
+            for (size_t i = 0; i < enemyArtifactList.statusEffect.size(); ++i)
+            {
+                if (enemyArtifactList.statusEffect[i].statusID == 00) {
+                    if (enemyArtifactList.statusEffect[i].statusTimer > 0) {
+                        damage = 0;;
+                    }
+                    else if (enemyArtifactList.statusEffect[i].statusCount > 0) {
+                        enemyArtifactList.statusEffect[i].statusCount--;
+                        damage = 0;;
+                    }
                 }
             }
+            enemyHp -= damage;
         }
-        enemyHp -= damage;
     }
+
 }
 
 void _gameManager::HealthCheck(bool isPlayer) {
@@ -381,5 +396,4 @@ void _gameManager::DisplayPauseMenu(void)
 void _gameManager::DisplayPauseOptionMenu(void) {
     DisplayOptionMenu();
     DisplayPauseMenu();
-
 }

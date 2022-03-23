@@ -35,8 +35,7 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     tempBckgrnd->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
     OptionMenu->AddChild(tempBckgrnd);
 
-    header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1));
-    header->GetComponent<SpriteRenderer>()->SetOpacity(0);
+    header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1), 0);
     TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(header, "Ayar.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 48.f, (short)(sortingLayer)+2);
     tempHeadertxtRenderer->SetTextColor(1, 1, 1);
     OptionMenu->AddChild(header);
@@ -115,15 +114,16 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     GameObject* PauseMenu = this->Owner();
 
     // Background
-    tempBckgrnd = devTools.CreateSpriteGameObject("More Stars 1.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.f);
+    tempBckgrnd = devTools.CreateSpriteGameObject("WhiteTexture.png", (float)AEGetWindowWidth() / 3, (float)AEGetWindowHeight() / 1.5f, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer), 0.8f);
+    tempBckgrnd->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
     PauseMenu->AddChild(tempBckgrnd);
 
-    Header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1));
+    Header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1), 0);
     TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(Header, "Gabriola.ttf", "Pause", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 48.f, (short)(sortingLayer)+2);
-    tempHeadertxtRenderer->SetTextColor(0, 0, 0);
+    tempHeadertxtRenderer->SetTextColor(1, 1, 1);
     PauseMenu->AddChild(Header);
 
-    resumeBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 500, 40, AE_GFX_BM_BLEND, Vector2(0.f, 150.f), (short)(sortingLayer + 1));
+    resumeBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 200.f), (short)(sortingLayer + 1));
     TextRenderer* tempResumetxtRenderer = devTools.AddTextToSpriteGameObject(resumeBtn, "Gabriola.ttf", "Resume", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempResumetxtRenderer->SetTextColor(0, 0, 0);
     Button* tempResumeBtn = resumeBtn->AddComponent<Button>();
@@ -133,7 +133,7 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempResumeBtn->ButtonEffect = &Resume;
     PauseMenu->AddChild(resumeBtn);
 
-    optionBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 500, 40, AE_GFX_BM_BLEND, Vector2(0.f, 50.f), (short)(sortingLayer + 1));
+    optionBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer + 1));
     TextRenderer* tempOptiontxtRenderer = devTools.AddTextToSpriteGameObject(optionBtn, "Gabriola.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempOptiontxtRenderer->SetTextColor(0, 0, 0);
     Button* tempOptionBtn = optionBtn->AddComponent<Button>();
@@ -143,7 +143,7 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempOptionBtn->ButtonEffect = &PauseOptions;
     PauseMenu->AddChild(optionBtn);
 
-    surrenderBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 500, 40, AE_GFX_BM_BLEND, Vector2(0.f, -50.f), (short)(sortingLayer + 1));
+    surrenderBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer + 1));
     TextRenderer* tempSurrendertxtRenderer = devTools.AddTextToSpriteGameObject(surrenderBtn, "Gabriola.ttf", "Abandon run", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempSurrendertxtRenderer->SetTextColor(0, 0, 0);
     Button* tempSurrenderBtn = surrenderBtn->AddComponent<Button>();
@@ -154,7 +154,7 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempSurrenderBtn->NotHoverEffect = &SurrenderUnhover;
     PauseMenu->AddChild(surrenderBtn);
 
-    quitBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 500, 40, AE_GFX_BM_BLEND, Vector2(0.f, -150.f), (short)(sortingLayer + 1));
+    quitBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -100.f), (short)(sortingLayer + 1));
     TextRenderer* tempQuittxtRenderer = devTools.AddTextToSpriteGameObject(quitBtn, "Gabriola.ttf", "Quit to Main Menu", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempQuittxtRenderer->SetTextColor(0, 0, 0);
     Button* tempQuitBtn = quitBtn->AddComponent<Button>();
@@ -165,11 +165,13 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempQuitBtn->NotHoverEffect = &QuitUnhover;
     PauseMenu->AddChild(quitBtn);
 }
+
 void Resume(Button* button) {
     GameManager.DisplayPauseMenu();
 }
 void Surrender(Button* button) {
     if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+        GameManager.DisplayPauseMenu();
         GameManager.GameOver();
     }
     else {
@@ -182,6 +184,7 @@ void Surrender(Button* button) {
 }
 void Quit(Button* button) {
     if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+        GameManager.DisplayPauseMenu();
         SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
     }
     else {
@@ -193,22 +196,27 @@ void Quit(Button* button) {
     button->hoverplay = false;
 }
 void SurrenderUnhover(Button* button) {
-    if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
-        button->Owner()->GetComponent<TextRenderer>()->SetText("Abandon run");
-        button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
-    }
-    if (!button->hoverplay) {
-        AudioManager.UnloadSound("ButtonHover.wav");
-        button->hoverplay = true;
+    if (!button->Owner()->remove) {
+        if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+            button->Owner()->GetComponent<TextRenderer>()->SetText("Abandon run");
+            button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
+        }
+        if (!button->hoverplay) {
+            AudioManager.UnloadSound("ButtonHover.wav");
+            button->hoverplay = true;
+        }
     }
 }
 void QuitUnhover(Button* button) {
-    if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
-        button->Owner()->GetComponent<TextRenderer>()->SetText("Quit to Main Menu");
-        button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
+    if (!button->Owner()->remove) {
+        if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+            button->Owner()->GetComponent<TextRenderer>()->SetText("Quit to Main Menu");
+            button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
+        }
+        if (!button->hoverplay) {
+            AudioManager.UnloadSound("ButtonHover.wav");
+            button->hoverplay = true;
+        }
     }
-    if (!button->hoverplay) {
-        AudioManager.UnloadSound("ButtonHover.wav");
-        button->hoverplay = true;
-    }
+
 }
