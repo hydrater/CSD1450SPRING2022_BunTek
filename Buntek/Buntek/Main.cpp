@@ -71,7 +71,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	#include "wtypes.h"
 		RECT desktop;
 		GetWindowRect(GetDesktopWindow(), &desktop);
-		if (desktop.right > 2500)
+		if (desktop.right > 2500 || desktop.right < 1900 || desktop.bottom < 1050)
 		{
 			cout << "Ultra wide monitor detected, disabling full screen...";
 			GameManager.isFullScreen = !GameManager.isFullScreen;
