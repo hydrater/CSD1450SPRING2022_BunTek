@@ -7,6 +7,10 @@
 *******************************************************************************/
 
 #include "Devtools.h"
+#include "Button.h"
+
+void ArtifactObjectHover(Button* button);
+void ArtifactObjectUnhover(Button* button);
 
 _devTools::_devTools()
 {
@@ -193,5 +197,22 @@ GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact,
 {
     GameObject* ArtifactUI = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(artifact), 50, 50, AE_GFX_BM_BLEND, pos, layer);
 
+    GameObject* PopUpUI = CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, pos + Vector2(150, -50), layer);
+    PopUpUI->GetComponent<SpriteRenderer>()->SetColor(0.5f, 0.5f, 0.5f);
+    TextRenderer* tempmusicSliderHeaderRenderer = devTools.AddTextToSpriteGameObject(PopUpUI, "Ayar.ttf", ArtifactDatabase.GetDescription(artifact), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 1);
+    PopUpUI->Deactivate();
+    Button* ArtifactUIBtn = ArtifactUI->AddComponent<Button>();
+    ArtifactUIBtn->sr = ArtifactUI->GetComponent<SpriteRenderer>();
+    ArtifactUIBtn->affectedHoverObject = PopUpUI;
+    ArtifactUIBtn->HoverEffect = &ArtifactObjectHover;
+    ArtifactUIBtn->NotHoverEffect = &ArtifactObjectUnhover;
+    ArtifactUIBtn->SetClickable(false);
+
     return ArtifactUI;
+}
+void ArtifactObjectHover(Button* button) {
+    button->affectedHoverObject->Activate();
+}
+void ArtifactObjectUnhover(Button* button) {
+    button->affectedHoverObject->Deactivate();
 }
