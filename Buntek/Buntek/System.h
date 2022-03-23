@@ -56,7 +56,7 @@ private:
     TransitionStage currentTransitionStage;
     AEGfxVertexList* transitionMesh;
     float transitionTransparency;
-    bool deleteScene = true;
+    bool deleteScene = true, isTransitioning = false;;
     bool SceneStart(void);
     void SceneReset(void);
 

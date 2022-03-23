@@ -19,7 +19,7 @@ public:
 private:
     ~Scene_GameOver(void) override;
     GameObject* header = 0, *gameOverBackground = 0;
-    float gameOverTime = 0;
+    float gameOverTime = 3;
     //TextRenderer* displayTxt = 0;
 
 };

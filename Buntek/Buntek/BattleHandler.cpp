@@ -345,7 +345,6 @@ void BattleHandler::SpawnArtifactList(Vector2 pos, map<unsigned long, int> artif
 	float i = 0, j = 0;
 	for (const auto& kv : artifactList)
 	{
-		cout << "count is " << kv.second << endl;
 		devTools.CreateArtifactObject(pos + Vector2(xOffset * i * xDir, yOffset * j * yDir), kv.first, kv.second, xDir, 5);
 		++i;
 		if (i >= maxRow)

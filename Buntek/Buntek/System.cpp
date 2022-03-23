@@ -32,6 +32,7 @@ bool _sceneManager::SceneStart(void)
     {
         scene->Start();
         notStarted = false;
+        isTransitioning = false;
         loadingTimer = loadingTimerDuration;
         GameManager.CameraEndShake();
     }
@@ -96,6 +97,13 @@ _sceneManager::~_sceneManager(void)
 
 void _sceneManager::LoadScene(Scene* newScene, TransitionType TransitionType, bool deleteCurrScene)
 {
+    if (isTransitioning)
+    {
+        delete newScene;
+        return;
+    }
+
+    isTransitioning = true;
     GameManager.disableInteraction = true;
     if (scene != NULL) {
         nextScene = newScene;
