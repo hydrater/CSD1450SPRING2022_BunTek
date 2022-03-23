@@ -15,6 +15,7 @@
 #include "Button.h"
 #include "GameManager.h"
 #include "SaveManager.h"
+#include "AudioEngine.h"
 
 void EnactTravel(Button* button);
 void EnableEmission(Button* button);
@@ -355,6 +356,7 @@ void _mapData::Travel(Node* destination)
 		}
 		case NodeType::Rest:
 		{
+            AudioManager.PlayClip("CampfireRest.wav");
 			SetClickable(false);
 			SetHoverable(false);
 			UIDialogueManager.CreateDialoguePreset("REST", 3);

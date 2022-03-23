@@ -12,6 +12,7 @@
 #include "Devtools.h"
 #include "System.h"
 #include "UI_DialogueHandler.h"
+#include "AudioEngine.h"
 
 void RemoveShop(Button* button);
 void PurchaseArtifact(Button* button);
@@ -241,6 +242,7 @@ void PurchaseArtifact(Button* button)
             if (MapData.shopUI->GetComponent<UI_Shop>()->DisplayedShop.ID == MapData.Shops[i].ID)
             {
                 MapData.Shops[i].ArtifactsPurchased[index] = true;
+                AudioManager.PlayClip("MakePurchase.wav");
             }
         }
         MapData.shopUI->GetComponent<UI_Shop>()->currencyTxt->SetText(to_string(GameManager.playerProfile.stardust));
