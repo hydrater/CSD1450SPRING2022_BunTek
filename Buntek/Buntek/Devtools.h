@@ -53,5 +53,5 @@ public:
     GameObject* CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R, float G, float B, float thickness, short layer, float opacity);
 
     //Create artifact object
-    GameObject* CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, short layer);
+    GameObject* CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, float xDir, short layer);
 };

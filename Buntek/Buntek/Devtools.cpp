@@ -193,13 +193,13 @@ GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R,
     return lineObj;
 }
 
-GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, short layer)
+GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, float xDir, short layer)
 {
     GameObject* ArtifactUI = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(artifact), 50, 50, AE_GFX_BM_BLEND, pos, layer);
-
-    GameObject* PopUpUI = CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, pos + Vector2(150, -50), layer);
+    GameObject* PopUpUI = CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, pos + Vector2(150.f * xDir, -50.f), layer + 1);
     PopUpUI->GetComponent<SpriteRenderer>()->SetColor(0.5f, 0.5f, 0.5f);
-    TextRenderer* tempmusicSliderHeaderRenderer = devTools.AddTextToSpriteGameObject(PopUpUI, "Ayar.ttf", ArtifactDatabase.GetDescription(artifact), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 1);
+    TextRenderer* textRenderer = devTools.AddTextToSpriteGameObject(PopUpUI, "Ayar.ttf", ArtifactDatabase.GetDescription(artifact), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 2, true);
+    textRenderer->SetYBuffer(0);
     PopUpUI->Deactivate();
     Button* ArtifactUIBtn = ArtifactUI->AddComponent<Button>();
     ArtifactUIBtn->sr = ArtifactUI->GetComponent<SpriteRenderer>();
