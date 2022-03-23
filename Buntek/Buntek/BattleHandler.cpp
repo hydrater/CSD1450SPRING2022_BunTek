@@ -319,12 +319,12 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 
 	// Set ball spawn position
 	if (tempBall->playerPossess) {
-		ball->transform->SetPosition(playerpaddle->transform->worldposition);
+		ball->transform->SetPosition(Vector2(playerpaddle->transform->worldposition.x, playerpaddle->transform->worldposition.y+5));
 		tempBall->ballDamage += GameManager.playerProfile.bonusDamage;
 		tempBall->SetSpeed(tempBall->GetSpeed() * GameManager.playerProfile.bonusBallSpeed);
 	}
 	else {
-		ball->transform->SetPosition(AIpaddle->transform->worldposition);
+		ball->transform->SetPosition(Vector2(AIpaddle->transform->worldposition.x, AIpaddle->transform->worldposition.y - 5));
 		tempBall->ballDamage += GameManager.enemyProfile.bonusDamage;
 		tempBall->SetSpeed(tempBall->GetSpeed() * GameManager.enemyProfile.bonusBallSpeed);
 	}
