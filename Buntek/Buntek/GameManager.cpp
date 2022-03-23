@@ -138,6 +138,7 @@ void _gameManager::Update(void)
         && !UIDialogueManager.UIDecision && !UIDialogueManager.UIOpen
         && typeid(*SceneManager.GetScene()) != typeid(Scene_MainMenu) && typeid(*SceneManager.GetScene()) != typeid(Scene_Splash))
     {
+        //DisplayOptionMenu();
         DisplayPauseMenu();
     }
 }
@@ -242,38 +243,41 @@ void _gameManager::InitBattle(float _playerHp, float _enemyHp)
 
 void _gameManager::DealDamage(float damage, bool isPlayer)
 {
-    if (isPlayer)
-    {
-        for (size_t i = 0; i < playerArtifactList.statusEffect.size(); ++i)
+    if (!battleOver) {
+        if (isPlayer)
         {
-            if (playerArtifactList.statusEffect[i].statusID == 00) {
-                if (playerArtifactList.statusEffect[i].statusTimer > 0) {
-                    damage = 0;
-                }
-                else if (playerArtifactList.statusEffect[i].statusCount > 0) {
-                    playerArtifactList.statusEffect[i].statusCount--;
-                    damage = 0;;
+            for (size_t i = 0; i < playerArtifactList.statusEffect.size(); ++i)
+            {
+                if (playerArtifactList.statusEffect[i].statusID == 00) {
+                    if (playerArtifactList.statusEffect[i].statusTimer > 0) {
+                        damage = 0;
+                    }
+                    else if (playerArtifactList.statusEffect[i].statusCount > 0) {
+                        playerArtifactList.statusEffect[i].statusCount--;
+                        damage = 0;;
+                    }
                 }
             }
+            playerHp -= damage;
         }
-        playerHp -= damage;
-    }
-    else
-    {
-        for (size_t i = 0; i < enemyArtifactList.statusEffect.size(); ++i)
+        else
         {
-            if (enemyArtifactList.statusEffect[i].statusID == 00) {
-                if (enemyArtifactList.statusEffect[i].statusTimer > 0) {
-                    damage = 0;;
-                }
-                else if (enemyArtifactList.statusEffect[i].statusCount > 0) {
-                    enemyArtifactList.statusEffect[i].statusCount--;
-                    damage = 0;;
+            for (size_t i = 0; i < enemyArtifactList.statusEffect.size(); ++i)
+            {
+                if (enemyArtifactList.statusEffect[i].statusID == 00) {
+                    if (enemyArtifactList.statusEffect[i].statusTimer > 0) {
+                        damage = 0;;
+                    }
+                    else if (enemyArtifactList.statusEffect[i].statusCount > 0) {
+                        enemyArtifactList.statusEffect[i].statusCount--;
+                        damage = 0;;
+                    }
                 }
             }
+            enemyHp -= damage;
         }
-        enemyHp -= damage;
     }
+
 }
 
 void _gameManager::HealthCheck(bool isPlayer) {
@@ -381,5 +385,4 @@ void _gameManager::DisplayPauseMenu(void)
 void _gameManager::DisplayPauseOptionMenu(void) {
     DisplayOptionMenu();
     DisplayPauseMenu();
-
 }

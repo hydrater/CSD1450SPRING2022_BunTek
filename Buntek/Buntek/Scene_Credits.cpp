@@ -22,7 +22,6 @@ void BtnFuncUnhover_Back(Button* button);
 void Scene_Credits::Start(void)
 {
 	AudioManager.LoadSound("ButtonHover.mp3");
-	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
 
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
@@ -271,7 +270,6 @@ void Scene_Credits::Update(void)
 Scene_Credits::~Scene_Credits(void)
 {
 	AudioManager.UnloadSound("ButtonHover.mp3");
-	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 }
 

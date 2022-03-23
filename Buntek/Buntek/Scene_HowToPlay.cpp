@@ -24,7 +24,6 @@ void Scene_HowToPlay::Start(void)
 	AssetManager.LoadTexture("PlayGuide.png");
 	AudioManager.LoadSound("ButtonHover.mp3");
 
-	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
 
 	playerGuide = new GameObject();
@@ -64,7 +63,6 @@ void Scene_HowToPlay::Update(void)
 Scene_HowToPlay::~Scene_HowToPlay(void)
 {
 	AudioManager.UnloadSound("ButtonHover.mp3");
-	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 	AssetManager.UnloadTexture("PlayGuide.png");
 
