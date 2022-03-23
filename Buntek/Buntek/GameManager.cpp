@@ -217,25 +217,20 @@ void _gameManager::DisplayArtifactList(void)
     }
     else
     {
-        artifactListUI = devTools.CreateSpriteGameObject("WhiteTexture.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0), 9, 0.2f);
-        artifactListUI->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
+        artifactListUI = devTools.CreateSpriteGameObject("WhiteTexture.png", 800, 600, AE_GFX_BM_BLEND, Vector2(0, 0), 10);
+        artifactListUI->GetComponent<SpriteRenderer>()->SetColor(0.2f, 0.2f, 0.2f);
+        TextRenderer* textRenderer = devTools.AddTextToSpriteGameObject(artifactListUI, "Astral.ttf", "List of artifacts", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Top, 40.f, 11);
+        textRenderer->SetYBuffer(50);
 
-        int x = -780, y = 360;
-        for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
+        float i = 0, j = 0;
+        for (const auto& kv : SaveManager.artifactSaveData)
         {
-            GameObject* newArtifactUI = devTools.CreateArtifactRewardCard(it->first, Vector2(x, y), 10);
-            GameObject* textObj = new GameObject;
-            textObj->transform->SetPosition(Vector2(x - 80, y + 50));
-            devTools.AddTextToSpriteGameObject(textObj, "GothicA1.ttf", to_string(it->second), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 50.f, 12);
-
-            newArtifactUI->AddChild(textObj);
-            artifactListUI->AddChild(newArtifactUI);
-
-            x += 310;
-            if (x > 800)
+            artifactListUI->AddChild(devTools.CreateArtifactObject(Vector2(-300.f, 160.f) + Vector2(xOffset * i, yOffset * j * -1), kv.first, kv.second, 1, 11));
+            ++i;
+            if (i >= maxRow)
             {
-                x = -780;
-                y -= 340;
+                i = 0;
+                ++j;
             }
         }
     }

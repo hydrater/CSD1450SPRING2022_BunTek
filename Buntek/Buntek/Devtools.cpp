@@ -210,6 +210,7 @@ GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact,
 
     GameObject* countUI = CreateSpriteGameObject("WhiteTexture.png", 40, 40, AE_GFX_BM_BLEND, pos + Vector2(25.f, -25.f), layer, 0);
     textRenderer = devTools.AddTextToSpriteGameObject(countUI, "Ayar.ttf", "x" + to_string(count), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 1, true);
+    artifactUI->AddChild(countUI);
 
     return artifactUI;
 }
