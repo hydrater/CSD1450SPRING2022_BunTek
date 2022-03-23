@@ -102,20 +102,37 @@ TextRenderer* _devTools::AddTextToSpriteGameObject(GameObject* gameObject, strin
 GameObject* _devTools::CreateArtifactUIGameObject(unsigned long ID, Vector2 pos, short layer) {
     
     // Artifact Background
-    GameObject* ArtifactUI = CreateSpriteGameObject("WhiteTexture.png", 260, 310, AE_GFX_BM_BLEND, pos, layer);
+    const float ArtifactUIXSize = 260.f, ArtifactUIYSize = 310.f;
+    GameObject* ArtifactUI = CreateSpriteGameObject("WhiteTexture.png", ArtifactUIXSize, ArtifactUIYSize, AE_GFX_BM_BLEND, pos, layer);
     SpriteRenderer* ArtifactBckgrd = ArtifactUI->GetComponent<SpriteRenderer>();
+
     // Artifact Name
-    GameObject* ArtifactName = CreateSpriteGameObject("WhiteTexture.png", 100.f, 100.f, AE_GFX_BM_BLEND, Vector2(pos.x + 46, pos.y + 22.f), layer, 0);
-    TextRenderer* NameText = AddTextToSpriteGameObject(ArtifactName, "Gabriola.ttf", ArtifactDatabase.GetName(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 29.f, layer + 2);
-    NameText->SetTextColor(1, 1, 1);
+    const float ArtifactNameXSize = 100.f, ArtifactNameYSize = 100.f;
+    const float ArtifactNameXOffset = 46.f, ArtifactNameYOffset = 22.f;
+    const float ArtifactNameFontSize = 29.f;
+    const int ArtifactNameFontLayerOffset = 2;
+    const float ArtifactNameFontColorR = 1.f, ArtifactNameFontColorG = 1.f, ArtifactNameFontColorB = 1.f;
+    GameObject* ArtifactName = CreateSpriteGameObject("WhiteTexture.png", ArtifactNameXSize, ArtifactNameYSize, AE_GFX_BM_BLEND, Vector2(pos.x + ArtifactNameXOffset, pos.y + ArtifactNameYOffset), layer, 0);
+    TextRenderer* NameText = AddTextToSpriteGameObject(ArtifactName, "Gabriola.ttf", ArtifactDatabase.GetName(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, ArtifactNameFontSize, layer + ArtifactNameFontLayerOffset);
+    NameText->SetTextColor(ArtifactNameFontColorR, ArtifactNameFontColorG, ArtifactNameFontColorB);
     ArtifactUI->AddChild(ArtifactName);
+
     // Artifact Icon
-    GameObject* ArtifactIcon = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(ID), 100.f, 100.f, AE_GFX_BM_BLEND, Vector2(pos.x + 47, pos.y + 100), layer + 2);
+    const float ArtifactIconXSize = 100.f, ArtifactIconYSize = 100.f;
+    const float ArtifactIconXOffset = 47.f, ArtifactIconYOffset = 100.f;
+    const int ArtifactIconLayerOffset = 2;
+    GameObject* ArtifactIcon = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(ID), ArtifactIconXSize, ArtifactIconYSize, AE_GFX_BM_BLEND, Vector2(pos.x + ArtifactIconXOffset, pos.y + ArtifactIconYOffset), layer + ArtifactIconLayerOffset);
     ArtifactUI->AddChild(ArtifactIcon);
+
     // Artifact Description
-    GameObject* ArtifactDesc = CreateSpriteGameObject("WhiteTexture.png", 250.f, 200.f, AE_GFX_BM_BLEND, Vector2(pos.x + 10, pos.y - 50), layer, 0);
-    TextRenderer* DescText = AddTextToSpriteGameObject(ArtifactDesc, "Ayar.ttf", ArtifactDatabase.GetDescription(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 16.f, layer + 2, true);
+    const float ArtifactDescXSize = 250.f, ArtifactDescYSize = 200.f;
+    const float ArtifactDescXOffset = 10.f, ArtifactDescYOffset = -50.f;
+    const float ArtifactDescFontSize = 16.f;
+    const int ArtifactDescLayerOffset = 2;
+    GameObject* ArtifactDesc = CreateSpriteGameObject("WhiteTexture.png", ArtifactDescXSize, ArtifactDescYSize, AE_GFX_BM_BLEND, Vector2(pos.x + ArtifactDescXOffset, pos.y + ArtifactDescYOffset), layer, 0);
+    TextRenderer* DescText = AddTextToSpriteGameObject(ArtifactDesc, "Ayar.ttf", ArtifactDatabase.GetDescription(ID), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, ArtifactDescFontSize, layer + ArtifactDescLayerOffset, true);
     ArtifactUI->AddChild(ArtifactDesc);
+
     // Set Background, Name and Description color
     switch (ArtifactDatabase.GetRarity(ID))
     {
@@ -136,14 +153,25 @@ GameObject* _devTools::CreateArtifactUIGameObject(unsigned long ID, Vector2 pos,
 }
 
 GameObject* _devTools::CreatePriceTagGameObject(int price, short blendMode, Vector2 pos, short layer) {
-    GameObject* PriceTag = CreateSpriteGameObject("WhiteTexture.png", 120, 50, blendMode, pos, layer);
+    float PriceTagXSize = 120.f, PriceTagYSize = 50.f;
+    float PriceTagColorR = 0.75f, PriceTagColorG = 0.5f, PriceTagColorB = 0.5f;
+    GameObject* PriceTag = CreateSpriteGameObject("WhiteTexture.png", PriceTagXSize, PriceTagYSize, blendMode, pos, layer);
     SpriteRenderer* Tagsr = PriceTag->GetComponent<SpriteRenderer>();
-    Tagsr->SetColor(0.75f, 0.5f, 0.5f);
-    GameObject* PriceTextObj = CreateSpriteGameObject("WhiteTexture.png", 40, 50, blendMode, Vector2(pos.x + 10, pos.y), layer + 1, 0);
+    Tagsr->SetColor(PriceTagColorR, PriceTagColorG, PriceTagColorB);
+
+    float PriceTextXSize = 40.f, PriceTextYSize = 50.f;
+    float PriceTextXOffset = 10.f;
+    int PriceTextLayerOffset = 1;
+    GameObject* PriceTextObj = CreateSpriteGameObject("WhiteTexture.png", PriceTextXSize, PriceTextYSize, blendMode, Vector2(pos.x + PriceTextXOffset, pos.y), layer + PriceTextLayerOffset, 0);
     TextRenderer* PriceText = AddTextToSpriteGameObject(PriceTextObj, "Ayar.ttf", to_string(price), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 26.f, layer + 1);
     PriceTag->AddChild(PriceTextObj);
-    GameObject* PriceIcon = CreateSpriteGameObject("UI/Stardust.png", 40, 40, blendMode, Vector2(pos.x - 30, pos.y), layer + 1);
+
+    float PriceIconXSize = 40.f, PriceIconYSize = 40.f;
+    float PriceIconXOffset = -30.f;
+    int PriceIconLayerOffset = 1;
+    GameObject* PriceIcon = CreateSpriteGameObject("UI/Stardust.png", PriceIconXSize, PriceIconYSize, blendMode, Vector2(pos.x + PriceIconXOffset, pos.y), layer + PriceIconLayerOffset);
     PriceTag->AddChild(PriceIcon);
+
     return PriceTag;
 }
 
