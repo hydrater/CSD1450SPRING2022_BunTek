@@ -49,10 +49,11 @@ void Scene_GameOver::Start(void)
 
 void Scene_GameOver::Update(void)
 {
-	gameOverTime += DeltaTime;
 	if (gameOverTime > 0)
 	{
-		SceneManager.LoadScene(new Scene_GameOver, TransitionType::FadeTransition, true);
+		gameOverTime -= DeltaTime;
+		if (gameOverTime <= 0)
+			SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
 	}
 }
 Scene_GameOver::~Scene_GameOver(void)
