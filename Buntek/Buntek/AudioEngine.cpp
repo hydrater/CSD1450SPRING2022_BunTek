@@ -61,10 +61,22 @@ void _audioManager::PlayMusic(string musicTrack)
     //musicChannel->setPaused(false);
 }
 
-void _audioManager::StopMusic(void)
+void _audioManager::StopMusic()
 {
     // Play the sound.
     musicChannel->stop();
+}
+
+void _audioManager::PauseMusic(bool playMusic)
+{
+    if (playMusic == true)
+    {
+        musicChannel->setPaused(true);
+    }
+    else
+    {
+        musicChannel->setPaused(false);
+    }
 }
 
 void _audioManager::SetAudioVolume(float volume)
