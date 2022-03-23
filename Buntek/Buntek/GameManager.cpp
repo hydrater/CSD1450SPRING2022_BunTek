@@ -387,11 +387,14 @@ void _gameManager::DisplayPauseMenu(void)
         pauseMenuUI->Delete();
 
         pauseMenuUI = NULL;
+        AudioManager.PauseMusic(false);
     }
     else
     {
         pauseMenuUI = new GameObject();
         pauseMenuUI->AddComponent<UI_PauseMenu>()->CreatePauseMenu(7);
+        AudioManager.PauseMusic(true);
+
     }
 }
 void _gameManager::DisplayPauseOptionMenu(void) {
