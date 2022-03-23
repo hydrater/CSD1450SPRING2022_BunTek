@@ -85,6 +85,7 @@ You collect the stardust scattered over the mystical books.
 E002
 /d 2
 You make it to the top of some rocky mountains.
+/e12
 Near the sheer drop sits a well lit bonfire, fire blazing and soul soothing.
 Take a rest?
 /b7 Rest

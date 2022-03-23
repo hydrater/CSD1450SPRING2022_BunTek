@@ -14,6 +14,7 @@
 #include "AlphaChanger.h"
 #include "ParticleSystem.h"
 #include "AssetManager.h"
+#include "AudioEngine.h"
 
 _dialogueDatabase::_dialogueDatabase()
 {
@@ -316,6 +317,12 @@ void LaunchButtonEffect(Button* button)
 		GameManager.playerProfile.stardust += stoi(buttonPath);
 		UIDialogueManager.UIDecision = false;
 		UIDialogueManager.SkipDialogue();
+		break;
+	}
+	case 12:
+	{
+		// Plays bonfire sound
+		AudioManager.PlayClip("CampfireRest.wav");
 		break;
 	}
 	default:

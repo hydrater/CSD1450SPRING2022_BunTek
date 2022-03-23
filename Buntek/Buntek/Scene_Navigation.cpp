@@ -36,6 +36,9 @@ void Scene_Navigation::Start(void)
 	AudioManager.LoadMusic("NavigationBGM.mp3");
 	AudioManager.PlayMusic("NavigationBGM.mp3");
 
+	AudioManager.LoadSound("CampfireRest.wav");
+	AudioManager.LoadSound("MakePurchase.wav");
+
 	AssetManager.LoadTexture("UI/Start.png");
 	AssetManager.LoadTexture("UI/Enemy.png");
 	AssetManager.LoadTexture("UI/Elite.png");
@@ -208,6 +211,8 @@ Scene_Navigation::~Scene_Navigation(void)
 	AssetManager.UnloadTexture("UI/Stardust.png");
 	AssetManager.UnloadTexture("ShopBackground.png");
 	AudioManager.UnloadMusic("NavigationBGM.mp3");
+	AudioManager.UnloadSound("CampfireRest.wav");
+	AudioManager.UnloadSound("MakePurchase.wav");
 	MapData.penaltyZone = nullptr;
 }
 
