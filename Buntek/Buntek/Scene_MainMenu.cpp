@@ -419,7 +419,13 @@ void BtnFunc_Credits(Button* button)
 void BtnFunc_Quit(Button* button)
 {
 	// Should have a "are you sure?"
-	GameManager.exit = true;
+	if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+		GameManager.exit = true;
+	}
+	else {
+		button->Owner()->GetComponent<TextRenderer>()->SetText("Are you sure?");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 0, 1);
+	}
 }
 
 void BtnFuncHover_Start(Button* button)
@@ -566,7 +572,10 @@ void BtnFuncUnHover_Quit(Button* button)
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
 		menu->quitPlay = true;
 	}
-	
+	if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+		button->Owner()->GetComponent<TextRenderer>()->SetText("Quit");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
+	}
 	Vector2 temp = menu->quitBtnPos;
 	temp.x = menu->GetObjRef(4)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(4)->transform->worldposition.x - DeltaTime * 150;
 	menu->GetObjRef(4)->transform->SetPosition(temp);

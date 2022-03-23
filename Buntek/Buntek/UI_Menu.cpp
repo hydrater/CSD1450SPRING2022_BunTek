@@ -16,7 +16,8 @@ void PauseOptions(Button* button);
 void Resume(Button* button);
 void Surrender(Button* button);
 void Quit(Button* button);
-
+void SurrenderUnhover(Button* button);
+void QuitUnhover(Button* button);
 
 UI_OptionMenu::UI_OptionMenu(void)
 {
@@ -147,6 +148,7 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempSurrenderBtn->tr = tempSurrendertxtRenderer;
     tempSurrenderBtn->affectedObject = PauseMenu;
     tempSurrenderBtn->ButtonEffect = &Surrender;
+    tempSurrenderBtn->NotHoverEffect = &SurrenderUnhover;
     PauseMenu->AddChild(surrenderBtn);
 
     quitBtn = devTools.CreateSpriteGameObject("UI/Button.png", 500, 40, AE_GFX_BM_BLEND, Vector2(0.f, -150.f), (short)(sortingLayer + 1));
@@ -156,15 +158,53 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempQuitBtn->tr = tempQuittxtRenderer;
     tempQuitBtn->affectedObject = PauseMenu;
     tempQuitBtn->ButtonEffect = &Quit;
+    tempQuitBtn->NotHoverEffect = &QuitUnhover;
     PauseMenu->AddChild(quitBtn);
 }
 void Resume(Button* button) {
     GameManager.DisplayPauseMenu();
 }
 void Surrender(Button* button) {
-    GameManager.GameOver();
+    if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+        GameManager.GameOver();
+    }
+    else {
+        button->Owner()->GetComponent<TextRenderer>()->SetText("Are you sure?");
+        button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 0, 1);
+    }
+    AudioManager.LoadSound("ButtonHover.wav");
+    AudioManager.PlayClip("ButtonHover.wav");
+    button->hoverplay = false;
 }
 void Quit(Button* button) {
-    SaveManager.SaveData();
-    SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
+    if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+        SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
+    }
+    else {
+        button->Owner()->GetComponent<TextRenderer>()->SetText("Are you sure?");
+        button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 0, 1);
+    }
+    AudioManager.LoadSound("ButtonHover.wav");
+    AudioManager.PlayClip("ButtonHover.wav");
+    button->hoverplay = false;
+}
+void SurrenderUnhover(Button* button) {
+    if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+        button->Owner()->GetComponent<TextRenderer>()->SetText("Abandon run");
+        button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
+    }
+    if (!button->hoverplay) {
+        AudioManager.UnloadSound("ButtonHover.wav");
+        button->hoverplay = true;
+    }
+}
+void QuitUnhover(Button* button) {
+    if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+        button->Owner()->GetComponent<TextRenderer>()->SetText("Quit to Main Menu");
+        button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
+    }
+    if (!button->hoverplay) {
+        AudioManager.UnloadSound("ButtonHover.wav");
+        button->hoverplay = true;
+    }
 }
