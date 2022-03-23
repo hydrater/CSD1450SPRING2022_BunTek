@@ -203,6 +203,8 @@ void SurrenderUnhover(Button* button) {
         }
         if (!button->hoverplay) {
             AudioManager.UnloadSound("ButtonHover.wav");
+            button->sr->Size(button->sr->GetHalfWidth() * 2 / 6 * 5, button->sr->GetHalfHeight() * 2 / 6 * 5);
+            button->tr->SetFontSize(button->tr->GetFontSize() / 6 * 5);
             button->hoverplay = true;
         }
     }
@@ -215,6 +217,8 @@ void QuitUnhover(Button* button) {
         }
         if (!button->hoverplay) {
             AudioManager.UnloadSound("ButtonHover.wav");
+            button->sr->Size(button->sr->GetHalfWidth() * 2 / 6 * 5, button->sr->GetHalfHeight() * 2 / 6 * 5);
+            button->tr->SetFontSize(button->tr->GetFontSize() / 6 * 5);
             button->hoverplay = true;
         }
     }

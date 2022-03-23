@@ -76,6 +76,12 @@ void DefaultHoverEffect(Button* button) {
 	if (button->hoverplay) {
 		AudioManager.LoadSound("ButtonHover.wav");
 		AudioManager.PlayClip("ButtonHover.wav");
+		if (button->sr != NULL) {
+			button->sr->Size(button->sr->GetHalfWidth() * 2 * 1.2, button->sr->GetHalfHeight() * 2 * 1.2);
+		}
+		if (button->tr != NULL) {
+			button->tr->SetFontSize(button->tr->GetFontSize() * 1.2);
+		}
 		button->hoverplay = false;
 	}
 }
@@ -83,6 +89,12 @@ void DefaultHoverEffect(Button* button) {
 void DefaultNotHoverEffect(Button* button) {
 	if (!button->hoverplay) {
 		AudioManager.UnloadSound("ButtonHover.wav");
+		if (button->sr != NULL) {
+			button->sr->Size(button->sr->GetHalfWidth() * 2 / 6 * 5, button->sr->GetHalfHeight() * 2 / 6 * 5);
+		}
+		if (button->tr != NULL) {
+			button->tr->SetFontSize(button->tr->GetFontSize() / 6 * 5);
+		}
 		button->hoverplay = true;
 	}
 }
