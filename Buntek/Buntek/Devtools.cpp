@@ -195,20 +195,23 @@ GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R,
 
 GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, float xDir, short layer)
 {
-    GameObject* ArtifactUI = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(artifact), 50, 50, AE_GFX_BM_BLEND, pos, layer);
-    GameObject* PopUpUI = CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, pos + Vector2(150.f * xDir, -50.f), layer + 1);
-    PopUpUI->GetComponent<SpriteRenderer>()->SetColor(0.5f, 0.5f, 0.5f);
-    TextRenderer* textRenderer = devTools.AddTextToSpriteGameObject(PopUpUI, "Ayar.ttf", ArtifactDatabase.GetDescription(artifact), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 2, true);
+    GameObject* artifactUI = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(artifact), 50, 50, AE_GFX_BM_BLEND, pos, layer);
+    GameObject* popUpUI = CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, pos + Vector2(150.f * xDir, -50.f), layer + 2, 0.8f);
+    popUpUI->GetComponent<SpriteRenderer>()->SetColor(0.f, 0.f, 0.f);
+    TextRenderer* textRenderer = devTools.AddTextToSpriteGameObject(popUpUI, "Ayar.ttf", ArtifactDatabase.GetDescription(artifact), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 3, true);
     textRenderer->SetYBuffer(0);
-    PopUpUI->Deactivate();
-    Button* ArtifactUIBtn = ArtifactUI->AddComponent<Button>();
-    ArtifactUIBtn->sr = ArtifactUI->GetComponent<SpriteRenderer>();
-    ArtifactUIBtn->affectedHoverObject = PopUpUI;
-    ArtifactUIBtn->HoverEffect = &ArtifactObjectHover;
-    ArtifactUIBtn->NotHoverEffect = &ArtifactObjectUnhover;
-    ArtifactUIBtn->SetClickable(false);
+    popUpUI->Deactivate();
+    Button* artifactUIBtn = artifactUI->AddComponent<Button>();
+    artifactUIBtn->sr = artifactUI->GetComponent<SpriteRenderer>();
+    artifactUIBtn->affectedHoverObject = popUpUI;
+    artifactUIBtn->HoverEffect = &ArtifactObjectHover;
+    artifactUIBtn->NotHoverEffect = &ArtifactObjectUnhover;
+    artifactUIBtn->SetClickable(false);
 
-    return ArtifactUI;
+    GameObject* countUI = CreateSpriteGameObject("WhiteTexture.png", 40, 40, AE_GFX_BM_BLEND, pos + Vector2(25.f, -25.f), layer, 0);
+    textRenderer = devTools.AddTextToSpriteGameObject(countUI, "Ayar.ttf", "x" + to_string(count), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 1, true);
+
+    return artifactUI;
 }
 void ArtifactObjectHover(Button* button) {
     button->affectedHoverObject->Activate();
