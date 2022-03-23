@@ -18,6 +18,7 @@
 #include "AudioEngine.h"
 #include "UI_Menu.h"
 #include "Scene_Splash.h"
+#include "Scene_GameOver.h"
 
 using namespace Math;
 
@@ -360,7 +361,7 @@ void _gameManager::GameOver(void)
     MapData.DeleteMapData();
     GameManager.playerProfile = {};
     GameManager.level = 0;
-    SceneManager.LoadScene(new Scene_MainMenu , TransitionType::FadeTransition, true);
+    SceneManager.LoadScene(new Scene_GameOver , TransitionType::FadeTransition, true);
 }
 
 void _gameManager::DisplayOptionMenu(void)

@@ -105,7 +105,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 
 	background = new GameObject();
 	background->AddComponent<SpriteRenderer>()->Size(1920, 1080);
-	background->GetComponent<SpriteRenderer>()->SetTexture("More Stars 1.png");
+	background->GetComponent<SpriteRenderer>()->SetTexture("Battlescreen.png");
 	background->GetComponent<SpriteRenderer>()->SetLayer(-1);
 
 	friendlyArea = new GameObject();
@@ -346,7 +346,7 @@ void BattleHandler::SpawnArtifactList(Vector2 pos, map<unsigned long, int> artif
 	for (const auto& kv : artifactList)
 	{
 		cout << "count is " << kv.second << endl;
-		devTools.CreateArtifactObject(pos + Vector2(xOffset * i * xDir, yOffset * j * yDir), kv.first, kv.second, 5);
+		devTools.CreateArtifactObject(pos + Vector2(xOffset * i * xDir, yOffset * j * yDir), kv.first, kv.second, xDir, 5);
 		++i;
 		if (i >= maxRow)
 		{
