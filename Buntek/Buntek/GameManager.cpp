@@ -102,6 +102,17 @@ map<unsigned long, int> _gameManager::GenerateArtifactList(int maxAmtOfArtifacts
         else
             EnemyArtifactData[id] = 1;
     }
+    if (GameManager.GetEnemyType() == 3)
+    {
+        unsigned long id = ArtifactDatabase.DrawLegendary();
+        map<unsigned long, int>::iterator it;
+
+        it = EnemyArtifactData.find(id);
+        if (it != EnemyArtifactData.end())
+            it->second++;
+        else
+            EnemyArtifactData[id] = 1;
+    }
 
     return EnemyArtifactData;
 }
@@ -211,7 +222,7 @@ void _gameManager::DisplayArtifactList(void)
         int x = -780, y = 360;
         for (map<unsigned long, int>::iterator it = SaveManager.artifactSaveData.begin(); it != SaveManager.artifactSaveData.end(); ++it)
         {
-            GameObject* newArtifactUI = devTools.CreateArtifactUIGameObject(it->first, Vector2(x, y), 10);
+            GameObject* newArtifactUI = devTools.CreateArtifactRewardCard(it->first, Vector2(x, y), 10);
             GameObject* textObj = new GameObject;
             textObj->transform->SetPosition(Vector2(x - 80, y + 50));
             devTools.AddTextToSpriteGameObject(textObj, "GothicA1.ttf", to_string(it->second), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 50.f, 12);

@@ -99,7 +99,7 @@ TextRenderer* _devTools::AddTextToSpriteGameObject(GameObject* gameObject, strin
     return tempTextRenderer;
 }
 
-GameObject* _devTools::CreateArtifactUIGameObject(unsigned long ID, Vector2 pos, short layer) {
+GameObject* _devTools::CreateArtifactRewardCard(unsigned long ID, Vector2 pos, short layer) {
     
     // Artifact Background
     const float ArtifactUIXSize = 260.f, ArtifactUIYSize = 310.f;
@@ -187,4 +187,11 @@ GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R,
     lineObj->transform->SetRotation(-angle);
     lineObj->GetComponent<SpriteRenderer>()->SetColor(R, G, B);
     return lineObj;
+}
+
+GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, short layer)
+{
+    GameObject* ArtifactUI = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(artifact), 50, 50, AE_GFX_BM_BLEND, pos, layer);
+
+    return ArtifactUI;
 }

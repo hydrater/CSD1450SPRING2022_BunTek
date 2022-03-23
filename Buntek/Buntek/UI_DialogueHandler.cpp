@@ -392,7 +392,7 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
         if (i <= artifact.size() - 1)
         {
             GameObject* owner = rewardButtonList[i]->Owner();
-            GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(artifact[i].ID,
+            GameObject* tempArtifact = devTools.CreateArtifactRewardCard(artifact[i].ID,
                 owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
             owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
             owner->AddChild(tempArtifact);
@@ -609,7 +609,7 @@ void UI_DialogueHandler::AssignArtifact(GameObject* owner, string selArtifact)
     if (selArtifact[0] >= '0' && selArtifact[0] <= '9' && selArtifact[1] >= '0' && selArtifact[1] <= '9'
         && selArtifact[2] >= '0' && selArtifact[2] <= '9' && selArtifact[3] >= '0' && selArtifact[3] <= '9')
         ID = (selArtifact[0] - '0') * 1000 + (selArtifact[1] - '0') * 100 + (selArtifact[2] - '0') * 10 + (selArtifact[3] - '0');
-    GameObject* tempArtifact = devTools.CreateArtifactUIGameObject(ID,
+    GameObject* tempArtifact = devTools.CreateArtifactRewardCard(ID,
             owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
     owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
     owner->AddChild(tempArtifact);

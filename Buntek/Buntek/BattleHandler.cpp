@@ -80,7 +80,11 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	}
 
 	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
-	GameManager.InitBattleProfile(GameManager.enemyArtifactList, GameManager.GenerateArtifactList(GameManager.level * 5 * GameManager.GetEnemyType()));
+	SpawnArtifactList(Vector2(-880, -300), SaveManager.artifactSaveData, 1, 1);
+
+	map<unsigned long, int> enemyArtifactList = GameManager.GenerateArtifactList(GameManager.level + 1 * 2 * GameManager.GetEnemyType());
+	GameManager.InitBattleProfile(GameManager.enemyArtifactList, enemyArtifactList);
+	SpawnArtifactList(Vector2(880, 340), enemyArtifactList, -1, -1);
 
 	ArtifactDatabase.ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_Passive, true);
 	ArtifactDatabase.ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_Passive, false);
@@ -334,4 +338,20 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	tempBall->ballParticleSystem = newSystem;
 
 	ballList->push_back(tempBall);
+}
+
+void BattleHandler::SpawnArtifactList(Vector2 pos, map<unsigned long, int> artifactList, float xDir, float yDir)
+{
+	float i = 0, j = 0;
+	for (const auto& kv : artifactList)
+	{
+		cout << "count is " << kv.second << endl;
+		devTools.CreateArtifactObject(pos + Vector2(xOffset * i * xDir, yOffset * j * yDir), kv.first, kv.second, 5);
+		++i;
+		if (i >= maxRow)
+		{
+			i = 0;
+			++j;
+		}
+	}
 }

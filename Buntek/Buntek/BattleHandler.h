@@ -12,6 +12,7 @@
 #include "SpriteRenderer.h"
 #include "BallBehavior.h"
 #include "ParticleSystem.h"
+#include <map>
 
 class BattleHandler : public GameScript
 {
@@ -29,11 +30,14 @@ public:
 	GameObject* inputHandler = 0;
 	GameObject* background = 0, * ball = 0, * friendlyArea = 0, * hostileArea = 0, * neutralArea = 0, * playerpaddle = 0, * playercursor = 0, * AIpaddle = 0, * AIcursor = 0, * hpBar = 0, * enemyhpBar = 0, * ballParticle = 0;
 	float playerBallSpawnTimerMax = 3, AIBallSpawnTimerMax = 3;
-	float playerBallSpawnTimer = 3, AIBallSpawnTimer = 3;
+	float playerBallSpawnTimer = 3, AIBallSpawnTimer = 3, hitPauseTimer = 0;
 	vector<BallBehavior*>* ballList = 0;
 	bool checkTimer = false;
 
-	float hitPauseTimer = 0;
+private:
+	const float xOffset = 55, yOffset = 55, maxRow = 9;
+	void SpawnArtifactList(Vector2 pos, map<unsigned long, int> artifactList, float xDir, float yDir);
+	Vector2 playerArtifactListTopLeft = Vector2(0, 0), enemyArtifactListTopLeft = Vector2(0, 0);
 };
 
 #endif
