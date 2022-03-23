@@ -68,6 +68,7 @@ public:
     void Update(void);
     void LateUpdate(void);
     void FadeTransition(void);
+    void SetLoadTime(float duration);
     bool transitioning;
 };
 

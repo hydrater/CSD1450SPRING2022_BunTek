@@ -82,6 +82,7 @@ public:
     // Artifact list UI
     GameObject* artifactListUI = NULL;
     void DisplayArtifactList(void);
+    const float xOffset = 70, yOffset = 70, maxRow = 9;
 
     // Battle arena info
     float areaTopBoundary = 0;
