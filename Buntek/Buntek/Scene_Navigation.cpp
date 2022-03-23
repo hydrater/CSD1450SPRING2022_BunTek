@@ -212,6 +212,5 @@ Scene_Navigation::~Scene_Navigation(void)
 }
 
 void BtnFuncHover_Artifacts(Button* button) {
-	button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
 	GameManager.DisplayArtifactList();
 }
