@@ -51,7 +51,6 @@ void Scene_MainMenu::Start(void)
 	AudioManager.PlayMusic("kidding.ogg");
 
 	AssetManager.LoadTexture("Menu/PolkaSquare.png");
-	AssetManager.LoadTexture("Menu/Button.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
 	AssetManager.LoadTexture("Menu/Disc.png");
 	AssetManager.LoadTexture("Menu/Fake.png");
@@ -362,7 +361,6 @@ Scene_MainMenu::~Scene_MainMenu(void)
 	AudioManager.UnloadSound("ButtonHover.wav");
 	AudioManager.UnloadMusic("kidding.ogg");
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
-	AssetManager.UnloadTexture("Menu/Button.png");
 	AssetManager.UnloadTexture("Menu/ButtonPressed.png");
 	AssetManager.UnloadTexture("Menu/Disc.png");
 	AssetManager.UnloadTexture("Menu/Bottom.png");
@@ -419,7 +417,13 @@ void BtnFunc_Credits(Button* button)
 void BtnFunc_Quit(Button* button)
 {
 	// Should have a "are you sure?"
-	GameManager.exit = true;
+	if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+		GameManager.exit = true;
+	}
+	else {
+		button->Owner()->GetComponent<TextRenderer>()->SetText("Are you sure?");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(0.7f, 0.31f, 0.96f);
+	}
 }
 
 void BtnFuncHover_Start(Button* button)
@@ -427,7 +431,7 @@ void BtnFuncHover_Start(Button* button)
 	if (menu->startPlay)
 	{
 		AudioManager.PlayClip("ButtonHover.wav");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(0, 1, 1);
 		menu->displayTxt->SetText("Start the game");
 		menu->startPlay = false;
 	}
@@ -442,7 +446,7 @@ void BtnFuncHover_HowToPlay(Button* button)
 	if (menu->howtoPlay)
 	{
 		AudioManager.PlayClip("ButtonHover.wav");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(0, 1, 1);
 		menu->displayTxt->SetText("Tutorial");
 		menu->howtoPlay = false;
 	}
@@ -457,7 +461,7 @@ void BtnFuncHover_Options(Button* button)
 	if (menu->optionPlay)
 	{
 		AudioManager.PlayClip("ButtonHover.wav");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(0, 1, 1);
 		menu->displayTxt->SetText("Options");
 		menu->optionPlay = false;
 	}
@@ -472,7 +476,7 @@ void BtnFuncHover_Credits(Button* button)
 	if (menu->creditsPlay)
 	{
 		AudioManager.PlayClip("ButtonHover.wav");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(0, 1, 1);
 		menu->displayTxt->SetText("Credits");
 		menu->creditsPlay = false;
 	}
@@ -487,7 +491,7 @@ void BtnFuncHover_Quit(Button* button)
 	if (menu->quitPlay)
 	{
 		AudioManager.PlayClip("ButtonHover.wav");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(0, 1, 1);
 		menu->displayTxt->SetText("Exit the game");
 		menu->quitPlay = false;
 	}
@@ -503,7 +507,7 @@ void BtnFuncUnhover_Start(Button* button)
 	{
 		if (menu->displayTxt != NULL)
 			menu->displayTxt->SetText("");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
 		menu->startPlay = true;
 	}
 
@@ -518,7 +522,7 @@ void BtnFuncUnhover_HowToPlay(Button* button)
 	{
 		if (menu->displayTxt != NULL)
 			menu->displayTxt->SetText("");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
 		menu->howtoPlay = true;
 	}
 
@@ -533,7 +537,7 @@ void BtnFuncUnHover_Options(Button* button)
 	{
 		if (menu->displayTxt != NULL)
 			menu->displayTxt->SetText("");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
 		menu->optionPlay = true;
 	}
 
@@ -548,7 +552,7 @@ void BtnFuncUnhover_Credits(Button* button)
 	{
 		if (menu->displayTxt != NULL)
 			menu->displayTxt->SetText("");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
 		menu->creditsPlay = true;
 	}
 
@@ -563,10 +567,12 @@ void BtnFuncUnHover_Quit(Button* button)
 	{
 		if (menu->displayTxt != NULL)
 			menu->displayTxt->SetText("");
-		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/Button.png");
+		button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
 		menu->quitPlay = true;
 	}
-	
+	if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
+		button->Owner()->GetComponent<TextRenderer>()->SetText("Quit");
+	}
 	Vector2 temp = menu->quitBtnPos;
 	temp.x = menu->GetObjRef(4)->transform->worldposition.x <= -670 ? -670 : menu->GetObjRef(4)->transform->worldposition.x - DeltaTime * 150;
 	menu->GetObjRef(4)->transform->SetPosition(temp);
