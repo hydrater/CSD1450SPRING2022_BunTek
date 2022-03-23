@@ -201,7 +201,7 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 		return (textRenderer->GetTransform()->worldposition.y - tempSR->GetHalfHeight() + textRenderer->GetYBuffer() - GameManager.pos.y);
 		break;
 	case TextRenderer::yAlignmentTypes::Mid:
-		return (textRenderer->GetTransform()->worldposition.y + textRenderer->lineCount * textRenderer->GetTextHeight() / 2.0f - textRenderer->GetTextHeight() - GameManager.pos.y);
+		return (textRenderer->GetTransform()->worldposition.y + ((textRenderer->lineCount * (textRenderer->GetTextHeight() + textRenderer->GetLineBuffer())) - textRenderer->GetLineBuffer()) / 2.0f  - textRenderer->GetTextHeight() - GameManager.pos.y);
 		break;
 	default:
 		return 0;
