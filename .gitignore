@@ -1,6 +1,7 @@
 # Prerequisites
 #testing
 *.d
+*.dat
 
 # Object files
 *.o
