@@ -26,6 +26,8 @@ _assetManager::_assetManager()
     LoadTexture("More Stars 2.png");
     LoadTexture("NebulaBig.png");
     LoadTexture("NebulaCloudBig.png");
+    LoadTexture("Battlescreen.png");
+    LoadTexture("Gameover.png");
 
     //font
     LoadFont("Ayar.ttf");
