@@ -60,9 +60,24 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	Renderer;
 	SaveManager.LoadData();
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
-	//SceneManager.LoadScene(new Scene_Battle, TransitionTypes::None);
-	//SceneManager.LoadScene(new Scene_Splash, TransitionTypes::None);
-	//SceneManager.LoadScene(new Scene_Navigation, TransitionTypes::None);
+
+	#if defined _DEBUG
+	GameManager.isFullScreen = !GameManager.isFullScreen;
+	AEToogleFullScreen(GameManager.isFullScreen);
+	#endif
+
+	// Check if screen res is ultra wide for alpha testing
+	{
+	#include "wtypes.h"
+		RECT desktop;
+		GetWindowRect(GetDesktopWindow(), &desktop);
+		if (desktop.right > 2500)
+		{
+			cout << "Ultra wide monitor detected, disabling full screen...";
+			GameManager.isFullScreen = !GameManager.isFullScreen;
+			AEToogleFullScreen(GameManager.isFullScreen);
+		}
+	}
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
@@ -76,36 +91,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// Debugging tools
 		Debugger.CheatsUpdate();
 
-		// Place holder code
-		if (AEInputCheckTriggered(AEVK_UP))
-		{
-			AudioManager.SetAudioVolume(*(AudioManager.GetAudioVolume()) + 0.1f);
-		}
-		if (AEInputCheckTriggered(AEVK_DOWN))
-		{
-			AudioManager.SetAudioVolume(*(AudioManager.GetAudioVolume()) - 0.1f);
-		}
-		if (AEInputCheckTriggered(AEVK_LEFT))
-		{
-			AudioManager.SetMusicVolume(*(AudioManager.GetMusicVolume()) - 0.1f);
-		}
-		if (AEInputCheckTriggered(AEVK_RIGHT))
-		{
-			AudioManager.SetMusicVolume(*(AudioManager.GetMusicVolume()) + 0.1f);
-		}
-
 		// --------------------------------------------- Update --------------------------------------------- //
 		SceneManager.EarlyUpdate();
 		UIDialogueManager.Update();
 		AudioManager.Update();
 		SceneManager.Update();
+		GameManager.Update();
 		GameScriptManager.Update();
 
 		// --------------------------------------------- Collision --------------------------------------------- //
 		//CollisionManager2D.CollideAll();
 
 		// --------------------------------------------- Render --------------------------------------------- //
-		GameManager.Update();
 		Renderer.Update();
 		SceneManager.LateUpdate();
 

@@ -51,7 +51,7 @@ private:
     const int commonRate = 60, uncommonRate = 90;
 
     // Store list of ID here
-    const vector<unsigned long> common{ 0, 1, 2, 3, 4, 300, 400, 401, 500};
+    const vector<unsigned long> common{0, 1, 2, 3, 4, 300, 400, 401, 500};
     const vector<unsigned long> uncommon{120, 220, 221, 420, 520};
     const vector<unsigned long> rare{30, 530, 630, 631};
     const vector<unsigned long> legendary{140, 540, 541, 640};
@@ -65,4 +65,5 @@ public:
     void ApplyArtifactBehavior(vector<Artifact> artifactList, bool isPlayerTheCaster, GameObject* ball = NULL);
     unsigned long DrawArtifact(void);
     unsigned long DrawLegendary(void);
+    vector<unsigned long> DrawThreeArtifacts(void);
 };

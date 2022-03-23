@@ -77,7 +77,7 @@ public:
     void CameraEndShake(void);
     bool cameraLerpBack = false;
     Vector2 pos = Vector2(0, 0);
-    bool fullScreen = false;
+    bool isFullScreen = true;
 
     // Artifact list UI
     GameObject* artifactListUI = NULL;
@@ -111,12 +111,11 @@ public:
     GameObject* optionMenuUI = NULL;
     bool optionMenuOpen = false;
     void DisplayOptionMenu(void);
-
     GameObject* pauseMenuUI = NULL;
     bool pauseMenuOpen = false;
     void DisplayPauseMenu(void);
-
     void DisplayPauseOptionMenu(void);
+
     // Game over
     void GameOver(void);
 };

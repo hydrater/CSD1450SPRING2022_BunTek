@@ -179,7 +179,7 @@ GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R,
     // Get Angle
     float angle = atan2(pos1.y - pos2.y, pos1.x - pos2.x) * 180.f / PI;
     // Get Length
-    float length = sqrt(pow(pos1.x - pos2.x, 2) + pow(pos1.y - pos2.y, 2));
+    float length = sqrtf(powf(pos1.x - pos2.x, 2) + powf(pos1.y - pos2.y, 2));
     // Get Midpoint Value
     Vector2 midpos = Vector2(pos2.x + (pos1.x - pos2.x)/2.f, pos2.y + (pos1.y - pos2.y) / 2.f);
     // "Draw" Line

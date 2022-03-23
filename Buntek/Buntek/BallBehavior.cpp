@@ -19,7 +19,7 @@ BallBehavior::~BallBehavior(void)
 {
 	CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
 	battleInput->RemoveFromList(this);
-	GameManager.CameraShake(0.5, 50, Vector2(0, 0));
+	GameManager.CameraShake(0.1f * ballPhase, ballPhase * 10.f, Vector2(0, 0));
 	ballParticle->GetComponent<ParticleSystem>()->DeleteParticleSystem();
 }
 
@@ -118,20 +118,19 @@ void BallBehavior::Update(void)
 			
 			savedCol = othercol;
 			bool hasBounced = ReflectBall(playerPossess, (othercol->Owner()));
-			if (hasBounced) {
+			if (hasBounced) 
+			{
 				GameObject* spawner = new GameObject();
 				if (playerPossess) {
 					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, -1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "hdCircle.png", Vector2(transform->worldposition.x , transform->worldposition.y+radius/2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
-					GameManager.PlayRandomBallSound();
 				}
 				else
 				{
 					spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, 1), 1, 10, false, 120, 50, 80, 0, 360, 20, 20, "hdCircle.png", Vector2(transform->worldposition.x, transform->worldposition.y - radius / 2), 6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
-					GameManager.PlayRandomBallSound();
 				}
+				if (ballPhase > 0)
+					GameManager.PlayRandomBallSound();
 			}
-			
-
 		}
 		//ball ball artifact collision check 
 		if (othercol != nullptr && savedCol != othercol && othercol->Owner() && othercol->Owner()->GetComponent<BallBehavior>())

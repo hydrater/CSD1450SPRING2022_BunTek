@@ -46,7 +46,7 @@ void Scene_MainMenu::Start(void)
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 	GameManager.disableInteraction = true;
 
-	AudioManager.LoadSound("ButtonHover.mp3");
+	AudioManager.LoadSound("ButtonHover.wav");
 	AudioManager.LoadMusic("kidding.ogg");
 	AudioManager.PlayMusic("kidding.ogg");
 
@@ -359,7 +359,7 @@ void Scene_MainMenu::Update(void)
 
 Scene_MainMenu::~Scene_MainMenu(void)
 {
-	AudioManager.UnloadSound("ButtonHover.mp3");
+	AudioManager.UnloadSound("ButtonHover.wav");
 	AudioManager.UnloadMusic("kidding.ogg");
 	AssetManager.UnloadTexture("Menu/PolkaSquare.png");
 	AssetManager.UnloadTexture("Menu/Button.png");
@@ -426,7 +426,7 @@ void BtnFuncHover_Start(Button* button)
 {
 	if (menu->startPlay)
 	{
-		AudioManager.PlayClip("ButtonHover.mp3");
+		AudioManager.PlayClip("ButtonHover.wav");
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
 		menu->displayTxt->SetText("Start the game");
 		menu->startPlay = false;
@@ -441,7 +441,7 @@ void BtnFuncHover_HowToPlay(Button* button)
 {
 	if (menu->howtoPlay)
 	{
-		AudioManager.PlayClip("ButtonHover.mp3");
+		AudioManager.PlayClip("ButtonHover.wav");
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
 		menu->displayTxt->SetText("Tutorial");
 		menu->howtoPlay = false;
@@ -456,7 +456,7 @@ void BtnFuncHover_Options(Button* button)
 {
 	if (menu->optionPlay)
 	{
-		AudioManager.PlayClip("ButtonHover.mp3");
+		AudioManager.PlayClip("ButtonHover.wav");
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
 		menu->displayTxt->SetText("Options");
 		menu->optionPlay = false;
@@ -471,7 +471,7 @@ void BtnFuncHover_Credits(Button* button)
 {
 	if (menu->creditsPlay)
 	{
-		AudioManager.PlayClip("ButtonHover.mp3");
+		AudioManager.PlayClip("ButtonHover.wav");
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
 		menu->displayTxt->SetText("Credits");
 		menu->creditsPlay = false;
@@ -486,7 +486,7 @@ void BtnFuncHover_Quit(Button* button)
 {
 	if (menu->quitPlay)
 	{
-		AudioManager.PlayClip("ButtonHover.mp3");
+		AudioManager.PlayClip("ButtonHover.wav");
 		button->Owner()->GetComponent<SpriteRenderer>()->SetTexture("Menu/ButtonPressed.png");
 		menu->displayTxt->SetText("Exit the game");
 		menu->quitPlay = false;

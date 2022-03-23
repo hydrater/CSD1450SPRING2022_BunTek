@@ -17,6 +17,7 @@
 #include "Scene_Battle.h"
 #include "AudioEngine.h"
 #include "UI_Menu.h"
+#include "Scene_Splash.h"
 
 using namespace Math;
 
@@ -133,7 +134,9 @@ void _gameManager::Update(void)
     }
 
     // pause
-    if (!optionMenuOpen && AEInputCheckTriggered(AEVK_ESCAPE))
+    if (!SceneManager.transitioning && !optionMenuOpen && AEInputCheckTriggered(AEVK_ESCAPE)
+        && !UIDialogueManager.UIDecision && !UIDialogueManager.UIOpen
+        && typeid(*SceneManager.GetScene()) != typeid(Scene_MainMenu) && typeid(*SceneManager.GetScene()) != typeid(Scene_Splash))
     {
         DisplayPauseMenu();
     }
@@ -304,8 +307,17 @@ void _gameManager::HealthCheck(bool isPlayer) {
             }
             GameManager.playerProfile.hp = GameManager.playerHp;
             ArtifactDatabase.ApplyArtifactBehavior(behaviorList_BattleWon, true);
+            if (currentEnemy == 1)
+            {
+                playerProfile.stardust += 5;
+            }
+            if (currentEnemy == 2)
+            {
+                playerProfile.stardust += 10;
+            }
             if (currentEnemy == 3)
             {
+                playerProfile.stardust += 20;
                 ++level;
                 MapData.GenerateMapData();
             }

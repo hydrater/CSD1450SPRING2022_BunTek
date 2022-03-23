@@ -42,6 +42,8 @@ public:
 
 	SpriteRenderer* sr = 0;
 	TextRenderer* tr = 0;
+
+	bool hoverplay = true;
 private:
 	Transform* transform = 0;
 	bool canHover = true;

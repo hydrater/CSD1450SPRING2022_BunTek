@@ -41,7 +41,7 @@ void _audioManager::PlayClip(string clipName)
 
     // Play the sound.
     fmodSystem->playSound(audioClip, channelGroup, true, &audioClipChannel);
-    audioClipChannel->setVolume(soundVol);
+    audioClipChannel->setVolume(soundVol*soundVolMultiplier);
     audioClipChannel->setPaused(false);
 }
 
@@ -57,7 +57,7 @@ void _audioManager::PlayMusic(string musicTrack)
     musicChannel->stop();
     FMOD_RESULT result;
     result = fmodSystem->playSound(audioClip, channelGroup, false, &musicChannel);
-    musicChannel->setVolume(musicVol * musicVolOffset);
+    musicChannel->setVolume(musicVol * musicVolMultiplier);
     //musicChannel->setPaused(false);
 }
 
@@ -81,7 +81,7 @@ float* _audioManager::GetAudioVolume(void)
 void _audioManager::SetMusicVolume(float volume)
 {
     musicVol = volume;
-    musicChannel->setVolume(volume * musicVolOffset);
+    musicChannel->setVolume(volume * musicVolMultiplier);
     SaveManager.SaveData();
 }
 

@@ -41,7 +41,7 @@ void _dialogueDatabase::InitDialogueScene(string id)
 	{
 	case 0:
 	{
-		GameObject* splashimage1 = devTools.CreateSpriteGameObject("Background.jpg", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0), UIDialogueManager.dialogueSortingLayer - 3);
+		GameObject* splashimage1 = devTools.CreateSpriteGameObject("More Stars 1.png", 1920, 1080, AE_GFX_BM_BLEND, Vector2(0, 0), UIDialogueManager.dialogueSortingLayer - 3);
 
 		dialogueSceneObjList.push_back(splashimage1);
 	}
@@ -312,8 +312,8 @@ void LaunchButtonEffect(Button* button)
 	}
 	case 11:
 	{
-		// Obtain 20 stardust
-		GameManager.playerProfile.stardust += 20;
+		// Obtain stardust based on | value
+		GameManager.playerProfile.stardust += stoi(buttonPath);
 		UIDialogueManager.UIDecision = false;
 		UIDialogueManager.SkipDialogue();
 		break;
