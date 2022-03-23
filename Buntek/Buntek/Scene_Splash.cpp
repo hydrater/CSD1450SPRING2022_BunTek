@@ -41,7 +41,13 @@ void Scene_Splash::Update(void)
 {
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 	timer += cycle == 4 ? DeltaTime* 1.2f: DeltaTime;
-
+	if (AEInputCheckTriggered(AEVK_LBUTTON)
+		|| AEInputCheckTriggered(AEVK_RBUTTON)
+		|| AEInputCheckTriggered(AEVK_ESCAPE)
+		|| AEInputCheckTriggered(AEVK_SPACE)
+		|| AEInputCheckTriggered(AEVK_RETURN)) {
+		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
+	}
 	switch (cycle)
 	{
 	default:
