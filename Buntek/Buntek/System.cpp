@@ -30,10 +30,10 @@ bool _sceneManager::SceneStart(void)
 {
     if (notStarted)
     {
+        loadingTimer = loadingTimerDuration;
         scene->Start();
         notStarted = false;
         isTransitioning = false;
-        loadingTimer = loadingTimerDuration;
         GameManager.CameraEndShake();
     }
     return notStarted;
@@ -205,6 +205,11 @@ void _sceneManager::FadeTransition(void) {
     AEGfxSetTintColor(0, 0, 0, transitionTransparency);
     AEGfxTextureSet(AssetManager.GetTexture("WhiteTexture.png"), 0, 0);
     AEGfxMeshDraw(transitionMesh, AE_GFX_MDM_TRIANGLES);
+}
+
+void _sceneManager::SetLoadTime(float duration)
+{
+    loadingTimer = duration;
 }
 
 _gameScriptManager::_gameScriptManager(void)
