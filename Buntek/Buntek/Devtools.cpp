@@ -193,5 +193,10 @@ GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact,
 {
     GameObject* ArtifactUI = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(artifact), 50, 50, AE_GFX_BM_BLEND, pos, layer);
 
+    GameObject* PopUpUI = CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, pos + Vector2(150, -50), layer);
+    PopUpUI->GetComponent<SpriteRenderer>()->SetColor(0.5f, 0.5f, 0.5f);
+    TextRenderer* tempmusicSliderHeaderRenderer = devTools.AddTextToSpriteGameObject(PopUpUI, "Ayar.ttf", ArtifactDatabase.GetDescription(artifact), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 1);
+
+
     return ArtifactUI;
 }
