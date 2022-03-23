@@ -206,6 +206,7 @@ GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact,
     ArtifactUIBtn->affectedHoverObject = PopUpUI;
     ArtifactUIBtn->HoverEffect = &ArtifactObjectHover;
     ArtifactUIBtn->NotHoverEffect = &ArtifactObjectUnhover;
+    ArtifactUIBtn->SetClickable(false);
 
     return ArtifactUI;
 }

@@ -40,7 +40,7 @@ void Button::Update(void)
 		if (HoverEffect != NULL) {
 			HoverEffect(this);
 		}
-		if (AEInputCheckTriggered(AEVK_LBUTTON) && ClickEffect != NULL) {
+		if (AEInputCheckTriggered(AEVK_LBUTTON) && canClick && ClickEffect != NULL) {
 			ClickEffect(this);
 		}
 		else if (AEInputCheckReleased(AEVK_LBUTTON) && canClick)
