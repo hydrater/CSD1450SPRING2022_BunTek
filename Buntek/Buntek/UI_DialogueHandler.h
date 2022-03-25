@@ -87,4 +87,26 @@ private:
 	const float displaySpeed = 0.001f; // No of char per sec
 	int displayNo = 0;
 	float doneDisplay = true;
+
+	// Values for determing command and parameters
+	size_t CommandMinSize = 3;
+
+	enum TxtFileCommand {
+		TFC_ActorName = 'a',
+		TFC_ButtonAction = 'b',
+		TFC_ChoiceType = 'c',
+		TFC_DesignBackground = 'd',
+		TFC_EncounterAction = 'e'
+	};
+
+	enum ActorNameColor {
+		ANC_Black = 'a',
+		ANC_Blue = 'b',
+		ANC_Green = 'g',
+		ANC_Cyan = 'c',
+		ANC_Red = 'r',
+		ANC_Purple = 'p',
+		ANC_Yellow = 'y',
+		ANC_White = 'w'
+	};
 };

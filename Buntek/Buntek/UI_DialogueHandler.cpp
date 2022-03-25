@@ -241,9 +241,9 @@ void UI_DialogueHandler::WriteToDialogue(void)
 
     if (dialogueList[dialogueNo].rfind("/", 0) == 0)
     {
-        if (dialogueList[dialogueNo].length() < 3)
+        if (dialogueList[dialogueNo].length() < CommandMinSize)
         {
-            cout << "Error: Comamnd has no parameters" << endl;
+            cout << "Error: Command has no parameters" << endl;
             return;
         }
 
@@ -257,38 +257,38 @@ void UI_DialogueHandler::WriteToDialogue(void)
         }
         switch (dialogueList[dialogueNo][1])
         {
-        case 'a':
+        case TFC_ActorName:
             //cout << "Actor Name: " << parameters << endl;
             name = parameters;
             actorTxt->SetText(name);
             // Assign color
             switch (dialogueList[dialogueNo][2])
             {
-            case 'a': // Abyss (black)
+            case ANC_Black:     // Black
                 actorTxt->SetTextColor(0, 0, 0);
                 break;
-            case 'b': // Blue
+            case ANC_Blue:      // Blue
                 actorTxt->SetTextColor(0, 0, 1);
                 break;
-            case 'g': // Green
+            case ANC_Green:     // Green
                 actorTxt->SetTextColor(0, 1, 0);
                 break;
-            case 'c': // Cyan
+            case ANC_Cyan:      // Cyan
                 actorTxt->SetTextColor(0, 1, 1);
                 break;
-            case 'r': // Red
+            case ANC_Red:       // Red
                 actorTxt->SetTextColor(1, 0, 0);
                 break;
-            case 'p': // Purple
+            case ANC_Purple:    // Purple
                 actorTxt->SetTextColor(1, 0, 1);
                 break;
-            case 'y': // Yellow
+            case ANC_Yellow:    // Yellow
                 actorTxt->SetTextColor(1, 1, 0);
                 break;
-            case 'w': // White
+            case ANC_White:     // White
                 actorTxt->SetTextColor(1, 1, 1);
                 break;
-            default:  // Purple
+            default:            // Purple
                 actorTxt->SetTextColor(1, 0, 1);
                 break;
             }
@@ -296,7 +296,7 @@ void UI_DialogueHandler::WriteToDialogue(void)
             WriteToDialogue();
             break;
 
-        case 'b':
+        case TFC_ButtonAction:
             //cout << "Button: " << parameters << endl;
             if (dialogueButtonNo < dialogueButtonList.size())
             {
@@ -305,7 +305,7 @@ void UI_DialogueHandler::WriteToDialogue(void)
                 dialogueButtonList[dialogueButtonNo]->tr->SetText(parameters);
                 dialogueButtonList[dialogueButtonNo++]->Owner()->Activate();
                 UIDecision = true;
-                if (CheckNextCommand('b'))
+                if (CheckNextCommand(TFC_ButtonAction))
                 {
                     ++dialogueNo;
                     WriteToDialogue();
@@ -313,7 +313,7 @@ void UI_DialogueHandler::WriteToDialogue(void)
             }
             break;
 
-        case 'c':
+        case TFC_ChoiceType:
             //cout << "Choice: " << parameters << endl;
             if (rewardButtonNo < rewardButtonList.size())
             {
@@ -324,7 +324,7 @@ void UI_DialogueHandler::WriteToDialogue(void)
                     rewardButtonList[rewardButtonNo]->tr->SetText(parameters);
                 rewardButtonList[rewardButtonNo++]->Owner()->Activate();
                 UIDecision = true;
-                if (CheckNextCommand('c'))
+                if (CheckNextCommand(TFC_ChoiceType))
                 {
                     ++dialogueNo;
                     WriteToDialogue();
@@ -332,13 +332,13 @@ void UI_DialogueHandler::WriteToDialogue(void)
             }
             break;
 
-        case 'd':
+        case TFC_DesignBackground:
             DialogueDatabase.InitDialogueScene(parameters);
             ++dialogueNo;
             WriteToDialogue();
             break;
 
-        case 'e':
+        case TFC_EncounterAction:
             DialogueDatabase.forceCommand = command;
             LaunchButtonEffect(nullptr);
             break;
@@ -391,9 +391,11 @@ void UI_DialogueHandler::CreateRewardSel(vector<Artifact> artifact, short sortin
         // Assign artifact
         if (i <= artifact.size() - 1)
         {
+            rewardButtonList[i]->hoverplay = true;
             GameObject* owner = rewardButtonList[i]->Owner();
             GameObject* tempArtifact = devTools.CreateArtifactRewardCard(artifact[i].ID,
                 owner->transform->worldposition, owner->GetComponent<SpriteRenderer>()->GetLayer());
+            rewardButtonList[i]->sr = tempArtifact->GetComponent<SpriteRenderer>();
             owner->GetComponent<SpriteRenderer>()->SetOpacity(0);
             owner->AddChild(tempArtifact);
             ArtifactLoot Artifact;
@@ -448,7 +450,7 @@ void UI_DialogueHandler::DeleteDialogueEvent(void)
 
 string UI_DialogueHandler::GenerateRandomDialogueID(void)
 {
-    string id = "E00";
+    string id = "E00";  // Default Encounter (E00)
     id += to_string(RandIntMinMax(0, 8));
     //id = "E002";
     return id;
@@ -604,7 +606,7 @@ void UI_DialogueHandler::SetDialogueClickable(bool _canClick)
 
 void UI_DialogueHandler::AssignArtifact(GameObject* owner, string selArtifact)
 {
-    // Take first three letters from the string
+    // Take first three letters from the string and make sure there are string digits
     unsigned long ID = 0;
     if (selArtifact[0] >= '0' && selArtifact[0] <= '9' && selArtifact[1] >= '0' && selArtifact[1] <= '9'
         && selArtifact[2] >= '0' && selArtifact[2] <= '9' && selArtifact[3] >= '0' && selArtifact[3] <= '9')
