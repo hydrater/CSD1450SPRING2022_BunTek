@@ -452,7 +452,6 @@ string UI_DialogueHandler::GenerateRandomDialogueID(void)
 {
     string id = "E00";  // Default Encounter (E00)
     id += to_string(RandIntMinMax(0, 8));
-    //id = "E002";
     return id;
 }
 
@@ -462,37 +461,33 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
 
     //Create main dialogue box
     dialogueBox = new GameObject;
-    GameObject* tempdialogue = devTools.CreateSpriteGameObject("UI/DialogueBox.png", 1900, 303,
-        AE_GFX_BM_BLEND, Vector2(0, -370), sortingLayer - 2);
+    GameObject* tempdialogue = devTools.CreateSpriteGameObject("UI/DialogueBox.png", dialogueBoxXSize, dialogueBoxYSize,
+        AE_GFX_BM_BLEND, dialogueBoxPos, sortingLayer - 2);
     SpriteRenderer* tempRenderer = tempdialogue->GetComponent<SpriteRenderer>();
     TextRenderer* tempTextRenderer = tempdialogue->AddComponent<TextRenderer>();
     tempTextRenderer->SetFont("GothicA1.ttf");
-    tempTextRenderer->SetFontScale(0.6f);
+    tempTextRenderer->SetFontScale(dialogueBoxFontScale);
     tempTextRenderer->SetTextColor(1, 1, 1);
     tempTextRenderer->SetLayer(sortingLayer);
     dialogueBox->AddChild(tempdialogue);
 
     // Create actor box
-    GameObject* tempGameObject = devTools.CreateSpriteGameObject("UI/DialogueBox.png", tempRenderer->GetHalfWidth() * 2 / 4.5f, tempRenderer->GetHalfHeight() / 2,
-        AE_GFX_BM_BLEND, Vector2(0.f, 0.f), sortingLayer - 1);
+    GameObject* tempGameObject = devTools.CreateSpriteGameObject("UI/DialogueBox.png", actorBoxXSize, actorBoxYSize,
+        AE_GFX_BM_BLEND, vectorZero, sortingLayer - 1);
     SpriteRenderer* tempRenderer2 = tempGameObject->GetComponent<SpriteRenderer>();
     tempRenderer2->SetOpacity(0);
-    tempRenderer2->Owner()->transform->SetPosition(Vector2(
-        0.0f,
-        tempRenderer->GetTransform()->worldposition.y + tempRenderer2->GetHalfHeight() + 20)
-    );
+    tempRenderer2->Owner()->transform->SetPosition(actorBoxPos);
     dialogueBox->AddChild(tempGameObject);
 
     TextRenderer* tempTxtRenderer2 = tempGameObject->AddComponent<TextRenderer>();
     tempTxtRenderer2->SetFont("Gabriola.ttf");
-    tempTxtRenderer2->SetTextColor(1.0f, 0.29f, 0.89f);
-    tempTxtRenderer2->SetLayer(1);
+    tempTxtRenderer2->SetTextColor(actorBoxColorR, actorBoxColorG, actorBoxColorB);
     tempTxtRenderer2->SetLayer(sortingLayer);
 
     // Buttons (Max 3)
     vector<Button*> buttonList;
     for (int i = 0; i < 3; ++i) {
-        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("UI/Button.png", 785, 70,
+        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("UI/Button.png", buttonXSize, buttonYSize,
             AE_GFX_BM_BLEND, Vector2(0.f, AEGfxGetWinMaxY() / 3 - (i * AEGfxGetWinMaxY() / 4)), sortingLayer - 1);
         SpriteRenderer* tempButtonRenderer = tempButtonObj->GetComponent<SpriteRenderer>();
         tempButtonRenderer->SetOpacity(0.8f);
@@ -520,7 +515,7 @@ void UI_DialogueHandler::CreatePreset(short sortingLayer)
     vector<Button*> tempbuttonList;
     for (int i = 0; i < 4; ++i) {
 
-        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("paddle.png", 350, 500, AE_GFX_BM_BLEND,
+        GameObject* tempButtonObj = devTools.CreateSpriteGameObject("paddle.png", rewardXSize, rewardYSize, AE_GFX_BM_BLEND,
             Vector2(0.f, -AEGfxGetWinMaxY() / 3.f), sortingLayer - 1);
 
         TextRenderer* tempButtonTxtRenderer = devTools.AddTextToSpriteGameObject(tempButtonObj, "Gabriola.ttf", "", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 36.f, sortingLayer);
