@@ -19,6 +19,8 @@ _assetManager::_assetManager()
     LoadTexture("UI/DialogueBox.png");
     LoadTexture("Menu/Button.png");
 
+    LoadTexture("PlayGuide.png");
+
     LoadTexture("Static Stars 1.png");
     LoadTexture("Static Stars 2.png");
     LoadTexture("More Stars 1.png");

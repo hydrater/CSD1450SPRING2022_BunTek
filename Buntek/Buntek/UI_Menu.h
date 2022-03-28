@@ -32,9 +32,23 @@ public:
     GameObject* tempBckgrnd = 0;
     GameObject* Header = 0;
     GameObject* resumeBtn = 0;
+    GameObject* howToPlayBtn = 0;
     GameObject* optionBtn = 0;
     GameObject* surrenderBtn = 0;
     GameObject* quitBtn = 0;
+private:
+
+};
+
+class UI_HowToPlayMenu : public GameScript
+{
+public:
+    UI_HowToPlayMenu(void);
+    ~UI_HowToPlayMenu(void);
+    void CreateHowToPlayMenu(short sortingLayer);
+
+    GameObject* tempBckgrnd = 0;
+    GameObject* backBtn = 0;
 private:
 
 };

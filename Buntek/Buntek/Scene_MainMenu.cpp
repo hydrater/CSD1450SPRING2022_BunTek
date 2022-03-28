@@ -328,7 +328,7 @@ void Scene_MainMenu::Update(void)
 		GameManager.disableInteraction = false;
 		finishedSetup = true;
 	}
-	if (GameManager.optionMenuOpen) {
+	if (GameManager.optionMenuOpen || GameManager.howToPlayMenuOpen) {
 		startBtn->GetComponent<Button>()->SetHoverable(false);
 		howtoplayBtn->GetComponent<Button>()->SetHoverable(false);
 		optionBtn->GetComponent<Button>()->SetHoverable(false);
@@ -397,7 +397,8 @@ void BtnFunc_Start(Button* button)
 
 void BtnFunc_HowToPlay(Button* button)
 {
-	SceneManager.LoadScene(new Scene_HowToPlay, TransitionType::FadeTransition, true);
+	//SceneManager.LoadScene(new Scene_HowToPlay, TransitionType::FadeTransition, true);
+	GameManager.DisplayHowToPlayMenu();
 }
 
 void BtnFunc_Options(Button* button)

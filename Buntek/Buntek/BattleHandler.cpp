@@ -223,7 +223,7 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 void BattleHandler::Update(void) {
 	
 	if (battleStarted) {
-		if (GameManager.optionMenuOpen || GameManager.pauseMenuOpen || SceneManager.transitioning) {
+		if (GameManager.optionMenuOpen || GameManager.pauseMenuOpen || GameManager.howToPlayMenuOpen || SceneManager.transitioning) {
 			timeScalar = 0;
 		}
 		else if (hitPauseTimer > 0) {

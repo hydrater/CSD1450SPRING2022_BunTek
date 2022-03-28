@@ -13,11 +13,16 @@ void MusicSlider(Slider* slider);
 void SoundSlider(Slider* slider);
 
 void PauseOptions(Button* button);
+
 void Resume(Button* button);
 void Surrender(Button* button);
 void Quit(Button* button);
 void SurrenderUnhover(Button* button);
 void QuitUnhover(Button* button);
+
+void HowToPlay(Button* button);
+void PauseHowToPlay(Button* button);
+
 
 UI_OptionMenu::UI_OptionMenu(void)
 {
@@ -119,12 +124,12 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     PauseMenu->AddChild(tempBckgrnd);
 
     Header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1), 0);
-    TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(Header, "Gabriola.ttf", "Pause", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 48.f, (short)(sortingLayer)+2);
+    TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(Header, "Ayar.ttf", "Pause", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 48.f, (short)(sortingLayer)+2);
     tempHeadertxtRenderer->SetTextColor(1, 1, 1);
     PauseMenu->AddChild(Header);
 
     resumeBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 200.f), (short)(sortingLayer + 1));
-    TextRenderer* tempResumetxtRenderer = devTools.AddTextToSpriteGameObject(resumeBtn, "Gabriola.ttf", "Resume", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    TextRenderer* tempResumetxtRenderer = devTools.AddTextToSpriteGameObject(resumeBtn, "Ayar.ttf", "Resume", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempResumetxtRenderer->SetTextColor(0, 0, 0);
     Button* tempResumeBtn = resumeBtn->AddComponent<Button>();
     tempResumeBtn->sr = resumeBtn->GetComponent<SpriteRenderer>();
@@ -134,7 +139,7 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     PauseMenu->AddChild(resumeBtn);
 
     optionBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer + 1));
-    TextRenderer* tempOptiontxtRenderer = devTools.AddTextToSpriteGameObject(optionBtn, "Gabriola.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    TextRenderer* tempOptiontxtRenderer = devTools.AddTextToSpriteGameObject(optionBtn, "Ayar.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempOptiontxtRenderer->SetTextColor(0, 0, 0);
     Button* tempOptionBtn = optionBtn->AddComponent<Button>();
     tempOptionBtn->sr = optionBtn->GetComponent<SpriteRenderer>();
@@ -143,8 +148,18 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempOptionBtn->ButtonEffect = &PauseOptions;
     PauseMenu->AddChild(optionBtn);
 
-    surrenderBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer + 1));
-    TextRenderer* tempSurrendertxtRenderer = devTools.AddTextToSpriteGameObject(surrenderBtn, "Gabriola.ttf", "Abandon run", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    howToPlayBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer + 1));
+    TextRenderer* tempHowToPlaytxtRenderer = devTools.AddTextToSpriteGameObject(howToPlayBtn, "Ayar.ttf", "How to play", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    tempHowToPlaytxtRenderer->SetTextColor(0, 0, 0);
+    Button* tempHowToPlayBtn = howToPlayBtn->AddComponent<Button>();
+    tempHowToPlayBtn->sr = howToPlayBtn->GetComponent<SpriteRenderer>();
+    tempHowToPlayBtn->tr = tempHowToPlaytxtRenderer;
+    tempHowToPlayBtn->affectedObject = PauseMenu;
+    tempHowToPlayBtn->ButtonEffect = &PauseHowToPlay;
+    PauseMenu->AddChild(howToPlayBtn);
+
+    surrenderBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f,-100.f), (short)(sortingLayer + 1));
+    TextRenderer* tempSurrendertxtRenderer = devTools.AddTextToSpriteGameObject(surrenderBtn, "Ayar.ttf", "Abandon run", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempSurrendertxtRenderer->SetTextColor(0, 0, 0);
     Button* tempSurrenderBtn = surrenderBtn->AddComponent<Button>();
     tempSurrenderBtn->sr = surrenderBtn->GetComponent<SpriteRenderer>();
@@ -154,8 +169,8 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempSurrenderBtn->NotHoverEffect = &SurrenderUnhover;
     PauseMenu->AddChild(surrenderBtn);
 
-    quitBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -100.f), (short)(sortingLayer + 1));
-    TextRenderer* tempQuittxtRenderer = devTools.AddTextToSpriteGameObject(quitBtn, "Gabriola.ttf", "Quit to Main Menu", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    quitBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -200.f), (short)(sortingLayer + 1));
+    TextRenderer* tempQuittxtRenderer = devTools.AddTextToSpriteGameObject(quitBtn, "Ayar.ttf", "Quit to Main Menu", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempQuittxtRenderer->SetTextColor(0, 0, 0);
     Button* tempQuitBtn = quitBtn->AddComponent<Button>();
     tempQuitBtn->sr = quitBtn->GetComponent<SpriteRenderer>();
@@ -223,4 +238,43 @@ void QuitUnhover(Button* button) {
         }
     }
 
+}
+
+UI_HowToPlayMenu::UI_HowToPlayMenu(void)
+{
+}
+
+UI_HowToPlayMenu::~UI_HowToPlayMenu(void)
+{
+}
+
+void UI_HowToPlayMenu::CreateHowToPlayMenu(short sortingLayer) {
+    GameObject* HowToPlayMenu = this->Owner();
+
+    // Background
+    tempBckgrnd = devTools.CreateSpriteGameObject("PlayGuide.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.0f);
+    HowToPlayMenu->AddChild(tempBckgrnd);
+
+
+    backBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 300, 40, AE_GFX_BM_BLEND, Vector2(750.0f, -400.0f), (short)(sortingLayer + 1));
+    TextRenderer* tempBacktxtRenderer = devTools.AddTextToSpriteGameObject(backBtn, "Ayar.ttf", "Back", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    tempBacktxtRenderer->SetTextColor(0, 0, 0);
+    Button* tempBackBtn = backBtn->AddComponent<Button>();
+    tempBackBtn->sr = backBtn->GetComponent<SpriteRenderer>();
+    tempBackBtn->tr = tempBacktxtRenderer;
+    tempBackBtn->affectedObject = HowToPlayMenu;
+    if (GameManager.pauseMenuOpen) {
+        tempBackBtn->ButtonEffect = &PauseHowToPlay;
+    }
+    else {
+        tempBackBtn->ButtonEffect = &HowToPlay;
+    }
+    HowToPlayMenu->AddChild(backBtn);
+
+}
+void HowToPlay(Button* button) {
+    GameManager.DisplayHowToPlayMenu();
+}
+void PauseHowToPlay(Button* button) {
+    GameManager.DisplayPauseHowToPlayMenu();
 }

@@ -146,7 +146,7 @@ void _gameManager::Update(void)
     }
 
     // pause
-    if (!SceneManager.transitioning && !optionMenuOpen && AEInputCheckTriggered(AEVK_ESCAPE)
+    if (!SceneManager.transitioning && !optionMenuOpen && !howToPlayMenuOpen && AEInputCheckTriggered(AEVK_ESCAPE)
         && !UIDialogueManager.UIDecision && !UIDialogueManager.UIOpen
         && typeid(*SceneManager.GetScene()) != typeid(Scene_MainMenu) && typeid(*SceneManager.GetScene()) != typeid(Scene_Splash))
     {
@@ -394,5 +394,25 @@ void _gameManager::DisplayPauseMenu(void)
 }
 void _gameManager::DisplayPauseOptionMenu(void) {
     DisplayOptionMenu();
+    DisplayPauseMenu();
+}
+void  _gameManager::DisplayHowToPlayMenu(void) {
+    howToPlayMenuOpen = !howToPlayMenuOpen;
+    if (howToPlayMenuUI)
+    {
+        howToPlayMenuUI->Delete();
+
+        howToPlayMenuUI = NULL;
+        AudioManager.PauseMusic(false);
+    }
+    else
+    {
+        howToPlayMenuUI = new GameObject();
+        howToPlayMenuUI->AddComponent<UI_HowToPlayMenu>()->CreateHowToPlayMenu(7);
+        AudioManager.PauseMusic(true);
+    }
+}
+void  _gameManager::DisplayPauseHowToPlayMenu(void) {
+    DisplayHowToPlayMenu();
     DisplayPauseMenu();
 }

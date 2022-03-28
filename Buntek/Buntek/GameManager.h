@@ -116,6 +116,10 @@ public:
     bool pauseMenuOpen = false;
     void DisplayPauseMenu(void);
     void DisplayPauseOptionMenu(void);
+    GameObject* howToPlayMenuUI = NULL;
+    bool howToPlayMenuOpen = false;
+    void DisplayHowToPlayMenu(void);
+    void DisplayPauseHowToPlayMenu(void);
 
     // Game over
     void GameOver(void);
