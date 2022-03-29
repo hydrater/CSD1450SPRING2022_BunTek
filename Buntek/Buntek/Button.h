@@ -28,7 +28,6 @@ public:
 		None = 0,
         MoveScene = 1
     };
-	ButtonTypes ButtonType = ButtonTypes::None;
 	//char fontId = -1;
 	string ButtonText = "";
 	void(*ButtonEffect)(Button*) = NULL;

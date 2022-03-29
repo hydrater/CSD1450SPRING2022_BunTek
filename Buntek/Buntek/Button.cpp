@@ -77,10 +77,10 @@ void DefaultHoverEffect(Button* button) {
 		AudioManager.LoadSound("ButtonHover.wav");
 		AudioManager.PlayClip("ButtonHover.wav");
 		if (button->sr != NULL) {
-			button->sr->Size(button->sr->GetHalfWidth() * 2 * 1.2, button->sr->GetHalfHeight() * 2 * 1.2);
+			button->sr->Size(button->sr->GetHalfWidth() * 2 * 1.2f, button->sr->GetHalfHeight() * 2 * 1.2f);
 		}
 		if (button->tr != NULL) {
-			button->tr->SetFontSize(button->tr->GetFontSize() * 1.2);
+			button->tr->SetFontSize(button->tr->GetFontSize() * 1.2f);
 		}
 		button->hoverplay = false;
 	}
