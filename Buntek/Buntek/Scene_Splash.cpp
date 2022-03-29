@@ -46,7 +46,7 @@ void Scene_Splash::Update(void)
 		|| AEInputCheckTriggered(AEVK_ESCAPE)
 		|| AEInputCheckTriggered(AEVK_SPACE)
 		|| AEInputCheckTriggered(AEVK_RETURN)) {
-		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::None, true);
+		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
 	}
 	switch (cycle)
 	{
