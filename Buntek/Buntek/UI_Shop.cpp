@@ -186,10 +186,12 @@ void UI_Shop::SetClickable(bool _canClick)
     {
         if (ArtifactOnSale[i].purchased == true)
         {
+            buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetHoverable(false);
             buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetClickable(false);
         }
         else
         {
+            buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetHoverable(_canClick);
             buttonArtifactList[i]->Owner()->GetComponent<Button>()->SetClickable(_canClick);
         }
     }

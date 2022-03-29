@@ -333,7 +333,7 @@ void _gameManager::DisplayOptionMenu(void)
     else
     {
         optionMenuUI = new GameObject();
-        optionMenuUI->AddComponent<UI_OptionMenu>()->CreateOptionMenu(7);
+        optionMenuUI->AddComponent<UI_OptionMenu>()->CreateOptionMenu(10);
     }
 }
 void _gameManager::DisplayPauseMenu(void)
@@ -349,7 +349,7 @@ void _gameManager::DisplayPauseMenu(void)
     else
     {
         pauseMenuUI = new GameObject();
-        pauseMenuUI->AddComponent<UI_PauseMenu>()->CreatePauseMenu(7);
+        pauseMenuUI->AddComponent<UI_PauseMenu>()->CreatePauseMenu(10);
         AudioManager.PauseMusic(true);
 
     }
@@ -370,7 +370,7 @@ void  _gameManager::DisplayHowToPlayMenu(void) {
     else
     {
         howToPlayMenuUI = new GameObject();
-        howToPlayMenuUI->AddComponent<UI_HowToPlayMenu>()->CreateHowToPlayMenu(7);
+        howToPlayMenuUI->AddComponent<UI_HowToPlayMenu>()->CreateHowToPlayMenu(10);
         AudioManager.PauseMusic(true);
     }
 }

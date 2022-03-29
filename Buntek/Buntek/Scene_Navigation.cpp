@@ -194,8 +194,10 @@ void Scene_Navigation::Update(void)
 
 void Scene_Navigation::LateUpdate(void)
 {
-	if (MapData.shopUI && MapData.shopUI->IsActive())
+	if (MapData.shopUI && MapData.shopUI->IsActive() && (!GameManager.optionMenuOpen && !GameManager.pauseMenuOpen && !GameManager.howToPlayMenuOpen))
 		MapData.shopUI->GetComponent<UI_Shop>()->SetClickable(true);
+	else if(MapData.shopUI && MapData.shopUI->IsActive() && ( GameManager.optionMenuOpen || GameManager.pauseMenuOpen || GameManager.howToPlayMenuOpen))
+		MapData.shopUI->GetComponent<UI_Shop>()->SetClickable(false);
 	UIDialogueManager.SetDialogueClickable(true);
 }
 
