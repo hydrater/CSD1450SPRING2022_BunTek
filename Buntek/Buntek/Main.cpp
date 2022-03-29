@@ -61,7 +61,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	SaveManager.LoadData();
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
 
-	AEToogleFullScreen(GameManager.isFullScreen);
 	#if defined _DEBUG
 		GameManager.isFullScreen = !GameManager.isFullScreen;
 		AEToogleFullScreen(GameManager.isFullScreen);
@@ -74,7 +73,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		if (desktop.right > 2500 || desktop.right < 1900 || desktop.bottom < 1050)
 		{
 			cout << "Ultra wide monitor detected, disabling full screen...";
-			GameManager.isFullScreen = !GameManager.isFullScreen;
+			GameManager.isFullScreen = false;
 			AEToogleFullScreen(GameManager.isFullScreen);
 		}
 	}
