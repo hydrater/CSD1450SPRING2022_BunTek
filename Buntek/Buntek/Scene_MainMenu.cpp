@@ -354,6 +354,11 @@ void Scene_MainMenu::Update(void)
 		creditsBtn->GetComponent<Button>()->SetClickable(true);
 		quitBtn->GetComponent<Button>()->SetClickable(true);
 	}
+	if (finishedSetup && AEInputCheckTriggered(AEVK_ESCAPE))
+	{
+		GameManager.exit = true;
+	}
+
 }
 
 Scene_MainMenu::~Scene_MainMenu(void)

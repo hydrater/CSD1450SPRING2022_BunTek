@@ -61,11 +61,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	SaveManager.LoadData();
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
 
-	#if defined _DEBUG
-	GameManager.isFullScreen = !GameManager.isFullScreen;
 	AEToogleFullScreen(GameManager.isFullScreen);
+	#if defined _DEBUG
+		GameManager.isFullScreen = !GameManager.isFullScreen;
+		AEToogleFullScreen(GameManager.isFullScreen);
 	#endif
-
 	// Check if screen res is ultra wide for alpha testing
 	{
 	#include "wtypes.h"
