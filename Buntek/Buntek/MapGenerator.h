@@ -90,5 +90,19 @@ private:
     const float maxDistance = 400;
     const float xBuffer = 75;
     const float yBuffer = 150;
+
+    const Vector2 particlePos = Vector2(0, 0);
+    const float particleSpawnRate = 1.f, particleAngleSpread = 360.f;
+    const int   particleNumBurst = 10.f;
+    const float particlePowerMin = 50.f, particlePowerMax = 80.f;
+    const float particleRotationMin = 0.f, particleRotationMax = 360.f;
+    const float particleXDimension = 20.f, particleYDimension = 20.f;
+    const short particleRenderLayer = -2;
+    const float particleLifeSpanMin = 0.5f, particleLifeSpanMax = 1.5f;
+
+    const float routeLineThickness = 5.f;
+    const short routeLineLayerOffset = -3;
+    const float historyLineThickness = 2.5f;
+    const short historyLineLayerOffset = -4;
     //bool CollideLines(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
 };

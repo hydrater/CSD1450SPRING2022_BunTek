@@ -43,7 +43,7 @@ void UI_EnemyNodeBox::CreateEnemyNode(GameObject* button, int sortingLayer, int 
 
 	SpriteRenderer* tempBckgdRenderer = 0;
 	tempBckgdRenderer = enemynode->AddComponent<SpriteRenderer>();
-	tempBckgdRenderer->Size(300, 300);
+	tempBckgdRenderer->Size(nodeBckgrndSize, nodeBckgrndSize);
 	tempBckgdRenderer->SetTexture("HoverTexture.png");
 	tempBckgdRenderer->SetLayer(sortingLayer - 2);
 

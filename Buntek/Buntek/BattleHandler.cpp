@@ -165,10 +165,6 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	inputHandler->GetComponent<BattleInput>()->AIPaddle = temppaddle;
 
 	playercursor = new GameObject();
-	//tempRenderer = playercursor->AddComponent<SpriteRenderer>();
-	//tempRenderer->Size(50, 50);
-	//tempRenderer->SetTexture("ball.png");
-	//tempRenderer->SetColor(0.5f, 0.5f, 1);
 	CursorBehaviour* tempcursor;
 	tempcursor = playercursor->AddComponent<CursorBehaviour>();
 	tempcursor->setplayerpossess(true);
@@ -177,10 +173,6 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	inputHandler->GetComponent<BattleInput>()->playerCursor = tempcursor;
 
 	AIcursor = new GameObject();
-	//tempRenderer = AIcursor->AddComponent<SpriteRenderer>();
-	//tempRenderer->Size(50, 50);
-	//tempRenderer->SetTexture("ball.png");
-	//tempRenderer->SetColor(1, 0.5f, 0.5f);
 	tempcursor = AIcursor->AddComponent<CursorBehaviour>();
 	tempcursor->setplayerpossess(false);
 	tempcursor->sr = tempRenderer;
@@ -332,7 +324,8 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	GameObject* newParticle = new GameObject();
 	ParticleSystem* newSystem = newParticle->AddComponent<ParticleSystem>();
 	newParticle->transform->SetPosition(ball->transform->worldposition);
-	newSystem->SetEmittingParticle(Vector2(0, 1), 100, 10, 80, 100, -10, 10, 10, 10, "hdCircle.png", ball->transform->worldposition, 6, (short)AE_GFX_BM_BLEND, false, true);
+	newSystem->SetEmittingParticle(particlePos, particleSpawnRate, particleAngleSpread, particlePowerMin, particlePowerMax, particleRotationMin,
+		particleRotationMax, particleXDimension, particleYDimension, "hdCircle.png", ball->transform->worldposition, particleRenderLayer, (short)AE_GFX_BM_BLEND, false, true);
 
 	tempBall->ballParticle = newParticle;
 	tempBall->ballParticleSystem = newSystem;

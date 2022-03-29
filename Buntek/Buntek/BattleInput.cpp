@@ -47,7 +47,7 @@ void BattleInput::Update(void)
 
 		temp = (temp - LaunchBall->transform->worldposition);
 		LaunchLine->transform->Owner()->GetComponent<SpriteRenderer>()->Size(5,temp.Length());
-		tempAngle = Vector2(0, 1).AngleBetween(temp) / 3.1415926535897932384626433832795f * 180.0f;
+		tempAngle = Vector2(0, 1).AngleBetween(temp) / PI * 180.0f;
 		if (tempCalculation.x < LaunchBall->transform->worldposition.x)
 		{
 			tempAngle = -tempAngle;
@@ -68,7 +68,7 @@ void BattleInput::Update(void)
 		{
 			temp.x = -temp.x;
 		}
-		LaunchBallCalculator->SetSpeed(300);
+		LaunchBallCalculator->SetSpeed(ballSpeed);
 		LaunchBallCalculator->velocity = temp.Normalize();
 		
 		this->ballList.push_back(LaunchBallCalculator);
@@ -145,20 +145,21 @@ void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Padd
 		if (targetedBall->playerPossess == isPlayer && acceptableRange)
 		{
 			float estimate = (*vecPosition).operator-(*vecTargetPosition).Length() - targetedBall->velocity.Length();
+			float randomXOffset = RandFloatMinMax(-2.f, 2.f); // Random offset to prevent direct reflection down
 
-			vecTargetPosition->x = temp->worldposition.x + (targetedBall->velocity.x * estimate);
+			vecTargetPosition->x = temp->worldposition.x + (targetedBall->velocity.x * estimate) + randomXOffset;
 			vecTargetPosition->y = temp->worldposition.y + (targetedBall->velocity.y * estimate);
 			vecTargetPosition->x = AEClamp(vecTargetPosition->x, GameManager.areaLeftBoundary, GameManager.areaRightBoundary);
 			vecTargetPosition->y = AEClamp(vecTargetPosition->y, GameManager.areaBottomBoundary, GameManager.areaTopBoundary);
 		}
 		else
 		{
-			*vecTargetPosition = isPlayer ? Vector2(0, -400) : Vector2(0, 400);
+			*vecTargetPosition = isPlayer ? Vector2(0.f, -AIRestYPosition) : Vector2(0.f, AIRestYPosition);
 		}
 	}
 	else
 	{
-		*vecTargetPosition = isPlayer ? Vector2(0, -400) : Vector2(0, 400);
+		*vecTargetPosition = isPlayer ? Vector2(0.f, -AIRestYPosition) : Vector2(0.f, AIRestYPosition);
 	}
 
 	// Move position towards the targetedPosition

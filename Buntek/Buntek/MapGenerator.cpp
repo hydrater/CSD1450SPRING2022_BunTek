@@ -119,9 +119,11 @@ void _mapData::GenerateMapObject(void)
         tempRenderer->Size(50, 50);
         tempRenderer->SetLayer(-1);
 
+        // Particle Effects
         GameObject* particle = new GameObject();
         ParticleSystem* newSystem = particle->AddComponent<ParticleSystem>();
-        newSystem->SetBurstingParticle(Vector2(0, 0), 1, 10, true, 360, 50, 80, 0, 360, 20, 20, "hdCircle.png", nodeList[i]->pos, -2, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+        newSystem->SetBurstingParticle(particlePos, particleSpawnRate, particleNumBurst, true, particleAngleSpread, particlePowerMin, particlePowerMax,
+            particleRotationMin, particleRotationMax, particleXDimension, particleYDimension, "hdCircle.png", nodeList[i]->pos, particleRenderLayer, (short)AE_GFX_BM_BLEND, true, true, particleLifeSpanMin, particleLifeSpanMax);
         newSystem->isEmitting = false;
 
         Button* tempButton = temp->AddComponent<Button>();
@@ -205,7 +207,7 @@ void _mapData::GenerateMapObject(void)
 
             if (nodeList[k] != nodeList[i] && closeEnough)
             {
-                GameObject* newLine = devTools.CreateLineGameObject(nodeList[i]->pos, nodeList[k]->pos, 1.f, 1.f, 1.f, 5, -3, 0.4f);
+                GameObject* newLine = devTools.CreateLineGameObject(nodeList[i]->pos, nodeList[k]->pos, 1.f, 1.f, 1.f, routeLineThickness, routeLineLayerOffset, 0.4f);
                 linkedLinesObj.push_back(newLine);
                 connectedLinesNodes.push_back(nodeList[i]);
                 connectedLinesObj.push_back(linkedLinesObj);
@@ -284,7 +286,7 @@ void _mapData::DisplayNodeHistory(void)
         // Draw Line
         if (prevNode != nullptr && currNode != nullptr && prevNode != currNode)
         {
-            GameObject* newLine = devTools.CreateLineGameObject(prevNode->pos, currNode->pos, 0.f, 0.f, 0.8f, 2.5f, -4, 1.f);
+            GameObject* newLine = devTools.CreateLineGameObject(prevNode->pos, currNode->pos, 0.f, 0.f, 0.8f, historyLineThickness, historyLineLayerOffset, 1.f);
             travelHistoryLinesObj.push_back(newLine);
         }
         prevNode = currNode;

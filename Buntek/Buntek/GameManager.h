@@ -29,6 +29,11 @@ private:
     map<unsigned long, int> EnemyArtifactData;
     short currentEnemy = 1;
 
+    const float artifactsUIXSize = 800.f, artifactsUIYSize = 600.f;
+    const short artifactsUILayer = 10;
+    const Vector2 artifactObjPos = Vector2(-300.f, 160.f);
+    const short artifactsObjLayer = 11;
+
 public:
     static _gameManager& Instance(void);
     bool exit = false;

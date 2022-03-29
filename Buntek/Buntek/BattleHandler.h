@@ -38,6 +38,14 @@ private:
 	const float xOffset = 55, yOffset = 55, maxRow = 9;
 	void SpawnArtifactList(Vector2 pos, map<unsigned long, int> artifactList, float xDir, float yDir);
 	Vector2 playerArtifactListTopLeft = Vector2(0, 0), enemyArtifactListTopLeft = Vector2(0, 0);
+
+	// Particle Effects
+	const Vector2 particlePos = Vector2(0, 1);
+	const float particleSpawnRate = 100.f, particleAngleSpread = 10.f;
+	const float particlePowerMin = 80.f, particlePowerMax = 100.f;
+	const float particleRotationMin = -10.f, particleRotationMax = 10.f;
+	const float particleXDimension = 10.f, particleYDimension = 10.f;
+	const short particleRenderLayer = 6;
 };
 
 #endif

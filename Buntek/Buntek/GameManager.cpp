@@ -155,44 +155,6 @@ void _gameManager::Update(void)
     }
 }
 
-//void _gameManager::CameraUpdate(void)
-//{
-//    if (cameraShakeTime > 0)
-//	{
-//		float dt = DeltaTime;
-//		float test = RandFloatMinMax(0, 3);
-//
-//		Vector2 newDir = Vector2(dir.x * shakeOffset, dir.y * shakeOffset);
-//
-//		shakeOffset -= cameraDecline;
-//		// For random, comment out the switch
-//		//pos = Vector2(RandFloatMinMax(-shakeOffset, shakeOffset), RandFloatMinMax(-shakeOffset, shakeOffset));
-//		shakeIntervalTimer -= dt;
-//
-//		if (shakeIntervalTimer < 0)
-//		{
-//			switch (cameraShakeState)
-//			{
-//			case 0: // top left
-//				pos = Vector2(newDir.x, newDir.y);
-//				break;
-//			case 1: // bottom right
-//				pos = Vector2(-newDir.x, -newDir.y);
-//			}
-//
-//			AEGfxSetCamPosition(pos.x, pos.y);
-//			cameraShakeState += cameraShakeState < 2 ? 1 : -2;
-//			shakeIntervalTimer = shakeInterval;
-//		}
-//		cameraShakeTime -= dt;
-//	}
-//	else
-//	{
-//		pos = Vector2(0, 0);
-//		AEGfxSetCamPosition(pos.x, pos.y);
-//	}
-//}
-
 void _gameManager::CameraShake(float period, float _shakeStrength, Vector2 direction)
 {
     dir = direction;
@@ -217,7 +179,7 @@ void _gameManager::DisplayArtifactList(void)
     }
     else
     {
-        artifactListUI = devTools.CreateSpriteGameObject("WhiteTexture.png", 800, 600, AE_GFX_BM_BLEND, Vector2(0, 0), 10);
+        artifactListUI = devTools.CreateSpriteGameObject("WhiteTexture.png", artifactsUIXSize, artifactsUIYSize, AE_GFX_BM_BLEND, Vector2(0, 0), artifactsUILayer);
         artifactListUI->GetComponent<SpriteRenderer>()->SetColor(0.2f, 0.2f, 0.2f);
         TextRenderer* textRenderer = devTools.AddTextToSpriteGameObject(artifactListUI, "Astral.ttf", "List of artifacts", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Top, 40.f, 11);
         textRenderer->SetYBuffer(50);
@@ -225,7 +187,7 @@ void _gameManager::DisplayArtifactList(void)
         float i = 0, j = 0;
         for (const auto& kv : SaveManager.artifactSaveData)
         {
-            artifactListUI->AddChild(devTools.CreateArtifactObject(Vector2(-300.f, 160.f) + Vector2(xOffset * i, yOffset * j * -1), kv.first, kv.second, 1, 11));
+            artifactListUI->AddChild(devTools.CreateArtifactObject(artifactObjPos + Vector2(xOffset * i, yOffset * j * -1), kv.first, kv.second, 1, artifactsObjLayer));
             ++i;
             if (i >= maxRow)
             {

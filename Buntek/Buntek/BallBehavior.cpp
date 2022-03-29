@@ -311,7 +311,7 @@ void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 	}
 }
 void BallBehavior::BallHorizontalCheck(void) {
-	float ang = Vector2(1, 0).AngleBetween(velocity) / 3.1415926535897932384626433832795f * 180.0f;
+	float ang = Vector2(1, 0).AngleBetween(velocity) / pi * 180.0f;
 	if (0 <= ang && ang <= angRange) {
 		if (playerPossess) {
 			velocity = Vector2(1, 0);

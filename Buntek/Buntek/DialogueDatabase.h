@@ -32,4 +32,5 @@ public:
 	string forceCommand = "";		// Use this to call a function in LaunchButtonEffect if button is a nullptr
 	int fullHealthCost = 10;		// Cost to heal to max hp
 private:
+	const float defaultXSize = 1920.f, defaultYSize = 1080.f;
 };

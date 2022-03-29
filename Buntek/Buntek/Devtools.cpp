@@ -195,10 +195,21 @@ GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R,
 
 GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, float xDir, short layer)
 {
-    GameObject* artifactUI = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(artifact), 50, 50, AE_GFX_BM_BLEND, pos, layer);
-    GameObject* popUpUI = CreateSpriteGameObject("WhiteTexture.png", 300, 100, AE_GFX_BM_BLEND, pos + Vector2(150.f * xDir, -50.f), layer + 2, 0.8f);
+    const float UIXSize = 50.f, UIYSize = 50.f;
+
+    const float popUpXSize = 300.f, popUpYSize = 100.f;
+    const Vector2 popUpPosOffset = Vector2(150.f * xDir, -50.f);
+    const short popUpOffset = 2;
+    const short popUpTextOffset = 3;
+
+    const float countXSize = 40.f, countYSize = 40.f;
+    const Vector2 countPosOffset = Vector2(25.f, -25.f);
+    const short countOffset = 1;
+
+    GameObject* artifactUI = CreateSpriteGameObject(ArtifactDatabase.GetSpriteName(artifact), UIXSize, UIYSize, AE_GFX_BM_BLEND, pos, layer);
+    GameObject* popUpUI = CreateSpriteGameObject("WhiteTexture.png", popUpXSize, popUpYSize, AE_GFX_BM_BLEND, pos + popUpPosOffset, layer + popUpOffset, 0.8f);
     popUpUI->GetComponent<SpriteRenderer>()->SetColor(0.f, 0.f, 0.f);
-    TextRenderer* textRenderer = devTools.AddTextToSpriteGameObject(popUpUI, "Ayar.ttf", ArtifactDatabase.GetDescription(artifact), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 3, true);
+    TextRenderer* textRenderer = devTools.AddTextToSpriteGameObject(popUpUI, "Ayar.ttf", ArtifactDatabase.GetDescription(artifact), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + popUpTextOffset, true);
     textRenderer->SetYBuffer(0);
     popUpUI->Deactivate();
     Button* artifactUIBtn = artifactUI->AddComponent<Button>();
@@ -208,8 +219,8 @@ GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact,
     artifactUIBtn->NotHoverEffect = &ArtifactObjectUnhover;
     artifactUIBtn->SetClickable(false);
 
-    GameObject* countUI = CreateSpriteGameObject("WhiteTexture.png", 40, 40, AE_GFX_BM_BLEND, pos + Vector2(25.f, -25.f), layer, 0);
-    textRenderer = devTools.AddTextToSpriteGameObject(countUI, "Ayar.ttf", "x" + to_string(count), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + 1, true);
+    GameObject* countUI = CreateSpriteGameObject("WhiteTexture.png", countXSize, countYSize, AE_GFX_BM_BLEND, pos + countPosOffset, layer, 0);
+    textRenderer = devTools.AddTextToSpriteGameObject(countUI, "Ayar.ttf", "x" + to_string(count), TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 18.f, layer + countOffset, true);
     artifactUI->AddChild(countUI);
 
     return artifactUI;

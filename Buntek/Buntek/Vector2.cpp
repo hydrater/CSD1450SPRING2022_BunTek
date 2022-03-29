@@ -95,8 +95,8 @@ void Vector2::SetZero()
 //Does Anticlockwise Rotation
 void Vector2::RotateAC(float degrees)
 {
-	float sin = sinf(degrees / 180.0f * 3.1415926535897932384626433832795f);
-	float cos = cosf(degrees / 180.0f * 3.1415926535897932384626433832795f);
+	float sin = sinf(degrees / 180.0f * pi);
+	float cos = cosf(degrees / 180.0f * pi);
 	float tx = x;
 	float ty = y;
 	x = (cos * tx) - (sin * ty);
@@ -106,8 +106,8 @@ void Vector2::RotateAC(float degrees)
 //Does Clockwise Rotation
 void Vector2::RotateC(float degrees)
 {
-	float sin = sinf(degrees / 180.0f * 3.1415926535897932384626433832795f);
-	float cos = cosf(degrees / 180.0f * 3.1415926535897932384626433832795f);
+	float sin = sinf(degrees / 180.0f * pi);
+	float cos = cosf(degrees / 180.0f * pi);
 	float tx = x;
 	float ty = y;
 	x = (cos * tx) + (sin * ty);

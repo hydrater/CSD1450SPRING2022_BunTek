@@ -41,5 +41,9 @@ private:
 
 	float AIspeed = 0.05f;
 	float AIscalingTimer = 0;
+
+	const float AIRestYPosition = 400.f;
+
+	const float ballSpeed = 300.f;
 };
 #endif

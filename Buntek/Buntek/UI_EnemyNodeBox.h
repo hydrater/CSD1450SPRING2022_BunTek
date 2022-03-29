@@ -36,4 +36,6 @@ public:
 private:
 	GameObject* enemynode = 0;
 	GameObject* artifactgrid = 0;
+
+	const float nodeBckgrndSize = 300.f;
 };
