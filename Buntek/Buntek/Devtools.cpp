@@ -157,22 +157,22 @@ GameObject* _devTools::CreateArtifactRewardCard(unsigned long ID, Vector2 pos, s
 }
 
 GameObject* _devTools::CreatePriceTagGameObject(int price, short blendMode, Vector2 pos, short layer) {
-    float PriceTagXSize = 120.f, PriceTagYSize = 50.f;
-    float PriceTagColorR = 0.75f, PriceTagColorG = 0.5f, PriceTagColorB = 0.5f;
+    const float PriceTagXSize = 120.f, PriceTagYSize = 50.f;
+    const float PriceTagColorR = 0.75f, PriceTagColorG = 0.5f, PriceTagColorB = 0.5f;
     GameObject* PriceTag = CreateSpriteGameObject("WhiteTexture.png", PriceTagXSize, PriceTagYSize, blendMode, pos, layer);
     SpriteRenderer* Tagsr = PriceTag->GetComponent<SpriteRenderer>();
     Tagsr->SetColor(PriceTagColorR, PriceTagColorG, PriceTagColorB);
 
-    float PriceTextXSize = 40.f, PriceTextYSize = 50.f;
-    float PriceTextXOffset = 10.f;
-    int PriceTextLayerOffset = 1;
+    const float PriceTextXSize = 40.f, PriceTextYSize = 50.f;
+    const float PriceTextXOffset = 10.f;
+    const int PriceTextLayerOffset = 1;
     GameObject* PriceTextObj = CreateSpriteGameObject("WhiteTexture.png", PriceTextXSize, PriceTextYSize, blendMode, Vector2(pos.x + PriceTextXOffset, pos.y), layer + PriceTextLayerOffset, 0);
     TextRenderer* PriceText = AddTextToSpriteGameObject(PriceTextObj, "Ayar.ttf", to_string(price), TextRenderer::xAlignmentTypes::Left, TextRenderer::yAlignmentTypes::Mid, 26.f, layer + 1);
     PriceTag->AddChild(PriceTextObj);
 
-    float PriceIconXSize = 40.f, PriceIconYSize = 40.f;
-    float PriceIconXOffset = -30.f;
-    int PriceIconLayerOffset = 1;
+    const float PriceIconXSize = 40.f, PriceIconYSize = 40.f;
+    const float PriceIconXOffset = -30.f;
+    const int PriceIconLayerOffset = 1;
     GameObject* PriceIcon = CreateSpriteGameObject("UI/Stardust.png", PriceIconXSize, PriceIconYSize, blendMode, Vector2(pos.x + PriceIconXOffset, pos.y), layer + PriceIconLayerOffset);
     PriceTag->AddChild(PriceIcon);
 
@@ -181,9 +181,9 @@ GameObject* _devTools::CreatePriceTagGameObject(int price, short blendMode, Vect
 
 GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R, float G, float B, float thickness, short layer, float opacity) {
     // Get Angle
-    float angle = atan2(pos1.y - pos2.y, pos1.x - pos2.x) * 180.f / PI;
+    const float angle = atan2(pos1.y - pos2.y, pos1.x - pos2.x) * 180.f / PI;
     // Get Length
-    float length = sqrtf(powf(pos1.x - pos2.x, 2) + powf(pos1.y - pos2.y, 2));
+    const float length = sqrtf(powf(pos1.x - pos2.x, 2) + powf(pos1.y - pos2.y, 2));
     // Get Midpoint Value
     Vector2 midpos = Vector2(pos2.x + (pos1.x - pos2.x)/2.f, pos2.y + (pos1.y - pos2.y) / 2.f);
     // "Draw" Line

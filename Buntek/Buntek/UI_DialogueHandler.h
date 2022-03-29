@@ -84,17 +84,17 @@ private:
 	int rewardButtonNo = 0;
 
 	// Dialogue Preset Size
-	Vector2 vectorZero = Vector2(0.f, 0.f);
-	float dialogueBoxXSize = 1900.f, dialogueBoxYSize = 303.f;
-	Vector2 dialogueBoxPos = Vector2(0, -370);
-	float dialogueBoxFontScale = 0.6f;
+	const Vector2 vectorZero = Vector2(0.f, 0.f);
+	const float dialogueBoxXSize = 1900.f, dialogueBoxYSize = 303.f;
+	const Vector2 dialogueBoxPos = Vector2(0, -370);
+	const float dialogueBoxFontScale = 0.6f;
 
-	float actorBoxXSize = dialogueBoxXSize / 4.5f, actorBoxYSize = dialogueBoxYSize / 4.f;
-	Vector2 actorBoxPos = Vector2(0.f, dialogueBoxPos.y + dialogueBoxYSize/4.f + 20.f);
-	float actorBoxColorR = 1.f, actorBoxColorG = 0.29f, actorBoxColorB = 0.89f;
+	const float actorBoxXSize = dialogueBoxXSize / 4.5f, actorBoxYSize = dialogueBoxYSize / 4.f;
+	const Vector2 actorBoxPos = Vector2(0.f, dialogueBoxPos.y + dialogueBoxYSize/4.f + 20.f);
+	const float actorBoxColorR = 1.f, actorBoxColorG = 0.29f, actorBoxColorB = 0.89f;
 
-	float buttonXSize = 785.f, buttonYSize = 70.f;
-	float rewardXSize = 350.f, rewardYSize = 500.f;
+	const float buttonXSize = 785.f, buttonYSize = 70.f;
+	const float rewardXSize = 350.f, rewardYSize = 500.f;
 
 	// Display Speed
 	float displayTimer = 0;
