@@ -11,6 +11,27 @@
 
 _assetManager::_assetManager()
 {
+    //font
+    LoadFont("Ayar.ttf");
+    LoadFont("Astral.ttf");
+    LoadFont("Gabriola.ttf");
+    LoadFont("Metrolic.ttf");
+    LoadFont("GothicA1.ttf");
+}
+
+_assetManager::~_assetManager()
+{
+    
+}
+
+_assetManager& _assetManager::Instance(void)
+{
+    static _assetManager instance;
+    return instance;
+}
+
+void _assetManager::LoadBaseLibrary(void)
+{
     LoadTexture("WhiteTexture.png");
     LoadTexture("hdCircle.png");
 
@@ -30,12 +51,7 @@ _assetManager::_assetManager()
     LoadTexture("Battlescreen.png");
     LoadTexture("Gameover.png");
 
-    //font
-    LoadFont("Ayar.ttf");
-    LoadFont("Astral.ttf");
-    LoadFont("Gabriola.ttf");
-    LoadFont("Metrolic.ttf");
-    LoadFont("GothicA1.ttf");
+
 
     //Artifacts
     LoadTexture("Artifacts/Common.png");
@@ -65,17 +81,6 @@ _assetManager::_assetManager()
     LoadTexture("Artifacts/StarryTrampoline.png");
     LoadTexture("Artifacts/TitaniumFan.png");
     LoadTexture("Artifacts/UwUGlu.png");
-}
-
-_assetManager::~_assetManager()
-{
-    
-}
-
-_assetManager& _assetManager::Instance(void)
-{
-    static _assetManager instance;
-    return instance;
 }
 
 void _assetManager::AddToList(SpriteRenderer* spriteRenderer)

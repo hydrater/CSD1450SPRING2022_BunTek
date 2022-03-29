@@ -22,7 +22,7 @@
 #include "ECSManager.h"
 #include "DebuggingTools.h"
 
-bool finishInit = false;
+short initStage = 0;
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -53,69 +53,83 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	AESysReset();
 
 	// --------------------------------------------- Init --------------------------------------------- //
-	InitRNG();
-	ArtifactDatabase;
-	GameManager;
 	AssetManager;
-	AudioManager;
-	MapData;
-	Renderer;
-	SaveManager.LoadData();
-	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
-
-#if defined _DEBUG
-	GameManager.isFullScreen = !GameManager.isFullScreen;
-	AEToogleFullScreen(GameManager.isFullScreen);
-#endif
-	// Check if screen res is ultra wide for alpha testing
-	{
-#include "wtypes.h"
-		RECT desktop;
-		GetWindowRect(GetDesktopWindow(), &desktop);
-		if (desktop.right > 2500 || desktop.right < 1900 || desktop.bottom < 1050)
-		{
-			cout << "Ultra wide monitor detected, disabling full screen...";
-			GameManager.isFullScreen = false;
-			AEToogleFullScreen(GameManager.isFullScreen);
-		}
-	}
+	// 
+//#if defined _DEBUG
+//	GameManager.isFullScreen = !GameManager.isFullScreen;
+//	AEToogleFullScreen(GameManager.isFullScreen);
+//#endif
+//	// Check if screen res is ultra wide for alpha testing
+//	{
+//#include "wtypes.h"
+//		RECT desktop;
+//		GetWindowRect(GetDesktopWindow(), &desktop);
+//		if (desktop.right > 2500 || desktop.right < 1900 || desktop.bottom < 1050)
+//		{
+//			cout << "Ultra wide monitor detected, disabling full screen...";
+//			GameManager.isFullScreen = false;
+//			AEToogleFullScreen(GameManager.isFullScreen);
+//		}
+//	}
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{
 		// ------------------------------------------- Start of Loop ------------------------------------------- //
 		// Informing the system about the loop's start
 		AESysFrameStart();
-		if (finishInit)
+
+		switch (initStage)
 		{
-			// Handling Input
-			AEInputUpdate();
+			case 0:
+			{
+				AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+				initStage = 1;
+				break;
+			}
 
-			// Debugging tools
-			Debugger.CheatsUpdate();
+			case 1:
+			{
+				InitRNG();
+				Renderer;
+				ArtifactDatabase;
+				GameManager;
+				AudioManager;
+				MapData;
+				SaveManager.LoadData();
+				SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
+				initStage = 2;
+				break;
+			}
 
-			// --------------------------------------------- Update --------------------------------------------- //
-			SceneManager.EarlyUpdate();
-			UIDialogueManager.Update();
-			AudioManager.Update();
-			SceneManager.Update();
-			GameManager.Update();
-			GameScriptManager.Update();
+			default:
+			{
+				// Handling Input
+				AEInputUpdate();
 
-			// --------------------------------------------- Collision --------------------------------------------- //
-			//CollisionManager2D.CollideAll();
+				// Debugging tools
+				Debugger.CheatsUpdate();
 
-			// --------------------------------------------- Render --------------------------------------------- //
-			Renderer.Update();
-			SceneManager.LateUpdate();
+				// --------------------------------------------- Update --------------------------------------------- //
+				SceneManager.EarlyUpdate();
+				UIDialogueManager.Update();
+				AudioManager.Update();
+				SceneManager.Update();
+				GameManager.Update();
+				GameScriptManager.Update();
 
-			// ------------------------------------------- End of Loop ------------------------------------------- //
-			ECSManager.UpdateList();
+				// --------------------------------------------- Collision --------------------------------------------- //
+				//CollisionManager2D.CollideAll();
+
+				// --------------------------------------------- Render --------------------------------------------- //
+				Renderer.Update();
+				SceneManager.LateUpdate();
+
+				// ------------------------------------------- End of Loop ------------------------------------------- //
+				ECSManager.UpdateList();
+				break;
+			}
 		}
-		else
-		{
-			AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
-			finishInit = true;
-		}
+
 		// Informing the system about the loop's end
 		AESysFrameEnd();
 
@@ -129,7 +143,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			Renderer.FreeMesh();
 			ECSManager.Free();
 		}
-
 	}
 	//
 	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //

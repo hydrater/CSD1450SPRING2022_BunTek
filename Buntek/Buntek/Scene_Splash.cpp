@@ -68,6 +68,7 @@ void Scene_Splash::Update(void)
 		break;
 	case 3:
 		splashRenderer->SetOpacity(0);
+		AssetManager.LoadBaseLibrary();
 		break;
 	case 4:
 	{
