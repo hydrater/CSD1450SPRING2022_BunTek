@@ -36,8 +36,11 @@ UI_DialogueHandler& UI_DialogueHandler::Instance(void)
 
 void UI_DialogueHandler::Update(void)
 {
+    if (GameManager.pauseMenuOpen || GameManager.optionMenuOpen || GameManager.howToPlayMenuOpen)
+        return;
+
     // For dialogue only
-    if (UIOpen)
+    if (UIOpen)// && !GameManager.pauseMenuOpen && !GameManager.optionMenuOpen && !GameManager.howToPlayMenuOpen)
     {
         if (dialogueNo >= dialogueList.size() && !UINotification)
             return;

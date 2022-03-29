@@ -93,7 +93,7 @@ private:
 
     const Vector2 particlePos = Vector2(0, 0);
     const float particleSpawnRate = 1.f, particleAngleSpread = 360.f;
-    const int   particleNumBurst = 10.f;
+    const int   particleNumBurst = 10;
     const float particlePowerMin = 50.f, particlePowerMax = 80.f;
     const float particleRotationMin = 0.f, particleRotationMax = 360.f;
     const float particleXDimension = 20.f, particleYDimension = 20.f;

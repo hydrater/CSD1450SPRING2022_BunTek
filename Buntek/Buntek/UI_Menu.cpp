@@ -3,6 +3,9 @@
 #include "Slider.h"
 #include "Button.h"
 #include "AudioEngine.h"
+#include "MapGenerator.h"
+#include "UI_DialogueHandler.h"
+#include "DialogueDatabase.h"
 #include "GameManager.h"
 #include "SaveManager.h"
 #include "Scene_MainMenu.h"
@@ -201,6 +204,13 @@ void Quit(Button* button) {
     if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
         GameManager.DisplayPauseMenu();
         SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
+        if (MapData.shopUI)
+        {
+            MapData.shopUI->Delete();
+            MapData.shopUI = 0;
+        }
+        DialogueDatabase.ClearDialogueSceneObjs();
+        UIDialogueManager.DeleteDialogueEvent();
     }
     else {
         button->Owner()->GetComponent<TextRenderer>()->SetText("Are you sure?");
@@ -208,6 +218,7 @@ void Quit(Button* button) {
     }
     AudioManager.LoadSound("ButtonHover.wav");
     AudioManager.PlayClip("ButtonHover.wav");
+
     button->hoverplay = false;
 }
 void SurrenderUnhover(Button* button) {
@@ -215,6 +226,13 @@ void SurrenderUnhover(Button* button) {
         if (button->Owner()->GetComponent<TextRenderer>()->GetText() == "Are you sure?") {
             button->Owner()->GetComponent<TextRenderer>()->SetText("Abandon run");
             button->Owner()->GetComponent<SpriteRenderer>()->SetColor(1, 1, 1);
+            if (MapData.shopUI)
+            {
+                MapData.shopUI->Delete();
+                MapData.shopUI = 0;
+            }
+            DialogueDatabase.ClearDialogueSceneObjs();
+            UIDialogueManager.DeleteDialogueEvent();
         }
         if (!button->hoverplay) {
             AudioManager.UnloadSound("ButtonHover.wav");
