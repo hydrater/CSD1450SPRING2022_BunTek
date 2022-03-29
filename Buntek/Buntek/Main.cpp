@@ -21,6 +21,8 @@
 #include "SaveManager.h"
 #include "ECSManager.h"
 #include "DebuggingTools.h"
+
+bool finishInit = false;
 // ---------------------------------------------------------------------------
 // main
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -32,9 +34,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(lpCmdLine);
 
 	// Enable run-time memory check for debug builds.
-	#if defined(DEBUG) | defined(_DEBUG)
-		_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	#endif
+#if defined(DEBUG) | defined(_DEBUG)
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+#endif
 
 	// --------------------------------------------- Awake --------------------------------------------- //
 	int gGameRunning = 1;
@@ -61,13 +63,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	SaveManager.LoadData();
 	SceneManager.LoadScene(new Scene_Splash, TransitionType::None, true);
 
-	#if defined _DEBUG
-		GameManager.isFullScreen = !GameManager.isFullScreen;
-		AEToogleFullScreen(GameManager.isFullScreen);
-	#endif
+#if defined _DEBUG
+	GameManager.isFullScreen = !GameManager.isFullScreen;
+	AEToogleFullScreen(GameManager.isFullScreen);
+#endif
 	// Check if screen res is ultra wide for alpha testing
 	{
-	#include "wtypes.h"
+#include "wtypes.h"
 		RECT desktop;
 		GetWindowRect(GetDesktopWindow(), &desktop);
 		if (desktop.right > 2500 || desktop.right < 1900 || desktop.bottom < 1050)
@@ -83,31 +85,37 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// ------------------------------------------- Start of Loop ------------------------------------------- //
 		// Informing the system about the loop's start
 		AESysFrameStart();
+		if (finishInit)
+		{
+			// Handling Input
+			AEInputUpdate();
 
-		// Handling Input
-		AEInputUpdate();
+			// Debugging tools
+			Debugger.CheatsUpdate();
 
-		// Debugging tools
-		Debugger.CheatsUpdate();
+			// --------------------------------------------- Update --------------------------------------------- //
+			SceneManager.EarlyUpdate();
+			UIDialogueManager.Update();
+			AudioManager.Update();
+			SceneManager.Update();
+			GameManager.Update();
+			GameScriptManager.Update();
 
-		// --------------------------------------------- Update --------------------------------------------- //
-		SceneManager.EarlyUpdate();
-		UIDialogueManager.Update();
-		AudioManager.Update();
-		SceneManager.Update();
-		GameManager.Update();
-		GameScriptManager.Update();
+			// --------------------------------------------- Collision --------------------------------------------- //
+			//CollisionManager2D.CollideAll();
 
-		// --------------------------------------------- Collision --------------------------------------------- //
-		//CollisionManager2D.CollideAll();
+			// --------------------------------------------- Render --------------------------------------------- //
+			Renderer.Update();
+			SceneManager.LateUpdate();
 
-		// --------------------------------------------- Render --------------------------------------------- //
-		Renderer.Update();
-		SceneManager.LateUpdate();
-
-		// ------------------------------------------- End of Loop ------------------------------------------- //
-		ECSManager.UpdateList();
-		
+			// ------------------------------------------- End of Loop ------------------------------------------- //
+			ECSManager.UpdateList();
+		}
+		else
+		{
+			AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
+			finishInit = true;
+		}
 		// Informing the system about the loop's end
 		AESysFrameEnd();
 
@@ -121,6 +129,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			Renderer.FreeMesh();
 			ECSManager.Free();
 		}
+
 	}
 	//
 	// ---------------------------------- Freeing the objects, fonts and textures ---------------------------------- //
