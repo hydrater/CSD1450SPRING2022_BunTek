@@ -409,7 +409,7 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 140:
         return "On battle won: Restores 20% of max hp";
     case 220:
-        return "On wall bounce: Ball phase +1";
+        return "On wall bounce: Increases your speed and damage slightly";
     case 221:
         return "On wall bounce: Increases ball speed by 10%";
     case 300:
