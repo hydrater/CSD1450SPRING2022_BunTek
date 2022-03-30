@@ -30,6 +30,7 @@ private:
 public:
     static _assetManager& Instance(void);
     void LoadBaseLibrary(void);
+    bool baseLoaded = false;
     void UnloadTexture(string name);
     void LoadTexture(string name);
     AEGfxTexture* GetTexture(string name);
