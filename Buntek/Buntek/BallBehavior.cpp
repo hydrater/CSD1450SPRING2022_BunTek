@@ -19,7 +19,7 @@ BallBehavior::~BallBehavior(void)
 {
 	CollisionManager2D.RemoveFromList(this->Owner()->GetComponent<CircleCollider>());
 	battleInput->RemoveFromList(this);
-	GameManager.CameraShake(0.1f * ballPhase, ballPhase * 10.f, Vector2(0, 0));
+	GameManager.CameraShake(0.1f * ballPhase, ballPhase * .5f, Vector2(0, 0));
 	ballParticle->GetComponent<ParticleSystem>()->DeleteParticleSystem();
 }
 
