@@ -1,7 +1,7 @@
 /*!*****************************************************************************
 \file Collider2D.cpp
-\author: <to be inserted>
-\co-authors: Algene Tan Chuan Hong, Isaiah Lim Ji Rong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\author: Isaiah Lim Ji Rong
+\co-authors: Algene Tan Chuan Hong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles 2D collision
 *******************************************************************************/
@@ -62,35 +62,6 @@ vector<Vector2> Collider2D::GetRectCorners(Vector2 pos, float width, float heigh
 	vector<Vector2>corners{TopLeft, TopRight, BottomLeft, BottomRight};
 	return corners;
 }
-
-//void Collider2D::UpdateDimension(void)
-//{
-//	if (this != NULL)
-//	{
-//		transform = this->Owner()->transform;
-//		if (transform != NULL) {
-//			angle = transform->worldrotation;
-//		}
-//		else {
-//			angle = 0.0f;
-//		}
-//		
-//		if (this->Owner()->transform != NULL) {
-//			scale.x = this->Owner()->transform->localscale.x;
-//			scale.y = this->Owner()->transform->localscale.y;
-//		}
-//		else {
-//			scale.x = 1;
-//			scale.y = 1;
-//		}
-//	}
-//}
-
-
-
-
-
-
 
 bool Collider2D::Collide(Collider2D col)
 {

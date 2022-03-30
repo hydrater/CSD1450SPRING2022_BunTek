@@ -16,6 +16,8 @@
 
 void Scene_GameOver::Start(void)
 {
+    AssetManager.LoadTexture("Gameover.png");
+
 	gameOverBackground= new GameObject();
 	SpriteRenderer* tempRenderer;
 	tempRenderer = gameOverBackground->AddComponent<SpriteRenderer>();

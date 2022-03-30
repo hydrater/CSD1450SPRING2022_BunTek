@@ -49,7 +49,6 @@ void _assetManager::LoadBaseLibrary(void)
     LoadTexture("NebulaBig.png");
     LoadTexture("NebulaCloudBig.png");
     LoadTexture("Battlescreen.png");
-    LoadTexture("Gameover.png");
 
 
 

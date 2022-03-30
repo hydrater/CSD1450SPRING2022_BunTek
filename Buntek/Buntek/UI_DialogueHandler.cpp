@@ -1,7 +1,7 @@
 /*!*****************************************************************************
 \file UI_DialogueHandler.cpp
-\author: <to be inserted>
-\co-authors: Algene Tan Chuan Hong, Isaiah Lim Ji Rong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\author: Isaiah Lim Ji Rong
+\co-authors: Algene Tan Chuan Hong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles the UI of Dialogues
 *******************************************************************************/
@@ -261,7 +261,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
         switch (dialogueList[dialogueNo][1])
         {
         case TFC_ActorName:
-            //cout << "Actor Name: " << parameters << endl;
             name = parameters;
             actorTxt->SetText(name);
             // Assign color
@@ -300,7 +299,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
             break;
 
         case TFC_ButtonAction:
-            //cout << "Button: " << parameters << endl;
             if (dialogueButtonNo < dialogueButtonList.size())
             {
                 dialogueButtonIDList.push_back(command);
@@ -317,7 +315,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
             break;
 
         case TFC_ChoiceType:
-            //cout << "Choice: " << parameters << endl;
             if (rewardButtonNo < rewardButtonList.size())
             {
                 // If it is the last button [Decline choices]
@@ -356,7 +353,6 @@ void UI_DialogueHandler::WriteToDialogue(void)
         displayNo = 0;
         dialogueOutput = "";
         dialogueFinalDisplayTxt = dialogueList[dialogueNo];
-        //cout << "Dialogue: " << dialogueFinalDisplayTxt << endl;
         doneDisplay = false;
     }
 }
