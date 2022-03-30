@@ -207,6 +207,14 @@ void Scene_MainMenu::Start(void)
 
 }
 
+void Scene_MainMenu::EarlyUpdate(void)
+{
+	if (IsWindowVisible(GetActiveWindow()) == FALSE)
+		AudioManager.PauseMusic(true);
+	else if (!GameManager.pauseMenuOpen)
+		AudioManager.PauseMusic(false);
+}
+
 void Scene_MainMenu::Update(void)
 {
 	animTimer += DeltaTime;

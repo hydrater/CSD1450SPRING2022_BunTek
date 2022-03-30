@@ -13,6 +13,7 @@ class Scene_Battle : public Scene
 {
 public:
     void Start(void) override;
+    void EarlyUpdate(void) override;
     void Update(void) override;
     GameObject* BattleManager = 0;
 

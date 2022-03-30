@@ -15,6 +15,7 @@ class Scene_MainMenu : public Scene
 {
 public:
     void Start(void) override;
+    void EarlyUpdate(void) override;
     void Update(void) override;
     ~Scene_MainMenu(void) override;
     GameObject* GetObjRef(short type);

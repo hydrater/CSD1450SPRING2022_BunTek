@@ -105,6 +105,11 @@ void Scene_Navigation::Start(void)
 // Draw all lines
 void Scene_Navigation::EarlyUpdate(void)
 {	
+	if (IsWindowVisible(GetActiveWindow()) == FALSE)
+		AudioManager.PauseMusic(true);
+	else if (!GameManager.pauseMenuOpen)
+		AudioManager.PauseMusic(false);
+
 	AEGfxSetRenderMode(AE_GFX_RM_COLOR);
 	AEGfxSetPosition(0.0f, 0.0f);
 	MapData.DisplayNodeRoutes(MapData.playerTravelDistance);

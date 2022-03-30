@@ -22,6 +22,12 @@ void Scene_Battle::Start(void)
 	_bh->StartBattle(GameManager.playerProfile.hp, GameManager.playerProfile.basemaxhp,GameManager.enemyProfile.hp, GameManager.enemyProfile.basemaxhp,3);
 }
 
+void Scene_Battle::EarlyUpdate(void)
+{
+	if (IsWindowVisible(GetActiveWindow()) == FALSE)
+		GameManager.DisplayPauseMenu();
+}
+
 void Scene_Battle::Update(void)
 {
 	
