@@ -24,7 +24,7 @@ void Scene_Battle::Start(void)
 
 void Scene_Battle::EarlyUpdate(void)
 {
-	if (IsWindowVisible(GetActiveWindow()) == FALSE)
+	if (IsWindowVisible(GetActiveWindow()) == FALSE && !GameManager.pauseMenuOpen)
 		GameManager.DisplayPauseMenu();
 }
 
