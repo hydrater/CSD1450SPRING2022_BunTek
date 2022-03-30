@@ -46,6 +46,9 @@ void Scene_Splash::Update(void)
 		|| AEInputCheckTriggered(AEVK_ESCAPE)
 		|| AEInputCheckTriggered(AEVK_SPACE)
 		|| AEInputCheckTriggered(AEVK_RETURN)) {
+		if (!AssetManager.baseLoaded) {
+			AssetManager.LoadBaseLibrary();
+		}
 		SceneManager.LoadScene(new Scene_MainMenu, TransitionType::FadeTransition, true);
 	}
 	switch (cycle)
@@ -58,17 +61,13 @@ void Scene_Splash::Update(void)
 		splashRenderer->SetOpacity(splashRenderer->GetOpacity() + DeltaTime);
 		break;
 	case 1:
-	{
-		/*GameObject* test = new GameObject();
-		test->Delete();*/
-	}
+		AssetManager.LoadBaseLibrary();
 		break;
 	case 2:
 		splashRenderer->SetOpacity(splashRenderer->GetOpacity() - DeltaTime);
 		break;
 	case 3:
 		splashRenderer->SetOpacity(0);
-		AssetManager.LoadBaseLibrary();
 		break;
 	case 4:
 	{

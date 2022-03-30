@@ -61,15 +61,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// Check if screen res is ultra wide for alpha testing
 	{
 #include "wtypes.h"
-		RECT desktop;
-		GetWindowRect(GetDesktopWindow(), &desktop);
-		if (desktop.right > 2500 || desktop.right < 1900 || desktop.bottom < 1050)
-		{
-			cout << "Ultra wide monitor detected, disabling full screen...";
-			GameManager.isFullScreen = false;
-			AEToogleFullScreen(GameManager.isFullScreen);
-		}
+		//RECT desktop;
+		//GetWindowRect(GetDesktopWindow(), &desktop);
+		//if (desktop.right > 2500 || desktop.right < 1900 || desktop.bottom < 1050)
+		//{
+		//	cout << "Ultra wide monitor detected, disabling full screen...";
+		//	GameManager.isFullScreen = false;
+		//	AEToogleFullScreen(GameManager.isFullScreen);
+		//}
 	}
+	AEToogleFullScreen(GameManager.isFullScreen);
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{

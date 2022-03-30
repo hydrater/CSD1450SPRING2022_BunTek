@@ -80,6 +80,7 @@ void _assetManager::LoadBaseLibrary(void)
     LoadTexture("Artifacts/StarryTrampoline.png");
     LoadTexture("Artifacts/TitaniumFan.png");
     LoadTexture("Artifacts/UwUGlu.png");
+    baseLoaded = true;
 }
 
 void _assetManager::AddToList(SpriteRenderer* spriteRenderer)
