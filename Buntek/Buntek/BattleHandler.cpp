@@ -92,6 +92,8 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	float selfMaxHp = (_selfMaxHp + GameManager.playerProfile.bonusHp);
 	float selfHp = (AEClamp(_selfHp, 0, selfMaxHp));
 	float enemyMaxHp = (_enemyMaxHp + GameManager.enemyProfile.bonusHp);
+	// Artificial scaling
+	enemyMaxHp += GameManager.GetEnemyType() * GameManager.level;
 	float enemyHp = enemyMaxHp;
 
 	// Setting up the scene
