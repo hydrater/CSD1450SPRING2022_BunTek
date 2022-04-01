@@ -219,9 +219,9 @@ bool CircleCollider::Collide(Collider2D* col)
 		if (thissr == nullptr || othersr == nullptr)
 			return false;
 
-		radius = thissr->GetHalfWidth() + thissr->GetHalfHeight();
+		radius = thissr->GetHalfWidth();
 		angle = this->Owner()->transform->worldrotation;
-		other->radius = othersr->GetHalfWidth() + othersr->GetHalfHeight();
+		other->radius = othersr->GetHalfWidth();
 		other->angle = other->Owner()->transform->worldrotation;
 
 		float Dist2 = (radius + other->radius)* (radius + other->radius);
