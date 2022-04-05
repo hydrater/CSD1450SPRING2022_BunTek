@@ -1,3 +1,11 @@
+/*!*****************************************************************************
+\file Entity.cpp
+\author: Algene Tan Chuan Hong (90%)
+\co-authors: Isaiah Lim Ji Rong (2.5%), Steven Koe (2.5%), Bryan Boh Tai Hong (2.5%), Goh Kiat Beng (2.5%)
+\par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
+\brief: Handles Entity
+*******************************************************************************/
+
 #include "Entity.h"
 #include "Transform.h"
 #include "Component.h"
@@ -13,32 +21,8 @@ remove(false)
 
 GameObject::~GameObject()
 {
-	/*transform->children.clear();
-	transform->parent->Owner()->DetachChild(this);
-	transform->parent = NULL;
-	for (unsigned i = 0; i < components.size(); ++i)
-	{
-		if (components[i] != NULL)
-		{
-			delete components[i];
-			components[i] = NULL;
-		}
-	}*/
-	//remove = true;
-	//for (int i = 0; i < transform->children.size(); ++i)
-	//{
-	//	transform->children[i]->Owner()->Delete();
-	//}
-	//for (auto& c : components)
-	//{
-	//	c->Remove();
-	//}
+	
 }
-
-//const int GameObject::GetID(void)
-//{
-//	return id;
-//}
 
 bool GameObject::IsActive(void)
 {
@@ -57,8 +41,6 @@ void GameObject::Deactivate(void)
 
 void GameObject::AddChild(GameObject* child)
 {
-	//children.push_back(child);
-	//child->parent = this;
 	child->transform->localposition = child->transform->worldposition - transform->worldposition;
 	transform->children.push_back(child->transform);
 	//transform->parent = transform;

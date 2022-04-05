@@ -1,7 +1,7 @@
 /*!*****************************************************************************
 \file Collider2D.cpp
-\author: Isaiah Lim Ji Rong
-\co-authors: Algene Tan Chuan Hong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\author: Isaiah Lim Ji Rong (80%)
+\co-authors: Algene Tan Chuan Hong (5%), Steven Koe (5%), Bryan Boh Tai Hong (5%), Goh Kiat Beng (5%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles 2D collision
 *******************************************************************************/

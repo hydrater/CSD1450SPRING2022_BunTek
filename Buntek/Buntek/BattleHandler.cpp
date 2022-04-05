@@ -1,7 +1,7 @@
 /*!*****************************************************************************
 \file BattleHandler.cpp
-\author: <to be inserted>
-\co-authors: Algene Tan Chuan Hong, Isaiah Lim Ji Rong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\author: Goh Kiat Beng (60%)
+\co-authors: Algene Tan Chuan Hong (10%), Isaiah Lim Ji Rong (10%), Steven Koe (10%), Bryan Boh Tai Hong (10%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief:File is used for handling of battles
 *******************************************************************************/
@@ -64,20 +64,6 @@ void BattleHandler::StartBattle(float _selfHp, float _selfMaxHp, float _enemyHp,
 	AudioManager.LoadSound("Reflect0.wav");
 	AudioManager.LoadSound("Reflect1.wav");
 	AudioManager.LoadSound("Reflect2.wav");
-
-	// Boss info
-	if (GameManager.GetEnemyType() == 3)
-	{
-		AssetManager.LoadTexture("Anim/Face.png");
-		AssetManager.LoadTexture("Anim/FaceShading.png");
-		AssetManager.LoadTexture("Anim/Hand0.png");
-		AssetManager.LoadTexture("Anim/Hand1.png");
-		AssetManager.LoadTexture("Anim/Hand2.png");
-		AssetManager.LoadTexture("Anim/Hand3.png");
-		AssetManager.LoadTexture("Anim/Hand4.png");
-		AssetManager.LoadTexture("Anim/Hand5.png");
-		AssetManager.LoadTexture("Anim/Hand6.png");
-	}
 
 	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
 	SpawnArtifactList(Vector2(-880, -300), SaveManager.artifactSaveData, 1, 1);

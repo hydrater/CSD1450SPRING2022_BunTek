@@ -1,7 +1,7 @@
 /*!*****************************************************************************
 \file Cursor.h
-\author: <to be inserted>
-\co-authors: Algene Tan Chuan Hong, Isaiah Lim Ji Rong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\author: Goh Kiat Beng (80%)
+\co-authors: Algene Tan Chuan Hong (5%), Isaiah Lim Ji Rong (5%), Steven Koe (5%), Bryan Boh Tai Hong (5%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles cursor behaviour
 *******************************************************************************/

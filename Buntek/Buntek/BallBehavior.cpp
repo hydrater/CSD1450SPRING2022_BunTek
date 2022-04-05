@@ -1,7 +1,7 @@
 /*!*****************************************************************************
 \file BallBehaviour.cpp
-\author: <to be inserted>
-\co-authors: Algene Tan Chuan Hong, Isaiah Lim Ji Rong, Steven Koe, Bryan Boh Tai Hong, Goh Kiat Beng
+\author: Bryan Boh Tai Hong (80%)
+\co-authors: Algene Tan Chuan Hong (3%), Isaiah Lim Ji Rong (10%), Steven Koe (3%), Goh Kiat Beng (3%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief:File is used for changing of ballbehaviour
 *******************************************************************************/
