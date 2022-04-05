@@ -318,6 +318,7 @@ void _gameManager::GameOver(void)
     MapData.DeleteMapData();
     GameManager.playerProfile = {};
     GameManager.playerProfile.basemaxhp = 100;
+    GameManager.playerProfile.bonusHp = 0;
     GameManager.level = 0;
     SceneManager.LoadScene(new Scene_GameOver , TransitionType::FadeTransition, true);
 }
