@@ -46,37 +46,37 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     GameObject* OptionMenu = this->Owner();
 
     // Background
-    tempBckgrnd = devTools.CreateSpriteGameObject("WhiteTexture.png", (float)AEGetWindowWidth() / 3, (float)AEGetWindowHeight() / 1.5f, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer), 0.8f);
+    tempBckgrnd = devTools.CreateSpriteGameObject("WhiteTexture.png", (float)AEGetWindowWidth() / 3, (float)AEGetWindowHeight() / 1.5f, AE_GFX_BM_BLEND, Vector2(defaultBckgrndXPos, defaultBckgrndYPos), (short)(sortingLayer), 0.8f);
     tempBckgrnd->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
     OptionMenu->AddChild(tempBckgrnd);
 
-    header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1), 0);
-    TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(header, "Ayar.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 48.f, (short)(sortingLayer)+2);
+    header = devTools.CreateSpriteGameObject("WhiteTexture.png", defaultHeaderXSize, defaultHeaderYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y + 300.f), (short)(sortingLayer + 1), 0);
+    TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(header, "Ayar.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultHeaderTextSize, (short)(sortingLayer)+2);
     tempHeadertxtRenderer->SetTextColor(1, 1, 1);
     OptionMenu->AddChild(header);
 
-    musicSliderHeader = devTools.CreateSpriteGameObject("WhiteTexture.png", 100, 60, AE_GFX_BM_BLEND, Vector2(0.f, 250.f), (short)(sortingLayer + 1), 0);
-    TextRenderer* tempmusicSliderHeaderRenderer = devTools.AddTextToSpriteGameObject(musicSliderHeader, "Ayar.ttf", "Music", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 28.f, (short)(sortingLayer)+2);
+    musicSliderHeader = devTools.CreateSpriteGameObject("WhiteTexture.png", defaultmusicSliderHeaderXSize, defaultmusicSliderHeaderYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y + 150.f), (short)(sortingLayer + 1), 0);
+    TextRenderer* tempmusicSliderHeaderRenderer = devTools.AddTextToSpriteGameObject(musicSliderHeader, "Ayar.ttf", "Music", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     OptionMenu->AddChild(musicSliderHeader);
 
     musicSlider = new GameObject();
-    musicSlider->transform->SetPosition(Vector2(0.f,200.f));
+    musicSlider->transform->SetPosition(Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y + 100.f));
     musicSlider->AddComponent<Slider>()->GenerateSlider(*AudioManager.GetMusicVolume(), sortingLayer + 1, 1.0f);
     musicSlider->GetComponent<Slider>()->SliderEffect = &MusicSlider;
     OptionMenu->AddChild(musicSlider);
 
-    soundSliderHeader = devTools.CreateSpriteGameObject("WhiteTexture.png", 100, 60, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer + 1), 0);
-    TextRenderer* tempsoundSliderHeadertxtRenderer = devTools.AddTextToSpriteGameObject(soundSliderHeader, "Ayar.ttf", "Sound", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 28, (short)(sortingLayer)+2);
+    soundSliderHeader = devTools.CreateSpriteGameObject("WhiteTexture.png", defaultsoundSliderHeaderXSize, defaultsoundSliderHeaderYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y), (short)(sortingLayer + 1), 0);
+    TextRenderer* tempsoundSliderHeadertxtRenderer = devTools.AddTextToSpriteGameObject(soundSliderHeader, "Ayar.ttf", "Sound", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     OptionMenu->AddChild(soundSliderHeader);
 
     soundSlider = new GameObject();
-    soundSlider->transform->SetPosition(Vector2(0.f,50.f));
+    soundSlider->transform->SetPosition(Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y - 50.f));
     soundSlider->AddComponent<Slider>()->GenerateSlider(*AudioManager.GetAudioVolume(), sortingLayer + 1,1.0f);
     soundSlider->GetComponent<Slider>()->SliderEffect = &SoundSlider;
     OptionMenu->AddChild(soundSlider);
 
-    fullScreenBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -50.f), (short)(sortingLayer + 1));
-    TextRenderer* tempfullScreentxtRenderer = devTools.AddTextToSpriteGameObject(fullScreenBtn, "Ayar.ttf", "Toggle fullscreen", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    fullScreenBtn = devTools.CreateSpriteGameObject("Menu/Button.png", defaultfullScreenBtnXSize, defaultfullScreenBtnYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y - 150.f), (short)(sortingLayer + 1));
+    TextRenderer* tempfullScreentxtRenderer = devTools.AddTextToSpriteGameObject(fullScreenBtn, "Ayar.ttf", "Toggle fullscreen", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     tempfullScreentxtRenderer->SetTextColor(0, 0, 0);
     Button* tempfullScreenBtn = fullScreenBtn->AddComponent<Button>();
     tempfullScreenBtn->sr = fullScreenBtn->GetComponent<SpriteRenderer>();
@@ -85,8 +85,8 @@ void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     tempfullScreenBtn->ButtonEffect = &FullScreen;
     OptionMenu->AddChild(fullScreenBtn);
 
-    LeaveBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -150.f), (short)(sortingLayer + 1));
-    TextRenderer* tempLeavetxtRenderer = devTools.AddTextToSpriteGameObject(LeaveBtn, "Ayar.ttf", "Back", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    LeaveBtn = devTools.CreateSpriteGameObject("Menu/Button.png", defaultLeaveBtnXSize, defaultLeaveBtnYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y - 250.f), (short)(sortingLayer + 1));
+    TextRenderer* tempLeavetxtRenderer = devTools.AddTextToSpriteGameObject(LeaveBtn, "Ayar.ttf", "Back", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     tempLeavetxtRenderer->SetTextColor(0, 0, 0);
     Button* tempLeaveBtn = LeaveBtn->AddComponent<Button>();
     tempLeaveBtn->sr = LeaveBtn->GetComponent<SpriteRenderer>();
@@ -129,17 +129,17 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     GameObject* PauseMenu = this->Owner();
 
     // Background
-    tempBckgrnd = devTools.CreateSpriteGameObject("WhiteTexture.png", (float)AEGetWindowWidth() / 3, (float)AEGetWindowHeight() / 1.5f, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer), 0.8f);
+    tempBckgrnd = devTools.CreateSpriteGameObject("WhiteTexture.png", (float)AEGetWindowWidth() / 3, (float)AEGetWindowHeight() / 1.5f, AE_GFX_BM_BLEND, Vector2(defaultBckgrndXPos, defaultBckgrndYPos), (short)(sortingLayer), 0.8f);
     tempBckgrnd->GetComponent<SpriteRenderer>()->SetColor(0, 0, 0);
     PauseMenu->AddChild(tempBckgrnd);
 
-    Header = devTools.CreateSpriteGameObject("WhiteTexture.png", 200, 100, AE_GFX_BM_BLEND, Vector2(0.f, 400.f), (short)(sortingLayer + 1), 0);
-    TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(Header, "Ayar.ttf", "Pause", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 48.f, (short)(sortingLayer)+2);
+    Header = devTools.CreateSpriteGameObject("WhiteTexture.png", defaultHeaderXSize, defaultHeaderYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y + 300.f), (short)(sortingLayer + 1), 0);
+    TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(Header, "Ayar.ttf", "Pause", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultHeaderTextSize, (short)(sortingLayer)+2);
     tempHeadertxtRenderer->SetTextColor(1, 1, 1);
     PauseMenu->AddChild(Header);
 
-    resumeBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 200.f), (short)(sortingLayer + 1));
-    TextRenderer* tempResumetxtRenderer = devTools.AddTextToSpriteGameObject(resumeBtn, "Ayar.ttf", "Resume", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    resumeBtn = devTools.CreateSpriteGameObject("Menu/Button.png", defaultElementXSize, defaultElementYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y + 100.f), (short)(sortingLayer + 1));
+    TextRenderer* tempResumetxtRenderer = devTools.AddTextToSpriteGameObject(resumeBtn, "Ayar.ttf", "Resume", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     tempResumetxtRenderer->SetTextColor(0, 0, 0);
     Button* tempResumeBtn = resumeBtn->AddComponent<Button>();
     tempResumeBtn->sr = resumeBtn->GetComponent<SpriteRenderer>();
@@ -148,8 +148,8 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempResumeBtn->ButtonEffect = &Resume;
     PauseMenu->AddChild(resumeBtn);
 
-    optionBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 100.f), (short)(sortingLayer + 1));
-    TextRenderer* tempOptiontxtRenderer = devTools.AddTextToSpriteGameObject(optionBtn, "Ayar.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    optionBtn = devTools.CreateSpriteGameObject("Menu/Button.png", defaultElementXSize, defaultElementYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y), (short)(sortingLayer + 1));
+    TextRenderer* tempOptiontxtRenderer = devTools.AddTextToSpriteGameObject(optionBtn, "Ayar.ttf", "Options", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     tempOptiontxtRenderer->SetTextColor(0, 0, 0);
     Button* tempOptionBtn = optionBtn->AddComponent<Button>();
     tempOptionBtn->sr = optionBtn->GetComponent<SpriteRenderer>();
@@ -158,8 +158,8 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempOptionBtn->ButtonEffect = &PauseOptions;
     PauseMenu->AddChild(optionBtn);
 
-    howToPlayBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer + 1));
-    TextRenderer* tempHowToPlaytxtRenderer = devTools.AddTextToSpriteGameObject(howToPlayBtn, "Ayar.ttf", "How to play", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    howToPlayBtn = devTools.CreateSpriteGameObject("Menu/Button.png", defaultElementXSize, defaultElementYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y - 100.f), (short)(sortingLayer + 1));
+    TextRenderer* tempHowToPlaytxtRenderer = devTools.AddTextToSpriteGameObject(howToPlayBtn, "Ayar.ttf", "How to play", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     tempHowToPlaytxtRenderer->SetTextColor(0, 0, 0);
     Button* tempHowToPlayBtn = howToPlayBtn->AddComponent<Button>();
     tempHowToPlayBtn->sr = howToPlayBtn->GetComponent<SpriteRenderer>();
@@ -168,8 +168,8 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempHowToPlayBtn->ButtonEffect = &PauseHowToPlay;
     PauseMenu->AddChild(howToPlayBtn);
 
-    surrenderBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f,-100.f), (short)(sortingLayer + 1));
-    TextRenderer* tempSurrendertxtRenderer = devTools.AddTextToSpriteGameObject(surrenderBtn, "Ayar.ttf", "Abandon run", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    surrenderBtn = devTools.CreateSpriteGameObject("Menu/Button.png", defaultElementXSize, defaultElementYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y - 200.f), (short)(sortingLayer + 1));
+    TextRenderer* tempSurrendertxtRenderer = devTools.AddTextToSpriteGameObject(surrenderBtn, "Ayar.ttf", "Abandon run", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     tempSurrendertxtRenderer->SetTextColor(0, 0, 0);
     Button* tempSurrenderBtn = surrenderBtn->AddComponent<Button>();
     tempSurrenderBtn->sr = surrenderBtn->GetComponent<SpriteRenderer>();
@@ -179,8 +179,8 @@ void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     tempSurrenderBtn->NotHoverEffect = &SurrenderUnhover;
     PauseMenu->AddChild(surrenderBtn);
 
-    quitBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 380, 40, AE_GFX_BM_BLEND, Vector2(0.f, -200.f), (short)(sortingLayer + 1));
-    TextRenderer* tempQuittxtRenderer = devTools.AddTextToSpriteGameObject(quitBtn, "Ayar.ttf", "Quit to Main Menu", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
+    quitBtn = devTools.CreateSpriteGameObject("Menu/Button.png", defaultElementXSize, defaultElementYSize, AE_GFX_BM_BLEND, Vector2(tempBckgrnd->transform->worldposition.x, tempBckgrnd->transform->worldposition.y - 300.f), (short)(sortingLayer + 1));
+    TextRenderer* tempQuittxtRenderer = devTools.AddTextToSpriteGameObject(quitBtn, "Ayar.ttf", "Quit to Main Menu", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, defaultElementTextSize, (short)(sortingLayer)+2);
     tempQuittxtRenderer->SetTextColor(0, 0, 0);
     Button* tempQuitBtn = quitBtn->AddComponent<Button>();
     tempQuitBtn->sr = quitBtn->GetComponent<SpriteRenderer>();
@@ -277,11 +277,11 @@ void UI_HowToPlayMenu::CreateHowToPlayMenu(short sortingLayer) {
     GameObject* HowToPlayMenu = this->Owner();
 
     // Background
-    tempBckgrnd = devTools.CreateSpriteGameObject("PlayGuide.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0.f, 0.f), (short)(sortingLayer), 1.0f);
+    tempBckgrnd = devTools.CreateSpriteGameObject("PlayGuide.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(defaultBckgrndXPos, defaultBckgrndYPos), (short)(sortingLayer), 1.0f);
     HowToPlayMenu->AddChild(tempBckgrnd);
 
 
-    backBtn = devTools.CreateSpriteGameObject("Menu/Button.png", 300, 40, AE_GFX_BM_BLEND, Vector2(750.0f, -400.0f), (short)(sortingLayer + 1));
+    backBtn = devTools.CreateSpriteGameObject("Menu/Button.png", defaultbackBtnXSize, defaultbackBtnYSize, AE_GFX_BM_BLEND, Vector2(defaultbackBtnXPos, defaultbackBtnYPos), (short)(sortingLayer + 1));
     TextRenderer* tempBacktxtRenderer = devTools.AddTextToSpriteGameObject(backBtn, "Ayar.ttf", "Back", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, 24.f, (short)(sortingLayer)+2);
     tempBacktxtRenderer->SetTextColor(0, 0, 0);
     Button* tempBackBtn = backBtn->AddComponent<Button>();

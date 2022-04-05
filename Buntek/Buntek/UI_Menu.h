@@ -26,6 +26,20 @@ public:
     GameObject* soundSlider = 0;
     GameObject* fullScreenBtn = 0;
     GameObject* LeaveBtn = 0;
+    float defaultHeaderTextSize = 48.f;
+    float defaultElementTextSize = 24.f;
+    float defaultBckgrndXPos = 0;
+    float defaultBckgrndYPos = 100;
+    float defaultHeaderXSize = 200;
+    float defaultHeaderYSize = 100;
+    float defaultmusicSliderHeaderXSize = 100;
+    float defaultmusicSliderHeaderYSize = 60;
+    float defaultsoundSliderHeaderXSize = 100;
+    float defaultsoundSliderHeaderYSize = 60;
+    float defaultfullScreenBtnXSize = 380;
+    float defaultfullScreenBtnYSize = 40;
+    float defaultLeaveBtnXSize = 380;
+    float defaultLeaveBtnYSize = 40;
 private:
 
 };
@@ -44,6 +58,15 @@ public:
     GameObject* optionBtn = 0;
     GameObject* surrenderBtn = 0;
     GameObject* quitBtn = 0;
+
+    float defaultHeaderTextSize = 48.f;
+    float defaultElementTextSize = 24.f;
+    float defaultBckgrndXPos = 0;
+    float defaultBckgrndYPos = 100;
+    float defaultHeaderXSize = 200;
+    float defaultHeaderYSize = 100;
+    float defaultElementXSize = 380;
+    float defaultElementYSize = 40;
 private:
 
 };
@@ -57,6 +80,14 @@ public:
 
     GameObject* tempBckgrnd = 0;
     GameObject* backBtn = 0;
+    float defaultHeaderTextSize = 48.f;
+    float defaultElementTextSize = 24.f;
+    float defaultBckgrndXPos = 0;
+    float defaultBckgrndYPos = 0;
+    float defaultbackBtnXSize = 300;
+    float defaultbackBtnYSize = 40;
+    float defaultbackBtnXPos = 750.f;
+    float defaultbackBtnYPos = -400.f;
 private:
 
 };

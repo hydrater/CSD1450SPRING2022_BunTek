@@ -294,7 +294,7 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 	tempBall->radius = 10;
 
 	tempBall->sr = tempRenderer;
-	dir ? tempRenderer->SetColor(0, 0, 1) : tempRenderer->SetColor(1, 0, 0);
+	dir ?  tempRenderer->SetColor(1, 0, 0) : tempRenderer->SetColor(0, 0, 1);
 	tempBall->col = tempcol;
 
 	// Set ball spawn position
