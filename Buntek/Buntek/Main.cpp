@@ -22,6 +22,8 @@
 #include "ECSManager.h"
 #include "DebuggingTools.h"
 
+#include <windowsx.h>
+
 short initStage = 0;
 // ---------------------------------------------------------------------------
 // main
@@ -77,6 +79,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		// ------------------------------------------- Start of Loop ------------------------------------------- //
 		// Informing the system about the loop's start
 		AESysFrameStart();
+
+		// Check if need to minimize windows
+		if (AESysGetWindowHandle() != GetFocus())
+			ShowWindow(AESysGetWindowHandle(), SW_MINIMIZE);
 
 		switch (initStage)
 		{

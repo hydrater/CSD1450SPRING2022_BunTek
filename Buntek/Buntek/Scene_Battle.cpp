@@ -24,8 +24,12 @@ void Scene_Battle::Start(void)
 
 void Scene_Battle::EarlyUpdate(void)
 {
-	if (IsWindowVisible(GetActiveWindow()) == FALSE && !GameManager.pauseMenuOpen)
+	if (IsWindowVisible(GetActiveWindow()) == FALSE && !GameManager.pauseMenuOpen && !GameManager.optionMenuOpen)
 		GameManager.DisplayPauseMenu();
+	else if (IsWindowVisible(GetActiveWindow()) == FALSE && GameManager.optionMenuOpen)
+		AudioManager.PauseMusic(true);
+	else if (GameManager.optionMenuOpen)
+		AudioManager.PauseMusic(false);
 }
 
 void Scene_Battle::Update(void)

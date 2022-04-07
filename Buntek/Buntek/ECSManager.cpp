@@ -17,8 +17,7 @@ _ECSManager::_ECSManager(void)
 
 _ECSManager::~_ECSManager(void)
 {
-    /*for (int i = (int)componentList.size() - 1; i >= 0; --i)
-        delete componentList[i];*/
+    
 }
 
 _ECSManager& _ECSManager::Instance(void)
