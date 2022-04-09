@@ -28,18 +28,6 @@ BattleHandler::~BattleHandler(void) {
 	AudioManager.UnloadSound("Reflect1.wav");
 	AudioManager.UnloadSound("Reflect2.wav");
 
-	if (GameManager.GetEnemyType() == 3)
-	{
-		AssetManager.UnloadTexture("Anim/Face.png");
-		AssetManager.UnloadTexture("Anim/FaceShading.png");
-		AssetManager.UnloadTexture("Anim/Hand0.png");
-		AssetManager.UnloadTexture("Anim/Hand1.png");
-		AssetManager.UnloadTexture("Anim/Hand2.png");
-		AssetManager.UnloadTexture("Anim/Hand3.png");
-		AssetManager.UnloadTexture("Anim/Hand4.png");
-		AssetManager.UnloadTexture("Anim/Hand5.png");
-		AssetManager.UnloadTexture("Anim/Hand6.png");
-	}
 }
 void BattleHandler::Start(void) {
 	

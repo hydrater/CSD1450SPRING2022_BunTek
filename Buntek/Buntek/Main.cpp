@@ -72,7 +72,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//	AEToogleFullScreen(GameManager.isFullScreen);
 		//}
 	}
-	AEToogleFullScreen(GameManager.isFullScreen);
+	AEToogleFullScreen(!GameManager.isFullScreen);
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{

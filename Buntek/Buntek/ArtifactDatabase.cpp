@@ -132,6 +132,29 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                 GameManager.playerHp -= 5 * artifact.count;
             }*/
             GameManager.DealDamage(5.f * artifact.count, !isPlayerTheCaster);
+            if (!isPlayerTheCaster) {
+                for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_TakeDamage.size(); ++i) {
+                    if (GameManager.playerArtifactList.behaviorList_TakeDamage[i].ID == 541) {
+                        if (GameManager.playerArtifactList.behaviorList_TakeDamage[i].count >= 1 && GameManager.playerHp <= 0) {
+                            GameManager.playerHp = (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) / 2;
+                            GameManager.playerArtifactList.behaviorList_TakeDamage[i].count--;
+                            SaveManager.RemoveFromArtifactList(541);
+                        }
+                    }
+                }
+                
+            }
+            else {
+                for (size_t i = 0; i < GameManager.enemyArtifactList.behaviorList_TakeDamage.size(); ++i) {
+                    if (GameManager.enemyArtifactList.behaviorList_TakeDamage[i].ID == 541) {
+                        if (GameManager.enemyArtifactList.behaviorList_TakeDamage[i].count >= 1 && GameManager.enemyHp <= 0) {
+                            GameManager.enemyHp = (GameManager.enemyProfile.basemaxhp + GameManager.enemyProfile.bonusHp) / 2;
+                            GameManager.enemyArtifactList.behaviorList_TakeDamage[i].count--;
+                            SaveManager.RemoveFromArtifactList(541);
+                            }
+                        }
+                    }
+                }
             //if (isPlayerTheCaster) {
             //    ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, !isPlayerTheCaster);
             //}

@@ -33,6 +33,12 @@ void Scene_Splash::Start(void)
 	splash2->transform->SetPosition(Vector2(0, 0));
 	splashRenderer2->SetOpacity(0);
 
+	loading = devTools.CreateSpriteGameObject("WhiteTexture.png", (float)AEGetWindowWidth(), (float)AEGetWindowHeight(), AE_GFX_BM_BLEND, Vector2(0, 0));
+	TextRenderer* tempHeadertxtRenderer = devTools.AddTextToSpriteGameObject(loading, "Ayar.ttf", "Loading", TextRenderer::xAlignmentTypes::Mid, TextRenderer::yAlignmentTypes::Mid, loadingtextsize);
+	loading->GetComponent<SpriteRenderer>()->SetOpacity(0);
+	tempHeadertxtRenderer->SetTextColor(1, 1, 1);
+	loading->Deactivate();
+
 	splashTransform = splash->transform;
 	splashTransform2 = splash2->transform;
 }
@@ -41,11 +47,8 @@ void Scene_Splash::Update(void)
 {
 	AEGfxSetBackgroundColor(0.0f, 0.0f, 0.0f);
 	timer += cycle == 4 ? DeltaTime* 1.2f: DeltaTime;
-	if (AEInputCheckTriggered(AEVK_LBUTTON)
-		|| AEInputCheckTriggered(AEVK_RBUTTON)
-		|| AEInputCheckTriggered(AEVK_ESCAPE)
-		|| AEInputCheckTriggered(AEVK_SPACE)
-		|| AEInputCheckTriggered(AEVK_RETURN)) {
+
+	if (skip) {
 		if (!AssetManager.baseLoaded) {
 			AssetManager.LoadBaseLibrary();
 		}
@@ -142,6 +145,19 @@ void Scene_Splash::Update(void)
 	{
 		++cycle;
 		timer = 0;
+	}
+
+	if (AEInputCheckTriggered(AEVK_LBUTTON)
+		|| AEInputCheckTriggered(AEVK_RBUTTON)
+		|| AEInputCheckTriggered(AEVK_ESCAPE)
+		|| AEInputCheckTriggered(AEVK_SPACE)
+		|| AEInputCheckTriggered(AEVK_RETURN)) {
+		if (!AssetManager.baseLoaded) {
+			splashRenderer->SetOpacity(0);
+			splashRenderer2->SetOpacity(0);
+			loading->Activate();
+		}
+		skip = true;
 	}
 }
 

@@ -18,6 +18,7 @@
 #include "AlphaChanger.h"
 #include "ParticleSystem.h"
 #include "UI_Hp.h"
+#include "SaveManager.h"
 
 void BtnFuncHover_Artifacts(Button* button);
 
@@ -72,6 +73,7 @@ void Scene_Navigation::Start(void)
 	currentArea = devTools.CreateSpriteGameObject("hdCircle.png", MapData.playerTravelDistance * 2, MapData.playerTravelDistance * 2, AE_GFX_BM_BLEND, MapData.currentNode->pos, -5, 0.5f);
 	currentArea->GetComponent<SpriteRenderer>()->SetColor(0.2f, 0, 0.2f);
 
+	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
 	playerHp = new GameObject();
 	playerHp->transform->SetPosition(Vector2(-660.0f, (-AEGetWindowHeight() / 2.25f)));
 	for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
@@ -187,14 +189,7 @@ void Scene_Navigation::Update(void)
 		playerLocation->transform->SetScale(Vector2(playerLocScale, playerLocScale));
 	}
 
-	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
-	playerHp->GetComponent<UI_Hp>()->health = GameManager.playerProfile.hp;
-	for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
-		if (GameManager.playerArtifactList.behaviorList_Passive[i].ID == 001) {
-			GameManager.playerProfile.bonusHp = (float)GameManager.playerArtifactList.behaviorList_Passive[i].count * 10;
-		}
-	}
-	playerHp->GetComponent<UI_Hp>()->maxHealth = (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp);
+
 }
 
 void Scene_Navigation::LateUpdate(void)
@@ -204,6 +199,17 @@ void Scene_Navigation::LateUpdate(void)
 	else if(MapData.shopUI && MapData.shopUI->IsActive() && ( GameManager.optionMenuOpen || GameManager.pauseMenuOpen || GameManager.howToPlayMenuOpen))
 		MapData.shopUI->GetComponent<UI_Shop>()->SetClickable(false);
 	UIDialogueManager.SetDialogueClickable(true);
+
+	playerCurrencyText->GetComponent<TextRenderer>()->SetText(to_string(GameManager.playerProfile.stardust));
+	playerHp->GetComponent<UI_Hp>()->health = GameManager.playerProfile.hp;
+	GameManager.InitBattleProfile(GameManager.playerArtifactList, SaveManager.artifactSaveData);
+	for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_Passive.size(); ++i) {
+		if (GameManager.playerArtifactList.behaviorList_Passive[i].ID == 001) {
+			GameManager.playerProfile.bonusHp = (float)GameManager.playerArtifactList.behaviorList_Passive[i].count * 10;
+		}
+	}
+	playerHp->GetComponent<UI_Hp>()->maxHealth = (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp);
+	playerHp->GetComponent<UI_Hp>()->SetHp(GameManager.playerProfile.hp);
 }
 
 Scene_Navigation::~Scene_Navigation(void)

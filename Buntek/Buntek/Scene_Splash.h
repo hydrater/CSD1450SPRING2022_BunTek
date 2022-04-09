@@ -20,11 +20,13 @@ private:
     Vector2 splashTargetScale = Vector2(1.35f,1.35f);
     GameObject* splash2 = 0;
     Vector2 splash2TargetScale = Vector2(1.3f, 1.3f);
+    GameObject* loading = 0;
     float timer = 0;
     float timer2 = 0;
+    float loadingtextsize = 48;
     int cycle = 0;
     int colorType = 0;
     SpriteRenderer* splashRenderer = 0, *splashRenderer2 = 0;
     Transform* splashTransform = 0, *splashTransform2 = 0;
-    bool canPlayAudio = true, resetSplash = true;
+    bool canPlayAudio = true, resetSplash = true, skip = false;
 };
