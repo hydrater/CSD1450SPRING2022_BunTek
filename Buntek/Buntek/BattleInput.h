@@ -1,9 +1,11 @@
 /*!*****************************************************************************
 \file BattleInput.h
+\project Beyond Aurorean Skies
 \author: Goh Kiat Beng (60%)
 \co-authors: Algene Tan Chuan Hong (10%), Isaiah Lim Ji Rong (10%), Steven Koe (10%), Bryan Boh Tai Hong (10%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles Battle's Input
+All content © 2022 DigiPen Institute of Technology Singapore. All rights reserved.
 *******************************************************************************/
 
 #ifndef BATTLEINPUT_H

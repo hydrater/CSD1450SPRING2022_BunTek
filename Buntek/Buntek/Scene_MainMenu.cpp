@@ -1,9 +1,11 @@
 /*!*****************************************************************************
 \file Scene_MainMenu.cpp
+\project Beyond Aurorean Skies
 \author: Algene Tan Chuan Hong (90%)
 \co-authors: Isaiah Lim Ji Rong (2.5%), Steven Koe (2.5%), Bryan Boh Tai Hong (2.5%), Goh Kiat Beng (2.5%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Scene Main Menu Screen
+All content © 2022 DigiPen Institute of Technology Singapore. All rights reserved.
 *******************************************************************************/
 #include "Scene_MainMenu.h"
 #include "SpriteRenderer.h"
@@ -52,8 +54,8 @@ void Scene_MainMenu::Start(void)
 	GameManager.disableInteraction = true;
 
 	AudioManager.LoadSound("ButtonHover.wav");
-	AudioManager.LoadMusic("kidding.ogg");
-	AudioManager.PlayMusic("kidding.ogg");
+	AudioManager.LoadMusic("NavigationBGM.ogg");
+	AudioManager.PlayMusic("NavigationBGM.ogg");
 
 	AssetManager.LoadTexture("Menu/PolkaSquare.png");
 	AssetManager.LoadTexture("Menu/ButtonPressed.png");
@@ -393,7 +395,7 @@ void Scene_MainMenu::Update(void)
 		creditsBtn->GetComponent<Button>()->SetClickable(true);
 		quitBtn->GetComponent<Button>()->SetClickable(true);
 	}
-	if (finishedSetup && AEInputCheckTriggered(AEVK_ESCAPE))
+	if (finishedSetup && AEInputCheckTriggered(AEVK_ESCAPE) && !(GameManager.optionMenuOpen || GameManager.howToPlayMenuOpen || GameManager.howToPlayMenuOpen))
 	{
 		GameManager.exit = true;
 	}

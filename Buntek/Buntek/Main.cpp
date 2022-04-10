@@ -1,9 +1,11 @@
 /*!*****************************************************************************
 \file Main.cpp
+\project Beyond Aurorean Skies
 \author: Algene Tan Chuan Hong (80%)
-\co-authors: Isaiah Lim Ji Rong (10%), Steven Koe (3%), Bryan Boh Tai Hong (3%), Goh Kiat Beng (3%)
+\co-authors: Isaiah Lim Ji Rong (10%), Steven Koe (3%), Bryan Boh Tai Hong (4%), Goh Kiat Beng (3%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Main logic
+All content © 2022 DigiPen Institute of Technology Singapore. All rights reserved.
 *******************************************************************************/
 // ---------------------------------------------------------------------------
 // includes
@@ -72,7 +74,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		//	AEToogleFullScreen(GameManager.isFullScreen);
 		//}
 	}
-	AEToogleFullScreen(!GameManager.isFullScreen);
+	AEToogleFullScreen(GameManager.isFullScreen);
 	// --------------------------------------------- Game Loop --------------------------------------------- //
 	while (gGameRunning)
 	{

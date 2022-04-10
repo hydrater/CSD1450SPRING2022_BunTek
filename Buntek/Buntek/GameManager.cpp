@@ -1,9 +1,11 @@
 /*!*****************************************************************************
 \file GameManager.cpp
-\author: Steven Koe (80%)
-\co-authors: Algene Tan Chuan Hong (5%), Isaiah Lim Ji Rong (5%), Bryan Boh Tai Hong (5%), Goh Kiat Beng (5%)
+\project Beyond Aurorean Skies
+\author: Steven Koe (70%)
+\co-authors: Algene Tan Chuan Hong (5%), Isaiah Lim Ji Rong (5%), Bryan Boh Tai Hong (15%), Goh Kiat Beng (5%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Manages the Game
+All content © 2022 DigiPen Institute of Technology Singapore. All rights reserved.
 *******************************************************************************/
 
 #include "GameManager.h"
@@ -334,7 +336,7 @@ void _gameManager::DisplayOptionMenu(void)
     else
     {
         optionMenuUI = new GameObject();
-        optionMenuUI->AddComponent<UI_OptionMenu>()->CreateOptionMenu(10);
+        optionMenuUI->AddComponent<UI_OptionMenu>()->CreateOptionMenu(12);
     }
 }
 void _gameManager::DisplayPauseMenu(void)
@@ -350,7 +352,7 @@ void _gameManager::DisplayPauseMenu(void)
     else
     {
         pauseMenuUI = new GameObject();
-        pauseMenuUI->AddComponent<UI_PauseMenu>()->CreatePauseMenu(10);
+        pauseMenuUI->AddComponent<UI_PauseMenu>()->CreatePauseMenu(12);
         AudioManager.PauseMusic(true);
 
     }
@@ -371,7 +373,7 @@ void  _gameManager::DisplayHowToPlayMenu(void) {
     else
     {
         howToPlayMenuUI = new GameObject();
-        howToPlayMenuUI->AddComponent<UI_HowToPlayMenu>()->CreateHowToPlayMenu(10);
+        howToPlayMenuUI->AddComponent<UI_HowToPlayMenu>()->CreateHowToPlayMenu(12);
         AudioManager.PauseMusic(true);
     }
 }

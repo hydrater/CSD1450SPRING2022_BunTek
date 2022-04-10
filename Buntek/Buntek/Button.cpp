@@ -1,9 +1,11 @@
 /*!*****************************************************************************
 \file Button.cpp
+\project Beyond Aurorean Skies
 \author: Bryan Boh Tai Hong (80%)
 \co-authors: Algene Tan Chuan Hong (5%), Isaiah Lim Ji Rong (5%), Steven Koe (5%), Goh Kiat Beng (5%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles Button behaviour
+All content © 2022 DigiPen Institute of Technology Singapore. All rights reserved.
 *******************************************************************************/
 
 #include "Button.h"

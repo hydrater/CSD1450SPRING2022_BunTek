@@ -1,9 +1,11 @@
 /*!*****************************************************************************
 \file ArtifactDatabase.cpp
+\project Beyond Aurorean Skies
 \author: Bryan Boh Tai Hong (80%)
 \co-authors: Algene Tan Chuan Hong (5%), Isaiah Lim Ji Rong (5%), Steven Koe (5%), Goh Kiat Beng (5%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles Artifact Database
+All content © 2022 DigiPen Institute of Technology Singapore. All rights reserved.
 *******************************************************************************/
 
 #include "ArtifactDatabase.h"
@@ -81,7 +83,7 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         }
         break;
     case 120://Increase hp by 10 per battle won, up to a max of X
-        GameManager.playerProfile.basemaxhp += 10 * artifact.count;
+        GameManager.playerProfile.basemaxhp += 5 * artifact.count;
         break;
     case 140://Restores 20% hp of max hp
         GameManager.playerHp += (GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp) * 0.2f * GameManager.playerProfile.bonusHealing;
@@ -125,12 +127,6 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
         break;
     case 500://B3: Opponent takes X damage
         if (ball->GetComponent<BallBehavior>()->ballPhase >= 3) {
-            /*if (isPlayerTheCaster) {
-                GameManager.enemyHp -= 5 * artifact.count;
-            }
-            else {
-                GameManager.playerHp -= 5 * artifact.count;
-            }*/
             GameManager.DealDamage(5.f * artifact.count, !isPlayerTheCaster);
             if (!isPlayerTheCaster) {
                 for (size_t i = 0; i < GameManager.playerArtifactList.behaviorList_TakeDamage.size(); ++i) {
@@ -155,13 +151,6 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
                         }
                     }
                 }
-            //if (isPlayerTheCaster) {
-            //    ApplyArtifactBehavior(GameManager.enemyArtifactList.behaviorList_TakeDamage, !isPlayerTheCaster);
-            //}
-            //else {
-            //    ApplyArtifactBehavior(GameManager.playerArtifactList.behaviorList_TakeDamage, !isPlayerTheCaster);
-            //}
-            //GameManager.HealthCheck(!isPlayerTheCaster);
         }
         break;
     case 520://B4: Spawns X ball in a random direction forward from the middle
@@ -280,20 +269,27 @@ void _artifactdatabase::ExecuteBehavior(Artifact artifact, bool isPlayerTheCaste
             tempBallBehavior = ball->GetComponent<BallBehavior>();
             if (tempBallBehavior->savedCol != NULL) {
                 tempBallBehavior = tempBallBehavior->savedCol->Owner()->GetComponent<BallBehavior>();  //get the other ball
-            }
-            for (size_t i = 0; i < tempBallBehavior->statusEffect.size(); ++i)
-            {
-                if (tempBallBehavior->statusEffect[i].statusID == 01) {
-                    tempBallBehavior->statusEffect[i].statusTimer += artifact.count;;
-                    flag = true;
-                    break;
+                if (ball->GetComponent<BallBehavior>()->playerPossess != tempBallBehavior->playerPossess) {
+                    for (size_t i = 0; i < tempBallBehavior->statusEffect.size(); ++i)
+                    {
+                        if (tempBallBehavior->statusEffect[i].statusID == 01) {
+                            tempBallBehavior->statusEffect[i].statusTimer += artifact.count;;
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        Status temp;
+                        temp.statusID = 01;
+                        temp.statusTimer = (float)artifact.count * 0.25f; //0.25 second freeze
+                        tempBallBehavior->statusEffect.push_back(temp);
+                    }
+                    GameObject* spawner = new GameObject();
+                    spawner->AddComponent<ParticleSystem>()->SetBurstingParticle(Vector2(0, 0), 1, 10, false, 120, 50, 80, 0, 360, 10, 10, "hdCircle.png",
+                        Vector2(tempBallBehavior->savedCol->Owner()->transform->worldposition.x, tempBallBehavior->savedCol->Owner()->transform->worldposition.y),
+                        6, (short)AE_GFX_BM_BLEND, true, true, 0.5f, 1.5f);
+                    spawner->GetComponent<ParticleSystem>()->SetColor(0, 1, 1);
                 }
-            }
-            if (!flag) {
-                Status temp;
-                temp.statusID = 01;
-                temp.statusTimer = (float)artifact.count*0.25f; //0.25 second freeze
-                tempBallBehavior->statusEffect.push_back(temp);
             }
         }
         break;
@@ -428,7 +424,7 @@ string _artifactdatabase::GetDescription(unsigned long id)
     case 30:
         return "Increases healing received by 20%";
     case 120:
-        return "On battle won: Increases max hp by 10";
+        return "On battle won: Increases max hp by 5";
     case 140:
         return "On battle won: Restores 20% of max hp";
     case 220:

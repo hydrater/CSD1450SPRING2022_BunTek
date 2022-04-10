@@ -1,9 +1,11 @@
 /*!*****************************************************************************
 \file DialogueDatabase.cpp
+\project Beyond Aurorean Skies
 \author: Isaiah Lim Ji Rong (90%)
 \co-authors: Algene Tan Chuan Hong (2.5%), Steven Koe (2.5%), Bryan Boh Tai Hong (2.5%), Goh Kiat Beng (2.5%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles Dialogue Database
+All content © 2022 DigiPen Institute of Technology Singapore. All rights reserved.
 *******************************************************************************/
 
 #include "DialogueDatabase.h"
