@@ -26,7 +26,7 @@ UI_Hp::~UI_Hp(void)
 {
 
 }
-
+//generate hp bar object
 void UI_Hp::GenerateHpBar(bool _isplayer, float hpAmt, float maxHpAmt, int barCount, float pixelWidth , float pixelHeight, int border)
 {
 	health = hpAmt;
@@ -115,7 +115,7 @@ void UI_Hp::UpdateHpBar(float remainderHp) { // remainder hp is the amount of re
 		hpBarCount->GetComponent<TextRenderer>()->SetText(std::to_string((int)health));
 	}
 }
-
+//apply damage to the hp bar
 void UI_Hp::Damage(float damageAmt)
 {
 	SetHp(health - damageAmt);

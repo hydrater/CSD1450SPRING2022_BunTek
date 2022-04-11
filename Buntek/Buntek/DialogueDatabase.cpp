@@ -276,10 +276,8 @@ void LaunchButtonEffect(Button* button)
 		float truemaxhp = GameManager.playerProfile.basemaxhp + GameManager.playerProfile.bonusHp;
 
 		// 20%
-		if(GameManager.playerProfile.hp > 30){
-			GameManager.playerProfile.hp -= GameManager.playerProfile.basemaxhp / 5;
-		}
-		else if (GameManager.playerProfile.hp > 10) {
+		GameManager.playerProfile.hp -= GameManager.playerProfile.basemaxhp / 5;
+		if (GameManager.playerProfile.hp < 10) {
 			GameManager.playerProfile.hp = 10;
 		}
 		// Shake camera for effect

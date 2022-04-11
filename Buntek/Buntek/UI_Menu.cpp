@@ -275,7 +275,7 @@ UI_HowToPlayMenu::UI_HowToPlayMenu(void)
 UI_HowToPlayMenu::~UI_HowToPlayMenu(void)
 {
 }
-
+//create how to play menu
 void UI_HowToPlayMenu::CreateHowToPlayMenu(short sortingLayer) {
     GameObject* HowToPlayMenu = this->Owner();
 
