@@ -310,7 +310,7 @@ void BattleHandler::SpawnBall(bool isPlayerBall) {
 
 	ballList->push_back(tempBall);
 }
-
+//create artifact list
 void BattleHandler::SpawnArtifactList(Vector2 pos, map<unsigned long, int> artifactList, float xDir, float yDir)
 {
 	float i = 0, j = 0;

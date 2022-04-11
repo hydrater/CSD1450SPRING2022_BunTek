@@ -141,7 +141,7 @@ void _renderer::Update(void)
 				textRenderer->SetWarpAround(false);
 				tempTextString = textRenderer->GetText();
 			}
-				
+			//render text line by line
 			for (int x = 0; char c = tempTextString[x]; x++) {
 				if (c == '\n') {
 					tempTextString[x] = '\0';
@@ -173,7 +173,7 @@ void _renderer::Update(void)
 		}
 	}
 }
-
+//calculate text x alignment
 float _renderer::TextAlignmentX(TextRenderer* textRenderer, int lineNum) {
 	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
 	switch (textRenderer->GetXAlignment())
@@ -192,6 +192,7 @@ float _renderer::TextAlignmentX(TextRenderer* textRenderer, int lineNum) {
 		break;
 	}
 }
+//calculate text y alignment
 float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
 	switch (textRenderer->GetYAlignment())
@@ -210,7 +211,7 @@ float _renderer::TextAlignmentY(TextRenderer* textRenderer) {
 		break;
 	}
 }
-
+//edit text for warp around
 void  _renderer::WrapAround(TextRenderer* textRenderer) {
 	SpriteRenderer* tempSR = textRenderer->Owner()->GetComponent<SpriteRenderer>();
 	float length = tempSR->GetHalfWidth() * 2 - textRenderer->GetXBuffer()*2; //(textRenderer->GetTransform()->worldposition.x + tempSR->GetHalfWidth()) - TextAlignmentX(textRenderer) - textRenderer->GetXBuffer();

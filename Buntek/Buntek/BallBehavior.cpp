@@ -164,7 +164,7 @@ void BallBehavior::Update(void)
 	}
 	
 }
-
+//ball reflection
 bool BallBehavior::ReflectBall(bool hasPossession, GameObject* paddle)
 {
 	bool hasbounced = false;
@@ -285,7 +285,7 @@ void BallBehavior::HitBall(Vector2 mousePos, bool isPlayer)
 		(!isPlayer && transform->worldposition.y < GameManager.hostileAreaY))
 		return;
 }
-
+//bounce ball of the wall
 void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 {
 	if ((!isPlayer && transform->worldposition.y < GameManager.friendlyAreaY) ||
@@ -312,6 +312,7 @@ void BallBehavior::BounceBall(bool isPlayer, GameObject* wall, float angle)
 		playerPossess ? sr->SetColor(1, 0, 0) : sr->SetColor(0, 0, 1);
 	}
 }
+//ball horizontal bounce check
 void BallBehavior::BallHorizontalCheck(void) {
 	float ang = Vector2(1, 0).AngleBetween(velocity) / pi * 180.0f;
 	if (0 <= ang && ang <= angRange) {

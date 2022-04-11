@@ -501,7 +501,7 @@ unsigned long _artifactdatabase::DrawLegendary(void)
     int RNG = RandIntMinMax(0, (int)legendary.size() - 1);
     return legendary[RNG];
 }
-
+//randomly generate 3 artifacts from the pool
 vector<unsigned long> _artifactdatabase::DrawThreeArtifacts(void)
 {
     vector<unsigned long> result;

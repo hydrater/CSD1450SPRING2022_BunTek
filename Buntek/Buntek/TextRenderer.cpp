@@ -46,9 +46,11 @@ void TextRenderer::SetFontScale(float _scale)
 float TextRenderer::GetFontScale(void) {
 	return textScale;
 }
+
 void TextRenderer::SetFontSize(float _fontsize) {
 	textScale = _fontsize / AssetManager.GetdefaultFontSize();
 }
+
 float TextRenderer::GetFontSize(void) {
 	return textScale * AssetManager.GetdefaultFontSize();
 }
@@ -66,7 +68,7 @@ vector<float> TextRenderer::GetTextColor(void)
 {
 	return vector<float>{textR, textG, textB};
 }
-
+//add the text width to the vector of lines
 void TextRenderer::SetTextWidth(float _TextWidth, int lineNum) {
 	if (lineNum >= textWidthList.size()) {
 		textWidthList.push_back(_TextWidth);
@@ -77,6 +79,7 @@ void TextRenderer::SetTextWidth(float _TextWidth, int lineNum) {
 	}
 	
 }
+//set the text height of each line
 void TextRenderer::SetTextHeight(float _TextHeight) {
 	textHeight = _TextHeight;
 }
@@ -121,7 +124,7 @@ TextRenderer::xAlignmentTypes TextRenderer::GetXAlignment(void) {
 TextRenderer::yAlignmentTypes TextRenderer::GetYAlignment(void) {
 	return yAlignment;
 }
-
+//calculate the text size
 void TextRenderer::CalculateTextSize(void) {
 	float wordWidth = 0;
 	float wordHeight = 0;
@@ -149,7 +152,7 @@ void TextRenderer::CalculateTextSize(void) {
 	lineCount++;
 	word.clear();
 }
-
+//scale the texture to fit the text
 void TextRenderer::ScaleTexture(SpriteRenderer* sr) {
 	CalculateTextSize();
 	float width = sr->GetHalfWidth();

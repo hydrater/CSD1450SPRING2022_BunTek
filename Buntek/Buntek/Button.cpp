@@ -38,6 +38,7 @@ void Button::Update(void)
 	if (tr != NULL && sr != NULL) {
 		tr->ScaleTexture(sr);
 	}
+	//button trigger logic
 	if (CheckTriggered(GameManager.GetCursorPosition()) && canHover) {
 		if (HoverEffect != NULL) {
 			HoverEffect(this);
@@ -71,7 +72,6 @@ bool Button::CheckTriggered(Vector2 mousePos) {
 		}
 	}
 	return false;
-	//add check for rotated button???
 }
 
 void DefaultHoverEffect(Button* button) {

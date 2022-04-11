@@ -19,6 +19,7 @@ All content © 2022 DigiPen Institute of Technology Singapore. All rights reserve
 #include "SaveManager.h"
 #include "Scene_MainMenu.h"
 
+//button effects
 void Options(Button* button);
 void FullScreen(Button* button);
 void MusicSlider(Slider* slider);
@@ -43,7 +44,7 @@ UI_OptionMenu::UI_OptionMenu(void)
 UI_OptionMenu::~UI_OptionMenu(void)
 {
 }
-
+//create option menu
 void UI_OptionMenu::CreateOptionMenu(short sortingLayer) {
     GameObject* OptionMenu = this->Owner();
 
@@ -126,7 +127,7 @@ UI_PauseMenu::UI_PauseMenu(void)
 UI_PauseMenu::~UI_PauseMenu(void)
 {
 }
-
+//create pause menu
 void UI_PauseMenu::CreatePauseMenu(short sortingLayer) {
     GameObject* PauseMenu = this->Owner();
 

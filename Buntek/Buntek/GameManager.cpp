@@ -46,7 +46,7 @@ Vector2 _gameManager::GetCursorPosition(void)
     AEInputGetCursorPosition(&x, &y);
     return Vector2((float)x - (float)AEGetWindowWidth() / 2, -((float)y - (float)AEGetWindowHeight() / 2));
 }
-
+//initialize battle profile
 void _gameManager::InitBattleProfile(BattleArtifactProfile& battleProfile, map<unsigned long, int> artifactSaveData)
 {
     battleProfile = BattleArtifactProfile();
@@ -89,7 +89,7 @@ void _gameManager::InitBattleProfile(BattleArtifactProfile& battleProfile, map<u
         }
     }
 }
-
+//generate artifact list
 map<unsigned long, int> _gameManager::GenerateArtifactList(int maxAmtOfArtifacts)
 {
     map<unsigned long, int> EnemyArtifactData;
@@ -171,7 +171,7 @@ void _gameManager::CameraEndShake(void)
     cameraShakeTime = 0;
     cameraLerpBack = false;
 }
-
+//diaplay artifact list
 void _gameManager::DisplayArtifactList(void)
 {
     if (artifactListUI)
@@ -211,7 +211,7 @@ void _gameManager::InitBattle(float _playerHp, float _enemyHp)
     playerHp = _playerHp;
     enemyHp = _enemyHp;
 }
-
+//deal damage to player or enemy
 void _gameManager::DealDamage(float damage, bool isPlayer)
 {
     if (!battleOver) {
@@ -250,7 +250,7 @@ void _gameManager::DealDamage(float damage, bool isPlayer)
     }
 
 }
-
+// check player or enemy health
 void _gameManager::HealthCheck(bool isPlayer) {
     if (isPlayer)
     {

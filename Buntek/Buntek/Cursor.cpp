@@ -1,8 +1,8 @@
 /*!*****************************************************************************
 \file Cursor.cpp
 \project Beyond Aurorean Skies
-\author: Algene Tan Chuan Hong (90%)
-\co-authors: Isaiah Lim Ji Rong (2.5%), Steven Koe (2.5%), Bryan Boh Tai Hong (2.5%), Goh Kiat Beng (2.5%)
+\author: Goh Kiat Beng (80%)
+\co-authors: Algene Tan Chuan Hong (5%), Isaiah Lim Ji Rong (5%), Steven Koe (5%), Bryan Boh Tai Hong (5%)
 \par DP email: lim.i@digipen.edu,t.chuanhongalgene@digipen.edu,b.boh@digipen.edu,kiatbeng.goh,steven.k@digipen.edu
 \brief: Handles cursor behaviour
 All content © 2022 DigiPen Institute of Technology Singapore. All rights reserved.
@@ -54,7 +54,7 @@ void CursorBehaviour::Update(void)
 		transSpeed = RandFloatMinMax(0.005f, 0.025f);
 	}
 }
-
+//set cursor
 void CursorBehaviour::setplayerpossess(bool _playerpossess)
 {
 	playerPossess = _playerpossess;

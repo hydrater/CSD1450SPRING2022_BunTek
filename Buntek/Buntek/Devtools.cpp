@@ -29,7 +29,7 @@ _devTools& _devTools::Instance(void)
     static _devTools instance;
     return instance;
 }
-
+//create game object
 GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, float ySize, short blendMode, Vector2 pos) {
     GameObject* temp = new GameObject();
     temp->AddComponent<SpriteRenderer>()->SetOpacity(1);
@@ -68,7 +68,7 @@ GameObject* _devTools::CreateSpriteGameObject(string spriteName, float xSize, fl
     tempRenderer->SetOpacity(opacity);
     return temp;
 }
-
+//add text to game objects
 TextRenderer* _devTools::AddTextToSpriteGameObject(GameObject* gameObject, string fontName, string text, TextRenderer::xAlignmentTypes xAlignment, TextRenderer::yAlignmentTypes yAlignment, float fontsize) {
     TextRenderer* tempTextRenderer;
     tempTextRenderer = gameObject->AddComponent<TextRenderer>();
@@ -104,7 +104,7 @@ TextRenderer* _devTools::AddTextToSpriteGameObject(GameObject* gameObject, strin
     tempTextRenderer->SetWarpAround(warparound);
     return tempTextRenderer;
 }
-
+//create artifact cards
 GameObject* _devTools::CreateArtifactRewardCard(unsigned long ID, Vector2 pos, short layer) {
     
     // Artifact Background
@@ -157,7 +157,7 @@ GameObject* _devTools::CreateArtifactRewardCard(unsigned long ID, Vector2 pos, s
     }
     return ArtifactUI;
 }
-
+//create price tag game object
 GameObject* _devTools::CreatePriceTagGameObject(int price, short blendMode, Vector2 pos, short layer) {
     const float PriceTagXSize = 120.f, PriceTagYSize = 50.f;
     const float PriceTagColorR = 0.75f, PriceTagColorG = 0.5f, PriceTagColorB = 0.5f;
@@ -180,7 +180,7 @@ GameObject* _devTools::CreatePriceTagGameObject(int price, short blendMode, Vect
 
     return PriceTag;
 }
-
+//create line object
 GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R, float G, float B, float thickness, short layer, float opacity) {
     // Get Angle
     const float angle = atan2(pos1.y - pos2.y, pos1.x - pos2.x) * 180.f / PI;
@@ -194,7 +194,7 @@ GameObject* _devTools::CreateLineGameObject(Vector2 pos1, Vector2 pos2, float R,
     lineObj->GetComponent<SpriteRenderer>()->SetColor(R, G, B);
     return lineObj;
 }
-
+//create artifact object
 GameObject* _devTools::CreateArtifactObject(Vector2 pos, unsigned long artifact, int count, float xDir, short layer)
 {
     const float UIXSize = 50.f, UIYSize = 50.f;

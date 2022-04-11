@@ -34,7 +34,7 @@ void PaddleBehavior::Update(void)
 {
 	position = Vector2(transform->worldposition.x, transform->worldposition.y);
 }
-
+//move the paddle to cursor positions
 void PaddleBehavior::movePaddle(Vector2 mousePos, bool isPlayer)
 {
 	
@@ -108,8 +108,7 @@ void PaddleBehavior::setMaxspeed(float _Maxspeed)
 {
 	MaxSpeed = _Maxspeed;
 }
-
-
+//set the paddle min move dist
 void PaddleBehavior::setMinMoveDist(float _MinMoveDist)
 {
 	MinMoveDist = _MinMoveDist;

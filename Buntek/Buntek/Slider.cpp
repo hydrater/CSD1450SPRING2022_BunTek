@@ -40,7 +40,7 @@ void Slider::Update(void)
 		sliderBar->transform->worldposition.x = currentAmount / maxAmount * xRange + xMin - sliderBar->GetComponent<SpriteRenderer>()->GetHalfWidth();
 	}
 }
-
+//generate a slider object
 void Slider::GenerateSlider(float curAmt, short sortingLayer, float maxAmt, float pixelWidth, float pixelHeight, int border) {
 	borderSize = border;
 	maxAmount = maxAmt;
@@ -65,7 +65,7 @@ void Slider::GenerateSlider(float curAmt, short sortingLayer, float maxAmt, floa
 	sliderCircle->transform->worldposition.x = currentAmount / maxAmount * xRange + xMin;
 	this->Owner()->AddChild(sliderCircle);
 }
-
+//check if the slider is triggered
 bool Slider::CheckSliderTriggered(Vector2 mousePos) {
 	if ((xMin <= mousePos.x && xMax >= mousePos.x) && !triggered) {
 

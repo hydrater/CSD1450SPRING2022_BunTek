@@ -117,7 +117,7 @@ void BattleInput::RemoveFromList(BallBehavior* ballbehavior)
 		}
 	}
 }
-
+//update Ai cursor position
 void BattleInput::UpdateAIPosition(CursorBehaviour* Cursor, PaddleBehavior* Paddle, float* Timer, bool isPlayer)
 {
 	Vector2* vecPosition = isPlayer ? &PlayerAIposition : &AIposition;
